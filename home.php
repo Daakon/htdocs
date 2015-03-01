@@ -3,6 +3,12 @@ require 'connect.php';
 require 'html_functions.php';
 get_head_files();
 get_header();
+
+// handle roll call post
+$post = mysql_real_escape_string($_POST['post']);
+if (issert($_POST['post'])) {
+
+}
 ?>
 
 <div class="container" style="background-color:red;padding:40px;">
@@ -13,7 +19,7 @@ get_header();
             <form  method= "post" enctype ="multipart/form-data" action = "" >
                 <img src="images/image-icon.png" height="30px" width="30px" alt="Photos/Video" />
                 <strong>Attach Photo/Video To Your Post</strong> &nbsp;
-                <input type= "file" name = "flBulletinPhoto" id = "flBulletinPhoto"  />
+                <input type= "file" name = "flPostPhoto" id = "flPostPhoto"  />
             <input type="text" name="post" id="post" class="input-style" placeholder="Share Your Talent"/>
 
             </form>
