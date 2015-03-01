@@ -54,5 +54,3 @@ function get_header() { ?>
     </header>
 
 <?php } ?>
-
-?>
