@@ -9,6 +9,39 @@
 .form {
     padding-left:100px;
 }
-.form-td {
-    width:25%;
+.input-style {
+    width:400px;
+    padding:5px;
+    height:50px;
+    border-radius: 10px;
+    margin-bottom:10px;
+    font-size: 26px;
+}
+
+.bday-style {
+    width:150px;
+    padding:5px;
+    height:50px;
+    border-radius: 10px;
+    margin-bottom:10px;
+    font-size: 26px;
+}
+
+.login-button {
+    background:black;
+    color:white;
+    border-radius: 10px;
+}
+
+.form-fields {
+    width:300px;
+}
+
+.signup-button {
+    margin-left:350px;
+    border:1px solid black;
+    border-radius: 10px;
+    width:100px;
+    height:50px;
+    font-size:26px;
 }

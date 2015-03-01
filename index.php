@@ -1,86 +1,86 @@
 <?php
-
+require 'html_functions.php';
+require 'calendar.php';
+get_head_files();
 ?>
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head lang="<?php echo $str_language; ?>" xml:lang="<?php echo $str_language; ?>">
-<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width-device-width", initial-scale="1">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!--JQuery CDN-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-
-    <!-- Bootstrap Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-
-    <!--Bootstrap Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-
-    <!--Bootstrap Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-
-    <!--Custom css -->
-    <link href="site.css" rel="stylesheet" type="text/css" />
-
-<title>Rapportbook</title>
-
-</head>
 
 <body>
 
 <header class="navbar navbar-default navbar-static-top header">
-            <strong>Rapportbook</strong>
+            <img src="images/Rapportbook-Logo-White-Text-Large.png" alt="Rapportbook" height="90px;" width="200px;" style="margin-top:-30px;" />
+    <span class="pull-right">
+        <input type ="email" name="email" id="email" placeholder="User Name or Email" style="color:black;" />
+        <input type="password" name="password" id="password" placeholder="Password" style="color:black;" />
+        <input type="submit" name="login" id="login" value="Login" class="login-button" />
+
+        <a href="forgot-passoword.php" style="color:white;font-size:12px;padding-left:100px;">Forgot Your Password</a>
+    </span>
    </header>
 
-<div class="container-fluid">
+<div class="container-fluid" style="padding-bottom:10px;">
 
 
     <div class="row">
         <div class = "col-sm-4 hidden-xs " >
-           <img src="images/college-kids-texting.jpg" height="500px" width="500px" alt="" style="padding-right:70px;" />
+           <img src="images/college-kids-texting.jpg" height="500px" width="400px" alt="" style="margin-right:70px;border:3px solid black;" />
         </div>
 
         <div class="col-sm-8 col-xs-12 form ">
 
             <!--Login div -->
             <div id="login">
-                <h2>Login</h2>
+                <h2>Sign Up</h2>
 
-                <h3>Click here to see how it works</h3>
+                <h4>Click here to see how it works</h4>
 
             <form>
 
-                    <label class="form-td" for="firstName">First Name </label>
-
-                    <input class="form-td" type="text" name="firstName" id="firstName" />
+                    <input class="input-style" type="text" name="firstName" id="firstName" placeholder="First Name" />
                     <br/>
 
-                    <label class="form-td" for="lastName">Last Name</label>
-
-                    <input class="form-td" type="text" name="lastName" id="lastName" />
-
+                    <input class="input-style" type="text" name="lastName" id="lastName" placeholder="Last Name" />
                     <br/>
-                    <label class="form-td" for="email">Email</label>
 
-                    <input class="form-td" type="email" name="email" id="email" />
-
+                    <input class="input-style" type="email" name="email" id="email" placeholder="Email" />
                     <br/>
-                    <label class="form-td" for="password">Password</label>
 
-                    <input class="form-td" type="password" name="password" id="password" />
+                    <select class = 'input-style' name = "ddGender" id = "ddGender">
+                        <option value = "">Gender</option>
+                        <option value = "Male">Male</option>
+                        <option value = "Female">Female</option>
+                    </select>
+                    <br/>
 
+                <h4>Birthday</h4>
+
+                <select class="bday-style" id = "ddMonth" name = "ddMonth">
+                    <option value = "month">Month</option>
+
+                    <?php echo calendarMonths() ?>
+                </select>
+
+
+                    <select class="bday-style" id = "ddDay" name = "ddDay">
+                        <option value = "day">Day</option>
+
+                        <?php echo calendarDays() ?>
+                    </select>
+
+
+                    <select class="bday-style" name = "ddYear" id = "ddYear">
+                        <option value = "year">Year</option>
+
+                        <?php echo calendarYears() ?>
+                    </select>
+
+                <br/>
+
+                    <input class="input-style" type="password" name="password" id="password" placeholder="Password" />
+                    <br/><br/>
+
+                    <input class="btn signup-button" type="submit" name="login" id="login" value="Login" />
             </form>
         </div><!--end of login div -->
-
-            <!--Sign up area -->
-            <div id="signup">
-                <h2>Sign Up</h2>
-
-                <h3>Click here to see how it works</h3>
-            </div> <!--End of sign up-->
 
             </div>
     </div>
