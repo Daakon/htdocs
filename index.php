@@ -6,16 +6,7 @@ get_head_files();
 
 <body>
 
-<header class="navbar navbar-default navbar-static-top header">
-            <img src="images/Rapportbook-Logo-White-Text-Large.png" alt="Rapportbook" height="90px;" width="200px;" style="margin-top:-30px;" />
-    <span class="pull-right">
-        <input type ="email" name="email" id="email" placeholder="User Name or Email" style="color:black;" />
-        <input type="password" name="password" id="password" placeholder="Password" style="color:black;" />
-        <input type="submit" name="login" id="login" value="Login" class="login-button" />
-
-        <a href="forgot-passoword.php" style="color:white;font-size:12px;padding-left:100px;">Forgot Your Password</a>
-    </span>
-   </header>
+<?php get_login_header() ?>
 
 <div class="container-fluid" style="padding-bottom:10px;">
 
