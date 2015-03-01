@@ -36,54 +36,58 @@
    </header>
 
 <div class="container-fluid">
+
+
     <div class="row">
-        <div class = "col-sm-4" style="border:1px solid black;">
-            Image
+        <div class = "col-sm-4 hidden-xs" >
+           <img src="images/college-kids-texting.jpg" height="500px" width="500px" alt="" />
         </div>
 
-        <div class="col-sm-8 ">
+        <div class="col-sm-8 col-xs-12 form ">
+
+            <!--Login div -->
+            <div id="login">
+                <h2>Login</h2>
+
+                <h3>Click here to see how it works</h3>
+
             <form>
-                <table>
-                    <tr>
-                        <td>
-                            <label for="firstName">First Name </label>
-                        </td>
-                        <td>
-                            <input type="text" name="firstName" id="firstName" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label for="lastName">Last Name</label>
-                        </td>
-                        <td>
-                            <input type="text" name="lastName" id="lastName" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label for="email">Email</label>
-                        </td>
-                        <td>
-                            <input type="email" name="email" id="email" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label for="password">Password</label>
-                        </td>
-                        <td>
-                            <input type="password" name="password" id="password" />
-                        </td>
-                    </tr>
-                </table>
 
+                    <label class="form-td" for="firstName">First Name </label>
 
+                    <input class="form-td" type="text" name="firstName" id="firstName" />
+                    <br/>
+
+                    <label class="form-td" for="lastName">Last Name</label>
+
+                    <input class="form-td" type="text" name="lastName" id="lastName" />
+
+                    <br/>
+                    <label class="form-td" for="email">Email</label>
+
+                    <input class="form-td" type="email" name="email" id="email" />
+
+                    <br/>
+                    <label class="form-td" for="password">Password</label>
+
+                    <input class="form-td" type="password" name="password" id="password" />
 
             </form>
-        </div>
+        </div><!--end of login div -->
+
+            <!--Sign up area -->
+            <div id="signup">
+                <h2>Sign Up</h2>
+
+                <h3>Click here to see how it works</h3>
+            </div> <!--End of sign up-->
+
+            </div>
     </div>
+
 </div>
 
 </body>
 </html>
+
+
