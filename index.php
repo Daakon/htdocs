@@ -1,4 +1,5 @@
 <?php
+require 'connect.php';
 require 'html_functions.php';
 require 'calendar.php';
 get_head_files();
