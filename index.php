@@ -39,8 +39,8 @@
 
 
     <div class="row">
-        <div class = "col-sm-4 hidden-xs" >
-           <img src="images/college-kids-texting.jpg" height="500px" width="500px" alt="" />
+        <div class = "col-sm-4 hidden-xs " >
+           <img src="images/college-kids-texting.jpg" height="500px" width="500px" alt="" style="padding-right:70px;" />
         </div>
 
         <div class="col-sm-8 col-xs-12 form ">
