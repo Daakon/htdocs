@@ -37,8 +37,8 @@ get_head_files();
 
                     <select class = 'input-style' name = "ddGender" id = "ddGender">
                         <option value = "">Gender</option>
-                        <option value = "Male">Male</option>
-                        <option value = "Female">Female</option>
+                        <option value = "1">Male</option>
+                        <option value = "2">Female</option>
                     </select>
                     <br/>
 
