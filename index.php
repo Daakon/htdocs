@@ -119,7 +119,7 @@ get_head_files();
                 </div>
 
                 <br/><br/>
-            <form>
+            <form method ="post" action="signup.php">
 
                     <input class="input-style" type="text" name="firstName" id="firstName" placeholder="First Name" />
                     <br/>
