@@ -7,17 +7,17 @@ if(session_id() == '') {
 
         if (strstr($url, 'localhost:8888')) {
 
-        $postMediaFilePath = trim("media/$postMediaName");
+        $postMediaFilePath = trim("media/$MediaName");
 
        }
        // test mobile writes to test desktop
        elseif (strstr($url, 'mdev.rapportbook.com') || strstr($url, "dev.rapportbook.com")) {
 
-            $postMediaFilePath = trim("/var/www/dev/media/$postMediaName");
+            $postMediaFilePath = trim("/var/www/dev/media/$MediaName");
         }
         else {
             // live desktop and mobile
-        $postMediaFilePath = trim("/var/www/rapportbook/media/$postMediaName");
+        $postMediaFilePath = trim("/var/www/rapportbook/media/$MediaName");
        }
 
 ?>

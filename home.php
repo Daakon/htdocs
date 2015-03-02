@@ -15,7 +15,8 @@ $category = "";
 if (isset($_POST['post'])) {
 
     // if photo is provided
-    if (isset($_FILES['flPostMedia']) && strlen($_FILES['flPostMedia']) > 1) {
+    if (isset($_FILES['flPostMedia'])) {
+        echo "<script>alert('test')</script>";
         // check file size
         if ($_FILES['flPostMedia']['size'] > 50000000) {
             echo '<script>alert("File is over 50MB");</script>';
@@ -154,16 +155,16 @@ if (isset($_POST['post'])) {
                 if (isset($_SESSION['ID'])) {
                     $sqlUpdateMedia = "UPDATE Media SET Post_ID = '$newPostID' WHERE MediaName = '$mediaName' ";
                     mysql_query($sqlUpdateMedia) or die(mysql_error());
-                } // if no bulletin photo
-                else {
-
-                    $sql = "INSERT INTO Posts (Post,           category,    Member_ID,   PostDate) Values
-                                              ('$bulletin',   '$category',   '$ID',      CURDATE())";
-
                 }
             }
         }
-    }
+    }       // if no media
+                else {
+
+                    $sql = "INSERT INTO Posts (Post,       Category,    Member_ID,   PostDate) Values
+                                              ('$post',   '$category',   '$ID',      CURDATE())";
+                    mysql_query($sql) or die(mysql_error());
+                }
 }
 ?>
 
@@ -176,8 +177,9 @@ if (isset($_POST['post'])) {
                 <img src="images/image-icon.png" height="30px" width="30px" alt="Photos/Video" />
                 <strong>Attach Photo/Video To Your Post</strong> &nbsp;
                 <input type= "file" name = "flPostMedia" id = "flPostMedia"  />
-            <input type="text" name="post" id="post" class="input-style" placeholder="Share Your Talent"/>
-
+                <input type="text" name="post" id="post" class="input-style" placeholder="Share Your Talent"/>
+                <br/>
+                <input type="submit" class="post-button" name="submit" id="submit" value="Post" />
             </form>
         </div>
     </div>

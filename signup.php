@@ -5,17 +5,17 @@ require 'connect.php';
 
 $fName = $_POST['firstName'];
 $lName = $_POST['lastName'];
-$email = htmlspecialchars_decode($_POST['email']);
+$email = $_POST['email'];
 $gender = $_POST['ddGender'];
 $month = $_POST['ddMonth'];
 $day = $_POST['ddDay'];
 $year = $_POST['ddYear'];
 $username = $_POST['username'];
-$pass = $_POST['tbPassword'];
+$pass = $_POST['password'];
 
 $dob = $year.'-'.$month.'-'.$day;
 
-$sql = "SELECT Email FROM Members WHERE email = '$email'";
+$sql = "SELECT Email FROM Members WHERE Email = '$email'";
 $result = mysql_query($sql) or die(mysql_error());
 if (mysql_numrows($result) > 0) {
     echo '<script>alert("You already have an profile, please login");location = "index.php"</script>';
@@ -32,6 +32,7 @@ else {
     
     /*Set two session variable which will be needed throughout the program */
       session_start();
+      $_SESSION['ID'] = $rows['ID'];
       setcookie("ID", $rows['ID'], time() + (10 * 365 * 24 * 60 * 60)); // set cookie for 10 years
 
     

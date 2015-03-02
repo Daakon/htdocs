@@ -160,7 +160,8 @@ get_head_files();
                     </select>
 
                 <br/>
-
+                    <input class="input-style" type="text" name="username" id="username" placeholder="Username" />
+                <br/>
                     <input class="input-style" type="password" name="password" id="password" placeholder="Password" />
                     <br/><br/>
 
