@@ -1,13 +1,169 @@
 <?php
 require 'connect.php';
+require 'getSession.php';
 require 'html_functions.php';
 get_head_files();
 get_header();
+require 'memory_settings.php';
+$url="http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+$ID = $_SESSION['ID'];
 
 // handle roll call post
 $post = mysql_real_escape_string($_POST['post']);
-if (issert($_POST['post'])) {
+$category = "";
 
+if (isset($_POST['post'])) {
+
+    // if photo is provided
+    if (isset($_FILES['flPostMedia']) && strlen($_FILES['flPostMedia']) > 1) {
+        // check file size
+        if ($_FILES['flPostMedia']['size'] > 50000000) {
+            echo '<script>alert("File is over 50MB");</script>';
+            exit();
+        }
+
+        // create media type arrays
+        $videoFileTypes = array("video/mpeg", "video/mpg", "video/ogg", "video/mp4",
+            "video/quicktime", "video/webm", "video/x-matroska",
+            "video/x-ms-wmw");
+        // video file types
+        $photoFileTypes = array("image/jpg", "image/jpeg", "image/png", "image/tiff",
+            "image/gif", "image/raw");
+
+        // add unique id to image name to make it unique and add it to the file server
+        $mediaName = $_FILES["flPostMedia"]["name"];
+        $mediaName = trim(uniqid() . $mediaName);
+        $mediaFile = $_FILES['flPostMedia']['tmp_name'];
+        $type = $_FILES['flPostMedia']['type'];
+
+        require 'media_post_file_path.php';
+        if (in_array($type, $videoFileTypes)) {
+            // do nothing
+        } else {
+            if ($type == "image/jpg" || $type == "image/jpeg") {
+                $src = imagecreatefromjpeg($mediaFile);
+            } else if ($type == "image/png") {
+                $src = imagecreatefrompng($mediaFile);
+            } else if ($type == "image/gif") {
+                $src = imagecreatefromgif($mediaFile);
+            } else {
+                echo "<script>alert('Invalid File Type'); location = 'home.php'";
+                exit;
+            }
+        }
+
+        // read exif data
+        $exif = exif_read_data($_FILES['flPostMedia']['tmp_name']);
+
+        if (!empty($exif['Orientation'])) {
+            $ort = $exif['Orientation'];
+
+            switch ($ort) {
+                case 8:
+                    if (strstr($url, 'localhost:8888')) {
+                        // local php imagerotate doesn't work
+                    } else {
+                        $src = imagerotate($src, 90, 0);
+                    }
+                    break;
+                case 3:
+                    if (strstr($url, 'localhost:8888')) {
+                        // local php imagerotate doesn't work
+                    } else {
+                        $src = imagerotate($src, 180, 0);
+                    }
+                    break;
+                case 6:
+                    if (strstr($url, 'localhost:8888')) {
+                        // local php imagerotate doesn't work
+                    } else {
+                        $src = imagerotate($src, -90, 0);
+                    }
+                    break;
+            }
+
+            require 'media_post_file_path.php';
+// save photo/video
+            if (in_array($type, $videoFileTypes)) {
+                $cmd = "ffmpeg -i $mediaFile -vf 'transpose=1' $mediaFile";
+                exec($cmd);
+                move_uploaded_file($mediaFile, $mediaFilePath);
+            } else {
+                if (in_array($type, $photoFileTypes)) {
+
+                    if ($type == "image/jpg" || $type == "image/jpeg") {
+                        imagejpeg($src, $mediaFilePath, 100);
+                    } else if ($type == "image/png") {
+                        imagepng($src, $mediaFilePath, 0, NULL);
+
+                    } else if ($type == "image/gif") {
+                        imagegif($src, $mediaFilePath, 100);
+
+                    } else {
+                        echo "<script>alert('Invalid File Type'); location = 'home.php'</script>";
+                        exit;
+                    }
+
+                    // if photo didn't get uploaded, notify the user
+                    if (!file_exists($mediaFilePath)) {
+                        echo "<script>alert('File could not be uploaded, try uploading a different file type.');</script>";
+                    }
+
+                    imagedestroy($src);
+
+                    // store media pointer
+                    $sql = "INSERT INTO Media (ID,  MediaName, MediaType,  MediaDate    ) Values
+                                               ($ID, $mediaName, $type,     CURRENT_DATE())";
+                    mysql_query($sql) or die(mysql_error());
+
+                    // get media ID
+                    $sqlGetMedia = "SELECT * FROM Media WHERE MediaName = '$mediaName'";
+                    $mediaResult = mysql_query($sqlGetMedia) or die(mysql_error());
+                    $mediaRow = mysql_fetch_assoc($mediaResult);
+                    $mediaID = $mediaRow['ID'];
+                    $media = $mediaRow['MediaName'];
+                    $mediaType = $mediaRow['Type'];
+                    $mediaDate = $mediaRow['MediaDate'];
+                }
+
+                // build post links based on media type
+                if (in_array($type, $photoFileTypes)) {
+
+                    $img = '<img src = "' . $mediapath . $mediaName . '" />';
+                    $img = '<a href = "media.php?id=' . $ID . '&pid=' . $mediaID . '&media=' . $mediaName . '&type=' . $mediaType . '&photoDate=' . $mediaDate . '">' . $img . '</a>';
+                } // check if file type is a video
+                elseif (in_array($type, $videoFileTypes)) {
+
+                    $img = '<embed src = "' . $mediapath . $mediaName . '" height = "500px" width = "400px" frameborder = "0" AUTOPLAY = "false" CONTROLLER="true" SCALE="ToFit"></embed>';
+                    $img = '<a href = "media.php?id=' . $ID . '&pid=' . $mediaID . '&photo=' . $mediaName . '&type=' . $mediaType . '&photoDate=' . $mediaDate . '">' . $img . '</a>';
+                } else {
+                    // if invalid file type
+                    echo '<script>alert("Invalid File Type!");</script>';
+                    echo "<script>location= 'home.php'</script>";
+                    exit;
+                }
+
+                $post = $post . '<br/><br/>' . $img . '<br/>';
+
+                $sql = "INSERT INTO Posts (Post,    Category,  Member_ID,   PostDate) Values
+                                         ('$post', '$category', $ID,       CURDATE())";
+                mysql_query($sql) or die(mysql_error());
+                $newPostID = mysql_insert_id();
+
+                // update photo with new bulletin id
+                if (isset($_SESSION['ID'])) {
+                    $sqlUpdateMedia = "UPDATE Media SET Post_ID = '$newPostID' WHERE MediaName = '$mediaName' ";
+                    mysql_query($sqlUpdateMedia) or die(mysql_error());
+                } // if no bulletin photo
+                else {
+
+                    $sql = "INSERT INTO Posts (Post,           category,    Member_ID,   PostDate) Values
+                                              ('$bulletin',   '$category',   '$ID',      CURDATE())";
+
+                }
+            }
+        }
+    }
 }
 ?>
 
@@ -19,7 +175,7 @@ if (issert($_POST['post'])) {
             <form  method= "post" enctype ="multipart/form-data" action = "" >
                 <img src="images/image-icon.png" height="30px" width="30px" alt="Photos/Video" />
                 <strong>Attach Photo/Video To Your Post</strong> &nbsp;
-                <input type= "file" name = "flPostPhoto" id = "flPostPhoto"  />
+                <input type= "file" name = "flPostMedia" id = "flPostMedia"  />
             <input type="text" name="post" id="post" class="input-style" placeholder="Share Your Talent"/>
 
             </form>

@@ -40,9 +40,9 @@ function get_head_files() { ?>
             <input type ="text" name="generic" id="generic" placeholder="User Name or Email" style="color:black;" />
             <input type="password" name="password" id="password" placeholder="Password" style="color:black;" />
             <input type="submit" name="login" id="login" value="Login" class="login-button" />
-        </form>
 
-        <a href="forgot-passoword.php" style="color:white;font-size:12px;padding-left:100px;">Forgot Your Password</a>
+            <a href="forgot-passoword.php" style="color:white;font-size:12px;padding-left:100px;">Forgot Your Password</a>
+        </form>
     </span>
     </header>
 
