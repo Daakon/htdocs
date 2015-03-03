@@ -1,6 +1,7 @@
 <?php
 $url="http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
- // get proper file path
+ // only used for existing photos not the upload process
+
         if (strstr($url, 'localhost:8888')) {
         
         $mediaPath = trim('media/');

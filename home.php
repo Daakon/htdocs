@@ -18,7 +18,7 @@ if (isset($_POST['post'])) {
     $category = "";
 
     // if photo is provided
-    if (isset($_FILES['flPostMedia']) && strlen(($_FILES['flPostMedia'])) > 1) {
+    if (isset($_FILES['flPostMedia']) && strlen($_FILES['flPostMedia']['name']) > 1) {
 
         // check file size
         if ($_FILES['flPostMedia']['size'] > 50000000) {
@@ -140,12 +140,12 @@ if (isset($_POST['post'])) {
             // build post links based on media type
             if (in_array($type, $photoFileTypes)) {
 
-                $img = '<img src = "' . $mediapath . $mediaName . '" />';
+                $img = '<img src = "' . $postMediaFilePath .'" />';
                 $img = '<a href = "media.php?id=' . $ID . '&pid=' . $mediaID . '&media=' . $mediaName . '&type=' . $mediaType . '&photoDate=' . $mediaDate . '">' . $img . '</a>';
             } // check if file type is a video
             elseif (in_array($type, $videoFileTypes)) {
 
-                $img = '<embed src = "' . $mediapath . $mediaName . '" height = "500px" width = "400px" frameborder = "0" AUTOPLAY = "false" CONTROLLER="true" SCALE="ToFit"></embed>';
+                $img = '<embed src = "' . $postMediaFilePath . '" height = "500px" width = "400px" frameborder = "0" AUTOPLAY = "false" CONTROLLER="true" SCALE="ToFit"></embed>';
                 $img = '<a href = "media.php?id=' . $ID . '&pid=' . $mediaID . '&photo=' . $mediaName . '&type=' . $mediaType . '&photoDate=' . $mediaDate . '">' . $img . '</a>';
             } else {
                 // if invalid file type
@@ -206,7 +206,9 @@ if (isset($_POST['post'])) {
     And Members.ID = Posts.Member_ID
     And Members.ID = Media.Member_ID
     AND Media.IsProfilePhoto = 1
-    And Posts.IsDeleted = 0 ";
+    And Posts.IsDeleted = 0
+    Group By Posts.ID
+    Order By Posts.ID DESC ";
 
 
     $result = mysql_query($sql) or die(mysql_error());
@@ -218,6 +220,7 @@ if (isset($_POST['post'])) {
             $name = $rows['FirstName'] . ' ' . $rows['LastName'];
             $mediaName = $rows['MediaName'];
             $category = $rows['Category'];
+            $post = $rows['Post'];
             ?>
             <div class="row">
                 <div class="col-xs-12 center-block" style="background:white;border-radius:10px;margin-top:20px;" align="left" >
@@ -225,7 +228,8 @@ if (isset($_POST['post'])) {
                     <img src="<?php echo $mediaPath . $mediaName ?>" height="50" width="50" border="" alt=""
                          title="<?php echo $name ?>" class='enlarge-onhover' /> &nbsp <b><font
                             size="4"><?php echo $name ?></font></b>
-
+                    <br/>
+                    <p><?php echo nl2br($post);?></p>
                 </div>
             </div>
 

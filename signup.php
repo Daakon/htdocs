@@ -41,7 +41,12 @@ else {
     $sql2 = "UPDATE Members SET SignupDate = '$date' WHERE ID = '$id' ";
     mysql_query($sql2) or die(mysql_error());
     
-      
+
+    // insert default profile pic
+    $sql = "INSERT INTO Media (Member_ID, MediaName,          MediaType, MediaDate,     IsProfilePhoto) Values
+                              ('$id',     'default_photo.png',  'png',   CURRENT_DATE (),     1)    ";
+        mysql_query($sql) or die(mysql_error());
+
     // Send out sign up email
     /*$removeLink = "If you did not sign up for this profile, contact us at <a href = 'mailto:info@businessconnect.co'>info@businessconnect.co</a> ";
     $fName = $rows['FirstName'];
