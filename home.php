@@ -177,8 +177,8 @@ if (isset($_POST['post'])) {
 }
 ?>
 
-<body>
-<div class="container" style="background-color:red;padding:40px;width:600px;" align="center">
+<body >
+<div class="container" style="background:red;padding:50px;" >
     <div class="row">
         <div class="col-xs-12 roll-call center-block" >
             <img src="images/roll-call.gif" height="150px" width="150px" alt="Roll Call" />
@@ -188,7 +188,7 @@ if (isset($_POST['post'])) {
                 <strong>Attach Photo/Video To Your Post</strong>
                 <input type= "file" width="10px;"  name = "flPostMedia" id = "flPostMedia"  />
                 <br/>
-                <input type="text" name="post" id="post" class="input-style" placeholder="Share Your Talent"/>
+                <input type="text" name="post" id="post" class="form-control" style="border:1px solid black" placeholder="Share Your Talent"/>
                 <br/>
                 <input type="submit" class="post-button" name="submit" id="submit" value="Post" />
             </form>
@@ -223,7 +223,7 @@ if (isset($_POST['post'])) {
             $post = $rows['Post'];
             ?>
             <div class="row">
-                <div class="col-xs-12 center-block" style="background:white;border-radius:10px;margin-top:20px;" align="left" >
+                <div class="col-xs-12 " style="background:white;border-radius:10px;margin-top:20px;" align="left" >
 
                     <img src="<?php echo $mediaPath . $mediaName ?>" height="50" width="50" border="" alt=""
                          title="<?php echo $name ?>" class='enlarge-onhover' /> &nbsp <b><font
