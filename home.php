@@ -178,9 +178,9 @@ if (isset($_POST['post'])) {
 ?>
 
 <body>
-<div class="container" style="background-color:red;padding:40px;" align="center">
+<div class="container" style="background-color:red;padding:40px;width:600px;" align="center">
     <div class="row">
-        <div class="col-xs-12 roll-call">
+        <div class="col-xs-12 roll-call center-block" >
             <img src="images/roll-call.gif" height="150px" width="150px" alt="Roll Call" />
             <br/>
             <form  method= "post" enctype ="multipart/form-data" action = "" >
@@ -220,7 +220,7 @@ if (isset($_POST['post'])) {
             $category = $rows['Category'];
             ?>
             <div class="row">
-                <div class="col-xs-12" style="background:white;border-radius:10px;padding:10px;margin-left:200px;margin-top:10px;width:500px;" align="left" >
+                <div class="col-xs-12 center-block" style="background:white;border-radius:10px;margin-top:20px;" align="left" >
 
                     <img src="<?php echo $mediaPath . $mediaName ?>" height="50" width="50" border="" alt=""
                          title="<?php echo $name ?>" class='enlarge-onhover' /> &nbsp <b><font
