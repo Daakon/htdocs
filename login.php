@@ -16,12 +16,12 @@ else {
 
     setcookie("ID", $rows['ID'], time() + (10 * 365 * 24 * 60 * 60)); // set cookie for 10 years
     
-    /* update last login
-        $id = $rows['consumerId'];
+     //update last login
+        $id = $rows['ID'];
         $date = date('Y-m-d H:i:s');
-        $sql2 = "UPDATE Consumers SET lastLogin = '$date', loginDevice = 'mobile' WHERE consumerId = '$id' ";
+        $sql2 = "UPDATE Members SET LastLogin = '$date' WHERE ID = '$id' ";
         mysql_query($sql2) or die(mysql_error());
-     */
-    header('location:home.php?city');
+
+    header('location:home.php');
 }
 ?>
