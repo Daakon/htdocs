@@ -4,9 +4,10 @@ $generic = $_POST['generic'];
 $pass = $_POST['password'];
 
 $sql = "SELECT * FROM Members WHERE Email = '$generic' Or username='$generic' And password = '$pass'";
-$result = mysql_query($sql) or die(mysql_error());
-$rows = mysql_fetch_assoc($result);
-if (mysql_numrows($result) == 0) {
+$result = $conn->prepare($sql) or die(mysql_error());
+$result->execute();
+$rows = $result->fetchAll();
+if (count($rows) == 0) {
     echo '<script>alert("Your email or password was incorrect");location = "index.php"</script>';
 }
 else {
@@ -20,8 +21,8 @@ else {
         $id = $rows['ID'];
         $date = date('Y-m-d H:i:s');
         $sql2 = "UPDATE Members SET LastLogin = '$date' WHERE ID = '$id' ";
-        mysql_query($sql2) or die(mysql_error());
-
+        $conn->prepare($sql2) or die(mysql_error());
+        $conn->execute();
     header('location:home.php');
 }
 ?>

@@ -19,11 +19,11 @@ function get_head_files() { ?>
     <!--Bootstrap Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 
+    <!-- Custom stylesheet, located in resources/css -->    
+    <link rel="stylesheet" href="/resources/css/site.css">
+
     <!--Bootstrap Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-
-    <!--Custom css -->
-    <link href="site.css" rel="stylesheet" type="text/css" />
 
     <title>Rapportbook</title>
 
@@ -34,7 +34,7 @@ function get_head_files() { ?>
     <?php function get_login_header() { ?>
 
     <header class="navbar navbar-default navbar-static-top header">
-        <img src="images/Rapportbook-Logo-White-Text-Large.png" alt="Rapportbook" height="90px;" width="200px;" style="margin-top:-30px;" />
+        <img src="images/Rapportbook-Logo-White-Text-Large.png" alt="Rapportbook" height="40" width="315" class="logo-image" />
     <span class="pull-right">
         <form method="post" action="login.php">
             <input type ="text" name="generic" id="generic" placeholder="User Name or Email" style="color:black;" />

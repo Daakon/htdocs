@@ -9,12 +9,12 @@ get_head_files();
 
 <?php get_login_header() ?>
 
-<div class="container-fluid" style="padding-bottom:10px;">
+<div class="container-fluid container-fluid-custom">
 
 
     <div class="row">
-        <div class = "col-sm-4 hidden-xs " >
-           <img src="images/college-kids-texting.jpg" height="500px" width="400px" alt="" style="margin-right:70px;border:3px solid black;" />
+        <div class = "col-sm-4 hidden-xs" >
+           <img src="images/college-kids-texting.jpg" height="350" width="523" alt="" class="index-image"/>
         </div>
 
         <div class="col-sm-8 col-xs-12 form ">

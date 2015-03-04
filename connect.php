@@ -1,14 +1,11 @@
 <?php
-    $localhost = 'localhost';
-    $username = 'root';
+    $host = 'localhost';
+    $username = 'rapportbook';
     $pass = 'admin10';
-    $rapportbook = 'Rapportbook';
-    $conn = mysql_connect($localhost,$username,$pass);
+    $dbname = 'rapportbook';
+    $conn = new PDO("mysql:host=".$host.";dbname=".$dbname, $username, $pass); 
     if (!$conn) {
        die(mysql_error()); 
-    }
-    else { 
-   mysql_selectdb($rapportbook, $conn);
     }
 
 ?>
