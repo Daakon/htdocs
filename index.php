@@ -123,52 +123,59 @@ get_head_files();
 
                 <br/><br/>
             <form method ="post" action="signup.php">
+                    <div class="form-group">
+                        <label class="sr-only" for="firstName">First Name</label>
+                        <input class="input-style form-control" type="text" name="firstName" id="firstName" placeholder="First Name" />
+                    </div>
+                    <div class="form-group">
+                        <label class="sr-only" for="lastName">Last Name</label>
+                        <input class="input-style form-control" type="text" name="lastName" id="lastName" placeholder="Last Name" />
+                    </div>
 
-                    <input class="input-style" type="text" name="firstName" id="firstName" placeholder="First Name" />
-                    <br/>
+                    <div class="form-group">
+                        <label class="sr-only" for="email">Email Address</label>
+                        <input class="input-style form-control" type="email" name="email" id="email" placeholder="Email" />
+                    </div>
 
-                    <input class="input-style" type="text" name="lastName" id="lastName" placeholder="Last Name" />
-                    <br/>
+                    <div class="form-group">
+                        <label class="sr-only" for="ddGender">Gender</label>
+                        <select class = 'input-style form-control' name = "ddGender" id = "ddGender">
+                            <option value = "">Gender</option>
+                            <option value = "1">Male</option>
+                            <option value = "2">Female</option>
+                        </select>
+                    </div>
 
-                    <input class="input-style" type="email" name="email" id="email" placeholder="Email" />
-                    <br/>
+                    <label>Birthday</label>
+                    <div class="form-group form-inline">
+                        <label class="sr-only" for="ddMonth">Birthday Month</label>
+                        <select class="bday-style form-control" id = "ddMonth" name = "ddMonth">
+                            <option value = "month">Month</option>
+                            <?php echo calendarMonths() ?>
+                        </select>
+                        <label class="sr-only" for="ddDay">Birthday Day</label>
+                        <select class="bday-style form-control" id = "ddDay" name = "ddDay">
+                            <option value = "day">Day</option>
+                            <?php echo calendarDays() ?>
+                        </select>
+                        <label class="sr-only" for="ddYear">Birthday Year</label>
+                        <select class="bday-style form-control" name = "ddYear" id = "ddYear">
+                            <option value = "year">Year</option>
+                            <?php echo calendarYears() ?>
+                        </select>
+                    </div>
 
-                    <select class = 'input-style' name = "ddGender" id = "ddGender">
-                        <option value = "">Gender</option>
-                        <option value = "1">Male</option>
-                        <option value = "2">Female</option>
-                    </select>
-                    <br/>
+                    <div class="form-group">
+                        <label class="sr-only" for="username">Username</label>
+                        <input class="input-style form-control" type="text" name="username" id="username" placeholder="Username" />
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="sr-only" for="password">Password</label>
+                        <input class="input-style form-control" type="password" name="password" id="password" placeholder="Password" />
+                    </div>
 
-                <h4>Birthday</h4>
-
-                <select class="bday-style" id = "ddMonth" name = "ddMonth">
-                    <option value = "month">Month</option>
-
-                    <?php echo calendarMonths() ?>
-                </select>
-
-
-                    <select class="bday-style" id = "ddDay" name = "ddDay">
-                        <option value = "day">Day</option>
-
-                        <?php echo calendarDays() ?>
-                    </select>
-
-
-                    <select class="bday-style" name = "ddYear" id = "ddYear">
-                        <option value = "year">Year</option>
-
-                        <?php echo calendarYears() ?>
-                    </select>
-
-                <br/>
-                    <input class="input-style" type="text" name="username" id="username" placeholder="Username" />
-                <br/>
-                    <input class="input-style" type="password" name="password" id="password" placeholder="Password" />
-                    <br/><br/>
-
-                    <input class="btn signup-button" type="submit" name="login" id="login" value="Login" />
+                    <input class="btn btn-default signup-button" type="submit" name="login" id="login" value="Login" />
             </form>
         </div><!--end of login div -->
 
