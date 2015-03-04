@@ -99,7 +99,7 @@ if (isset($_POST['submit'])) {
             $cmd = "ffmpeg -i $mediaFile -vf 'transpose=1' $mediaFile";
             exec($cmd);
             move_uploaded_file($mediaFile, $postMediaFilePath);
-echo "<script>alert('test');</script>";
+
         } else {
 
             if (in_array($type, $photoFileTypes)) {
@@ -149,7 +149,7 @@ echo "<script>alert('test');</script>";
             } // check if file type is a video
             elseif (in_array($type, $videoFileTypes)) {
 
-                $img = '<embed src = "' . $postMediaFilePath . '" height = "500px" width = "400px" frameborder = "0" AUTOPLAY = "false" CONTROLLER="true" SCALE="ToFit"></embed>';
+                $img = '<video src = "' . $postMediaFilePath . '" height = "500px" width = "400px" frameborder = "1" controls preload="none" SCALE="ToFit"></video>';
                 $img = '<a href = "media.php?id=' . $ID . '&pid=' . $mediaID . '&photo=' . $mediaName . '&type=' . $mediaType . '&photoDate=' . $mediaDate . '">' . $img . '</a>';
             } else {
                 // if invalid file type
@@ -159,7 +159,7 @@ echo "<script>alert('test');</script>";
             }
 
             $post = $post . '<br/><br/>' . $img . '<br/>';
-
+        echo "<script>alert('test');</script>";
             $sql = "INSERT INTO Posts (Post,    Category,  Member_ID,   PostDate) Values
                                       ('$post', '$category', '$ID',       CURDATE())";
             mysql_query($sql) or die(mysql_error());
@@ -213,7 +213,7 @@ echo "<script>alert('test');</script>";
 
 <body >
 
-<div class="container" style="background:red;padding:50px;" >
+<div class="container" style="background:red;padding:100px;" >
     <div class="row">
         <div class="col-xs-12 roll-call center-block" >
             <img src="images/roll-call.gif" height="150px" width="150px" alt="Roll Call" />
