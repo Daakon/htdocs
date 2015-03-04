@@ -40,6 +40,10 @@ function get_head_files() { ?>
             <a href="forgot-password.php" class="forgot-password-link">Forgot Your Password?</a>
         </form>
     </span>
+
+
+
+
     </header>
 
 <?php } ?>
@@ -49,7 +53,11 @@ function get_head_files() { ?>
 function get_header() { ?>
     <header class="navbar navbar-default navbar-static-top header">
         <img src="images/Rapportbook-Logo-White-Text-Large.png" alt="Rapportbook" height="40" width="315" class="logo-image" />
+
+
+
     </header>
+
 
 <?php } ?>
 
