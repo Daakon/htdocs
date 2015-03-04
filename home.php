@@ -14,15 +14,17 @@ $ID = $_SESSION['ID'];
 
 $post = mysql_real_escape_string($_POST['post']);
 $category = "";
-if (strlen($_POST['post'])) {
+
+if (isset($_POST['submit'])) {
+
 
 
     // if photo is provided
-    if (isset($_FILES['flPostMedia']) && strlen($_FILES['flPostMedia']['name']) > 1) {
+    if (strlen($_FILES['flPostMedia']['name']) > 0) {
 
         // check file size
-        if ($_FILES['flPostMedia']['size'] > 50000000) {
-            echo '<script>alert("File is over 50MB");</script>';
+        if ($_FILES['flPostMedia']['size'] > 500000000) {
+
             exit();
         }
 
@@ -44,6 +46,7 @@ if (strlen($_POST['post'])) {
 
         if (in_array($type, $videoFileTypes)) {
             // do nothing
+
         } else {
             if ($type == "image/jpg" || $type == "image/jpeg") {
                 $src = imagecreatefromjpeg($mediaFile);
@@ -96,6 +99,7 @@ if (strlen($_POST['post'])) {
             $cmd = "ffmpeg -i $mediaFile -vf 'transpose=1' $mediaFile";
             exec($cmd);
             move_uploaded_file($mediaFile, $postMediaFilePath);
+echo "<script>alert('test');</script>";
         } else {
 
             if (in_array($type, $photoFileTypes)) {
@@ -114,7 +118,7 @@ if (strlen($_POST['post'])) {
                     echo "<script>alert('Invalid File Type'); location = 'home.php'</script>";
                     exit;
                 }
-
+            }
                 // if photo didn't get uploaded, notify the user
                 if (!file_exists($postMediaFilePath)) {
                     echo "<script>alert('File could not be uploaded, try uploading a different file type.'); location= 'home.php'</script>";
@@ -166,7 +170,7 @@ if (strlen($_POST['post'])) {
                 $sqlUpdateMedia = "UPDATE Media SET Post_ID = '$newPostID' WHERE MediaName = '$mediaName' ";
                 mysql_query($sqlUpdateMedia) or die(mysql_error());
             }
-        }
+
     } // if no media
     else {
 
@@ -176,9 +180,39 @@ if (strlen($_POST['post'])) {
 
     }
 }
+
 ?>
 
+<style>
+
+    iframe { max-width: 100%; height: auto; }
+    img { max-width: 100%; height: auto;}
+    video { max-width: 100%; height: auto; }
+    embed  { max-width: 100%; height: auto; }
+    script { max-width: 100%; height: auto; }
+</style>
+
+
+<style>
+    .enlarge-onhover {
+        width: 50px;
+        height: 50px;
+    }
+    .enlarge-onhover:hover {
+        width: 100px;
+        height: 100px;
+        position: inherit;
+        top: 50%;
+        left: 50%;
+        margin-top: 0px;
+        margin-left: 0px;
+
+    }
+</style>
+
+
 <body >
+
 <div class="container" style="background:red;padding:50px;" >
     <div class="row">
         <div class="col-xs-12 roll-call center-block" >
@@ -188,6 +222,7 @@ if (strlen($_POST['post'])) {
                 <img src="images/image-icon.png" height="30px" width="30px" alt="Photos/Video" />
                 <strong>Attach Photo/Video To Your Post</strong>
                 <input type= "file" width="10px;"  name = "flPostMedia" id = "flPostMedia"  />
+                <input type="hidden" name="MAX_FILE_SIZE" value ="500000000"
                 <br/>
                 <input type="text" name="post" id="post" class="form-control" style="border:1px solid black" placeholder="Share Your Talent"/>
                 <br/>
