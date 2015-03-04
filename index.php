@@ -13,17 +13,20 @@ get_head_files();
 
 
     <div class="row">
-        <div class = "col-sm-4 hidden-xs" >
+        <div class = "col-lg-6 col-md-5 hidden-sm hidden-xs" >
            <img src="images/college-kids-texting.jpg" height="350" width="523" alt="" class="index-image"/>
         </div>
 
-        <div class="col-sm-8 col-xs-12 form ">
+        <div class="col-lg-6 col-md-7 col-sm-12 col-xs-12 form ">
 
             <!--Login div -->
             <div id="login">
+                <div style="padding-left:30px">
                 <h2>Sign Up</h2>
 
+
                 <h4>Click here to see how it works</h4>
+                </div>
 
                 <script>
                 // This is called with the results from from FB.getLoginStatus().

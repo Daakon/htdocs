@@ -7,6 +7,9 @@ if(session_id() == '') {
             $_SESSION['ID'] = $_COOKIE['ID'];
         }
     }
+    else {
+        echo "<script>alert('You are not logged in');</script>";
+    }
   }
 
 ?>

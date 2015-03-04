@@ -12,10 +12,10 @@ $ID = $_SESSION['ID'];
 
 // handle roll call post
 
+$post = mysql_real_escape_string($_POST['post']);
+$category = "";
+if (strlen($_POST['post'])) {
 
-if (isset($_POST['post'])) {
-    $post = mysql_real_escape_string($_POST['post']);
-    $category = "";
 
     // if photo is provided
     if (isset($_FILES['flPostMedia']) && strlen($_FILES['flPostMedia']['name']) > 1) {
@@ -173,6 +173,7 @@ if (isset($_POST['post'])) {
         $sql = "INSERT INTO Posts (Post,       Category,    Member_ID,   PostDate) Values
                                   ('$post',   '$category',   '$ID',      CURDATE())";
         mysql_query($sql) or die(mysql_error());
+
     }
 }
 ?>
@@ -241,7 +242,7 @@ if (isset($_POST['post'])) {
 
 
 
-    </div>
+</div>
 
 </body>
 </html>
