@@ -16,19 +16,25 @@ $pass = $_POST['password'];
 $dob = $year.'-'.$month.'-'.$day;
 
 $sql = "SELECT Email FROM Members WHERE Email = '$email'";
-$result = mysql_query($sql) or die(mysql_error());
-if (mysql_numrows($result) > 0) {
+
+$result = $conn->prepare($sql) or die(mysql_error());
+$result->execute();
+$rows = $result->fetchAll();
+
+if (count($rows) > 0) {
     echo '<script>alert("You already have an profile, please login");location = "index.php"</script>';
     exit();
 }
 else {
     $sql = "INSERT INTO Members (FirstName,    LastName,   Email,   Gender,   DOB,   Username,   Password, SignupDate)
     Values                        ('$fName',  '$lName','   $email','$gender','$dob','$username', '$pass',  CURRENT_DATE())";
-    $result = mysql_query($sql) or die(mysql_error());
+    $result = $conn->prepare($sql) or die(mysql_error());
+    $result->execute();
     
     $sql = "SELECT * FROM Members WHERE Email = '$email'";
-    $result = mysql_query($sql) or die(mysql_error());
-    $rows = mysql_fetch_assoc($result);
+    $result = $conn->prepare($sql) or die(mysql_error());
+    $result->execute();
+    $rows = $result->fetchAll();
     
     /*Set two session variable which will be needed throughout the program */
       session_start();
@@ -39,13 +45,15 @@ else {
     $id = $rows['ID'];
     $date = date('Y-m-d H:i:s');
     $sql2 = "UPDATE Members SET SignupDate = '$date' WHERE ID = '$id' ";
-    mysql_query($sql2) or die(mysql_error());
+    $result = $conn->prepare($sql2) or die(mysql_error());
+    $result->execute();
     
 
     // insert default profile pic
     $sql = "INSERT INTO Media (Member_ID, MediaName,          MediaType, MediaDate,     IsProfilePhoto) Values
                               ('$id',     'default_photo.png',  'png',   CURRENT_DATE (),     1)    ";
-        mysql_query($sql) or die(mysql_error());
+    $result = $conn->prepare($sql) or die(mysql_error());
+    $result->execute();
 
     // Send out sign up email
     /*$removeLink = "If you did not sign up for this profile, contact us at <a href = 'mailto:info@businessconnect.co'>info@businessconnect.co</a> ";

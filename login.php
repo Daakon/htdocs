@@ -1,7 +1,7 @@
 <?php
 require 'connect.php';
 $generic = $_POST['generic'];
-$pass = $_POST['password'];
+$pass = $_POST['login_password'];
 
 $sql = "SELECT * FROM Members WHERE Email = '$generic' Or username='$generic' And password = '$pass'";
 $result = $conn->prepare($sql) or die(mysql_error());

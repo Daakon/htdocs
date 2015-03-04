@@ -27,7 +27,7 @@
     font-size: 26px;
 }
 
-.login-button {
+.login-button, .login-button:hover {
     background:black;
     color:white;
     border-radius: 10px;
@@ -90,4 +90,9 @@
     color:white;
     font-size:12px;
     padding-left:100px;"
+}
+
+.has-error .error-text{
+    display:inline;
+    color: #A94442;
 }

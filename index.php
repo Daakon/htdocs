@@ -118,61 +118,116 @@ get_head_files();
                 <div id="status">
                 </div>
 
+                <div class="modal fade" id="request_message">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Error</h4>
+                      </div>
+                      <div class="modal-body">
+                        <p>There was a problem submitting your request.</p>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
+                      </div>
+                    </div><!-- /.modal-content -->
+                  </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->
+
                 <br/><br/>
-            <form method ="post" action="signup.php">
-                    <div class="form-group">
-                        <label class="sr-only" for="firstName">First Name</label>
-                        <input class="input-style form-control" type="text" name="firstName" id="firstName" placeholder="First Name" />
+            <form method ="post" action="signup.php" id="rb_signup_form">
+                    <div class="form-group row" id="form-group-firstName">
+                        <div class="col-md-6">
+                            <label class="sr-only" for="firstName">First Name</label>
+                            <input class="input-style form-control" type="text" name="firstName" id="firstName" placeholder="First Name" />
+                        </div>
+                        <div class="col-md-6">
+                            <div class="error-text"></div>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label class="sr-only" for="lastName">Last Name</label>
-                        <input class="input-style form-control" type="text" name="lastName" id="lastName" placeholder="Last Name" />
+                    <div class="form-group row" id="form-group-lastName">
+                        <div class="col-md-6">
+                            <label class="sr-only" for="lastName">Last Name</label>
+                            <input class="input-style form-control" type="text" name="lastName" id="lastName" placeholder="Last Name" />
+                        </div>
+                        <div class="col-md-6">
+                            <div class="error-text"></div>
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <label class="sr-only" for="email">Email Address</label>
-                        <input class="input-style form-control" type="email" name="email" id="email" placeholder="Email" />
+                    <div class="form-group row" id="form-group-email">
+                        <div class="col-md-6">
+                            <label class="sr-only" for="email">Email Address</label>
+                            <input class="input-style form-control" type="email" name="email" id="email" placeholder="Email" />
+                        </div>
+                        <div class="col-md-6">
+                            <div class="error-text"></div>
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <label class="sr-only" for="ddGender">Gender</label>
-                        <select class = 'input-style form-control' name = "ddGender" id = "ddGender">
-                            <option value = "">Gender</option>
-                            <option value = "1">Male</option>
-                            <option value = "2">Female</option>
-                        </select>
+                    <div class="form-group row" id="form-group-ddGender">
+                        <div class="col-md-6">
+                            <label class="sr-only" for="ddGender">Gender</label>
+                            <select class = 'input-style form-control' name = "ddGender" id = "ddGender">
+                                <option value = "">Gender</option>
+                                <option value = "1">Male</option>
+                                <option value = "2">Female</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="error-text"></div>
+                        </div>
                     </div>
 
                     <label>Birthday</label>
-                    <div class="form-group form-inline">
-                        <label class="sr-only" for="ddMonth">Birthday Month</label>
-                        <select class="bday-style form-control" id = "ddMonth" name = "ddMonth">
-                            <option value = "month">Month</option>
-                            <?php echo calendarMonths() ?>
-                        </select>
-                        <label class="sr-only" for="ddDay">Birthday Day</label>
-                        <select class="bday-style form-control" id = "ddDay" name = "ddDay">
-                            <option value = "day">Day</option>
-                            <?php echo calendarDays() ?>
-                        </select>
-                        <label class="sr-only" for="ddYear">Birthday Year</label>
-                        <select class="bday-style form-control" name = "ddYear" id = "ddYear">
-                            <option value = "year">Year</option>
-                            <?php echo calendarYears() ?>
-                        </select>
+                    <div class="form-group form-inline row" id="form-group-birthday">
+                        <div class="col-md-6">
+                            <label class="sr-only" for="ddMonth">Birthday Month</label>
+                            <select class="bday-style form-control" id = "ddMonth" name = "ddMonth">
+                                <option value = "month">Month</option>
+                                <?php echo calendarMonths() ?>
+                            </select>
+                            <label class="sr-only" for="ddDay">Birthday Day</label>
+                            <select class="bday-style form-control" id = "ddDay" name = "ddDay">
+                                <option value = "day">Day</option>
+                                <?php echo calendarDays() ?>
+                            </select>
+                            <label class="sr-only" for="ddYear">Birthday Year</label>
+                            <select class="bday-style form-control" name = "ddYear" id = "ddYear">
+                                <option value = "year">Year</option>
+                                <?php echo calendarYears() ?>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="error-text"></div>
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <label class="sr-only" for="username">Username</label>
-                        <input class="input-style form-control" type="text" name="username" id="username" placeholder="Username" />
+                    <div class="form-group row" id="form-group-username">
+                        <div class="col-md-6">
+                            <label class="sr-only" for="username">Username</label>
+                            <input class="input-style form-control" type="text" name="username" id="username" placeholder="Username" />
+                        </div>
+                        <div class="col-md-6">
+                            <div class="error-text"></div>
+                        </div>
                     </div>
                     
-                    <div class="form-group">
-                        <label class="sr-only" for="password">Password</label>
-                        <input class="input-style form-control" type="password" name="password" id="password" placeholder="Password" />
+                    <div class="form-group row" id="form-group-password">
+                        <div class="col-md-6">
+                            <label class="sr-only" for="password">Password</label>
+                            <input class="input-style form-control" type="password" name="password" id="password" placeholder="Password" />
+                        </div>
+                        <div class="col-md-6">
+                            <div class="error-text"></div>
+                        </div>
                     </div>
-
-                    <input class="btn btn-default signup-button" type="submit" name="login" id="login" value="Login" />
+                    <div class="form-group row">
+                        <div class="col-md-6">
+                            <input class="btn btn-default signup-button" type="submit" name="signup" id="signup" value="Sign Up" />
+                        </div>
+                    </div>
             </form>
         </div><!--end of login div -->
 
@@ -181,7 +236,7 @@ get_head_files();
 
 </div>
 
-</body>
-</html>
+
+<?php get_footer_files();?>
 
 

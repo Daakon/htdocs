@@ -7,11 +7,7 @@ function get_head_files() { ?>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head lang="<?php echo $str_language; ?>" xml:lang="<?php echo $str_language; ?>">
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width-device-width", initial-scale="1">
-
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!--JQuery CDN-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
     <!-- Bootstrap Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -22,11 +18,8 @@ function get_head_files() { ?>
     <!-- Custom stylesheet, located in resources/css -->    
     <link rel="stylesheet" href="/resources/css/site.css">
 
-    <!--Bootstrap Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-
     <title>Rapportbook</title>
-
+</head>
 
 <?php } ?>
 
@@ -40,8 +33,8 @@ function get_head_files() { ?>
             <div class="form-group">
             <label class="sr-only" for="generic">Your Email address or Username</label>
             <input type ="text" name="generic" id="generic" placeholder="User Name or Email" class="form-control" />
-            <label class="sr-only" for="password">Password</label>
-            <input type="password" name="password" id="password" placeholder="Password" class="form-control" />
+            <label class="sr-only" for="login_password">Password</label>
+            <input type="password" name="login_password" id="login_password" placeholder="Password" class="form-control" />
             <input type="submit" name="login" id="login" value="Login" class="login-button btn" />
             </div>
             <a href="forgot-password.php" class="forgot-password-link">Forgot Your Password?</a>
@@ -57,5 +50,22 @@ function get_header() { ?>
     <header class="navbar navbar-default navbar-static-top header">
         <img src="images/Rapportbook-Logo-White-Text-Large.png" alt="Rapportbook" height="40" width="315" class="logo-image" />
     </header>
+
+<?php } ?>
+
+<?php function get_footer_files() { ?>
+
+
+    <!--JQuery CDN-->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+    <!--Bootstrap Latest compiled and minified JavaScript-->
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+    <!--Local JS file-->
+    <script type="text/javascript" src="/resources/js/site.js"></script>
+    </body>
+</html>
+
 
 <?php } ?>
