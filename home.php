@@ -190,6 +190,19 @@ if (isset($_POST['submit'])) {
     video { max-width: 100%; height: auto; }
     embed  { max-width: 100%; height: auto; }
     script { max-width: 100%; height: auto; }
+
+    .btnApprove {
+        background: url("company_photos/gray_check.png") no-repeat;
+        width: 30px;
+        height: 30px;
+        border: none;
+    }
+    .btnDisapprove {
+        background: url("company_photos/red_check.png") no-repeat;
+        width: 30px;
+        height: 30px;
+        border: none;
+    }
 </style>
 
 
@@ -202,14 +215,59 @@ if (isset($_POST['submit'])) {
         width: 100px;
         height: 100px;
         position: inherit;
-        top: 50%;
-        left: 50%;
+
         margin-top: 0px;
         margin-left: 0px;
 
     }
 </style>
 
+<script>
+    $(document).ready(function() {
+        $("body").delegate(".btnApprove", "click", function() {
+            var parentDiv = $(this).closest("div[id^=approvals]");
+            var data={
+                postID: $(this).closest('tr').find('.postID').val(),
+                ID: $(this).closest('tr').find('.ID').val()
+                //add other properties similarly
+            }
+
+            $.ajax({
+                type: "post",
+                url: "post_approve.php",
+                data: data,
+                success: function(data)
+                {
+                    parentDiv.html(data);
+                }
+
+            })
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
+        $("body").delegate(".btnDisapprove", "click", function() {
+            var parentDiv = $(this).closest("div[id^=approvals]");
+            var data={
+                    postID: $(this).closest('tr').find('.postID').val(),
+                    ID: $(this).closest('tr').find('.ID').val()
+                    //add other properties similarly
+                }
+            $.ajax({
+                type: "post",
+                url: "post_disapprove.php",
+                data: data,
+                success: function(data)
+                {
+                    parentDiv.html(data);
+                }
+
+            })
+        });
+    });
+</script>
 
 <body >
 
@@ -233,7 +291,7 @@ if (isset($_POST['submit'])) {
 
     <?php
     $sql = "SELECT DISTINCT Members.ID As MemberID, Members.FirstName As FirstName,Members.LastName As LastName,
-    Posts.Post As Post,Posts.Category As Category,
+    Posts.ID As PostID, Posts.Post As Post,Posts.Category As Category,
     Media.MediaName As MediaName
     FROM Members,Posts,Media
     WHERE
@@ -257,6 +315,7 @@ if (isset($_POST['submit'])) {
             $mediaName = $rows['MediaName'];
             $category = $rows['Category'];
             $post = $rows['Post'];
+            $postID = $rows['PostID']
             ?>
             <div class="row">
                 <div class="col-xs-12 " style="background:white;border-radius:10px;margin-top:20px;" align="left" >
@@ -266,8 +325,71 @@ if (isset($_POST['submit'])) {
                             size="4"><?php echo $name ?></font></b>
                     <br/>
                     <p><?php echo nl2br($post);?></p>
+
+
+                <?php
+
+                //check if member has approved this post
+                //----------------------------------------------------------------
+                //require 'getSessionType.php';
+
+                $sql2 = "SELECT * FROM PostApprovals WHERE Post_ID = '$postID' AND Member_ID = '$ID'";
+                $result2 = mysql_query($sql2) or die(mysql_error());
+                $rows2 = mysql_fetch_assoc($result2);
+
+
+                // get approvals for each post
+                $sql3 = "SELECT COUNT(*) FROM PostApprovals WHERE ID = '$postID' ";
+                $result3 = mysql_query($sql3) or die(mysql_error());
+                $rows3 = mysql_fetch_assoc($result3);
+                $approvals = mysql_numrows($result3);
+
+                // show disapprove if members has approved the post
+                echo '<table>';
+                echo '<tr>';
+                echo '<td>';
+                echo "<div id = 'approvals$postID'>";
+
+                if (mysql_numrows($result2) > 0) {
+
+                    echo '<form>';
+
+                    echo '<input type ="hidden" class = "postID" id = "postID" value = "'.$postID.'" />';
+                    echo '<input type ="hidden" class = "ID" id = "ID" value = "'.$ID.'" />';
+                    echo '<input type ="button" class = "btnDisapprove" />';
+
+                    if ($approvals > 0) {
+                        //echo '<tr><td>';
+
+                        echo '&nbsp;<span style = "color:red;font-weight:bold;font-size:16">'.$approvals.'</font>';
+                    }
+                    echo '</form>';
+                }
+
+                else {
+                    echo '<form>';
+
+                    echo '<input type ="hidden" class = "postID" id = "postID" value = "'.$postID.'" />';
+                    echo '<input type ="hidden" class = "ID" id = "ID" value = "'.$ID.'" />';
+                    echo '<input type ="button" class = "btnApprove" />';
+
+                    if ($approvals > 0) {
+                        //echo '<tr><td>';
+
+                        echo '&nbsp;<span style = "color:red;font-weight:bold;font-size:16">'.$approvals.'</font>';
+                    }
+                    echo '</form>';
+                }
+
+                echo '</td></tr></table>';
+
+                //-------------------------------------------------------------
+                // End of approvals
+                //-----------------------------------------------------------
+
+    ?>
+                    </div>
                 </div>
-            </div>
 
 
         <?php
