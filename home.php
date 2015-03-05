@@ -271,7 +271,7 @@ if (isset($_POST['submit'])) {
 
 <body >
 
-<div class="container" style="background:red;padding:10px;width:550px" >
+<div class="container" >
     <div class="row">
         <div class="col-xs-12 roll-call center-block" >
             <img src="images/roll-call.gif" height="150px" width="150px" alt="Roll Call" />
