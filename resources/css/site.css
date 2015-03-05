@@ -49,10 +49,9 @@
 .roll-call {
     background:white;
     color:black;
-    border:1px solid black;
+    border:2px solid black;
     border-radius: 5px;
     padding-bottom:20px;
-
 }
 
 .post-button {
@@ -95,4 +94,9 @@
 .has-error .error-text{
     display:inline;
     color: #A94442;
+}
+
+#comment-style {
+    background-color:yellow;
+    border:1px solid black;
 }

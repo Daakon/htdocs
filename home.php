@@ -271,7 +271,7 @@ if (isset($_POST['submit'])) {
 
 <body >
 
-<div class="container" style="background:red;padding:100px;" >
+<div class="container" style="background:red;padding:10px;width:550px" >
     <div class="row">
         <div class="col-xs-12 roll-call center-block" >
             <img src="images/roll-call.gif" height="150px" width="150px" alt="Roll Call" />
@@ -318,7 +318,7 @@ if (isset($_POST['submit'])) {
             $postID = $rows['PostID']
             ?>
             <div class="row">
-                <div class="col-xs-12 " style="background:white;border-radius:10px;margin-top:20px;" align="left" >
+                <div class="col-xs-12 center-block" style="background:white;border-radius:10px;margin-top:20px;border:2px solid black;" align="left" >
 
                     <img src="<?php echo $mediaPath . $mediaName ?>" height="50" width="50" border="" alt=""
                          title="<?php echo $name ?>" class='enlarge-onhover' /> &nbsp <b><font
@@ -385,6 +385,15 @@ if (isset($_POST['submit'])) {
                     //-----------------------------------------------------------
 
                     ?>
+
+                    <div style="border-top:2px solid black;margin-top:10px;padding-bottom:10px;">
+                        Dynamic User Comments
+                    </div>
+
+                    <!---------------------------------------------------
+                    End of comments div
+                    ----------------------------------------------------->
+
                 </div>
             </div>
 
