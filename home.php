@@ -119,57 +119,57 @@ if (isset($_POST['submit'])) {
                     exit;
                 }
             }
-                // if photo didn't get uploaded, notify the user
-                if (!file_exists($postMediaFilePath)) {
-                    echo "<script>alert('File could not be uploaded, try uploading a different file type.'); location= 'home.php'</script>";
-                }
+            // if photo didn't get uploaded, notify the user
+            if (!file_exists($postMediaFilePath)) {
+                echo "<script>alert('File could not be uploaded, try uploading a different file type.'); location= 'home.php'</script>";
+            }
 
-                imagedestroy($src);
+            imagedestroy($src);
 
-                // store media pointer
-                $sql = "INSERT INTO Media (Member_ID,  MediaName,  MediaType,  MediaDate    ) Values
+            // store media pointer
+            $sql = "INSERT INTO Media (Member_ID,  MediaName,  MediaType,  MediaDate    ) Values
                                                ('$ID',    '$mediaName', '$type',   CURRENT_DATE())";
-                mysql_query($sql) or die(mysql_error());
-
-                // get media ID
-                $sqlGetMedia = "SELECT * FROM Media WHERE MediaName = '$mediaName'";
-                $mediaResult = mysql_query($sqlGetMedia) or die(mysql_error());
-                $mediaRow = mysql_fetch_assoc($mediaResult);
-                $mediaID = $mediaRow['ID'];
-                $media = $mediaRow['MediaName'];
-                $mediaType = $mediaRow['Type'];
-                $mediaDate = $mediaRow['MediaDate'];
-            }
-
-            // build post links based on media type
-            if (in_array($type, $photoFileTypes)) {
-
-                $img = '<img src = "' . $postMediaFilePath .'" />';
-                $img = '<a href = "media.php?id=' . $ID . '&pid=' . $mediaID . '&media=' . $mediaName . '&type=' . $mediaType . '&photoDate=' . $mediaDate . '">' . $img . '</a>';
-            } // check if file type is a video
-            elseif (in_array($type, $videoFileTypes)) {
-
-                $img = '<video src = "' . $postMediaFilePath . '" height = "500px" width = "400px" frameborder = "1" controls preload="none" SCALE="ToFit"></video>';
-                $img = '<a href = "media.php?id=' . $ID . '&pid=' . $mediaID . '&photo=' . $mediaName . '&type=' . $mediaType . '&photoDate=' . $mediaDate . '">' . $img . '</a>';
-            } else {
-                // if invalid file type
-                echo '<script>alert("Invalid File Type!");</script>';
-                echo "<script>location= 'home.php'</script>";
-                exit;
-            }
-
-            $post = $post . '<br/><br/>' . $img . '<br/>';
-        echo "<script>alert('test');</script>";
-            $sql = "INSERT INTO Posts (Post,    Category,  Member_ID,   PostDate) Values
-                                      ('$post', '$category', '$ID',       CURDATE())";
             mysql_query($sql) or die(mysql_error());
-            $newPostID = mysql_insert_id();
 
-            // update Media table with new post id
-            if (isset($_SESSION['ID'])) {
-                $sqlUpdateMedia = "UPDATE Media SET Post_ID = '$newPostID' WHERE MediaName = '$mediaName' ";
-                mysql_query($sqlUpdateMedia) or die(mysql_error());
-            }
+            // get media ID
+            $sqlGetMedia = "SELECT * FROM Media WHERE MediaName = '$mediaName'";
+            $mediaResult = mysql_query($sqlGetMedia) or die(mysql_error());
+            $mediaRow = mysql_fetch_assoc($mediaResult);
+            $mediaID = $mediaRow['ID'];
+            $media = $mediaRow['MediaName'];
+            $mediaType = $mediaRow['Type'];
+            $mediaDate = $mediaRow['MediaDate'];
+        }
+
+        // build post links based on media type
+        if (in_array($type, $photoFileTypes)) {
+
+            $img = '<img src = "' . $postMediaFilePath .'" />';
+            $img = '<a href = "media.php?id=' . $ID . '&pid=' . $mediaID . '&media=' . $mediaName . '&type=' . $mediaType . '&photoDate=' . $mediaDate . '">' . $img . '</a>';
+        } // check if file type is a video
+        elseif (in_array($type, $videoFileTypes)) {
+
+            $img = '<video src = "' . $postMediaFilePath . '" height = "500px" width = "400px" frameborder = "1" controls preload="none" SCALE="ToFit"></video>';
+            $img = '<a href = "media.php?id=' . $ID . '&pid=' . $mediaID . '&photo=' . $mediaName . '&type=' . $mediaType . '&photoDate=' . $mediaDate . '">' . $img . '</a>';
+        } else {
+            // if invalid file type
+            echo '<script>alert("Invalid File Type!");</script>';
+            echo "<script>location= 'home.php'</script>";
+            exit;
+        }
+
+        $post = $post . '<br/><br/>' . $img . '<br/>';
+        echo "<script>alert('test');</script>";
+        $sql = "INSERT INTO Posts (Post,    Category,  Member_ID,   PostDate) Values
+                                      ('$post', '$category', '$ID',       CURDATE())";
+        mysql_query($sql) or die(mysql_error());
+        $newPostID = mysql_insert_id();
+
+        // update Media table with new post id
+        if (isset($_SESSION['ID'])) {
+            $sqlUpdateMedia = "UPDATE Media SET Post_ID = '$newPostID' WHERE MediaName = '$mediaName' ";
+            mysql_query($sqlUpdateMedia) or die(mysql_error());
+        }
 
     } // if no media
     else {
@@ -251,10 +251,10 @@ if (isset($_POST['submit'])) {
         $("body").delegate(".btnDisapprove", "click", function() {
             var parentDiv = $(this).closest("div[id^=approvals]");
             var data={
-                    postID: $(this).closest('tr').find('.postID').val(),
-                    ID: $(this).closest('tr').find('.ID').val()
-                    //add other properties similarly
-                }
+                postID: $(this).closest('tr').find('.postID').val(),
+                ID: $(this).closest('tr').find('.ID').val()
+                //add other properties similarly
+            }
             $.ajax({
                 type: "post",
                 url: "post_disapprove.php",
@@ -327,69 +327,66 @@ if (isset($_POST['submit'])) {
                     <p><?php echo nl2br($post);?></p>
 
 
-                <?php
+                    <?php
 
-                //check if member has approved this post
-                //----------------------------------------------------------------
-                //require 'getSessionType.php';
+                    //check if member has approved this post
+                    //----------------------------------------------------------------
+                    //require 'getSessionType.php';
 
-                $sql2 = "SELECT * FROM PostApprovals WHERE Post_ID = '$postID' AND Member_ID = '$ID'";
-                $result2 = mysql_query($sql2) or die(mysql_error());
-                $rows2 = mysql_fetch_assoc($result2);
+                    $sql2 = "SELECT ID FROM PostApprovals WHERE Post_ID = '$postID' AND Member_ID = '$ID'";
+                    $result2 = mysql_query($sql2) or die(mysql_error());
+                    $rows2 = mysql_fetch_assoc($result2);
 
 
-                // get approvals for each post
-                $sql3 = "SELECT COUNT(*) FROM PostApprovals WHERE ID = '$postID' ";
-                $result3 = mysql_query($sql3) or die(mysql_error());
-                $rows3 = mysql_fetch_assoc($result3);
-                $approvals = mysql_numrows($result3);
+                    // get approvals for each post
+                    $approvals = mysql_num_rows(mysql_query("SELECT * FROM PostApprovals WHERE Post_ID = '$postID'"));
 
-                // show disapprove if members has approved the post
-                echo '<table>';
-                echo '<tr>';
-                echo '<td>';
-                echo "<div id = 'approvals$postID'>";
+                    // show disapprove if members has approved the post
+                    echo '<table>';
+                    echo '<tr>';
+                    echo '<td>';
+                    echo "<div id = 'approvals$postID'>";
 
-                if (mysql_numrows($result2) > 0) {
+                    if (mysql_numrows($result2) > 0) {
 
-                    echo '<form>';
+                        echo '<form>';
 
-                    echo '<input type ="hidden" class = "postID" id = "postID" value = "'.$postID.'" />';
-                    echo '<input type ="hidden" class = "ID" id = "ID" value = "'.$ID.'" />';
-                    echo '<input type ="button" class = "btnDisapprove" />';
+                        echo '<input type ="hidden" class = "postID" id = "postID" value = "'.$postID.'" />';
+                        echo '<input type ="hidden" class = "ID" id = "ID" value = "'.$ID.'" />';
+                        echo '<input type ="button" class = "btnDisapprove" />';
 
-                    if ($approvals > 0) {
-                        //echo '<tr><td>';
+                        if ($approvals > 0) {
+                            //echo '<tr><td>';
 
-                        echo '&nbsp;<span style = "color:red;font-weight:bold;font-size:16">'.$approvals.'</font>';
+                            echo '&nbsp;<span style = "color:red;font-weight:bold;font-size:16">'.$approvals.'</font>';
+                        }
+                        echo '</form>';
                     }
-                    echo '</form>';
-                }
 
-                else {
-                    echo '<form>';
+                    else {
+                        echo '<form>';
 
-                    echo '<input type ="hidden" class = "postID" id = "postID" value = "'.$postID.'" />';
-                    echo '<input type ="hidden" class = "ID" id = "ID" value = "'.$ID.'" />';
-                    echo '<input type ="button" class = "btnApprove" />';
+                        echo '<input type ="hidden" class = "postID" id = "postID" value = "'.$postID.'" />';
+                        echo '<input type ="hidden" class = "ID" id = "ID" value = "'.$ID.'" />';
+                        echo '<input type ="button" class = "btnApprove" />';
 
-                    if ($approvals > 0) {
-                        //echo '<tr><td>';
+                        if ($approvals > 0) {
+                            //echo '<tr><td>';
 
-                        echo '&nbsp;<span style = "color:red;font-weight:bold;font-size:16">'.$approvals.'</font>';
+                            echo '&nbsp;<span style = "color:red;font-weight:bold;font-size:16">'.$approvals.'</font>';
+                        }
+                        echo '</form>';
                     }
-                    echo '</form>';
-                }
 
-                echo '</td></tr></table>';
+                    echo '</td></tr></table>';
 
-                //-------------------------------------------------------------
-                // End of approvals
-                //-----------------------------------------------------------
+                    //-------------------------------------------------------------
+                    // End of approvals
+                    //-----------------------------------------------------------
 
-    ?>
-                    </div>
+                    ?>
                 </div>
+            </div>
 
 
         <?php
@@ -402,4 +399,4 @@ if (isset($_POST['submit'])) {
 </div>
 
 </body>
-</html>
+</html></html>

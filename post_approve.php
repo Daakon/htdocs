@@ -11,14 +11,16 @@ $sql = "INSERT INTO PostApprovals (Post_ID, Member_ID) Values
                                   ('$postID',  '$ID')";
 mysql_query($sql) or die(mysql_error());
 
-$sql2 = "SELECT * FROM PostApprovals WHERE Post_ID = '$postID' AND Member_ID = '$ID' ";
+$sql2 = "SELECT ID FROM PostApprovals WHERE Post_ID = '$postID' AND Member_ID = '$ID' ";
 $result2 = mysql_query($sql2) or die(mysql_error());
 
+// get approvals for each post
+$sql3 = "SELECT ID FROM PostApprovals WHERE Post_ID = '$postID' ";
+$result3 = mysql_query($sql3) or die(mysql_error());
+$rows3 = mysql_fetch_assoc($result3);
+$approvals = mysql_numrows($result3);
 
 // show disapprove if members has approved the post
-echo '<table>';
-echo '<tr>';
-echo '<td>';
 echo "<div id = 'approvals$postID'>";
 
 
@@ -27,6 +29,7 @@ if (mysql_numrows($result2) > 0) {
     echo '<form>';
 
     echo '<input type ="hidden" class = "postID" id = "postID" value = "'.$postID.'" />';
+    echo '<input type ="hidden" class = "ID" id = "ID" value = "'.$ID.'" />';
     echo '<input type ="button" class = "btnDisapprove" />';
 
     if ($approvals > 0) {
@@ -40,7 +43,8 @@ if (mysql_numrows($result2) > 0) {
 else {
     echo '<form>';
 
-    echo '<input type ="hidden" class = "postID" id = "postID" value="'.$postID.'"/>';
+    echo '<input type ="hidden" class = "postID" id = "postID" value = "'.$postID.'" />';
+    echo '<input type ="hidden" class = "ID" id = "ID" value = "'.$ID.'" />';
     echo '<input type ="button" class = "btnApprove" />';
 
     if ($approvals > 0) {
@@ -50,8 +54,6 @@ else {
     }
     echo '</form>';
 }
-
-echo '</td></tr></table>';
 
 //-------------------------------------------------------------
 // End of approvals

@@ -1,0 +1,185 @@
+-- phpMyAdmin SQL Dump
+-- version 4.2.10
+-- http://www.phpmyadmin.net
+--
+-- Host: localhost:8889
+-- Generation Time: Mar 04, 2015 at 10:11 PM
+-- Server version: 5.5.38
+-- PHP Version: 5.6.2
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+--
+-- Database: `Rapportbook`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Media`
+--
+
+CREATE TABLE `Media` (
+`ID` bigint(20) NOT NULL,
+  `Member_ID` int(11) NOT NULL,
+  `Post_ID` bigint(20) DEFAULT NULL,
+  `MediaName` varchar(255) NOT NULL,
+  `MediaType` varchar(50) NOT NULL,
+  `MediaDate` date NOT NULL,
+  `IsProfilePhoto` tinyint(1) NOT NULL,
+  `IsDeleted` tinyint(1) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `Media`
+--
+
+INSERT INTO `Media` (`ID`, `Member_ID`, `Post_ID`, `MediaName`, `MediaType`, `MediaDate`, `IsProfilePhoto`, `IsDeleted`) VALUES
+(1, 1, 0, 'default_photo.png', 'png', '2015-03-02', 1, 0),
+(3, 1, 37, '54f5c48a96fd4logo.jpg', 'image/jpeg', '2015-03-03', 0, 0),
+(4, 1, 38, '54f5c6c02c67blogo.jpg', 'image/jpeg', '2015-03-03', 0, 0),
+(5, 1, 55, '54f67904d21c1IronMan.jpg', 'image/jpeg', '2015-03-03', 0, 0),
+(6, 1, 57, '54f68cd93b296IMG_0298.JPG', 'image/jpeg', '2015-03-03', 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Members`
+--
+
+CREATE TABLE `Members` (
+`ID` bigint(20) NOT NULL,
+  `FirstName` varchar(50) NOT NULL,
+  `LastName` varchar(50) NOT NULL,
+  `Email` varchar(50) NOT NULL,
+  `Gender` smallint(6) NOT NULL,
+  `DOB` smallint(6) NOT NULL,
+  `Username` varchar(255) NOT NULL,
+  `Password` varchar(10) NOT NULL,
+  `SignupDate` date NOT NULL,
+  `IsActive` tinyint(1) NOT NULL DEFAULT '1',
+  `IsSuspended` tinyint(1) NOT NULL,
+  `LastLogin` date NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `Members`
+--
+
+INSERT INTO `Members` (`ID`, `FirstName`, `LastName`, `Email`, `Gender`, `DOB`, `Username`, `Password`, `SignupDate`, `IsActive`, `IsSuspended`, `LastLogin`) VALUES
+(1, 'Chris', 'Weathers', 'chris@rapportbook.com', 1, 2013, 'chris', 'pass', '2015-03-01', 1, 0, '2015-03-04');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `PostApprovals`
+--
+
+CREATE TABLE `PostApprovals` (
+`ID` bigint(20) NOT NULL,
+  `Member_ID` bigint(20) NOT NULL,
+  `Post_ID` bigint(20) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `PostApprovals`
+--
+
+INSERT INTO `PostApprovals` (`ID`, `Member_ID`, `Post_ID`) VALUES
+(28, 1, 56),
+(30, 1, 62),
+(34, 1, 61);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Posts`
+--
+
+CREATE TABLE `Posts` (
+`ID` bigint(20) NOT NULL,
+  `Member_ID` bigint(20) NOT NULL,
+  `Post` longtext NOT NULL,
+  `Category` varchar(255) NOT NULL,
+  `PostDate` date NOT NULL,
+  `IsDeleted` tinyint(1) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `Posts`
+--
+
+INSERT INTO `Posts` (`ID`, `Member_ID`, `Post`, `Category`, `PostDate`, `IsDeleted`) VALUES
+(31, 1, 'Test', '', '2015-03-02', 0),
+(32, 1, 'Rapportbook', '', '2015-03-03', 0),
+(33, 1, 'Rapportbook', '', '2015-03-03', 0),
+(34, 1, 'Rapportbook', '', '2015-03-03', 0),
+(35, 1, 'Rapportbook', '', '2015-03-03', 0),
+(36, 1, 'Testing', '', '2015-03-03', 0),
+(37, 1, 'Logo<br/><br/><a href = "media.php?id=1&pid=3&media=54f5c48a96fd4logo.jpg&type=&photoDate=2015-03-03"><img src = "54f5c48a96fd4logo.jpg" /></a><br/>', '', '2015-03-03', 0),
+(38, 1, 'RB<br/><br/><a href = "media.php?id=1&pid=4&media=54f5c6c02c67blogo.jpg&type=&photoDate=2015-03-03"><img src = "media/54f5c6c02c67blogo.jpg" /></a><br/>', '', '2015-03-03', 0),
+(52, 1, 'Test post', '', '2015-03-03', 0),
+(53, 1, 'String', '', '2015-03-03', 0),
+(54, 1, 'String post', '', '2015-03-03', 0),
+(55, 1, 'Iron man<br/><br/><a href = "media.php?id=1&pid=5&media=54f67904d21c1IronMan.jpg&type=&photoDate=2015-03-03"><img src = "media/54f67904d21c1IronMan.jpg" /></a><br/>', '', '2015-03-03', 0),
+(56, 1, 'Today', '', '2015-03-03', 0),
+(57, 1, 'Pic<br/><br/><a href = "media.php?id=1&pid=6&media=54f68cd93b296IMG_0298.JPG&type=&photoDate=2015-03-03"><img src = "media/54f68cd93b296IMG_0298.JPG" /></a><br/>', '', '2015-03-03', 0),
+(58, 1, 'Video<br/><br/><a href = "media.php?id=1&pid=&photo=54f68d4e8e3e7IMG_1530 2.mov&type=&photoDate="><video src = "media/54f68d4e8e3e7IMG_1530 2.mov" height = "500px" width = "400px" frameborder = "0" controls preload="none" SCALE="ToFit"></video></a><br/>', '', '2015-03-03', 0),
+(59, 1, 'Mardi Gras!<br/><br/><a href = "media.php?id=&pid=&photo=54f6914e61e68IMG_1530 2.mov&type=&photoDate="><video src = "media/54f6914e61e68IMG_1530 2.mov" height = "500px" width = "400px" frameborder = "0" controls preload="none" SCALE="ToFit"></video></a><br/>', '', '2015-03-03', 0),
+(60, 1, 'Video 2<br/><br/><a href = "media.php?id=&pid=&photo=54f691a50c5fdIMG_1530 2.mov&type=&photoDate="><video src = "media/54f691a50c5fdIMG_1530 2.mov" height = "500px" width = "400px" frameborder = "1" controls preload="none" SCALE="ToFit"></video></a><br/>', '', '2015-03-03', 0),
+(61, 1, 'Video 2<br/><br/><a href = "media.php?id=&pid=&photo=54f69216b9072IMG_1530 2.mov&type=&photoDate="><video src = "media/54f69216b9072IMG_1530 2.mov" height = "500px" width = "400px" frameborder = "1" controls preload="none" SCALE="ToFit"></video></a><br/>', '', '2015-03-03', 0),
+(62, 1, 'Video 2<br/><br/><a href = "media.php?id=&pid=&photo=54f6926badc5cIMG_1530 2.mov&type=&photoDate="><video src = "media/54f6926badc5cIMG_1530 2.mov" height = "500px" width = "400px" frameborder = "1" controls preload="none" SCALE="ToFit"></video></a><br/>', '', '2015-03-03', 0);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `Media`
+--
+ALTER TABLE `Media`
+ ADD PRIMARY KEY (`ID`), ADD UNIQUE KEY `ID` (`ID`), ADD UNIQUE KEY `Post_ID` (`Post_ID`), ADD UNIQUE KEY `Post_ID_2` (`Post_ID`);
+
+--
+-- Indexes for table `Members`
+--
+ALTER TABLE `Members`
+ ADD PRIMARY KEY (`ID`), ADD UNIQUE KEY `ID` (`ID`);
+
+--
+-- Indexes for table `PostApprovals`
+--
+ALTER TABLE `PostApprovals`
+ ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `Posts`
+--
+ALTER TABLE `Posts`
+ ADD PRIMARY KEY (`ID`), ADD UNIQUE KEY `ID` (`ID`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `Media`
+--
+ALTER TABLE `Media`
+MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT for table `Members`
+--
+ALTER TABLE `Members`
+MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `PostApprovals`
+--
+ALTER TABLE `PostApprovals`
+MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=35;
+--
+-- AUTO_INCREMENT for table `Posts`
+--
+ALTER TABLE `Posts`
+MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=63;
