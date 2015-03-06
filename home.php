@@ -386,8 +386,20 @@ if (isset($_POST['submit'])) {
 
                     ?>
 
-                    <div style="border-top:2px solid black;margin-top:10px;padding-bottom:10px;">
-                        Dynamic User Comments
+                    <div style="border-top:2px solid black;padding-top:10px;padding-bottom:10px;margin-top:10px;">
+                        <form method = "post" action = "" enctype ="multipart/form-data" onsubmit="return checkComment(this, postComment)">
+
+                            <input type = "text" class="form-control" name = "postComment" id = "postComment"  placeholder = "Write a comment" title ='' style="border:1px solid black" />
+
+
+                            <input type= "file" name = "flPostCommentPhoto" id = "flPostCommentPhoto" style = "max-width:180px;" />
+                            <br/>
+                            <input type = "submit" name = "btnComment" id = "btnComment" Value = "Comment" style="border:1px solid black" />
+                            <input type = "hidden" name = "postID" id = "postID" Value = "<?php echo $postID ?>" />
+                            <input type = "hidden" name = "ID" id = "ID" value = "<?php echo $ID ?>" />
+                            <input type="hidden" name="scrollx" id="scrollx" value="0" />
+                            <input type="hidden" name="scrolly" id="scrolly" value="0" />
+                        </form>
                     </div>
 
                     <!---------------------------------------------------
