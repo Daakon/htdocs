@@ -1,15 +1,11 @@
 <?php
 require 'connect.php';
 require 'mediaPath.php';
+require 'getSession.php';
 
 //These functions will help us refactor
 if (session_id() == '') {
     session_start();
-}
-
-function get_users_id()
-{
-    return $_SESSION['ID'];
 }
 
 function checkActive($user_id)
@@ -65,7 +61,9 @@ function get_users_photo_by_id($user_id)
     $result = mysql_query($sql) or die(mysql_error());
     while ($rows = mysql_fetch_assoc($result)) {
         $photo = $rows['MediaName'];
-        echo "<img src='$mediaPath$photo' width=52 height=52/>";
+        require 'mediaPath.php';
+        ?> <img src="media/<?php echo $photo ?>" width=52 height=52/>
+<?php
     }
 
 }

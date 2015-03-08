@@ -1,20 +1,22 @@
 <?php
-function calendarMonths() {
+function calendarMonths()
+{
     echo '<option value = 1>1</option>';
-    echo   '<option value = 2>2</option>';
-    echo   '<option value = 3>3</option>';
-    echo   '<option value = 4>4</option>';
-    echo   '<option value = 5>5</option>';
-    echo   '<option value = 6>6</option>';
-    echo   '<option value = 7>7</option>';
-    echo   '<option value = 8>8</option>';
-    echo   '<option value = 9>9</option>';
-    echo   '<option value = 10>10</option>';
-    echo   '<option value = 11>11</option>';
-    echo   '<option value = 12>12</option>';
+    echo '<option value = 2>2</option>';
+    echo '<option value = 3>3</option>';
+    echo '<option value = 4>4</option>';
+    echo '<option value = 5>5</option>';
+    echo '<option value = 6>6</option>';
+    echo '<option value = 7>7</option>';
+    echo '<option value = 8>8</option>';
+    echo '<option value = 9>9</option>';
+    echo '<option value = 10>10</option>';
+    echo '<option value = 11>11</option>';
+    echo '<option value = 12>12</option>';
 }
 
-function calendarDays() {
+function calendarDays()
+{
     echo '<option value = 1>1</option>';
     echo '<option value = 2>2</option>';
     echo '<option value = 3>3</option>';
@@ -48,7 +50,8 @@ function calendarDays() {
     echo '<option value = 31>31</option>';
 }
 
-function calendarYears() {
+function calendarYears()
+{
     echo '<option value = "2013">2013</option>';
     echo '<option value = "2012">2012</option>';
     echo '<option value = "2011">2011</option>';
@@ -105,7 +108,9 @@ function calendarYears() {
     echo '<option value = "1960">1960</option>';
 }
 
-function calendarEventYears() {
+function calendarEventYears()
+{
     echo '<option value = "2014">2014</option>';
 }
+
 ?>

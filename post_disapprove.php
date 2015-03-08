@@ -28,33 +28,30 @@ if (mysql_numrows($result2) > 0) {
 
     echo '<form>';
 
-    echo '<input type ="hidden" class = "postID" id = "postID" value = "'.$postID.'" />';
-    echo '<input type ="hidden" class = "ID" id = "ID" value = "'.$ID.'" />';
+    echo '<input type ="hidden" class = "postID" id = "postID" value = "' . $postID . '" />';
+    echo '<input type ="hidden" class = "ID" id = "ID" value = "' . $ID . '" />';
     echo '<input type ="button" class = "btnDisapprove" />';
 
     if ($approvals > 0) {
         //echo '<tr><td>';
 
-        echo '&nbsp;<span style = "color:red;font-weight:bold;font-size:16">'.$approvals.'</font>';
+        echo '&nbsp;<span style = "color:red;font-weight:bold;font-size:16">' . $approvals . '</font>';
     }
     echo '</form>';
-}
-
-else {
+} else {
     echo '<form>';
 
-    echo '<input type ="hidden" class = "postID" id = "postID" value = "'.$postID.'" />';
-    echo '<input type ="hidden" class = "ID" id = "ID" value = "'.$ID.'" />';
+    echo '<input type ="hidden" class = "postID" id = "postID" value = "' . $postID . '" />';
+    echo '<input type ="hidden" class = "ID" id = "ID" value = "' . $ID . '" />';
     echo '<input type ="button" class = "btnApprove" />';
 
     if ($approvals > 0) {
         //echo '<tr><td>';
 
-        echo '&nbsp;<span style = "color:red;font-weight:bold;font-size:16">'.$approvals.'</font>';
+        echo '&nbsp;<span style = "color:red;font-weight:bold;font-size:16">' . $approvals . '</font>';
     }
     echo '</form>';
 }
-
 
 
 echo '</div>';

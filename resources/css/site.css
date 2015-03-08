@@ -3,104 +3,106 @@ body {
 }
 
 .header {
-    background:red;
+    background: red;
     color: white;
     height: 50px;
     padding: 10px;
-    font-size:20px;
+    font-size: 20px;
 }
 
 .form {
-    padding-left:100px;
+    padding-left: 100px;
 }
+
 .input-style {
-    width:400px;
-    padding:5px;
-    height:50px;
+    width: 400px;
+    padding: 5px;
+    height: 50px;
     border-radius: 10px;
-    margin-bottom:10px;
+    margin-bottom: 10px;
     font-size: 26px;
 }
 
 .bday-style {
-    width:150px;
-    padding:5px;
-    height:50px;
+    width: 150px;
+    padding: 5px;
+    height: 50px;
     border-radius: 10px;
-    margin-bottom:10px;
+    margin-bottom: 10px;
     font-size: 26px;
 }
 
 .login-button, .login-button:hover {
-    background:black;
-    color:white;
+    background: black;
+    color: white;
     border-radius: 10px;
 }
 
 .form-fields {
-    width:300px;
+    width: 300px;
 }
 
 .signup-button {
-    margin-left:350px;
-    border:1px solid black;
+    margin-left: 350px;
+    border: 1px solid black;
     border-radius: 10px;
-    width:100px;
-    height:50px;
-    font-size:26px;
+    width: 100px;
+    height: 50px;
+    font-size: 26px;
 }
 
 .roll-call {
-    background:white;
-    color:black;
-    border:2px solid black;
+    background: white;
+    color: black;
+    border: 2px solid black;
     border-radius: 5px;
-    padding-bottom:20px;
+    padding-bottom: 20px;
 }
 
 .post-button {
     background: red;
     color: white;
     border-radius: 10px;
-    padding:5px 10px;
-    font-size:20px;
+    padding: 5px 10px;
+    font-size: 20px;
 }
 
 .roll-call-post {
     background-color: white;
-    color:black;
-    border:1px solid black;
+    color: black;
+    border: 1px solid black;
     padding: 10px;
     border-radius: 10px;
     width: 500px;
-    height:500px;
+    height: 500px;
 }
 
-.index-image{
-    margin-right:70px;
-    border:3px solid #000;
+.index-image {
+    margin-right: 70px;
+    border: 3px solid #000;
 }
 
-.container-fluid-custom{
-    padding-bottom:10px;
+.container-fluid-custom {
+    padding-bottom: 10px;
 }
 
-.logo-image{
-    margin-top:-5px;
+.logo-image {
+    margin-top: -5px;
 }
 
-.forgot-password-link{
-    color:white;
-    font-size:12px;
-    padding-left:100px;"
+.forgot-password-link {
+    color: white;
+    font-size: 12px;
+    padding-left: 100px;
+"
 }
 
-.has-error .error-text{
-    display:inline;
+.has-error .error-text {
+    display: inline;
     color: #A94442;
 }
 
 #comment-style {
-    background-color:yellow;
-    border:1px solid black;
+    background-color: yellow;
+    border: 1px solid black;
 }
