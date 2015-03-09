@@ -150,12 +150,12 @@ if (isset($_POST['submit'])) {
             if (in_array($type, $photoFileTypes)) {
 
                 $img = '<img src = "' . $postMediaFilePath . '" />';
-                $img = '<a href = "media.php?id=' . $ID . '&pid=' . $mediaID . '&media=' . $mediaName . '&type=' . $mediaType . '&photoDate=' . $mediaDate . '">' . $img . '</a>';
+                $img = '<a href = "media.php?id=' . $ID . '&mid=' . $mediaID . '&media=' . $mediaName . '&type=' . $mediaType . '&mediaDate=' . $mediaDate . '">' . $img . '</a>';
             } // check if file type is a video
             elseif (in_array($type, $videoFileTypes)) {
 
                 $img = '<video src = "' . $postMediaFilePath . '" height = "500px" width = "400px" frameborder = "1" controls preload="none" SCALE="ToFit"></video>';
-                $img = '<a href = "media.php?id=' . $ID . '&pid=' . $mediaID . '&photo=' . $mediaName . '&type=' . $mediaType . '&photoDate=' . $mediaDate . '">' . $img . '</a>';
+                $img = '<a href = "media.php?id=' . $ID . '&mid=' . $mediaID . '&media=' . $mediaName . '&type=' . $mediaType . '&mediaDate=' . $mediaDate . '">' . $img . '</a>';
             } else {
                 // if invalid file type
                 echo '<script>alert("Invalid File Type!");</script>';
@@ -323,7 +323,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
             $mediaRow = mysql_fetch_assoc($mediaResult);
             $mediaID = $mediaRow['ID'];
             $media = $mediaRow['MediaName'];
-            $mediaType = $mediaRow['Type'];
+            $mediaType = $mediaRow['MediaType'];
             $mediaDate = $mediaRow['MediaDate'];
 
 
@@ -331,12 +331,12 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
             if (in_array($type, $photoFileTypes)) {
 
                 $img = '<img src = "' . $postMediaFilePath . '" />';
-                $img = '<a href = "photo.php?id=' . $ID . '&pid=' . $mediaID . '&photo=' . $mediaName . '&type=' . $mediaType . '&photoDate=' . $mediaDate . '">' . $img . '</a>';
+                $img = '<a href = "media.php?id=' . $ID . '&mid=' . $mediaID . '&media=' . $mediaName . '&type=' . $mediaType . '&mediaDate=' . $mediaDate . '">' . $img . '</a>';
             } // check if file type is a video
             elseif (in_array($type, $videoFileTypes)) {
 
                 $img = '<video src = "' . $postMediaFilePath . '" height = "500px" width = "400px" frameborder = "1" controls preload="none" SCALE="ToFit"></video>';
-                $img = '<a href = "media.php?id=' . $ID . '&pid=' . $mediaID . '&photo=' . $mediaName . '&type=' . $mediaType . '&photoDate=' . $mediaDate . '">' . $img . '</a>';
+                $img = '<a href = "media.php?id=' . $ID . '&mid=' . $mediaID . '&media=' . $mediaName . '&type=' . $mediaType . '&mediaDate=' . $mediaDate . '">' . $img . '</a>';
             } else {
                 // if invalid file type
                 echo '<script>alert("Invalid File Type!");</script>';
@@ -384,7 +384,6 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
             $post = "$nameLink posted a new $mediaString comment on $noun post.<br/><br/>$img<br/>";
             $post = mysql_real_escape_string($post);
-            echo "<script>alert('$post');</script>";
 
             $sqlInsertPost = "INSERT INTO Posts (Post,     Member_ID,    PostDate  ) Values
                                                 ('$post', '$ID',        CURDATE() ) ";
@@ -418,8 +417,8 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
         $user_id = $_SESSION['ID'];
 
 
-//Get the ids of all the consumers connected with a bulletin comment
-        $sql = "SELECT ID FROM PostComments WHERE ID = $postID ";
+//Get the ids of all the members connected with a post comment
+        $sql = "SELECT Member_ID FROM PostComments WHERE ID = $postID ";
 
         $result = mysql_query($sql) or die(mysql_error());
 
@@ -434,27 +433,6 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
         $comment_ids = array_unique($comment_ids);
 //Send consumer notifications
 
-
-//Get the ids of all the businesses connected with a post comment
-        $sql = "SELECT ID FROM PostComments WHERE ID = $postID ";
-
-        $result = mysql_query($sql) or die(mysql_error());
-
-        $consumer_comment_ids = array();
-
-        $checkActive = mysql_fetch_assoc($result);
-
-
-//Iterate over the results and sort out the biz ids from the consumer ones.
-        while ($rows = mysql_fetch_assoc($result)) {
-            array_push($comment_ids, $rows['ID']);
-        }
-
-//Boil the id's down to unique values bc we dont want to send double emails or notifications
-        $comment_ids = array_unique($comment_ids);
-//Send consumer notifications
-
-
         foreach ($comment_ids as $item) {
 
             // only send email if account & email active
@@ -463,7 +441,6 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                     build_and_send_email($item, $user_id, 1, $postID);
                 }
             }
-            mysql_query($sql) or die(mysql_error());
         }
 
 
@@ -715,7 +692,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                 echo '<input type ="button" class = "btnDisapprove" />';
 
                 if ($approvals > 0) {
-                    //echo '<tr><td>';
+
 
                     echo '&nbsp;<span style = "color:red;font-weight:bold;font-size:16">' . $approvals . '</font>';
                 }
@@ -728,13 +705,13 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                 echo '<input type ="button" class = "btnApprove" />';
 
                 if ($approvals > 0) {
-                    //echo '<tr><td>';
+
 
                     echo '&nbsp;<span style = "color:red;font-weight:bold;font-size:16">' . $approvals . '</font>';
                 }
                 echo '</form>';
             }
-
+            echo '</div>'; // end of approval div
             echo '</td></tr></table>';
 
             //-------------------------------------------------------------
@@ -849,7 +826,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
                     }
                     echo '</table>';
-                    echo '</div>';
+                    echo '</div>'; //end of more commments div
                     }
                     ?>
 

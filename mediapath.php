@@ -12,7 +12,7 @@ elseif (strstr($url, 'mdev.rapportbook.com') || strstr($url, "dev.rapportbook.co
     $mediaPath = trim('http://dev.rapportbook.com/media/');
 } else {
     // live desktop and mobile
-    $mediaPath = trim('http://businessconnect.co/media/');
+    $mediaPath = trim('http://rapportbook.com/media/');
 
 }
 ?>

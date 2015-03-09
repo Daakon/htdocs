@@ -1,14 +1,15 @@
 <?php
-session_start();
+
 require 'connect.php';
-require 'MediaPath.php';
+require 'mediaPath.php';
 require 'getSession.php';
 require_once 'email.php';
+
 ini_set('memory_limit', '900M');
 // handle approves
 
 $mediaName = $_POST['mediaName'];
-$type = $_POST['type'];
+$mediaType = $_POST['mediaType'];
 $postID = $_POST['postID'];
 $mediaID = $_POST['mediaID'];
 $mediaDate = $_POST['mediaDate'];
@@ -26,7 +27,7 @@ $user_id = $ID;
 
 
 //Get the ids of all the consumers connected with a bulletin comment
-$sql = "SELECT Member_ID FROM PostComments WHERE ID = $postID ";
+$sql = "SELECT Member_ID FROM PostComments WHERE Post_ID = $postID ";
 
 $result = mysql_query($sql) or die(mysql_error());
 
@@ -34,11 +35,11 @@ $comment_ids = array();
 
 //Iterate over the results and sort out the biz ids from the consumer ones.
 while ($rows = mysql_fetch_assoc($result)) {
-    array_push($comment_ids, $rows['id']);
+    array_push($comment_ids, $rows['ID']);
 }
 
 //Boil the id's down to unique values bc we dont want it send double emails or notifications
-$comment_ids = array_unique($consumer_comment_ids);
+$comment_ids = array_unique($comment_ids);
 //Send consumer notifications
 
 
@@ -58,28 +59,26 @@ foreach ($comment_ids as $item) {
 
 // check if user has approved this post
 
-$sql2 = "SELECT * FROM PostApprovals WHERE ID = '$postID' AND Member_ID = '$ID' ";
+$sql2 = "SELECT * FROM PostApprovals WHERE Post_ID = '$postID' AND Member_ID = '$ID' ";
 $result2 = mysql_query($sql2) or die(mysql_error());
 $rows2 = mysql_fetch_assoc($result2);
 
 // get approvals for each bulletin
-$sql3 = "SELECT * FROM PostApprovals WHERE ID = '$postID' ";
+$sql3 = "SELECT * FROM PostApprovals WHERE Post_ID = '$postID' ";
 $result3 = mysql_query($sql3) or die(mysql_error());
 $rows3 = mysql_fetch_assoc($result3);
 $approvals = mysql_numrows($result3);
 
-echo "<div id = 'approvals'>";
+echo "<div id = 'approvals$postID'>";
 
 if (mysql_numrows($result2) > 0) {
 
     echo '<form>';
     echo '<input type ="hidden" class = "postID" value = "' . $postID . '" />';
-
-    echo '<input type ="hidden" class = "id" value="' . $id . '"/>';
+    echo '<input type ="hidden" class = "ID" value="' . $ID . '"/>';
     echo '<input type ="hidden" class = "mediaID" value = "' . $mediaID . '" />';
-
     echo '<input type ="hidden" class = "mediaName" value ="' . $mediaName . '" />';
-    echo '<input type ="hidden" class = "type" value = "' . $type . '" />';
+    echo '<input type ="hidden" class = "mediaType" value = "' . $mediaType . '" />';
     echo '<input type ="hidden" class = "mediaDate" id = "mediaDate" value = "' . $mediaDate . '" />';
 
 
@@ -95,12 +94,10 @@ if (mysql_numrows($result2) > 0) {
 
     echo '<form>';
     echo '<input type ="hidden" class = "postID" id = "postID" value = "' . $postID . '" />';
-
     echo '<input type ="hidden" class = "ID" value="' . $ID . '"/>';
     echo '<input type ="hidden" class = "mediaID" value = "' . $mediaID . '" />';
-
     echo '<input type ="hidden" class = "mediaName" id = "mediaName" value ="' . $mediaName . '" />';
-    echo '<input type ="hidden" class = "type" id = "type" value = "' . $type . '" />';
+    echo '<input type ="hidden" class = "type" id = "mediaType" value = "' . $mediaType . '" />';
     echo '<input type ="hidden" class = "mediaDate" id = "mediaDate" value = "' . $mediaDate . '" />';
 
 

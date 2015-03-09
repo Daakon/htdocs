@@ -20,7 +20,7 @@ if (!empty($_GET['btnDelete']) && ($_GET['btnDelete'] == 'Delete')) {
 
     mysql_query($sql) or die(mysql_error());
 
-    echo "<script>location = 'photos.php?id=$ID'</script>";
+    echo "<script>location = 'media.php?id=$ID'</script>";
 
 }
 ?>
@@ -291,7 +291,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
  * Start to build photo page here
  * *********************************/
 $mediaName = $_GET['media'];
-$type = $_GET['type'];
+$mediaType = $_GET['mediaType'];
 $mediaDate = $_GET['mediaDate'];
 $mediaID = $_GET['mid'];
 $memberID = $_GET['id'];
@@ -340,66 +340,9 @@ $profileMediaSrc = trim($mediaPath . $photo);
 ?>
 
 
-<?php get_header() ?>
+<?php get_head_files() ?>
 
 
-<script>
-    $(document).ready(function () {
-        $("body").delegate(" . btnApprove", "click", function () {
-            var currentDiv = $(this).closest("div[id ^= approvals]");
-            var data = {
-                postID: $(this).closest('tr').find('.postID').val(),
-
-                ID: $(this).closest('tr').find('.ID').val(),
-                mediaID: $(this).closest('tr').find('.mediaID').val(),
-                mediaName: $(this).closest('tr').find('.mediaName').val(),
-                type: $(this).closest('tr').find('.type').val(),
-                mediaDate: $(this).closest('tr').find('.mediaDate').val()
-
-                //add other properties similarly
-            };
-
-            $.ajax({
-                type: "post",
-                url: "media_Approve . php",
-                data: data,
-                success: function (data) {
-                    currentDiv.html(data);
-                }
-
-            })
-        });
-    });
-</script>
-
-<script>
-    $(document).ready(function () {
-        $("body").delegate(" . btnDisapprove", "click", function () {
-            var currentDiv = $(this).closest("div[id ^= approvals]");
-            var data = {
-                postID: $(this).closest('tr').find('.postID').val(),
-
-                ID: $(this).closest('tr').find('.id').val(),
-                mediaID: $(this).closest('tr').find('.pId').val(),
-                mediaName: $(this).closest('tr').find('.mediaName').val(),
-                type: $(this).closest('tr').find('.type').val(),
-                mediaDate: $(this).closest('tr').find('.mediaDate').val()
-
-                //add other properties similarly
-            };
-
-            $.ajax({
-                type: "post",
-                url: "media_disapprove . php",
-                data: data,
-                success: function (data) {
-                    currentDiv.html(data);
-                }
-
-            })
-        });
-    });
-</script>
 
 <script type="text / javascript">
         function confirmPhotoDelete(theForm) {
@@ -415,7 +358,7 @@ $profileMediaSrc = trim($mediaPath . $photo);
 
 </script>
 
-<script type="text / javascript">
+<script type="text/javascript">
 
         function showComments(id) {
             var e = document.getElementById('moreComments');
@@ -425,32 +368,90 @@ $profileMediaSrc = trim($mediaPath . $photo);
             else
                 e.style.display = 'none';
         }
+</script>
+
+<script>
+    $(document).ready(function () {
+        $("body").delegate(".btnApprove", "click", function () {
+            var parentDiv = $(this).closest("div[id^=approvals]");
+            var data = {
+                postID: $(this).closest('tr').find('.postID').val(),
+                ID: $(this).closest('tr').find('.ID').val(),
+                mediaID: $(this).closest('tr').find('.mediaID').val(),
+                mediaName: $(this).closest('tr').find('.mediaName').val(),
+                mediaType: $(this).closest('tr').find('.mediaType').val(),
+                mediaDate: $(this).closest('tr').find('.mediaDate').val()
+                //add other properties similarly
+            }
+
+            $.ajax({
+                type: "post",
+                url: "media_approve.php",
+                data: data,
+                success: function (data) {
+                    parentDiv.html(data);
+                }
+
+            })
+        });
+    });
+</script>
 
 
 
+<script>
+    $(document).ready(function() {
+        $("body").delegate(".btnDisapprove", "click", function() {
+            var currentDiv = $(this).closest("div[id^=approvals]");
+            var data={
+                postID: $(this).closest('tr').find('.postID').val(),
+                ID: $(this).closest('tr').find('.ID').val(),
+                mediaID: $(this).closest('tr').find('.mediaID').val(),
+                mediaName: $(this).closest('tr').find('.mediaName').val(),
+                mediaType: $(this).closest('tr').find('.mediaType').val(),
+                mediaDate: $(this).closest('tr').find('.mediaDate').val()
 
+                //add other properties similarly
+            }
+
+            $.ajax({
+                type: "post",
+                url: "media_disapprove.php",
+                data: data,
+                success: function(data)
+                {
+                    currentDiv.html(data);
+                }
+
+            })
+        });
+    });
 </script>
 
 <style>
     iframe {
-        min-width: 400px;
-        max-width: 400px;
-        max-height: 400px;
+        max-width: 100%;
+        height: auto;
     }
 
     img {
-        max-width: 400px;
-        max-height: 600px;
+        max-width: 100%;
+        height: auto;
     }
 
     video {
-        max-width: 400px;
-        max-height: 400px;
+        max-width: 100%;
+        height: auto;
     }
 
     embed {
-        height: 500px;
-        width: 400px;
+        max-width: 100%;
+        height: auto;
+    }
+
+    script {
+        max-width: 100%;
+        height: auto;
     }
 
     .btnApprove {
@@ -537,11 +538,11 @@ $profileMediaSrc = trim($mediaPath . $photo);
 
 <body style="background:black;">
 
-<div class="container">
+<div class="container" style="background:white;margin-top:10px;padding:10px;">
     <div class="row">
-        <div class="col-xs-12">
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 ">
 
-            <table class="table" style="background:white;border:1px solid black;margin-top:20px;" align="center">
+
                 <?php
 
 
@@ -556,29 +557,19 @@ $profileMediaSrc = trim($mediaPath . $photo);
                 // remove image from original body
                 $post = preg_replace(" /<img[^>]+\> / i", "", $rowPost['Post']);
                 $post = preg_replace(" /<embed[^>]+\> / i", "", $post);
+                $post = "<p>".$post."</p>";
                 ?>
-                <tr>
-                    <td valign="top" style="border:1px solid black;max - width:450px;"><?php echo $img ?>
-                        <br/><?php echo nl2br($post) ?></td>
 
-        </div>
+
+                        <?php echo nl2br($post); ?>
+
     </div>
 
-    <div class="row">
-        <div class="col-xs-12">
-            <td valign="top"
-                style="border - left:1px solid black;padding-left:0px;width:100px;max - width:100px;">
+
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 ">
+
                 <img src=" <?php echo $profileMediaSrc ?>" height="100px" width="100px"/>
-            </td>
 
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-xs-12">
-
-
-            <td valign="top" style="border:1px solid black;">
                 <?php echo $name; ?><br/>
                 <?php echo date("F j, Y", strtotime($mediaDate)) ?>
 
@@ -589,34 +580,33 @@ $profileMediaSrc = trim($mediaPath . $photo);
                 <?php
 
 
-                // check if user has approved this bulletin
+                // check if user has approved this post
 
-                $sql2 = "SELECT * FROM PostApprovals WHERE ID = '$postID' AND Member_ID = '$ID' ";
+                $sql2 = "SELECT * FROM PostApprovals WHERE Post_ID = '$postID' AND Member_ID = '$ID' ";
                 $result2 = mysql_query($sql2) or die(mysql_error());
                 $rows2 = mysql_fetch_assoc($result2);
 
                 // get approvals for each bulletin
-                $sql3 = "SELECT * FROM PostApprovals WHERE ID = '$postID' ";
+                $sql3 = "SELECT * FROM PostApprovals WHERE Post_ID = '$postID' ";
                 $result3 = mysql_query($sql3) or die(mysql_error());
                 $rows3 = mysql_fetch_assoc($result3);
                 $approvals = mysql_numrows($result3);
 
-                echo "<div id = 'approvals'>";
+                echo '<table><tr><td>';
+                echo "<div id = 'approvals$postID'>";
 
                 if (mysql_numrows($result2) > 0) {
 
                     echo '<form>';
+
                     echo '<input type ="hidden" class = "postID" value = "' . $postID . '" />';
-
-                    echo '<input type ="hidden" class = "id" value="' . $id . '"/>';
+                    echo '<input type ="hidden" class = "ID" value="' . $ID . '"/>';
                     echo '<input type ="hidden" class = "mediaID" value = "' . $mediaID . '" />';
-
                     echo '<input type ="hidden" class = "mediaName" value ="' . $mediaName . '" />';
-                    echo '<input type ="hidden" class = "type" value = "' . $type . '" />';
+                    echo '<input type ="hidden" class = "mediaType" value = "' . $mediaType . '" />';
                     echo '<input type ="hidden" class = "mediaDate" id = "mediaDate" value = "' . $mediaDate . '" />';
-
-
                     echo '<input type ="button" class = "btnDisapprove" />';
+
 
                     if ($approvals > 0) {
                         //echo '<tr><td>';
@@ -627,26 +617,26 @@ $profileMediaSrc = trim($mediaPath . $photo);
                 } else {
 
                     echo '<form>';
-                    echo '<input type ="hidden" class = "postID" id = "postID" value = "' . $postID . '" />';
 
+                    echo '<input type ="hidden" class = "postID" id = "postID" value = "' . $postID . '" />';
                     echo '<input type ="hidden" class = "ID" value="' . $ID . '"/>';
                     echo '<input type ="hidden" class = "mediaID" value = "' . $mediaID . '" />';
-
                     echo '<input type ="hidden" class = "mediaName" id = "mediaName" value ="' . $mediaName . '" />';
-                    echo '<input type ="hidden" class = "type" id = "type" value = "' . $type . '" />';
+                    echo '<input type ="hidden" class = "mediaType" id = "type" value = "' . $mediaType . '" />';
                     echo '<input type ="hidden" class = "mediaDate" id = "mediaDate" value = "' . $mediaDate . '" />';
-
-
                     echo '<input type ="button" class = "btnApprove" />';
 
+
                     if ($approvals > 0) {
-                        //echo '<tr><td>';
+
 
                         echo '&nbsp;<span style = "color:red;font-weight:bold;font-size:16px">' . $approvals . '</font>';
                     }
                     echo '</form>';
                 }
                 echo "</div>"; // end of approval div
+                echo '</td></tr></table>';
+
                 ?>
 
 
@@ -654,7 +644,7 @@ $profileMediaSrc = trim($mediaPath . $photo);
                 <form method="post" action="" enctype="multipart/form-data"
                       onsubmit="return (checkComment(this, btnComment) && saveScrollPositions(this))">
 
-                    <input type="text" name="postComment" id="postComment" style="width:300px;"/>
+                    <input type="text" class="form-control" name="postComment" id="postComment" style="width:350px;margin-top:10px;" placeholder ="Write a comment"/>
 
 
                     <input type="file" name="flPostMedia" id="flPostMedia"/>
@@ -718,15 +708,15 @@ $profileMediaSrc = trim($mediaPath . $photo);
                         PostComments.Comment As Comment,
                         PostComments.ID As CommentID,
                         Members.ID As MemberID,
-                        CONCAT(Consumers.fName, ' ', Consumers.lName) As Name,
-                        Media.MediaName As MediaName,
+                        CONCAT(Members.FirstName, ' ', Members.LastName) As Name,
+                        Media.MediaName As MediaName
                         FROM PostComments,Members, Media
                         WHERE
                         PostComments.ID = '$postID'
                         AND PostComments.ID = Members.ID
                         AND Media.ID = Members.ID
-                        AND Media.IsProfilePhoto = 1;
-                        Group By bCommentId Order By bCommentId ASC LIMIT 3, 100";
+                        AND Media.IsProfilePhoto = 1
+                        Group By PostComments.ID Order By PostComments.ID ASC LIMIT 3, 100";
 
                 $result4 = mysql_query($sql4) or die(mysql_error());
                 if (mysql_numrows($result4) > 0) {
@@ -750,9 +740,10 @@ $profileMediaSrc = trim($mediaPath . $photo);
                         echo '</td></tr>';
                     }
 
-                    echo '</table>';
-                    echo '</div>';
+                    echo '</table>'; ?>
+                   </div>'; // end of more comments div
 
+            <?php
                     }
                     echo '<hr/>';
                     ?>
@@ -778,12 +769,6 @@ $profileMediaSrc = trim($mediaPath . $photo);
                         ?>
 
 
-            </td>
-            </tr>
-
-            </table>
-
-        </div>
     </div>
 </div>
 
