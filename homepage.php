@@ -11,10 +11,10 @@ $ID = $_SESSION['ID'];
     $rows =  mysql_fetch_assoc($result);
     $username = $rows['Username'];
 
-    header("Location: profile.php/$username");
+    header("Location: /profile.php/$username");
 }
 else {
-    echo "<script>alert('You are not logged in'); location = 'index.php'</script>";
+    echo "<script>alert('You are not logged in'); location = '/index.php'</script>";
 }
 
 

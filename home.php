@@ -495,14 +495,14 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
     }
 
     .btnApprove {
-        background: url("company_photos/gray_check.png") no-repeat;
+        background: url("/images/gray_check.png") no-repeat;
         width: 30px;
         height: 30px;
         border: none;
     }
 
     .btnDisapprove {
-        background: url("company_photos/red_check.png") no-repeat;
+        background: url("/images/red_check.png") no-repeat;
         width: 30px;
         height: 30px;
         border: none;
@@ -550,7 +550,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
             $.ajax({
                 type: "post",
-                url: "post_approve.php",
+                url: "/post_approve.php",
                 data: data,
                 success: function (data) {
                     parentDiv.html(data);
@@ -572,7 +572,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
             }
             $.ajax({
                 type: "post",
-                url: "post_disapprove.php",
+                url: "/post_disapprove.php",
                 data: data,
                 success: function (data) {
                     parentDiv.html(data);
@@ -601,11 +601,11 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 <div class="container" >
     <div class="row">
         <div class="col-xs-12 roll-call center-block">
-            <img src="images/roll-call.gif" height="150px" width="150px" alt="Roll Call"/>
+            <img src="/images/roll-call.gif" height="150px" width="150px" alt="Roll Call"/>
             <br/>
 
             <form method="post" enctype="multipart/form-data" action="">
-                <img src="images/image-icon.png" height="30px" width="30px" alt="Photos/Video"/>
+                <img src="/images/image-icon.png" height="30px" width="30px" alt="Photos/Video"/>
                 <strong>Attach Photo/Video To Your Post</strong>
                 <input type="file" width="10px;" name="flPostMedia" id="flPostMedia"/>
                 <input type="hidden" name="MAX_FILE_SIZE" value="500000000"

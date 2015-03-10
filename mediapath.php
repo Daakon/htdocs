@@ -4,7 +4,7 @@ $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 
 if (strstr($url, 'localhost:8888')) {
 
-    $mediaPath = trim('media/');
+    $mediaPath = trim('/media/');
 
 } // test mobile writes to test desktop
 elseif (strstr($url, 'mdev.rapportbook.com') || strstr($url, "dev.rapportbook.com")) {

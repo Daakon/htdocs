@@ -15,7 +15,7 @@ mysql_query($sql) or die(mysql_error());
 //An approval just popped so we should set the notifications
 //A comment was just made, we need to send out some notifications.
 //The first thing is to identify all of the id's connected with this bulletin
-$user_id = $ID;
+
 
 
 //Get the ids of all the consumers connected with a bulletin comment
@@ -34,13 +34,13 @@ while ($rows = mysql_fetch_assoc($result)) {
 $comment_ids = array_unique($comment_ids);
 //Send consumer notifications
 
-
+/*
 foreach ($comment_ids as $item) {
 
     // only send email if account & email active
     if (checkActive($item, 1)) {
         if (checkEmailActive($item, 1)) {
-            build_and_send_email($user_id, $item , 1, $postID);
+            build_and_send_email($ID, $item , 1, $postID);
         }
     }
 }
@@ -56,7 +56,7 @@ $rows = mysql_fetch_assoc($result);
 if (checkEmailActive($ID)) {
     build_and_send_email($ID, $user_id, 1, $postID, '');
 }
-$result = mysql_query($sql) or die(mysql_error());
+*/
 
 //=========================================================================================================================//
 //BELOW IS END OF Post Approval HANDLING CODE ==========================================================================//

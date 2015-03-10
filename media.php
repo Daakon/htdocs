@@ -386,7 +386,7 @@ $profileMediaSrc = trim($mediaPath . $photo);
 
             $.ajax({
                 type: "post",
-                url: "media_approve.php",
+                url: "/media_approve.php",
                 data: data,
                 success: function (data) {
                     parentDiv.html(data);
@@ -416,7 +416,7 @@ $profileMediaSrc = trim($mediaPath . $photo);
 
             $.ajax({
                 type: "post",
-                url: "media_disapprove.php",
+                url: "/media_disapprove.php",
                 data: data,
                 success: function(data)
                 {
@@ -455,7 +455,7 @@ $profileMediaSrc = trim($mediaPath . $photo);
     }
 
     .btnApprove {
-        background: url("company_photos/gray_check.png");
+        background: url("/images/gray_check.png");
         display: inline-block;
         background-repeat: no-repeat;
         background-color: white;
@@ -466,7 +466,7 @@ $profileMediaSrc = trim($mediaPath . $photo);
     }
 
     .btnDisapprove {
-        background: url("company_photos/red_check.png");
+        background: url("/images/red_check.png");
         display: inline-block;
         background-repeat: no-repeat;
         background-color: transparent;

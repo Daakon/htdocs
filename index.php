@@ -14,7 +14,7 @@ get_head_files();
 
     <div class="row">
         <div class="col-lg-6 col-md-5 hidden-sm hidden-xs">
-            <img src="images/college-kids-texting.jpg" height="350" width="100%" alt="" class="index-image"/>
+            <img src="/images/college-kids-texting.jpg" height="350" width="100%" alt="" class="index-image"/>
         </div>
 
         <div class="col-lg-6 col-md-7 col-sm-12 col-xs-12 ">

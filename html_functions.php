@@ -33,7 +33,7 @@ function get_head_files()
 
     <form method="post" action="login.php" class="form-inline" >
     <header class="navbar navbar-default navbar-static-top header">
-        <img src="images/Rapportbook-Logo-White-Text-Large.png" alt="Rapportbook" height="40" width="auto"
+        <img src="/images/Rapportbook-Logo-White-Text-Large.png" alt="Rapportbook" height="40" width="auto"
              class="logo-image"/>
 
 
@@ -63,7 +63,7 @@ function get_header()
 { ?>
     <header class="navbar navbar-default navbar-static-top header">
         <a href="homepage.php">
-        <img src="images/Rapportbook-Logo-White-Text-Large.png" alt="Rapportbook" height="40" width="315"
+        <img src="/images/Rapportbook-Logo-White-Text-Large.png" alt="Rapportbook" height="40" width="315"
              class="logo-image"/>
         </a>
 
