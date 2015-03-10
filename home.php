@@ -438,7 +438,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
             // only send email if account & email active
             if (checkActive($item, 1)) {
                 if (checkEmailActive($item, 1)) {
-                    build_and_send_email($item, $user_id, 1, $postID);
+                    build_and_send_email($user_id, $item , 1, $postID);
                 }
             }
         }
@@ -598,7 +598,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
 <body>
 
-<div class="container">
+<div class="container" >
     <div class="row">
         <div class="col-xs-12 roll-call center-block">
             <img src="images/roll-call.gif" height="150px" width="150px" alt="Roll Call"/>

@@ -31,25 +31,29 @@ function get_head_files()
 <?php function get_login_header()
 { ?>
 
+    <form method="post" action="login.php" class="form-inline" >
     <header class="navbar navbar-default navbar-static-top header">
-        <img src="images/Rapportbook-Logo-White-Text-Large.png" alt="Rapportbook" height="40" width="315"
+        <img src="images/Rapportbook-Logo-White-Text-Large.png" alt="Rapportbook" height="40" width="auto"
              class="logo-image"/>
-    <span class="pull-right">
-        <form method="post" action="login.php" class="form-inline">
-            <div class="form-group">
+
+
+            <div class="form-group hidden-xs" >
                 <label class="sr-only" for="generic">Your Email address or Username</label>
                 <input type="text" name="generic" id="generic" placeholder="User Name or Email" class="form-control"/>
                 <label class="sr-only" for="login_password">Password</label>
                 <input type="password" name="login_password" id="login_password" placeholder="Password"
                        class="form-control"/>
-                <input type="submit" name="login" id="login" value="Login" class="login-button btn"/>
+                <input type="submit" name="login" id="login" value="Login" class="btn btn-default"/>
+
+
+                <a href="forgot-password.php" class="forgot-password-link hidden-xs" style="color:white">Forgot Your Password?</a>
             </div>
-            <a href="forgot-password.php" class="forgot-password-link">Forgot Your Password?</a>
-        </form>
-    </span>
+
+
 
 
     </header>
+    </form>
 
 <?php } ?>
 

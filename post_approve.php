@@ -11,6 +11,59 @@ $sql = "INSERT INTO PostApprovals (Post_ID, Member_ID) Values
                                   ('$postID',  '$ID')";
 mysql_query($sql) or die(mysql_error());
 
+
+//An approval just popped so we should set the notifications
+//A comment was just made, we need to send out some notifications.
+//The first thing is to identify all of the id's connected with this bulletin
+$user_id = $ID;
+
+
+//Get the ids of all the consumers connected with a bulletin comment
+$sql = "SELECT Member_ID FROM PostComments WHERE Post_ID = $postID ";
+
+$result = mysql_query($sql) or die(mysql_error());
+
+$comment_ids = array();
+
+//Iterate over the results and sort out the biz ids from the consumer ones.
+while ($rows = mysql_fetch_assoc($result)) {
+    array_push($comment_ids, $rows['ID']);
+}
+
+//Boil the id's down to unique values bc we dont want it send double emails or notifications
+$comment_ids = array_unique($comment_ids);
+//Send consumer notifications
+
+
+foreach ($comment_ids as $item) {
+
+    // only send email if account & email active
+    if (checkActive($item, 1)) {
+        if (checkEmailActive($item, 1)) {
+            build_and_send_email($user_id, $item , 1, $postID);
+        }
+    }
+}
+
+//Notify the post creator
+
+$sql = "SELECT ID FROM Posts WHERE ID = '$postID';";
+
+$result = mysql_query($sql) or die(mysql_error());
+$rows = mysql_fetch_assoc($result);
+
+
+if (checkEmailActive($ID)) {
+    build_and_send_email($ID, $user_id, 1, $postID, '');
+}
+$result = mysql_query($sql) or die(mysql_error());
+
+//=========================================================================================================================//
+//BELOW IS END OF Post Approval HANDLING CODE ==========================================================================//
+
+// check if user has approved this post
+
+
 $sql2 = "SELECT ID FROM PostApprovals WHERE Post_ID = '$postID' AND Member_ID = '$ID' ";
 $result2 = mysql_query($sql2) or die(mysql_error());
 

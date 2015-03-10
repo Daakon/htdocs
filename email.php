@@ -1,10 +1,10 @@
 <?php
 require_once 'model_functions.php';
 
-function build_and_send_email($toId, $creator_id, $notification, $postID)
+function build_and_send_email($senderId, $toId, $notification, $postID)
 {
     $toEmail = get_email_by_id($toId);
-    $from_photo = get_users_photo_by_id($creator_id);
+
 
     $subject = '';
 
@@ -12,10 +12,10 @@ function build_and_send_email($toId, $creator_id, $notification, $postID)
     $from_photo = "http://www.rapportbook.com/company_photos/" . $from_photo;
 
     if ($notification == 1) {
-        // 1 = post comment
-        $name = get_users_name_by_id($creator_id);
 
-        if ($creator_id == $toId) {
+        $name = get_users_name_by_id($senderId);
+
+        if ($senderId == $toId) {
             $name = 'You';
         }
 
@@ -30,10 +30,10 @@ function build_and_send_email($toId, $creator_id, $notification, $postID)
                 ";
     }
     if ($notification == 2) {
-        // 2 = post approval
-        $name = get_users_name_by_id($creator_id);
 
-        if ($creator_id == $toId) {
+        $name = get_users_name_by_id($senderId);
+
+        if ($senderId == $toId) {
             $name = 'You';
         }
 
@@ -50,8 +50,8 @@ function build_and_send_email($toId, $creator_id, $notification, $postID)
 
     if ($notification == 3) {
         // 15 = sign up email
-        $name = get_users_name_by_id($creator_id);
-        $pass = get_password($creator_id);
+        $name = get_users_name_by_id($senderId);
+        $pass = get_password($senderId);
         $nameArray = explode(' ', $name);
         $name = $nameArray[0];
         $subject = "Congratulations $name, you now have a new profile on Rapportbook.<br/>";
@@ -69,25 +69,26 @@ function build_and_send_email($toId, $creator_id, $notification, $postID)
     }
 
     if ($notification == 4) {
-        // 16 = recovery email
-        $pass = get_password($creator_id);
+
+        $pass = get_password($toId);
         $subject = "Our records indicate you have requested your password. Your passowrd is <b>$pass</b> <br/>";
         $subject .= "Log in <a href = 'http://www.rapportbook.com'>here</a>";
+
     }
 
     if ($notification == 5) {
-        // 17 = create new pass
-        $email = get_email_by_id($creator_id);
+
+        $email = get_email_by_id($toId);
 
 
         $subject = "Click this <a href = 'http://www.rapportbook.co/createpass.php?email=$email'>link</a> to create a new password. <br/>";
         $subject .= 'If you did not request to change your password, contact support at <a href = "mailto:info@businessconnect.co">info@businessconnect.co</a>';
     }
     if ($notification == 6) {
-        // 18 = photo comment
-        $name = get_users_name_by_id($creator_id);
 
-        if ($creator_id == $toId) {
+        $name = get_users_name_by_id($toId);
+
+        if ($senderId == $toId) {
             $name = 'You';
         }
 
@@ -102,10 +103,10 @@ function build_and_send_email($toId, $creator_id, $notification, $postID)
                 ";
     }
     if ($notification == 7) {
-        // 19 = photo approval
-        $name = get_users_name_by_id($creator_id);
 
-        if ($creator_id == $toId) {
+        $name = get_users_name_by_id($senderId);
+
+        if ($senderId == $toId) {
             $name = 'You';
         }
 
@@ -122,7 +123,7 @@ function build_and_send_email($toId, $creator_id, $notification, $postID)
 
     if ($notification == 8) {
         // 20 = message notification
-        $senderName = get_users_name_by_id($creator_id);
+        $senderName = get_users_name_by_id($senderId);
 
 
         $type = "id";
@@ -151,7 +152,7 @@ function build_and_send_email($toId, $creator_id, $notification, $postID)
 
     $message = "<html><body>";
     $message .= "<table style = 'background:red;height:400px;width:600px;border-radius:10px;border:2px solid black;'><tr style = 'color:white;border-radius:10px;'><td>";
-    $message .= "<tr><td><img src = '$from_photo' height = '200' width = '200' style = 'border:2px solid black' /></td></tr>";
+    $message .= "<tr><td><img src = 'get_users_photo_by_id($senderId)' height = '200' width = '200' style = 'border:2px solid black' /></td></tr>";
     $message .= "<tr><td style = 'background:silver;padding:20px;border:2px solid black;'>$subject<br/><br/></td></tr>";
     $message .= "<tr><td style = 'background-color:red;color:white'>If you received this email in error contact us at <mailto:info@connectcommunity.com>info@rapportbook.com</a>";
     $message .= "<br/>Rapportbook LLC, 1500 Washington Ave, St.Louis,MO 63103 USA </td></tr>";

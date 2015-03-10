@@ -48,14 +48,14 @@ foreach ($comment_ids as $item) {
     // only send email if account & email active
     if (checkActive($item, 1)) {
         if (checkEmailActive($item, 1)) {
-            build_and_send_email($item, $user_id, 1, $postID);
+            build_and_send_email($user_id, $item , 1, $postID);
         }
     }
 }
 
 
 //=========================================================================================================================//
-//BELOW IS END OF BULLETIN Approval HANDLING CODE ==========================================================================//
+//BELOW IS END OF Post Approval HANDLING CODE ==========================================================================//
 
 // check if user has approved this post
 

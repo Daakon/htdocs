@@ -9,24 +9,20 @@ get_head_files();
 
 <?php get_login_header() ?>
 
-<div class="container-fluid container-fluid-custom">
+<div class="container-fluid">
 
 
     <div class="row">
         <div class="col-lg-6 col-md-5 hidden-sm hidden-xs">
-            <img src="images/college-kids-texting.jpg" height="350" width="523" alt="" class="index-image"/>
+            <img src="images/college-kids-texting.jpg" height="350" width="100%" alt="" class="index-image"/>
         </div>
 
-        <div class="col-lg-6 col-md-7 col-sm-12 col-xs-12 form ">
-
-            <!--Login div -->
-            <div id="login">
-                <div style="padding-left:30px">
-                    <h2>Sign Up</h2>
+        <div class="col-lg-6 col-md-7 col-sm-12 col-xs-12 ">
 
 
-                    <h4>Click here to see how it works</h4>
-                </div>
+
+
+
 
                 <script>
                     // This is called with the results from from FB.getLoginStatus().
@@ -143,13 +139,19 @@ get_head_files();
                 </div>
                 <!-- /.modal -->
 
-                <br/><br/>
+                <div class="visible-xs" style="font-weight: bold;font-size:20px">
+                    <a href="login.php">Login Here</a>
+                </div>
 
-                <form method="post" action="signup.php" id="rb_signup_form">
+
+                <form method="post" action="signup.php" id="rb_signup_form" >
+                    <h2>Sign Up</h2>
+                    <h4><a href="how-it-works.php">Click Here To See How It Works</a></h4>
+
                     <div class="form-group row" id="form-group-firstName">
-                        <div class="col-md-6">
+                        <div class="col-xs-12 col-md-12 col-md-6 col-lg-6 ">
                             <label class="sr-only" for="firstName">First Name</label>
-                            <input class="input-style form-control" type="text" name="firstName" id="firstName"
+                            <input class=" form-control input-lg" type="text" name="firstName" id="firstName"
                                    placeholder="First Name"/>
                         </div>
                         <div class="col-md-6">
@@ -159,7 +161,7 @@ get_head_files();
                     <div class="form-group row" id="form-group-lastName">
                         <div class="col-md-6">
                             <label class="sr-only" for="lastName">Last Name</label>
-                            <input class="input-style form-control" type="text" name="lastName" id="lastName"
+                            <input class="form-control input-lg" type="text" name="lastName" id="lastName"
                                    placeholder="Last Name"/>
                         </div>
                         <div class="col-md-6">
@@ -170,7 +172,7 @@ get_head_files();
                     <div class="form-group row" id="form-group-email">
                         <div class="col-md-6">
                             <label class="sr-only" for="email">Email Address</label>
-                            <input class="input-style form-control" type="email" name="email" id="email"
+                            <input class="form-control input-lg" type="email" name="email" id="email"
                                    placeholder="Email"/>
                         </div>
                         <div class="col-md-6">
@@ -181,7 +183,7 @@ get_head_files();
                     <div class="form-group row" id="form-group-ddGender">
                         <div class="col-md-6">
                             <label class="sr-only" for="ddGender">Gender</label>
-                            <select class='input-style form-control' name="ddGender" id="ddGender">
+                            <select class='form-control input-lg' name="ddGender" id="ddGender">
                                 <option value="">Gender</option>
                                 <option value="1">Male</option>
                                 <option value="2">Female</option>
@@ -197,17 +199,17 @@ get_head_files();
                     <div class="form-group form-inline row" id="form-group-birthday">
                         <div class="col-md-6">
                             <label class="sr-only" for="ddMonth">Birthday Month</label>
-                            <select class="bday-style form-control" id="ddMonth" name="ddMonth">
+                            <select class="form-control input-lg" id="ddMonth" name="ddMonth">
                                 <option value="month">Month</option>
                                 <?php echo calendarMonths() ?>
                             </select>
                             <label class="sr-only" for="ddDay">Birthday Day</label>
-                            <select class="bday-style form-control" id="ddDay" name="ddDay">
+                            <select class="form-control input-lg" id="ddDay" name="ddDay">
                                 <option value="day">Day</option>
                                 <?php echo calendarDays() ?>
                             </select>
                             <label class="sr-only" for="ddYear">Birthday Year</label>
-                            <select class="bday-style form-control" name="ddYear" id="ddYear">
+                            <select class="form-control input-lg" name="ddYear" id="ddYear">
                                 <option value="year">Year</option>
                                 <?php echo calendarYears() ?>
                             </select>
@@ -220,7 +222,7 @@ get_head_files();
                     <div class="form-group row" id="form-group-username">
                         <div class="col-md-6">
                             <label class="sr-only" for="username">Username</label>
-                            <input class="input-style form-control" type="text" name="username" id="username"
+                            <input class="form-control input-lg" type="text" name="username" id="username"
                                    placeholder="Username"/>
                         </div>
                         <div class="col-md-6">
@@ -231,7 +233,7 @@ get_head_files();
                     <div class="form-group row" id="form-group-password">
                         <div class="col-md-6">
                             <label class="sr-only" for="password">Password</label>
-                            <input class="input-style form-control" type="password" name="password" id="password"
+                            <input class="form-control input-lg" type="password" name="password" id="password"
                                    placeholder="Password"/>
                         </div>
                         <div class="col-md-6">
@@ -240,13 +242,12 @@ get_head_files();
                     </div>
                     <div class="form-group row">
                         <div class="col-md-6">
-                            <input class="btn btn-default signup-button" type="submit" name="signup" id="signup"
+                            <input class="btn btn-default " type="submit" name="signup" id="signup"
                                    value="Sign Up"/>
                         </div>
                     </div>
                 </form>
-            </div>
-            <!--end of login div -->
+
 
         </div>
     </div>
