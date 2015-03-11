@@ -66,9 +66,9 @@ function get_header()
         <img src="/images/Rapportbook-Logo-White-Text-Large.png" alt="Rapportbook" height="40" width="315"
              class="logo-image"/>
         </a>
-
+        <a href="logout.php" style="color:white;" class=" visible-sm visible-md visible-lg pull-right">Log Out</a>
     </header>
-
+<a href ="logout.php" style="color:black" class="visible-xs "><h3>Log Out</h3></a>
 
 <?php } ?>
 

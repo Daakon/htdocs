@@ -1,7 +1,7 @@
 <?php
 require 'connect.php';
 require 'mediaPath.php';
-require 'getSession.php';
+
 
 //These functions will help us refactor
 if (session_id() == '') {

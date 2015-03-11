@@ -140,7 +140,7 @@ get_head_files();
                 <!-- /.modal -->
 
                 <div class="visible-xs" style="font-weight: bold;font-size:20px">
-                    <a href="login.php">Login Here</a>
+                    <a href="login-mobile.php">Login Here</a>
                 </div>
 
 

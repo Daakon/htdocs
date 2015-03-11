@@ -290,6 +290,8 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 /***********************************
  * Start to build photo page here
  * *********************************/
+
+
 $mediaName = $_GET['media'];
 $mediaType = $_GET['mediaType'];
 $mediaDate = $_GET['mediaDate'];
@@ -297,7 +299,9 @@ $mediaID = $_GET['mid'];
 $memberID = $_GET['id'];
 
 // if a postback, the entire file path is already constructed
-$mediaFilePath = trim($mediaPath . $mediaName);
+
+$mediaFilePath = trim("media/".$mediaName);
+
 
 if (file_exists($mediaFilePath)) {
 
@@ -325,9 +329,7 @@ elseif (in_array($sType, $videoFileTypes)) {
 
 <?php
 
-$sql = "SELECT * FROM Members,Media
-            WHERE
-            Members . ID = '$ID' And Media . Member_ID = '$ID' AND Media.IsProfilePhoto = 1 ";
+$sql = "SELECT * FROM Members,Media WHERE Members.ID = '$ID' And Media.Member_ID = '$ID' AND Media.IsProfilePhoto = 1 ";
 $result = mysql_query($sql) or die(mysql_error());
 $pRows = mysql_fetch_assoc($result);
 $photo = $pRows['MediaName'];
@@ -336,7 +338,7 @@ $name = $pRows['FirstName'] . ' ' . $pRows['LastName'];
 ?>
 
 <?php
-$profileMediaSrc = trim($mediaPath . $photo);
+$profileMediaSrc = trim("images/".$photo);
 ?>
 
 
@@ -700,7 +702,7 @@ $profileMediaSrc = trim($mediaPath . $photo);
                     echo '</table>';
                 }
 
-                }
+
                 ?>
 
                 <?php
@@ -765,6 +767,8 @@ $profileMediaSrc = trim($mediaPath . $photo);
                         echo '<input type = "hidden" name = "ID" id = "ID" value="' . $ID . '"/>';
                         echo '</form>';
                         echo '<hr/>';
+                        }
+
                         }
                         ?>
 

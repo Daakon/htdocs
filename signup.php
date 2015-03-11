@@ -52,18 +52,8 @@ if (count($rows) > 0) {
     $result = mysql_query($sql) or die(mysql_error());
 
     // Send out sign up email
-    /*$removeLink = "If you did not sign up for this profile, contact us at <a href = 'mailto:info@businessconnect.co'>info@businessconnect.co</a> ";
-    $fName = $rows['FirstName'];
-    $pass = $rows['Password'];
-    $toEmail = $rows['Email'];
-    $fromEmail = '<noreply@rapportbook.com>';
-    $failMessage = '<script>alert("Your sign up email could not be sent. Please contact support at info@businessconnect.co ");</script>'; // no return link
-    $photo = "http://rapportbook.com/media/rapportbook.png";
-    $subject = 'Rapportbook Sign Up';
-    
-    
     $toId = $rows['ID'];
-    build_and_send_email();*/
+    build_and_send_email(1,$toId, 3, '');
 
     echo '<script>alert("Your profile was successfully set up");location = "home.php"</script>';
 }

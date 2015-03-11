@@ -655,7 +655,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
         <div class="col-xs-12 center-block"
              style="background:white;border-radius:10px;margin-top:20px;border:2px solid black;" align="left">
 
-            <img src="<?php echo $mediaPath . $mediaName ?>" height="50" width="50" border="" alt=""
+            <img src="<?php echo $images. $mediaName ?>" height="50" width="50" border="" alt=""
                  title="<?php echo $name ?>" class='enlarge-onhover'/> &nbsp <b><font
                     size="4"><?php echo $name ?></font></b>
             <br/>
@@ -720,7 +720,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
             ?>
 
-            <div style="border-top:2px solid black;padding-top:10px;padding-bottom:10px;margin-top:10px;">
+            <div style="padding-top:10px;padding-bottom:10px;margin-top:10px;">
                 <form method="post" action="" enctype="multipart/form-data"
                       onsubmit="return saveScrollPositions(this);">
 

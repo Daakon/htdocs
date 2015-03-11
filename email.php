@@ -49,7 +49,7 @@ function build_and_send_email($senderId, $toId, $notification, $postID)
     }
 
     if ($notification == 3) {
-        // 15 = sign up email
+
         $name = get_users_name_by_id($senderId);
         $pass = get_password($senderId);
         $nameArray = explode(' ', $name);
