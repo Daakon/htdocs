@@ -39,17 +39,18 @@ if (count($rows) > 0) {
     setcookie("ID", $rows['ID'], time() + (10 * 365 * 24 * 60 * 60)); // set cookie for 10 years
 
     //sign up date
-    $id = $rows['ID'];
+    $ID = $rows['ID'];
     $date = date('Y-m-d H:i:s');
     $sql2 = "UPDATE Members SET SignupDate = '$date' WHERE ID = '$id' ";
     $result = mysql_fetch_assoc($sql2) or die(mysql_error());
 
 
 
-    // insert default profile pic
-    $sql = "INSERT INTO Media (Member_ID, MediaName,          MediaType, MediaDate,     IsProfilePhoto) Values
-                              ('$id',     'default_photo.png',  'png',   CURRENT_DATE (),     1)    ";
+    // insert default profile pic into profile table
+    $sql = "INSERT INTO Profile (Member_ID) Values
+                                ('$ID')    ";
     $result = mysql_query($sql) or die(mysql_error());
+
 
     // Send out sign up email
     $toId = $rows['ID'];

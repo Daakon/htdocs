@@ -329,16 +329,16 @@ elseif (in_array($sType, $videoFileTypes)) {
 
 <?php
 
-$sql = "SELECT * FROM Members,Media WHERE Members.ID = '$ID' And Media.Member_ID = '$ID' AND Media.IsProfilePhoto = 1 ";
+$sql = "SELECT * FROM Members,Profile WHERE Members.ID = '$ID' And Profile.Member_ID = '$ID' ";
 $result = mysql_query($sql) or die(mysql_error());
 $pRows = mysql_fetch_assoc($result);
-$photo = $pRows['MediaName'];
+$profilePhoto = $pRows['ProfilePhoto'];
 $name = $pRows['FirstName'] . ' ' . $pRows['LastName'];
 
 ?>
 
 <?php
-$profileMediaSrc = trim("images/".$photo);
+$profileMediaSrc = trim("media/".$profilePhoto);
 ?>
 
 
@@ -438,22 +438,22 @@ $profileMediaSrc = trim("images/".$photo);
 
     img {
         max-width: 100%;
-        height: auto;
+        max-height: 500px;
     }
 
     video {
         max-width: 100%;
-        height: auto;
+        max-height: 500px;
     }
 
     embed {
         max-width: 100%;
-        height: auto;
+        max-height: 500px;
     }
 
     script {
         max-width: 100%;
-        height: auto;
+        max-height: 500px;
     }
 
     .btnApprove {

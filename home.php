@@ -471,27 +471,27 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
     iframe {
         max-width: 100%;
-        height: auto;
+        max-height: 500px;
     }
 
     img {
         max-width: 100%;
-        height: auto;
+        max-height:500px;
     }
 
     video {
         max-width: 100%;
-        height: auto;
+        max-height: 500px;
     }
 
     embed {
         max-width: 100%;
-        height: auto;
+        max-height: 500px;
     }
 
     script {
         max-width: 100%;
-        height: auto;
+        max-height: 500px;
     }
 
     .btnApprove {
@@ -600,7 +600,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
 <div class="container" >
     <div class="row">
-        <div class="col-xs-12 roll-call center-block">
+        <div class="col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8 roll-call ">
             <img src="/images/roll-call.gif" height="150px" width="150px" alt="Roll Call"/>
             <br/>
 
@@ -626,14 +626,13 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
     Posts.ID As PostID,
     Posts.Post As Post,
     Posts.Category As Category,
-    Media.MediaName As MediaName
-    FROM Members,Posts,Media
+    Profile.ProfilePhoto As ProfilePhoto
+    FROM Members,Posts,Profile
     WHERE
     Members.IsActive = 1
     And Members.IsSuspended = 0
     And Members.ID = Posts.Member_ID
-    And Members.ID = Media.Member_ID
-    AND Media.IsProfilePhoto = 1
+    And Members.ID = Profile.Member_ID
     And Posts.IsDeleted = 0
     Group By Posts.ID
     Order By Posts.ID DESC ";
@@ -646,16 +645,16 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
     while ($rows = mysql_fetch_assoc($result)) {
     $memberID = $rows['MembersID'];
     $name = $rows['FirstName'] . ' ' . $rows['LastName'];
-    $mediaName = $rows['MediaName'];
+    $profilePhoto = $rows['ProfilePhoto'];
     $category = $rows['Category'];
     $post = $rows['Post'];
     $postID = $rows['PostID']
     ?>
     <div class="row">
-        <div class="col-xs-12 center-block"
+        <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8"
              style="background:white;border-radius:10px;margin-top:20px;border:2px solid black;" align="left">
 
-            <img src="<?php echo $images. $mediaName ?>" height="50" width="50" border="" alt=""
+            <img src="<?php echo $mediaPath. $profilePhoto ?>" height="50" width="50" border="" alt=""
                  title="<?php echo $name ?>" class='enlarge-onhover'/> &nbsp <b><font
                     size="4"><?php echo $name ?></font></b>
             <br/>
@@ -748,30 +747,27 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                         Members.ID As MemberID,
                         Members.FirstName as FirstName,
                         Members.LastName As LastName,
-                        Media.MediaName As MediaName
-                        FROM PostComments,Members, Media
+                        Profile.ProfilePhoto As ProfilePhoto
+                        FROM PostComments,Members, Profile
                         WHERE
                         PostComments.Post_ID = $postID
-                        And Members.ID = Media.Member_ID
-                        AND Media.IsProfilePhoto = 1
+                        AND Members.ID = Profile.Member_ID
                         And Members.ID = PostComments.Member_ID
-                        And Members.ID = Media.Member_ID
-                        AND Media.IsProfilePhoto = 1
                         Group By PostComments.ID
                         Order By PostComments.ID ASC LIMIT 3 ";
 
 
-                $result3 = mysql_query($sql3) or die(mysql_error);
+                $result3 = mysql_query($sql3) or die(mysql_error());
                 if (mysql_numrows($result3) > 0) {
                     echo '<br/>';
                     echo '<table style = "background:#E0EEEE;width:100%">';
                     while ($rows3 = mysql_fetch_assoc($result3)) {
                         $comment = $rows3['PostComment'];
-                        $mediaName = $rows3['MediaName'];
+                        $profilePhoto = $rows3['ProfilePhoto'];
 
                         echo '<tr><td style="width:60px;padding-bottom:10px;" valign = "top">';
 
-                        echo '<img src = "' . $mediaPath . $mediaName . '" height = "50" width = "50" style = "border:1px solid black" class ="enlarge-onhover" />&nbsp;</td><td valign = "top"><b>' . $rows3['FirstName'] . ' ' . $rows3['LastName'] . '</b>&nbsp;&nbsp;' . nl2br($comment) . '</span>';
+                        echo '<img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" style = "border:1px solid black" class ="enlarge-onhover" />&nbsp;</td><td valign = "top"><b>' . $rows3['FirstName'] . ' ' . $rows3['LastName'] . '</b>&nbsp;&nbsp;' . nl2br($comment) . '</span>';
                         echo '</td></tr>';
                     }
                     echo '</table>';
@@ -790,19 +786,16 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                         Members.ID As MemberID,
                         Members.FirstName as FirstName,
                         Members.LastName As LastName,
-                        Media.MediaName As MediaName
-                        FROM PostComments,Members, Media
+                        Profile.ProfilePhoto As ProfilePhoto
+                        FROM PostComments,Members, Profile
                         WHERE
                         PostComments.Post_ID = $postID
-                        And Members.ID = Media.Member_ID
-                        AND Media.IsProfilePhoto = 1
                         And Members.ID = PostComments.Member_ID
-                        And Members.ID = Media.Member_ID
-                        AND Media.IsProfilePhoto = 1
+                        And Members.ID = Profile.Member_ID
                         Group By PostComments.ID
                         Order By PostComments.ID ASC LIMIT 3, 100 ";
 
-                $result4 = mysql_query($sql4) or die(mysql_error);
+                $result4 = mysql_query($sql4) or die(mysql_error());
                 if (mysql_numrows($result4) > 0) {
                 $moreComments = "moreComments$postID";
                 ?>
@@ -817,16 +810,16 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                     echo '<table style = "background:#E0EEEE;width:100%">';
                     while ($rows4 = mysql_fetch_assoc($result4)) {
                         $comment = $rows4['PostComment'];
-                        $mediaName = $rows4['MediaName'];
+                        $profilePhoto = $rows4['ProfilePhoto'];
 
                         echo '<tr><td style = "width:60px;padding-bottom:10px;" valign = "top">';
-                        echo '<img src = "' . $mediaPath . $mediaName . '" height = "50" width = "50" style = "border:1px solid black" class ="enlarge-onhover" />&nbsp;</td><td valign = "top"><b>' . $rows4['FirstName'] . $rows['LastName'] . '</b>&nbsp;&nbsp;' . nl2br($comment) . '</span>';
+                        echo '<img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" style = "border:1px solid black" class ="enlarge-onhover" />&nbsp;</td><td valign = "top"><b>' . $rows4['FirstName'] . $rows['LastName'] . '</b>&nbsp;&nbsp;' . nl2br($comment) . '</span>';
 
                         echo '</td></tr>';
 
                     }
                     echo '</table>';
-                    echo '</div>'; //end of more commments div
+                    echo '</div>'; //end of more comments div
                     }
                     ?>
 
