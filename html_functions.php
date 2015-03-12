@@ -68,7 +68,9 @@ function get_header()
         </a>
         <a href="logout.php" style="color:white;" class=" visible-sm visible-md visible-lg pull-right">Log Out</a>
     </header>
-<a href ="logout.php" style="color:black" class="visible-xs "><h3>Log Out</h3></a>
+<a href ="logout.php" style="color:black" class="visible-xs black-link"><h6>Log Out</h6></a>
+    <br/>
+    <a href="homepage.php" class="visible-xs black-link"><h4>Go To Your Profile</h4></a>
 
 <?php } ?>
 

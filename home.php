@@ -599,7 +599,12 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 <body>
 
 <div class="container" >
+
+
     <div class="row">
+
+
+
         <div class="col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8 roll-call ">
             <img src="/images/roll-call.gif" height="150px" width="150px" alt="Roll Call"/>
             <br/>

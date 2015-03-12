@@ -2,7 +2,8 @@ body {
     background-color: lightgray;
 }
 
-h1{
+h1, h2, h3, h4, h5, h6 {
+    /* Make h tags responsive */
     word-wrap: break-word;
     -webkit-hyphens: auto;
     -moz-hyphens: auto;
@@ -87,4 +88,9 @@ h1{
 #comment-style {
     background-color: yellow;
     border: 1px solid black;
+}
+
+.black-link {
+    color: black;
+    font-weight: bold;
 }
