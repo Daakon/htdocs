@@ -50,6 +50,7 @@ h1, h2, h3, h4, h5, h6 {
     border: 2px solid black;
     border-radius: 5px;
     padding-bottom: 20px;
+    margin-bottom:20px;
 }
 
 .post-button {
@@ -68,6 +69,11 @@ h1, h2, h3, h4, h5, h6 {
     border-radius: 10px;
     width: 500px;
     height: 500px;
+}
+
+.row-padding {
+    padding-left:10px;
+    padding-right:10px;
 }
 
 .index-image {
@@ -93,4 +99,14 @@ h1, h2, h3, h4, h5, h6 {
 .black-link {
     color: black;
     font-weight: bold;
+}
+
+.profilePhoto {
+    height: 500px;
+    width: 500px;
+}
+
+.profileVideo {
+    height: 100px;
+    width: 200px;
 }

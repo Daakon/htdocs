@@ -66,11 +66,10 @@ function get_header()
         <img src="/images/Rapportbook-Logo-White-Text-Large.png" alt="Rapportbook" height="40" width="315"
              class="logo-image"/>
         </a>
-        <a href="logout.php" style="color:white;" class=" visible-sm visible-md visible-lg pull-right">Log Out</a>
+        <a href="/logout.php" style="color:white;" class=" visible-sm visible-md visible-lg pull-right">Log Out</a>
     </header>
-<a href ="logout.php" style="color:black" class="visible-xs black-link"><h6>Log Out</h6></a>
+<a href ="/logout.php" style="color:black" class="visible-xs black-link"><h6>Log Out</h6></a>
     <br/>
-    <a href="homepage.php" class="visible-xs black-link"><h4>Go To Your Profile</h4></a>
 
 <?php } ?>
 

@@ -598,12 +598,12 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
 <body>
 
-<div class="container" >
+<div class="container">
 
 
-    <div class="row">
+    <div class="row row-padding">
 
-
+        <a href="homepage.php" class="black-link"><h4>Go To Your Profile</h4></a>
 
         <div class="col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8 roll-call ">
             <img src="/images/roll-call.gif" height="150px" width="150px" alt="Roll Call"/>
@@ -655,8 +655,8 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
     $post = $rows['Post'];
     $postID = $rows['PostID']
     ?>
-    <div class="row">
-        <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8"
+    <div class="row row-padding">
+        <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 "
              style="background:white;border-radius:10px;margin-top:20px;border:2px solid black;" align="left">
 
             <img src="<?php echo $mediaPath. $profilePhoto ?>" height="50" width="50" border="" alt=""
