@@ -1,0 +1,333 @@
+-- phpMyAdmin SQL Dump
+-- version 4.2.10
+-- http://www.phpmyadmin.net
+--
+-- Host: localhost:8889
+-- Generation Time: Mar 14, 2015 at 12:18 PM
+-- Server version: 5.5.38
+-- PHP Version: 5.6.2
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+--
+-- Database: `Rapportbook`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Media`
+--
+
+CREATE TABLE `Media` (
+`ID` bigint(20) NOT NULL,
+  `Member_ID` int(11) NOT NULL,
+  `Post_ID` bigint(20) DEFAULT NULL,
+  `MediaName` varchar(255) NOT NULL,
+  `MediaType` varchar(50) NOT NULL,
+  `MediaDate` date NOT NULL,
+  `WasProfilePhoto` tinyint(1) NOT NULL,
+  `IsDeleted` tinyint(1) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `Media`
+--
+
+INSERT INTO `Media` (`ID`, `Member_ID`, `Post_ID`, `MediaName`, `MediaType`, `MediaDate`, `WasProfilePhoto`, `IsDeleted`) VALUES
+(1, 2, NULL, 'default_photo.png', '', '0000-00-00', 1, 0),
+(32, 2, 73, '54ffb38e5e9652014-07-27 18.30.32.jpg', 'image/jpeg', '2015-03-10', 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Members`
+--
+
+CREATE TABLE `Members` (
+`ID` bigint(20) NOT NULL,
+  `FirstName` varchar(50) NOT NULL,
+  `LastName` varchar(50) NOT NULL,
+  `Email` varchar(50) NOT NULL,
+  `Gender` smallint(6) NOT NULL,
+  `DOB` date NOT NULL,
+  `Username` varchar(255) NOT NULL,
+  `Password` varchar(10) NOT NULL,
+  `SignupDate` date NOT NULL,
+  `IsActive` tinyint(1) NOT NULL DEFAULT '1',
+  `EmailActive` tinyint(1) NOT NULL,
+  `IsSuspended` tinyint(1) NOT NULL,
+  `LastLogin` date NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `Members`
+--
+
+INSERT INTO `Members` (`ID`, `FirstName`, `LastName`, `Email`, `Gender`, `DOB`, `Username`, `Password`, `SignupDate`, `IsActive`, `EmailActive`, `IsSuspended`, `LastLogin`) VALUES
+(1, 'Rapportbook', '', 'info@rapportbook.com', 1, '0000-00-00', 'Rapportbook', 'admin10', '2015-02-04', 1, 1, 0, '0000-00-00'),
+(2, 'Chris', 'Weathers', 'chris@rapportbook.com', 1, '0000-00-00', 'chris', 'pass', '2015-03-01', 1, 0, 0, '2015-03-14');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `PostApprovals`
+--
+
+CREATE TABLE `PostApprovals` (
+`ID` bigint(20) NOT NULL,
+  `Member_ID` bigint(20) NOT NULL,
+  `Post_ID` bigint(20) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=73 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `PostApprovals`
+--
+
+INSERT INTO `PostApprovals` (`ID`, `Member_ID`, `Post_ID`) VALUES
+(70, 2, 72),
+(71, 2, 71),
+(72, 2, 73);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `PostComments`
+--
+
+CREATE TABLE `PostComments` (
+`ID` bigint(20) NOT NULL,
+  `Member_ID` bigint(20) NOT NULL,
+  `Post_ID` bigint(20) NOT NULL,
+  `Comment` longtext NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `PostComments`
+--
+
+INSERT INTO `PostComments` (`ID`, `Member_ID`, `Post_ID`, `Comment`) VALUES
+(1, 1, 62, 'Comment  '),
+(2, 1, 62, 'Test  '),
+(3, 1, 62, 'Test 2  '),
+(4, 1, 62, 'More Comments  '),
+(5, 1, 62, ''),
+(6, 1, 62, ''),
+(7, 1, 61, ''),
+(8, 1, 62, 'Test 3  '),
+(9, 1, 61, 'Test  '),
+(10, 1, 61, 'Test 2  '),
+(11, 1, 61, 'Test post  '),
+(12, 1, 60, 'Post  '),
+(13, 1, 60, 'Post again  '),
+(14, 1, 60, '3rd post  ');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Posts`
+--
+
+CREATE TABLE `Posts` (
+`ID` bigint(20) NOT NULL,
+  `Member_ID` bigint(20) NOT NULL,
+  `Post` longtext NOT NULL,
+  `Category` varchar(255) NOT NULL,
+  `PostDate` date NOT NULL,
+  `IsDeleted` tinyint(1) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=74 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `Posts`
+--
+
+INSERT INTO `Posts` (`ID`, `Member_ID`, `Post`, `Category`, `PostDate`, `IsDeleted`) VALUES
+(72, 1, 'Post 2', '', '2015-03-09', 0),
+(73, 2, 'Picasso<br/><br/><a href = "media.php?id=2&mid=32&media=54ffb38e5e9652014-07-27 18.30.32.jpg&type=&mediaDate=2015-03-10"><img src = "media/54ffb38e5e9652014-07-27 18.30.32.jpg" height="500px" /></a><br/>', '', '2015-03-10', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Profile`
+--
+
+CREATE TABLE `Profile` (
+`ID` bigint(20) NOT NULL,
+  `Member_ID` bigint(20) NOT NULL,
+  `ProfilePhoto` varchar(255) NOT NULL DEFAULT 'default_photo.png',
+  `ProfileVideo` varchar(255) NOT NULL DEFAULT 'default_video.png',
+  `HomeCity` varchar(255) NOT NULL,
+  `HomeState` varchar(2) NOT NULL,
+  `CurrentCity` varchar(255) NOT NULL,
+  `CurrentState` varchar(2) NOT NULL,
+  `Interests` longtext NOT NULL,
+  `Books` longtext NOT NULL,
+  `Movies` longtext NOT NULL,
+  `Food` longtext NOT NULL,
+  `Dislikes` longtext NOT NULL,
+  `Plan` longtext NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `Profile`
+--
+
+INSERT INTO `Profile` (`ID`, `Member_ID`, `ProfilePhoto`, `ProfileVideo`, `HomeCity`, `HomeState`, `CurrentCity`, `CurrentState`, `Interests`, `Books`, `Movies`, `Food`, `Dislikes`, `Plan`) VALUES
+(1, 1, 'default_photo.png', '', '', '', '', '', '', '', '', '', '', ''),
+(2, 2, 'default_photo.png', 'default_video.png', '', '', '', '', '', '', '', '', '', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `State`
+--
+
+CREATE TABLE `State` (
+`ID` int(11) NOT NULL,
+  `State` varchar(255) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `State`
+--
+
+INSERT INTO `State` (`ID`, `State`) VALUES
+(1, 'AL'),
+(2, 'AK'),
+(3, 'AZ'),
+(4, 'AR'),
+(5, 'CA'),
+(6, 'CO'),
+(7, 'CT'),
+(8, 'DE'),
+(9, 'FL'),
+(10, 'GA'),
+(11, 'HI'),
+(12, 'ID'),
+(13, 'IL'),
+(14, 'ID'),
+(15, 'IL'),
+(16, 'IN'),
+(17, 'IA'),
+(18, 'KS'),
+(19, 'KY'),
+(20, 'LA'),
+(21, 'ME'),
+(22, 'MD'),
+(23, 'MA'),
+(24, 'MI'),
+(25, 'MN'),
+(26, 'MS'),
+(27, 'MO'),
+(28, 'MT'),
+(29, 'NE'),
+(30, 'NV'),
+(31, 'NH'),
+(32, 'NJ'),
+(33, 'NM'),
+(34, 'NY'),
+(35, 'NC'),
+(36, 'ND'),
+(37, 'OH'),
+(38, 'OK'),
+(39, 'OR'),
+(40, 'PA'),
+(41, 'RI'),
+(42, 'SC'),
+(43, 'SD'),
+(44, 'TN'),
+(45, 'TX'),
+(46, 'UT'),
+(47, 'VT'),
+(48, 'VA'),
+(49, 'WA'),
+(50, 'WV'),
+(51, 'WI'),
+(52, 'WY');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `Media`
+--
+ALTER TABLE `Media`
+ ADD PRIMARY KEY (`ID`), ADD UNIQUE KEY `ID` (`ID`), ADD UNIQUE KEY `Post_ID` (`Post_ID`), ADD UNIQUE KEY `Post_ID_2` (`Post_ID`);
+
+--
+-- Indexes for table `Members`
+--
+ALTER TABLE `Members`
+ ADD PRIMARY KEY (`ID`), ADD UNIQUE KEY `ID` (`ID`);
+
+--
+-- Indexes for table `PostApprovals`
+--
+ALTER TABLE `PostApprovals`
+ ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `PostComments`
+--
+ALTER TABLE `PostComments`
+ ADD PRIMARY KEY (`ID`), ADD UNIQUE KEY `ID` (`ID`);
+
+--
+-- Indexes for table `Posts`
+--
+ALTER TABLE `Posts`
+ ADD PRIMARY KEY (`ID`), ADD UNIQUE KEY `ID` (`ID`);
+
+--
+-- Indexes for table `Profile`
+--
+ALTER TABLE `Profile`
+ ADD PRIMARY KEY (`ID`), ADD UNIQUE KEY `Member_ID` (`Member_ID`);
+
+--
+-- Indexes for table `State`
+--
+ALTER TABLE `State`
+ ADD PRIMARY KEY (`ID`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `Media`
+--
+ALTER TABLE `Media`
+MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=33;
+--
+-- AUTO_INCREMENT for table `Members`
+--
+ALTER TABLE `Members`
+MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `PostApprovals`
+--
+ALTER TABLE `PostApprovals`
+MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=73;
+--
+-- AUTO_INCREMENT for table `PostComments`
+--
+ALTER TABLE `PostComments`
+MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
+--
+-- AUTO_INCREMENT for table `Posts`
+--
+ALTER TABLE `Posts`
+MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=74;
+--
+-- AUTO_INCREMENT for table `Profile`
+--
+ALTER TABLE `Profile`
+MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `State`
+--
+ALTER TABLE `State`
+MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=53;
