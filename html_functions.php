@@ -38,8 +38,8 @@ function get_head_files()
 
 
             <div class="form-group hidden-xs" >
-                <label class="sr-only" for="generic">Your Email address or Username</label>
-                <input type="text" name="generic" id="generic" placeholder="User Name or Email" class="form-control"/>
+                <label class="sr-only" for="email">Your Email </label>
+                <input type="text" name="email" id="email" placeholder="Email" class="form-control"/>
                 <label class="sr-only" for="login_password">Password</label>
                 <input type="password" name="login_password" id="login_password" placeholder="Password"
                        class="form-control"/>
@@ -48,9 +48,6 @@ function get_head_files()
 
                 <a href="forgot-password.php" class="forgot-password-link hidden-xs" style="color:white">Forgot Your Password?</a>
             </div>
-
-
-
 
     </header>
     </form>

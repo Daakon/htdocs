@@ -4,12 +4,8 @@ require_once 'model_functions.php';
 function build_and_send_email($senderId, $toId, $notification, $postID)
 {
     $toEmail = get_email_by_id($toId);
-
-
     $subject = '';
 
-
-    $from_photo = "http://www.rapportbook.com/company_photos/" . $from_photo;
 
     if ($notification == 1) {
 
@@ -50,8 +46,8 @@ function build_and_send_email($senderId, $toId, $notification, $postID)
 
     if ($notification == 3) {
 
-        $name = get_users_name_by_id($senderId);
-        $pass = get_password($senderId);
+        $name = get_users_name_by_id($toId);
+        $pass = get_password($toId);
         $nameArray = explode(' ', $name);
         $name = $nameArray[0];
         $subject = "Congratulations $name, you now have a new profile on Rapportbook.<br/>";
@@ -158,7 +154,7 @@ function build_and_send_email($senderId, $toId, $notification, $postID)
     $message .= "<br/>Rapportbook LLC, 1500 Washington Ave, St.Louis,MO 63103 USA </td></tr>";
     $message .= "</table></body></html>";
 
-    $header = "From: ConnectCommunity <admin@rapportbook.com> \r\n";
+    $header = "From: Rapporbook <admin@rapportbook.com> \r\n";
     $header .= "Content-type: text/html";
     ini_set('sendmail_from', 'admin@rapportbook.com');
 
@@ -167,6 +163,7 @@ function build_and_send_email($senderId, $toId, $notification, $postID)
         return true;
 
     } else {
+        echo "<script>alert('$message');</script>";
         echo 'mail sending failed';
         return false;
     }

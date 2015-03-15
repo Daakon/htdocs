@@ -1,8 +1,8 @@
-function checkEmail() {
+/*function checkEmail() {
     var email = $('#email').val();
-    var regex = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+    var regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return regex.test(email);
-}
+}*/
 
 function checkRequest(field_id, invalid_input) {
     var request = $('#' + field_id).val();
@@ -30,7 +30,7 @@ $('#signup').on("click", function (event) {
 
     // check email address
     // check if blank, if it fits email regex, and check if it already exists in db
-    if (!checkEmail()) {
+ /*   if (!checkEmail()) {
         $('#form-group-email').addClass('has-error');
         $('#form-group-email .error-text').html('Please enter a valid email address.');
         request_successful = false;
@@ -48,7 +48,7 @@ $('#signup').on("click", function (event) {
             $('#form-group-email').addClass('has-error');
             $('#form-group-email .error-text').html('That email address has been previously used on this site. Please log in or use another email address.');
         }
-    }
+    }*/
 
     // check first name
     if (!checkRequest('firstName', '')) {

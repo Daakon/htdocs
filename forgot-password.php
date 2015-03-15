@@ -24,7 +24,7 @@ get_header()
             <div class="form-group">
                 <h2>Recover Your Password</h2>
                 <label for="email">Email</label>
-                <input type="text" class="form-control" id="generic" name="generic" placeholder="Email or Username"/>
+                <input type="text" class="form-control" id="email" name="email" placeholder="Email"/>
             </div>
 
             <input type="submit" id="submit" name="submit" value="Recover Password" class="btn btn-default"/>
@@ -38,9 +38,9 @@ get_header()
 if (isset($_POST['submit']) && ($_POST['submit'] == "Recover Password")) {
 
     require 'connect.php';
-    $generic = trim($_POST['generic']);
+    $email = trim($_POST['email']);
 
-    $sql = "SELECT * FROM Members WHERE (Email = '$generic' OR Username = '$generic') ";
+    $sql = "SELECT * FROM Members WHERE (Email = '$email' OR Username = '$generic') ";
 
 
     $result = mysql_query($sql) or die(mysql_error());

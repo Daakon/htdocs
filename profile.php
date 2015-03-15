@@ -177,20 +177,48 @@ if (isset($_POST['video']) && ($_POST['video'] == "Upload Video")) {
 <?php
 
 // handle profile update
-if (isset($_POST['submit']) && $_POST['submit'] == "Update Profile") {
+if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
     $firstName = $_POST['FirstName'];
     $lastName = $_POST['LastName'];
-    $homeCity = $_POST['homeCity'];
-    $homeState = $_POST['homeState'];
-    $currentCity = $_POST['currentCity'];
-    $currentState = $_POST['currentState'];
-    $interests = $_POST['interests'];
-    $books = $_POST['books'];
-    $movies = $_POST['movies'];
-    $food = $_POST['food'];
-    $dislikes = $_POST['dislikes'];
-    $plan = $_POST['plan'];
+    $homeCity = $_POST['HomeCity'];
+    $homeState = $_POST['HomeState'];
+    $currentCity = $_POST['CurrentCity'];
+    $currentState = $_POST['CurrentState'];
+    $interests = $_POST['Interests'];
+    $books = $_POST['Books'];
+    $movies = $_POST['Movies'];
+    $food = $_POST['Food'];
+    $dislikes = $_POST['Dislikes'];
+    $plan = $_POST['Plan'];
     $dob = $_POST['DOB'];
+
+   // update Member table first
+   $sql = "Update Members
+          Set
+          FirstName = '$firstName',
+          LastName = '$lastName',
+          DOB = '$DOB'
+          WHERE ID = $ID ";
+    $result = mysql_query($sql) or die(mysql_error());
+
+    // update Profile table
+    $sql = "Update Profile
+            Set HomeCity = '$homeCity',
+            HomeState = '$homeState',
+            CurrentCity = '$currentCity',
+            CurrentState = '$currentState',
+            Interests = '$interests',
+            Books = '$books',
+            Movies = '$movies',
+            Food = '$food',
+            Dislikes = '$dislikes',
+            Plan = '$plan'
+             WHERE Member_ID = $ID ";
+    mysql_query($sql) or die(mysql_error());
+    echo "<script>alert('Update Successful');</script>";
+
+    $scrollx = $_REQUEST['scrollx'];
+    $scrolly = $_REQUEST['scrolly'];
 }
 
 ?>
@@ -244,6 +272,7 @@ if (isset($_POST['submit']) && $_POST['submit'] == "Update Profile") {
 
 
 <body>
+
 
 <div class="container" >
     <div class="row row-padding">
@@ -307,7 +336,6 @@ if (isset($_POST['submit']) && $_POST['submit'] == "Update Profile") {
             $email = $rows['Email'];
             $password = $rows['Password'];
             $dob = $rows['DOB'];
-            $username = $rows['Username'];
 
 
             ?>
@@ -335,7 +363,7 @@ if (isset($_POST['submit']) && $_POST['submit'] == "Update Profile") {
 
             <div align ="center">
                 <?php if ($profileVideo != "default_video.png") { ?>
-                <video src = "<?php echo $mediaPath.$profileVideo ?>" class="profileVideo" alt="Profile Video"  frameborder = "1" controls preload="none" SCALE="ToFit" />
+                <video src = "<?php echo $mediaPath.$profileVideo ?>" class="profileVideo" frameborder = "1" controls preload="none" SCALE="ToFit" />
                 <?php } else { ?>
                 <img src = "<?php echo $mediaPath.$profileVideo ?>" class="defaultProfileVideo" alt="Profile Video" />
                 <?php } ?>
@@ -360,74 +388,74 @@ if (isset($_POST['submit']) && $_POST['submit'] == "Update Profile") {
             <form id="ajax-form" method="post" action = "">
 
                 <div class="form-group">
-                    <label for="firstName">First Name</label>
+                    <label for="FirstName">First Name</label>
                     <br/>
                     <input type ="text" class="form-control" id="FirstName" name="FirstName" value="<?php echo $firstName ?>" onblur="saveData();" />
                 </div>
 
                 <div class="form-group">
-                    <label for="lastName">Last Name</label>
+                    <label for="LastName">Last Name</label>
                     <input type="text" class="form-control" id="LastName" name="LastName" value="<?php echo $lastName ?>" />
                  </div>
 
                 <div class="form-group">
-                    <label for="homeCity">Home City</label>
+                    <label for="HomeCity">Home City</label>
                     <input type="text" class="form-control" id="HomeCity" name="HomeCity" value="<?php echo $homeCity ?>" />
                 </div>
 
                 <div class="form-group">
-                <label for="homeState">State</label>
-                <select class="form-control">
-                    <option value="<?php echo $state ?>"><?php echo $homeState ?></option>
+                <label for="HomeState">Home State</label>
+                <select id="HomeState" name="HomeState" class="form-control">
+                    <option  value="<?php echo $homeState ?>"><?php echo $homeState ?></option>
                     <?php getState() ?>
                 </select>
                 </div>
 
                 <div class="form-group">
-                <label for="currentCity">Current City</label>
-                <input type="text" class="form-control" id="CurrentCity" name="CurrentCity" value="<?php $currentCity ?>" />
+                <label for="CurrentCity">Current City</label>
+                <input type="text" class="form-control" id="CurrentCity" name="CurrentCity" value="<?php echo $currentCity ?>" />
                 </div>
 
                 <div class="form-group">
-                    <label for="currentState">Current State</label>
-                    <select class="form-control">
-                        <option value="<?php echo $state ?>"><?php echo $currentState ?></option>
+                    <label for="CurrentState">Current State</label>
+                    <select id="CurrentState" name="CurrentState" name="" class="form-control">
+                        <option value="<?php echo $currentState ?>"><?php echo $currentState ?></option>
                         <?php getState() ?>
                     </select>
                 </div>
 
                 <div class="form-group">
-                    <label for="interests">Interests</label>
+                    <label for="Interests">Interests</label>
                     <textarea class="form-control" id="Interests" name="Interests"><?php echo $interests ?> </textarea>
                 </div>
 
                 <div class="form-group">
-                    <label for="books">Favorite Books</label>
+                    <label for="Books">Favorite Books</label>
                     <textarea class="form-control" id="Books" name="Books" ><?php echo $books ?></textarea>
                 </div>
 
                 <div class="form-group">
-                    <label for="movies">Favorite Movies</label>
+                    <label for="Movies">Favorite Movies</label>
                     <textarea class="form-control" id="Movies" name="Movies"><?php echo $movies ?></textarea>
                 </div>
 
                 <div class="form-group">
-                    <label for="food">Favorite Food</label>
+                    <label for="Food">Favorite Food</label>
                     <textarea class="form-control" id="Food" name="Food"><?php echo $food ?></textarea>
                 </div>
 
                 <div class="form-group">
-                    <label for="dislikes">Dislikes</label>
+                    <label for="Dislikes">Dislikes</label>
                     <input type="text" class="form-control" id="Dislikes" name="Dislikes" value="<?php echo $dislikes ?>" />
                 </div>
 
                 <div class="form-group">
-                    <label for="plan">5 Year Plan</label>
+                    <label for="Plan">5 Year Plan</label>
                     <textarea class="form-control" id="Plan" name="Plan"><?php echo $plan ?></textarea>
                 </div>
 
                 <div class="form-group">
-                    <label for="email">Email</label>
+                    <label for="Email">Email</label>
                     <input type="email" class="form-control" id="Email" name="Email" value="<?php echo $email ?>" />
                 </div>
 
@@ -450,3 +478,25 @@ if (isset($_POST['submit']) && $_POST['submit'] == "Update Profile") {
         </div>
     </div>
 
+</body>
+</html>
+
+<?php
+
+$scrollx = 0;
+$scrolly = 0;
+
+if(!empty($_REQUEST['scrollx'])) {
+    $scrollx = $_REQUEST['scrollx'];
+}
+
+if(!empty($_REQUEST['scrolly'])) {
+    $scrolly = $_REQUEST['scrolly'];
+}
+?>
+
+<script type="text/javascript">
+
+    window.scrollTo(<?php echo "$scrollx" ?>, <?php echo "$scrolly" ?>);
+
+</script>
