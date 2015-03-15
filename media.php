@@ -329,7 +329,9 @@ elseif (in_array($sType, $videoFileTypes)) {
 
 <?php
 
-$sql = "SELECT * FROM Members,Profile WHERE Members.ID = '$ID' And Profile.Member_ID = '$ID' ";
+$sql = "SELECT * FROM Members,Profile
+WHERE Members.ID = '$ID'
+And Profile.Member_ID = '$ID' ";
 $result = mysql_query($sql) or die(mysql_error());
 $pRows = mysql_fetch_assoc($result);
 $profilePhoto = $pRows['ProfilePhoto'];
@@ -646,7 +648,7 @@ $profileMediaSrc = trim("media/".$profilePhoto);
                 <form method="post" action="" enctype="multipart/form-data"
                       onsubmit="return (checkComment(this, btnComment) && saveScrollPositions(this))">
 
-                    <input type="text" class="form-control" name="postComment" id="postComment" style="width:350px;margin-top:10px;" placeholder ="Write a comment"/>
+                    <input type="text" class="form-control" name="postComment" id="postComment" style="margin-top:10px;" placeholder ="Write a comment"/>
 
 
                     <input type="file" name="flPostMedia" id="flPostMedia"/>
@@ -671,21 +673,19 @@ $profileMediaSrc = trim("media/".$profilePhoto);
                 <br/>
 
                 <?php
-                // get bulletin comments
+                // get post comments
 
                 $sql3 = "SELECT DISTINCT
                         PostComments.Comment As Comment,
                         PostComments.ID As CommentID,
                         Members.ID As MemberID,
                         CONCAT(Members.FirstName, ' ', Members.LastName) As Name,
-                        Media.MediaName As MediaName
-                        FROM PostComments, Members, Media
+                        Profile.ProfilePhoto As MediaName
+                        FROM PostComments, Members, Profile
                         WHERE
                         PostComments.ID = '$postID '
                         AND PostComments.ID = Members.ID
-                        AND Media.ID = Members.ID
-                        AND Media.IsProfilePhoto = 1
-
+                        AND Profile.Member_ID = Members.ID
                         Group By PostComments.ID DESC LIMIT 3";
 
                 $result3 = mysql_query($sql3) or die(mysql_error());
@@ -711,13 +711,12 @@ $profileMediaSrc = trim("media/".$profilePhoto);
                         PostComments.ID As CommentID,
                         Members.ID As MemberID,
                         CONCAT(Members.FirstName, ' ', Members.LastName) As Name,
-                        Media.MediaName As MediaName
-                        FROM PostComments,Members, Media
+                        Profile.ProfilePhoto As MediaName
+                        FROM PostComments,Members, Profile
                         WHERE
                         PostComments.ID = '$postID'
                         AND PostComments.ID = Members.ID
-                        AND Media.ID = Members.ID
-                        AND Media.IsProfilePhoto = 1
+                        AND Profile.Member_ID = Members.ID
                         Group By PostComments.ID Order By PostComments.ID ASC LIMIT 3, 100";
 
                 $result4 = mysql_query($sql4) or die(mysql_error());

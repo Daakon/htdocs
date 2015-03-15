@@ -8,6 +8,6 @@ session_destroy();
 // clear cookie
 setcookie("ID", "", time()-3600);
 
-header('location:index.php');
+header('location:/index.php');
 
 ?>

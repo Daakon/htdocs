@@ -124,6 +124,7 @@ if (isset($_POST['submit'])) {
                         exit;
                     }
                 }
+            }
                 // if photo didn't get uploaded, notify the user
                 if (!file_exists($postMediaFilePath)) {
                     echo "<script>alert('File could not be uploaded, try uploading a different file type.'); location= 'home.php'</script>";
@@ -133,7 +134,7 @@ if (isset($_POST['submit'])) {
 
                 // store media pointer
                 $sql = "INSERT INTO Media (Member_ID,  MediaName,  MediaType,  MediaDate    ) Values
-                                               ('$ID',    '$mediaName', '$type',   CURRENT_DATE())";
+                                          ('$ID',    '$mediaName', '$type',   CURRENT_DATE())";
                 mysql_query($sql) or die(mysql_error());
 
                 // get media ID
@@ -142,20 +143,20 @@ if (isset($_POST['submit'])) {
                 $mediaRow = mysql_fetch_assoc($mediaResult);
                 $mediaID = $mediaRow['ID'];
                 $media = $mediaRow['MediaName'];
-                $mediaType = $mediaRow['Type'];
+                $mediaType = $mediaRow['MediaType'];
                 $mediaDate = $mediaRow['MediaDate'];
-            }
+
 
             // build post links based on media type
             if (in_array($type, $photoFileTypes)) {
 
                 $img = '<img src = "' . $postMediaFilePath . '" />';
-                $img = '<a href = "media.php?id=' . $ID . '&mid=' . $mediaID . '&media=' . $mediaName . '&type=' . $mediaType . '&mediaDate=' . $mediaDate . '">' . $img . '</a>';
+                $img = '<a href = "media.php?id=' . $ID . '&mid=' . $mediaID . '&media=' . $media . '&type=' . $mediaType . '&mediaDate=' . $mediaDate . '">' . $img . '</a>';
             } // check if file type is a video
             elseif (in_array($type, $videoFileTypes)) {
 
-                $img = '<video src = "' . $postMediaFilePath . '" height = "500px" width = "400px" frameborder = "1" controls preload="none" SCALE="ToFit"></video>';
-                $img = '<a href = "media.php?id=' . $ID . '&mid=' . $mediaID . '&media=' . $mediaName . '&type=' . $mediaType . '&mediaDate=' . $mediaDate . '">' . $img . '</a>';
+                $img = '<video src = "' . $postMediaFilePath . '" class="profileVideo" frameborder = "1" controls preload="none" SCALE="ToFit"></video>';
+                $img = '<a href = "media.php?id=' . $ID . '&mid=' . $mediaID . '&media=' . $media . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '">' . $img . '</a>';
             } else {
                 // if invalid file type
                 echo '<script>alert("Invalid File Type!");</script>';
@@ -314,7 +315,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
             // determine which table to put photo pointer in
             // store media pointer
             $sql = "INSERT INTO Media (Member_ID,  MediaName,  MediaType,  MediaDate    ) Values
-                                               ('$ID',    '$mediaName', '$type',   CURRENT_DATE())";
+                                      ('$ID',    '$mediaName', '$type',   CURRENT_DATE())";
             mysql_query($sql) or die(mysql_error());
 
             // get media ID
@@ -331,12 +332,12 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
             if (in_array($type, $photoFileTypes)) {
 
                 $img = '<img src = "' . $postMediaFilePath . '" />';
-                $img = '<a href = "media.php?id=' . $ID . '&mid=' . $mediaID . '&media=' . $mediaName . '&type=' . $mediaType . '&mediaDate=' . $mediaDate . '">' . $img . '</a>';
+                $img = '<a href = "media.php?id=' . $ID . '&mid=' . $mediaID . '&media=' . $media . '&type=' . $mediaType . '&mediaDate=' . $mediaDate . '">' . $img . '</a>';
             } // check if file type is a video
             elseif (in_array($type, $videoFileTypes)) {
 
-                $img = '<video src = "' . $postMediaFilePath . '" height = "500px" width = "400px" frameborder = "1" controls preload="none" SCALE="ToFit"></video>';
-                $img = '<a href = "media.php?id=' . $ID . '&mid=' . $mediaID . '&media=' . $mediaName . '&type=' . $mediaType . '&mediaDate=' . $mediaDate . '">' . $img . '</a>';
+                $img = '<video src = "' . $postMediaFilePath . '" class="profileVideo" frameborder = "1" controls preload="none" SCALE="ToFit"></video>';
+                $img = '<a href = "media.php?id=' . $ID . '&mid=' . $mediaID . '&media=' . $media . '&type=' . $mediaType . '&mediaDate=' . $mediaDate . '">' . $img . '</a>';
             } else {
                 // if invalid file type
                 echo '<script>alert("Invalid File Type!");</script>';
@@ -659,7 +660,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
         <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 "
              style="background:white;border-radius:10px;margin-top:20px;border:2px solid black;" align="left">
 
-            <img src="<?php echo $mediaPath. $profilePhoto ?>" height="50" width="50" border="" alt=""
+            <img src="<?php echo $mediaPath. $profilePhoto ?>" class="profilePhoto-Feed" alt=""
                  title="<?php echo $name ?>" class='enlarge-onhover'/> &nbsp <b><font
                     size="4"><?php echo $name ?></font></b>
             <br/>

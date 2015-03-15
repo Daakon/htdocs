@@ -101,12 +101,33 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: bold;
 }
 
+.profilePhoto-Feed {
+    height:50px;
+    width:50px;
+    border:1px solid black;
+    margin-top:5px;
+}
+
 .profilePhoto {
     height: 500px;
     width: 500px;
+    margin-top:10px;
+    border:2px solid black;
+
 }
 
-.profileVideo {
+.defaultProfileVideo {
     height: 100px;
     width: 200px;
+}
+.profileVideo {
+    background-image:url("/images/video-bg.jpg");
+    background-repeat:no-repeat;
+    background-size:contain;
+    background-position:center;
+}
+
+.img-icon {
+    height:30px !important;
+    width:30px !important;
 }
