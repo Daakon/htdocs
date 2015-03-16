@@ -315,12 +315,12 @@ $photoFileTypes = array("image / jpg", "image / jpeg", "image / png", "image / t
 
 
 // check if file type is a photo
-if (in_array($type, $photoFileTypes)) {
+if (in_array($mediaType, $photoFileTypes)) {
 
     $img = '<img src = "' . $mediaFilePath . '" style = "border:3px solid black;width:400;" />';
 
 } // check if file type is a video
-elseif (in_array($sType, $videoFileTypes)) {
+elseif (in_array($mediaType, $videoFileTypes)) {
 
     $img = '<embed src = "' . $mediaFilePath . '" height = "500" width = "300" frameborder = "0" AUTOPLAY = "false" CONTROLLER="true" SCALE="ToFit"></embed>';
 

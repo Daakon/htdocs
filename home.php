@@ -467,65 +467,11 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 }
 ?>
 
-
-<style>
-
-    iframe {
-        max-width: 100%;
-        max-height: 500px;
-    }
-
-    img {
-        max-width: 100%;
-        max-height:500px;
-    }
-
-    video {
-        max-width: 100%;
-        max-height: 500px;
-    }
-
-    embed {
-        max-width: 100%;
-        max-height: 500px;
-    }
-
-    script {
-        max-width: 100%;
-        max-height: 500px;
-    }
-
-    .btnApprove {
-        background: url("/images/gray_check.png") no-repeat;
-        width: 30px;
-        height: 30px;
-        border: none;
-    }
-
-    .btnDisapprove {
-        background: url("/images/red_check.png") no-repeat;
-        width: 30px;
-        height: 30px;
-        border: none;
-    }
-</style>
+<?php include('media_sizes.html'); ?>
 
 
 <style>
-    .enlarge-onhover {
-        width: 50px;
-        height: 50px;
-    }
 
-    .enlarge-onhover:hover {
-        width: 100px;
-        height: 100px;
-        position: inherit;
-
-        margin-top: 0px;
-        margin-left: 0px;
-
-    }
 </style>
 
 <script type="text/javascript">
@@ -604,7 +550,9 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
     <div class="row row-padding">
 
-        <a href="homepage.php" class="black-link"><h4>Go To Your Profile</h4></a>
+        <ul class="list-inline">
+            <li><a href="/profile.php">Go To Your Profile</a></li>
+        </ul>
 
         <div class="col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8 roll-call ">
             <img src="/images/roll-call.gif" height="150px" width="150px" alt="Roll Call"/>

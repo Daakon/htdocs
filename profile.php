@@ -223,49 +223,7 @@ if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
 
 ?>
 
-<style>
-
-    iframe {
-        max-width: 100%;
-        width:500px;
-        max-height: 500px;
-    }
-
-    img {
-        max-width: 100%;
-        max-height:500px;
-    }
-
-    video {
-        max-width: 100%;
-        width:500px;
-        max-height: 500px;
-    }
-
-    embed {
-        max-width: 100%;
-        max-height: 500px;
-    }
-
-    script {
-        max-width: 100%;
-        max-height: 500px;
-    }
-
-    .btnApprove {
-        background: url("/images/gray_check.png") no-repeat;
-        width: 30px;
-        height: 30px;
-        border: none;
-    }
-
-    .btnDisapprove {
-        background: url("/images/red_check.png") no-repeat;
-        width: 30px;
-        height: 30px;
-        border: none;
-    }
-</style>
+<?php include('media_sizes.html'); ?>
 
 <link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet"/>
 <script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
@@ -277,7 +235,11 @@ if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
 <div class="container" >
     <div class="row row-padding">
 
-        <a href ="/home.php" class="black-link"><h4>Roll Call</h4></a>
+        <ul class="list-inline">
+            <li><a href="/home.php">Roll Call</a></li>
+            <li><a href="/member_photos.php">Photos & Videos</a></li>
+            <li><a href="/messaging.php">Messaging</a></li>
+        </ul>
         <br/><br/>
 
         <div class="col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8 roll-call ">
