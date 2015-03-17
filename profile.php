@@ -238,7 +238,7 @@ if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
         <ul class="list-inline">
             <li><a href="/home.php">Roll Call</a></li>
             <li><a href="/member_photos.php">Photos & Videos</a></li>
-            <li><a href="/messaging.php">Messaging</a></li>
+            <li><a href="/messages.php">Messaging</a></li>
         </ul>
         <br/><br/>
 
