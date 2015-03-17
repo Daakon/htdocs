@@ -26,8 +26,8 @@ if (mysql_num_rows($result) > 0) {
     exit;
 }
 
-    $sql = "INSERT INTO Members (FirstName,    LastName,   Email,   Gender,   DOB,   Username,   Password, SignupDate)
-    Values                        ('$fName',  '$lName','   $email','$gender','$dob','$username', '$pass',  CURRENT_DATE())";
+    $sql = "INSERT INTO Members (FirstName, LastName, Email, Gender, DOB, Username, Password, SignupDate, IsSuspended, EmailActive, LastLogin)
+    Values ('$fName', '$lName', '$email', '$gender', '$dob', '$username', '$pass', CURRENT_DATE(), 0, 1, CURRENT_DATE())";
     $result = mysql_query($sql) or die(mysql_error());
     $rows = mysql_fetch_assoc($result);
 
@@ -49,8 +49,8 @@ if (mysql_num_rows($result) > 0) {
     $result = mysql_query($sql) or die(mysql_error());
 
     // insert default profile pic into profile table
-    $sql = "INSERT INTO Profile (Member_ID) Values
-                                ('$ID')    ";
+    $sql = "INSERT INTO Profile (Member_ID, ProfilePhoto, ProfileVideo, HomeState, HomeCity, CurrentCity, CurrentState, Interests, Books, Movies, Food, Dislikes, Plan) Values
+                                ('$ID', 'default_photo.png', '', '', '', '', '', '', '', '', '', '', '')    ";
     $result = mysql_query($sql) or die(mysql_error());
 
 
