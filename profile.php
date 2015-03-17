@@ -223,6 +223,42 @@ if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
 
 ?>
 
+
+<?php
+
+// handle profile text
+
+require 'class-Clockwork.php';
+
+if (isset($_POST['text']) && $_POST['text'] == "Text") {
+    $number = $_POST['number'];
+    $name = get_users_name($ID);
+    $API_KEY = '7344d6254838e6d2c917c4cb78305a3235ba951d';
+try
+{
+    // Create a Clockwork object using your API key
+    $clockwork = new Clockwork( $API_KEY );
+
+    // Setup and send a message
+    $message = array( 'to' => $number, 'message' => $name.'has shared his profile with you!' );
+    $result = $clockwork->send( $message );
+
+    // Check if the send was successful
+    if($result['success']) {
+        //echo 'Message sent - ID: ' . $result['id'];
+        echo "<script>alert('Message Sent');</script>";
+    } else {
+        echo 'Message failed - Error: ' . $result['error_message'];
+    }
+}
+catch (ClockworkException $e)
+{
+    echo 'Exception sending SMS: ' . $e->getMessage();
+}
+
+}
+?>
+
 <?php include('media_sizes.html'); ?>
 
 <link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet"/>
@@ -303,6 +339,33 @@ if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
             ?>
 
             <div align ="center">
+
+                <script>
+                    function showTextBox(textDiv) {
+                        var textBox = document.getElementById(textDiv);
+                        if (textBox.style.display == 'none') {
+                            textBox.style.display = 'block';
+                        }
+                        else {
+                            textBox.style.display = 'none';
+                        }
+                    }
+                </script>
+
+                <input onclick="showTextBox('textDiv')" type="image" value="Share" src="images/share.png" height="50px" width="50px" style="margin-top:10px" />
+                <br/>
+
+                <form method="post" action="">
+                    <div id="textDiv" style="display:none;">
+                    <div class="form-group">
+                <label for="text">Text Your Profile</label>
+
+                <input type="text" id="number" name="number" class="form-control text-center" style="width:150px;" placeholder="2125551212"/>
+                    </div>
+                <input type="submit" id="text" name="text" value="Text" style="border-radius: 10px" class="btn btn-default" />
+                    </div>
+                </form>
+
             <img src = "<?php echo $mediaPath.$profilePhoto ?>" class="profilePhoto" alt="Profile Photo" />
             </div>
 
