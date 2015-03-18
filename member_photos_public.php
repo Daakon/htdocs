@@ -3,21 +3,23 @@ require 'connect.php';
 require 'getSession.php';
 require 'html_functions.php';
 require 'mediaPath.php';
-require 'model_functions.php';
-
 get_head_files();
 get_header();
 require 'memory_settings.php';
-$url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 $ID = $_SESSION['ID'];
 ?>
 
 
 
 <?php
+$url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+preg_match("/[^\/]+$/",$url ,$match);
+$username = $match[0];
+$token = $match[1];
+
 $sql = "SELECT * FROM Members
 WHERE
-Members.ID = '$ID'
+Members.Username = '$username'
 And Members.IsActive = 1 ";
 
 $result = mysql_query($sql) or die(mysql_error());
@@ -38,9 +40,8 @@ if (mysql_numrows($result) == 0) {
 
 <div class="container">
     <ul class="list-inline">
-        <li><a href="/home.php">Roll Call</a></li>
-        <li><a href="/profile.php/<?php echo get_username($ID) ?>">Profile</a></li>
-        <li><a href="/messages.php">Messaging</a></li>
+        <li><a href="/profile_public.php/<?php echo $username ?>">Profile</a></li>
+        <li><a href="/messages_public.php/<?php echo $username ?>">Messaging</a></li>
     </ul>
     <br/><br/>
     <div class="row row-padding">
@@ -93,4 +94,3 @@ if (mysql_numrows($result) == 0) {
     </div>
 </div>
 </body>
-</html>

@@ -231,6 +231,10 @@ if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
 require 'class-Clockwork.php';
 
 if (isset($_POST['text']) && $_POST['text'] == "Text") {
+    $result = mysql_query("SELECT Username FROM Members WHERE ID = $ID");
+    $row = mysql_fetch_assoc($result);
+    $username = $row['Username'];
+
     $number = $_POST['number'];
     $name = get_users_name($ID);
     $API_KEY = '7344d6254838e6d2c917c4cb78305a3235ba951d';
@@ -240,7 +244,8 @@ try
     $clockwork = new Clockwork( $API_KEY );
 
     // Setup and send a message
-    $message = array( 'to' => $number, 'message' => $name.'has shared his profile with you!' );
+    $text = "$name has shared their profile with you. <br/> http://rapportbook.com/profile_public/$username";
+    $message = array( 'to' => $number, 'message' => $text );
     $result = $clockwork->send( $message );
 
     // Check if the send was successful
@@ -284,6 +289,8 @@ catch (ClockworkException $e)
             $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
             preg_match("/[^\/]+$/",$url ,$match);
             $username = $match[0];
+
+            require 'checkUsername.php';
 
                 $sql = "SELECT
                         Members.ID As MemberID,
@@ -352,7 +359,7 @@ catch (ClockworkException $e)
                     }
                 </script>
 
-                <input onclick="showTextBox('textDiv')" type="image" value="Share" src="images/share.png" height="50px" width="50px" style="margin-top:10px" />
+                <input onclick="showTextBox('textDiv')" type="image" value="Share" src="/images/share.png" height="50px" width="50px" style="margin-top:10px" />
                 <br/>
 
                 <form method="post" action="">

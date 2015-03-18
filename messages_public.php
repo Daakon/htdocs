@@ -5,15 +5,16 @@ require 'getSession.php';
 require 'html_functions.php';
 require 'mediaPath.php';
 require 'findURL.php';
-require 'model_functions.php';
 
 get_head_files();
 get_header();
 require 'memory_settings.php';
-$url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 $ID = $_SESSION['ID'];
 
-
+$url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+preg_match("/[^\/]+$/",$url ,$match);
+$username = $match[0];
+$token = $match[1];
 ?>
 
 
@@ -23,9 +24,8 @@ $ID = $_SESSION['ID'];
 
         <ul class="list-inline">
 
-            <li><a href="/home.php">Roll Call</a></li>
-            <li><a href="/profile.php/<?php echo get_username($ID)?>">Profile</a></li>
-            <li><a href="/member_photos.php">Photos & Videos</a></li>
+            <li><a href="/profile_public.php/<?php $username ?>">Profile</a></li>
+            <li><a href="/member_photos_public.php/<?php $username ?>">Photos & Videos</a></li>
         </ul>
         <br/><br/>
 
@@ -40,7 +40,12 @@ $ID = $_SESSION['ID'];
 
             if (mysql_numrows($result) > 0) {
                 while ($rows = mysql_fetch_assoc($result)) {
-                    $receiverID = $rows['Receiver_ID'];
+
+                    $sql = "SELECT ID FROM Members WHERE Username = '$username' ";
+                    $result = mysql_query($sql) or die(mysql_error());
+                    $rows = mysql_fetch_assoc($result);
+
+                    $receiverID = $rows['ID'];
                     $subject = $rows['Subject'];
 
                     // get receiver name
@@ -54,7 +59,7 @@ $ID = $_SESSION['ID'];
                     $pic = $rows2['ProfilePhoto'];
                     $name = $rows2['FirstName'] . ' ' . $rows2['LastName'];
 
-                    echo "<a href = 'view_messages.php?id=$receiverID'><img src = '$mediaPath$pic' class='profilePhoto-Feed' alt='' /> $name </a>";
+                    echo "<a href = '/view_messages_public.php?id=$receiverID'><img src = '$mediaPath$pic' class='profilePhoto-Feed' alt='' /> $name </a>";
                     echo "<br/>";
                     echo "$subject";
                     echo "<hr/>";
@@ -62,11 +67,10 @@ $ID = $_SESSION['ID'];
                 }
             }
             else {
-                echo "You currently have no messages";
+                echo "You currently have no thread with $username";
             }
             ?>
 
             <!-------------------------------------------------------------------->
-            </div>
         </div>
     </div>
