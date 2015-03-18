@@ -38,8 +38,8 @@ function get_head_files()
 
 
             <div class="form-group hidden-xs" >
-                <label class="sr-only" for="email">Your Email </label>
-                <input type="text" name="email" id="email" placeholder="Email" class="form-control"/>
+                <label class="sr-only" for="login_email">Your Email </label>
+                <input type="text" name="login_email" id="login_email" placeholder="Email" class="form-control"/>
                 <label class="sr-only" for="login_password">Password</label>
                 <input type="password" name="login_password" id="login_password" placeholder="Password"
                        class="form-control"/>

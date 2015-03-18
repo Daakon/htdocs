@@ -1,6 +1,6 @@
 <?php
 require '../connect.php';
-$email = $_POST['email'];
+$email = $_POST['login_email'];
 
 $sql = "SELECT * FROM Members WHERE Email = '$email'";
 $result = $conn->prepare($sql) or die(mysql_error());
