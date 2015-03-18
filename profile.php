@@ -197,7 +197,7 @@ if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
           Set
           FirstName = '$firstName',
           LastName = '$lastName',
-          DOB = '$DOB'
+          DOB = '$dob'
           WHERE ID = $ID ";
     $result = mysql_query($sql) or die(mysql_error());
 

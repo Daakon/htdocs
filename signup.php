@@ -49,8 +49,8 @@ if (mysql_num_rows($result) > 0) {
     $result = mysql_query($sql) or die(mysql_error());
 
     // insert default profile pic into profile table
-    $sql = "INSERT INTO Profile (Member_ID, ProfilePhoto, ProfileVideo, HomeState, HomeCity, CurrentCity, CurrentState, Interests, Books, Movies, Food, Dislikes, Plan) Values
-                                ('$ID', 'default_photo.png', '', '', '', '', '', '', '', '', '', '', '')    ";
+    $sql = "INSERT INTO Profile (Member_ID, ProfilePhoto,     ProfileVideo,      HomeState, HomeCity, CurrentCity, CurrentState, Interests, Books, Movies, Food, Dislikes, Plan) Values
+                                ('$ID', 'default_photo.png', 'default_video.png', '', '', '', '', '', '', '', '', '', '')    ";
     $result = mysql_query($sql) or die(mysql_error());
 
 
