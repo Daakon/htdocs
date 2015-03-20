@@ -15,7 +15,7 @@ function build_and_send_email($senderId, $toId, $notification, $postID)
             $name = 'You';
         }
 
-        $text = "$name commented on a <a href='http://www.rapportbook.com/show_post.php?postID=postID'>post</a> you're tagged in.";
+        $text = "$name commented on a <a href='http://www.rapportbook.com/show_post.php?postID=$postID'>post</a> you're tagged in.";
 
         $subject = "
                 <div style='height:20px; padding:10px;'>
@@ -33,7 +33,7 @@ function build_and_send_email($senderId, $toId, $notification, $postID)
             $name = 'You';
         }
 
-        $text = "$name approved a <a href='http://www.rapportbook.com/show_bulletin.php?bid=$postID'>post</a> you're tagged in.";
+        $text = "$name approved a <a href='http://www.rapportbook.com/show_post.php?postID=$postID'>post</a> you're tagged in.";
 
         $subject = "
                 <div style='height:20px; padding:10px;'>
@@ -77,7 +77,7 @@ function build_and_send_email($senderId, $toId, $notification, $postID)
         $email = get_email_by_id($toId);
 
 
-        $subject = "Click this <a href = 'http://www.rapportbook.co/createpass.php?email=$email'>link</a> to create a new password. <br/>";
+        $subject = "Click this <a href = 'http://www.rapportbook.co/create_pass.php?email=$email'>link</a> to create a new password. <br/>";
         $subject .= 'If you did not request to change your password, contact support at <a href = "mailto:info@businessconnect.co">info@businessconnect.co</a>';
     }
     if ($notification == 6) {
@@ -88,7 +88,7 @@ function build_and_send_email($senderId, $toId, $notification, $postID)
             $name = 'You';
         }
 
-        $text = "$name commented on a <a href='http://www.rapportbook.com/show_bulletin.php?postID=$postID'>photo</a> you're tagged in.";
+        $text = "$name commented on a <a href='http://www.rapportbook.com/show_post.php?postID=$postID'>photo</a> you're tagged in.";
 
         $subject = "
                 <div  style='height:20px; padding:10px;'>
@@ -106,7 +106,7 @@ function build_and_send_email($senderId, $toId, $notification, $postID)
             $name = 'You';
         }
 
-        $text = "$name approved a <a href='http://www.rapportbook.com/show_bulletin.php?postID=$postID'>photo</a> you're tagged in.";
+        $text = "$name approved a <a href='http://www.rapportbook.com/show_post.php?postID=$postID'>photo</a> you're tagged in.";
 
         $subject = "
                 <div style='height:20px; padding:10px;'>
@@ -124,7 +124,7 @@ function build_and_send_email($senderId, $toId, $notification, $postID)
 
         $type = "id";
 
-        $subject = "$senderName has sent you a new <a href='http://www.rapportbook.com/messages.php?$type=$toId'>message</a>";
+        $subject = "$senderName has sent you a new <a href='http://www.rapportbook.com/messages.php'>message</a>";
     }
 
 

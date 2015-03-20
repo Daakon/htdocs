@@ -73,7 +73,7 @@ function get_users_photo_by_id($user_id)
     while ($rows = mysql_fetch_assoc($result)) {
         $photo = $rows['MediaName'];
         require 'mediaPath.php';
-        ?> <img src="media/<?php echo $photo ?>" width=52 height=52/>
+        ?> <img src="/media/<?php echo $photo ?>" width=52 height=52/>
 <?php
     }
 
