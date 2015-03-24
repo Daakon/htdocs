@@ -151,7 +151,6 @@ if (isset($_POST['video']) && ($_POST['video'] == "Upload Video")) {
         }
 
 
-
         // write photo to media table
         $sql2 = "INSERT INTO Media (Member_ID, MediaName,     MediaType,  wasProfilePhoto, MediaDate) Values
                                ('$ID',     '$mediaName',  '$type',       1,            CURDATE())";
@@ -187,13 +186,15 @@ if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
     $dislikes = $_POST['Dislikes'];
     $plan = $_POST['Plan'];
     $dob = $_POST['DOB'];
+    $emailStatus = $_POST['EmailStatus'];
 
    // update Member table first
    $sql = "Update Members
           Set
           FirstName = '$firstName',
           LastName = '$lastName',
-          DOB = '$dob'
+          DOB = '$dob',
+          EmailActive = '$emailStatus '
           WHERE ID = $ID ";
     $result = mysql_query($sql) or die(mysql_error());
 
@@ -295,6 +296,7 @@ catch (ClockworkException $e)
                         Members.Email As Email,
                         Members.Password As Password,
                         Members.DOB As DOB,
+                        Members.EmailActive As EmailStatus,
                         Profile.ProfilePhoto As ProfilePhoto,
                         Profile.ProfileVideo As ProfileVideo,
                         Profile.HomeCity As HomeCity,
@@ -337,7 +339,7 @@ catch (ClockworkException $e)
             $email = $rows['Email'];
             $password = $rows['Password'];
             $dob = $rows['DOB'];
-
+            $emailStatus = $rows['EmailStatus'];
 
             ?>
 
@@ -487,11 +489,34 @@ catch (ClockworkException $e)
                     <input type="email" class="form-control" id="Email" name="Email" value="<?php echo $email ?>" />
                 </div>
 
-                <div class="form=group">
+                <div class="form-group">
                     <label for="DOB">Date Of Birth</label>
                     <input type="date" class="form-control" id="DOB" name="DOB" value="<?php echo $dob ?>" />
                 </div>
                 <br/>
+
+                <?php
+                $otherEmailValue = "";
+                $otherEmailText = "";
+                if ($emailStatus == 1) {
+                    $emailStatusText = "On";
+                    $otherEmailValue = 0;
+                    $otherEmailText = "Off";
+                }
+                else {
+                    $emailStatusText = "Off";
+                    $otherEmailValue = 1;
+                    $otherEmailText = "On";
+                }
+                ?>
+
+                <div class="form-group">
+                    <label for="EmailStatus">Email Notification</label>
+                    <select id="EmailStatus" name="EmailStatus" name="EmailStatus" class="form-control">
+                        <option value="<?php echo $emailStatus ?>"><?php echo $emailStatusText ?></option>
+                        <option value="<?php echo $otherEmailValue ?>"><?php echo $otherEmailText ?></option>
+                    </select>
+                </div>
 
                 <div class="form-group">
                     <label for="username">Username</label>
