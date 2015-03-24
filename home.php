@@ -5,6 +5,7 @@ require 'html_functions.php';
 require 'mediaPath.php';
 require 'findURL.php';
 require 'model_functions.php';
+require 'email.php';
 
 get_head_files();
 get_header();
@@ -65,38 +66,7 @@ if (isset($_POST['submit'])) {
                 }
             }
 
-            // read exif data
-            $exif = exif_read_data($_FILES['flPostMedia']['tmp_name']);
 
-            if (!empty($exif['Orientation'])) {
-
-                $ort = $exif['Orientation'];
-
-                switch ($ort) {
-                    case 8:
-                        if (strstr($url, 'localhost:8888')) {
-                            // local php imagerotate doesn't work
-                        } else {
-                            $src = imagerotate($src, 90, 0);
-                        }
-                        break;
-                    case 3:
-                        if (strstr($url, 'localhost:8888')) {
-                            // local php imagerotate doesn't work
-                        } else {
-                            $src = imagerotate($src, 180, 0);
-                        }
-                        break;
-                    case 6:
-                        if (strstr($url, 'localhost:8888')) {
-                            // local php imagerotate doesn't work
-                        } else {
-                            $src = imagerotate($src, -90, 0);
-                        }
-
-                        break;
-                }
-            }
             require 'media_post_file_path.php';
 
 // save photo/video
@@ -124,13 +94,45 @@ if (isset($_POST['submit'])) {
                         exit;
                     }
                 }
+
+                // read exif data
+                $exif = exif_read_data($_FILES['flPostMedia']['tmp_name']);
+
+                if (!empty($exif['Orientation'])) {
+
+                    $ort = $exif['Orientation'];
+
+                    switch ($ort) {
+                        case 8:
+                            if (strstr($url, 'localhost:8888')) {
+                                // local php imagerotate doesn't work
+                            } else {
+                                $src = imagerotate($src, 90, 0);
+                            }
+                            break;
+                        case 3:
+                            if (strstr($url, 'localhost:8888')) {
+                                // local php imagerotate doesn't work
+                            } else {
+                                $src = imagerotate($src, 180, 0);
+                            }
+                            break;
+                        case 6:
+                            if (strstr($url, 'localhost:8888')) {
+                                // local php imagerotate doesn't work
+                            } else {
+                                $src = imagerotate($src, -90, 0);
+                            }
+
+                            break;
+                    }
+                }
             }
                 // if photo didn't get uploaded, notify the user
                 if (!file_exists($postMediaFilePath)) {
                     echo "<script>alert('File could not be uploaded, try uploading a different file type.'); location= 'home.php'</script>";
                 }
 
-                imagedestroy($src);
 
                 // store media pointer
                 $sql = "INSERT INTO Media (Member_ID,  MediaName,  MediaType,  MediaDate    ) Values
@@ -413,7 +415,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
 //A comment was just made, we need to send out some notifications.
 //The first thing is to identify all of the id's connected with this post
-        require 'email.php';
+
 
         $user_id = $_SESSION['ID'];
 
@@ -427,7 +429,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
 //Iterate over the results
         while ($rows = mysql_fetch_assoc($result)) {
-            array_push($comment_ids, $rows['ID']);
+            array_push($comment_ids, $rows['Member_ID']);
         }
 
 //Boil the id's down to unique values because we dont want to send double emails or notifications
@@ -435,11 +437,12 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 //Send consumer notifications
 
         foreach ($comment_ids as $item) {
-
-            // only send email if account & email active
-            if (checkActive($item, 1)) {
-                if (checkEmailActive($item, 1)) {
-                    build_and_send_email($user_id, $item , 1, $postID);
+            if (strlen($item) > 0) {
+                // only send email if account & email active
+                if (checkActive($item)) {
+                    if (checkEmailActive($item)) {
+                        build_and_send_email($user_id, $item, 1, $postID);
+                    }
                 }
             }
         }
@@ -694,7 +697,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
                 <br/>
                 <?php
-                // get bulletin comments
+                // get post comments
                 $sql3 = "SELECT DISTINCT
                         PostComments.Comment As PostComment,
                         PostComments.ID As PostCommentID,
@@ -708,7 +711,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                         AND Members.ID = Profile.Member_ID
                         And Members.ID = PostComments.Member_ID
                         Group By PostComments.ID
-                        Order By PostComments.ID ASC LIMIT 3 ";
+                        Order By PostComments.ID DESC LIMIT 3 ";
 
 
                 $result3 = mysql_query($sql3) or die(mysql_error());
@@ -747,7 +750,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                         And Members.ID = PostComments.Member_ID
                         And Members.ID = Profile.Member_ID
                         Group By PostComments.ID
-                        Order By PostComments.ID ASC LIMIT 3, 100 ";
+                        Order By PostComments.ID DESC LIMIT 3, 100 ";
 
                 $result4 = mysql_query($sql4) or die(mysql_error());
                 if (mysql_numrows($result4) > 0) {

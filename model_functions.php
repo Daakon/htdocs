@@ -2,12 +2,6 @@
 require 'connect.php';
 require 'mediaPath.php';
 
-
-//These functions will help us refactor
-if (session_id() == '') {
-    session_start();
-}
-
 function checkActive($user_id)
 {
     $sql = "SELECT IsActive FROM Members where ID = $user_id ";
@@ -93,7 +87,7 @@ function check_password($user_id, $pass)
 }
 
 
-function get_users_photo_by_id_raw($user_id, $user_type)
+function get_users_photo_by_id_raw($user_id)
 {
 
     $sql = "SELECT DISTINCT MediaName FROM Media WHERE ID = $user_id";

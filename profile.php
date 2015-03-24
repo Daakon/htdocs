@@ -90,15 +90,13 @@ if (isset($_FILES['flPostPhoto']) && strlen($_FILES['flPostPhoto']['name']) > 1)
         imagejpeg($src, $postMediaFilePath, 100);
 
     } else if ($type == "image/png") {
-        imagepng($src, $postMediaPath, 0, NULL);
+        imagepng($src, $postMediaFilePath, 0, NULL);
 
     } else {
         imagegif($src, $postMediaFilePath, 100);
 
     }
 
-    imagedestroy($src);
-    imagedestroy($tmp);
 
 
     // write photo to media table
@@ -120,7 +118,7 @@ if (isset($_FILES['flPostPhoto']) && strlen($_FILES['flPostPhoto']['name']) > 1)
 
 <?php
 
-// handle upload profile pic
+// handle upload profile video
 if (isset($_POST['video']) && ($_POST['video'] == "Upload Video")) {
     if (isset($_FILES['flPostVideo']) && strlen($_FILES['flPostVideo']['name']) > 1) {
 
@@ -152,8 +150,6 @@ if (isset($_POST['video']) && ($_POST['video'] == "Upload Video")) {
             exit;
         }
 
-        imagedestroy($src);
-        imagedestroy($tmp);
 
 
         // write photo to media table

@@ -4,7 +4,7 @@ require 'connect.php';
 require 'mediaPath.php';
 require 'getSession.php';
 require_once 'email.php';
-
+require 'model_functions.php';
 ini_set('memory_limit', '900M');
 // handle approves
 
@@ -46,9 +46,11 @@ $comment_ids = array_unique($comment_ids);
 foreach ($comment_ids as $item) {
 
     // only send email if account & email active
-    if (checkActive($item, 1)) {
-        if (checkEmailActive($item, 1)) {
-            build_and_send_email($user_id, $item , 1, $postID);
+    if (strlen($item) > 0) {
+        if (checkActive($item)) {
+            if (checkEmailActive($item, 1)) {
+                build_and_send_email($user_id, $item, 1, $postID);
+            }
         }
     }
 }

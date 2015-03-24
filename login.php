@@ -2,7 +2,7 @@
 
 require 'connect.php';
 
-$email = $_POST['email'];
+$email = $_POST['login_email'];
 $pass = $_POST['login_password'];
 
 $sql = "SELECT * FROM Members WHERE Email = '$email' And Password = '$pass'";

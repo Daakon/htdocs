@@ -2,12 +2,14 @@
 //handle approves
 require 'connect.php';
 require 'getSession.php';
+require 'model_functions.php';
+require 'email.php';
 
 // variables that get sent in post must have identical names every where they exist
 $postID = $_POST['postID'];
 $ID = $_POST['ID'];
 
-$sql = "INSERT INTO PostApprovals (Post_ID, Member_ID) Values
+$sql = "INSERT INTO PostApprovals (Post_ID,   Member_ID) Values
                                   ('$postID',  '$ID')";
 mysql_query($sql) or die(mysql_error());
 
@@ -17,8 +19,7 @@ mysql_query($sql) or die(mysql_error());
 //The first thing is to identify all of the id's connected with this bulletin
 
 
-
-//Get the ids of all the consumers connected with a bulletin comment
+//Get the ids of all the consumers connected with a post comment
 $sql = "SELECT Member_ID FROM PostComments WHERE Post_ID = $postID ";
 
 $result = mysql_query($sql) or die(mysql_error());
@@ -30,17 +31,18 @@ while ($rows = mysql_fetch_assoc($result)) {
     array_push($comment_ids, $rows['ID']);
 }
 
-//Boil the id's down to unique values bc we dont want it send double emails or notifications
+//Boil the ids down to unique values bc we dont want it send double emails or notifications
 $comment_ids = array_unique($comment_ids);
 //Send consumer notifications
 
-/*
-foreach ($comment_ids as $item) {
 
-    // only send email if account & email active
-    if (checkActive($item, 1)) {
-        if (checkEmailActive($item, 1)) {
-            build_and_send_email($ID, $item , 1, $postID);
+foreach ($comment_ids as $item) {
+    if (strlen($item) > 0) {
+        // only send email if account & email active
+        if (checkActive($item)) {
+            if (checkEmailActive($item, 1)) {
+                build_and_send_email($ID, $item, 1, $postID);
+            }
         }
     }
 }
@@ -54,9 +56,9 @@ $rows = mysql_fetch_assoc($result);
 
 
 if (checkEmailActive($ID)) {
-    build_and_send_email($ID, $user_id, 1, $postID, '');
+  build_and_send_email($ID, 1, 1, $postID, '');
 }
-*/
+
 
 //=========================================================================================================================//
 //BELOW IS END OF Post Approval HANDLING CODE ==========================================================================//

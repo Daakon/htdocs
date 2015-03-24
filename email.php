@@ -1,7 +1,9 @@
 <?php
-require_once 'model_functions.php';
+
+
 
 function build_and_send_email($senderId, $toId, $notification, $postID)
+
 {
     $toEmail = get_email_by_id($toId);
     $subject = '';
@@ -9,7 +11,12 @@ function build_and_send_email($senderId, $toId, $notification, $postID)
 
     if ($notification == 1) {
 
-        $name = get_users_name_by_id($senderId);
+        if (function_exists(get_users_name_by_id)) {
+            $name = get_users_name_by_id($senderId);
+        }
+        else {
+            echo "<script>alert('could not retrieve name for email');</script>";
+        }
 
         if ($senderId == $toId) {
             $name = 'You';
@@ -129,7 +136,7 @@ function build_and_send_email($senderId, $toId, $notification, $postID)
 
 
     if ($notification == 9) {
-        // no bulletin notification
+        // no posts
 
         $subject = "We noticed you have not created any posts.
                 Posts are the best way to get seen by people and become really popular.
@@ -145,28 +152,29 @@ function build_and_send_email($senderId, $toId, $notification, $postID)
                 Pictures are EVERYTHING so login and upload your profile photo today.";
     }
 
+    // if we have a notification, then send the email.
 
-    $message = "<html><body>";
-    $message .= "<table style = 'background:red;height:400px;width:600px;border-radius:10px;border:2px solid black;'><tr style = 'color:white;border-radius:10px;'><td>";
-    $message .= "<tr><td><img src = 'get_users_photo_by_id($senderId)' height = '200' width = '200' style = 'border:2px solid black' /></td></tr>";
-    $message .= "<tr><td style = 'background:silver;padding:20px;border:2px solid black;'>$subject<br/><br/></td></tr>";
-    $message .= "<tr><td style = 'background-color:red;color:white'>If you received this email in error contact us at <mailto:info@connectcommunity.com>info@rapportbook.com</a>";
-    $message .= "<br/>Rapportbook LLC, 1500 Washington Ave, St.Louis,MO 63103 USA </td></tr>";
-    $message .= "</table></body></html>";
+    if (strlen($notification) > 0) {
+        $message = "<html><body>";
+        $message .= "<table style = 'background:red;height:400px;width:600px;border-radius:10px;border:2px solid black;'><tr style = 'color:white;border-radius:10px;'><td>";
+        $message .= "<tr><td><img src = 'get_users_photo_by_id($senderId)' height = '200' width = '200' style = 'border:2px solid black' /></td></tr>";
+        $message .= "<tr><td style = 'background:silver;padding:20px;border:2px solid black;'>$subject<br/><br/></td></tr>";
+        $message .= "<tr><td style = 'background-color:red;color:white'>If you received this email in error contact us at <mailto:info@connectcommunity.com>info@rapportbook.com</a>";
+        $message .= "<br/>Rapportbook LLC, 1500 Washington Ave, St.Louis,MO 63103 USA </td></tr>";
+        $message .= "</table></body></html>";
 
-    $header = "From: Rapporbook <admin@rapportbook.com> \r\n";
-    $header .= "Content-type: text/html";
-    ini_set('sendmail_from', 'admin@rapportbook.com');
+        $header = "From: Rapporbook <admin@rapportbook.com> \r\n";
+        $header .= "Content-type: text/html";
+        ini_set('sendmail_from', 'admin@rapportbook.com');
 
-    if (mail($toEmail, 'Rapportbook: Notification Alert', $message, $header)) {
-        // mail sent
-        return true;
+        if (mail($toEmail, 'Rapportbook: Notification Alert', $message, $header)) {
+            // mail sent
+            return true;
 
-    } else {
-        echo "<script>alert('$message');</script>";
-        echo 'mail sending failed';
-        return false;
+        } else {
+            echo 'mail sending failed';
+            return false;
+        }
     }
 }
-
 ?>

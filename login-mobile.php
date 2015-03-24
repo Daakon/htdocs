@@ -12,12 +12,12 @@ get_header();
 
 <div class="container">
 
-    <div class="col-xs-12 hidden-sm hidden-md hidden-lg">
+    <div class="col-xs-12">
  <h2>Login</h2>
 
         <form method="post" action="login.php" >
-    <label class="sr-only" for="generic">Your Email address or Username</label>
-    <input type="text" name="generic" id="generic" placeholder="User Name or Email" class="form-control"/>
+    <label class="sr-only" for="email">Email</label>
+    <input type="text" name="login_email" id="login_email" placeholder="Email" class="form-control"/>
     <br/>
     <label class="sr-only" for="login_password">Password</label>
     <input type="password" name="login_password" id="login_password" placeholder="Password"

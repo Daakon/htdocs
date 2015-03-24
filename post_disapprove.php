@@ -28,8 +28,8 @@ if (mysql_numrows($result2) > 0) {
 
     echo '<form>';
 
-    echo '<input type ="hidden" class = "postID" id = "postID" value = "' . $postID . '" />';
-    echo '<input type ="hidden" class = "ID" id = "ID" value = "' . $ID . '" />';
+    echo '<input type ="text" class = "postID" id = "postID" value = "' . $postID . '" />';
+    echo '<input type ="text" class = "ID" id = "ID" value = "' . $ID . '" />';
     echo '<input type ="button" class = "btnDisapprove" />';
 
     if ($approvals > 0) {

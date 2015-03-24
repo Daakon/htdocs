@@ -1,11 +1,12 @@
 <?php
+
 require 'connect.php';
 require 'getSession.php';
 require 'mediaPath.php';
 require 'model_functions.php';
-require_once 'email.php';
 require 'memory_settings.php';
 require 'html_functions.php';
+require 'email.php';
 
 $ID = $_SESSION['ID'];
 
@@ -88,42 +89,12 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
             }
         }
 
-        $exif = exif_read_data($_FILES['flPostMedia']['tmp_name']);
 
-        if (!empty($exif['Orientation'])) {
-            $ort = $exif['Orientation'];
-
-            switch ($ort) {
-                case 8:
-                    if (strstr($url, 'localhost:8888')) {
-                        // local php imagerotate doesn't work
-
-                    } else {
-                        $src = imagerotate($src, 90, 0);
-                    }
-                    break;
-                case 3:
-                    if (strstr($url, 'localhost:8888')) {
-                        // local php imagerotate doesn't work
-
-                    } else {
-                        $src = imagerotate($src, 180, 0);
-                    }
-                    break;
-                case 6:
-                    if (strstr($url, 'localhost:8888')) {
-                        // local php imagerotate doesn't work
-                    } else {
-                        $src = imagerotate($src, -90, 0);
-                    }
-                    break;
-            }
-        }
 
         require 'media_post_file_path.php';
 // save photo/video
         if (in_array($type, $videoFileTypes)) {
-            move_uploaded_file($photoCommentPhotoFile, $photoCommentPath);
+            move_uploaded_file($mediaFile, $postMediaFilePath);
         } else {
             if ($type == "image/jpg" || $type == "image/jpeg") {
                 imagejpeg($src, $postMediaFilePath, 100);
@@ -136,10 +107,40 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                 echo "<script>alert('The file could not be saved');</script>";
                 exit;
             }
+
+            $exif = exif_read_data($_FILES['flPostMedia']['tmp_name']);
+
+            if (!empty($exif['Orientation'])) {
+                $ort = $exif['Orientation'];
+
+                switch ($ort) {
+                    case 8:
+                        if (strstr($url, 'localhost:8888')) {
+                            // local php imagerotate doesn't work
+
+                        } else {
+                            $src = imagerotate($src, 90, 0);
+                        }
+                        break;
+                    case 3:
+                        if (strstr($url, 'localhost:8888')) {
+                            // local php imagerotate doesn't work
+
+                        } else {
+                            $src = imagerotate($src, 180, 0);
+                        }
+                        break;
+                    case 6:
+                        if (strstr($url, 'localhost:8888')) {
+                            // local php imagerotate doesn't work
+                        } else {
+                            $src = imagerotate($src, -90, 0);
+                        }
+                        break;
+                }
+            }
         }
 
-        imagedestroy($src);
-        imagedestroy($tmp);
 
 
         $sql2 = "INSERT INTO Media (Member_ID,  MediaName,   MediaType,   MediaDate     ) Values
@@ -158,13 +159,13 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 // check if file type is a photo
         if (in_array($type, $photoFileTypes)) {
 
-            $img = '<img src = "' . $mediaPostFilePath . '" style = "width:auto; max-width:400px;max-height:400px;" />';
+            $img = '<img src = "' . $postMediaFilePath . '" style = "width:auto; max-width:400px;max-height:400px;" />';
 
             $img = '<a href = "media.php?id=' . $id . '&pid=' . $newPhotoId . '&media=' . $newPhoto . '&type=' . $newPhotoType . '&mediaDate=' . $newPhotoDate . '">' . $img . '</a>';
         } // check if file type is a video
         elseif (in_array($type, $videoFileTypes)) {
 
-            $img = '<video src = "' . $mediaPostFilePath . '"  height = "500" width = "300" frameborder = "0" AUTOPLAY = "false" CONTROLLER="true" SCALE="ToFit"></video>';
+            $img = '<video src = "' . $postMediaFilePath . '"  height = "500" width = "300" frameborder = "0" AUTOPLAY = "false" CONTROLLER="true" SCALE="ToFit"></video>';
             $img = '<a href = "media.php?id=' . $ID . '&mid=' . $newPhotoId . '&media=' . $newPhoto . '&type=' . $newPhotoType . '&mediaDate=' . $newPhotoDate . '">' . $img . '</a>';
         }
 
@@ -195,7 +196,6 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
         $rowsOwner = mysql_fetch_assoc($resultOwner);
         $name2 = $rowsOwner['FirstName'] . ' ' . $rowsOwner['LastName'];
         $name2 = $name2;
-        $ownerId = $rowsOwner['ID'];
         $name2Link = $name2;
 
         // determine noun if profile owner commented on their own post and write bulletin
@@ -227,7 +227,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
     else {
 
         $sql = "INSERT INTO PostComments(Post_ID, Member_ID, Comment) Values
-                                                ('$bId', '$ID', '$comment')";
+                                        ('$postID', '$ID', '$comment')";
         mysql_query($sql) or die(mysql_error());
     }
 
@@ -251,19 +251,22 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
 //Iterate over the results and sort out the biz ids from the consumer ones.
     while ($rows = mysql_fetch_assoc($result)) {
-        array_push($consumer_comment_ids, $rows['id']);
+        array_push($consumer_comment_ids, $rows['Member_ID']);
     }
 
 //Boil the id's down to unique values because we dont want to send double emails or notifications
-    //$consumer_comment_ids = array_unique($consumer_comment_ids);
+    $comment_ids = array_unique($consumer_comment_ids);
+
 //Send consumer notifications
 
-    foreach ($comment_ids as $item) {
 
-        // only send email if account & email active
-        if (checkActive($item, 1)) {
-            if (checkEmailActive($item, 1)) {
-                build_and_send_email($item, $user_id, 1, $postID);
+    foreach ($comment_ids as $item) {
+        if (strlen($item) > 0) {
+            // only send email if account & email active
+            if (checkActive($item)) {
+                if (checkEmailActive($item)) {
+                    build_and_send_email($item, $user_id, 1, $postID);
+                }
             }
         }
     }
@@ -282,7 +285,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
     }
 
 //=========================================================================================================================//
-//BELOW IS END OF BULLETIN COMMENT HANDLING CODE ==========================================================================//
+//BELOW IS END OF POST COMMENT HANDLING CODE ==========================================================================//
 
 }
 
@@ -300,9 +303,10 @@ $memberID = $_GET['id'];
 
 // if a postback, the entire file path is already constructed
 
-$mediaFilePath = trim("media/".$mediaName);
+$mediaFilePath = trim("media/" . $mediaName);
 
 
+if (!empty($mediaFilePath)){
 if (file_exists($mediaFilePath)) {
 
 // check if file type is a photo
@@ -340,7 +344,7 @@ $name = $pRows['FirstName'] . ' ' . $pRows['LastName'];
 ?>
 
 <?php
-$profileMediaSrc = trim("media/".$profilePhoto);
+$profileMediaSrc = trim("media/" . $profilePhoto);
 ?>
 
 
@@ -360,18 +364,19 @@ $profileMediaSrc = trim("media/".$profilePhoto);
 
 
 
+
 </script>
 
 <script type="text/javascript">
 
-        function showComments(id) {
-            var e = document.getElementById('moreComments');
-            if (e.style.display == 'none') {
-                e.style.display = 'block';
-            }
-            else
-                e.style.display = 'none';
+    function showComments(id) {
+        var e = document.getElementById('moreComments');
+        if (e.style.display == 'none') {
+            e.style.display = 'block';
         }
+        else
+            e.style.display = 'none';
+    }
 </script>
 
 <script>
@@ -402,12 +407,11 @@ $profileMediaSrc = trim("media/".$profilePhoto);
 </script>
 
 
-
 <script>
-    $(document).ready(function() {
-        $("body").delegate(".btnDisapprove", "click", function() {
+    $(document).ready(function () {
+        $("body").delegate(".btnDisapprove", "click", function () {
             var currentDiv = $(this).closest("div[id^=approvals]");
-            var data={
+            var data = {
                 postID: $(this).closest('tr').find('.postID').val(),
                 ID: $(this).closest('tr').find('.ID').val(),
                 mediaID: $(this).closest('tr').find('.mediaID').val(),
@@ -422,8 +426,7 @@ $profileMediaSrc = trim("media/".$profilePhoto);
                 type: "post",
                 url: "/media_disapprove.php",
                 data: data,
-                success: function(data)
-                {
+                success: function (data) {
                     currentDiv.html(data);
                 }
 
@@ -433,6 +436,11 @@ $profileMediaSrc = trim("media/".$profilePhoto);
 </script>
 
 <style>
+    html, body {
+        max-width: 100% !important;
+        overflow-x: hidden !important;
+    }
+
     iframe {
         max-width: 100%;
         height: auto;
@@ -547,180 +555,183 @@ $profileMediaSrc = trim("media/".$profilePhoto);
         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 ">
 
 
-                <?php
+            <?php
 
 
-                $sqlGetPostID = "SELECT Post_ID FROM Media WHERE ID = '$mediaID' ";
-                $resultGetPostID = mysql_query($sqlGetPostID) or die(mysql_error());
-                $rowPostID = mysql_fetch_assoc($resultGetPostID);
-                $postID = $rowPostID['Post_ID'];
+            $sqlGetPostID = "SELECT Post_ID FROM Media WHERE ID = '$mediaID' ";
+            $resultGetPostID = mysql_query($sqlGetPostID) or die(mysql_error());
+            $rowPostID = mysql_fetch_assoc($resultGetPostID);
+            $postID = $rowPostID['Post_ID'];
 
-                $sqlPost = "SELECT Post FROM Posts WHERE ID = '$postID' ";
-                $resultPost = mysql_query($sqlPost) or die(mysql_error());
-                $rowPost = mysql_fetch_assoc($resultPost);
-                // remove image from original body
-                $post = preg_replace(" /<img[^>]+\> / i", "", $rowPost['Post']);
-                $post = preg_replace(" /<embed[^>]+\> / i", "", $post);
-                $post = "<p>".$post."</p>";
-                ?>
+            $sqlPost = "SELECT Post FROM Posts WHERE ID = '$postID' ";
+            $resultPost = mysql_query($sqlPost) or die(mysql_error());
+            $rowPost = mysql_fetch_assoc($resultPost);
+            // remove image from original body
+            $post = preg_replace(" /<img[^>]+\> / i", "", $rowPost['Post']);
+            $post = preg_replace(" /<embed[^>]+\> / i", "", $post);
+            $post = "<p>" . $post . "</p>";
+            ?>
 
 
-                        <?php echo nl2br($post); ?>
+            <?php echo nl2br($post); ?>
 
-    </div>
+        </div>
 
 
         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 ">
 
-                <img src=" <?php echo $profileMediaSrc ?>" height="100px" width="100px"/>
+            <img src=" <?php echo $profileMediaSrc ?>" height="100px" width="100px"/>
 
-                <?php echo $name; ?><br/>
-                <?php echo date("F j, Y", strtotime($mediaDate)) ?>
+            <?php echo $name; ?><br/>
+            <?php echo date("F j, Y", strtotime($mediaDate)) ?>
 
-                <hr/>
-                <a href="javascript:history.go(- <?php echo $back ?>)">Back</a>
-                <br/><br/><br/>
+            <hr/>
+            <a href="javascript:history.go(- <?php echo $back ?>)">Back</a>
+            <br/><br/><br/>
 
-                <?php
-
-
-                // check if user has approved this post
-
-                $sql2 = "SELECT * FROM PostApprovals WHERE Post_ID = '$postID' AND Member_ID = '$ID' ";
-                $result2 = mysql_query($sql2) or die(mysql_error());
-                $rows2 = mysql_fetch_assoc($result2);
-
-                // get approvals for each bulletin
-                $sql3 = "SELECT * FROM PostApprovals WHERE Post_ID = '$postID' ";
-                $result3 = mysql_query($sql3) or die(mysql_error());
-                $rows3 = mysql_fetch_assoc($result3);
-                $approvals = mysql_numrows($result3);
-
-                echo '<table><tr><td>';
-                echo "<div id = 'approvals$postID'>";
-
-                if (mysql_numrows($result2) > 0) {
-
-                    echo '<form>';
-
-                    echo '<input type ="hidden" class = "postID" value = "' . $postID . '" />';
-                    echo '<input type ="hidden" class = "ID" value="' . $ID . '"/>';
-                    echo '<input type ="hidden" class = "mediaID" value = "' . $mediaID . '" />';
-                    echo '<input type ="hidden" class = "mediaName" value ="' . $mediaName . '" />';
-                    echo '<input type ="hidden" class = "mediaType" value = "' . $mediaType . '" />';
-                    echo '<input type ="hidden" class = "mediaDate" id = "mediaDate" value = "' . $mediaDate . '" />';
-                    echo '<input type ="button" class = "btnDisapprove" />';
+            <?php
 
 
-                    if ($approvals > 0) {
-                        //echo '<tr><td>';
+            // check if user has approved this post
 
-                        echo '&nbsp;<span style = "color:red;font-weight:bold;font-size:16px">' . $approvals . '</font>';
-                    }
-                    echo '</form>';
-                } else {
+            $sql2 = "SELECT * FROM PostApprovals WHERE Post_ID = '$postID' AND Member_ID = '$ID' ";
+            $result2 = mysql_query($sql2) or die(mysql_error());
+            $rows2 = mysql_fetch_assoc($result2);
 
-                    echo '<form>';
+            // get approvals for each bulletin
+            $sql3 = "SELECT * FROM PostApprovals WHERE Post_ID = '$postID' ";
+            $result3 = mysql_query($sql3) or die(mysql_error());
+            $rows3 = mysql_fetch_assoc($result3);
+            $approvals = mysql_numrows($result3);
 
-                    echo '<input type ="hidden" class = "postID" id = "postID" value = "' . $postID . '" />';
-                    echo '<input type ="hidden" class = "ID" value="' . $ID . '"/>';
-                    echo '<input type ="hidden" class = "mediaID" value = "' . $mediaID . '" />';
-                    echo '<input type ="hidden" class = "mediaName" id = "mediaName" value ="' . $mediaName . '" />';
-                    echo '<input type ="hidden" class = "mediaType" id = "type" value = "' . $mediaType . '" />';
-                    echo '<input type ="hidden" class = "mediaDate" id = "mediaDate" value = "' . $mediaDate . '" />';
-                    echo '<input type ="button" class = "btnApprove" />';
+            echo '<table><tr><td>';
+            echo "<div id = 'approvals$postID'>";
+
+            if (mysql_numrows($result2) > 0) {
+
+                echo '<form>';
+
+                echo '<input type ="hidden" class = "postID" value = "' . $postID . '" />';
+                echo '<input type ="hidden" class = "ID" value="' . $ID . '"/>';
+                echo '<input type ="hidden" class = "mediaID" value = "' . $mediaID . '" />';
+                echo '<input type ="hidden" class = "mediaName" value ="' . $mediaName . '" />';
+                echo '<input type ="hidden" class = "mediaType" value = "' . $mediaType . '" />';
+                echo '<input type ="hidden" class = "mediaDate" id = "mediaDate" value = "' . $mediaDate . '" />';
+                echo '<input type ="button" class = "btnDisapprove" />';
 
 
-                    if ($approvals > 0) {
+                if ($approvals > 0) {
+                    //echo '<tr><td>';
 
-
-                        echo '&nbsp;<span style = "color:red;font-weight:bold;font-size:16px">' . $approvals . '</font>';
-                    }
-                    echo '</form>';
+                    echo '&nbsp;<span style = "color:red;font-weight:bold;font-size:16px">' . $approvals . '</font>';
                 }
-                echo "</div>"; // end of approval div
-                echo '</td></tr></table>';
+                echo '</form>';
+            } else {
 
-                ?>
+                echo '<form>';
+
+                echo '<input type ="hidden" class = "postID" id = "postID" value = "' . $postID . '" />';
+                echo '<input type ="hidden" class = "ID" value="' . $ID . '"/>';
+                echo '<input type ="hidden" class = "mediaID" value = "' . $mediaID . '" />';
+                echo '<input type ="hidden" class = "mediaName" id = "mediaName" value ="' . $mediaName . '" />';
+                echo '<input type ="hidden" class = "mediaType" id = "type" value = "' . $mediaType . '" />';
+                echo '<input type ="hidden" class = "mediaDate" id = "mediaDate" value = "' . $mediaDate . '" />';
+                echo '<input type ="button" class = "btnApprove" />';
+
+
+                if ($approvals > 0) {
+
+
+                    echo '&nbsp;<span style = "color:red;font-weight:bold;font-size:16px">' . $approvals . '</font>';
+                }
+                echo '</form>';
+            }
+            echo "</div>"; // end of approval div
+            echo '</td></tr></table>';
+
+            ?>
 
 
 
-                <form method="post" action="" enctype="multipart/form-data"
-                      onsubmit="return (checkComment(this, btnComment) && saveScrollPositions(this))">
+            <form method="post" action="" enctype="multipart/form-data"
+                  onsubmit="return (checkComment(this, btnComment) && saveScrollPositions(this))">
 
-                    <input type="text" class="form-control" name="postComment" id="postComment" style="margin-top:10px;" placeholder ="Write a comment"/>
+                <input type="text" class="form-control" name="postComment" id="postComment" style="margin-top:10px;"
+                       placeholder="Write a comment"/>
 
 
-                    <input type="file" name="flPostMedia" id="flPostMedia"/>
-                    <br/>
-                    <input type="hidden" name="postID" id="postID" Value="<?php echo $postID ?>"/>
-                    <input type="hidden" name="ID" id="ID" value="<?php echo $ID ?>"/>
-                    <input type="hidden" name="mediaID" id="mediaID" value="<?php echo $mediaID ?>"/>
-
-                    <input type="hidden" name="mediaName" id="mediaName" value="<?php echo $mediaName ?>"/>
-                    <input type="hidden" name="type" id="type" value="<?php echo $type ?>"/>
-                    <input type="hidden" name="mediaDate" id="mediaDate" value="<?php echo $mediaDate ?>"/>
-
-                    <input type="hidden" name="back" id="back" value="<?php echo $back ?>"/>
-                    <input type="hidden" name="scrollx" id="scrollx" value="0"/>
-                    <input type="hidden" name="scrolly" id="scrolly" value="0"/>
-                    <?php if (isset($visitor)) { ?>
-                        <input type="button" class="btnComment" Value="Comment" disabled/>
-                    <?php } else { ?>
-                        <input type="submit" class="btnComment" id="btnComment" name="btnComment" Value="Comment"/>
-                    <?php } ?>
-                </form>
+                <input type="file" name="flPostMedia" id="flPostMedia"/>
                 <br/>
+                <input type="hidden" name="postID" id="postID" Value="<?php echo $postID ?>"/>
+                <input type="hidden" name="ID" id="ID" value="<?php echo $ID ?>"/>
+                <input type="hidden" name="mediaID" id="mediaID" value="<?php echo $mediaID ?>"/>
 
-                <?php
-                // get post comments
+                <input type="hidden" name="mediaName" id="mediaName" value="<?php echo $mediaName ?>"/>
+                <input type="hidden" name="type" id="type" value="<?php echo $type ?>"/>
+                <input type="hidden" name="mediaDate" id="mediaDate" value="<?php echo $mediaDate ?>"/>
 
-                $sql3 = "SELECT DISTINCT
+                <input type="hidden" name="back" id="back" value="<?php echo $back ?>"/>
+                <input type="hidden" name="scrollx" id="scrollx" value="0"/>
+                <input type="hidden" name="scrolly" id="scrolly" value="0"/>
+                <?php if (isset($visitor)) { ?>
+                    <input type="button" class="btnComment" Value="Comment" disabled/>
+                <?php } else { ?>
+                    <input type="submit" class="btnComment" id="btnComment" name="btnComment" Value="Comment"/>
+                <?php } ?>
+            </form>
+
+
+            <?php
+            // get post comments
+
+            $sql3 = "SELECT DISTINCT
                         PostComments.Comment As Comment,
                         PostComments.ID As CommentID,
                         Members.ID As MemberID,
                         CONCAT(Members.FirstName, ' ', Members.LastName) As Name,
-                        Profile.ProfilePhoto As MediaName
+                        Profile.ProfilePhoto As ProfilePhoto
                         FROM PostComments, Members, Profile
                         WHERE
-                        PostComments.ID = '$postID '
-                        AND PostComments.ID = Members.ID
+                        PostComments.Post_ID = '$postID '
+                        AND PostComments.Member_ID = Members.ID
                         AND Profile.Member_ID = Members.ID
                         Group By PostComments.ID DESC LIMIT 3";
 
-                $result3 = mysql_query($sql3) or die(mysql_error());
-                if (mysql_numrows($result) > 0) {
-                    while ($rows3 = mysql_fetch_assoc($result3)) {
-                        $comment = $rows3['Comment'];
-                        $photo = $rows3['MediaName'];
-                        echo '<br/>';
-                        echo '<table style = "background:#E0EEEE;width:400px;">';
-                        echo '<tr><td style = "width:15%;" valign = "top">';
-                        echo '<img src = "' . $mediaPath . $mediaName . '" class = "enlarge-onhover"  height = "50" width = "50" style = "border:1px solid black" title = "' . $rows3['Name'] . '" />&nbsp;</td><td valign = "top"><b>' . $rows3['Name'] . '</a></b>&nbsp;&nbsp;' . nl2br($comment);
-                    }
+            $result3 = mysql_query($sql3) or die(mysql_error());
+            if (mysql_numrows($result3) > 0) {
+                echo '<table style = "background:#E0EEEE;width:400px;">';
+                while ($rows3 = mysql_fetch_assoc($result3)) {
+                    $comment = $rows3['Comment'];
+                    $profilePhoto = $rows3['ProfilePhoto'];
+                    echo '<br/>';
+
+                    echo '<tr><td style = "width:15%;" valign = "top">';
+                    echo '<img src = "' . $mediaPath . $profilePhoto . '" class = "enlarge-onhover"  height = "50" width = "50" style = "border:1px solid black" title = "' . $rows3['Name'] . '" />&nbsp;</td><td valign = "top"><b>' . $rows3['Name'] . '</a></b>&nbsp;&nbsp;' . nl2br($comment);
                     echo '</td></tr>';
-                    echo '</table>';
                 }
 
+                echo '</table>';
+            }
 
-                ?>
 
-                <?php
-                $sql4 = "SELECT DISTINCT
+            ?>
+
+            <?php
+            $sql4 = "SELECT DISTINCT
                         PostComments.Comment As Comment,
                         PostComments.ID As CommentID,
                         Members.ID As MemberID,
                         CONCAT(Members.FirstName, ' ', Members.LastName) As Name,
-                        Profile.ProfilePhoto As MediaName
+                        Profile.ProfilePhoto As ProfilePhoto
                         FROM PostComments,Members, Profile
                         WHERE
-                        PostComments.ID = '$postID'
-                        AND PostComments.ID = Members.ID
+                        PostComments.Post_ID = '$postID'
+                        AND PostComments.Member_ID = Members.ID
                         AND Profile.Member_ID = Members.ID
-                        Group By PostComments.ID Order By PostComments.ID ASC LIMIT 3, 100";
+                        Group By PostComments.ID Order By PostComments.ID DESC LIMIT 3, 100";
 
-                $result4 = mysql_query($sql4) or die(mysql_error());
-                if (mysql_numrows($result4) > 0) {
+            $result4 = mysql_query($sql4) or die(mysql_error());
+            if (mysql_numrows($result4) > 0) {
                 ?>
 
 
@@ -733,46 +744,48 @@ $profileMediaSrc = trim("media/".$profilePhoto);
                     echo '<table style = "background:#E0EEEE;width:400px;">';
                     while ($rows4 = mysql_fetch_assoc($result4)) {
                         $comment = $rows4['Comment'];
-                        $photo = $rows4['MediaName'];
+                        $profilePhoto = $rows4['ProfilePhoto'];
 
                         echo '<tr><td style = "width:15%;" valign = "top">';
 
-                        echo '<img src = "' . $mediaPath . $photo . '" height = "50" width = "50" class = "enlarge-onhover" style = "border:1px solid black" title = "' . $rows4['Name'] . '" />&nbsp;</td><td valign = "top"><b>' . $rows4['Name'] . '</a></b></a>&nbsp;&nbsp;' . $Comment . '</span>';
+                        echo '<img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" class = "enlarge-onhover" style = "border:1px solid black" title = "' . $rows4['Name'] . '" />&nbsp;</td><td valign = "top"><b>' . $rows4['Name'] . '</a></b></a>&nbsp;&nbsp;' . nl2br($comment) . '</span>';
                         echo '</td></tr>';
                     }
 
-                    echo '</table>'; ?>
-                   </div>'; // end of more comments div
+                    echo '</table>';
+                    echo '</div>'; // end of more comments div
+?>
 
             <?php
-                    }
-                    echo '<hr/>';
-                    ?>
+            }
+            echo '<hr/>';
+            ?>
 
-                    <br/><br/><br/>
-                    <?php
-                    echo '<tr><td>';
-                    /* if the session id is the same as the id related to the folder
-                    and the is business bit aligns with the session type, picture owner is confirmed
-                    show delete */
-
-
-                    if ($_SESSION['ID'] == $memberID) {
-                    ?>
-                    <form method="get" action="" onsubmit="return confirm('Are you sure you want to delte this photo')">
-                        <?php
-                        echo '<input type = "submit" name = "btnDelete" id = "btnDelete" value = "Delete" /><br/><br/>';
-                        echo '<input type ="hidden" name = "mediaID" id = "mediaID" value = "' . $mediaID . '" />';
-                        echo '<input type = "hidden" name = "ID" id = "ID" value="' . $ID . '"/>';
-                        echo '</form>';
-                        echo '<hr/>';
-                        }
-
-                        }
-                        ?>
+            <br/><br/><br/>
+            <?php
+            echo '<tr><td>';
+            /* if the session id is the same as the id related to the folder
+            and the is business bit aligns with the session type, picture owner is confirmed
+            show delete */
 
 
+            if ($_SESSION['ID'] == $memberID) {
+            ?>
+            <form method="get" action="" onsubmit="return confirm('Are you sure you want to delte this photo')">
+                <?php
+                echo '<input type = "submit" name = "btnDelete" id = "btnDelete" value = "Delete" /><br/><br/>';
+                echo '<input type ="hidden" name = "mediaID" id = "mediaID" value = "' . $mediaID . '" />';
+                echo '<input type = "hidden" name = "ID" id = "ID" value="' . $ID . '"/>';
+                echo '</form>';
+                echo '<hr/>';
+                }
+
+                }
+                }
+                ?>
+
+
+        </div>
     </div>
-</div>
 
 </body>
