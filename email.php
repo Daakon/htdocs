@@ -155,9 +155,10 @@ function build_and_send_email($senderId, $toId, $notification, $postID)
     // if we have a notification, then send the email.
 
     if (strlen($notification) > 0) {
+        $profilePhoto = get_users_photo_by_id($senderId);
         $message = "<html><body>";
         $message .= "<table style = 'background:red;height:400px;width:600px;border-radius:10px;border:2px solid black;'><tr style = 'color:white;border-radius:10px;'><td>";
-        $message .= "<tr><td><img src = 'get_users_photo_by_id($senderId)' height = '200' width = '200' style = 'border:2px solid black' /></td></tr>";
+        $message .= "<tr><td><img src = '$profilePhoto' height = '200' width = '200' style = 'border:2px solid black' /></td></tr>";
         $message .= "<tr><td style = 'background:silver;padding:20px;border:2px solid black;'>$subject<br/><br/></td></tr>";
         $message .= "<tr><td style = 'background-color:red;color:white'>If you received this email in error contact us at <mailto:info@connectcommunity.com>info@rapportbook.com</a>";
         $message .= "<br/>Rapportbook LLC, 1500 Washington Ave, St.Louis,MO 63103 USA </td></tr>";
@@ -165,11 +166,13 @@ function build_and_send_email($senderId, $toId, $notification, $postID)
 
         $header = "From: Rapporbook <admin@rapportbook.com> \r\n";
         $header .= "Content-type: text/html";
-        ini_set('sendmail_from', 'admin@rapportbook.com');
+        ini_set('sendmail_from', 'info@rapportbook.com');
 
         if (mail($toEmail, 'Rapportbook: Notification Alert', $message, $header)) {
             // mail sent
+            unset($profilePhoto);
             return true;
+
 
         } else {
             echo 'mail sending failed';
@@ -177,4 +180,5 @@ function build_and_send_email($senderId, $toId, $notification, $postID)
         }
     }
 }
+
 ?>

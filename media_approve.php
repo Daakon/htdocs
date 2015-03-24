@@ -35,7 +35,7 @@ $comment_ids = array();
 
 //Iterate over the results and sort out the biz ids from the consumer ones.
 while ($rows = mysql_fetch_assoc($result)) {
-    array_push($comment_ids, $rows['ID']);
+    array_push($comment_ids, $rows['Member_ID']);
 }
 
 //Boil the id's down to unique values bc we dont want it send double emails or notifications
@@ -48,7 +48,7 @@ foreach ($comment_ids as $item) {
     // only send email if account & email active
     if (strlen($item) > 0) {
         if (checkActive($item)) {
-            if (checkEmailActive($item, 1)) {
+            if (checkEmailActive($item)) {
                 build_and_send_email($user_id, $item, 1, $postID);
             }
         }

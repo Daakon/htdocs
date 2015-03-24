@@ -2,6 +2,8 @@
 require 'connect.php';
 require 'mediaPath.php';
 
+
+
 function checkActive($user_id)
 {
     $sql = "SELECT IsActive FROM Members where ID = $user_id ";
@@ -62,16 +64,25 @@ function get_users_name_by_id($user_id)
 function get_users_photo_by_id($user_id)
 {
 
-    $sql = "SELECT DISTINCT MediaName FROM Media WHERE ID =$user_id And IsProfilePhoto = 1 ";
+    $sql = "SELECT DISTINCT ProfilePhoto FROM Profile WHERE Member_ID =$user_id ";
     $result = mysql_query($sql) or die(mysql_error());
-    while ($rows = mysql_fetch_assoc($result)) {
-        $photo = $rows['MediaName'];
-        require 'mediaPath.php';
-        ?> <img src="/media/<?php echo $photo ?>" width=52 height=52/>
-<?php
-    }
+    $rows = mysql_fetch_assoc($result);
 
+    $photo = $rows['ProfilePhoto'];
+
+    $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+    $fullMediaPath = "";
+
+    if (strstr($url, "localhost")) {
+        $fullMediaPath = "/media/$photo";
+    } elseif (strstr($url, "dev")) {
+        $fullMediaPath = "http://dev.rapportbook.com/media/$photo";
+    } else {
+        $fullMediaPath = "http://rapportbook.com/media/$photo";
+    }
+    return $fullMediaPath;
 }
+
 
 function check_password($user_id, $pass)
 {

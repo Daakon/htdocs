@@ -65,7 +65,7 @@ function get_header()
         </a>
         <a href="/logout.php" style="color:white;" class=" visible-sm visible-md visible-lg pull-right">Log Out</a>
     </header>
-    <?php if (empty($_COOKIE['ID']) || !isset($_COOKIE['ID'])) { ?>
+    <?php if (!empty($_COOKIE['ID']) && isset($_COOKIE['ID'])) { ?>
 <a href ="/logout.php" style="color:black" class="visible-xs black-link"><h6>Log Out</h6></a>
     <br/>
 

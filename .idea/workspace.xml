@@ -5,20 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="51867226-c8dd-43fb-9a46-7c8a9e9ab742" name="Default" comment="Added media page.&#10;&#10;">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/mediapath.php" afterPath="$PROJECT_DIR$/mediaPath.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/email.php" afterPath="$PROJECT_DIR$/email.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/home.php" afterPath="$PROJECT_DIR$/home.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html_functions.php" afterPath="$PROJECT_DIR$/html_functions.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/login-mobile.php" afterPath="$PROJECT_DIR$/login-mobile.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/login.php" afterPath="$PROJECT_DIR$/login.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/media.php" afterPath="$PROJECT_DIR$/media.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/media_approve.php" afterPath="$PROJECT_DIR$/media_approve.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/media_post_file_path.php" afterPath="$PROJECT_DIR$/media_post_file_path.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/model_functions.php" afterPath="$PROJECT_DIR$/model_functions.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/post_approve.php" afterPath="$PROJECT_DIR$/post_approve.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/post_disapprove.php" afterPath="$PROJECT_DIR$/post_disapprove.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/profile.php" afterPath="$PROJECT_DIR$/profile.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="htdocs.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -48,7 +39,157 @@
     <favorites_list name="htdocs" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="email.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/email.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-6.785714" vertical-offset="2850" max-vertical-offset="3610">
+              <caret line="160" column="41" selection-start-line="160" selection-start-column="41" selection-end-line="160" selection-end-column="41" />
+              <folding>
+                <marker date="1427235682000" expanded="false" signature="653:679" placeholder="..." />
+                <marker date="1427235682000" expanded="true" signature="680:726" placeholder="..." />
+                <marker date="1427235682000" expanded="false" signature="1086:1112" placeholder="..." />
+                <marker date="1427235682000" expanded="true" signature="1113:1159" placeholder="..." />
+                <marker date="1427235682000" expanded="false" signature="3220:3246" placeholder="..." />
+                <marker date="1427235682000" expanded="true" signature="3247:3293" placeholder="..." />
+                <marker date="1427235682000" expanded="false" signature="3654:3680" placeholder="..." />
+                <marker date="1427235682000" expanded="true" signature="3681:3727" placeholder="..." />
+                <marker date="1427235682000" expanded="true" signature="4833:4915" placeholder="..." />
+                <marker date="1427235682000" expanded="true" signature="4930:4961" placeholder="..." />
+                <marker date="1427235682000" expanded="true" signature="5064:5086" placeholder="..." />
+                <marker date="1427235682000" expanded="true" signature="5141:5195" placeholder="..." />
+                <marker date="1427235682000" expanded="true" signature="5266:5298" placeholder="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="home.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/home.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-8.142858" vertical-offset="0" max-vertical-offset="15732">
+              <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="67" />
+              <folding>
+                <marker date="1427228999000" expanded="true" signature="4752:4922" placeholder="INSERT INTO ..." />
+                <marker date="1427228999000" expanded="true" signature="5047:5097" placeholder="SELECT * FRO..Media..." />
+                <marker date="1427228999000" expanded="true" signature="6539:6692" placeholder="INSERT INTO ..." />
+                <marker date="1427228999000" expanded="true" signature="6921:6991" placeholder="UPDATE Media..." />
+                <marker date="1427228999000" expanded="true" signature="7139:7296" placeholder="INSERT INTO ..." />
+                <marker date="1427228999000" expanded="true" signature="11910:12076" placeholder="INSERT INTO ..." />
+                <marker date="1427228999000" expanded="true" signature="12189:12239" placeholder="SELECT * FRO..Media..." />
+                <marker date="1427228999000" expanded="true" signature="13639:13789" placeholder="INSERT INTO ..." />
+                <marker date="1427228999000" expanded="true" signature="13920:13988" placeholder="SELECT ID, F..Members..." />
+                <marker date="1427228999000" expanded="true" signature="14376:14441" placeholder="SELECT ID, F..Members..." />
+                <marker date="1427228999000" expanded="true" signature="15186:15331" placeholder="INSERT INTO ..." />
+                <marker date="1427228999000" expanded="true" signature="15522:15592" placeholder="UPDATE Media..." />
+                <marker date="1427228999000" expanded="true" signature="15770:15912" placeholder="INSERT INTO ..." />
+                <marker date="1427228999000" expanded="true" signature="16323:16369" placeholder="SELECT Membe..PostComments..." />
+                <marker date="1427228999000" expanded="true" signature="17220:17261" placeholder="SELECT ID FR..Posts..." />
+                <marker date="1427228999000" expanded="true" signature="21145:21630" placeholder="SELECT DISTI..Members..." />
+                <marker date="1427228999000" expanded="true" signature="22761:22837" placeholder="SELECT ID FR..PostApprovals..." />
+                <marker date="1427228999000" expanded="true" signature="23053:23106" placeholder="SELECT * FRO..PostApprovals..." />
+                <marker date="1427228999000" expanded="true" signature="23746:23785" placeholder="..." />
+                <marker date="1427228999000" expanded="true" signature="24276:24315" placeholder="..." />
+                <marker date="1427228999000" expanded="true" signature="25981:26712" placeholder="SELECT DISTI..PostComments..." />
+                <marker date="1427228999000" expanded="true" signature="26914:26943" placeholder="..." />
+                <marker date="1427228999000" expanded="true" signature="27183:27214" placeholder="..." />
+                <marker date="1427228999000" expanded="true" signature="27770:28506" placeholder="SELECT DISTI..PostComments..." />
+                <marker date="1427228999000" expanded="true" signature="28984:29013" placeholder="..." />
+                <marker date="1427228999000" expanded="true" signature="29255:29286" placeholder="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="post_approve.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/post_approve.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="27.821428" vertical-offset="1539" max-vertical-offset="2299">
+              <caret line="40" column="24" selection-start-line="40" selection-start-column="24" selection-end-line="40" selection-end-column="24" />
+              <folding>
+                <marker date="1427233136000" expanded="true" signature="267:376" placeholder="INSERT INTO ..." />
+                <marker date="1427233136000" expanded="true" signature="703:754" placeholder="SELECT Membe..PostComments..." />
+                <marker date="1427233136000" expanded="true" signature="1504:1545" placeholder="SELECT ID FR..Posts..." />
+                <marker date="1427233136000" expanded="true" signature="2021:2097" placeholder="SELECT ID FR..PostApprovals..." />
+                <marker date="1427233136000" expanded="true" signature="2195:2249" placeholder="SELECT ID FR..PostApprovals..." />
+                <marker date="1427233136000" expanded="true" signature="2858:2897" placeholder="..." />
+                <marker date="1427233136000" expanded="true" signature="3306:3345" placeholder="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="media_approve.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/media_approve.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-17.607143" vertical-offset="495" max-vertical-offset="2337">
+              <caret line="52" column="13" selection-start-line="52" selection-start-column="13" selection-end-line="52" selection-end-column="13" />
+              <folding>
+                <marker date="1427232176000" expanded="true" signature="382:489" placeholder="INSERT INTO ..." />
+                <marker date="1427232176000" expanded="true" signature="834:885" placeholder="SELECT Membe..PostComments..." />
+                <marker date="1427232176000" expanded="true" signature="1907:1982" placeholder="SELECT * FRO..PostApprovals..." />
+                <marker date="1427232176000" expanded="true" signature="2122:2175" placeholder="SELECT * FRO..PostApprovals..." />
+                <marker date="1427232176000" expanded="true" signature="3061:3102" placeholder="..." />
+                <marker date="1427232176000" expanded="true" signature="3885:3926" placeholder="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="html_functions.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/html_functions.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-25.071428" vertical-offset="476" max-vertical-offset="1805">
+              <caret line="62" column="6" selection-start-line="62" selection-start-column="6" selection-end-line="62" selection-end-column="6" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="model_functions.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/model_functions.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.79744136" vertical-offset="1146" max-vertical-offset="2717">
+              <caret line="80" column="55" selection-start-line="80" selection-start-column="55" selection-end-line="80" selection-end-column="55" />
+              <folding>
+                <marker date="1427235740000" expanded="true" signature="102:142" placeholder="SELECT IsAct..Members..." />
+                <marker date="1427235740000" expanded="true" signature="398:441" placeholder="SELECT Email..Members..." />
+                <marker date="1427235740000" expanded="true" signature="699:750" placeholder="SELECT First..Members..." />
+                <marker date="1427235740000" expanded="true" signature="965:1005" placeholder="SELECT Usern..Members..." />
+                <marker date="1427235740000" expanded="true" signature="1201:1252" placeholder="SELECT First..Members..." />
+                <marker date="1427235740000" expanded="true" signature="1494:1553" placeholder="SELECT DISTI..Profile..." />
+                <marker date="1427235740000" expanded="true" signature="1494:1561" placeholder="SELECT DISTI..Media..." />
+                <marker date="1427235740000" expanded="true" signature="2150:2198" placeholder="SELECT DISTI..Members..." />
+                <marker date="1427235740000" expanded="true" signature="2468:2516" placeholder="SELECT DISTI..Media..." />
+                <marker date="1427235740000" expanded="true" signature="2721:2780" placeholder="SELECT DISTI..Members..." />
+                <marker date="1427235740000" expanded="true" signature="2962:2999" placeholder="SELECT Email..Members..." />
+                <marker date="1427235740000" expanded="true" signature="3184:3229" placeholder="SELECT ID FR..Members..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="mediaPath.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mediaPath.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-3.392857" vertical-offset="0" max-vertical-offset="228">
+              <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="logout.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/logout.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-6.785714" vertical-offset="0" max-vertical-offset="342">
+              <caret line="10" column="18" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="18" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -93,20 +234,20 @@
         <option value="$PROJECT_DIR$/member_photos.php" />
         <option value="$PROJECT_DIR$/signup.php" />
         <option value="$PROJECT_DIR$/show_post.php" />
-        <option value="$PROJECT_DIR$/html_functions.php" />
         <option value="$PROJECT_DIR$/login-mobile.php" />
         <option value="$PROJECT_DIR$/login.php" />
         <option value="$PROJECT_DIR$/post_disapprove.php" />
-        <option value="$PROJECT_DIR$/model_functions.php" />
-        <option value="$PROJECT_DIR$/media_approve.php" />
         <option value="$PROJECT_DIR$/media_post_file_path.php" />
-        <option value="$PROJECT_DIR$/mediaPath.php" />
         <option value="$PROJECT_DIR$/profile.php" />
         <option value="$PROJECT_DIR$/media_sizes.html" />
-        <option value="$PROJECT_DIR$/email.php" />
-        <option value="$PROJECT_DIR$/post_approve.php" />
         <option value="$PROJECT_DIR$/home.php" />
         <option value="$PROJECT_DIR$/media.php" />
+        <option value="$PROJECT_DIR$/html_functions.php" />
+        <option value="$PROJECT_DIR$/media_approve.php" />
+        <option value="$PROJECT_DIR$/post_approve.php" />
+        <option value="$PROJECT_DIR$/mediaPath.php" />
+        <option value="$PROJECT_DIR$/email.php" />
+        <option value="$PROJECT_DIR$/model_functions.php" />
       </list>
     </option>
   </component>
@@ -116,7 +257,7 @@
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" interpreter_name="PHP 5.5" />
   <component name="ProjectFrameBounds">
     <option name="x" value="1280" />
-    <option name="y" value="41" />
+    <option name="y" value="44" />
     <option name="width" value="1600" />
     <option name="height" value="809" />
   </component>
@@ -374,8 +515,8 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1280" y="41" width="1600" height="809" extended-state="0" />
-    <editor active="false" />
+    <frame x="1280" y="44" width="1600" height="809" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -384,8 +525,8 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32936507" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21125" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2647059" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21125" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2647059" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -447,13 +588,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.0" vertical-offset="5753" max-vertical-offset="6422">
           <caret line="332" column="62" selection-start-line="332" selection-start-column="62" selection-end-line="332" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/logout.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.785714" vertical-offset="0" max-vertical-offset="342">
-          <caret line="10" column="18" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="18" />
         </state>
       </provider>
     </entry>
@@ -759,17 +893,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/html_functions.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.207752" vertical-offset="494" max-vertical-offset="1805">
-          <caret line="67" column="3" selection-start-line="67" selection-start-column="3" selection-end-line="67" selection-end-column="3" />
-          <folding>
-            <element signature="e#2534#2554#0#HTML" expanded="false" />
-            <element signature="e#2725#2744#0#HTML" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/getSession.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.05775076" vertical-offset="0" max-vertical-offset="658">
@@ -792,46 +915,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/model_functions.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.37537995" vertical-offset="19" max-vertical-offset="2508">
-          <caret line="14" column="1" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
-          <folding>
-            <marker date="1427211570000" expanded="true" signature="-1:-1" placeholder="SELECT IsAct..Members..." />
-            <marker date="1427211570000" expanded="true" signature="-1:-1" placeholder="SELECT Email..Members..." />
-            <marker date="1427211570000" expanded="true" signature="-1:-1" placeholder="SELECT First..Members..." />
-            <marker date="1427211570000" expanded="true" signature="-1:-1" placeholder="SELECT Usern..Members..." />
-            <marker date="1427211570000" expanded="true" signature="-1:-1" placeholder="SELECT First..Members..." />
-            <marker date="1427211570000" expanded="true" signature="-1:-1" placeholder="SELECT DISTI..Media..." />
-            <marker date="1427211570000" expanded="true" signature="-1:-1" placeholder="SELECT DISTI..Members..." />
-            <marker date="1427211570000" expanded="true" signature="-1:-1" placeholder="SELECT DISTI..Media..." />
-            <marker date="1427211570000" expanded="true" signature="-1:-1" placeholder="SELECT DISTI..Members..." />
-            <marker date="1427211570000" expanded="true" signature="-1:-1" placeholder="SELECT Email..Members..." />
-            <marker date="1427211570000" expanded="true" signature="-1:-1" placeholder="SELECT ID FR..Members..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/Dropbox/ConnectCommunity/htdocs/mobile/style.css">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="15078" max-vertical-offset="15751">
           <caret line="408" column="4" selection-start-line="408" selection-start-column="4" selection-end-line="408" selection-end-column="23" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/media_approve.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.17325228" vertical-offset="0" max-vertical-offset="2337">
-          <caret line="6" column="30" selection-start-line="6" selection-start-column="30" selection-end-line="6" selection-end-column="30" />
-          <folding>
-            <marker date="1427216796000" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
-            <marker date="1427216796000" expanded="true" signature="-1:-1" placeholder="SELECT Membe..PostComments..." />
-            <marker date="1427216796000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..PostApprovals..." />
-            <marker date="1427216796000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..PostApprovals..." />
-            <marker date="1427216796000" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1427216796000" expanded="true" signature="-1:-1" placeholder="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -860,14 +948,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mediaPath.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.08662614" vertical-offset="0" max-vertical-offset="658">
-          <caret line="3" column="20" selection-start-line="3" selection-start-column="20" selection-end-line="3" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/media_post_file_path.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.02887538" vertical-offset="0" max-vertical-offset="658">
@@ -881,22 +961,6 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="7687" max-vertical-offset="8360">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/post_approve.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-15.607142" vertical-offset="0" max-vertical-offset="2280">
-          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
-          <folding>
-            <marker date="1427228753000" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
-            <marker date="1427228753000" expanded="true" signature="-1:-1" placeholder="SELECT Membe..PostComments..." />
-            <marker date="1427228753000" expanded="true" signature="-1:-1" placeholder="SELECT ID FR..Posts..." />
-            <marker date="1427228753000" expanded="true" signature="-1:-1" placeholder="SELECT ID FR..PostApprovals..." />
-            <marker date="1427228753000" expanded="true" signature="-1:-1" placeholder="SELECT ID FR..PostApprovals..." />
-            <marker date="1427228753000" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1427228753000" expanded="true" signature="-1:-1" placeholder="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -933,59 +997,135 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/logout.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.785714" vertical-offset="0" max-vertical-offset="342">
+          <caret line="10" column="18" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html_functions.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-25.071428" vertical-offset="476" max-vertical-offset="1805">
+          <caret line="62" column="6" selection-start-line="62" selection-start-column="6" selection-end-line="62" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/home.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-12.755039" vertical-offset="8379" max-vertical-offset="15732">
-          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+        <state vertical-scroll-proportion="-8.142858" vertical-offset="0" max-vertical-offset="15732">
+          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="67" />
           <folding>
-            <marker date="1427228999000" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
-            <marker date="1427228999000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..Media..." />
-            <marker date="1427228999000" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
-            <marker date="1427228999000" expanded="true" signature="-1:-1" placeholder="UPDATE Media..." />
-            <marker date="1427228999000" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
-            <marker date="1427228999000" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
-            <marker date="1427228999000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..Media..." />
-            <marker date="1427228999000" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
-            <marker date="1427228999000" expanded="true" signature="-1:-1" placeholder="SELECT ID, F..Members..." />
-            <marker date="1427228999000" expanded="true" signature="-1:-1" placeholder="SELECT ID, F..Members..." />
-            <marker date="1427228999000" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
-            <marker date="1427228999000" expanded="true" signature="-1:-1" placeholder="UPDATE Media..." />
-            <marker date="1427228999000" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
-            <marker date="1427228999000" expanded="true" signature="-1:-1" placeholder="SELECT Membe..PostComments..." />
-            <marker date="1427228999000" expanded="true" signature="-1:-1" placeholder="SELECT ID FR..Posts..." />
-            <marker date="1427228999000" expanded="true" signature="-1:-1" placeholder="SELECT DISTI..Members..." />
-            <marker date="1427228999000" expanded="true" signature="-1:-1" placeholder="SELECT ID FR..PostApprovals..." />
-            <marker date="1427228999000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..PostApprovals..." />
-            <marker date="1427228999000" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1427228999000" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1427228999000" expanded="true" signature="-1:-1" placeholder="SELECT DISTI..PostComments..." />
-            <marker date="1427228999000" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1427228999000" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1427228999000" expanded="true" signature="-1:-1" placeholder="SELECT DISTI..PostComments..." />
-            <marker date="1427228999000" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1427228999000" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1427228999000" expanded="true" signature="4752:4922" placeholder="INSERT INTO ..." />
+            <marker date="1427228999000" expanded="true" signature="5047:5097" placeholder="SELECT * FRO..Media..." />
+            <marker date="1427228999000" expanded="true" signature="6539:6692" placeholder="INSERT INTO ..." />
+            <marker date="1427228999000" expanded="true" signature="6921:6991" placeholder="UPDATE Media..." />
+            <marker date="1427228999000" expanded="true" signature="7139:7296" placeholder="INSERT INTO ..." />
+            <marker date="1427228999000" expanded="true" signature="11910:12076" placeholder="INSERT INTO ..." />
+            <marker date="1427228999000" expanded="true" signature="12189:12239" placeholder="SELECT * FRO..Media..." />
+            <marker date="1427228999000" expanded="true" signature="13639:13789" placeholder="INSERT INTO ..." />
+            <marker date="1427228999000" expanded="true" signature="13920:13988" placeholder="SELECT ID, F..Members..." />
+            <marker date="1427228999000" expanded="true" signature="14376:14441" placeholder="SELECT ID, F..Members..." />
+            <marker date="1427228999000" expanded="true" signature="15186:15331" placeholder="INSERT INTO ..." />
+            <marker date="1427228999000" expanded="true" signature="15522:15592" placeholder="UPDATE Media..." />
+            <marker date="1427228999000" expanded="true" signature="15770:15912" placeholder="INSERT INTO ..." />
+            <marker date="1427228999000" expanded="true" signature="16323:16369" placeholder="SELECT Membe..PostComments..." />
+            <marker date="1427228999000" expanded="true" signature="17220:17261" placeholder="SELECT ID FR..Posts..." />
+            <marker date="1427228999000" expanded="true" signature="21145:21630" placeholder="SELECT DISTI..Members..." />
+            <marker date="1427228999000" expanded="true" signature="22761:22837" placeholder="SELECT ID FR..PostApprovals..." />
+            <marker date="1427228999000" expanded="true" signature="23053:23106" placeholder="SELECT * FRO..PostApprovals..." />
+            <marker date="1427228999000" expanded="true" signature="23746:23785" placeholder="..." />
+            <marker date="1427228999000" expanded="true" signature="24276:24315" placeholder="..." />
+            <marker date="1427228999000" expanded="true" signature="25981:26712" placeholder="SELECT DISTI..PostComments..." />
+            <marker date="1427228999000" expanded="true" signature="26914:26943" placeholder="..." />
+            <marker date="1427228999000" expanded="true" signature="27183:27214" placeholder="..." />
+            <marker date="1427228999000" expanded="true" signature="27770:28506" placeholder="SELECT DISTI..PostComments..." />
+            <marker date="1427228999000" expanded="true" signature="28984:29013" placeholder="..." />
+            <marker date="1427228999000" expanded="true" signature="29255:29286" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mediaPath.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.392857" vertical-offset="0" max-vertical-offset="228">
+          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/post_approve.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="27.821428" vertical-offset="1539" max-vertical-offset="2299">
+          <caret line="40" column="24" selection-start-line="40" selection-start-column="24" selection-end-line="40" selection-end-column="24" />
+          <folding>
+            <marker date="1427233136000" expanded="true" signature="267:376" placeholder="INSERT INTO ..." />
+            <marker date="1427233136000" expanded="true" signature="703:754" placeholder="SELECT Membe..PostComments..." />
+            <marker date="1427233136000" expanded="true" signature="1504:1545" placeholder="SELECT ID FR..Posts..." />
+            <marker date="1427233136000" expanded="true" signature="2021:2097" placeholder="SELECT ID FR..PostApprovals..." />
+            <marker date="1427233136000" expanded="true" signature="2195:2249" placeholder="SELECT ID FR..PostApprovals..." />
+            <marker date="1427233136000" expanded="true" signature="2858:2897" placeholder="..." />
+            <marker date="1427233136000" expanded="true" signature="3306:3345" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/media_approve.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-17.607143" vertical-offset="495" max-vertical-offset="2337">
+          <caret line="52" column="13" selection-start-line="52" selection-start-column="13" selection-end-line="52" selection-end-column="13" />
+          <folding>
+            <marker date="1427232176000" expanded="true" signature="382:489" placeholder="INSERT INTO ..." />
+            <marker date="1427232176000" expanded="true" signature="834:885" placeholder="SELECT Membe..PostComments..." />
+            <marker date="1427232176000" expanded="true" signature="1907:1982" placeholder="SELECT * FRO..PostApprovals..." />
+            <marker date="1427232176000" expanded="true" signature="2122:2175" placeholder="SELECT * FRO..PostApprovals..." />
+            <marker date="1427232176000" expanded="true" signature="3061:3102" placeholder="..." />
+            <marker date="1427232176000" expanded="true" signature="3885:3926" placeholder="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/email.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7364341" vertical-offset="2812" max-vertical-offset="3534">
-          <caret line="173" column="16" selection-start-line="173" selection-start-column="16" selection-end-line="173" selection-end-column="16" />
+        <state vertical-scroll-proportion="-6.785714" vertical-offset="2850" max-vertical-offset="3610">
+          <caret line="160" column="41" selection-start-line="160" selection-start-column="41" selection-end-line="160" selection-end-column="41" />
           <folding>
-            <marker date="1427228717000" expanded="false" signature="-1:-1" placeholder="..." />
-            <marker date="1427228717000" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1427228717000" expanded="false" signature="-1:-1" placeholder="..." />
-            <marker date="1427228717000" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1427228717000" expanded="false" signature="-1:-1" placeholder="..." />
-            <marker date="1427228717000" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1427228717000" expanded="false" signature="-1:-1" placeholder="..." />
-            <marker date="1427228717000" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1427228717000" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1427228717000" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1427228717000" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1427228717000" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1427228717000" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1427235682000" expanded="false" signature="653:679" placeholder="..." />
+            <marker date="1427235682000" expanded="true" signature="680:726" placeholder="..." />
+            <marker date="1427235682000" expanded="false" signature="1086:1112" placeholder="..." />
+            <marker date="1427235682000" expanded="true" signature="1113:1159" placeholder="..." />
+            <marker date="1427235682000" expanded="false" signature="3220:3246" placeholder="..." />
+            <marker date="1427235682000" expanded="true" signature="3247:3293" placeholder="..." />
+            <marker date="1427235682000" expanded="false" signature="3654:3680" placeholder="..." />
+            <marker date="1427235682000" expanded="true" signature="3681:3727" placeholder="..." />
+            <marker date="1427235682000" expanded="true" signature="4833:4915" placeholder="..." />
+            <marker date="1427235682000" expanded="true" signature="4930:4961" placeholder="..." />
+            <marker date="1427235682000" expanded="true" signature="5064:5086" placeholder="..." />
+            <marker date="1427235682000" expanded="true" signature="5141:5195" placeholder="..." />
+            <marker date="1427235682000" expanded="true" signature="5266:5298" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model_functions.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.79744136" vertical-offset="1146" max-vertical-offset="2717">
+          <caret line="80" column="55" selection-start-line="80" selection-start-column="55" selection-end-line="80" selection-end-column="55" />
+          <folding>
+            <marker date="1427235740000" expanded="true" signature="102:142" placeholder="SELECT IsAct..Members..." />
+            <marker date="1427235740000" expanded="true" signature="398:441" placeholder="SELECT Email..Members..." />
+            <marker date="1427235740000" expanded="true" signature="699:750" placeholder="SELECT First..Members..." />
+            <marker date="1427235740000" expanded="true" signature="965:1005" placeholder="SELECT Usern..Members..." />
+            <marker date="1427235740000" expanded="true" signature="1201:1252" placeholder="SELECT First..Members..." />
+            <marker date="1427235740000" expanded="true" signature="1494:1553" placeholder="SELECT DISTI..Profile..." />
+            <marker date="1427235740000" expanded="true" signature="1494:1561" placeholder="SELECT DISTI..Media..." />
+            <marker date="1427235740000" expanded="true" signature="2150:2198" placeholder="SELECT DISTI..Members..." />
+            <marker date="1427235740000" expanded="true" signature="2468:2516" placeholder="SELECT DISTI..Media..." />
+            <marker date="1427235740000" expanded="true" signature="2721:2780" placeholder="SELECT DISTI..Members..." />
+            <marker date="1427235740000" expanded="true" signature="2962:2999" placeholder="SELECT Email..Members..." />
+            <marker date="1427235740000" expanded="true" signature="3184:3229" placeholder="SELECT ID FR..Members..." />
           </folding>
         </state>
       </provider>
