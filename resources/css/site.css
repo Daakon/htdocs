@@ -50,7 +50,7 @@ h1, h2, h3, h4, h5, h6 {
     border: 2px solid black;
     border-radius: 5px;
     padding-bottom: 20px;
-    margin-bottom:20px;
+    margin-bottom:20px !important;
 }
 
 .post-button {
@@ -69,6 +69,7 @@ h1, h2, h3, h4, h5, h6 {
     border-radius: 10px;
     width: 500px;
     height: 500px;
+
 }
 
 .row-padding {
@@ -157,4 +158,15 @@ li {
 
 .public-profile-label {
     font-weight: bold;
+}
+
+.notification {
+    background-color:red;
+    border:1px solid black;
+    border-radius:10px;
+    color:white;
+    padding-left:5px;
+    padding-right:5px;
+    padding-top:3px;
+    margin-left:5px;
 }

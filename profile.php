@@ -271,13 +271,20 @@ catch (ClockworkException $e)
 
 
 <div class="container" >
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src = "jquery-1.8.3.min.js"></script>
+
+    <span id = "newMessageCount" style = "padding-left:30px;width:150px;"></span>
+
     <div class="row row-padding">
 
         <ul class="list-inline">
             <li><a href="/home.php">Roll Call</a></li>
             <li><a href="/member_photos.php">Photos & Videos</a></li>
-            <li><a href="/messages.php">Messaging</a></li>
+            <li><a href="/messages.php">Messaging <?php require 'getNewMessageCount.php' ?></a></li>
         </ul>
+
         <br/><br/>
 
         <div class="col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8 roll-call ">

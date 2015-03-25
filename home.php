@@ -554,7 +554,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
     <div class="row row-padding">
 
         <ul class="list-inline">
-            <li><a href="/profile.php/<?php echo get_username($ID) ?>">Go To Your Profile</a></li>
+            <li><a href="/profile.php/<?php echo get_username($ID) ?>">Go To Your Profile <?php require 'getNewMessageCount.php' ?></a></li>
         </ul>
 
         <div class="col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8 roll-call ">
@@ -800,6 +800,8 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
 
     </div>
+
+    <br/><br/>
 
 </body>
 </html>

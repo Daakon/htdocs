@@ -212,7 +212,7 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
 
         <ul class="list-inline">
             <li><a href="/home.php">Roll Call</a></li>
-            <li><a href="/profile.php">Profile</a></li>
+            <li><a href="/profile.php/<?php echo get_username($ID)?>">Profile</a></li>
             <li><a href="/member_photos.php">Photos & Videos</a></li>
         </ul>
         <br/><br/>

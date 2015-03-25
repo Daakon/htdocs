@@ -65,19 +65,12 @@ function get_header()
         </a>
         <a href="/logout.php" style="color:white;" class=" visible-sm visible-md visible-lg pull-right">Log Out</a>
     </header>
+
     <?php if (!empty($_COOKIE['ID']) && isset($_COOKIE['ID'])) { ?>
 <a href ="/logout.php" style="color:black" class="visible-xs black-link"><h6>Log Out</h6></a>
     <br/>
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-    <script src = "jquery-1.8.3.min.js"></script>
-    <script>
-        setInterval(function()
-        {
-            $('#newMessageCount').load('getNewMessageCount.php');}, 1000);
-    </script>
-</script>
-<span id = "newMessageCount" style = "padding-left:30px;width:150px;"></span>
+
 <?php }
 
 } ?>

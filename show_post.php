@@ -585,8 +585,8 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
     Profile.ProfilePhoto As ProfilePhoto
     FROM Members,Posts,Profile
     WHERE
-    Posts.PostID = $postID
-    Members.IsActive = 1
+    Posts.ID = $postID
+    And Members.IsActive = 1
     And Members.IsSuspended = 0
     And Members.ID = Posts.Member_ID
     And Members.ID = Profile.Member_ID
@@ -600,7 +600,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
     if (mysql_numrows($result) > 0) {
     while ($rows = mysql_fetch_assoc($result)) {
-    $memberID = $rows['MembersID'];
+    $memberID = $rows['MemberID'];
     $name = $rows['FirstName'] . ' ' . $rows['LastName'];
     $profilePhoto = $rows['ProfilePhoto'];
     $category = $rows['Category'];
@@ -797,6 +797,8 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
 
     </div>
+
+    <br/><br/>
 
 </body>
 </html>
