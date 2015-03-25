@@ -279,11 +279,7 @@ catch (ClockworkException $e)
 
     <div class="row row-padding">
 
-        <ul class="list-inline">
-            <li><a href="/home.php">Roll Call</a></li>
-            <li><a href="/member_photos.php">Photos & Videos</a></li>
-            <li><a href="/messages.php">Messaging <?php require 'getNewMessageCount.php' ?></a></li>
-        </ul>
+        <?php require 'profile_menu.php'; ?>
 
         <br/><br/>
 

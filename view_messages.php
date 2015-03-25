@@ -210,11 +210,7 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
 <div class="container" >
     <div class="row row-padding">
 
-        <ul class="list-inline">
-            <li><a href="/home.php">Roll Call</a></li>
-            <li><a href="/profile.php/<?php echo get_username($ID)?>">Profile</a></li>
-            <li><a href="/member_photos.php">Photos & Videos</a></li>
-        </ul>
+        <?php require 'profile_menu.php'; ?>
         <br/><br/>
 
         <div class="col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8 roll-call ">

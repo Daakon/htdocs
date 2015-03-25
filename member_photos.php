@@ -40,7 +40,7 @@ if (mysql_numrows($result) == 0) {
     <ul class="list-inline">
         <li><a href="/home.php">Roll Call</a></li>
         <li><a href="/profile.php/<?php echo get_username($ID) ?>">Profile</a></li>
-        <li><a href="/messages.php">Messaging <?php require 'getNewMessageCount.php' ?></a></li>
+        <li><a href="/messages.php">Messaging</a></li>
     </ul>
     <br/><br/>
     <div class="row row-padding">

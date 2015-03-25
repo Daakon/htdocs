@@ -21,7 +21,7 @@ if (!empty($_GET['btnDelete']) && ($_GET['btnDelete'] == 'Delete')) {
 
     mysql_query($sql) or die(mysql_error());
 
-    echo "<script>location = 'media.php?id=$ID'</script>";
+    echo "<script>location = 'member_photos.php'</script>";
 
 }
 ?>
@@ -773,7 +773,7 @@ $profileMediaSrc = trim("media/" . $profilePhoto);
             ?>
             <form method="get" action="" onsubmit="return confirm('Are you sure you want to delte this photo')">
                 <?php
-                echo '<input type = "submit" name = "btnDelete" id = "btnDelete" value = "Delete" /><br/><br/>';
+                echo '<input type = "submit" name = "btnDelete" id = "btnDelete" value = "Delete" class="deleteButton" /><br/><br/>';
                 echo '<input type ="hidden" name = "mediaID" id = "mediaID" value = "' . $mediaID . '" />';
                 echo '<input type = "hidden" name = "ID" id = "ID" value="' . $ID . '"/>';
                 echo '</form>';
