@@ -49,7 +49,7 @@ foreach ($comment_ids as $item) {
     if (strlen($item) > 0) {
         if (checkActive($item)) {
             if (checkEmailActive($item)) {
-                build_and_send_email($user_id, $item, 1, $postID);
+                build_and_send_email($user_id, $item, 6, $postID);
             }
         }
     }

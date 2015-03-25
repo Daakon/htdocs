@@ -600,7 +600,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
     if (mysql_numrows($result) > 0) {
     while ($rows = mysql_fetch_assoc($result)) {
-    $memberID = $rows['MembersID'];
+    $memberID = $rows['MemberID'];
     $name = $rows['FirstName'] . ' ' . $rows['LastName'];
     $profilePhoto = $rows['ProfilePhoto'];
     $category = $rows['Category'];
@@ -695,6 +695,9 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                     <input type="hidden" name="scrolly" id="scrolly" value="0"/>
                 </form>
 
+                <br/>
+
+                <a href="/view_messages.php?id=<?php echo $memberID ?>">Direct Message <?php echo $rows['FirstName'] ?></a>
                 <br/>
                 <?php
                 // get post comments

@@ -10,6 +10,19 @@ function build_and_send_email($senderId, $toId, $notification, $postID)
 
 
     if ($notification == 1) {
+// comment on post
+        $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+        $link;
+
+        if (strstr($url, "local")) {
+            $link = "show_post.php?postID=$postID";
+        }
+        else if (strstr($url, "dev")) {
+            $link = "http://dev.rapportbook.com/show_post.php?postID=$postID";
+        }
+        else {
+            $link = "http://www.rapportbook.com/show_post.php?postID=$postID";
+        }
 
         if (function_exists(get_users_name_by_id)) {
             $name = get_users_name_by_id($senderId);
@@ -22,7 +35,7 @@ function build_and_send_email($senderId, $toId, $notification, $postID)
             $name = 'You';
         }
 
-        $text = "$name commented on a <a href='http://www.rapportbook.com/show_post.php?postID=$postID'>post</a> you're tagged in.";
+        $text = "$name commented on a <a href='$link'>post</a> you're tagged in.";
 
         $subject = "
                 <div style='height:20px; padding:10px;'>
@@ -33,6 +46,19 @@ function build_and_send_email($senderId, $toId, $notification, $postID)
                 ";
     }
     if ($notification == 2) {
+    // post approval
+        $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+        $link;
+
+        if (strstr($url, "local")) {
+            $link = "show_post.php?postID=$postID";
+        }
+        else if (strstr($url, "dev")) {
+            $link = "http://dev.rapportbook.com/show_post.php?postID=$postID";
+        }
+        else {
+            $link = "http://www.rapportbook.com/show_post.php?postID=$postID";
+        }
 
         $name = get_users_name_by_id($senderId);
 
@@ -40,7 +66,7 @@ function build_and_send_email($senderId, $toId, $notification, $postID)
             $name = 'You';
         }
 
-        $text = "$name approved a <a href='http://www.rapportbook.com/show_post.php?postID=$postID'>post</a> you're tagged in.";
+        $text = "$name approved a <a href='$link'>post</a> you're tagged in.";
 
         $subject = "
                 <div style='height:20px; padding:10px;'>
@@ -52,6 +78,20 @@ function build_and_send_email($senderId, $toId, $notification, $postID)
     }
 
     if ($notification == 3) {
+// sign up email
+        //  message notification
+        $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+        $link;
+
+        if (strstr($url, "local")) {
+            $link = "index.php";
+        }
+        else if (strstr($url, "dev")) {
+            $link = "http://dev.rapportbook.com";
+        }
+        else {
+            $link = "http://www.rapportbook.com";
+        }
 
         $name = get_users_name_by_id($toId);
         $pass = get_password($toId);
@@ -72,40 +112,64 @@ function build_and_send_email($senderId, $toId, $notification, $postID)
     }
 
     if ($notification == 4) {
+// password recovery
+        //  message notification
+        $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+        $link;
+
+        if (strstr($url, "local")) {
+            $link = "index.php";
+        }
+        else if (strstr($url, "dev")) {
+            $link = "http://dev.rapportbook.com";
+        }
+        else {
+            $link = "http://www.rapportbook.com";
+        }
 
         $pass = get_password($toId);
         $subject = "Our records indicate you have requested your password. Your passowrd is <b>$pass</b> <br/>";
-        $subject .= "Log in <a href = 'http://www.rapportbook.com'>here</a>";
+        $subject .= "Log in <a href = '$link'>here</a>";
 
     }
 
     if ($notification == 5) {
+// change password
+        //  message notification
+        $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+        $link;
 
+        if (strstr($url, "local")) {
+            $link = "create_pass.php?email=$email";
+        }
+        else if (strstr($url, "dev")) {
+            $link = "http://dev.rapportbook.com/create_pass.php?email=$email";
+        }
+        else {
+            $link = "http://www.rapportbook.com/create_pass.php?email=$email";
+        }
         $email = get_email_by_id($toId);
 
 
-        $subject = "Click this <a href = 'http://www.rapportbook.co/create_pass.php?email=$email'>link</a> to create a new password. <br/>";
+        $subject = "Click this <a href = '$link'>link</a> to create a new password. <br/>";
         $subject .= 'If you did not request to change your password, contact support at <a href = "mailto:info@businessconnect.co">info@businessconnect.co</a>';
     }
+
     if ($notification == 6) {
+// photo comment
+        //  message notification
+        $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+        $link;
 
-        $name = get_users_name_by_id($toId);
-
-        if ($senderId == $toId) {
-            $name = 'You';
+        if (strstr($url, "local")) {
+            $link = "show_post.php?postID=$postID";
         }
-
-        $text = "$name commented on a <a href='http://www.rapportbook.com/show_post.php?postID=$postID'>photo</a> you're tagged in.";
-
-        $subject = "
-                <div  style='height:20px; padding:10px;'>
-                $text
-
-                </div>
-
-                ";
-    }
-    if ($notification == 7) {
+        else if (strstr($url, "dev")) {
+            $link = "http://dev.rapportbook.com/show_post.php?postID=$postID";
+        }
+        else {
+            $link = "http://www.rapportbook.com/show_post.php?postID=$postID";
+        }
 
         $name = get_users_name_by_id($senderId);
 
@@ -113,7 +177,39 @@ function build_and_send_email($senderId, $toId, $notification, $postID)
             $name = 'You';
         }
 
-        $text = "$name approved a <a href='http://www.rapportbook.com/show_post.php?postID=$postID'>photo</a> you're tagged in.";
+        $text = "$name commented a <a href='$link'>photo</a> you're tagged in.";
+
+        $subject = "
+                <div style='height:20px; padding:10px;'>
+                $text
+
+                </div>
+
+                ";
+    }
+
+    if ($notification == 7) {
+// photo approve
+        $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+        $link;
+
+        if (strstr($url, "local")) {
+            $link = "show_post.php?postID=$postID";
+        }
+        else if (strstr($url, "dev")) {
+            $link = "http://dev.rapportbook.com/show_post.php?postID=$postID";
+        }
+        else {
+            $link = "http://www.rapportbook.com/show_post.php?postID=$postID";
+        }
+
+        $name = get_users_name_by_id($senderId);
+
+        if ($senderId == $toId) {
+            $name = 'You';
+        }
+
+        $text = "$name approved a <a href='$link'>photo</a> you're tagged in.";
 
         $subject = "
                 <div style='height:20px; padding:10px;'>
@@ -125,13 +221,26 @@ function build_and_send_email($senderId, $toId, $notification, $postID)
     }
 
     if ($notification == 8) {
-        // 20 = message notification
+        //  message notification
+        $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+        $link;
+
+        if (strstr($url, "local")) {
+            $link = "view_messages.php?id=$senderId";
+        }
+        else if (strstr($url, "dev")) {
+            $link = "http://dev.rapportbook.com/view_messages.php?id=$senderId";
+        }
+        else {
+            $link = "http://www.rapportbook.com/view_messages.php?id=$senderId";
+        }
+
         $senderName = get_users_name_by_id($senderId);
 
 
         $type = "id";
 
-        $subject = "$senderName has sent you a new <a href='http://www.rapportbook.com/messages.php'>message</a>";
+        $subject = "$senderName has sent you a new <a href='$link'>message</a>";
     }
 
 

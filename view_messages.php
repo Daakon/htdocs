@@ -5,6 +5,8 @@ require 'getSession.php';
 require 'html_functions.php';
 require 'mediaPath.php';
 require 'findURL.php';
+require 'model_functions.php';
+require 'email.php';
 
 get_head_files();
 get_header();
@@ -123,9 +125,6 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
             echo "<script>alert('File could not be uploaded, try uploading a different file type.');</script>";
         }
 
-        imagedestroy($src);
-        //imagedestroy($tmp);
-
 
 // check if file type is a photo
         if (in_array($type, $photoFileTypes)) {
@@ -172,6 +171,10 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
 
         echo "<script>alert('Message Sent'); </script>";
     }
+
+    // notify recipient of email
+    build_and_send_email($ID, $receiverID,8, "");
+
 }
 ?>
 

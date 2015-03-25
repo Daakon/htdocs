@@ -57,7 +57,7 @@ $rows = mysql_fetch_assoc($result);
 
 
 if (checkEmailActive($ID)) {
-  build_and_send_email($ID, 1, 1, $postID, '');
+  build_and_send_email($ID, 1, 2, $postID, '');
 }
 
 

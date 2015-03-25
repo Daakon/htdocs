@@ -265,7 +265,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
             // only send email if account & email active
             if (checkActive($item)) {
                 if (checkEmailActive($item)) {
-                    build_and_send_email($item, $user_id, 1, $postID);
+                    build_and_send_email($item, $user_id, 6, $postID);
                 }
             }
         }
@@ -281,7 +281,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
 
     if (checkEmailActive($ID)) {
-        build_and_send_email($ID, $user_id, 1, $postID, '');
+        build_and_send_email($ID, $user_id, 6, $postID, '');
     }
 
 //=========================================================================================================================//
