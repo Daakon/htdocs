@@ -279,7 +279,6 @@ function build_and_send_email($senderId, $toId, $notification, $postID)
 
         if (mail($toEmail, 'Rapportbook: Notification Alert', $message, $header)) {
             // mail sent
-            unset($profilePhoto);
             return true;
 
 

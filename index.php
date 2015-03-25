@@ -1,9 +1,9 @@
 <?php
 require 'connect.php';
+require 'checkLogin.php';
 require 'html_functions.php';
 require 'calendar.php';
 get_head_files();
-require 'checkLogin.php';
 ?>
 
 <body>

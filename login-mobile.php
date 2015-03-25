@@ -4,6 +4,7 @@ require 'html_functions.php';
 require 'mediaPath.php';
 require 'findURL.php';
 require 'model_functions.php';
+require 'checkLogin.php';
 
 get_head_files();
 get_header();

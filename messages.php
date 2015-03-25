@@ -55,6 +55,7 @@ $ID = $_SESSION['ID'];
                     $name = $rows2['FirstName'] . ' ' . $rows2['LastName'];
 
                     echo "<a href = 'view_messages.php?id=$receiverID'><img src = '$mediaPath$pic' class='profilePhoto-Feed' alt='' /> $name </a>";
+                    if ($rows['New'] == 1) { echo "<span style='color:red;font-weight:bold'>New</font>"; }
                     echo "<br/>";
                     echo "$subject";
                     echo "<hr/>";
