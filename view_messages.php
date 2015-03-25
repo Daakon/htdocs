@@ -21,12 +21,13 @@ $ID = $_SESSION['ID'];
 // handle message
 if (isset($_POST['send']) && $_POST['send'] == "Send") {
 
+    $checkID = $_GET['id'];
     $receiverID = $_POST['receiverID'];
     $subject = $_POST['subject'];
     $message = $_POST['message'];
 
     // check if prior message thread exists
-    $sql="SELECT * FROM Messages WHERE ThreadOwner_ID = $ID && Receiver_ID = $receiverID ";
+    $sql="SELECT * FROM Messages WHERE ThreadOwner_ID = $ID && Receiver_ID = $checkID ";
     $result = mysql_query($sql) or die(mysql_error());
     $numRows = mysql_num_rows($result);
     $initialMessage;

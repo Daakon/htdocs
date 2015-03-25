@@ -77,7 +77,7 @@ function get_header()
             $('#newMessageCount').load('getNewMessageCount.php');}, 1000);
     </script>
 </script>
-<span id = "newMessageCount" style = "padding-left:70px;width:150px;"></span>
+<span id = "newMessageCount" style = "padding-left:30px;width:150px;"></span>
 <?php }
 
 } ?>
