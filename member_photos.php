@@ -37,16 +37,12 @@ if (mysql_numrows($result) == 0) {
 <body>
 
 <div class="container">
-    <ul class="list-inline">
-        <li><a href="/home.php">Roll Call</a></li>
-        <li><a href="/profile.php/<?php echo get_username($ID) ?>">Profile</a></li>
-        <li><a href="/messages.php">Messaging</a></li>
-    </ul>
+    <?php require 'profile_menu.php'; ?>
     <br/><br/>
     <div class="row row-padding">
 
         <div class="col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8 roll-call">
-            <h2>Photos</h2>
+            <h2>Photos & Videos</h2>
 
             <?php
 
@@ -79,7 +75,7 @@ if (mysql_numrows($result) == 0) {
 // check if file type is a video
                     elseif (in_array($mediaType, $videoFileTypes)) {
 
-                        $img = '<a " href = "media.php?id='.$id.'&mediaName='.$mediaName.'&mid='.$mediaID.'&mediaType='.$type.'&mediaDate='.$mediaDate.'" ><video src = "'.$mediaPath . $mediaName.'" style="border:2px solid black;"></video></a>';
+                        $img = '<a " href = "media.php?id='.$ID.'&mediaName='.$mediaName.'&mid='.$mediaID.'&mediaType='.$type.'&mediaDate='.$mediaDate.'" ><video src = "'.$mediaPath . $mediaName.'" class="profileVideo"></video></a>';
 
                     }
                     ?>
