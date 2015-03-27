@@ -338,6 +338,14 @@ if (isset($_POST['Delete']) && $_POST['Delete'] == "Delete") {
         <?php
         }
         }
+        else { ?>
+            <div class="row row-padding">
+        <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 "
+             style="background:white;border-radius:10px;margin-top:20px;border:2px solid black;" align="left">
+            <div style='font-weight:bold;'>You do not have anything posted.</div>
+        </div>
+                </div>
+            <?php }
         ?>
 
 

@@ -241,6 +241,7 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
                     AND (Sender_ID = $senderID Or Receiver_ID = $senderID)
                     AND (IsDeleted = 0) ";
             $result = mysql_query($sql) or die(mysql_error());
+            $senderID = 0;
 
             if (mysql_numrows($result) > 0) {
                 while ($rows = mysql_fetch_assoc($result)) {
@@ -291,7 +292,6 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
     </div>
 
     <?php
-    $sql = "UPDATE Messages SET New = 0 WHERE ThreadOwner_ID = $ID AND Sender_ID = $senderID ";
+    $sql = "UPDATE Messages SET New = 0 WHERE ThreadOwner_ID = $ID AND (Sender_ID = $senderID Or Receiver_ID = $senderID) ";
     mysql_query($sql) or die(mysql_error());
-
 ?>

@@ -142,12 +142,12 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
             $img = '<img src = "' . $postMediaFilePath . '" style = "width:auto; max-width:400px;max-height:400px;" />';
 
-            $img = '<a href = "media.php?id=' . $ID . '&pid=' . $newPhotoId . '&media=' . $newPhoto . '&type=' . $newPhotoType . '&mediaDate=' . $newPhotoDate . '">' . $img . '</a>';
+            $img = '<a href = "media.php?id=' . $ID . '&pid=' . $newPhotoId . '&media=' . $newPhoto . '&mediaType=' . $newPhotoType . '&mediaDate=' . $newPhotoDate . '">' . $img . '</a>';
         } // check if file type is a video
         elseif (in_array($type, $videoFileTypes)) {
 
             $img = '<video src = "' . $postMediaFilePath . '"  height = "500" width = "300" frameborder = "0" AUTOPLAY = "false" CONTROLLER="true" SCALE="ToFit"></video>';
-            $img = '<a href = "media.php?id=' . $ID . '&mid=' . $newPhotoId . '&media=' . $newPhoto . '&type=' . $newPhotoType . '&mediaDate=' . $newPhotoDate . '">' . $img . '</a>';
+            $img = '<a href = "media.php?id=' . $ID . '&mid=' . $newPhotoId . '&media=' . $newPhoto . '&mediaType=' . $newPhotoType . '&mediaDate=' . $newPhotoDate . '">' . $img . '</a>';
         }
 
         $comment = $comment . '<br/><br/>' . $img . '<br/>';
