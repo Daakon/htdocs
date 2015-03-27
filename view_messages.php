@@ -218,13 +218,13 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
             <h2>View Messages</h2>
             <hr/>
 
-            <?php $receiverID = $_GET['id']; ?>
+            <?php $senderID = $_GET['id']; ?>
 
             <?php
             // get subject
             $sql = "SELECT * FROM Messages
                     WHERE ThreadOwner_ID = $ID
-                    AND (Receiver_ID = $receiverID)
+                    AND (Receiver_ID = $senderID)
                     AND (IsDeleted = 0) LIMIT 1 ";
             $result = mysql_query($sql) or die(mysql_error());
             $row = mysql_fetch_assoc($result);
@@ -238,7 +238,7 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
 
             $sql = "SELECT * FROM Messages
                     WHERE ThreadOwner_ID = $ID
-                    AND (Receiver_ID = $receiverID)
+                    AND (Sender_ID = $senderID Or Receiver_ID = $senderID)
                     AND (IsDeleted = 0) ";
             $result = mysql_query($sql) or die(mysql_error());
 
@@ -276,14 +276,14 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
                 <input type="file" width="10px;" name="flPostMedia" id="flPostMedia"/>
                 <textarea name="message" id="message" class="form-control"></textarea>
                 <input type="hidden" id="subject" name="subject" value="<?php echo $subject ?>" />
-                <input type="hidden" id="receiverID" name="receiverID" value="<?php echo $receiverID ?>" />
+                <input type="hidden" id="receiverID" name="receiverID" value="<?php echo $senderID ?>" />
                 <input type="submit" class="btn btn-default" id="send" name="send" value="Send" />
             </form>
 
             <br/><br/>
 
             <form action="" method="post" onsubmit = "return confirm('Do you really want to delete this message thread')" >
-                <input type="hidden" id="receiverID" name="receiverID" value="<?php echo $receiverID ?>" />
+                <input type="hidden" id="receiverID" name="receiverID" value="<?php echo $senderID ?>" />
                 <input type="submit" class="btn btn-default" style="background:red;color:white;" id="delete" name="delete" value="Delete Messages" />
             </form>
             <!-------------------------------------------------------------------->
@@ -291,7 +291,7 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
     </div>
 
     <?php
-    $sql = "UPDATE Messages SET New = 0 WHERE ThreadOwner_ID = $ID AND Receiver_ID = $receiverID ";
+    $sql = "UPDATE Messages SET New = 0 WHERE ThreadOwner_ID = $ID AND Sender_ID = $senderID ";
     mysql_query($sql) or die(mysql_error());
 
 ?>

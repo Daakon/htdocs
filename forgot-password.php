@@ -58,7 +58,9 @@ if (isset($_POST['submit']) && ($_POST['submit'] == "Recover Password")) {
 
     else {
 
+        require 'model_functions.php';
         require 'email.php';
+
         $toId = $rows['ID'];
         if (build_and_send_email(1, $toId, 4, '')) {
             echo "<script>alert('Your password has been sent to your email on file');</script>";

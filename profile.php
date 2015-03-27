@@ -48,7 +48,7 @@ if (isset($_FILES['flPostPhoto']) && strlen($_FILES['flPostPhoto']['name']) > 1)
         exit;
     }
 
-    $exif = exif_read_data($_FILES['flPostPhoto']['tmp_name']);
+    $exif = exif_read_data($mediaFile);
 
     if (!empty($exif['Orientation'])) {
         $ort = $exif['Orientation'];

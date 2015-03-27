@@ -33,26 +33,32 @@ $ID = $_SESSION['ID'];
             <hr/>
 
             <?php
-            $sql = "SELECT * FROM Messages WHERE ThreadOwner_ID = $ID AND InitialMessage = 1 AND IsDeleted = 0 ";
+            $sql = "SELECT * FROM Messages WHERE ThreadOwner_ID = $ID AND (Sender_ID != $ID Or Receiver_ID != $ID) AND InitialMessage = 1 AND IsDeleted = 0 ";
             $result = mysql_query($sql) or die(mysql_error());
 
             if (mysql_numrows($result) > 0) {
                 while ($rows = mysql_fetch_assoc($result)) {
-                    $receiverID = $rows['Receiver_ID'];
+                    if ($rows['Sender_ID'] != $ID) {
+                        $otherID = $rows['Sender_ID'];
+                    }
+                    else {
+                        $otherID = $rows['Receiver_ID'];
+                    }
+
                     $subject = $rows['Subject'];
 
-                    // get receiver name
+                    // get sender name
                     $sql2 = "SELECT FirstName, LastName, ProfilePhoto
                 FROM Members, Profile
-                WHERE Profile.Member_ID = $receiverID
-                AND Members.ID = $receiverID ";
+                WHERE Profile.Member_ID = $otherID
+                AND Members.ID = $otherID ";
 
                     $result2 = mysql_query($sql2) or die(mysql_error());
                     $rows2 = mysql_fetch_assoc($result2);
                     $pic = $rows2['ProfilePhoto'];
                     $name = $rows2['FirstName'] . ' ' . $rows2['LastName'];
 
-                    echo "<a href = 'view_messages.php?id=$receiverID'><img src = '$mediaPath$pic' class='profilePhoto-Feed' alt='' /> $name </a>";
+                    echo "<a href = 'view_messages.php?id=$otherID'><img src = '$mediaPath$pic' class='profilePhoto-Feed' alt='' /> $name </a>";
                     if ($rows['New'] == 1) { echo "<span style='color:red;font-weight:bold'>New</font>"; }
                     echo "<br/>";
                     echo "$subject";

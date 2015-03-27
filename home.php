@@ -75,9 +75,33 @@ if (isset($_POST['submit'])) {
                 exec($cmd);
                 move_uploaded_file($mediaFile, $postMediaFilePath);
 
-            } else {
+            }
+            else {
 
                 if (in_array($type, $photoFileTypes)) {
+
+                    // read exif data
+                    $exif = exif_read_data($mediaFile);
+
+                    if (!empty($exif['Orientation'])) {
+
+                        $ort = $exif['Orientation'];
+
+                        switch ($ort) {
+                            case 8:
+                                    $src = imagerotate($src, 90, 0);
+                                break;
+                            case 3:
+                                    $src = imagerotate($src, 180, 0);
+                                break;
+                            case 6:
+                                    $src = imagerotate($src, -90, 0);
+                                break;
+                        }
+                    }
+
+                }
+
 
                     if ($type == "image/jpg" || $type == "image/jpeg") {
                         imagejpeg($src, $postMediaFilePath, 100);
@@ -95,39 +119,7 @@ if (isset($_POST['submit'])) {
                     }
                 }
 
-                // read exif data
-                $exif = exif_read_data($_FILES['flPostMedia']['tmp_name']);
 
-                if (!empty($exif['Orientation'])) {
-
-                    $ort = $exif['Orientation'];
-
-                    switch ($ort) {
-                        case 8:
-                            if (strstr($url, 'localhost:8888')) {
-                                // local php imagerotate doesn't work
-                            } else {
-                                $src = imagerotate($src, 90, 0);
-                            }
-                            break;
-                        case 3:
-                            if (strstr($url, 'localhost:8888')) {
-                                // local php imagerotate doesn't work
-                            } else {
-                                $src = imagerotate($src, 180, 0);
-                            }
-                            break;
-                        case 6:
-                            if (strstr($url, 'localhost:8888')) {
-                                // local php imagerotate doesn't work
-                            } else {
-                                $src = imagerotate($src, -90, 0);
-                            }
-
-                            break;
-                    }
-                }
-            }
                 // if photo didn't get uploaded, notify the user
                 if (!file_exists($postMediaFilePath)) {
                     echo "<script>alert('File could not be uploaded, try uploading a different file type.'); location= 'home.php'</script>";
@@ -239,8 +231,10 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
             if (in_array($type, $videoFileTypes)) {
                 // do nothing here
                 $mediaString = 'video';
+                move_uploaded_file($mediaFile, $postMediaFilePath);
+            }
+            else {
 
-            } else {
                 $mediaString = 'photo';
                 if ($type == "image/jpg" || $type == "image/jpeg") {
                     $src = imagecreatefromjpeg($mediaFile);
@@ -252,40 +246,29 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                     echo "<script>alert('Invalid File Type'); ";
                     exit;
                 }
-            }
 
-            // read exif data
-            $exif = exif_read_data($_FILES['flPostMedia']['tmp_name']);
+                // read exif data
+                $exif = exif_read_data($mediaFile);
 
-            if (!empty($exif['Orientation'])) {
-                $ort = $exif['Orientation'];
+                if (!empty($exif['Orientation'])) {
 
-                switch ($ort) {
-                    case 8:
-                        if (strstr($url, 'localhost:8888')) {
-                            // local php imagerotate doesn't work
+                    $ort = $exif['Orientation'];
 
-                        } else {
+                    switch ($ort) {
+                        case 8:
                             $src = imagerotate($src, 90, 0);
-                        }
-                        break;
-                    case 3:
-                        if (strstr($url, 'localhost:8888')) {
-                            // local php imagerotate doesn't work
-
-                        } else {
+                            break;
+                        case 3:
                             $src = imagerotate($src, 180, 0);
-                        }
-                        break;
-                    case 6:
-                        if (strstr($url, 'localhost:8888')) {
-                            // local php imagerotate doesn't work
-                        } else {
+                            break;
+                        case 6:
                             $src = imagerotate($src, -90, 0);
-                        }
-                        break;
+                            break;
+                    }
                 }
+
             }
+
 
 // save photo/video
             require 'media_post_file_path.php';
@@ -311,8 +294,6 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                 echo "<script>alert('File could not be uploaded, try uploading a different file type.');</script>";
             }
 
-            imagedestroy($src);
-            //imagedestroy($tmp);
 
             // determine which table to put photo pointer in
             // store media pointer
@@ -697,8 +678,12 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
                 <br/>
 
+                <?php if ($memberID != $ID) { ?>
                 <a href="/view_messages.php?id=<?php echo $memberID ?>">Direct Message <?php echo $rows['FirstName'] ?></a>
+                <?php } ?>
                 <br/>
+
+
                 <?php
                 // get post comments
                 $sql3 = "SELECT DISTINCT
