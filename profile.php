@@ -48,7 +48,7 @@ if (isset($_FILES['flPostPhoto']) && strlen($_FILES['flPostPhoto']['name']) > 1)
         exit;
     }
 
-    $exif = exif_read_data($mediaFile);
+    $exif = @exif_read_data($mediaFile);
 
     if (!empty($exif['Orientation'])) {
         $ort = $exif['Orientation'];
@@ -187,6 +187,7 @@ if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
     $plan = $_POST['Plan'];
     $dob = $_POST['DOB'];
     $emailStatus = $_POST['EmailStatus'];
+    $password = $_POST['Password'];
 
    // update Member table first
    $sql = "Update Members
@@ -194,7 +195,8 @@ if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
           FirstName = '$firstName',
           LastName = '$lastName',
           DOB = '$dob',
-          EmailActive = '$emailStatus '
+          EmailActive = '$emailStatus ',
+          Password = '".md5($password)."'
           WHERE ID = $ID ";
     $result = mysql_query($sql) or die(mysql_error());
 
@@ -522,7 +524,12 @@ catch (ClockworkException $e)
                 </div>
 
                 <div class="form-group">
-                    <label for="username">Username</label>
+                    <label for="username">Password</label>
+                    <input type="password" class="form-control" id="Password" name="Password" value="<?php echo $password ?>"  />
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Username</label>
                     <input type="text" class="form-control" id="Username" name="Username" value="<?php echo $username ?>" readonly="readonly" />
                 </div>
 

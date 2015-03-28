@@ -27,7 +27,7 @@ if (mysql_num_rows($result) > 0) {
 }
 
     $sql = "INSERT INTO Members (FirstName, LastName, Email, Gender, DOB, Username, Password, SignupDate, IsSuspended, EmailActive, LastLogin)
-    Values ('$fName', '$lName', '$email', '$gender', '$dob', '$username', '$pass', CURRENT_DATE(), 0, 1, CURRENT_DATE())";
+    Values ('$fName', '$lName', '$email', '$gender', '$dob', '$username', '".md5($pass)."', CURRENT_DATE(), 0, 1, CURRENT_DATE())";
     $result = mysql_query($sql) or die(mysql_error());
     $rows = mysql_fetch_assoc($result);
 

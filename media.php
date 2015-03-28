@@ -86,7 +86,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                 exit;
             }
 
-            $exif = exif_read_data($mediaFile);
+            $exif = @exif_read_data($mediaFile);
 
             if (!empty($exif['Orientation'])) {
                 $ort = $exif['Orientation'];

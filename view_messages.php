@@ -25,9 +25,10 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
     $receiverID = $_POST['receiverID'];
     $subject = $_POST['subject'];
     $message = $_POST['message'];
+    $message = mysql_real_escape_string($message);
 
     // check if prior message thread exists
-    $sql="SELECT * FROM Messages WHERE ThreadOwner_ID = $ID && Receiver_ID = $checkID ";
+    $sql="SELECT * FROM Messages WHERE ThreadOwner_ID = $ID And Receiver_ID = $checkID Or Sender_ID = $checkID ";
     $result = mysql_query($sql) or die(mysql_error());
     $numRows = mysql_num_rows($result);
     $initialMessage;
@@ -177,7 +178,7 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
 
         // create thread for sender
         $sql = "INSERT INTO Messages (ThreadOwner_ID, Sender_ID,  Receiver_ID,    Subject,    Message, InitialMessage) Values
-                                 ($ID,             $ID,       $receiverID, '$subject',  '$message',    '$initialMessage') ";
+                                      ($ID,             $ID,       $receiverID, '$subject',  '$message',    '$initialMessage') ";
         mysql_query($sql) or die(mysql_error());
 
         // create thread for receiver
@@ -241,7 +242,7 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
                     AND (Sender_ID = $senderID Or Receiver_ID = $senderID)
                     AND (IsDeleted = 0) ";
             $result = mysql_query($sql) or die(mysql_error());
-            $senderID = 0;
+
 
             if (mysql_numrows($result) > 0) {
                 while ($rows = mysql_fetch_assoc($result)) {
@@ -261,7 +262,7 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
                     $name = $rows2['FirstName'] . ' ' . $rows2['LastName'];
 
                     echo "<img src = '$mediaPath$pic' class='profilePhoto-Feed' alt='' /> $name";
-                    echo "<br/>";
+                    echo "<br/><br/>";
                     echo "$message";
                     echo "<hr/>";
                     echo "<br/>";

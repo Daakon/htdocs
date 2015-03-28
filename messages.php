@@ -33,7 +33,7 @@ $ID = $_SESSION['ID'];
             <hr/>
 
             <?php
-            $sql = "SELECT * FROM Messages WHERE ThreadOwner_ID = $ID AND (Sender_ID != $ID Or Receiver_ID != $ID) AND InitialMessage = 1 AND IsDeleted = 0 ";
+            $sql = "SELECT * FROM Messages WHERE ThreadOwner_ID = $ID AND (Sender_ID != $ID Or Receiver_ID != $ID) AND IsDeleted = 0 Order By ID DESC Limit 1";
             $result = mysql_query($sql) or die(mysql_error());
 
             if (mysql_numrows($result) > 0) {

@@ -81,7 +81,7 @@ if (isset($_POST['submit'])) {
                 if (in_array($type, $photoFileTypes)) {
 
                     // read exif data
-                    $exif = exif_read_data($mediaFile);
+                    $exif = @exif_read_data($mediaFile);
 
                     if (!empty($exif['Orientation'])) {
 
@@ -248,7 +248,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                 }
 
                 // read exif data
-                $exif = exif_read_data($mediaFile);
+                $exif = @exif_read_data($mediaFile);
 
                 if (!empty($exif['Orientation'])) {
 
@@ -595,7 +595,8 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
             <img src="<?php echo $mediaPath. $profilePhoto ?>" class="profilePhoto-Feed" alt=""
                  title="<?php echo $name ?>" class='enlarge-onhover'/> &nbsp <b><font
                     size="4"><?php echo $name ?></font></b>
-            <br/>
+
+            <br/><br/>
 
             <p><?php echo nl2br($post); ?></p>
 
