@@ -404,7 +404,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
 
 //Get the ids of all the members connected with a post comment
-        $sql = "SELECT Member_ID FROM PostComments WHERE ID = $postID ";
+        $sql = "SELECT Member_ID FROM PostComments WHERE Post_ID = $postID ";
 
         $result = mysql_query($sql) or die(mysql_error());
 
@@ -413,6 +413,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 //Iterate over the results
         while ($rows = mysql_fetch_assoc($result)) {
             array_push($comment_ids, $rows['Member_ID']);
+
         }
 
 //Boil the id's down to unique values because we dont want to send double emails or notifications
@@ -421,6 +422,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
         foreach ($comment_ids as $item) {
             if (strlen($item) > 0) {
+
                 // only send email if account & email active
                 if (checkActive($item)) {
                     if (checkEmailActive($item)) {
@@ -430,20 +432,17 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
             }
         }
 
-
 //Notify the post creator
 
-        $sql = "SELECT ID FROM Posts WHERE ID = '$postID';";
+      $sql = "SELECT Member_ID FROM Posts WHERE ID = '$postID';";
 
         $result = mysql_query($sql) or die(mysql_error());
         $rows = mysql_fetch_assoc($result);
-
+        $creatorID = $rows['Member_ID'];
 
         if (checkEmailActive($ID)) {
-            build_and_send_email($ID, $user_id, 1, $postID, '');
+            build_and_send_email($ID, $creatorID, 1, $postID, '');
         }
-        $result = mysql_query($sql) or die(mysql_error());
-
 
 //------------------
 

@@ -22,12 +22,12 @@ get_header()
 
         <form action="" method="post">
             <div class="form-group">
-                <h2>Recover Your Password</h2>
+                <h2>Reset Your Password</h2>
                 <label for="email">Email</label>
                 <input type="text" class="form-control" id="email" name="email" placeholder="Email"/>
             </div>
 
-            <input type="submit" id="submit" name="submit" value="Recover Password" class="btn btn-default"/>
+            <input type="submit" id="submit" name="submit" value="Reset Password" class="btn btn-default"/>
         </form>
 
     </div>
@@ -35,7 +35,7 @@ get_header()
 
 <?php
 
-if (isset($_POST['submit']) && ($_POST['submit'] == "Recover Password")) {
+if (isset($_POST['submit']) && ($_POST['submit'] == "Reset Password")) {
 
     require 'connect.php';
     $email = trim($_POST['email']);
@@ -62,8 +62,8 @@ if (isset($_POST['submit']) && ($_POST['submit'] == "Recover Password")) {
         require 'email.php';
 
         $toId = $rows['ID'];
-        if (build_and_send_email(1, $toId, 4, '')) {
-            echo "<script>alert('Your password has been sent to your email on file');</script>";
+        if (build_and_send_email(1, $toId, 5, '')) {
+            echo "<script>alert('Your password reset has been sent to your email on file');</script>";
         }
 
     }

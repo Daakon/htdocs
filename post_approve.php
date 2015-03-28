@@ -9,6 +9,9 @@ require 'email.php';
 $postID = $_POST['postID'];
 $ID = $_POST['ID'];
 
+if (!empty($_POST['ID'])) {
+
+
 $sql = "INSERT INTO PostApprovals (Post_ID,   Member_ID) Values
                                   ('$postID',  '$ID')";
 mysql_query($sql) or die(mysql_error());
@@ -48,17 +51,19 @@ foreach ($comment_ids as $item) {
     }
 }
 
-//Notify the post creator
+    //Notify the post creator
 
-$sql = "SELECT ID FROM Posts WHERE ID = '$postID';";
+    $sql = "SELECT Member_ID FROM Posts WHERE ID = '$postID';";
 
-$result = mysql_query($sql) or die(mysql_error());
-$rows = mysql_fetch_assoc($result);
+    $result = mysql_query($sql) or die(mysql_error());
+    $rows = mysql_fetch_assoc($result);
+    $creatorID = $rows['Member_ID'];
 
-
-if (checkEmailActive($ID)) {
-  build_and_send_email($ID, 1, 2, $postID, '');
+    if (checkEmailActive($ID)) {
+        build_and_send_email($ID, $creatorID, 2, $postID, '');
+    }
 }
+
 
 
 //=========================================================================================================================//

@@ -16,6 +16,7 @@ $mediaDate = $_POST['mediaDate'];
 
 $ID = $_POST['ID'];
 
+if (!empty($_POST['ID'])) {
 
 $sql = "INSERT INTO PostApprovals (Post_ID,  Member_ID) Values
                                   ('$postID', '$ID')";
@@ -55,6 +56,19 @@ foreach ($comment_ids as $item) {
     }
 }
 
+
+    //Notify the post creator
+
+    $sql = "SELECT Member_ID FROM Posts WHERE ID = '$postID';";
+
+    $result = mysql_query($sql) or die(mysql_error());
+    $rows = mysql_fetch_assoc($result);
+    $creatorID = $rows['Member_ID'];
+
+    if (checkEmailActive($ID)) {
+        build_and_send_email($ID, $creatorID, 6, $postID, '');
+    }
+}
 
 //=========================================================================================================================//
 //BELOW IS END OF Post Approval HANDLING CODE ==========================================================================//

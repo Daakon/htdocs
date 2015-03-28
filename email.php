@@ -139,6 +139,8 @@ function build_and_send_email($senderId, $toId, $notification, $postID)
         $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
         $link;
 
+        $email = get_email_by_id($toId);
+
         if (strstr($url, "local")) {
             $link = "create_pass.php?email=$email";
         }
