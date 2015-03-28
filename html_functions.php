@@ -57,12 +57,23 @@ function get_head_files()
 <?php
 
 function get_header()
-{ ?>
+{
+
+    $ID = $_SESSION['ID'];
+    ?>
     <header class="navbar navbar-default navbar-static-top header">
         <a href="homepage.php">
         <img src="/images/Rapportbook-Logo-White-Text-Large.png" alt="Rapportbook" height="40" width="315"
              class="logo-image"/>
         </a>
+
+        <!--Get profile pic for header -->
+        <?php if (!empty($_COOKIE['ID']) && isset($_COOKIE['ID'])) { ?>
+        <img src="<?php echo get_users_photo_by_id($ID) ?>" style="height=20" width="20" alt=""
+             title="" />
+<?php } ?>
+
+        <!--mobile logout -->
         <a href="/logout.php" style="color:white;" class=" visible-sm visible-md visible-lg pull-right">Log Out</a>
     </header>
 

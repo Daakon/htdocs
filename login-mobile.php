@@ -17,7 +17,7 @@ get_header();
  <h2>Login</h2>
 
         <form method="post" action="login.php" >
-    <label class="sr-only" for="email">Email</label>
+    <label class="sr-only" for="login_email">Email</label>
     <input type="text" name="login_email" id="login_email" placeholder="Email" class="form-control"/>
     <br/>
     <label class="sr-only" for="login_password">Password</label>

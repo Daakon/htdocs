@@ -142,12 +142,12 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
             $img = '<img src = "' . $postMediaFilePath . '" style = "width:auto; max-width:400px;max-height:400px;" />';
 
-            $img = '<a href = "media.php?id=' . $ID . '&pid=' . $newPhotoId . '&media=' . $newPhoto . '&mediaType=' . $newPhotoType . '&mediaDate=' . $newPhotoDate . '">' . $img . '</a>';
+            $img = '<a href = "media.php?id=' . $ID . '&pid=' . $newPhotoId . '&mediaName=' . $newPhoto . '&mediaType=' . $newPhotoType . '&mediaDate=' . $newPhotoDate . '">' . $img . '</a>';
         } // check if file type is a video
         elseif (in_array($type, $videoFileTypes)) {
 
             $img = '<video src = "' . $postMediaFilePath . '"  height = "500" width = "300" frameborder = "0" AUTOPLAY = "false" CONTROLLER="true" SCALE="ToFit"></video>';
-            $img = '<a href = "media.php?id=' . $ID . '&mid=' . $newPhotoId . '&media=' . $newPhoto . '&mediaType=' . $newPhotoType . '&mediaDate=' . $newPhotoDate . '">' . $img . '</a>';
+            $img = '<a href = "media.php?id=' . $ID . '&mid=' . $newPhotoId . '&mediaName=' . $newPhoto . '&mediaType=' . $newPhotoType . '&mediaDate=' . $newPhotoDate . '">' . $img . '</a>';
         }
 
         $comment = $comment . '<br/><br/>' . $img . '<br/>';
@@ -276,8 +276,8 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
  * *********************************/
 
 
-$mediaName = $_GET['media'];
-$mediaType = $_GET['type'];
+$mediaName = $_GET['mediaName'];
+$mediaType = $_GET['mediaType'];
 $mediaDate = $_GET['mediaDate'];
 $mediaID = $_GET['mid'];
 $memberID = $_GET['id'];
@@ -775,7 +775,7 @@ $profileMediaSrc = trim("media/" . $profilePhoto);
                 /* if the session id is the same as the id related to the folder
                 and the is business bit aligns with the session type, picture owner is confirmed
                 show delete */
-
+                }
 
                 if ($_SESSION['ID'] == $memberID) {
                 ?>
@@ -792,7 +792,7 @@ $profileMediaSrc = trim("media/" . $profilePhoto);
                     else {
                         echo "<script>alert('Image not found'); location='home.php'</script>";
                     }
-                    }
+
                     }
                     }
                 ?>

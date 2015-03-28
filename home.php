@@ -1,10 +1,12 @@
 <?php
 require 'connect.php';
+require 'model_functions.php';
+require 'mediaPath.php';
 require 'getSession.php';
 require 'html_functions.php';
-require 'mediaPath.php';
+
 require 'findURL.php';
-require 'model_functions.php';
+
 require 'email.php';
 
 get_head_files();
@@ -145,12 +147,12 @@ if (isset($_POST['submit'])) {
             if (in_array($type, $photoFileTypes)) {
 
                 $img = '<img src = "' . $postMediaFilePath . '" />';
-                $img = '<a href = "media.php?id=' . $ID . '&mid=' . $mediaID . '&media=' . $media . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '">' . $img . '</a>';
+                $img = '<a href = "media.php?id=' . $ID . '&mid=' . $mediaID . '&mediaName=' . $media . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '">' . $img . '</a>';
             } // check if file type is a video
             elseif (in_array($type, $videoFileTypes)) {
 
                 $img = '<video src = "' . $postMediaFilePath . '" class="profileVideo" frameborder = "1" controls preload="none" SCALE="ToFit"></video>';
-                $img = '<a href = "media.php?id=' . $ID . '&mid=' . $mediaID . '&media=' . $media . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '">' . $img . '</a>';
+                $img = '<a href = "media.php?id=' . $ID . '&mid=' . $mediaID . '&mediaName=' . $media . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '">' . $img . '</a>';
             } else {
                 // if invalid file type
                 echo '<script>alert("Invalid File Type!");</script>';
@@ -315,12 +317,12 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
             if (in_array($type, $photoFileTypes)) {
 
                 $img = '<img src = "' . $postMediaFilePath . '" />';
-                $img = '<a href = "media.php?id=' . $ID . '&mid=' . $mediaID . '&media=' . $media . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '">' . $img . '</a>';
+                $img = '<a href = "media.php?id=' . $ID . '&mid=' . $mediaID . '&mediaName=' . $media . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '">' . $img . '</a>';
             } // check if file type is a video
             elseif (in_array($type, $videoFileTypes)) {
 
                 $img = '<video src = "' . $postMediaFilePath . '" class="profileVideo" frameborder = "1" controls preload="none" SCALE="ToFit"></video>';
-                $img = '<a href = "media.php?id=' . $ID . '&mid=' . $mediaID . '&media=' . $media . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '">' . $img . '</a>';
+                $img = '<a href = "media.php?id=' . $ID . '&mid=' . $mediaID . '&mediaName=' . $media . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '">' . $img . '</a>';
             } else {
                 // if invalid file type
                 echo '<script>alert("Invalid File Type!");</script>';

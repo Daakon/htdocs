@@ -272,6 +272,10 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
             ?>
 
 
+<?php
+// reinitialize sender ID
+$senderID = $_GET['id'];
+?>
 
             <form action="" method="post" enctype="multipart/form-data">
                 <img src="/images/image-icon.png" height="30px" width="30px" alt="Photos/Video"/>
