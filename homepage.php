@@ -1,9 +1,9 @@
 <?php
-require 'connect.php';
 
+require 'connect.php';
+$url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 session_start();
 if (isset($_SESSION["ID"])) {
-
 
 $ID = $_SESSION['ID'];
     $sql = "SELECT Username FROM Members WHERE ID = $ID ";
@@ -11,7 +11,7 @@ $ID = $_SESSION['ID'];
     $rows =  mysql_fetch_assoc($result);
     $username = $rows['Username'];
 
-    header("Location: /profile.php/$username");
+    echo "<script>location='/profile.php/$username';</script>";
 }
 else {
     echo "<script>alert('You are not logged in'); location = '/index.php'</script>";

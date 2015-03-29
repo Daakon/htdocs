@@ -1,7 +1,7 @@
 <?php
 
 require 'connect.php';
-require 'getSession.php';
+require 'getSession_public.php';
 require 'html_functions.php';
 require 'mediaPath.php';
 require 'findURL.php';
@@ -11,9 +11,22 @@ get_header();
 require 'memory_settings.php';
 $ID = $_SESSION['ID'];
 
-$url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-preg_match("/[^\/]+$/",$url ,$match);
-$token = $match[0];
+$username = $_SESSION['Username'];
+
+$sql = "SELECT * FROM Members
+WHERE
+Members.Username = '$username'
+And Members.IsActive = 1 ";
+
+$result = mysql_query($sql) or die(mysql_error());
+$rows = mysql_fetch_assoc($result);
+$memberID = $rows['ID'];
+$fName = $rows['FirstName'];
+$lName = $rows['LastName'];
+
+if (mysql_numrows($result) == 0) {
+    echo '<script>alert("This profile could not be found");location = "/index.php"</script>';
+}
 ?>
 
 
@@ -193,10 +206,8 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
 <div class="container" >
     <div class="row row-padding">
 
-        <ul class="list-inline">
-            <li><a href="/profile_public.php/<?php echo $_SESSION['Username'] ?>">Profile</a></li>
-            <li><a href="/member_photos_public.php/<?php echo $_SESSION['Username'] ?>">Photos & Videos</a></li>
-        </ul>
+        <?php require 'profile_menu_public.php'; ?>
+
         <br/><br/>
 
         <div class="col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8 roll-call ">
@@ -204,7 +215,7 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
             <h2>View Messages</h2>
             <hr/>
 
-            <?php $receiverID = $_GET['id']; ?>
+            <?php $receiverID = $memberID ?>
 
             <?php
             $sql = "SELECT * FROM Messages
@@ -254,7 +265,10 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
 
             ?>
 
-
+            <?php
+            // reinitialize sender ID
+            $senderID = $memberID;
+            ?>
 
             <form action="" method="post" enctype="multipart/form-data">
                 <img src="/images/image-icon.png" height="30px" width="30px" alt="Photos/Video"/>

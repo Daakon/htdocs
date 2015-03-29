@@ -1,6 +1,6 @@
 <?php
 require 'connect.php';
-require 'getSession.php';
+require 'getSession_public.php';
 require 'html_functions.php';
 require 'mediaPath.php';
 require 'findURL.php';
@@ -18,6 +18,18 @@ preg_match("/[^\/]+$/",$url ,$match);
 $username = $match[0];
 $_SESSION['Username'] = $username;
 $token = $match[1];
+$username = $_SESSION['Username'];
+
+$sql = "SELECT * FROM Members
+WHERE
+Members.Username = '$username'
+And Members.IsActive = 1 ";
+
+$result = mysql_query($sql) or die(mysql_error());
+$rows = mysql_fetch_assoc($result);
+$memberID = $rows['ID'];
+$fName = $rows['FirstName'];
+$lName = $rows['LastName'];
 ?>
 
 <?php include('media_sizes.html'); ?>
@@ -32,9 +44,7 @@ $token = $match[1];
 <div class="container" >
     <div class="row row-padding">
 
-        <ul class="list-inline">
-            <li><a href="/member_photos.php/<?php echo $username ?>">Photos & Videos</a></li>
-        </ul>
+        <?php require 'profile_menu_public.php'; ?>
         <br/><br/>
 
         <div class="col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8 roll-call ">
@@ -62,8 +72,8 @@ $token = $match[1];
                         Profile.Dislikes As Dislikes,
                         Profile.Plan As Plan
                         FROM Members, Profile
-                        WHERE Members.ID = $ID
-                        AND Profile.Member_ID = $ID ";
+                        WHERE Members.ID = $memberID
+                        AND Profile.Member_ID = $memberID ";
 
             $result = mysql_query($sql) or die(mysql_error());
 

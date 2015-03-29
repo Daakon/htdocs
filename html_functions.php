@@ -58,11 +58,9 @@ function get_head_files()
 
 function get_header()
 {
-
-    $ID = $_SESSION['ID'];
     ?>
     <header class="navbar navbar-default navbar-static-top header">
-        <a href="homepage.php">
+        <a href="/homepage.php">
         <img src="/images/Rapportbook-Logo-White-Text-Large.png" alt="Rapportbook" height="40" width="315"
              class="logo-image"/>
         </a>
