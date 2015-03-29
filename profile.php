@@ -235,24 +235,34 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
     $username = $row['Username'];
 
     $number = $_POST['number'];
+    $number = "1".$number;
     $name = get_users_name($ID);
     $API_KEY = '7344d6254838e6d2c917c4cb78305a3235ba951d';
 try
 {
     // Create a Clockwork object using your API key
     $clockwork = new Clockwork( $API_KEY );
+    $domain;
+
+    if (strstr($url, "dev")) {
+        $domain = "http://dev.rapportbook.com/profile_public.php/";
+    }
+    else {
+        $domain = "http://rapportbook.com/profile_public.php/";
+    }
 
     // Setup and send a message
-    $text = "$name has shared their profile with you. <br/> http://rapportbook.com/profile_public/$username";
+    $text = "$name has shared their profile with you. $domain$username";
     $message = array( 'to' => $number, 'message' => $text );
     $result = $clockwork->send( $message );
 
     // Check if the send was successful
     if($result['success']) {
         //echo 'Message sent - ID: ' . $result['id'];
-        echo "<script>alert('Message Sent');</script>";
+        echo "<script>alert('SMS Sent');</script>";
     } else {
-        echo 'Message failed - Error: ' . $result['error_message'];
+        $error = $result['error_message'];
+        echo "<script>alert('Message failed - Error: $error');</script>";
     }
 }
 catch (ClockworkException $e)
