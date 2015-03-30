@@ -64,7 +64,7 @@ function get_header()
         <img src="/images/Rapportbook-Logo-White-Text-Large.png" alt="Rapportbook" height="40" width="315"
              class="logo-image"/>
         </a>
-
+        <?php $ID = $_SESSION['ID']; ?>
         <!--Get profile pic for header -->
         <?php if (!empty($_COOKIE['ID']) && isset($_COOKIE['ID'])) { ?>
         <img src="<?php echo get_users_photo_by_id($ID) ?>" style="height=20" width="20" alt=""

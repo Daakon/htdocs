@@ -119,7 +119,7 @@ $lName = $rows['LastName'];
 
             <div align ="center">
                 <?php if ($profileVideo != "default_video.png") { ?>
-                    <video src = "<?php echo $mediaPath.$profileVideo ?>" class="profileVideo" frameborder = "1" controls preload="none" SCALE="ToFit" />
+                    <video src = "<?php echo $mediaPath.$profileVideo ?>" class="profileVideo" frameborder = "1" controls />
                 <?php } else { ?>
                     <img src = "<?php echo $mediaPath.$profileVideo ?>" class="defaultProfileVideo" alt="Profile Video" />
                 <?php } ?>

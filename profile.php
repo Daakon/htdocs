@@ -179,12 +179,12 @@ if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
     $homeState = $_POST['HomeState'];
     $currentCity = $_POST['CurrentCity'];
     $currentState = $_POST['CurrentState'];
-    $interests = $_POST['Interests'];
-    $books = $_POST['Books'];
-    $movies = $_POST['Movies'];
-    $food = $_POST['Food'];
-    $dislikes = $_POST['Dislikes'];
-    $plan = $_POST['Plan'];
+    $interests = mysql_real_escape_string($_POST['Interests']);
+    $books = mysql_real_escape_string($_POST['Books']);
+    $movies = mysql_real_escape_string($_POST['Movies']);
+    $food = mysql_real_escape_string($_POST['Food']);
+    $dislikes = mysql_real_escape_string($_POST['Dislikes']);
+    $plan = mysql_real_escape_string($_POST['Plan']);
     $dob = $_POST['DOB'];
     $emailStatus = $_POST['EmailStatus'];
     $password = $_POST['Password'];
@@ -408,7 +408,7 @@ catch (ClockworkException $e)
 
             <div align ="center">
                 <?php if ($profileVideo != "default_video.png") { ?>
-                <video src = "<?php echo $mediaPath.$profileVideo ?>" class="profileVideo" frameborder = "1" controls preload="none" SCALE="ToFit" />
+                <video src = "<?php echo $mediaPath.$profileVideo ?>" class="profileVideo" frameborder = "1" controls="true" />
                 <?php } else { ?>
                 <img src = "<?php echo $mediaPath.$profileVideo ?>" class="defaultProfileVideo" alt="Profile Video" />
                 <?php } ?>

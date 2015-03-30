@@ -147,7 +147,7 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
             $img = '<img src = "' . $postMediaFilePath . '" />';
         } // check if file type is a video
         elseif (in_array($type, $videoFileTypes)) {
-            $img = '<video src = "' . $postMediaFilePath . '" class="profileVideo" frameborder = "1" controls preload="none" SCALE="ToFit"></video>';
+            $img = '<video src = "' . $postMediaFilePath . '" class="profileVideo" frameborder = "1" controls="true""></video>';
         } else {
             // if invalid file type
             echo '<script>alert("Invalid File Type!");</script>';

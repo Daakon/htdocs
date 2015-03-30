@@ -1,6 +1,7 @@
 <?php
 
 require 'connect.php';
+require 'model_functions.php';
 require 'email.php';
 
 
@@ -29,7 +30,6 @@ if (mysql_num_rows($result) > 0) {
     $sql = "INSERT INTO Members (FirstName, LastName, Email, Gender, DOB, Username, Password, SignupDate, IsSuspended, EmailActive, LastLogin)
     Values ('$fName', '$lName', '$email', '$gender', '$dob', '$username', '".md5($pass)."', CURRENT_DATE(), 0, 1, CURRENT_DATE())";
     $result = mysql_query($sql) or die(mysql_error());
-    $rows = mysql_fetch_assoc($result);
 
     $ID = mysql_insert_id();
 
@@ -56,7 +56,7 @@ if (mysql_num_rows($result) > 0) {
 
     // Send out sign up email
     $toId = $rows['ID'];
-    build_and_send_email(1,$toId, 3, null);
+    build_and_send_email(1,$ID, 3, null);
 
     echo '<script>alert("Your profile was successfully set up");location = "home.php"</script>';
 

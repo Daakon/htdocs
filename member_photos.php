@@ -214,7 +214,7 @@ And Members.IsActive = 1 ";
                     } // check if file type is a video
                     elseif (in_array($mediaType, $videoFileTypes)) {
 
-                        $img = '<a " href = "media.php?id=' . $ID . '&mediaName=' . $mediaName . '&mid=' . $mediaID . '&mediaType=' . $type . '&mediaDate=' . $mediaDate . '" ><video src = "' . $mediaPath . $mediaName . '" class="profileVideo"></video></a>
+                        $img = '<a " href = "media.php?id=' . $ID . '&mediaName=' . $mediaName . '&mid=' . $mediaID . '&mediaType=' . $type . '&mediaDate=' . $mediaDate . '" ><video src = "' . $mediaPath . $mediaName . '" class="profileVideo" controls="true"></video></a>
                         <br/>'.$privateString;
 
                     }

@@ -146,7 +146,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
         } // check if file type is a video
         elseif (in_array($type, $videoFileTypes)) {
 
-            $img = '<video src = "' . $postMediaFilePath . '"  height = "500" width = "300" frameborder = "0" AUTOPLAY = "false" CONTROLLER="true" SCALE="ToFit"></video>';
+            $img = '<video src = "' . $postMediaFilePath . '"  height = "500" width = "300" frameborder = "0" controls="true"></video>';
             $img = '<a href = "media.php?id=' . $ID . '&mid=' . $newPhotoId . '&mediaName=' . $newPhoto . '&mediaType=' . $newPhotoType . '&mediaDate=' . $newPhotoDate . '">' . $img . '</a>';
         }
 
@@ -307,7 +307,7 @@ if (in_array($mediaType, $photoFileTypes)) {
 } // check if file type is a video
 elseif (in_array($mediaType, $videoFileTypes)) {
 
-    $img = '<embed src = "' . $mediaFilePath . '" height = "500" width = "300" frameborder = "0" AUTOPLAY = "false" CONTROLLER="true" SCALE="ToFit"></embed>';
+    $img = '<video src = "' . $mediaFilePath . '" height = "500" width = "300" controls="true"></video>';
 
 }
 ?>
@@ -550,7 +550,7 @@ $profileMediaSrc = trim("media/" . $profilePhoto);
             $rowPost = mysql_fetch_assoc($resultPost);
             // remove image from original body
             $post = preg_replace(" /<img[^>]+\> / i", "", $rowPost['Post']);
-            $post = preg_replace(" /<embed[^>]+\> / i", "", $post);
+            $post = preg_replace(" /<video[^>]+\> / i", "", $post);
             $post = "<p>" . $post . "</p>";
 
             $isPost = true;
@@ -572,7 +572,7 @@ $profileMediaSrc = trim("media/" . $profilePhoto);
                 } // check if file type is a video
                 elseif (in_array($mediaType, $videoFileTypes)) {
 
-                    $post = '<embed src = "' . $mediaFilePath . '" height = "500" width = "300" frameborder = "0" AUTOPLAY = "false" CONTROLLER="true" SCALE="ToFit"></embed>';
+                    $post = '<video src = "' . $mediaFilePath . '" height = "500" width = "300" webkit-playsinline ></video>';
                 }
             }
             ?>
@@ -765,7 +765,7 @@ $profileMediaSrc = trim("media/" . $profilePhoto);
                 ?>
 
                 <?php
-                }
+
                 echo '<hr/>';
                 ?>
 
@@ -787,7 +787,7 @@ $profileMediaSrc = trim("media/" . $profilePhoto);
                     echo '</form>';
                     echo '<hr/>';
                     }
-
+                    }
 
                     else {
                         echo "<script>alert('Image not found'); location='home.php'</script>";
