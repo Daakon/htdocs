@@ -1,8 +1,9 @@
 <?php
 /*Destroy user session */
 session_start();
-unset($_SESSION['ID']);
-session_destroy();
+
+// destroy all session variables
+session_unset();
 
 
 // clear cookie
