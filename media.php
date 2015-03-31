@@ -786,7 +786,8 @@ $profileMediaSrc = trim("media/" . $profilePhoto);
                 and the is business bit aligns with the session type, picture owner is confirmed
                 show delete */
                 }
-
+                }
+               
                 if ($_SESSION['ID'] == $memberID) {
                 ?>
                 <br/><br/>
@@ -798,9 +799,9 @@ $profileMediaSrc = trim("media/" . $profilePhoto);
                     echo '</form>';
                     echo '<hr/>';
                     }
-                    }
 
-                    else {
+
+                    if (empty($profileMediaSrc)) {
                         echo "<script>alert('Image not found'); location='home.php'</script>";
                     }
 
