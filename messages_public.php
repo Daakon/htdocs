@@ -4,12 +4,14 @@ require 'connect.php';
 require 'getSession_public.php';
 require 'html_functions.php';
 require 'mediaPath.php';
-require 'findURL.php';
+require 'model_functions.php';
 
 get_head_files();
 get_header();
 require 'memory_settings.php';
+$url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 $ID = $_SESSION['ID'];
+
 
 $username = $_SESSION['Username'];
 
@@ -71,7 +73,7 @@ if (mysql_numrows($result) == 0) {
                     $pic = $rows2['ProfilePhoto'];
                     $name = $rows2['FirstName'] . ' ' . $rows2['LastName'];
 
-                    echo "<a href = 'view_messages.php?id=$otherID'><img src = '$mediaPath$pic' class='profilePhoto-Feed' alt='' /> $name </a>";
+                    echo "<a href = '/view_messages_public.php?id=$otherID'><img src = '$mediaPath$pic' class='profilePhoto-Feed' alt='' /> $name </a>";
                     if ($rows['New'] == 1) { echo "<span style='color:red;font-weight:bold'>New</font>"; }
                     echo "<br/>";
                     echo "$subject";

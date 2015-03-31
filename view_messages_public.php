@@ -5,30 +5,16 @@ require 'getSession_public.php';
 require 'html_functions.php';
 require 'mediaPath.php';
 require 'findURL.php';
+require 'model_functions.php';
+require 'email.php';
 
 get_head_files();
 get_header();
 require 'memory_settings.php';
+
 $ID = $_SESSION['ID'];
 
-$username = $_SESSION['Username'];
-
-$sql = "SELECT * FROM Members
-WHERE
-Members.Username = '$username'
-And Members.IsActive = 1 ";
-
-$result = mysql_query($sql) or die(mysql_error());
-$rows = mysql_fetch_assoc($result);
-$memberID = $rows['ID'];
-$fName = $rows['FirstName'];
-$lName = $rows['LastName'];
-
-if (mysql_numrows($result) == 0) {
-    echo '<script>alert("This profile could not be found");location = "/index.php"</script>';
-}
 ?>
-
 
 <?php
 // handle message
@@ -215,12 +201,13 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
             <h2>View Messages</h2>
             <hr/>
 
-            <?php $receiverID = $memberID ?>
+            <?php $memberID = $_GET['id']; ?>
 
             <?php
+
             $sql = "SELECT * FROM Messages
                     WHERE ThreadOwner_ID = $ID
-                    AND (Receiver_ID = $receiverID Or Sender_ID = $receiverID)
+                    AND (Receiver_ID = $memberID Or Sender_ID = $memberID)
                     AND (IsDeleted = 0) LIMIT 1 ";
             $result = mysql_query($sql) or die(mysql_error());
             $row = mysql_fetch_assoc($result);
@@ -234,7 +221,7 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
 
             $sql = "SELECT * FROM Messages
                     WHERE ThreadOwner_ID = $ID
-                    AND (Receiver_ID = $receiverID Or Sender_ID = $receiverID)
+                    AND (Receiver_ID = $memberID Or Sender_ID = $memberID)
                     AND (IsDeleted = 0) ";
             $result = mysql_query($sql) or die(mysql_error());
 
@@ -275,14 +262,14 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
                 <input type="file" width="10px;" name="flPostMedia" id="flPostMedia"/>
                 <textarea name="message" id="message" class="form-control"></textarea>
                 <input type="hidden" id="subject" name="subject" value="<?php echo $subject ?>" />
-                <input type="hidden" id="receiverID" name="receiverID" value="<?php echo $receiverID ?>" />
+                <input type="hidden" id="receiverID" name="receiverID" value="<?php echo $memberID ?>" />
                 <input type="submit" class="btn btn-default" id="send" name="send" value="Send" />
             </form>
 
             <br/><br/>
 
             <form action="" method="post" onsubmit = "return confirm('Do you really want to delete this message thread')" >
-                <input type="hidden" id="receiverID" name="receiverID" value="<?php echo $receiverID ?>" />
+                <input type="hidden" id="receiverID" name="receiverID" value="<?php echo $memberID ?>" />
                 <input type="submit" class="btn btn-default" style="background:red;color:white;" id="delete" name="delete" value="Delete Messages" />
             </form>
             <!-------------------------------------------------------------------->

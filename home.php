@@ -540,6 +540,13 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
 </script>
 
+<script>
+    var video = document.getElementById('video');
+    video.addEventListener('click',function(){
+        video.play();
+    },false);
+</script>
+
 <body>
 
 <div class="container">

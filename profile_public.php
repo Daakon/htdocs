@@ -206,7 +206,7 @@ $lName = $rows['LastName'];
 
                     <?php if ($memberID != $ID) { ?>
                     <div class="public-profile-label">Message Me</div>
-                    <a href="/view_messages_public.php?id=<?php echo $memberID ?>"><?php echo $username ?></a>
+                    <a href="/messages_public.php/<?php echo $username ?>"><?php echo $username ?></a>
                     <?php } else { ?>
                     <?php echo "Sorry but you can't message yourself, that's kind weird anyway"; } ?>
 
