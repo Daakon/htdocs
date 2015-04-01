@@ -228,7 +228,8 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
 // check file size
                 if ($_FILES['flPostMedia']['size'] > 50000000) {
-                    echo '<script>alert("File is too large. The maximum file size is 50MB.");location = "home.php?"</script>';
+                    echo '<script>alert("File is too large. The maximum file size is 50MB.");</script>';
+                    header('Location:home.php');
                     exit;
                 }
 
@@ -265,7 +266,8 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                     } else if ($type == "image/gif") {
                         $src = imagecreatefromgif($mediaFile);
                     } else {
-                        echo "<script>alert('Invalid File Type'); ";
+                        echo "<script>alert('Invalid File Type'); </script>";
+                        header('Location:home.php');
                         exit;
                     }
 
@@ -312,6 +314,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 // if photo didn't get uploaded, notify the user
                 if (!file_exists($postMediaFilePath)) {
                     echo "<script>alert('File could not be uploaded, try uploading a different file type.');</script>";
+                    header('Location:home.php');
                 } else {
 
                     // determine which table to put photo pointer in
@@ -341,7 +344,8 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                     } else {
                         // if invalid file type
                         echo '<script>alert("Invalid File Type!");</script>';
-                        echo "<script>location= 'home.php'</script>";
+                        //echo "<script>location= 'home.php'</script>";
+                        header('Location:home.php');
                         exit;
                     }
 
