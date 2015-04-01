@@ -642,9 +642,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
             $approvals = mysql_num_rows(mysql_query("SELECT * FROM PostApprovals WHERE Post_ID = '$postID'"));
 
             // show disapprove if members has approved the post
-            echo '<table>';
-            echo '<tr>';
-            echo '<td>';
+            echo '<div class="post-approvals">';
             echo "<div id = 'approvals$postID'>";
 
             if (mysql_numrows($result2) > 0) {
@@ -676,7 +674,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                 echo '</form>';
             }
             echo '</div>'; // end of approval div
-            echo '</td></tr></table>';
+            echo '</div>';
 
             //-------------------------------------------------------------
             // End of approvals
@@ -732,17 +730,17 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                 $result3 = mysql_query($sql3) or die(mysql_error());
                 if (mysql_numrows($result3) > 0) {
                     echo '<br/>';
-                    echo '<table class="comment-style">';
+                    echo '<div class="comment-style">';
                     while ($rows3 = mysql_fetch_assoc($result3)) {
                         $comment = $rows3['PostComment'];
                         $profilePhoto = $rows3['ProfilePhoto'];
 
-                        echo '<tr><td style="width:60px;padding-bottom:10px;" valign = "top">';
+                        echo '<div class="comment-row">';
 
-                        echo '<img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" style = "border:1px solid black" class ="enlarge-onhover img-responsive" />&nbsp;</td><td valign = "top"><b>' . $rows3['FirstName'] . ' ' . $rows3['LastName'] . '</b>&nbsp;&nbsp;' . nl2br($comment) . '</span>';
-                        echo '</td></tr>';
+                        echo '<div class="user-icon"><img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" style = "border:1px solid black" class ="enlarge-onhover img-responsive" /><div class="user-name">' . $rows3['FirstName'] . ' ' . $rows3['LastName'] . '</div></div><div class="comment-content">' . nl2br($comment) . '</div>';
+                        echo '</div>';
                     }
-                    echo '</table>';
+                    echo '</div>';
                 }
 
 
@@ -779,18 +777,18 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
                     <?php
                     echo '<br/>';
-                    echo '<table style = "background:#E0EEEE;width:100%">';
+                    echo '<div class="comment-style">';
                     while ($rows4 = mysql_fetch_assoc($result4)) {
                         $comment = $rows4['PostComment'];
                         $profilePhoto = $rows4['ProfilePhoto'];
 
-                        echo '<tr><td style = "width:60px;padding-bottom:10px;" valign = "top">';
-                        echo '<img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" style = "border:1px solid black" class ="enlarge-onhover img-responsive" />&nbsp;</td><td valign = "top"><b>' . $rows4['FirstName'] . $rows['LastName'] . '</b>&nbsp;&nbsp;' . nl2br($comment) . '</span>';
+                        echo '<div class="user-icon">';
+                        echo '<img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" style = "border:1px solid black" class ="enlarge-onhover img-responsive" /><div class="user-name">' . $rows4['FirstName'] . $rows['LastName'] . '</div></div><div class="comment-content">' . nl2br($comment) . '</div>';
 
                         echo '</td></tr>';
 
                     }
-                    echo '</table>';
+                    echo '</div>';
                     echo '</div>'; //end of more comments div
                     }
                     ?>
