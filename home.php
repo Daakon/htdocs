@@ -69,7 +69,8 @@ if (isset($_POST['submit'])) {
                     } else if ($type == "image/gif") {
                         $src = imagecreatefromgif($mediaFile);
                     } else {
-                        echo "<script>alert('Invalid File Type'); location = 'home.php'";
+                        echo "<script>alert('Invalid File Type');</script>";
+                        header('Location:home.php');
                         exit;
                     }
                 }
@@ -121,7 +122,8 @@ if (isset($_POST['submit'])) {
                         imagegif($src, $postMediaFilePath, 100);
 
                     } else {
-                        echo "<script>alert('Invalid File Type'); location = 'home.php'</script>";
+                        echo "<script>alert('Invalid File Type');</script>";
+                        header('Location:home.php');
                         exit;
                     }
                 }
@@ -129,7 +131,8 @@ if (isset($_POST['submit'])) {
 
                 // if photo didn't get uploaded, notify the user
                 if (!file_exists($postMediaFilePath)) {
-                    echo "<script>alert('File could not be uploaded, try uploading a different file type.'); location= 'home.php'</script>";
+                    echo "<script>alert('File could not be uploaded, try uploading a different file type.');</script>";
+                    header('Location:home.php');
                 }
 else {
 
@@ -159,7 +162,8 @@ else {
     } else {
         // if invalid file type
         echo '<script>alert("Invalid File Type!");</script>';
-        echo "<script>location= 'home.php'</script>";
+        //echo "<script>location= 'home.php'</script>";
+        header('Location:home.php');
         exit;
     }
 
@@ -187,6 +191,7 @@ else {
         }
         // prevent double posting
         $_SESSION['Post'] = $_POST['post'];
+        header('Location: home.php');
     }
 }
 
