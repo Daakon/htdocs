@@ -227,8 +227,6 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
             $sql = "UPDATE Media SET Post_ID = '$newPostID' WHERE MediaName = '$mediaName' ";
             mysql_query($sql) or die(mysql_error());
-            header('Location:manage_post.php');
-
 
         }
 //----------------------
@@ -240,7 +238,6 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                                         ('$postID', '$ID',      '$comment')";
 
             mysql_query($sql) or die(mysql_error());
-            header('Location:manage_post.php');
         }
 
         $scrollx = $_REQUEST['scrollx'];
@@ -309,7 +306,6 @@ if (isset($_POST['Delete']) && $_POST['Delete'] == "Delete") {
     $postID = $_POST['postID'];
     $sql = "Update Posts SET IsDeleted = '1' WHERE ID = $postID And Member_ID = $ID ";
     mysql_query($sql) or die (mysql_error());
-    header('Location:manage_post.php');
 
 }
 ?>
