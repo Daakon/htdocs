@@ -578,12 +578,12 @@ $profileMediaSrc = trim("media/" . $profilePhoto);
                 // check if file type is a photo
                 if (in_array($mediaType, $photoFileTypes)) {
 
-                    $post = '<img src = "' . $mediaFilePath . '" style = "border:3px solid black;width:400;" />';
+                    $post = '<img src = "' . $mediaFilePath . '" style = "border:3px solid black;width:400;" class="img-responsive"/>';
 
                 } // check if file type is a video
                 elseif (in_array($mediaType, $videoFileTypes)) {
 
-                    $post = '<a href = "' . $videoPath . $mediaName.'"> <img src = "' . $images . 'video-bg.jpg" height="100" width = "100" /></a>';
+                    $post = '<a href = "' . $videoPath . $mediaName.'"> <img src = "' . $images . 'video-bg.jpg" height="100" width = "100" class="img-responsive"/></a>';
                 }
             }
             ?>
