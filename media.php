@@ -47,10 +47,6 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
     $comment = mysql_real_escape_string($_POST['postComment']);
 $comment = makeLinks($comment);
 
-    if ($_SESSION['MediaComment'] == $comment) {
-        echo "<script>alert('You cannot post the same comment twice');</script>";
-    }
-    else {
 
 // if photo is provided
         if (isset($_FILES['flPostMedia']) && strlen($_FILES['flPostMedia']['name']) > 1) {
@@ -78,9 +74,13 @@ $comment = makeLinks($comment);
 
 
             require 'media_post_file_path.php';
-// save photo/video
+// create file instance
             if (in_array($type, $videoFileTypes)) {
-                move_uploaded_file($mediaFile, $postMediaFilePath);
+                // convert to mp4
+                $fileName = pathinfo($mediaName, PATHINFO_FILENAME);
+                $newFileName = $fileName.".mp4";
+                exec("ffmpeg -i $fileName -vcodec libx264 -pix_fmt yuv420p -profile:v baseline -preset slow -crf 22 -movflags +faststart $newFileName");
+                $mediaName = $newFileName;
             } else {
                 if ($type == "image/jpg" || $type == "image/jpeg") {
                     $src = imagecreatefromjpeg($mediaFile);
@@ -115,8 +115,6 @@ $comment = makeLinks($comment);
 // save photo/video
             require 'media_post_file_path.php';
             if (in_array($type, $videoFileTypes)) {
-                $cmd = "ffmpeg -i $mediaFile -vf 'transpose=1' $mediaFile";
-                exec($cmd);
                 move_uploaded_file($mediaFile, $postMediaFilePath);
             } else {
                 if ($type == "image/jpg" || $type == "image/jpeg") {
@@ -152,9 +150,7 @@ $comment = makeLinks($comment);
                 $img = '<a href = "media.php?id=' . $ID . '&pid=' . $newPhotoId . '&mediaName=' . $newPhoto . '&mediaType=' . $newPhotoType . '&mediaDate=' . $newPhotoDate . '">' . $img . '</a>';
             } // check if file type is a video
             elseif (in_array($type, $videoFileTypes)) {
-
-                $img = '<video src = "' . $postMediaFilePath . '"  height = "500" width = "300" frameborder = "0" controls="true"></video>';
-                $img = '<a href = "media.php?id=' . $ID . '&mid=' . $newPhotoId . '&mediaName=' . $newPhoto . '&mediaType=' . $newPhotoType . '&mediaDate=' . $newPhotoDate . '">' . $img . '</a>';
+                $img = '<a href = "' . $videoPath . $mediaName . '"><img src = "' . $images . 'video-bg.jpg" height="100" width = "100" /></a>';
             }
 
             $comment = $comment . '<br/><br/>' . $img . '<br/>';
@@ -275,9 +271,7 @@ $comment = makeLinks($comment);
 //=========================================================================================================================//
 //BELOW IS END OF POST COMMENT HANDLING CODE ==========================================================================//
 
-        // prevent double posting
-        $_SESSION['MediaComment'] = $comment;
-    }
+
 }
 
 
@@ -317,7 +311,7 @@ if (in_array($mediaType, $photoFileTypes)) {
 } // check if file type is a video
 elseif (in_array($mediaType, $videoFileTypes)) {
 
-    $img = '<video src = "' . $mediaFilePath . '" height = "500" width = "300" controls="true"></video>';
+    $img = '<a href = "' . $videoPath . $mediaName . '"><img src = "' . $images . 'video-bg.jpg" height="100" width = "100" /></a>';
 
 }
 ?>
@@ -539,6 +533,13 @@ $profileMediaSrc = trim("media/" . $profilePhoto);
     }
 </style>
 
+<script>
+    // for android video playback
+    var video = document.getElementById('video');
+    video.addEventListener('click',function(){
+        video.play();
+    },false);
+</script>
 
 <body style="background:black;">
 
@@ -582,7 +583,7 @@ $profileMediaSrc = trim("media/" . $profilePhoto);
                 } // check if file type is a video
                 elseif (in_array($mediaType, $videoFileTypes)) {
 
-                    $post = '<video src = "' . $mediaFilePath . '" height = "500" width = "300" webkit-playsinline ></video>';
+                    $post = '<a href = "' . $videoPath . $mediaName.'"> <img src = "' . $images . 'video-bg.jpg" height="100" width = "100" /></a>';
                 }
             }
             ?>
@@ -787,7 +788,7 @@ $profileMediaSrc = trim("media/" . $profilePhoto);
                 show delete */
                 }
                 }
-               
+
                 if ($_SESSION['ID'] == $memberID) {
                 ?>
                 <br/><br/>

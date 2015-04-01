@@ -44,7 +44,11 @@ if (isset($_POST['Upload'])) {
         require 'media_post_file_path.php';
 
         if (in_array($type, $videoFileTypes)) {
-// do nothing
+            // convert to mp4
+            $fileName = pathinfo($mediaName, PATHINFO_FILENAME);
+            $newFileName = $fileName.".mp4";
+            exec("ffmpeg -i $fileName -vcodec libx264 -pix_fmt yuv420p -profile:v baseline -preset slow -crf 22 -movflags +faststart $newFileName");
+            $mediaName = $newFileName;
 
         } else {
             if ($type == "image/jpg" || $type == "image/jpeg") {
@@ -64,8 +68,6 @@ if (isset($_POST['Upload'])) {
 
         // save photo/video
         if (in_array($type, $videoFileTypes)) {
-            $cmd = "ffmpeg -i $mediaFile -vf 'transpose=1' $mediaFile";
-            exec($cmd);
             move_uploaded_file($mediaFile, $postMediaFilePath);
 
         } else {
@@ -214,7 +216,7 @@ And Members.IsActive = 1 ";
                     } // check if file type is a video
                     elseif (in_array($mediaType, $videoFileTypes)) {
 
-                        $img = '<a " href = "media.php?id=' . $ID . '&mediaName=' . $mediaName . '&mid=' . $mediaID . '&mediaType=' . $type . '&mediaDate=' . $mediaDate . '" ><video src = "' . $mediaPath . $mediaName . '" class="profileVideo" controls="true"></video></a>
+                        $img = '<a href = "' . $videoPath . $mediaName . '"><img src = "' . $images . 'video-bg.jpg" height="100" width = "100" /></a>
                         <br/>'.$privateString;
 
                     }

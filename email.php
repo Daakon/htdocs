@@ -179,7 +179,7 @@ function build_and_send_email($senderId, $toId, $notification, $postID)
             $name = 'You';
         }
 
-        $text = "$name commented a <a href='$link'>photo</a> you're tagged in.";
+        $text = "$name commented with a photo on a <a href='$link'>post</a> you're tagged in.";
 
         $subject = "
                 <div style='height:20px; padding:10px;'>

@@ -22,7 +22,7 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
 
     $receiverID = $_POST['receiverID'];
     $subject = $_POST['subject'];
-    $message = $_POST['message'];
+    $message = mysql_real_escape_string($_POST['message']);
 
 // if photo is provided
     if (isset($_FILES['flPostMedia']) && strlen($_FILES['flPostMedia']['name']) > 1) {
@@ -50,8 +50,11 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
         require 'media_post_file_path.php';
 
         if (in_array($type, $videoFileTypes)) {
-            // do nothing here
-            $mediaString = 'video';
+            // convert to mp4
+            $fileName = pathinfo($mediaName, PATHINFO_FILENAME);
+            $newFileName = $fileName.".mp4";
+            exec("ffmpeg -i $fileName -vcodec libx264 -pix_fmt yuv420p -profile:v baseline -preset slow -crf 22 -movflags +faststart $newFileName");
+            $mediaName = $newFileName;
 
         } else {
             $mediaString = 'photo';
@@ -103,8 +106,6 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
 // save photo/video
         require 'media_post_file_path.php';
         if (in_array($type, $videoFileTypes)) {
-            $cmd = "ffmpeg -i $mediaFile -vf 'transpose=1' $mediaFile";
-            exec($cmd);
             move_uploaded_file($mediaFile, $postMediaFilePath);
         } else {
             if ($type == "image/jpg" || $type == "image/jpeg") {
@@ -134,7 +135,7 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
             $img = '<img src = "' . $postMediaFilePath . '" />';
         } // check if file type is a video
         elseif (in_array($type, $videoFileTypes)) {
-            $img = '<video src = "' . $postMediaFilePath . '" class="profileVideo" frameborder = "1" controls="true"></video>';
+            $img = '<a href = "' . $videoPath . $mediaName . '"><img src = "' . $images . 'video-bg.jpg" height="100" width = "100" /></a>';
         } else {
             // if invalid file type
             echo '<script>alert("Invalid File Type!");</script>';

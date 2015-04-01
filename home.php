@@ -21,7 +21,7 @@ $post = mysql_real_escape_string($_POST['post']);
 $category = "";
 
 if (isset($_POST['submit'])) {
-    if ($_SESSION['Post'] == $post) {
+    if ($_SESSION['Post'] == $_POST['post']) {
         echo "<script>alert('You cannot post the same post twice');</script>";
     } else {
         if (strlen($post) > 0) {
@@ -55,7 +55,11 @@ if (isset($_POST['submit'])) {
                 require 'media_post_file_path.php';
 
                 if (in_array($type, $videoFileTypes)) {
-                    // do nothing
+                    // convert to mp4
+                    $fileName = pathinfo($mediaName, PATHINFO_FILENAME);
+                    $newFileName = $fileName.".mp4";
+                    exec("ffmpeg -i $fileName -vcodec libx264 -pix_fmt yuv420p -profile:v baseline -preset slow -crf 22 -movflags +faststart $newFileName");
+                    $mediaName = $newFileName;
 
                 } else {
                     if ($type == "image/jpg" || $type == "image/jpeg") {
@@ -127,53 +131,51 @@ if (isset($_POST['submit'])) {
                 if (!file_exists($postMediaFilePath)) {
                     echo "<script>alert('File could not be uploaded, try uploading a different file type.'); location= 'home.php'</script>";
                 }
+else {
 
-
-                // store media pointer
-                $sql = "INSERT INTO Media (Member_ID,  MediaName,  MediaType,  MediaDate    ) Values
+    // store media pointer
+    $sql = "INSERT INTO Media (Member_ID,  MediaName,  MediaType,  MediaDate    ) Values
                                           ('$ID',    '$mediaName', '$type',   CURRENT_DATE())";
-                mysql_query($sql) or die(mysql_error());
+    mysql_query($sql) or die(mysql_error());
 
-                // get media ID
-                $sqlGetMedia = "SELECT * FROM Media WHERE MediaName = '$mediaName'";
-                $mediaResult = mysql_query($sqlGetMedia) or die(mysql_error());
-                $mediaRow = mysql_fetch_assoc($mediaResult);
-                $mediaID = $mediaRow['ID'];
-                $media = $mediaRow['MediaName'];
-                $mediaType = $mediaRow['MediaType'];
-                $mediaDate = $mediaRow['MediaDate'];
+    // get media ID
+    $sqlGetMedia = "SELECT * FROM Media WHERE MediaName = '$mediaName'";
+    $mediaResult = mysql_query($sqlGetMedia) or die(mysql_error());
+    $mediaRow = mysql_fetch_assoc($mediaResult);
+    $mediaID = $mediaRow['ID'];
+    $media = $mediaRow['MediaName'];
+    $mediaType = $mediaRow['MediaType'];
+    $mediaDate = $mediaRow['MediaDate'];
 
 
-                // build post links based on media type
-                if (in_array($type, $photoFileTypes)) {
+    // build post links based on media type
+    if (in_array($type, $photoFileTypes)) {
 
-                    $img = '<img src = "' . $postMediaFilePath . '" />';
-                    $img = '<a href = "media.php?id=' . $ID . '&mid=' . $mediaID . '&mediaName=' . $media . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '">' . $img . '</a>';
-                } // check if file type is a video
-                elseif (in_array($type, $videoFileTypes)) {
+        $img = '<img src = "' . $postMediaFilePath . '" />';
+        $img = '<a href = "media.php?id=' . $ID . '&mid=' . $mediaID . '&mediaName=' . $media . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '">' . $img . '</a>';
+    } // check if file type is a video
+    elseif (in_array($type, $videoFileTypes)) {
+        $img = '<a href = "' . $videoPath . $mediaName . '"><img src = "' . $images . 'video-bg.jpg" height="100" width = "100" /></a>';
+    } else {
+        // if invalid file type
+        echo '<script>alert("Invalid File Type!");</script>';
+        echo "<script>location= 'home.php'</script>";
+        exit;
+    }
 
-                    $img = '<video src = "' . $postMediaFilePath . '" class="profileVideo" frameborder = "1" controls="true" ></video>';
-                    $img = '<a href = "media.php?id=' . $ID . '&mid=' . $mediaID . '&mediaName=' . $media . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '">' . $img . '</a>';
-                } else {
-                    // if invalid file type
-                    echo '<script>alert("Invalid File Type!");</script>';
-                    echo "<script>location= 'home.php'</script>";
-                    exit;
-                }
+    $post = $post . '<br/><br/>' . $img . '<br/>';
 
-                $post = $post . '<br/><br/>' . $img . '<br/>';
-
-                $sql = "INSERT INTO Posts (Post,    Category,  Member_ID,   PostDate) Values
+    $sql = "INSERT INTO Posts (Post,    Category,  Member_ID,   PostDate) Values
                                       ('$post', '$category', '$ID',       CURDATE())";
-                mysql_query($sql) or die(mysql_error());
-                $newPostID = mysql_insert_id();
+    mysql_query($sql) or die(mysql_error());
+    $newPostID = mysql_insert_id();
 
-                // update Media table with new post id
-                if (isset($_SESSION['ID'])) {
-                    $sqlUpdateMedia = "UPDATE Media SET Post_ID = '$newPostID' WHERE MediaName = '$mediaName' ";
-                    mysql_query($sqlUpdateMedia) or die(mysql_error());
-                }
-
+    // update Media table with new post id
+    if (isset($_SESSION['ID'])) {
+        $sqlUpdateMedia = "UPDATE Media SET Post_ID = '$newPostID' WHERE MediaName = '$mediaName' ";
+        mysql_query($sqlUpdateMedia) or die(mysql_error());
+    }
+}
             } // if no media
             else {
 
@@ -184,9 +186,10 @@ if (isset($_POST['submit'])) {
             }
         }
         // prevent double posting
-        $_SESSION['Post'] = $post;
+        $_SESSION['Post'] = $_POST['post'];
     }
 }
+
 ?>
 
 
@@ -211,7 +214,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
         $comment = makeLinks($comment);
 
-        if ($_SESSION['PostComment'] == $comment) {
+        if ($_SESSION['PostComment'] == $_POST['postComment']) {
             echo "<script>alert('You cannot post the same comment twice');</script>";
         } else {
 
@@ -240,10 +243,13 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
                 require 'media_post_file_path.php';
 
+                // create file type instance
                 if (in_array($type, $videoFileTypes)) {
-                    // do nothing here
-                    $mediaString = 'video';
-                    move_uploaded_file($mediaFile, $postMediaFilePath);
+                    // convert to mp4
+                    $fileName = pathinfo($mediaName, PATHINFO_FILENAME);
+                    $newFileName = $fileName.".mp4";
+                    exec("ffmpeg -i $newFileName -vcodec libx264 -pix_fmt yuv420p -profile:v baseline -preset slow -crf 22 -movflags +faststart $newFileName");
+                    $mediaName = $newFileName;
                 } else {
 
                     $mediaString = 'photo';
@@ -284,8 +290,6 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 // save photo/video
                 require 'media_post_file_path.php';
                 if (in_array($type, $videoFileTypes)) {
-                    $cmd = "ffmpeg -i $mediaFile -vf 'transpose=1' $mediaFile";
-                    exec($cmd);
                     move_uploaded_file($mediaFile, $postMediaFilePath);
                 } else {
                     if ($type == "image/jpg" || $type == "image/jpeg") {
@@ -303,92 +307,90 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 // if photo didn't get uploaded, notify the user
                 if (!file_exists($postMediaFilePath)) {
                     echo "<script>alert('File could not be uploaded, try uploading a different file type.');</script>";
-                }
+                } else {
 
-
-                // determine which table to put photo pointer in
-                // store media pointer
-                $sql = "INSERT INTO Media (Member_ID,  MediaName,  MediaType,  MediaDate    ) Values
+                    // determine which table to put photo pointer in
+                    // store media pointer
+                    $sql = "INSERT INTO Media (Member_ID,  MediaName,  MediaType,  MediaDate    ) Values
                                       ('$ID',    '$mediaName', '$type',   CURRENT_DATE())";
-                mysql_query($sql) or die(mysql_error());
+                    mysql_query($sql) or die(mysql_error());
 
-                // get media ID
-                $sqlGetMedia = "SELECT * FROM Media WHERE MediaName = '$mediaName'";
-                $mediaResult = mysql_query($sqlGetMedia) or die(mysql_error());
-                $mediaRow = mysql_fetch_assoc($mediaResult);
-                $mediaID = $mediaRow['ID'];
-                $media = $mediaRow['MediaName'];
-                $mediaType = $mediaRow['MediaType'];
-                $mediaDate = $mediaRow['MediaDate'];
+                    // get media ID
+                    $sqlGetMedia = "SELECT * FROM Media WHERE MediaName = '$mediaName'";
+                    $mediaResult = mysql_query($sqlGetMedia) or die(mysql_error());
+                    $mediaRow = mysql_fetch_assoc($mediaResult);
+                    $mediaID = $mediaRow['ID'];
+                    $media = $mediaRow['MediaName'];
+                    $mediaType = $mediaRow['MediaType'];
+                    $mediaDate = $mediaRow['MediaDate'];
 
 
 // check if file type is a photo
-                if (in_array($type, $photoFileTypes)) {
+                    if (in_array($type, $photoFileTypes)) {
 
-                    $img = '<img src = "' . $postMediaFilePath . '" />';
-                    $img = '<a href = "media.php?id=' . $ID . '&mid=' . $mediaID . '&mediaName=' . $media . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '">' . $img . '</a>';
-                } // check if file type is a video
-                elseif (in_array($type, $videoFileTypes)) {
+                        $img = '<img src = "' . $postMediaFilePath . '" />';
+                        $img = '<a href = "media.php?id=' . $ID . '&mid=' . $mediaID . '&mediaName=' . $media . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '">' . $img . '</a>';
+                    } // check if file type is a video
+                    elseif (in_array($type, $videoFileTypes)) {
+                        $img = '<a href = "' . $videoPath . $mediaName . '"><img src = "' . $images . 'video-bg.jpg" height="100" width = "100" /></a>';
+                    } else {
+                        // if invalid file type
+                        echo '<script>alert("Invalid File Type!");</script>';
+                        echo "<script>location= 'home.php'</script>";
+                        exit;
+                    }
 
-                    $img = '<video src = "' . $postMediaFilePath . '" class="profileVideo" frameborder = "1" controls="true" ></video>';
-                    $img = '<a href = "media.php?id=' . $ID . '&mid=' . $mediaID . '&mediaName=' . $media . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '">' . $img . '</a>';
-                } else {
-                    // if invalid file type
-                    echo '<script>alert("Invalid File Type!");</script>';
-                    echo "<script>location= 'home.php'</script>";
-                    exit;
-                }
+                    $comment = $comment . '<br/><br/>' . $img . '<br/>';
 
-                $comment = $comment . '<br/><br/>' . $img . '<br/>';
-
-                $sql = "INSERT INTO PostComments (Post_ID,     Member_ID,   Comment  ) Values
+                    $sql = "INSERT INTO PostComments (Post_ID,     Member_ID,   Comment  ) Values
                                              ('$postID', '$ID',      '$comment')";
 
-                mysql_query($sql) or die(mysql_error());
+                    mysql_query($sql) or die(mysql_error());
 
 // create post
 
-                // get poster data
-                $sqlPoster = "SELECT ID, FirstName, LastName, Gender FROM Members WHERE ID = '$ID' ";
-                $resultPoster = mysql_query($sqlPoster) or die(mysql_error());
-                $rowsPoster = mysql_fetch_assoc($resultPoster);
-                $name = $rowsPoster['FirstName'] . ' ' . $rowsPoster['LastName'];
-                $posterId = $rowsPoster['ID'];
-                $gender = $rowsPoster['Gender'];
-                $nameLink = $name;
+                    // get poster data
+                    $sqlPoster = "SELECT ID, FirstName, LastName, Gender FROM Members WHERE ID = '$ID' ";
+                    $resultPoster = mysql_query($sqlPoster) or die(mysql_error());
+                    $rowsPoster = mysql_fetch_assoc($resultPoster);
+                    $name = $rowsPoster['FirstName'] . ' ' . $rowsPoster['LastName'];
+                    $posterId = $rowsPoster['ID'];
+                    $gender = $rowsPoster['Gender'];
+                    $nameLink = $name;
 
 
 // get photo owner data
 
-                $sqlOwner = "SELECT ID, FirstName, LastName FROM Members WHERE ID = '$ownerId' ";
-                $resultOwner = mysql_query($sqlOwner) or die(mysql_error());
-                $rowsOwner = mysql_fetch_assoc($resultOwner);
-                $name2 = $rowsOwner['FirstName'] . ' ' . $rowsOwner['LastName'];
-                $name2 = $name2;
-                $ownerId = $rowsOwner['ID'];
-                $name2Link = $name2;
+                    $sqlOwner = "SELECT ID, FirstName, LastName FROM Members WHERE ID = '$ownerId' ";
+                    $resultOwner = mysql_query($sqlOwner) or die(mysql_error());
+                    $rowsOwner = mysql_fetch_assoc($resultOwner);
+                    $name2 = $rowsOwner['FirstName'] . ' ' . $rowsOwner['LastName'];
+                    $name2 = $name2;
+                    $ownerId = $rowsOwner['ID'];
+                    $name2Link = $name2;
 
-                // determine noun if profile owner commented on their own post and write bulletin
+                    // determine noun if profile owner commented on their own post and write bulletin
 
-                if ($gender == 1) {
-                    $noun = 'his';
-                } else {
-                    $noun = 'her';
-                }
+                    if ($gender == 1) {
+                        $noun = 'his';
+                    } else {
+                        $noun = 'her';
+                    }
 
-                $post = "$nameLink posted a new $mediaString comment on $noun post.<br/><br/>$img<br/>";
-                $post = mysql_real_escape_string($post);
+                    $post = "$nameLink posted a new $mediaString comment on $noun post.<br/><br/>$img<br/>";
+                    $post = mysql_real_escape_string($post);
 
-                $sqlInsertPost = "INSERT INTO Posts (Post,     Member_ID,    PostDate  ) Values
+                    $sqlInsertPost = "INSERT INTO Posts (Post,     Member_ID,    PostDate  ) Values
                                                 ('$post', '$ID',        CURDATE() ) ";
-                mysql_query($sqlInsertPost) or die(mysql_error());
-                $newPostID = mysql_insert_id();
+                    mysql_query($sqlInsertPost) or die(mysql_error());
+                    $newPostID = mysql_insert_id();
 
 // update new photo with bulletin id for commenting later
 
-                $sql = "UPDATE Media SET Post_ID = '$newPostID' WHERE MediaName = '$mediaName' ";
-                mysql_query($sql) or die(mysql_error());
+                    $sql = "UPDATE Media SET Post_ID = '$newPostID' WHERE MediaName = '$mediaName' ";
+                    mysql_query($sql) or die(mysql_error());
 
+                }
             }
 //----------------------
 // if not comment photo
@@ -458,7 +460,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 //BELOW IS END OF POST COMMENT HANDLING CODE ==========================================================================//
 
             // prevent double posting
-            $_SESSION['PostComment'] = $comment;
+            $_SESSION['PostComment'] = $_POST['postComment'];
         }
     }
 }
@@ -481,6 +483,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
         }
     }
 </script>
+
 
 <script>
     $(document).ready(function () {
@@ -540,12 +543,6 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
 </script>
 
-<script>
-    var video = document.getElementById('video');
-    video.addEventListener('click',function(){
-        video.play();
-    },false);
-</script>
 
 <body>
 

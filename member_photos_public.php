@@ -84,7 +84,7 @@ if (mysql_numrows($result) == 0) {
                     } // check if file type is a video
                     elseif (in_array($mediaType, $videoFileTypes)) {
 
-                        $img = '<a " href = "media.php?id=' . $ID . '&mediaName=' . $mediaName . '&mid=' . $mediaID . '&mediaType=' . $type . '&mediaDate=' . $mediaDate . '" ><video src = "' . $mediaPath . $mediaName . '" class="profileVideo" frameborder="1" controls="true" /></a>
+                        $img = '<a href = "' . $videoPath . $mediaName . '"><img src = "' . $images . 'video-bg.jpg" height="100" width = "100" /></a>
                         <br/>'.$privateString;
 
                     }
