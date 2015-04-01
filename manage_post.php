@@ -41,7 +41,8 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
 // check file size
             if ($_FILES['flPostMedia']['size'] > 50000000) {
-                echo '<script>alert("File is too large. The maximum file size is 50MB.");location = "home.php?"</script>';
+                echo '<script>alert("File is too large. The maximum file size is 50MB.");</script>';
+                header('Location:manage_post.php');
                 exit;
             }
 
@@ -79,7 +80,8 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                 } else if ($type == "image/gif") {
                     $src = imagecreatefromgif($mediaFile);
                 } else {
-                    echo "<script>alert('Invalid File Type'); ";
+                    echo "<script>alert('Invalid File Type');</script>";
+                    header('Location:manage_post.php');
                     exit;
                 }
             }
@@ -137,6 +139,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 // if photo didn't get uploaded, notify the user
             if (!file_exists($postMediaFilePath)) {
                 echo "<script>alert('File could not be uploaded, try uploading a different file type.');</script>";
+                header('Location:manage_post.php');
             }
 
             imagedestroy($src);
@@ -169,7 +172,8 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
             } else {
                 // if invalid file type
                 echo '<script>alert("Invalid File Type!");</script>';
-                echo "<script>location= 'home.php'</script>";
+                //echo "<script>location= 'home.php'</script>";
+                header('Location:manage_post.php');
                 exit;
             }
 
@@ -223,6 +227,8 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
             $sql = "UPDATE Media SET Post_ID = '$newPostID' WHERE MediaName = '$mediaName' ";
             mysql_query($sql) or die(mysql_error());
+            header('Location:manage_post.php');
+
 
         }
 //----------------------
@@ -234,6 +240,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                                         ('$postID', '$ID',      '$comment')";
 
             mysql_query($sql) or die(mysql_error());
+            header('Location:manage_post.php');
         }
 
         $scrollx = $_REQUEST['scrollx'];
@@ -302,6 +309,7 @@ if (isset($_POST['Delete']) && $_POST['Delete'] == "Delete") {
     $postID = $_POST['postID'];
     $sql = "Update Posts SET IsDeleted = '1' WHERE ID = $postID And Member_ID = $ID ";
     mysql_query($sql) or die (mysql_error());
+    header('Location:manage_post.php');
 
 }
 ?>
