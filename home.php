@@ -154,11 +154,11 @@ else {
     // build post links based on media type
     if (in_array($type, $photoFileTypes)) {
 
-        $img = '<img src = "' . $postMediaFilePath . '" />';
+        $img = '<img src = "' . $postMediaFilePath . '" class="img-responsive"/>';
         $img = '<a href = "media.php?id=' . $ID . '&mid=' . $mediaID . '&mediaName=' . $media . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '">' . $img . '</a>';
     } // check if file type is a video
     elseif (in_array($type, $videoFileTypes)) {
-        $img = '<a href = "' . $videoPath . $mediaName . '"><img src = "' . $images . 'video-bg.jpg" height="100" width = "100" /></a>';
+        $img = '<a href = "' . $videoPath . $mediaName . '"><img src = "' . $images . 'video-bg.jpg" height="100" width = "100" class="img-responsive"/></a>';
     } else {
         // if invalid file type
         echo '<script>alert("Invalid File Type!");</script>';
@@ -336,11 +336,11 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 // check if file type is a photo
                     if (in_array($type, $photoFileTypes)) {
 
-                        $img = '<img src = "' . $postMediaFilePath . '" />';
+                        $img = '<img src = "' . $postMediaFilePath . '" class="img-responsive"/>';
                         $img = '<a href = "media.php?id=' . $ID . '&mid=' . $mediaID . '&mediaName=' . $media . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '">' . $img . '</a>';
                     } // check if file type is a video
                     elseif (in_array($type, $videoFileTypes)) {
-                        $img = '<a href = "' . $videoPath . $mediaName . '"><img src = "' . $images . 'video-bg.jpg" height="100" width = "100" /></a>';
+                        $img = '<a href = "' . $videoPath . $mediaName . '"><img src = "' . $images . 'video-bg.jpg" height="100" width = "100" class="img-responsive"/></a>';
                     } else {
                         // if invalid file type
                         echo '<script>alert("Invalid File Type!");</script>';
@@ -619,7 +619,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
              style="background:white;border-radius:10px;margin-top:20px;border:2px solid black;" align="left">
 
             <img src="<?php echo $mediaPath. $profilePhoto ?>" class="profilePhoto-Feed" alt=""
-                 title="<?php echo $name ?>" class='enlarge-onhover'/> &nbsp <b><font
+                 title="<?php echo $name ?>" class='enlarge-onhover img-responsive'/> &nbsp <b><font
                     size="4"><?php echo $name ?></font></b>
 
             <br/><br/>
@@ -739,7 +739,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
                         echo '<tr><td style="width:60px;padding-bottom:10px;" valign = "top">';
 
-                        echo '<img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" style = "border:1px solid black" class ="enlarge-onhover" />&nbsp;</td><td valign = "top"><b>' . $rows3['FirstName'] . ' ' . $rows3['LastName'] . '</b>&nbsp;&nbsp;' . nl2br($comment) . '</span>';
+                        echo '<img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" style = "border:1px solid black" class ="enlarge-onhover img-responsive" />&nbsp;</td><td valign = "top"><b>' . $rows3['FirstName'] . ' ' . $rows3['LastName'] . '</b>&nbsp;&nbsp;' . nl2br($comment) . '</span>';
                         echo '</td></tr>';
                     }
                     echo '</table>';
@@ -785,7 +785,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                         $profilePhoto = $rows4['ProfilePhoto'];
 
                         echo '<tr><td style = "width:60px;padding-bottom:10px;" valign = "top">';
-                        echo '<img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" style = "border:1px solid black" class ="enlarge-onhover" />&nbsp;</td><td valign = "top"><b>' . $rows4['FirstName'] . $rows['LastName'] . '</b>&nbsp;&nbsp;' . nl2br($comment) . '</span>';
+                        echo '<img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" style = "border:1px solid black" class ="enlarge-onhover img-responsive" />&nbsp;</td><td valign = "top"><b>' . $rows4['FirstName'] . $rows['LastName'] . '</b>&nbsp;&nbsp;' . nl2br($comment) . '</span>';
 
                         echo '</td></tr>';
 
