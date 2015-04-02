@@ -1,16 +1,34 @@
 <?php
 
 require 'connect.php';
-require 'getSession.php';
+require 'getSession_public.php';
 require 'html_functions.php';
 require 'mediaPath.php';
-require 'findURL.php';
 require 'model_functions.php';
+require 'findURL.php';
+
 get_head_files();
 get_header();
 require 'memory_settings.php';
 $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 $ID = $_SESSION['ID'];
+
+$username = $_SESSION['Username'];
+
+$sql = "SELECT * FROM Members
+WHERE
+Members.Username = '$username'
+And Members.IsActive = 1 ";
+
+$result = mysql_query($sql) or die(mysql_error());
+$rows = mysql_fetch_assoc($result);
+$memberID = $rows['ID'];
+$fName = $rows['FirstName'];
+$lName = $rows['LastName'];
+
+if (mysql_numrows($result) == 0) {
+    echo '<script>alert("This profile could not be found");location = "/index.php"</script>';
+}
 ?>
 
 <?php include('media_sizes.html');  ?>
@@ -164,7 +182,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 // check if file type is a photo
             if (in_array($type, $photoFileTypes)) {
 
-                $img = '<img src = "' . $mediaPath . $mediaName .'" class="img-responsive"/>';
+                $img = '<img src = "' . $mediaPath . $mediaName . '" class="img-responsive"/>';
                 $img = '<a href = "media.php?id=' . $ID . '&mid=' . $mediaID . '&media=' . $media . '&type=' . $mediaType . '&mediaDate=' . $mediaDate . '">' . $img . '</a>';
             } // check if file type is a video
             elseif (in_array($type, $videoFileTypes)) {
@@ -390,7 +408,7 @@ if (isset($_POST['Delete']) && $_POST['Delete'] == "Delete") {
 
     <div class="row row-padding">
 
-        <?php require 'profile_menu.php'; ?>
+        <?php require 'profile_menu_public.php'; ?>
 
 
     </div>
@@ -408,7 +426,7 @@ if (isset($_POST['Delete']) && $_POST['Delete'] == "Delete") {
     Profile.ProfilePhoto As ProfilePhoto
     FROM Members,Posts,Profile
     WHERE
-    Posts.Member_ID = $ID
+    Posts.Member_ID = $memberID
     And Members.IsActive = 1
     And Members.IsSuspended = 0
     And Members.ID = Posts.Member_ID
@@ -442,12 +460,7 @@ if (isset($_POST['Delete']) && $_POST['Delete'] == "Delete") {
 
             <p><?php echo nl2br($post); ?></p>
 
-            <!--DELETE BUTTON ------------------>
-            <form action="" method="post" onsubmit="return confirm('Do you really want to delete this post?')">
-                <input type="hidden" name="postID" id="postID" value="<?php echo $postID ?>" />
-            <input type ="submit" name="Delete" id="Delete" value="Delete" class="deleteButton" />
-            </form>
-            <br/><br/>
+
             <!------------------------------------->
 
             <?php
@@ -456,7 +469,7 @@ if (isset($_POST['Delete']) && $_POST['Delete'] == "Delete") {
             //----------------------------------------------------------------
             //require 'getSessionType.php';
 
-            $sql2 = "SELECT ID FROM PostApprovals WHERE Post_ID = '$postID' AND Member_ID = '$ID'";
+            $sql2 = "SELECT ID FROM PostApprovals WHERE Post_ID = '$postID' AND Member_ID = '$memberID'";
             $result2 = mysql_query($sql2) or die(mysql_error());
             $rows2 = mysql_fetch_assoc($result2);
 
@@ -476,8 +489,13 @@ if (isset($_POST['Delete']) && $_POST['Delete'] == "Delete") {
 
                 echo '<input type ="hidden" class = "postID" id = "postID" value = "' . $postID . '" />';
                 echo '<input type ="hidden" class = "ID" id = "ID" value = "' . $ID . '" />';
-                echo '<input type ="button" class = "btnDisapprove" />';
 
+                if (!empty($_SESSION['ID']) && isset($_SESSION['ID'])) {
+                    echo '<input type ="button" class = "btnDisapprove" />';
+                }
+                else {
+                    echo '<input type ="button" class = "btnDisapprove" readonly = "readonly" />';
+                }
                 if ($approvals > 0) {
 
 
@@ -489,8 +507,12 @@ if (isset($_POST['Delete']) && $_POST['Delete'] == "Delete") {
 
                 echo '<input type ="hidden" class = "postID" id = "postID" value = "' . $postID . '" />';
                 echo '<input type ="hidden" class = "ID" id = "ID" value = "' . $ID . '" />';
-                echo '<input type ="button" class = "btnApprove" />';
-
+                if (!empty($_SESSION['ID']) && isset($_SESSION['ID'])) {
+                    echo '<input type ="button" class = "btnApprove" />';
+                }
+                else {
+                    echo '<input type ="button" class = "btnApprove" readonly="readonly" />';
+                }
                 if ($approvals > 0) {
 
 
@@ -514,14 +536,17 @@ if (isset($_POST['Delete']) && $_POST['Delete'] == "Delete") {
                     <input type="text" class="form-control" name="postComment" id="postComment"
                            placeholder="Write a comment" title='' style="border:1px solid black"/>
 
-
+                    <?php if (!empty($ID) && isset($ID)) { ?>
                     <input type="file" name="flPostMedia" id="flPostMedia" style="max-width:180px;"/>
                     <br/>
+
                     <input type="submit" name="btnComment" id="btnComment" Value="Comment"
                            style="border:1px solid black"/>
+                    <?php } ?>
+
                     <input type="hidden" name="postID" id="postID" Value="<?php echo $postID ?>"/>
                     <input type="hidden" name="ID" id="ID" value="<?php echo $ID ?>"/>
-                    <input type="hidden" name="ownerId" id="ownerId" value="<?php echo $MemberID ?>"/>
+                    <input type="hidden" name="ownerId" id="ownerId" value="<?php echo $memberID ?>"/>
                     <input type="hidden" name="scrollx" id="scrollx" value="0"/>
                     <input type="hidden" name="scrolly" id="scrolly" value="0"/>
                 </form>
@@ -626,12 +651,12 @@ if (isset($_POST['Delete']) && $_POST['Delete'] == "Delete") {
         }
         else { ?>
             <div class="row row-padding">
-        <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 "
-             style="background:white;border-radius:10px;margin-top:20px;border:2px solid black;" align="left">
-            <div style='font-weight:bold;'>You do not have anything posted.</div>
-        </div>
+                <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 "
+                     style="background:white;border-radius:10px;margin-top:20px;border:2px solid black;" align="left">
+                    <div style='font-weight:bold;'>You do not have anything posted.</div>
                 </div>
-            <?php }
+            </div>
+        <?php }
         ?>
 
 
