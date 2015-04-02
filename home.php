@@ -473,6 +473,14 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
         }
     }
 }
+
+if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
+    $commentID = $_POST['commentID'];
+    $sql = "Update PostComments SET IsDeleted = '1' WHERE ID = $commentID";
+    mysql_query($sql) or die (mysql_error());
+
+}
+
 ?>
 
 <?php include('media_sizes.html'); ?>
@@ -612,7 +620,8 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
     $profilePhoto = $rows['ProfilePhoto'];
     $category = $rows['Category'];
     $post = $rows['Post'];
-    $postID = $rows['PostID']
+    $postID = $rows['PostID'];
+    $postOwner = $memberID;
     ?>
     <div class="row row-padding">
         <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 "
@@ -735,11 +744,24 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                     while ($rows3 = mysql_fetch_assoc($result3)) {
                         $comment = $rows3['PostComment'];
                         $profilePhoto = $rows3['ProfilePhoto'];
+                        $commentID = $rows3['PostCommentID'];
+                        $commentOwner = $rows3['MemberID'];
 
                         echo '<div class="comment-row">';
 
                         echo '<div class="user-icon"><img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" style = "border:1px solid black" class ="enlarge-onhover img-responsive" /><div class="user-name">' . $rows3['FirstName'] . ' ' . $rows3['LastName'] . '</div></div><div class="comment-content">' . nl2br($comment) . '</div>';
                         echo '</div>';
+
+                        if ($commentOwner == $ID || $postOwner == $ID) {
+                            //<!--DELETE BUTTON ------------------>
+                            echo '<div class="comment-delete">';
+                            echo '<form action="" method="post" onsubmit="return confirm(\'Do you really want to delete this comment?\')">';
+                            echo '<input type="hidden" name="commentID" id="commentID" value="' .  $commentID . '" />';
+                            echo '<input type ="submit" name="DeleteComment" id="DeleteComment" value="Delete" class="deleteButton" />';
+                            echo '</form>';
+                            echo '</div>';
+                            //<!------------------------------------->
+                        }
                     }
                     echo '</div>';
                 }
@@ -783,7 +805,8 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                     while ($rows4 = mysql_fetch_assoc($result4)) {
                         $comment = $rows4['PostComment'];
                         $profilePhoto = $rows4['ProfilePhoto'];
-
+                        $commentID = $rows4['PostCommentID'];
+                        $commentOwner = $rows4['MemberID'];
                         echo '<div class="user-icon">';
                         echo '<img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" style = "border:1px solid black" class ="enlarge-onhover img-responsive" /><div class="user-name">' . $rows4['FirstName'] . $rows['LastName'] . '</div></div><div class="comment-content">' . nl2br($comment) . '</div>';
 
@@ -791,6 +814,16 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
                     }
                     echo '</div>';
+                        if ($commentOwner == $ID || $postOwner == $ID) {
+                            //<!--DELETE BUTTON ------------------>
+                            echo '<div class="comment-delete">';
+                            echo '<form action="" method="post" onsubmit="return confirm(\'Do you really want to delete this comment?\')">';
+                            echo '<input type="hidden" name="commentID" id="commentID" value="' .  $commentID . '" />';
+                            echo '<input type ="submit" name="DeleteComment" id="DeleteComment" value="Delete" class="deleteButton" />';
+                            echo '</form>';
+                            echo '</div>';
+                            //<!------------------------------------->
+                        }
                     echo '</div>'; //end of more comments div
                     }
                     ?>
