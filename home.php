@@ -499,8 +499,8 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
         $("body").delegate(".btnApprove", "click", function () {
             var parentDiv = $(this).closest("div[id^=approvals]");
             var data = {
-                postID: $(this).closest('tr').find('.postID').val(),
-                ID: $(this).closest('tr').find('.ID').val()
+                postID: $(this).closest('div').find('.postID').val(),
+                ID: $(this).closest('div').find('.ID').val()
                 //add other properties similarly
             }
 
@@ -522,8 +522,8 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
         $("body").delegate(".btnDisapprove", "click", function () {
             var parentDiv = $(this).closest("div[id^=approvals]");
             var data = {
-                postID: $(this).closest('tr').find('.postID').val(),
-                ID: $(this).closest('tr').find('.ID').val()
+                postID: $(this).closest('div').find('.postID').val(),
+                ID: $(this).closest('div').find('.ID').val()
                 //add other properties similarly
             }
             $.ajax({

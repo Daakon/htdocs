@@ -24,6 +24,32 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
     $subject = $_POST['subject'];
     $message = mysql_real_escape_string($_POST['message']);
 
+    // check if sender prior message thread exists
+    $sql="SELECT * FROM Messages WHERE ThreadOwner_ID = $ID And Receiver_ID = $checkID Or Sender_ID = $checkID And InitialMessage = 1 ";
+    $result = mysql_query($sql) or die(mysql_error());
+    $numRows = mysql_num_rows($result);
+    $initialMessage;
+
+    if ($numRows > 0) {
+        $senderInitialMessage = 0;
+    }
+    else {
+        $senderInitialMessage = 1;
+    }
+
+    // check if reciever prior message thread exists
+    $sql="SELECT * FROM Messages WHERE ThreadOwner_ID = $checkID And Receiver_ID = $ID Or Sender_ID = $ID And InitialMessage = 1 ";
+    $result = mysql_query($sql) or die(mysql_error());
+    $numRows = mysql_num_rows($result);
+    $recieverInitialMessage;
+
+    if ($numRows > 0) {
+        $receiverInitialMessage = 0;
+    }
+    else {
+        $receiverInitialMessage = 1;
+    }
+
 // if photo is provided
     if (isset($_FILES['flPostMedia']) && strlen($_FILES['flPostMedia']['name']) > 1) {
 
@@ -145,13 +171,13 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
         $message = $message . '<br/><br/>' . $img . '<br/>';
 
         // create thread for sender
-        $sql = "INSERT INTO Messages (ThreadOwner_ID, Sender_ID,  Receiver_ID,    Subject,    Message) Values
-                                 ($ID,             $ID,       $receiverID, '$subject',  '$message') ";
+        $sql = "INSERT INTO Messages (ThreadOwner_ID, Sender_ID,  Receiver_ID,    Subject,    Message,  InitialMessage) Values
+                                     ($ID,             $ID,       $receiverID, '$subject',  '$message', $senderInitialMessage) ";
         mysql_query($sql) or die(mysql_error());
 
         // create thread for receiver
-        $sql = "INSERT INTO Messages (ThreadOwner_ID, Sender_ID, Receiver_ID,  Subject,    Message) VALUES
-                                 ($receiverID,    $ID,        $receiverID, '$subject', '$message') ";
+        $sql = "INSERT INTO Messages (ThreadOwner_ID, Sender_ID, Receiver_ID,  Subject,    Message,   InitialMessage,  New) VALUES
+                                    ($receiverID,    $ID,        $receiverID, '$subject', '$message', '$receiverInitialMessage',  '1') ";
         mysql_query($sql) or die(mysql_error());
 
         echo "<script>alert('Message Sent'); </script>";
@@ -163,13 +189,13 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
     else {
 
         // create thread for sender
-        $sql = "INSERT INTO Messages (ThreadOwner_ID, Sender_ID,  Receiver_ID,    Subject,    Message) Values
-                                 ($ID,             $ID,       $receiverID, '$subject',  '$message') ";
+        $sql = "INSERT INTO Messages (ThreadOwner_ID, Sender_ID,  Receiver_ID,    Subject,    Message, InitialMessage) Values
+                                      ($ID,             $ID,       $receiverID, '$subject',  '$message',    '$senderInitialMessage') ";
         mysql_query($sql) or die(mysql_error());
 
         // create thread for receiver
-        $sql = "INSERT INTO Messages (ThreadOwner_ID, Sender_ID, Receiver_ID,  Subject,    Message) VALUES
-                                 ($receiverID,    $ID,        $receiverID, '$subject', '$message') ";
+        $sql = "INSERT INTO Messages (ThreadOwner_ID, Sender_ID, Receiver_ID,  Subject,    Message,   InitialMessage,    New) VALUES
+                                    ($receiverID,    $ID,        $receiverID, '$subject', '$message',  '$receiverInitialMessage', '1') ";
         mysql_query($sql) or die(mysql_error());
 
         echo "<script>alert('Message Sent'); </script>";
