@@ -13,12 +13,10 @@ get_head_files();
 get_header()
 ?>
 
-<div class="container" style="background:white;padding:20px;border:1px solid black;border-radius:10px;">
-    <div class="col-lg-offset-2 col-md-offset-2">
+<div class="container" >
 
-    </div>
 
-    <div class="col-xs-12 col-md-10 col-lg-10">
+    <div class="col-xs-12 col-md-8 col-lg-8 col-md-offset-2 roll-call">
 
         <form action="" method="post">
             <div class="form-group">

@@ -217,7 +217,8 @@ And Members.IsActive = 1 ";
                     elseif (in_array($mediaType, $videoFileTypes)) {
 
                         $img = '<a href = "' . $videoPath . $mediaName . '"><img src = "' . $images . 'video-bg.jpg" height="100" width = "100" /></a>
-                        <br/>'.$privateString;
+                        <a href = "media.php?id=' . $ID . '&mediaName=' . $mediaName . '&mid=' . $mediaID . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '" >More</a><br/>'
+                            .$privateString;
 
                     }
                     ?>

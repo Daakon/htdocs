@@ -22,8 +22,8 @@ if (!empty($_GET['btnDelete']) && ($_GET['btnDelete'] == 'Delete')) {
 
     mysql_query($sql) or die(mysql_error());
 
-    //echo "<script>location = 'member_photos.php'</script>";
-    header('Location:member_photos.php');
+    echo "<script>location = 'member_photos.php'</script>";
+//    header('Location:/member_photos.php');
 
 }
 ?>
@@ -319,8 +319,8 @@ elseif (in_array($mediaType, $videoFileTypes)) {
 <?php
 
 $sql = "SELECT * FROM Members,Profile
-WHERE Members.ID = '$ID'
-And Profile.Member_ID = '$ID' ";
+WHERE Members.ID = '$memberID'
+And Profile.Member_ID = '$memberID' ";
 $result = mysql_query($sql) or die(mysql_error());
 $pRows = mysql_fetch_assoc($result);
 $profilePhoto = $pRows['ProfilePhoto'];
