@@ -98,15 +98,11 @@ function build_and_send_email($senderId, $toId, $notification, $postID)
         $nameArray = explode(' ', $name);
         $name = $nameArray[0];
         $subject = "Congratulations $name, you now have a new profile on Rapportbook.<br/>";
-        $subject .= "Your password is <b>$pass</b> <br/>";
-        $subject .= "Please keep this email for your records <br/><br/>";
-
         $subject .= "You can now:<br/>";
-        $subject .= "<b>Post photo and videos of your talents</b><br/>";
-        $subject .= "<b>Text your profile to new people in your life</b><br/>";
-        $subject .= "<b>Comment on other people's post with text and or photo and video</b><br/>";
-        $subject .= "<b>Direct message people</b><br/>";
-        $subject .= "<b>Post Photos and Videos.</b><br/><br/>";
+        $subject .= "<b>Post photo and videos of your talents.</b><br/>";
+        $subject .= "<b>Text your profile to new people in your life.</b><br/>";
+        $subject .= "<b>Comment on other people's post with text and or photo and video.</b><br/>";
+        $subject .= "<b>Direct message people with photos and videos.</b><br/><br/>";
         $subject .= "Start posting content today and become popular.<br/>";
         $subject .= '<a href = "http://www.rapportbook.com">Login</a> to your account today and maximize the tools we have built for you.';
     }

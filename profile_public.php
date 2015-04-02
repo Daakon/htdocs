@@ -197,18 +197,20 @@ $lName = $rows['LastName'];
                     <div class="public-profile-label">Email</div>
                     <?php echo $email ?>
 
+<!--            <br/><br/>-->
+
+                    <!--<div class="public-profile-label">Date Of Birth</div>-->
+                    <?php /*echo $dob */?>
+
             <br/><br/>
 
-                    <div class="public-profile-label">Date Of Birth</div>
-                    <?php echo $dob ?>
-
-            <br/><br/>
-
-                    <?php if ($memberID != $ID) { ?>
+                    <?php if (isset($ID) && !empty($ID) && $memberID != $ID) { ?>
                     <div class="public-profile-label">Message Me</div>
                     <a href="/messages_public.php/<?php echo $username ?>"><?php echo $username ?></a>
-                    <?php } else { ?>
-                    <?php echo "Sorry but you can't message yourself, that's kind weird anyway"; } ?>
+                    <?php } elseif ($memberID == $ID) { ?>
+                    <?php echo "Sorry but you can't message yourself, that's kind weird anyway";
+
+                    } else { echo "<span style='color:red;'>You must be logged in to message this person</span>"; } ?>
 
 
             <!------------->

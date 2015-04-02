@@ -48,7 +48,8 @@ if (mysql_numrows($result) == 0) {
             <hr/>
 
             <?php
-            $sql = "SELECT * FROM Messages WHERE ThreadOwner_ID = $ID AND (Sender_ID != $memberID Or Receiver_ID != $memberID) AND IsDeleted = 0 Order By ID DESC Limit 1";
+            // get only the person who text their profile
+            $sql = "SELECT * FROM Messages WHERE ThreadOwner_ID = $ID AND (Sender_ID = $memberID Or Receiver_ID = $memberID) AND IsDeleted = 0 Order By ID DESC Limit 1";
             $result = mysql_query($sql) or die(mysql_error());
 
             if (mysql_numrows($result) > 0) {

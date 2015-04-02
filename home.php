@@ -754,6 +754,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
                         if ($commentOwner == $ID || $postOwner == $ID) {
                             //<!--DELETE BUTTON ------------------>
+
                             echo '<div class="comment-delete">';
                             echo '<form action="" method="post" onsubmit="return confirm(\'Do you really want to delete this comment?\')">';
                             echo '<input type="hidden" name="commentID" id="commentID" value="' .  $commentID . '" />';
@@ -816,6 +817,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                     echo '</div>';
                         if ($commentOwner == $ID || $postOwner == $ID) {
                             //<!--DELETE BUTTON ------------------>
+
                             echo '<div class="comment-delete">';
                             echo '<form action="" method="post" onsubmit="return confirm(\'Do you really want to delete this comment?\')">';
                             echo '<input type="hidden" name="commentID" id="commentID" value="' .  $commentID . '" />';
