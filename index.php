@@ -54,7 +54,7 @@ get_head_files();
 
                 <form method="post" action="signup.php" id="rb_signup_form" >
                     <h2>Sign Up</h2>
-                    <h4><a href="how-it-works.php">Click Here To See How It Works</a></h4>
+                    <h4><a href="how_it_works.php">Click Here To See How It Works</a></h4>
 
                     <div class="form-group row" id="form-group-firstName">
                         <div class="col-xs-12 col-md-12 col-md-6 col-lg-6 ">
