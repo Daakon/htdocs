@@ -280,7 +280,7 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
 
                     echo "<div class='post'>$message</div>";
 
-                    echo "<div style='opacity:0.5'>".date('l F Y g:i:s A',strtotime($date))."</div>";
+                    echo "<div style='opacity:0.5'>".date('l F d Y g:i:s A',strtotime($date))."</div>";
                     echo "<hr/>";
                     echo "<br/>";
                 }
