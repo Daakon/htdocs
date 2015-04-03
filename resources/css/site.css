@@ -204,9 +204,13 @@ li {
     padding-bottom:10px;
 }
 
-.how-it-works {
-    margin-bottom:10px;
-    padding-top:30px;
+.how-it-works-header {
+    font-weight:bold;
+    font-size:20px;
+}
+
+.how-it-works-row {
+    padding-top:10px;
 }
 
 .how-it-works-img {
@@ -214,4 +218,10 @@ li {
     width:200px;
     border:1px solid black;
     margin-right:10px;
+}
+
+.post {
+    padding-top:5px;
+    padding-bottom:5px;
+    font-size:16px;
 }

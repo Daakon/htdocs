@@ -22,7 +22,7 @@ $category = "";
 
 if (isset($_POST['submit'])) {
     if ($_SESSION['Post'] == $_POST['post']) {
-        echo "<script>alert('You cannot post the same post twice');</script>";
+        echo "<script>alert('You post appears to be empty');</script>";
     } else {
         if (strlen($post) > 0) {
 
@@ -69,8 +69,7 @@ if (isset($_POST['submit'])) {
                     } else if ($type == "image/gif") {
                         $src = imagecreatefromgif($mediaFile);
                     } else {
-                        echo "<script>alert('Invalid File Type');</script>";
-                        header('Location:home.php');
+                        echo "<script>alert('Invalid File Type');location='home.php'</script>";
                         exit;
                     }
                 }
@@ -122,8 +121,7 @@ if (isset($_POST['submit'])) {
                         imagegif($src, $postMediaFilePath, 100);
 
                     } else {
-                        echo "<script>alert('Invalid File Type');</script>";
-                        header('Location:home.php');
+                        echo "<script>alert('Invalid File Type');location='home.php';</script>";
                         exit;
                     }
                 }
@@ -131,8 +129,7 @@ if (isset($_POST['submit'])) {
 
                 // if photo didn't get uploaded, notify the user
                 if (!file_exists($postMediaFilePath)) {
-                    echo "<script>alert('File could not be uploaded, try uploading a different file type.');</script>";
-                    header('Location:home.php');
+                    echo "<script>alert('File could not be uploaded, try uploading a different file type.');location='home.php'</script>";
                 }
 else {
 
@@ -161,9 +158,7 @@ else {
         $img = '<a href = "' . $videoPath . $mediaName . '"><img src = "' . $images . 'video-bg.jpg" height="100" width = "100" class="img-responsive"/></a>';
     } else {
         // if invalid file type
-        echo '<script>alert("Invalid File Type!");</script>';
-        //echo "<script>location= 'home.php'</script>";
-        header('Location:home.php');
+        echo '<script>alert("Invalid File Type!");location="home.php"</script>';
         exit;
     }
 
@@ -189,9 +184,7 @@ else {
 
             }
         }
-        // prevent double posting
-        $_SESSION['Post'] = $_POST['post'];
-        header('Location: home.php');
+
     }
 }
 
@@ -220,7 +213,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
         $comment = makeLinks($comment);
 
         if ($_SESSION['PostComment'] == $_POST['postComment']) {
-            echo "<script>alert('You cannot post the same comment twice');</script>";
+            echo "<script>alert('Your comment appears to be empty');</script>";
         } else {
 
 // if photo is provided
@@ -228,8 +221,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
 // check file size
                 if ($_FILES['flPostMedia']['size'] > 50000000) {
-                    echo '<script>alert("File is too large. The maximum file size is 50MB.");</script>';
-                    header('Location:home.php');
+                    echo '<script>alert("File is too large. The maximum file size is 50MB.");location="home.php"</script>';
                     exit;
                 }
 
@@ -266,8 +258,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                     } else if ($type == "image/gif") {
                         $src = imagecreatefromgif($mediaFile);
                     } else {
-                        echo "<script>alert('Invalid File Type'); </script>";
-                        header('Location:home.php');
+                        echo "<script>alert('Invalid File Type');location='home.php' </script>";
                         exit;
                     }
 
@@ -313,8 +304,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
 // if photo didn't get uploaded, notify the user
                 if (!file_exists($postMediaFilePath)) {
-                    echo "<script>alert('File could not be uploaded, try uploading a different file type.');</script>";
-                    header('Location:home.php');
+                    echo "<script>alert('File could not be uploaded, try uploading a different file type.');location='home.php'</script>";
                 } else {
 
                     // determine which table to put photo pointer in
@@ -344,8 +334,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                     } else {
                         // if invalid file type
                         echo '<script>alert("Invalid File Type!");</script>';
-                        //echo "<script>location= 'home.php'</script>";
-                        header('Location:home.php');
+                        echo "<script>location= 'home.php'</script>";
                         exit;
                     }
 
@@ -582,8 +571,8 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                 <input type="file" width="10px;" name="flPostMedia" id="flPostMedia"/>
                 <input type="hidden" name="MAX_FILE_SIZE" value="500000000"
                 <br/>
-                <input type="text" name="post" id="post" class="form-control" style="border:1px solid black"
-                       placeholder="Share Your Talent"/>
+                <textarea name="post" id="post" class="form-control" style="border:1px solid black"
+                       placeholder="Share Your Talent" ></textarea>
                 <br/>
                 <input type="submit" class="post-button" name="submit" id="submit" value="Post"/>
             </form>
@@ -631,9 +620,8 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                  title="<?php echo $name ?>" class='enlarge-onhover img-responsive'/> &nbsp <b><font
                     size="4"><?php echo $name ?></font></b>
 
-            <br/><br/>
 
-            <p><?php echo nl2br($post); ?></p>
+            <div class="post"><?php echo nl2br($post); ?></div>
 
 
             <?php
@@ -719,7 +707,6 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
 
                 <?php
-                // get post comments
                 $sql3 = "SELECT DISTINCT
                         PostComments.Comment As PostComment,
                         PostComments.ID As PostCommentID,
@@ -738,8 +725,8 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
 
                 $result3 = mysql_query($sql3) or die(mysql_error());
-                if (mysql_numrows($result3) > 0) {
                     echo '<br/>';
+                if (mysql_numrows($result3) > 0) {
                     echo '<div class="comment-style">';
                     while ($rows3 = mysql_fetch_assoc($result3)) {
                         $comment = $rows3['PostComment'];
@@ -785,8 +772,10 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                         WHERE
                         PostComments.Post_ID = $postID
                         And Members.ID = PostComments.Member_ID
-                        And Members.ID = Profile.Member_ID
                         And PostComments.IsDeleted = 0
+                        And Members.ID = Profile.Member_ID
+
+
                         Group By PostComments.ID
                         Order By PostComments.ID DESC LIMIT 3, 100 ";
 

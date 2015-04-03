@@ -12,6 +12,6 @@ elseif (strstr($url, "dev")) {
     $videoPath = "http://dev.rapportbook.com/media/";
 }
 else {
-    $videoPath = "http://dev.rapportbook.com/media/";
+    $videoPath = "http://rapportbook.com/media/";
 }
 ?>

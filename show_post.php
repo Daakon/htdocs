@@ -554,24 +554,6 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
             <li><a href="/profile.php/<?php echo get_username($ID) ?>">Go To Your Profile</a></li>
         </ul>
 
-        <div class="col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8 roll-call ">
-            <img src="/images/roll-call.gif" height="150px" width="150px" alt="Roll Call"/>
-            <br/>
-
-            <form method="post" enctype="multipart/form-data" action="">
-                <img src="/images/image-icon.png" height="30px" width="30px" alt="Photos/Video"/>
-                <strong>Attach Photo/Video To Your Post</strong>
-                <input type="file" width="10px;" name="flPostMedia" id="flPostMedia"/>
-                <input type="hidden" name="MAX_FILE_SIZE" value="500000000"
-                <br/>
-                <input type="text" name="post" id="post" class="form-control" style="border:1px solid black"
-                       placeholder="Share Your Talent"/>
-                <br/>
-                <input type="submit" class="post-button" name="submit" id="submit" value="Post"/>
-            </form>
-        </div>
-    </div>
-
     <?php
     $postID = $_GET['postID'];
 
@@ -614,9 +596,8 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
             <img src="<?php echo $mediaPath. $profilePhoto ?>" class="profilePhoto-Feed" alt=""
                  title="<?php echo $name ?>" class='enlarge-onhover'/> &nbsp <b><font
                     size="4"><?php echo $name ?></font></b>
-            <br/>
 
-            <p><?php echo nl2br($post); ?></p>
+            <div class="post"><?php echo nl2br($post); ?></div>
 
 
             <?php
@@ -697,7 +678,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
                 <br/>
                 <?php
-                // get bulletin comments
+                // get post comments
                 $sql3 = "SELECT DISTINCT
                         PostComments.Comment As PostComment,
                         PostComments.ID As PostCommentID,
@@ -711,7 +692,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                         AND Members.ID = Profile.Member_ID
                         And Members.ID = PostComments.Member_ID
                         Group By PostComments.ID
-                        Order By PostComments.ID ASC LIMIT 3 ";
+                        Order By PostComments.ID DESC LIMIT 3 ";
 
 
                 $result3 = mysql_query($sql3) or die(mysql_error());
@@ -721,10 +702,23 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                     while ($rows3 = mysql_fetch_assoc($result3)) {
                         $comment = $rows3['PostComment'];
                         $profilePhoto = $rows3['ProfilePhoto'];
+                        $commentOwner = $rows3['MemberID'];
 
                         echo '<tr><td style="width:60px;padding-bottom:10px;" valign = "top">';
 
                         echo '<img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" style = "border:1px solid black" class ="enlarge-onhover" />&nbsp;</td><td valign = "top"><b>' . $rows3['FirstName'] . ' ' . $rows3['LastName'] . '</b>&nbsp;&nbsp;' . nl2br($comment) . '</span>';
+
+                        if ($commentOwner == $ID || $postOwner == $ID) {
+                            //<!--DELETE BUTTON ------------------>
+
+                            echo '<div class="comment-delete">';
+                            echo '<form action="" method="post" onsubmit="return confirm(\'Do you really want to delete this comment?\')">';
+                            echo '<input type="hidden" name="commentID" id="commentID" value="' .  $commentID . '" />';
+                            echo '<input type ="submit" name="DeleteComment" id="DeleteComment" value="Delete" class="deleteButton" />';
+                            echo '</form>';
+                            echo '</div>';
+                            //<!------------------------------------->
+                        }
                         echo '</td></tr>';
                     }
                     echo '</table>';
@@ -750,7 +744,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                         And Members.ID = PostComments.Member_ID
                         And Members.ID = Profile.Member_ID
                         Group By PostComments.ID
-                        Order By PostComments.ID ASC LIMIT 3, 100 ";
+                        Order By PostComments.ID DESC LIMIT 3, 100 ";
 
                 $result4 = mysql_query($sql4) or die(mysql_error());
                 if (mysql_numrows($result4) > 0) {
@@ -768,9 +762,22 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                     while ($rows4 = mysql_fetch_assoc($result4)) {
                         $comment = $rows4['PostComment'];
                         $profilePhoto = $rows4['ProfilePhoto'];
+                        $commentOwner = $rows4['MemberID'];
 
                         echo '<tr><td style = "width:60px;padding-bottom:10px;" valign = "top">';
-                        echo '<img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" style = "border:1px solid black" class ="enlarge-onhover" />&nbsp;</td><td valign = "top"><b>' . $rows4['FirstName'] . $rows['LastName'] . '</b>&nbsp;&nbsp;' . nl2br($comment) . '</span>';
+                        echo '<img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" style = "border:1px solid black" class ="enlarge-onhover" />&nbsp;</td><td valign = "top"><b>' . $rows4['FirstName'] .' '. $rows4['LastName'] . '</b>&nbsp;&nbsp;' . nl2br($comment) . '</span>';
+
+                        if ($commentOwner == $ID || $postOwner == $ID) {
+                            //<!--DELETE BUTTON ------------------>
+
+                            echo '<div class="comment-delete">';
+                            echo '<form action="" method="post" onsubmit="return confirm(\'Do you really want to delete this comment?\')">';
+                            echo '<input type="hidden" name="commentID" id="commentID" value="' .  $commentID . '" />';
+                            echo '<input type ="submit" name="DeleteComment" id="DeleteComment" value="Delete" class="deleteButton" />';
+                            echo '</form>';
+                            echo '</div>';
+                            //<!------------------------------------->
+                        }
 
                         echo '</td></tr>';
 

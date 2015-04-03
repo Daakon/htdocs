@@ -23,7 +23,6 @@ if (!empty($_GET['btnDelete']) && ($_GET['btnDelete'] == 'Delete')) {
     mysql_query($sql) or die(mysql_error());
 
     echo "<script>location = 'member_photos.php'</script>";
-//    header('Location:/member_photos.php');
 
 }
 ?>
@@ -803,8 +802,7 @@ $profileMediaSrc = trim("media/" . $profilePhoto);
 
 
                     if (empty($profileMediaSrc)) {
-                        echo "<script>alert('Image not found');</script>";
-                        header('Location:home.php');
+                        echo "<script>alert('Image not found');location='home.php'</script>";
                     }
 
                     }

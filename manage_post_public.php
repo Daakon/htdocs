@@ -60,7 +60,6 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 // check file size
             if ($_FILES['flPostMedia']['size'] > 50000000) {
                 echo '<script>alert("File is too large. The maximum file size is 50MB.");</script>';
-                header('Location:manage_post.php');
                 exit;
             }
 
@@ -99,7 +98,6 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                     $src = imagecreatefromgif($mediaFile);
                 } else {
                     echo "<script>alert('Invalid File Type');</script>";
-                    header('Location:manage_post.php');
                     exit;
                 }
             }
@@ -157,7 +155,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 // if photo didn't get uploaded, notify the user
             if (!file_exists($postMediaFilePath)) {
                 echo "<script>alert('File could not be uploaded, try uploading a different file type.');</script>";
-                header('Location:manage_post.php');
+                exit;
             }
 
             imagedestroy($src);
@@ -189,9 +187,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                 $img = '<a href = "' . $videoPath . $mediaName . '"><img src = "' . $images . 'video-bg.jpg" height="100" width = "100" class="img-responsive"/></a>';
             } else {
                 // if invalid file type
-                echo '<script>alert("Invalid File Type!");</script>';
-                //echo "<script>location= 'home.php'</script>";
-                header('Location:manage_post.php');
+                echo '<script>alert("Invalid File Type!");location="home.php"</script>';
                 exit;
             }
 
@@ -456,9 +452,7 @@ if (isset($_POST['Delete']) && $_POST['Delete'] == "Delete") {
                  title="<?php echo $name ?>" class='enlarge-onhover img-responsive'/> &nbsp <b><font
                     size="4"><?php echo $name ?></font></b>
 
-            <br/><br/>
-
-            <p><?php echo nl2br($post); ?></p>
+            <div class="post"><?php echo nl2br($post); ?></div>
 
 
             <!------------------------------------->
