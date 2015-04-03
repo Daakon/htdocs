@@ -171,13 +171,13 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
         $message = $message . '<br/><br/>' . $img . '<br/>';
 
         // create thread for sender
-        $sql = "INSERT INTO Messages (ThreadOwner_ID, Sender_ID,  Receiver_ID,    Subject,    Message,  InitialMessage) Values
-                                     ($ID,             $ID,       $receiverID, '$subject',  '$message', $senderInitialMessage) ";
+        $sql = "INSERT INTO Messages (ThreadOwner_ID, Sender_ID,  Receiver_ID,    Subject,    Message,  InitialMessage,        MessageDate        ) Values
+                                     ($ID,             $ID,       $receiverID, '$subject',  '$message', $senderInitialMessage, CURRENT_TIMESTAMP ) ";
         mysql_query($sql) or die(mysql_error());
 
         // create thread for receiver
-        $sql = "INSERT INTO Messages (ThreadOwner_ID, Sender_ID, Receiver_ID,  Subject,    Message,   InitialMessage,  New) VALUES
-                                    ($receiverID,    $ID,        $receiverID, '$subject', '$message', '$receiverInitialMessage',  '1') ";
+        $sql = "INSERT INTO Messages (ThreadOwner_ID, Sender_ID, Receiver_ID,  Subject,    Message,   InitialMessage,             New,  MessageDate       ) VALUES
+                                    ($receiverID,    $ID,        $receiverID, '$subject', '$message', '$receiverInitialMessage',  '1',  CURRENT_TIMESTAMP ) ";
         mysql_query($sql) or die(mysql_error());
 
         echo "<script>alert('Message Sent'); </script>";
@@ -189,13 +189,13 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
     else {
 
         // create thread for sender
-        $sql = "INSERT INTO Messages (ThreadOwner_ID, Sender_ID,  Receiver_ID,    Subject,    Message, InitialMessage) Values
-                                      ($ID,             $ID,       $receiverID, '$subject',  '$message',    '$senderInitialMessage') ";
+        $sql = "INSERT INTO Messages (ThreadOwner_ID, Sender_ID,  Receiver_ID,    Subject,    Message, InitialMessage,              MessageDate) Values
+                                      ($ID,             $ID,       $receiverID, '$subject',  '$message',    '$senderInitialMessage', CURRENT_TIMESTAMP ) ";
         mysql_query($sql) or die(mysql_error());
 
         // create thread for receiver
-        $sql = "INSERT INTO Messages (ThreadOwner_ID, Sender_ID, Receiver_ID,  Subject,    Message,   InitialMessage,    New) VALUES
-                                    ($receiverID,    $ID,        $receiverID, '$subject', '$message',  '$receiverInitialMessage', '1') ";
+        $sql = "INSERT INTO Messages (ThreadOwner_ID, Sender_ID, Receiver_ID,  Subject,    Message,   InitialMessage,             New,  MessageDate       ) VALUES
+                                    ($receiverID,    $ID,        $receiverID, '$subject', '$message',  '$receiverInitialMessage', '1',  CURRENT_TIMESTAMP ) ";
         mysql_query($sql) or die(mysql_error());
 
         echo "<script>alert('Message Sent'); </script>";
@@ -271,6 +271,8 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
 
                     echo "<img src = '$mediaPath$pic' class='profilePhoto-Feed' alt='' /> $name";
                     echo "<div class='post'>$message</div>";
+
+                    echo "<div style='opacity:0.5'>".date('l F Y g:i:s A',strtotime($date))."</div>";
                     echo "<hr/>";
                     echo "<br/>";
                 }
