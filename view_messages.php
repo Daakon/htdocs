@@ -276,8 +276,8 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
                     $name = $rows2['FirstName'] . ' ' . $rows2['LastName'];
 
                     echo "<img src = '$mediaPath$pic' class='profilePhoto-Feed' alt='' /> $name";
-                    echo "<br/><br/>";
-                    echo "$message";
+
+                    echo "<div class='post'>$message</div>";
                     echo "<hr/>";
                     echo "<br/>";
                 }
