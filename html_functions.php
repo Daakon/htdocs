@@ -71,12 +71,27 @@ function get_header()
              title="" />
 <?php } ?>
 
-        <!--mobile logout -->
-        <a href="/logout.php" style="color:white;" class=" visible-sm visible-md visible-lg pull-right">Log Out</a>
+        <!--desktop layout -->
+        <?php if (!empty($_COOKIE['ID']) && isset($_COOKIE['ID'])) { ?>
+        <div class=" visible-sm visible-md visible-lg pull-right">
+            <ul class="list-inline">
+                <li><a href="/support.php" style="color:white;">Support</a></li>
+                <li><a href="/logout.php" style="color:white;" >Log Out</a></li>
+            </ul>
+        </div>
+    <?php } ?>
+
     </header>
 
+    <!--mobile layout -->
     <?php if (!empty($_COOKIE['ID']) && isset($_COOKIE['ID'])) { ?>
-<a href ="/logout.php" style="color:black" class="visible-xs black-link"><h6>Log Out</h6></a>
+    <div class="visible-xs black-link">
+        <ul class="list-inline">
+            <li><a href="/support.php" style="color:black">Support</a></li>
+            <li><a href ="/logout.php" style="color:black" >Log Out</a></li>
+           </ul>
+
+    </div>
     <br/>
 
 
