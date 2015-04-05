@@ -27,6 +27,14 @@ $ID = $_SESSION['ID'];
 
     <div class="col-xs-12 col-md-8 col-lg-8 col-md-offset-2 roll-call">
 
+        <div style="padding-top:10px">
+        <?php if (empty($_SESSION['ID']) || !isset($_SESSION['ID'])) { ?>
+            <a href="/index.php" ><h4>Login or Sign Up</h4></a></h4>
+            <?php } else { ?>
+            <a href="/home.php">Back to Roll Call</a>
+        <?php } ?>
+        </div>
+        
         <img src="<?php echo $images ?>faq.jpg" class="img-responsive" />
 
         <br/>

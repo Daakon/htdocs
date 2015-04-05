@@ -1,24 +1,24 @@
 <?php
 require 'connect.php';
+require 'model_functions.php';
+require 'mediaPath.php';
+require 'getSession_public.php';
 require 'html_functions.php';
+
+require 'findURL.php';
+
+require 'email.php';
+
 get_head_files();
+get_header();
 ?>
-
-
-
 
 <body>
 
-<?php
-get_header()
-?>
 
-<div class="container" style="background:white;padding:20px;border:1px solid black;border-radius:10px;">
-    <div class="col-lg-offset-2 col-md-offset-2">
+<div class="container" >
+    <div class="col-lg-offset-2 col-md-offset-2 col-lg-8 col-md-8 roll-call">
 
-    </div>
-
-    <div class="col-xs-12 col-md-10 col-lg-10">
 
         <h1><div style = "color:red;">Create A New Password</div></h1>
 
@@ -49,7 +49,7 @@ get_header()
 
         ?>
 
-    </div>
+
 </div>
 
 

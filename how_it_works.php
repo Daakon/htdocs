@@ -2,23 +2,26 @@
 require 'connect.php';
 require 'html_functions.php';
 require 'mediaPath.php';
+require 'getSession_public.php';
 get_head_files();
+get_header()
 ?>
-
-
 
 
 <body>
 
-<?php
-get_header()
-?>
 
 <div class="container">
 
 
     <div class="col-xs-12 col-md-8 col-lg-8 col-md-offset-2 roll-call">
-        <div align="left"><a href="/index.php" ><h4>Login or Sign Up</h4></a></h4>
+        <div align="left">
+            <?php if (empty($_SESSION['ID']) || !isset($_SESSION['ID'])) { ?>
+            <a href="/index.php" ><h4>Login or Sign Up</h4></a></h4>
+            <?php } else { ?>
+            <a href="/home.php">Back to Roll Call</a>
+            <?php } ?>
+
         <div class="row how-it-works-row">
 
             <div class="col-xs-12 col-md-5 col-md-offset-1">

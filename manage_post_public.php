@@ -560,6 +560,7 @@ if (isset($_POST['Delete']) && $_POST['Delete'] == "Delete") {
                         PostComments.Post_ID = $postID
                         AND Members.ID = Profile.Member_ID
                         And Members.ID = PostComments.Member_ID
+                        And PostComments.IsDeleted = 0
                         Group By PostComments.ID
                         Order By PostComments.ID ASC LIMIT 3 ";
 
