@@ -57,8 +57,8 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
     if (isset($_FILES['flPostMedia']) && strlen($_FILES['flPostMedia']['name']) > 1) {
 
 // check file size
-        if ($_FILES['flPostMedia']['size'] > 50000000) {
-            echo '<script>alert("File is too large. The maximum file size is 50MB.");location = "home.php?"</script>';
+        if ($_FILES['flPostMedia']['size'] > 500000000) {
+            echo '<script>alert("File is too large. The maximum file size is 500MB.");</script>';
             exit;
         }
 
@@ -205,7 +205,7 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
 
     // notify recipient of email
     build_and_send_email($ID, $receiverID,8, "");
-
+    echo "<script>location = 'view_messages.php?id=$receiverID'</script>";
 }
 ?>
 

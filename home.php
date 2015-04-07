@@ -186,6 +186,7 @@ else {
         }
 
     }
+    echo '<meta http-equiv="Location" content="/home.php">';
 }
 
 ?>
@@ -457,10 +458,9 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 //=========================================================================================================================//
 //BELOW IS END OF POST COMMENT HANDLING CODE ==========================================================================//
 
-            // prevent double posting
-            $_SESSION['PostComment'] = $_POST['postComment'];
         }
     }
+    echo '<meta http-equiv="Location" content="/home.php">';
 }
 
 if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
