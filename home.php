@@ -27,7 +27,7 @@ if (isset($_POST['submit'])) {
         if (strlen($post) > 0) {
 
 
-            makeLinks($post);
+            $post = makeLinks($post);
 
             // if photo is provided
             if (strlen($_FILES['flPostMedia']['name']) > 0) {
