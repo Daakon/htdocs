@@ -33,7 +33,7 @@ if (isset($_POST['submit'])) {
             if (strlen($_FILES['flPostMedia']['name']) > 0) {
 
                 // check file size
-                if ($_FILES['flPostMedia']['size'] > 500000000) {
+                if ($_FILES['flPostMedia']['size'] > 600000000) {
 
                     exit();
                 }
@@ -359,21 +359,30 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
 
 // get photo owner data
-
+                    $sql = "SELECT Member_ID FROM Posts WHERE ID = $postID";
+                    $result = mysql_query($sql) or die(mysql_error());
+                    $rows = mysql_fetch_assoc($result);
+                    $ownerId = $rows['Member_ID'];
                     $sqlOwner = "SELECT ID, FirstName, LastName FROM Members WHERE ID = '$ownerId' ";
                     $resultOwner = mysql_query($sqlOwner) or die(mysql_error());
                     $rowsOwner = mysql_fetch_assoc($resultOwner);
                     $name2 = $rowsOwner['FirstName'] . ' ' . $rowsOwner['LastName'];
-                    $name2 = $name2;
+                    $name2 = $name2."'s";
                     $ownerId = $rowsOwner['ID'];
                     $name2Link = $name2;
 
                     // determine noun if profile owner commented on their own post and write bulletin
 
-                    if ($gender == 1) {
-                        $noun = 'his';
-                    } else {
-                        $noun = 'her';
+                    if ($ownerId == $ID) {
+                        if ($gender == 1) {
+                            $noun = 'his';
+                        } else {
+                            $noun = 'her';
+                        }
+                    }
+                    else {
+
+                        $noun = $name2;
                     }
 
                     $post = "$nameLink posted a new $mediaString comment on $noun post.<br/><br/>$img<br/>";
