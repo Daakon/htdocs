@@ -5,8 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="51867226-c8dd-43fb-9a46-7c8a9e9ab742" name="Default" comment="Added media page.&#10;&#10;">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/home.php" afterPath="$PROJECT_DIR$/home.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/messages.php" afterPath="$PROJECT_DIR$/messages.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/view_messages.php" afterPath="$PROJECT_DIR$/view_messages.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/view_messages_public.php" afterPath="$PROJECT_DIR$/view_messages_public.php" />
     </list>
     <ignored path="htdocs.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -36,7 +37,53 @@
     <favorites_list name="htdocs" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="view_messages.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/view_messages.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="88.89286" vertical-offset="3363" max-vertical-offset="6156">
+              <caret line="46" column="10" selection-start-line="46" selection-start-column="10" selection-end-line="46" selection-end-column="10" />
+              <folding>
+                <marker date="1428460701000" expanded="true" signature="678:801" placeholder="SELECT * FRO..Messages..." />
+                <marker date="1428460701000" expanded="true" signature="1103:1221" placeholder="SELECT * FRO..Messages..." />
+                <marker date="1428460701000" expanded="true" signature="5852:6128" placeholder="INSERT INTO ..." />
+                <marker date="1428460701000" expanded="true" signature="6236:6532" placeholder="INSERT INTO ..." />
+                <marker date="1428460701000" expanded="true" signature="6788:7081" placeholder="INSERT INTO ..." />
+                <marker date="1428460701000" expanded="true" signature="7189:7491" placeholder="INSERT INTO ..." />
+                <marker date="1428460701000" expanded="true" signature="7922:8028" placeholder="DELETE FROM ..." />
+                <marker date="1428460701000" expanded="true" signature="8553:8720" placeholder="SELECT * FRO..Messages..." />
+                <marker date="1428460701000" expanded="true" signature="9028:9212" placeholder="SELECT * FRO..Messages..." />
+                <marker date="1428460701000" expanded="true" signature="9611:9787" placeholder="SELECT First..Members..." />
+                <marker date="1428460701000" expanded="true" signature="10259:10270" placeholder="..." />
+                <marker date="1428460701000" expanded="true" signature="11731:11840" placeholder="UPDATE Messa..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="view_messages_public.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/view_messages_public.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-4.8007665" vertical-offset="3323" max-vertical-offset="5928">
+              <caret line="43" column="10" selection-start-line="43" selection-start-column="10" selection-end-line="43" selection-end-column="10" />
+              <folding>
+                <marker date="1428460898000" expanded="true" signature="564:687" placeholder="SELECT * FRO..Messages..." />
+                <marker date="1428460898000" expanded="true" signature="989:1107" placeholder="SELECT * FRO..Messages..." />
+                <marker date="1428460898000" expanded="true" signature="5817:6102" placeholder="INSERT INTO ..." />
+                <marker date="1428460898000" expanded="true" signature="6210:6512" placeholder="INSERT INTO ..." />
+                <marker date="1428460898000" expanded="true" signature="6768:7056" placeholder="INSERT INTO ..." />
+                <marker date="1428460898000" expanded="true" signature="7164:7466" placeholder="INSERT INTO ..." />
+                <marker date="1428460898000" expanded="true" signature="7820:7926" placeholder="DELETE FROM ..." />
+                <marker date="1428460898000" expanded="true" signature="8433:8625" placeholder="SELECT * FRO..Messages..." />
+                <marker date="1428460898000" expanded="true" signature="8933:9117" placeholder="SELECT * FRO..Messages..." />
+                <marker date="1428460898000" expanded="true" signature="9465:9641" placeholder="SELECT First..Members..." />
+                <marker date="1428460898000" expanded="true" signature="10112:10123" placeholder="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -65,7 +112,6 @@
         <option value="$PROJECT_DIR$/mediaPath.php" />
         <option value="$PROJECT_DIR$/forgot-password.php" />
         <option value="$PROJECT_DIR$/member_photos.php" />
-        <option value="$PROJECT_DIR$/messages.php" />
         <option value="$PROJECT_DIR$/getSession_public.php" />
         <option value="$PROJECT_DIR$/media_post_file_path.php" />
         <option value="$PROJECT_DIR$/profile.php" />
@@ -92,9 +138,10 @@
         <option value="$PROJECT_DIR$/how_it_works.php" />
         <option value="$PROJECT_DIR$/support.php" />
         <option value="$PROJECT_DIR$/findURL.php" />
+        <option value="$PROJECT_DIR$/home.php" />
+        <option value="$PROJECT_DIR$/messages.php" />
         <option value="$PROJECT_DIR$/view_messages.php" />
         <option value="$PROJECT_DIR$/view_messages_public.php" />
-        <option value="$PROJECT_DIR$/home.php" />
       </list>
     </option>
   </component>
@@ -103,8 +150,8 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" interpreter_name="PHP 5.5" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="66" />
-    <option name="y" value="62" />
+    <option name="x" value="29" />
+    <option name="y" value="43" />
     <option name="width" value="1214" />
     <option name="height" value="686" />
   </component>
@@ -143,7 +190,7 @@
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="full.screen.before.presentation.mode" value="false" />
     <property name="FullScreen" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/memory_settings.php" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/view_messages_public.php" />
     <property name="LayoutCode.rearrangeEntriesPHP" value="false" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="191" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
@@ -313,8 +360,8 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="66" y="62" width="1214" height="686" extended-state="1" />
-    <editor active="false" />
+    <frame x="29" y="43" width="1214" height="686" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -482,13 +529,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.6015831" vertical-offset="494" max-vertical-offset="1900">
           <caret line="50" column="57" selection-start-line="50" selection-start-column="57" selection-end-line="50" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/messages.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.42612138" vertical-offset="342" max-vertical-offset="1558">
-          <caret line="35" column="147" selection-start-line="35" selection-start-column="147" selection-end-line="35" selection-end-column="147" />
         </state>
       </provider>
     </entry>
@@ -710,47 +750,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/view_messages.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="3800" max-vertical-offset="6156">
-          <caret line="207" column="74" selection-start-line="207" selection-start-column="4" selection-end-line="207" selection-end-column="74" />
-          <folding>
-            <marker date="1428447459000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..Messages..." />
-            <marker date="1428447459000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..Messages..." />
-            <marker date="1428447459000" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
-            <marker date="1428447459000" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
-            <marker date="1428447459000" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
-            <marker date="1428447459000" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
-            <marker date="1428447459000" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
-            <marker date="1428447459000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..Messages..." />
-            <marker date="1428447459000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..Messages..." />
-            <marker date="1428447459000" expanded="true" signature="-1:-1" placeholder="SELECT First..Members..." />
-            <marker date="1428447459000" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1428447459000" expanded="true" signature="-1:-1" placeholder="UPDATE Messa..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view_messages_public.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="3488" max-vertical-offset="5928">
-          <caret line="202" column="50" selection-start-line="202" selection-start-column="50" selection-end-line="202" selection-end-column="50" />
-          <folding>
-            <marker date="1428449880000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..Messages..." />
-            <marker date="1428449880000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..Messages..." />
-            <marker date="1428449880000" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
-            <marker date="1428449880000" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
-            <marker date="1428449880000" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
-            <marker date="1428449880000" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
-            <marker date="1428449880000" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
-            <marker date="1428449880000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..Messages..." />
-            <marker date="1428449880000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..Messages..." />
-            <marker date="1428449880000" expanded="true" signature="-1:-1" placeholder="SELECT First..Members..." />
-            <marker date="1428449880000" expanded="true" signature="-1:-1" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/media_sizes.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.882243" vertical-offset="472" max-vertical-offset="1273">
@@ -799,6 +798,59 @@
             <marker date="1428457377000" expanded="true" signature="-1:-1" placeholder="SELECT DISTI..PostComments..." />
             <marker date="1428457377000" expanded="true" signature="-1:-1" placeholder="..." />
             <marker date="1428457377000" expanded="true" signature="-1:-1" placeholder="SELECT DISTI..PostComments..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/messages.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.4195403" vertical-offset="532" max-vertical-offset="1558">
+          <caret line="67" column="12" selection-start-line="67" selection-start-column="12" selection-end-line="67" selection-end-column="12" />
+          <folding>
+            <marker date="1428459638000" expanded="true" signature="-1:-1" placeholder="SELECT DISTI..Messages..." />
+            <marker date="1428459638000" expanded="true" signature="-1:-1" placeholder="SELECT First..Members..." />
+            <marker date="1428459638000" expanded="true" signature="-1:-1" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view_messages.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="88.89286" vertical-offset="3363" max-vertical-offset="6156">
+          <caret line="46" column="10" selection-start-line="46" selection-start-column="10" selection-end-line="46" selection-end-column="10" />
+          <folding>
+            <marker date="1428460701000" expanded="true" signature="678:801" placeholder="SELECT * FRO..Messages..." />
+            <marker date="1428460701000" expanded="true" signature="1103:1221" placeholder="SELECT * FRO..Messages..." />
+            <marker date="1428460701000" expanded="true" signature="5852:6128" placeholder="INSERT INTO ..." />
+            <marker date="1428460701000" expanded="true" signature="6236:6532" placeholder="INSERT INTO ..." />
+            <marker date="1428460701000" expanded="true" signature="6788:7081" placeholder="INSERT INTO ..." />
+            <marker date="1428460701000" expanded="true" signature="7189:7491" placeholder="INSERT INTO ..." />
+            <marker date="1428460701000" expanded="true" signature="7922:8028" placeholder="DELETE FROM ..." />
+            <marker date="1428460701000" expanded="true" signature="8553:8720" placeholder="SELECT * FRO..Messages..." />
+            <marker date="1428460701000" expanded="true" signature="9028:9212" placeholder="SELECT * FRO..Messages..." />
+            <marker date="1428460701000" expanded="true" signature="9611:9787" placeholder="SELECT First..Members..." />
+            <marker date="1428460701000" expanded="true" signature="10259:10270" placeholder="..." />
+            <marker date="1428460701000" expanded="true" signature="11731:11840" placeholder="UPDATE Messa..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view_messages_public.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.8007665" vertical-offset="3323" max-vertical-offset="5928">
+          <caret line="43" column="10" selection-start-line="43" selection-start-column="10" selection-end-line="43" selection-end-column="10" />
+          <folding>
+            <marker date="1428460898000" expanded="true" signature="564:687" placeholder="SELECT * FRO..Messages..." />
+            <marker date="1428460898000" expanded="true" signature="989:1107" placeholder="SELECT * FRO..Messages..." />
+            <marker date="1428460898000" expanded="true" signature="5817:6102" placeholder="INSERT INTO ..." />
+            <marker date="1428460898000" expanded="true" signature="6210:6512" placeholder="INSERT INTO ..." />
+            <marker date="1428460898000" expanded="true" signature="6768:7056" placeholder="INSERT INTO ..." />
+            <marker date="1428460898000" expanded="true" signature="7164:7466" placeholder="INSERT INTO ..." />
+            <marker date="1428460898000" expanded="true" signature="7820:7926" placeholder="DELETE FROM ..." />
+            <marker date="1428460898000" expanded="true" signature="8433:8625" placeholder="SELECT * FRO..Messages..." />
+            <marker date="1428460898000" expanded="true" signature="8933:9117" placeholder="SELECT * FRO..Messages..." />
+            <marker date="1428460898000" expanded="true" signature="9465:9641" placeholder="SELECT First..Members..." />
+            <marker date="1428460898000" expanded="true" signature="10112:10123" placeholder="..." />
           </folding>
         </state>
       </provider>

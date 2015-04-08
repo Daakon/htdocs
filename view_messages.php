@@ -44,7 +44,7 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
     $sql="SELECT * FROM Messages WHERE ThreadOwner_ID = $checkID And Receiver_ID = $ID Or Sender_ID = $ID And InitialMessage = 1 ";
     $result = mysql_query($sql) or die(mysql_error());
     $numRows = mysql_num_rows($result);
-    $recieverInitialMessage;
+    $receiverInitialMessage;
 
     if ($numRows > 0) {
         $receiverInitialMessage = 0;
