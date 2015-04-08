@@ -136,3 +136,13 @@ $('#signup').on("click", function (event) {
 
 });
 
+$('input#submit').click(function(){
+    if ($('#flPostMedia').val()) {
+        $('#post-loading-box').css('display', 'block');
+    }
+});
+$('input#btnComment').click(function(){
+    if ($('#flPostMedia').val()) {
+        $('#post-loading-box').css('display', 'block');
+    }
+});

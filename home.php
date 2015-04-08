@@ -22,7 +22,7 @@ $category = "";
 
 if (isset($_POST['submit'])) {
     if ($_SESSION['Post'] == $_POST['post']) {
-        echo "<script>alert('You post appears to be empty');</script>";
+        echo "<script>alert('Your post appears to be empty');</script>";
     } else {
         if (strlen($post) > 0) {
 
@@ -583,7 +583,14 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                 <textarea name="post" id="post" class="form-control" style="border:1px solid black"
                        placeholder="Share Your Talent" ></textarea>
                 <br/>
-                <input type="submit" class="post-button" name="submit" id="submit" value="Post"/>
+                <div id="post-loading-box" style="display:none;">
+                    <div class="progress">
+                      <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                        <span class="sr-only">Loading</span>
+                      </div>
+                    </div>
+                </div>
+                    <input type="submit" class="post-button" name="submit" id="submit" value="Post"/>
             </form>
         </div>
     </div>
@@ -698,6 +705,13 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
                     <input type="file" name="flPostMedia" id="flPostMedia" style="max-width:180px;"/>
                     <br/>
+                    <div id="post-loading-box" style="display:none;">
+                    <div class="progress">
+                      <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                        <span class="sr-only">Loading</span>
+                      </div>
+                    </div>
+                </div>
                     <input type="submit" name="btnComment" id="btnComment" Value="Comment"
                            style="border:1px solid black"/>
                     <input type="hidden" name="postID" id="postID" Value="<?php echo $postID ?>"/>
@@ -870,3 +884,8 @@ if(!empty($_REQUEST['scrolly'])) {
     window.scrollTo(<?php echo "$scrollx" ?>, <?php echo "$scrolly" ?>);
 
 </script>
+
+<?php
+
+get_footer_files();
+?>
