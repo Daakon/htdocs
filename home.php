@@ -21,6 +21,7 @@ $post = mysql_real_escape_string($_POST['post']);
 $category = "";
 
 if (isset($_POST['submit'])) {
+
     if ($_SESSION['Post'] == $_POST['post']) {
         echo "<script>alert('Your post appears to be empty');</script>";
     } else {
@@ -31,6 +32,7 @@ if (isset($_POST['submit'])) {
 
             // if photo is provided
             if (strlen($_FILES['flPostMedia']['name']) > 0) {
+
 
                 // check file size
                 if ($_FILES['flPostMedia']['size'] > 600000000) {
@@ -55,6 +57,7 @@ if (isset($_POST['submit'])) {
                 require 'media_post_file_path.php';
 
                 if (in_array($type, $videoFileTypes)) {
+
                     // convert to mp4
                     $fileName = pathinfo($mediaName, PATHINFO_FILENAME);
                     $newFileName = $fileName.".mp4";
@@ -559,6 +562,14 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 </script>
 
 
+<script>
+    // show uploading
+    function showUploading() {
+        document.getElementById("progress").style.display = "block";
+    }
+</script>
+
+
 <body>
 
 <div class="container">
@@ -574,7 +585,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
             <img src="/images/roll-call.gif" height="150px" width="150px" alt="Roll Call"/>
             <br/>
 
-            <form method="post" enctype="multipart/form-data" action="">
+            <form method="post" enctype="multipart/form-data" action="" onsubmit="showUploading()">
                 <img src="/images/image-icon.png" height="30px" width="30px" alt="Photos/Video"/>
                 <strong>Attach Photo/Video To Your Post</strong>
                 <input type="file" width="10px;" name="flPostMedia" id="flPostMedia"/>
@@ -592,6 +603,11 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                 </div>
                     <input type="submit" class="post-button" name="submit" id="submit" value="Post"/>
             </form>
+            <div id="progress" style="display:none;background:url('/images/progressbar.gif')no-repeat;background-size: 300px 20px;margin-top:10px">
+                <br/>
+                Uploading....
+
+                </div>
         </div>
     </div>
 
