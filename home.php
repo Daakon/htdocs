@@ -602,7 +602,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                 <textarea name="post" id="post" class="form-control" style="border:1px solid black"
                        placeholder="Share Your Talent" ></textarea>
                 <br/>
-                <div id="post-loading-box" style="display:none;">
+                <div id="progress" style="display:none;">
                     <div class="progress">
                       <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
                         <span class="sr-only">Loading</span>
@@ -611,11 +611,6 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                 </div>
                     <input type="submit" class="post-button" name="submit" id="submit" value="Post"/>
             </form>
-            <div id="progress" style="display:none;background:url('/images/progressbar.gif')no-repeat;background-size: 300px 20px;margin-top:10px">
-                <br/>
-                Uploading....
-
-                </div>
         </div>
     </div>
 
