@@ -569,6 +569,14 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
     }
 </script>
 
+<script>
+    // show comment uploading
+    function showCommentUploading(comment, theForm) {
+        document.getElementById(comment).style.display = "block";
+
+        saveScrollPositions(theForm);
+    }
+</script>
 
 <body>
 
@@ -713,7 +721,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
             <div style="padding-top:10px;padding-bottom:10px;margin-top:10px;">
                 <form method="post" action="" enctype="multipart/form-data"
-                      onsubmit="return saveScrollPositions(this);">
+                      onsubmit="showCommentUploading('comment<?php echo $postID?>', this);">
 
                     <input type="text" class="form-control" name="postComment" id="postComment"
                            placeholder="Write a comment" title='' style="border:1px solid black"/>
@@ -721,9 +729,9 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
                     <input type="file" name="flPostMedia" id="flPostMedia" style="max-width:180px;"/>
                     <br/>
-                    <div id="post-loading-box" style="display:none;">
+                    <div id="comment<?php echo $postID ?>" style="display:none;">
                     <div class="progress">
-                      <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                      <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
                         <span class="sr-only">Loading</span>
                       </div>
                     </div>
