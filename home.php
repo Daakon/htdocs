@@ -550,17 +550,14 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
 <script type="text/javascript">
 
-    function showLongPost(short, long) {
-        var shortPost = document.getElementById(short);
+    function showPost(long,short) {
         var longPost = document.getElementById(long);
+        var shortPost = document.getElementById(short);
 
         if (longPost.style.display == 'none') {
             longPost.style.display = 'block';
             shortPost.style.display = 'none';
         }
-        else
-            longPost.style.display = 'none';
-            shortPost.style.display = 'block';
     }
 
 </script>
@@ -678,10 +675,15 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
                 if (strlen($post) > 500) {
 
-                    $post500 = mb_substr($post, 0, 500);
+                    $post500 = mb_substr($post, 0, 500); ?>
 
-                    echo "<p>$post500</p> <a href = 'show_post.php?postID=$postID&rc=true'>Show More</a>";
-
+                    <div id="short<?php echo $postID ?>">
+                    <?php echo nl2br($post500) ?>...<a href="javascript:showPost('long<?php echo $postID ?>', 'short<?php echo $postID ?>');">Show More</a>
+                        </div>
+<?php
+                    echo "<div id='long$postID' style='display:none;'>";
+                        echo nl2br($post);
+                        echo "</div>";
                 }
                 else {
                     echo nl2br($post);
