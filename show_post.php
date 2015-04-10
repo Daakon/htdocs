@@ -551,7 +551,11 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
     <div class="row row-padding">
 
         <ul class="list-inline">
+            <?php if (!empty($_GET['rc'])) { ?>
+            <li><a href="/home.php">Back</a></li>
+           <?php } else { ?>
             <li><a href="/profile.php/<?php echo get_username($ID) ?>">Go To Your Profile</a></li>
+            <?php } ?>
         </ul>
 
     <?php

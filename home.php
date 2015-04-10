@@ -550,6 +550,23 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
 <script type="text/javascript">
 
+    function showLongPost(short, long) {
+        var shortPost = document.getElementById(short);
+        var longPost = document.getElementById(long);
+
+        if (longPost.style.display == 'none') {
+            longPost.style.display = 'block';
+            shortPost.style.display = 'none';
+        }
+        else
+            longPost.style.display = 'none';
+            shortPost.style.display = 'block';
+    }
+
+</script>
+
+<script type="text/javascript">
+
     function showComments(id) {
         var e = document.getElementById(id);
         if (e.style.display == 'none') {
@@ -656,7 +673,23 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                     size="4"><?php echo $name ?></font></b>
 
 
-            <div class="post"><?php echo nl2br($post); ?></div>
+            <div class="post">
+                <?php
+
+                if (strlen($post) > 500) {
+
+                    $post500 = mb_substr($post, 0, 500);
+
+                    echo "<p>$post500</p> <a href = 'show_post.php?postID=$postID&rc=true'>Show More</a>";
+
+                }
+                else {
+                    echo nl2br($post);
+                }
+                echo '<br/><br/>';
+                ?>
+
+            </div>
 
 
             <?php
