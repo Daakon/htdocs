@@ -158,7 +158,8 @@ else {
         $img = '<a href = "media.php?id=' . $ID . '&mid=' . $mediaID . '&mediaName=' . $media . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '">' . $img . '</a>';
     } // check if file type is a video
     elseif (in_array($type, $videoFileTypes)) {
-        $img = '<a href = "' . $videoPath . $mediaName . '"><img src = "' . $images . 'video-bg.jpg" height="100" width = "100" class="img-responsive"/></a>';
+        //$img = '<a href = "' . $videoPath . $mediaName . '"><video src = "' . $videoPath . $mediaName . '" poster="'.$images.'video-bg.jpg" preload="auto" controls /></a>';
+        $img = '<video src = "' . $videoPath . $mediaName . '" poster="'.$images.'video-bg.jpg" preload="auto" controls />';
     } else {
         // if invalid file type
         echo '<script>alert("Invalid File Type!");location="home.php"</script>';
@@ -334,7 +335,8 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                         $img = '<a href = "media.php?id=' . $ID . '&mid=' . $mediaID . '&mediaName=' . $media . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '">' . $img . '</a>';
                     } // check if file type is a video
                     elseif (in_array($type, $videoFileTypes)) {
-                        $img = '<a href = "' . $videoPath . $mediaName . '"><img src = "' . $images . 'video-bg.jpg" height="100" width = "100" class="img-responsive"/></a>';
+                        //$img = '<a href = "' . $videoPath . $mediaName . '"><video src = "' . $videoPath . $mediaName . '" poster="'.$images.'video-bg.jpg" preload="auto" controsl /></a>';
+                        $img = '<video src = "' . $videoPath . $mediaName . '" poster="'.$images.'video-bg.jpg" preload="auto" controls />';
                     } else {
                         // if invalid file type
                         echo '<script>alert("Invalid File Type!");</script>';
