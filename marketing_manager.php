@@ -34,7 +34,7 @@ $ID = $_SESSION['ID'];
         $result = mysql_query($sql) or die(mysql_error());
         $rows = mysql_fetch_assoc($result);
         ?>
-        Current Sign Ups : <?php echo $rows['Total']; ?>
+        <span style="color:green;font-weight:bold">Current Sign Ups</span> : <?php echo $rows['Total']; ?>
 
     </div>
 </div>
