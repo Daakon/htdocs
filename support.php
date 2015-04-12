@@ -90,4 +90,4 @@ $ID = $_SESSION['ID'];
 </div>
 
 
-</body>
+<?php get_footer_files() ?>
