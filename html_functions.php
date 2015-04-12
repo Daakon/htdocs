@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 function get_head_files()
 { ?>
 
@@ -100,7 +101,9 @@ function get_header()
 } ?>
 
 <?php function get_footer_files()
-{ ?>
+{
+    $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+    ?>
 
 
     <!--JQuery CDN-->
@@ -111,6 +114,21 @@ function get_header()
 
     <!--Local JS file-->
     <script type="text/javascript" src="/resources/js/site.js"></script>
+
+<?php if (!strstr($url, "dev") && !strstr($url, "localhost")) { ?>
+    <script>
+    // google anayltics
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-59826601-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<?php } ?>
+
     </body>
 </html>
 

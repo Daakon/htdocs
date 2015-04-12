@@ -489,10 +489,6 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 <?php include('media_sizes.html'); ?>
 
 
-<style>
-
-</style>
-
 <script type="text/javascript">
     function saveScrollPositions(theForm) {
         if(theForm) {
