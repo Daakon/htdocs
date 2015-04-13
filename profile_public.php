@@ -208,7 +208,7 @@ $lName = $rows['LastName'];
                     <div class="public-profile-label">Message Me</div>
                     <a href="/messages_public.php/<?php echo $username ?>"><?php echo $username ?></a>
                     <?php } elseif ($memberID == $ID) { ?>
-                    <?php echo "Sorry but you can't message yourself, that's kind weird anyway";
+                    <?php echo "Sorry but you can't message yourself, that's kind of weird anyway";
 
                     } else { echo "<span style='color:red;'>You must be logged in to message this person</span>"; } ?>
 
