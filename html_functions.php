@@ -68,7 +68,7 @@ function get_header()
         <?php $ID = $_SESSION['ID']; ?>
         <!--Get profile pic for header -->
         <?php if (!empty($_COOKIE['ID']) && isset($_COOKIE['ID'])) { ?>
-        <img src="<?php echo get_users_photo_by_id($ID) ?>" style="height=20" width="20" alt=""
+        <img src="<?php echo get_users_photo_by_id($ID) ?>" style="height:48px; width:30px;margin-top:-10px;" alt=""
              title="" />
 <?php } ?>
 
