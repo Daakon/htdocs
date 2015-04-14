@@ -72,7 +72,8 @@ if (isset($_POST['submit'])) {
                     } else if ($type == "image/gif") {
                         $src = imagecreatefromgif($mediaFile);
                     } else {
-                        echo "<script>alert('Invalid File Type');location='home.php'</script>";
+                        echo "<script>alert('Invalid File Type');</script>";
+                        header('Location:home.php');
                         exit;
                     }
                 }
@@ -124,7 +125,8 @@ if (isset($_POST['submit'])) {
                         imagegif($src, $postMediaFilePath, 100);
 
                     } else {
-                        echo "<script>alert('Invalid File Type');location='home.php';</script>";
+                        echo "<script>alert('Invalid File Type');</script>";
+                        header('Location:home.php');
                         exit;
                     }
                 }
@@ -162,7 +164,8 @@ else {
         $img = '<video src = "' . $videoPath . $mediaName . '" poster="'.$images.'video-bg.jpg" preload="auto" controls />';
     } else {
         // if invalid file type
-        echo '<script>alert("Invalid File Type!");location="home.php"</script>';
+        echo '<script>alert("Invalid File Type!");</script>';
+        header('Location:home.php');
         exit;
     }
 
@@ -226,7 +229,8 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
 // check file size
                 if ($_FILES['flPostMedia']['size'] > 50000000) {
-                    echo '<script>alert("File is too large. The maximum file size is 50MB.");location="home.php"</script>';
+                    echo '<script>alert("File is too large. The maximum file size is 50MB.");</script>';
+                    header('Location:home.php');
                     exit;
                 }
 
@@ -263,7 +267,8 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                     } else if ($type == "image/gif") {
                         $src = imagecreatefromgif($mediaFile);
                     } else {
-                        echo "<script>alert('Invalid File Type');location='home.php' </script>";
+                        echo "<script>alert('Invalid File Type');</script>";
+                        header('Location:home.php');
                         exit;
                     }
 
@@ -309,7 +314,8 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
 // if photo didn't get uploaded, notify the user
                 if (!file_exists($postMediaFilePath)) {
-                    echo "<script>alert('File could not be uploaded, try uploading a different file type.');location='home.php'</script>";
+                    echo "<script>alert('File could not be uploaded, try uploading a different file type.');</script>";
+                    header('Location:home.php');
                 } else {
 
                     // determine which table to put photo pointer in
@@ -340,7 +346,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                     } else {
                         // if invalid file type
                         echo '<script>alert("Invalid File Type!");</script>';
-                        echo "<script>location= 'home.php'</script>";
+                        header('Location:home.php');
                         exit;
                     }
 
@@ -616,7 +622,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                 <br/>
                 <div id="progress" style="display:none;">
                     <div class="progress">
-                      <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                      <div class="progress-bar progress-bar-striped progress-bar-danger active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
                         <span class="sr-only">Loading</span>
                       </div>
                     </div>
@@ -759,7 +765,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                     <br/>
                     <div id="comment<?php echo $postID ?>" style="display:none;">
                     <div class="progress">
-                      <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+                      <div class="progress-bar progress-bar-striped progress-bar-danger active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
                         <span class="sr-only">Loading</span>
                       </div>
                     </div>
