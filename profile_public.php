@@ -78,7 +78,8 @@ $lName = $rows['LastName'];
             $result = mysql_query($sql) or die(mysql_error());
 
             if (mysql_num_rows($result) == 0) {
-                echo "<script>alert('Profile not found'); location = 'home.php'</script>";
+                echo "<script>alert('Profile not found');</script>";
+                header('Location:home.php');
             }
 
             $rows = mysql_fetch_assoc($result);
