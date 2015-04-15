@@ -187,7 +187,8 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                 $img = '<a href = "' . $videoPath . $mediaName . '"><img src = "' . $images . 'video-bg.jpg" height="100" width = "100" class="img-responsive"/></a>';
             } else {
                 // if invalid file type
-                echo '<script>alert("Invalid File Type!");location="home.php"</script>';
+                echo '<script>alert("Invalid File Type!");</script>';
+                header('Location:manage_post_public.php');
                 exit;
             }
 
