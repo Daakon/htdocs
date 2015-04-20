@@ -12,7 +12,6 @@ get_header();
 require 'memory_settings.php';
 $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 $ID = $_SESSION['ID'];
-
 ?>
 
 
@@ -188,7 +187,17 @@ if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
     $dob = $_POST['DOB'];
     $emailStatus = $_POST['EmailStatus'];
     $password = $_POST['Password'];
+    $username = $_POST['Username'];
 
+    if (strlen($firstName) == 0) {
+        echo "<script>alert('You must provide a first name');location='/profile.php/$username'</script>";
+        exit;
+    }
+
+    if (strlen($lastName)==0) {
+        echo "<script>alert('You must provide a last name');location='/profile.php/$username'</script>";
+        exit;
+    }
    // update Member table first
    $sql = "Update Members
           Set

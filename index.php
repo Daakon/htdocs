@@ -119,7 +119,7 @@ get_head_files();
 
     <div class="row">
         <div class="col-lg-6 col-md-5 hidden-sm hidden-xs">
-            <img src="/images/dance.jpg" height="350" width="100%" alt="" class="index-image"/>
+            <img src="/images/singer-against-wall.jpg" height="350" width="100%" alt="" class="index-image"/>
             <h2>Share Your Talent</h2>
         </div>
 
