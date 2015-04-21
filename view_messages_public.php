@@ -230,7 +230,7 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
             <hr/>
 
             <?php $memberID = $_GET['id']; ?>
-
+            <h5>Message: <span class="viewMessage"><?php echo get_users_name($memberID) ?></span></h5>
             <?php
 
             $sql = "SELECT * FROM Messages

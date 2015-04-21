@@ -189,15 +189,7 @@ if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
     $password = $_POST['Password'];
     $username = $_POST['Username'];
 
-    if (strlen($firstName) == 0) {
-        echo "<script>alert('You must provide a first name');location='/profile.php/$username'</script>";
-        exit;
-    }
 
-    if (strlen($lastName)==0) {
-        echo "<script>alert('You must provide a last name');location='/profile.php/$username'</script>";
-        exit;
-    }
    // update Member table first
    $sql = "Update Members
           Set
@@ -287,6 +279,22 @@ catch (ClockworkException $e)
 <link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet"/>
 <script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
 
+<script>
+    function checkFields() {
+        var firstName = document.getElementById('FirstName').value;
+        var lastName = document.getElementById('LastName').value;
+
+        if (firstName == "") {
+            alert('First Name cannot be empty');
+            return false;
+        }
+        if (lastName == "") {
+            alert('Last Name cannot be empty');
+            return false;
+        }
+        return true;
+    }
+</script>
 
 <body>
 
@@ -440,7 +448,7 @@ catch (ClockworkException $e)
             <p id="notice"></p>
             <br/>
 
-            <form id="ajax-form" method="post" action = "">
+            <form id="ajax-form" method="post" action = "" onsubmit="return checkFields();">
 
                 <div class="form-group">
                     <label for="FirstName">First Name</label>

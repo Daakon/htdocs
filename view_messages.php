@@ -234,7 +234,7 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
             <hr/>
 
             <?php $senderID = $_GET['id']; ?>
-
+            <h5>Message: <span class="viewMessage"><?php echo get_users_name($senderID) ?></span></h5>
             <?php
             // get subject
             $sql = "SELECT * FROM Messages
