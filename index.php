@@ -1,6 +1,6 @@
 <?php
 require 'connect.php';
-require 'checkLogin.php';
+
 require 'html_functions.php';
 require 'calendar.php';
 get_head_files();
@@ -112,7 +112,7 @@ get_head_files();
     }
 </script>
 
-
+<?php require 'checkLogin.php'; ?>
 
 <div class="container-fluid">
 
@@ -282,7 +282,6 @@ get_head_files();
 
     </div>
 </div>
-
 
 
 

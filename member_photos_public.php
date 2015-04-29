@@ -57,6 +57,7 @@ if (mysql_numrows($result) == 0) {
                 $mediaID = $rows['ID'];
                 $private = $rows['Private'];
                 $mediaFilePath = trim("media/" . $mediaName);
+                $poster = $rows['Poster'];
 
                 /*$privateString = "Public";
 
@@ -64,6 +65,10 @@ if (mysql_numrows($result) == 0) {
                     $privateString = "Private";
                 }*/
                 $privateString = "";
+
+                if (strlen($poster) == "" || strlen($poster) == 0) {
+                    $poster = "video-bg.jpg";
+                }
 
                 if (file_exists($mediaFilePath)) {
 
@@ -90,13 +95,13 @@ if (mysql_numrows($result) == 0) {
                     elseif (in_array($mediaType, $videoFileTypes)) {
 
                         if (isset($_SESSION['ID']) && !empty($_SESSION['ID'])) {
-                            $img = '<a href = "' . $videoPath . $mediaName . '"><img src = "' . $images . 'video-bg.jpg" height="100" width = "100" /></a>
+                            $img = '<video src = "' . $videoPath . $mediaName . '" poster="/poster/'.$poster.'" preload="auto" controls />
                         <a href = "/media.php?id=' . $ID . '&mediaName=' . $mediaName . '&mid=' . $mediaID . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '" >More</a><br/>'
                                 . $privateString;
                         }
                         else {
-                                $img = '<a href = "' . $videoPath . $mediaName . '"><img src = "' . $images . 'video-bg.jpg" height="100" width = "100" /></a>'
-                                    . $privateString;
+                            $img = '<a href = "' . $videoPath . $mediaName . '"><img src = "' . $images . 'video-bg.jpg" height="100" width = "100" /></a>'
+                                . $privateString;
                         }
                     }
                     ?>
@@ -111,3 +116,4 @@ if (mysql_numrows($result) == 0) {
     </div>
 </div>
 </body>
+

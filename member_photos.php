@@ -190,6 +190,7 @@ And Members.IsActive = 1 ";
                 $mediaID = $rows['ID'];
                 $private = $rows['Private'];
                 $mediaFilePath = trim("media/" . $mediaName);
+                $posterName = $rows['Poster'];
 
                 $privateString = "Public";
 
@@ -216,8 +217,8 @@ And Members.IsActive = 1 ";
                     } // check if file type is a video
                     elseif (in_array($mediaType, $videoFileTypes)) {
 
-                        $img = '<a href = "' . $videoPath . $mediaName . '"><img src = "' . $images . 'video-bg.jpg" height="100" width = "100" /></a>
-                        <a href = "media.php?id=' . $ID . '&mediaName=' . $mediaName . '&mid=' . $mediaID . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '" >More</a><br/>'
+                        $img = '<a href = "' . $videoPath . $mediaName . '"><video src = "' . $videoPath . $mediaName . '" poster="/poster/'.$posterName.'" preload="auto" controls /></a>
+                        <a href = "media.php?id=' . $ID . '&mediaName=' . $mediaName . '&mid=' . $mediaID . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '" ><br/>More</a><br/><br/>'
                             .$privateString;
 
                     }

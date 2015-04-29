@@ -532,11 +532,11 @@ if (isset($_POST['Delete']) && $_POST['Delete'] == "Delete") {
                            placeholder="Write a comment" title='' style="border:1px solid black"/>
 
                     <?php if (!empty($ID) && isset($ID)) { ?>
-                    <input type="file" name="flPostMedia" id="flPostMedia" style="max-width:180px;"/>
-                    <br/>
+                        <input type="file" name="flPostMedia" id="flPostMedia" style="max-width:180px;"/>
+                        <br/>
 
-                    <input type="submit" name="btnComment" id="btnComment" Value="Comment"
-                           style="border:1px solid black"/>
+                        <input type="submit" name="btnComment" id="btnComment" Value="Comment"
+                               style="border:1px solid black"/>
                     <?php } ?>
 
                     <input type="hidden" name="postID" id="postID" Value="<?php echo $postID ?>"/>
@@ -682,4 +682,6 @@ if(!empty($_REQUEST['scrolly'])) {
     window.scrollTo(<?php echo "$scrollx" ?>, <?php echo "$scrolly" ?>);
 
 </script>
+
+
 

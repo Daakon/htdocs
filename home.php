@@ -61,8 +61,12 @@ if (isset($_POST['submit'])) {
                     // convert to mp4
                     $fileName = pathinfo($mediaName, PATHINFO_FILENAME);
                     $newFileName = $fileName.".mp4";
+
                     exec("ffmpeg -i $fileName -vcodec libx264 -pix_fmt yuv420p -profile:v baseline -preset slow -crf 22 -movflags +faststart $newFileName");
                     $mediaName = $newFileName;
+
+
+
 
                 } else {
                     if ($type == "image/jpg" || $type == "image/jpeg") {
@@ -136,57 +140,105 @@ if (isset($_POST['submit'])) {
                 if (!file_exists($postMediaFilePath)) {
                     echo "<script>alert('File could not be uploaded, try uploading a different file type.');location='home.php'</script>";
                 }
-else {
+                else {
 
-    // store media pointer
-    $sql = "INSERT INTO Media (Member_ID,  MediaName,  MediaType,  MediaDate    ) Values
+                    // store media pointer
+                    $sql = "INSERT INTO Media (Member_ID,  MediaName,  MediaType,  MediaDate    ) Values
                                           ('$ID',    '$mediaName', '$type',   CURRENT_DATE())";
-    mysql_query($sql) or die(mysql_error());
+                    mysql_query($sql) or die(mysql_error());
 
-    // get media ID
-    $sqlGetMedia = "SELECT * FROM Media WHERE MediaName = '$mediaName'";
-    $mediaResult = mysql_query($sqlGetMedia) or die(mysql_error());
-    $mediaRow = mysql_fetch_assoc($mediaResult);
-    $mediaID = $mediaRow['ID'];
-    $media = $mediaRow['MediaName'];
-    $mediaType = $mediaRow['MediaType'];
-    $mediaDate = $mediaRow['MediaDate'];
+                    // get media ID
+                    $sqlGetMedia = "SELECT * FROM Media WHERE MediaName = '$mediaName'";
+                    $mediaResult = mysql_query($sqlGetMedia) or die(mysql_error());
+                    $mediaRow = mysql_fetch_assoc($mediaResult);
+                    $mediaID = $mediaRow['ID'];
+                    $media = $mediaRow['MediaName'];
+                    $mediaType = $mediaRow['MediaType'];
+                    $mediaDate = $mediaRow['MediaDate'];
 
 
-    // build post links based on media type
-    if (in_array($type, $photoFileTypes)) {
+                    // build post links based on media type
+                    if (in_array($type, $photoFileTypes)) {
 
-        $img = '<img src = "' . $mediaPath . $mediaName . '" class="img-responsive"/>';
-        $img = '<a href = "media.php?id=' . $ID . '&mid=' . $mediaID . '&mediaName=' . $media . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '">' . $img . '</a>';
-    } // check if file type is a video
-    elseif (in_array($type, $videoFileTypes)) {
-        //$img = '<a href = "' . $videoPath . $mediaName . '"><video src = "' . $videoPath . $mediaName . '" poster="'.$images.'video-bg.jpg" preload="auto" controls /></a>';
-        $img = '<video src = "' . $videoPath . $mediaName . '" poster="'.$images.'video-bg.jpg" preload="auto" controls />';
-    } else {
-        // if invalid file type
-        echo '<script>alert("Invalid File Type!");</script>';
-        header('Location:home.php');
-        exit;
-    }
+                        $img = '<img src = "' . $mediaPath . $mediaName . '" class="img-responsive"/>';
+                        $img = '<a href = "media.php?id=' . $ID . '&mid=' . $mediaID . '&mediaName=' . $media . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '">' . $img . '</a>';
+                    } // check if file type is a video
+                    elseif (in_array($type, $videoFileTypes)) {
 
-    $post = $post . '<br/><br/>' . $img . '<br/>';
+                        // where ffmpeg is located
+                        $ffmpeg = '/usr/bin/ffmpeg';
 
-    $sql = "INSERT INTO Posts (Post,    Category,  Member_ID,   PostDate) Values
-                                      ('$post', '$category', '$ID',       CURDATE())";
-    mysql_query($sql) or die(mysql_error());
-    $newPostID = mysql_insert_id();
+                        // poster file name
+                        $posterName = "poster".uniqid().".jpg";
 
-    // update Media table with new post id
-    if (isset($_SESSION['ID'])) {
-        $sqlUpdateMedia = "UPDATE Media SET Post_ID = '$newPostID' WHERE MediaName = '$mediaName' ";
-        mysql_query($sqlUpdateMedia) or die(mysql_error());
-    }
-}
+                        //where to save the image
+                        $poster = "$posterPath$posterName";
+
+
+                        //time to take screenshot at
+                        $interval = 5;
+
+                        //screenshot size
+                        $size = '440x280';
+
+                        //ffmpeg command
+                        $cmd = "$ffmpeg -i \"$postMediaFilePath\" -r 1 -s $size -f image2 $poster 2>&1";
+
+                        exec($cmd);
+
+
+                        $exif = @exif_read_data($poster);
+                        if ( isset($exif['Orientation']) && !empty($exif['Orientation']) ) {
+                            echo "<script>alert('$poster');</script>";
+                            // Decide orientation
+                            if ( $exif['Orientation'] == 3 ) {
+                                $rotation = 180;
+                            } else if ( $exif['Orientation'] == 6 ) {
+                                $rotation = 90;
+                            } else if ( $exif['Orientation'] == 8 ) {
+                                $rotation = -90;
+                            } else {
+                                $rotation = 0;
+                            }
+
+                            // Rotate the image
+                            if ( $rotation ) {
+                                $imagick = new Imagick();
+                                $imagick->readImage($imageFile);
+                                $imagick->rotateImage(new ImagickPixel('none'), $rotation);
+                                $imagick->writeImage($imageFile);
+                                $imagick->clear();
+                                $imagick->destroy();
+                            }
+
+                        }
+                        $img = '<video src = "' . $videoPath . $mediaName . '" poster="/poster/'.$posterName.'" preload="auto" controls />';
+
+                    } else {
+                        // if invalid file type
+                        echo '<script>alert("Invalid File Type!");</script>';
+                        header('Location:home.php');
+                        exit;
+                    }
+
+                    $post = $post . '<br/><br/>' . $img . '<br/>';
+
+                    $sql = "INSERT INTO Posts (Post,    Poster,	      Category,  Member_ID,   PostDate) Values
+                                              ('$post', '$posterName', '$category', '$ID',       CURDATE())";
+                    mysql_query($sql) or die(mysql_error());
+                    $newPostID = mysql_insert_id();
+
+                    // update Media table with new post id
+                    if (isset($_SESSION['ID'])) {
+                        $sqlUpdateMedia = "UPDATE Media SET Post_ID = '$newPostID', Poster='$posterName' WHERE MediaName = '$mediaName' ";
+                        mysql_query($sqlUpdateMedia) or die(mysql_error());
+                    }
+                }
             } // if no media
             else {
-
+                echo "<script>alert('test');</script>";
                 $sql = "INSERT INTO Posts (Post,       Category,    Member_ID,   PostDate) Values
-                                  ('$post',   '$category',   '$ID',      CURDATE())";
+                                          ('$post',   '$category',   '$ID',      CURDATE())";
                 mysql_query($sql) or die(mysql_error());
 
             }
@@ -342,7 +394,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                     } // check if file type is a video
                     elseif (in_array($type, $videoFileTypes)) {
                         //$img = '<a href = "' . $videoPath . $mediaName . '"><video src = "' . $videoPath . $mediaName . '" poster="'.$images.'video-bg.jpg" preload="auto" controsl /></a>';
-                        $img = '<video src = "' . $videoPath . $mediaName . '" poster="'.$images.'video-bg.jpg" preload="auto" controls />';
+                        $img = '<video src = "' . $videoPath . $mediaName . '" poster="/media/shot.jpg" preload="auto" controls />';
                     } else {
                         // if invalid file type
                         echo '<script>alert("Invalid File Type!");</script>';
@@ -353,7 +405,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                     $comment = $comment . '<br/><br/>' . $img . '<br/>';
 
                     $sql = "INSERT INTO PostComments (Post_ID,     Member_ID,   Comment  ) Values
-                                             ('$postID', '$ID',      '$comment')";
+                                                      ('$postID', '$ID',      '$comment')";
 
                     mysql_query($sql) or die(mysql_error());
 
@@ -633,7 +685,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
     </div>
 
     <?php
-    $sql = "SELECT DISTINCT
+$sql = "SELECT DISTINCT
     Members.ID As MemberID,
     Members.FirstName As FirstName,
     Members.LastName As LastName,
@@ -652,20 +704,20 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
     Order By Posts.ID DESC ";
 
 
-    $result = mysql_query($sql) or die(mysql_error());
+$result = mysql_query($sql) or die(mysql_error());
 
 
-    if (mysql_numrows($result) > 0) {
+if (mysql_numrows($result) > 0) {
     while ($rows = mysql_fetch_assoc($result)) {
-    $memberID = $rows['MemberID'];
-    $name = $rows['FirstName'] . ' ' . $rows['LastName'];
-    $profilePhoto = $rows['ProfilePhoto'];
-    $category = $rows['Category'];
-    $post = $rows['Post'];
-    $postID = $rows['PostID'];
-    $postOwner = $memberID;
-    ?>
-    <div class="row row-padding">
+        $memberID = $rows['MemberID'];
+        $name = $rows['FirstName'] . ' ' . $rows['LastName'];
+        $profilePhoto = $rows['ProfilePhoto'];
+        $category = $rows['Category'];
+        $post = $rows['Post'];
+        $postID = $rows['PostID'];
+        $postOwner = $memberID;
+        ?>
+        <div class="row row-padding">
         <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 "
              style="background:white;border-radius:10px;margin-top:20px;border:2px solid black;" align="left">
 
@@ -682,12 +734,12 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                     $post500 = mb_substr($post, 0, 500); ?>
 
                     <div id="short<?php echo $postID ?>">
-                    <?php echo nl2br($post500) ?>...<a href="javascript:showPost('long<?php echo $postID ?>', 'short<?php echo $postID ?>');">Show More</a>
-                        </div>
-<?php
+                        <?php echo nl2br($post500) ?>...<a href="javascript:showPost('long<?php echo $postID ?>', 'short<?php echo $postID ?>');">Show More</a>
+                    </div>
+                    <?php
                     echo "<div id='long$postID' style='display:none;'>";
-                        echo nl2br($post);
-                        echo "</div>";
+                    echo nl2br($post);
+                    echo "</div>";
                 }
                 else {
                     echo nl2br($post);
@@ -764,12 +816,12 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                     <input type="file" name="flPostMedia" id="flPostMedia" style="max-width:180px;"/>
                     <br/>
                     <div id="comment<?php echo $postID ?>" style="display:none;">
-                    <div class="progress">
-                      <div class="progress-bar progress-bar-striped progress-bar-danger active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-                        <span class="sr-only">Loading</span>
-                      </div>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped progress-bar-danger active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+                                <span class="sr-only">Loading</span>
+                            </div>
+                        </div>
                     </div>
-                </div>
                     <input type="submit" name="btnComment" id="btnComment" Value="Comment"
                            style="border:1px solid black"/>
                     <input type="hidden" name="postID" id="postID" Value="<?php echo $postID ?>"/>
@@ -782,7 +834,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                 <br/>
 
                 <?php if ($memberID != $ID) { ?>
-                <a href="/view_messages.php?id=<?php echo $memberID ?>">Direct Message <?php echo $rows['FirstName'] ?></a>
+                    <a href="/view_messages.php?id=<?php echo $memberID ?>">Direct Message <?php echo $rows['FirstName'] ?></a>
                 <?php } ?>
                 <br/>
 
@@ -806,7 +858,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
 
                 $result3 = mysql_query($sql3) or die(mysql_error());
-                    echo '<br/>';
+                echo '<br/>';
                 if (mysql_numrows($result3) > 0) {
                     echo '<div class="comment-style">';
                     while ($rows3 = mysql_fetch_assoc($result3)) {
@@ -885,17 +937,17 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
                     }
                     echo '</div>';
-                        if ($commentOwner == $ID || $postOwner == $ID) {
-                            //<!--DELETE BUTTON ------------------>
+                    if ($commentOwner == $ID || $postOwner == $ID) {
+                        //<!--DELETE BUTTON ------------------>
 
-                            echo '<div class="comment-delete">';
-                            echo '<form action="" method="post" onsubmit="return confirm(\'Do you really want to delete this comment?\')">';
-                            echo '<input type="hidden" name="commentID" id="commentID" value="' .  $commentID . '" />';
-                            echo '<input type ="submit" name="DeleteComment" id="DeleteComment" value="Delete" class="deleteButton" />';
-                            echo '</form>';
-                            echo '</div>';
-                            //<!------------------------------------->
-                        }
+                        echo '<div class="comment-delete">';
+                        echo '<form action="" method="post" onsubmit="return confirm(\'Do you really want to delete this comment?\')">';
+                        echo '<input type="hidden" name="commentID" id="commentID" value="' .  $commentID . '" />';
+                        echo '<input type ="submit" name="DeleteComment" id="DeleteComment" value="Delete" class="deleteButton" />';
+                        echo '</form>';
+                        echo '</div>';
+                        //<!------------------------------------->
+                    }
                     echo '</div>'; //end of more comments div
                     }
                     ?>
@@ -910,10 +962,10 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
         </div>
 
 
-        <?php
-        }
-        }
-        ?>
+    <?php
+    }
+}
+?>
 
 
     </div>

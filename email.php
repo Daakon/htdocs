@@ -46,7 +46,7 @@ function build_and_send_email($senderId, $toId, $notification, $postID)
                 ";
     }
     if ($notification == 2) {
-    // post approval
+        // post approval
         $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
         $link;
 
@@ -150,7 +150,7 @@ function build_and_send_email($senderId, $toId, $notification, $postID)
 
 
         $subject = "Click this <a href = '$link'>link</a> to create a new password. <br/>";
-        $subject .= 'If you did not request to change your password, contact support at <a href = "mailto:info@businessconnect.co">info@businessconnect.co</a>';
+        $subject .= 'If you did not request to change your password, contact support at <a href = "mailto:info@rapportbook.com">info@rapportbook.com</a>';
     }
 
     if ($notification == 6) {

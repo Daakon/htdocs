@@ -19,99 +19,99 @@ $ID = $_SESSION['ID'];
 
 // handle upload profile pic
 if (isset($_POST['photo']) && ($_POST['photo'] == "Upload Photo")) {
-if (isset($_FILES['flPostPhoto']) && strlen($_FILES['flPostPhoto']['name']) > 1) {
+    if (isset($_FILES['flPostPhoto']) && strlen($_FILES['flPostPhoto']['name']) > 1) {
 
-    if ($_FILES['flPostPhoto']['size'] > 50000000) {
-        echo '<script>alert("File is too large");</script>';
-        exit;
-    }
-
-    // add unique id to image name to make it unique and add it to the file server
-    $mediaName = $_FILES["flPostPhoto"]["name"];
-    $mediaName = uniqid() . $mediaName;
-    $mediaFile = $_FILES['flPostPhoto']['tmp_name'];
-    $type = $_FILES["flPostPhoto"]["type"];
-
-    require 'media_post_file_path.php';
-
-    if ($type == "image/jpg" || $type == "image/jpeg") {
-
-        $src = imagecreatefromjpeg($mediaFile);
-    } else if ($type == "image/png") {
-
-        $src = imagecreatefrompng($mediaFile);
-    } else if ($type == "image/gif") {
-        $src = imagecreatefromgif($mediaFile);
-    } else {
-        echo "<script>alert('Invalid File Type');</script>";
-        exit;
-    }
-
-    $exif = @exif_read_data($mediaFile);
-
-    if (!empty($exif['Orientation'])) {
-        $ort = $exif['Orientation'];
-
-        switch ($ort) {
-            case 8:
-                if (strstr($url, 'localhost:8888')) {
-                    // local php imagerotate doesn't work
-
-                } else {
-                    $src = imagerotate($src, 90, 0);
-                }
-                break;
-            case 3:
-                if (strstr($url, 'localhost:8888')) {
-                    // local php imagerotate doesn't work
-
-                } else {
-                    $src = imagerotate($src, 180, 0);
-                }
-                break;
-            case 6:
-                if (strstr($url, 'localhost:8888')) {
-                    // local php imagerotate doesn't work
-                } else {
-                    $src = imagerotate($src, -90, 0);
-                }
-                break;
+        if ($_FILES['flPostPhoto']['size'] > 50000000) {
+            echo '<script>alert("File is too large");</script>';
+            exit;
         }
-    }
 
-    require 'media_post_file_path.php';
+        // add unique id to image name to make it unique and add it to the file server
+        $mediaName = $_FILES["flPostPhoto"]["name"];
+        $mediaName = uniqid() . $mediaName;
+        $mediaFile = $_FILES['flPostPhoto']['tmp_name'];
+        $type = $_FILES["flPostPhoto"]["type"];
 
-    // photo file types
-    $photoFileTypes = array("image/jpg", "image/jpeg", "image/png", "image/tiff",
-        "image/gif", "image/raw");
+        require 'media_post_file_path.php';
 
-    if ($type == "image/jpg" || $type == "image/jpeg") {
-        imagejpeg($src, $postMediaFilePath, 100);
+        if ($type == "image/jpg" || $type == "image/jpeg") {
 
-    } else if ($type == "image/png") {
-        imagepng($src, $postMediaFilePath, 0, NULL);
+            $src = imagecreatefromjpeg($mediaFile);
+        } else if ($type == "image/png") {
 
-    } else {
-        imagegif($src, $postMediaFilePath, 100);
+            $src = imagecreatefrompng($mediaFile);
+        } else if ($type == "image/gif") {
+            $src = imagecreatefromgif($mediaFile);
+        } else {
+            echo "<script>alert('Invalid File Type');</script>";
+            exit;
+        }
 
-    }
+        $exif = @exif_read_data($mediaFile);
+
+        if (!empty($exif['Orientation'])) {
+            $ort = $exif['Orientation'];
+
+            switch ($ort) {
+                case 8:
+                    if (strstr($url, 'localhost:8888')) {
+                        // local php imagerotate doesn't work
+
+                    } else {
+                        $src = imagerotate($src, 90, 0);
+                    }
+                    break;
+                case 3:
+                    if (strstr($url, 'localhost:8888')) {
+                        // local php imagerotate doesn't work
+
+                    } else {
+                        $src = imagerotate($src, 180, 0);
+                    }
+                    break;
+                case 6:
+                    if (strstr($url, 'localhost:8888')) {
+                        // local php imagerotate doesn't work
+                    } else {
+                        $src = imagerotate($src, -90, 0);
+                    }
+                    break;
+            }
+        }
+
+        require 'media_post_file_path.php';
+
+        // photo file types
+        $photoFileTypes = array("image/jpg", "image/jpeg", "image/png", "image/tiff",
+            "image/gif", "image/raw");
+
+        if ($type == "image/jpg" || $type == "image/jpeg") {
+            imagejpeg($src, $postMediaFilePath, 100);
+
+        } else if ($type == "image/png") {
+            imagepng($src, $postMediaFilePath, 0, NULL);
+
+        } else {
+            imagegif($src, $postMediaFilePath, 100);
+
+        }
 
 
 
-    // write photo to media table
-    $sql2 = "INSERT INTO Media (Member_ID, MediaName,     MediaType,  wasProfilePhoto, MediaDate) Values
+        // write photo to media table
+        $sql2 = "INSERT INTO Media (Member_ID, MediaName,     MediaType,  wasProfilePhoto, MediaDate) Values
                                ('$ID',     '$mediaName',  '$type',       1,            CURDATE())";
-    mysql_query($sql2) or die(mysql_error());
+        mysql_query($sql2) or die(mysql_error());
 
 
-    // update photo pointer in database
-    $sql = "UPDATE Profile Set ProfilePhoto = '$mediaName' WHERE Member_ID = '$ID'";
-    mysql_query($sql) or die(mysql_error());
+        // update photo pointer in database
+        $sql = "UPDATE Profile Set ProfilePhoto = '$mediaName' WHERE Member_ID = '$ID'";
+        mysql_query($sql) or die(mysql_error());
 
 
-    // alert everything is good
-    echo "<script>alert('Update Successful');</script>";
-}
+        // alert everything is good
+        echo "<script>alert('Update Successful');</script>";
+    }
 }
 ?>
 
@@ -189,15 +189,18 @@ if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
     $password = $_POST['Password'];
     $username = $_POST['Username'];
 
-
-   // update Member table first
-   $sql = "Update Members
+//only if password has changed do we hash it
+    if (check_password($ID, $password)==false) {
+        $password = md5($password);
+    }
+    // update Member table first
+    $sql = "Update Members
           Set
           FirstName = '$firstName',
           LastName = '$lastName',
           DOB = '$dob',
           EmailActive = '$emailStatus ',
-          Password = '".md5($password)."'
+          Password = '$password'
           WHERE ID = $ID ";
     $result = mysql_query($sql) or die(mysql_error());
 
@@ -239,37 +242,37 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
     $number = "1".$number;
     $name = get_users_name($ID);
     $API_KEY = '7344d6254838e6d2c917c4cb78305a3235ba951d';
-try
-{
-    // Create a Clockwork object using your API key
-    $clockwork = new Clockwork( $API_KEY );
-    $domain;
+    try
+    {
+        // Create a Clockwork object using your API key
+        $clockwork = new Clockwork( $API_KEY );
+        $domain;
 
-    if (strstr($url, "dev")) {
-        $domain = "http://dev.rapportbook.com/profile_public.php/";
-    }
-    else {
-        $domain = "http://rapportbook.com/profile_public.php/";
-    }
+        if (strstr($url, "dev")) {
+            $domain = "http://dev.rapportbook.com/profile_public.php/";
+        }
+        else {
+            $domain = "http://rapportbook.com/profile_public.php/";
+        }
 
-    // Setup and send a message
-    $text = "$name has shared their profile with you. $domain$username";
-    $message = array( 'to' => $number, 'message' => $text );
-    $result = $clockwork->send( $message );
+        // Setup and send a message
+        $text = "$name has shared their profile with you. $domain$username";
+        $message = array( 'to' => $number, 'message' => $text );
+        $result = $clockwork->send( $message );
 
-    // Check if the send was successful
-    if($result['success']) {
-        //echo 'Message sent - ID: ' . $result['id'];
-        echo "<script>alert('SMS Sent');</script>";
-    } else {
-        $error = $result['error_message'];
-        echo "<script>alert('Message failed - Error: $error');</script>";
+        // Check if the send was successful
+        if($result['success']) {
+            //echo 'Message sent - ID: ' . $result['id'];
+            echo "<script>alert('SMS Sent');</script>";
+        } else {
+            $error = $result['error_message'];
+            echo "<script>alert('Message failed - Error: $error');</script>";
+        }
     }
-}
-catch (ClockworkException $e)
-{
-    echo 'Exception sending SMS: ' . $e->getMessage();
-}
+    catch (ClockworkException $e)
+    {
+        echo 'Exception sending SMS: ' . $e->getMessage();
+    }
 
 }
 ?>
@@ -321,7 +324,7 @@ catch (ClockworkException $e)
 
             require 'checkUsername.php';
 
-                $sql = "SELECT
+            $sql = "SELECT
                         Members.ID As MemberID,
                         Members.FirstName As FirstName,
                         Members.LastName As LastName,
@@ -354,7 +357,7 @@ catch (ClockworkException $e)
 
             $rows = mysql_fetch_assoc($result);
 
-//            $memberID = $rows['MemberID'];
+            //            $memberID = $rows['MemberID'];
             $profilePhoto = $rows['ProfilePhoto'];
             $profileVideo = $rows['ProfileVideo'];
             $firstName = $rows['FirstName'];
@@ -395,16 +398,16 @@ catch (ClockworkException $e)
 
                 <form method="post" action="">
                     <div id="textDiv" style="display:none;">
-                    <div class="form-group">
-                <label for="text">Text Your Profile</label>
+                        <div class="form-group">
+                            <label for="text">Text Your Profile</label>
 
-                <input type="text" id="number" name="number" class="form-control text-center" style="width:150px;" placeholder="2125551212"/>
-                    </div>
-                <input type="submit" id="text" name="text" value="Text" style="border-radius: 10px" class="btn btn-default" />
+                            <input type="text" id="number" name="number" class="form-control text-center" style="width:150px;" placeholder="2125551212"/>
+                        </div>
+                        <input type="submit" id="text" name="text" value="Text" style="border-radius: 10px" class="btn btn-default" />
                     </div>
                 </form>
 
-            <img src = "<?php echo $mediaPath.$profilePhoto ?>" class="profilePhoto" alt="Profile Photo" />
+                <img src = "<?php echo $mediaPath.$profilePhoto ?>" class="profilePhoto" alt="Profile Photo" />
             </div>
 
 
@@ -459,7 +462,7 @@ catch (ClockworkException $e)
                 <div class="form-group">
                     <label for="LastName">Last Name</label>
                     <input type="text" class="form-control" id="LastName" name="LastName" value="<?php echo $lastName ?>" />
-                 </div>
+                </div>
 
                 <div class="form-group">
                     <label for="HomeCity">Home City</label>
@@ -467,16 +470,16 @@ catch (ClockworkException $e)
                 </div>
 
                 <div class="form-group">
-                <label for="HomeState">Home State</label>
-                <select id="HomeState" name="HomeState" class="form-control">
-                    <option  value="<?php echo $homeState ?>"><?php echo $homeState ?></option>
-                    <?php getState() ?>
-                </select>
+                    <label for="HomeState">Home State</label>
+                    <select id="HomeState" name="HomeState" class="form-control">
+                        <option  value="<?php echo $homeState ?>"><?php echo $homeState ?></option>
+                        <?php getState() ?>
+                    </select>
                 </div>
 
                 <div class="form-group">
-                <label for="CurrentCity">Current City</label>
-                <input type="text" class="form-control" id="CurrentCity" name="CurrentCity" value="<?php echo $currentCity ?>" />
+                    <label for="CurrentCity">Current City</label>
+                    <input type="text" class="form-control" id="CurrentCity" name="CurrentCity" value="<?php echo $currentCity ?>" />
                 </div>
 
                 <div class="form-group">
@@ -564,10 +567,10 @@ catch (ClockworkException $e)
                 <input type = "submit" value = "Update" name = "updateProfile" id = "updateProfile" class="btn btn-default" />
             </form>
 
-          <!------------->
-            </div>
+            <!------------->
         </div>
     </div>
+</div>
 
 </body>
 </html>

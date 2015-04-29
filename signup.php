@@ -54,8 +54,13 @@ if (mysql_num_rows($result) > 0) {
     }
 }
 
-$sql = "INSERT INTO Members (FirstName, LastName, Email, Gender, DOB, Username, Password, SignupDate,     IsSuspended, EmailActive, LastLogin,        fb_token,   fb_id)
-    Values ('$fName', '$lName', '$email', '$gender', '$dob', '$username', '".md5($pass)."', CURRENT_DATE(), 0,              1,       CURRENT_DATE(),'$fb_token','$fb_id')";
+// if facebook is used for a sign up then we will use fb_id for a username to keep things unique
+if (strlen($username) == 0 || $username == '') {
+    $username = $fb_id;
+}
+
+$sql = "INSERT INTO Members (FirstName, LastName, Email,    Gender,    DOB,    Username,      Password,     SignupDate,   IsSuspended, EmailActive, LastLogin,      fb_token,   fb_id)
+    Values 			('$fName', '$lName', '$email', '$gender', '$dob', '$username', '".md5($pass)."', CURRENT_DATE(), 0,           1,        CURRENT_DATE(),'$fb_token','$fb_id')";
 $result = mysql_query($sql) or die(mysql_error());
 
 $ID = mysql_insert_id();

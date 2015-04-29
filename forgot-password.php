@@ -38,7 +38,7 @@ if (isset($_POST['submit']) && ($_POST['submit'] == "Reset Password")) {
     require 'connect.php';
     $email = trim($_POST['email']);
 
-    $sql = "SELECT * FROM Members WHERE (Email = '$email' OR Username = '$generic') ";
+    $sql = "SELECT * FROM Members WHERE (Email = '$email') ";
 
 
     $result = mysql_query($sql) or die(mysql_error());
