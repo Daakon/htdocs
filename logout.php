@@ -1,5 +1,6 @@
 <?php
 /*Destroy user session */
+
 session_start();
 
 // destroy all session variables

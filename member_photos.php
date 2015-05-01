@@ -198,6 +198,10 @@ And Members.IsActive = 1 ";
                     $privateString = "Private";
                 }
 
+                if (strlen($posterName) == 0) {
+                    $posterName = "video-bg.jpg";
+                }
+
                 if (file_exists($mediaFilePath)) {
 
                     // check if file type is a photo

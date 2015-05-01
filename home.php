@@ -236,7 +236,7 @@ if (isset($_POST['submit'])) {
                 }
             } // if no media
             else {
-                echo "<script>alert('test');</script>";
+
                 $sql = "INSERT INTO Posts (Post,       Category,    Member_ID,   PostDate) Values
                                           ('$post',   '$category',   '$ID',      CURDATE())";
                 mysql_query($sql) or die(mysql_error());
