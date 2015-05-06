@@ -15,13 +15,13 @@ function build_and_send_email($senderId, $toId, $notification, $postID)
         $link;
 
         if (strstr($url, "local")) {
-            $link = "show_post.php?postID=$postID";
+            $link = "show_post.php?postID=$postID&email=1";
         }
         else if (strstr($url, "dev")) {
-            $link = "http://dev.rapportbook.com/show_post.php?postID=$postID";
+            $link = "http://dev.rapportbook.com/show_post.php?postID=$postID&email=1";
         }
         else {
-            $link = "http://www.rapportbook.com/show_post.php?postID=$postID";
+            $link = "http://www.rapportbook.com/show_post.php?postID=$postID&email=1";
         }
 
         if (function_exists(get_users_name_by_id)) {
@@ -51,13 +51,13 @@ function build_and_send_email($senderId, $toId, $notification, $postID)
         $link;
 
         if (strstr($url, "local")) {
-            $link = "show_post.php?postID=$postID";
+            $link = "show_post.php?postID=$postID&email=1";
         }
         else if (strstr($url, "dev")) {
-            $link = "http://dev.rapportbook.com/show_post.php?postID=$postID";
+            $link = "http://dev.rapportbook.com/show_post.php?postID=$postID&email=1";
         }
         else {
-            $link = "http://www.rapportbook.com/show_post.php?postID=$postID";
+            $link = "http://www.rapportbook.com/show_post.php?postID=$postID&email=1";
         }
 
         $name = get_users_name_by_id($senderId);
@@ -160,13 +160,13 @@ function build_and_send_email($senderId, $toId, $notification, $postID)
         $link;
 
         if (strstr($url, "local")) {
-            $link = "show_post.php?postID=$postID";
+            $link = "show_post.php?postID=$postID&email=1";
         }
         else if (strstr($url, "dev")) {
-            $link = "http://dev.rapportbook.com/show_post.php?postID=$postID";
+            $link = "http://dev.rapportbook.com/show_post.php?postID=$postID&email=1";
         }
         else {
-            $link = "http://www.rapportbook.com/show_post.php?postID=$postID";
+            $link = "http://www.rapportbook.com/show_post.php?postID=$postID&email=1";
         }
 
         $name = get_users_name_by_id($senderId);
@@ -192,13 +192,13 @@ function build_and_send_email($senderId, $toId, $notification, $postID)
         $link;
 
         if (strstr($url, "local")) {
-            $link = "show_post.php?postID=$postID";
+            $link = "show_post.php?postID=$postID&email=1";
         }
         else if (strstr($url, "dev")) {
-            $link = "http://dev.rapportbook.com/show_post.php?postID=$postID";
+            $link = "http://dev.rapportbook.com/show_post.php?postID=$postID&email=1";
         }
         else {
-            $link = "http://www.rapportbook.com/show_post.php?postID=$postID";
+            $link = "http://www.rapportbook.com/show_post.php?postID=$postID&email=1";
         }
 
         $name = get_users_name_by_id($senderId);
