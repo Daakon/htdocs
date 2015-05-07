@@ -189,7 +189,7 @@ if (isset($_POST['submit'])) {
 
                         $exif = @exif_read_data($poster);
                         if ( isset($exif['Orientation']) && !empty($exif['Orientation']) ) {
-                            echo "<script>alert('$poster');</script>";
+
                             // Decide orientation
                             if ( $exif['Orientation'] == 3 ) {
                                 $rotation = 180;
@@ -204,9 +204,9 @@ if (isset($_POST['submit'])) {
                             // Rotate the image
                             if ( $rotation ) {
                                 $imagick = new Imagick();
-                                $imagick->readImage($imageFile);
+                                $imagick->readImage($poster);
                                 $imagick->rotateImage(new ImagickPixel('none'), $rotation);
-                                $imagick->writeImage($imageFile);
+                                $imagick->writeImage($poster);
                                 $imagick->clear();
                                 $imagick->destroy();
                             }

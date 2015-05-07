@@ -70,6 +70,54 @@ if (isset($_POST['Upload'])) {
         if (in_array($type, $videoFileTypes)) {
             move_uploaded_file($mediaFile, $postMediaFilePath);
 
+            // where ffmpeg is located
+            $ffmpeg = '/usr/bin/ffmpeg';
+
+            // poster file name
+            $posterName = "poster".uniqid().".jpg";
+
+            //where to save the image
+            $poster = "$posterPath$posterName";
+
+
+            //time to take screenshot at
+            $interval = 5;
+
+            //screenshot size
+            $size = '440x280';
+
+            //ffmpeg command
+            $cmd = "$ffmpeg -i \"$postMediaFilePath\" -r 1 -s $size -f image2 $poster 2>&1";
+
+            exec($cmd);
+
+
+            $exif = @exif_read_data($poster);
+            if ( isset($exif['Orientation']) && !empty($exif['Orientation']) ) {
+
+                // Decide orientation
+                if ( $exif['Orientation'] == 3 ) {
+                    $rotation = 180;
+                } else if ( $exif['Orientation'] == 6 ) {
+                    $rotation = 90;
+                } else if ( $exif['Orientation'] == 8 ) {
+                    $rotation = -90;
+                } else {
+                    $rotation = 0;
+                }
+
+                // Rotate the image
+                if ( $rotation ) {
+                    $imagick = new Imagick();
+                    $imagick->readImage($poster);
+                    $imagick->rotateImage(new ImagickPixel('none'), $rotation);
+                    $imagick->writeImage($poster);
+                    $imagick->clear();
+                    $imagick->destroy();
+                }
+
+            }
+
         } else {
 
             if (in_array($type, $photoFileTypes)) {
@@ -121,8 +169,8 @@ if (isset($_POST['Upload'])) {
 
 
 // store media pointer
-        $sql = "INSERT INTO Media (Member_ID,  MediaName,  MediaType,  MediaDate, Private    ) Values
-('$ID',    '$mediaName', '$type',   CURRENT_DATE(), 1)";
+        $sql = "INSERT INTO Media (Member_ID,  MediaName,  MediaType,  MediaDate, Private,  Poster    ) Values
+                                  ('$ID',    '$mediaName', '$type',   CURRENT_DATE(), 1,   '$posterName')";
         mysql_query($sql) or die(mysql_error());
 
 
