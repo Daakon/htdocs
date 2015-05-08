@@ -61,6 +61,7 @@ $lName = $rows['LastName'];
                         Members.DOB As DOB,
                         Profile.ProfilePhoto As ProfilePhoto,
                         Profile.ProfileVideo As ProfileVideo,
+                        Profile.Poster As Poster,
                         Profile.HomeCity As HomeCity,
                         Profile.HomeState As HomeState,
                         Profile.CurrentCity As CurrentCity,
@@ -87,6 +88,7 @@ $lName = $rows['LastName'];
             $memberID = $rows['MemberID'];
             $profilePhoto = $rows['ProfilePhoto'];
             $profileVideo = $rows['ProfileVideo'];
+            $posterName = $rows['Poster'];
             $firstName = $rows['FirstName'];
             $lastName = $rows['LastName'];
             $homeCity = $rows["HomeCity"];
@@ -120,7 +122,7 @@ $lName = $rows['LastName'];
 
             <div align ="center">
                 <?php if ($profileVideo != "default_video.png") { ?>
-                    <a href = "<?php echo $videoPath . $profileVideo ?> "><img src = "<?php echo $images ?>video-bg.jpg" height="100" width = "100" class="img-responsive"/></a>
+                    <video src = " <?php echo $videoPath . $profileVideo ?>" poster="/poster/<?php echo $posterName ?>"  preload="auto" controls />
                 <?php } else { ?>
                     <img src = "<?php echo $mediaPath.$profileVideo ?>" class="defaultProfileVideo" alt="Profile Video" />
                 <?php } ?>

@@ -196,6 +196,13 @@ And Members.IsActive = 1 ";
 
 <?php include('media_sizes.html'); ?>
 
+<script>
+    // show uploading
+    function showUploading() {
+        document.getElementById("progress").style.display = "block";
+    }
+</script>
+
 <body>
 
 <div class="container">
@@ -207,7 +214,7 @@ And Members.IsActive = 1 ";
         <div class="col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8 roll-call">
             <h2>Photos & Videos</h2>
 
-            <form method="post" enctype="multipart/form-data" action="">
+            <form method="post" enctype="multipart/form-data" action="" onsubmit="showUploading()">
                 <img src="/images/image-icon.png" height="30px" width="30px" alt="Photos/Video"/>
                 <strong>Upload a Photo or Video to your profile</strong>
                 <br/><br/>
@@ -219,7 +226,17 @@ And Members.IsActive = 1 ";
 
                 <input type="file" width="10px;" name="flPostMedia" id="flPostMedia"/>
                 <input type="hidden" name="MAX_FILE_SIZE" value="500000000"
+
                 <br/><br/>
+
+                <div id="progress" style="display:none;">
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped progress-bar-danger active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                            <span class="sr-only">Loading</span>
+                        </div>
+                    </div>
+                </div>
+                <br/>
                 <input type="submit" class="post-button" name="Upload" id="Upload" value="Upload"/>
             </form>
             <br/>

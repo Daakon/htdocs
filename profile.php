@@ -143,6 +143,54 @@ if (isset($_POST['video']) && ($_POST['video'] == "Upload Video")) {
             $cmd = "ffmpeg -i $mediaFile -vf 'transpose=1' $mediaFile";
             exec($cmd);
             move_uploaded_file($mediaFile, $postMediaFilePath);
+
+            // where ffmpeg is located
+            $ffmpeg = '/usr/bin/ffmpeg';
+
+            // poster file name
+            $posterName = "poster".uniqid().".jpg";
+
+            //where to save the image
+            $poster = "$posterPath$posterName";
+
+
+            //time to take screenshot at
+            $interval = 5;
+
+            //screenshot size
+            $size = '440x280';
+
+            //ffmpeg command
+            $cmd = "$ffmpeg -i \"$postMediaFilePath\" -r 1 -s $size -f image2 $poster 2>&1";
+
+            exec($cmd);
+
+
+            $exif = @exif_read_data($poster);
+            if ( isset($exif['Orientation']) && !empty($exif['Orientation']) ) {
+
+                // Decide orientation
+                if ( $exif['Orientation'] == 3 ) {
+                    $rotation = 180;
+                } else if ( $exif['Orientation'] == 6 ) {
+                    $rotation = 90;
+                } else if ( $exif['Orientation'] == 8 ) {
+                    $rotation = -90;
+                } else {
+                    $rotation = 0;
+                }
+
+                // Rotate the image
+                if ( $rotation ) {
+                    $imagick = new Imagick();
+                    $imagick->readImage($poster);
+                    $imagick->rotateImage(new ImagickPixel('none'), $rotation);
+                    $imagick->writeImage($poster);
+                    $imagick->clear();
+                    $imagick->destroy();
+                }
+
+            }
         }
         else {
             echo "<script>alet('Invalid File Type');</script>";
@@ -151,13 +199,13 @@ if (isset($_POST['video']) && ($_POST['video'] == "Upload Video")) {
 
 
         // write photo to media table
-        $sql2 = "INSERT INTO Media (Member_ID, MediaName,     MediaType,  wasProfilePhoto, MediaDate) Values
-                               ('$ID',     '$mediaName',  '$type',       1,            CURDATE())";
+        $sql2 = "INSERT INTO Media (Member_ID, MediaName,     MediaType,  wasProfilePhoto, MediaDate,  Poster      ) Values
+                               ('$ID',     '$mediaName',  '$type',       1,            CURDATE(),     '$posterName')";
         mysql_query($sql2) or die(mysql_error());
 
 
         // update photo pointer in database
-        $sql = "UPDATE Profile Set ProfileVideo = '$mediaName' WHERE Member_ID = '$ID'";
+        $sql = "UPDATE Profile Set ProfileVideo = '$mediaName', Poster = '$posterName' WHERE Member_ID = '$ID'";
         mysql_query($sql) or die(mysql_error());
 
 
@@ -299,6 +347,13 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
     }
 </script>
 
+<script>
+    // show uploading
+    function showUploading() {
+        document.getElementById("progress").style.display = "block";
+    }
+</script>
+
 <body>
 
 
@@ -334,6 +389,7 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
                         Members.EmailActive As EmailStatus,
                         Profile.ProfilePhoto As ProfilePhoto,
                         Profile.ProfileVideo As ProfileVideo,
+                        Profile.Poster As Poster,
                         Profile.HomeCity As HomeCity,
                         Profile.HomeState As HomeState,
                         Profile.CurrentCity As CurrentCity,
@@ -360,6 +416,7 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
             //            $memberID = $rows['MemberID'];
             $profilePhoto = $rows['ProfilePhoto'];
             $profileVideo = $rows['ProfileVideo'];
+            $posterName = $rows['Poster'];
             $firstName = $rows['FirstName'];
             $lastName = $rows['LastName'];
             $homeCity = $rows["HomeCity"];
@@ -376,6 +433,10 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
             $password = $rows['Password'];
             $dob = $rows['DOB'];
             $emailStatus = $rows['EmailStatus'];
+
+            if (strlen($posterName) == 0) {
+                $posterName = "video-bg.jpg";
+            }
 
             ?>
 
@@ -411,7 +472,7 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
             </div>
 
 
-            <form method="post" enctype="multipart/form-data" action="">
+            <form method="post" enctype="multipart/form-data" action="" >
                 <img src="/images/image-icon.png" class="img-icon" alt="Photos/Video"/>
                 <strong>Upload A Profile Photo</strong>
                 <input type="file" width="10px;" name="flPostPhoto" id="flPostPhoto"/>
@@ -427,15 +488,17 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
 
             <!--Profile video --------------------------------------------------------------------------------->
 
+
+
             <div align ="center">
                 <?php if ($profileVideo != "default_video.png") { ?>
-                    <a href = "<?php echo $videoPath . $profileVideo ?> "><img src = "<?php echo $images ?>video-bg.jpg" height="100" width = "100" class="img-responsive"/></a>
+                   <video src = " <?php echo $videoPath . $profileVideo ?>" poster="/poster/<?php echo $posterName ?>"  preload="auto" controls />
                 <?php } else { ?>
                     <img src = "<?php echo $mediaPath.$profileVideo ?>" class="defaultProfileVideo" alt="Profile Video" />
                 <?php } ?>
             </div>
 
-            <form method="post" enctype="multipart/form-data" action="">
+            <form method="post" enctype="multipart/form-data" action="" onsubmit="showUploading()">
                 <img src="/images/image-icon.png" class="img-icon" alt="Photos/Video"/>
                 <strong>Upload A Profile Video</strong>
                 <input type="file" width="10px;" name="flPostVideo" id="flPostVideo"/>
@@ -443,6 +506,15 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
                 <br/>
                 <br/>
                 <input type="submit" class="post-button" name="video" id="video" value="Upload Video"/>
+
+                <br/>
+                <div id="progress" style="display:none;">
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped progress-bar-danger active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                            <span class="sr-only">Loading</span>
+                        </div>
+                    </div>
+                </div>
             </form>
 
             <!--Profile ---------------------------------------------------------------------------------------->
