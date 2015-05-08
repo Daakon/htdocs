@@ -19,10 +19,10 @@ mysql_query($sql) or die(mysql_error());
 
 //An approval just popped so we should set the notifications
 //A comment was just made, we need to send out some notifications.
-//The first thing is to identify all of the id's connected with this bulletin
+//The first thing is to identify all of the id's connected with this post
 
 
-//Get the ids of all the consumers connected with a post comment
+//Get the ids of all the people connected with a post comment
 $sql = "SELECT Member_ID FROM PostComments WHERE Post_ID = $postID ";
 
 $result = mysql_query($sql) or die(mysql_error());
