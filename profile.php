@@ -158,15 +158,15 @@ if (isset($_POST['video']) && ($_POST['video'] == "Upload Video")) {
             $interval = 5;
 
             //screenshot size
-            $size = '440x280';
+            //$size = '440x280'; -s $size -f
 
             //ffmpeg command
-            $cmd = "$ffmpeg -i \"$postMediaFilePath\" -r 1 -s $size -f image2 $poster 2>&1";
+            $cmd = "$ffmpeg -i \"$postMediaFilePath\" -r 1  image2 $poster 2>&1";
 
             exec($cmd);
-
-
+            $poster = imagecreatefromjpeg($poster);
             $exif = @exif_read_data($poster);
+
             if ( isset($exif['Orientation']) && !empty($exif['Orientation']) ) {
 
                 // Decide orientation
@@ -182,14 +182,21 @@ if (isset($_POST['video']) && ($_POST['video'] == "Upload Video")) {
 
                 // Rotate the image
                 if ( $rotation ) {
-                    $imagick = new Imagick();
-                    $imagick->readImage($poster);
-                    $imagick->rotateImage(new ImagickPixel('none'), $rotation);
-                    $imagick->writeImage($poster);
-                    $imagick->clear();
-                    $imagick->destroy();
+                    $img = imagerotate($poster, $rotation, 0);
+                    imagejpeg($img, $posterPath.$posterName, 100);
                 }
-
+            }
+            else {
+                // if we cannot determine the exif data
+                // then we will rotate the image if it is wider than it is tall
+                // this is the best fallback so far.
+                $size = getimagesize("$posterPath$posterName");
+                $width = $size[0];
+                $height = $size[1];
+                if ($width > $height) {
+                    $img = imagerotate($poster, -90, 0);
+                    imagejpeg($img, $posterPath.$posterName, 100);
+                }
             }
         }
         else {
@@ -347,12 +354,7 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
     }
 </script>
 
-<script>
-    // show uploading
-    function showUploading() {
-        document.getElementById("progress").style.display = "block";
-    }
-</script>
+
 
 <body>
 
@@ -488,7 +490,12 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
 
             <!--Profile video --------------------------------------------------------------------------------->
 
-
+            <script>
+                // show uploading
+                function showUploading() {
+                    document.getElementById("progress").style.display = "block";
+                }
+            </script>
 
             <div align ="center">
                 <?php if ($profileVideo != "default_video.png") { ?>
@@ -504,10 +511,6 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
                 <input type="file" width="10px;" name="flPostVideo" id="flPostVideo"/>
                 <input type="hidden" name="MAX_FILE_SIZE" value="500000000"
                 <br/>
-                <br/>
-                <input type="submit" class="post-button" name="video" id="video" value="Upload Video"/>
-
-                <br/>
                 <div id="progress" style="display:none;">
                     <div class="progress">
                         <div class="progress-bar progress-bar-striped progress-bar-danger active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
@@ -515,6 +518,9 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
                         </div>
                     </div>
                 </div>
+                <br/>
+                <input type="submit" class="post-button" name="video" id="video" value="Upload Video"/>
+
             </form>
 
             <!--Profile ---------------------------------------------------------------------------------------->

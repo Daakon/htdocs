@@ -84,15 +84,16 @@ if (isset($_POST['Upload'])) {
             $interval = 5;
 
             //screenshot size
-            $size = '440x280';
+            //$size = '440x280'; -s $size
 
             //ffmpeg command
-            $cmd = "$ffmpeg -i \"$postMediaFilePath\" -r 1 -s $size -f image2 $poster 2>&1";
+            $cmd = "$ffmpeg -i \"$postMediaFilePath\" -r 1 -f image2 $poster 2>&1";
 
             exec($cmd);
 
-
+            $poster = imagecreatefromjpeg($poster);
             $exif = @exif_read_data($poster);
+
             if ( isset($exif['Orientation']) && !empty($exif['Orientation']) ) {
 
                 // Decide orientation
@@ -108,14 +109,21 @@ if (isset($_POST['Upload'])) {
 
                 // Rotate the image
                 if ( $rotation ) {
-                    $imagick = new Imagick();
-                    $imagick->readImage($poster);
-                    $imagick->rotateImage(new ImagickPixel('none'), $rotation);
-                    $imagick->writeImage($poster);
-                    $imagick->clear();
-                    $imagick->destroy();
+                    $img = imagerotate($poster, $rotation, 0);
+                    imagejpeg($img, $posterPath.$posterName, 100);
                 }
-
+            }
+            else {
+                // if we cannot determine the exif data
+                // then we will rotate the image if it is wider than it is tall
+                // this is the best fallback so far.
+                $size = getimagesize("$posterPath$posterName");
+                $width = $size[0];
+                $height = $size[1];
+                if ($width > $height) {
+                    $img = imagerotate($poster, -90, 0);
+                    imagejpeg($img, $posterPath.$posterName, 100);
+                }
             }
 
         } else {

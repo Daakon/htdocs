@@ -568,11 +568,12 @@ $profileMediaSrc = trim("media/" . $profilePhoto);
             // if the
             if ($post == "<p></p>") {
                 $isPost = false;
-                $sqlPost = "SELECT MediaName, MediaType FROM Media WHERE MediaName = '$mediaName' ";
+                $sqlPost = "SELECT MediaName, MediaType, Poster FROM Media WHERE MediaName = '$mediaName' ";
                 $resultPost = mysql_query($sqlPost) or die(mysql_error());
                 $rowPost = mysql_fetch_assoc($resultPost);
                 $mediaName = $rowPost['MediaName'];
                 $mediaType = $rowPost['MediaType'];
+                $posterName = $rowPost['Poster'];
 
                 // check if file type is a photo
                 if (in_array($mediaType, $photoFileTypes)) {
@@ -582,7 +583,7 @@ $profileMediaSrc = trim("media/" . $profilePhoto);
                 } // check if file type is a video
                 elseif (in_array($mediaType, $videoFileTypes)) {
 
-                    $post = '<a href = "' . $videoPath . $mediaName.'"> <img src = "' . $images . 'video-bg.jpg" height="100" width = "100" class="img-responsive"/></a>';
+                    $post = '<video src = "' . $videoPath . $mediaName . '" poster="/poster/'.$posterName.'" preload="auto" controls />';
                 }
             }
             ?>
