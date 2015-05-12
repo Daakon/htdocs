@@ -667,6 +667,19 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
             <li><a href="/profile.php/<?php echo get_username($ID) ?>">Go To Your Profile <?php require 'getNewMessageCount.php' ?></a></li>
         </ul>
 
+       <!-- SMARTADDON BEGIN -->
+<script type="text/javascript">
+(function() {
+var s=document.createElement('script');s.type='text/javascript';s.async = true;
+s.src='http://s1.smartaddon.com/share_addon.js';
+var j =document.getElementsByTagName('script')[0];j.parentNode.insertBefore(s,j);
+})();
+</script>
+
+<a href="http://www.smartaddon.com/?share" title="Share Button" onclick="return sa_tellafriend('','bookmarks')"><img alt="Share" src="http://s1.smartaddon.com/s12.png" border="0" /></a>
+<!-- SMARTADDON END -->
+<br/><br/>
+
         <div class="col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8 roll-call ">
             <img src="/images/roll-call.gif" height="150px" width="150px" alt="Roll Call"/>
             <br/>
