@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="51867226-c8dd-43fb-9a46-7c8a9e9ab742" name="Default" comment="Added media page.&#10;&#10;">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/home.php" afterPath="$PROJECT_DIR$/home.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/calendar.php" afterPath="$PROJECT_DIR$/calendar.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="htdocs.iws" />
@@ -40,8 +40,8 @@
       <file leaf-file-name="home.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/home.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.8908046" vertical-offset="12474" max-vertical-offset="19513">
-              <caret line="681" column="0" selection-start-line="681" selection-start-column="0" selection-end-line="681" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.67241377" vertical-offset="11125" max-vertical-offset="19513">
+              <caret line="604" column="12" selection-start-line="604" selection-start-column="12" selection-end-line="604" selection-end-column="12" />
               <folding>
                 <marker date="1431438856000" expanded="true" signature="4997:5167" placeholder="INSERT INTO ..." />
                 <marker date="1431438856000" expanded="true" signature="5304:5354" placeholder="SELECT * FRO..Media..." />
@@ -258,10 +258,6 @@
     <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
       <method />
     </configuration>
-    <configuration default="true" type="PhpBehatConfigurationType" factoryName="Behat">
-      <BehatRunner />
-      <method />
-    </configuration>
     <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server">
       <method />
     </configuration>
@@ -353,7 +349,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1404" y="52" width="1214" height="686" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -765,11 +761,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.49042144" vertical-offset="1359" max-vertical-offset="6061">
           <caret line="85" column="0" selection-start-line="85" selection-start-column="0" selection-end-line="86" selection-end-column="41" />
-          <folding>
-            <marker date="1431203242000" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
-            <marker date="1431203242000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..Members..." />
-            <marker date="1431203242000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..Media..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -777,23 +768,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5996169" vertical-offset="2727" max-vertical-offset="12901">
           <caret line="160" column="14" selection-start-line="160" selection-start-column="14" selection-end-line="160" selection-end-column="14" />
-          <folding>
-            <marker date="1431203242000" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
-            <marker date="1431203242000" expanded="true" signature="-1:-1" placeholder="UPDATE Profi..." />
-            <marker date="1431203242000" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
-            <marker date="1431203242000" expanded="true" signature="-1:-1" placeholder="UPDATE Profi..." />
-            <marker date="1431203242000" expanded="true" signature="-1:-1" placeholder="Update Membe..." />
-            <marker date="1431203242000" expanded="true" signature="-1:-1" placeholder="Update Profi..." />
-            <marker date="1431203242000" expanded="true" signature="-1:-1" placeholder="SELECT Usern..Members..." />
-            <marker date="1431203242000" expanded="true" signature="-1:-1" placeholder="SELECT Membe..Members..." />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/home.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8908046" vertical-offset="12474" max-vertical-offset="19513">
-          <caret line="681" column="0" selection-start-line="681" selection-start-column="0" selection-end-line="681" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.67241377" vertical-offset="11125" max-vertical-offset="19513">
+          <caret line="604" column="12" selection-start-line="604" selection-start-column="12" selection-end-line="604" selection-end-column="12" />
           <folding>
             <marker date="1431438856000" expanded="true" signature="4997:5167" placeholder="INSERT INTO ..." />
             <marker date="1431438856000" expanded="true" signature="5304:5354" placeholder="SELECT * FRO..Media..." />
