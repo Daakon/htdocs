@@ -645,14 +645,6 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
 </script>
 
-
-<script>
-    // show uploading
-    function showUploading() {
-        document.getElementById("progress").style.display = "block";
-    }
-</script>
-
 <script>
     // show comment uploading
     function showCommentUploading(comment, theForm) {
@@ -671,53 +663,16 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
         <ul class="list-inline">
             <li><a href="/profile.php/<?php echo get_username($ID) ?>">Go To Your Profile <?php require 'getNewMessageCount.php' ?></a></li>
+            <li><a href = "/home.php">Back to Roll Call</a></li>
         </ul>
 
-       <!-- SMARTADDON BEGIN -->
-<script type="text/javascript">
-(function() {
-var s=document.createElement('script');s.type='text/javascript';s.async = true;
-s.src='http://s1.smartaddon.com/share_addon.js';
-var j =document.getElementsByTagName('script')[0];j.parentNode.insertBefore(s,j);
-})();
-</script>
 
-<a href="http://www.smartaddon.com/?share" title="Share Button" onclick="return sa_tellafriend('','bookmarks')"><img alt="Share" src="http://s1.smartaddon.com/s12.png" border="0" /></a>
-<!-- SMARTADDON END -->
-<br/><br/>
+<?php $category = $_GET['cat']; ?>
 
-        <div class="col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8 roll-call ">
-            <img src="/images/roll-call.gif" height="150px" width="150px" alt="Roll Call"/>
-            <br/>
+<h2><?php echo $category ?> Posts</h2>
 
-            <form method="post" enctype="multipart/form-data" action="" onsubmit="showUploading()">
-                <img src="/images/image-icon.png" height="30px" width="30px" alt="Photos/Video"/>
-                <strong>Attach Photo/Video To Your Post</strong>
-                <input type="file" width="10px;" name="flPostMedia" id="flPostMedia"/>
-                <input type="hidden" name="MAX_FILE_SIZE" value="500000000"
-                <br/>
-                <textarea name="post" id="post" class="form-control" style="border:1px solid black"
-                       placeholder="Share Your Talent" ></textarea>
-                <br/>
-                <div id="progress" style="display:none;">
-                    <div class="progress">
-                      <div class="progress-bar progress-bar-striped progress-bar-danger active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-                        <span class="sr-only">Loading</span>
-                      </div>
-                    </div>
-                </div>
-                <br/>
-                    <select class="form-control input-lg" id="category" name="category">
-                            <option value="">Category</option>
-                            <?php echo category() ?>
-                        </select>
-                        <br/>
-                    <input type="submit" class="post-button" name="submit" id="submit" value="Post"/>
-            </form>
-        </div>
-    </div>
+<?php
 
-    <?php
 $sql = "SELECT DISTINCT
     Members.ID As MemberID,
     Members.FirstName As FirstName,
@@ -733,6 +688,7 @@ $sql = "SELECT DISTINCT
     And Members.ID = Posts.Member_ID
     And Members.ID = Profile.Member_ID
     And Posts.IsDeleted = 0
+    AND Posts.Category = '$category'
     Group By Posts.ID
     Order By Posts.ID DESC ";
 
