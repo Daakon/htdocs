@@ -666,7 +666,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
             function getGenre() {
                var selection = document.getElementById('genre');
                var genre = selection.options[selection.selectedIndex].value;
-               window.location = "/home.php?genre="+genre;
+               window.location = "/home.php?genre="+encodeURIComponent(genre);
             }
         </script>
 
@@ -704,7 +704,7 @@ var j =document.getElementsByTagName('script')[0];j.parentNode.insertBefore(s,j)
                 <input type="file" width="10px;" name="flPostMedia" id="flPostMedia"/>
                 <input type="hidden" name="MAX_FILE_SIZE" value="500000000"
                 <br/>
-                <textarea name="post" id="post" class="form-control" style="border:1px solid black"
+                <textarea name="post" id="post" class="form-control textArea"
                        placeholder="Share Your Talent" ></textarea>
                 <br/>
                 <div id="progress" style="display:none;">
@@ -726,9 +726,8 @@ var j =document.getElementsByTagName('script')[0];j.parentNode.insertBefore(s,j)
     </div>
 
 <div align = "center">
-<h3>Show Post By Category</h3>
 <select id="genre" name="genre" onchange="getGenre()">
-            <option value="All">All</option>
+            <option value="">Show Post By Category</option>
             <option value="Show-All">Show All</option>
                             <?php echo category() ?>
                         </select>
@@ -810,7 +809,7 @@ if (mysql_numrows($result) > 0) {
 
             </div>
 
-            <a href='/post-cat.php?cat=<?php echo $category ?>' class='category'><h5><?php echo $category ?></h5></a>
+            <a href='/post-cat.php?cat=<?php echo urlencode($category) ?>' class='category'><h5><?php echo $category ?></h5></a>
             <br/><br/>
             <?php
 

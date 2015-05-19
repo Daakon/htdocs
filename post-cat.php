@@ -667,7 +667,9 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
         </ul>
 
 
-<?php $category = $_GET['cat']; ?>
+<?php $category = $_GET['cat'];
+
+?>
 
 <h2><?php echo $category ?> Posts</h2>
 
