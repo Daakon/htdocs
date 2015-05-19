@@ -663,7 +663,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
         <ul class="list-inline">
             <li><a href="/profile.php/<?php echo get_username($ID) ?>">Go To Your Profile <?php require 'getNewMessageCount.php' ?></a></li>
-            <li><a href = "/home.php">Back to Roll Call</a></li>
+             <li><a href="javascript:history.back();">Go Back</a></li>
         </ul>
 
 

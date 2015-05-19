@@ -662,6 +662,14 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
     }
 </script>
 
+<script type = "text/javascript">
+            function getGenre() {
+               var selection = document.getElementById('genre');
+               var genre = selection.options[selection.selectedIndex].value;
+               window.location = "/home.php?genre="+genre;
+            }
+        </script>
+
 <body>
 
 <div class="container">
@@ -717,7 +725,25 @@ var j =document.getElementsByTagName('script')[0];j.parentNode.insertBefore(s,j)
         </div>
     </div>
 
+<div align = "center">
+<h3>Show Post By Category</h3>
+<select id="genre" name="genre" onchange="getGenre()">
+            <option value="All">All</option>
+            <option value="Show-All">Show All</option>
+                            <?php echo category() ?>
+                        </select>
+</div>
+
     <?php
+$genre = $_GET['genre'];
+if (!empty($genre) && $genre != "Show-All") {
+    $genreCondition = "And Posts.Category = '$genre' ";
+}
+else if($genre = "Show-All") {
+    $genreCondition = " ";
+}
+else { $genreCondition = " "; }
+
 $sql = "SELECT DISTINCT
     Members.ID As MemberID,
     Members.FirstName As FirstName,
@@ -733,6 +759,7 @@ $sql = "SELECT DISTINCT
     And Members.ID = Posts.Member_ID
     And Members.ID = Profile.Member_ID
     And Posts.IsDeleted = 0
+    $genreCondition
     Group By Posts.ID
     Order By Posts.ID DESC ";
 
@@ -772,19 +799,19 @@ if (mysql_numrows($result) > 0) {
                     <?php
                     echo "<div id='long$postID' style='display:none;'>";
                     echo nl2br($post);
-                    echo "<br/><br/><a href='/post-cat.php?cat=$category' class='category' >$category</a>";
+
                     echo "</div>";
                 }
                 else {
                     echo nl2br($post);
-                    echo "<br/><br/><a href='/post-cat.php?cat=$category' class='category' >$category</a>";
+
                 }
-                echo '<br/><br/>';
                 ?>
 
             </div>
 
-
+            <a href='/post-cat.php?cat=<?php echo $category ?>' class='category'><h5><?php echo $category ?></h5></a>
+            <br/><br/>
             <?php
 
             //check if member has approved this post
@@ -999,6 +1026,9 @@ if (mysql_numrows($result) > 0) {
 
     <?php
     }
+}
+else {
+    echo "<div align ='center' class='notFound'><h2>No $genre Posts Found</h2></div>";
 }
 ?>
 
