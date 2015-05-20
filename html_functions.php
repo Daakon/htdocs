@@ -8,6 +8,10 @@ function get_head_files()
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
     <html xmlns="http://www.w3.org/1999/xhtml">
     <head lang="<?php echo $str_language; ?>" xml:lang="<?php echo $str_language; ?>">
+        <meta name="description" content="Rapportbook is a platform that lets individuals share their talent with the world.
+        Post photos, videos, network and much more. It's free to Join!">
+        <meta name="keywords" content="networking, promotion, advertise, photos, videos, messaging">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 
