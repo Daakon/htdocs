@@ -123,11 +123,11 @@ if (isset($_POST['submit'])) {
 
                     }
 
-
+                    // handle transparency
+                    imagesavealpha($src, true);
                     if ($type == "image/jpg" || $type == "image/jpeg") {
                         imagejpeg($src, $postMediaFilePath, 100);
                     } else if ($type == "image/png") {
-
                         imagepng($src, $postMediaFilePath, 0, NULL);
 
 
@@ -366,6 +366,8 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                 if (in_array($type, $videoFileTypes)) {
                     move_uploaded_file($mediaFile, $postMediaFilePath);
                 } else {
+                    // handle transparency
+                    imagesavealpha($src, true);
                     if ($type == "image/jpg" || $type == "image/jpeg") {
                         imagejpeg($src, $postMediaFilePath, 100);
 

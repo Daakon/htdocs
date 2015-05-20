@@ -85,6 +85,8 @@ if (isset($_POST['photo']) && ($_POST['photo'] == "Upload Photo")) {
         $photoFileTypes = array("image/jpg", "image/jpeg", "image/png", "image/tiff",
             "image/gif", "image/raw");
 
+        // handle transparency
+        imagesavealpha($src, true);
         if ($type == "image/jpg" || $type == "image/jpeg") {
             imagejpeg($src, $postMediaFilePath, 100);
 
@@ -161,7 +163,7 @@ if (isset($_POST['video']) && ($_POST['video'] == "Upload Video")) {
             //$size = '440x280'; -s $size -f
 
             //ffmpeg command
-            $cmd = "$ffmpeg -i \"$postMediaFilePath\" -r 1  image2 $poster 2>&1";
+            $cmd = "$ffmpeg -i \"$postMediaFilePath\" -r 1 -f image2 $poster 2>&1";
 
             exec($cmd);
             $poster = imagecreatefromjpeg($poster);
@@ -354,7 +356,12 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
     }
 </script>
 
-
+<script>
+    // show uploading
+    function showUploading() {
+        document.getElementById("progress").style.display = "block";
+    }
+</script>
 
 <body>
 
@@ -490,12 +497,7 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
 
             <!--Profile video --------------------------------------------------------------------------------->
 
-            <script>
-                // show uploading
-                function showUploading() {
-                    document.getElementById("progress").style.display = "block";
-                }
-            </script>
+
 
             <div align ="center">
                 <?php if ($profileVideo != "default_video.png") { ?>
@@ -509,7 +511,7 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
                 <img src="/images/image-icon.png" class="img-icon" alt="Photos/Video"/>
                 <strong>Upload A Profile Video</strong>
                 <input type="file" width="10px;" name="flPostVideo" id="flPostVideo"/>
-                <input type="hidden" name="MAX_FILE_SIZE" value="500000000"
+                <input type="hidden" name="MAX_FILE_SIZE" value="500000000" />
                 <br/>
                 <div id="progress" style="display:none;">
                     <div class="progress">
