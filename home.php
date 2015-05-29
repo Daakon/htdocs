@@ -9,6 +9,7 @@ require 'findURL.php';
 
 require 'email.php';
 require 'category.php';
+require 'ads.php';
 
 get_head_files();
 get_header();
@@ -675,9 +676,19 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 <body>
 
 <div class="container">
+<?php
+// ad demographics
+$age = getAge($ID);
+$state = getState($ID);
+$interests = getInterests($ID);
+$interests = explode(" ", $interests);
+$interests = $interests[0];
 
+?>
 
     <div class="row row-padding">
+<div class=" col-md-10  col-lg-10 col-md-offset-1 col-lg-offset-2 ">
+
 
         <ul class="list-inline">
             <li><a href="/profile.php/<?php echo get_username($ID) ?>">Go To Your Profile <?php require 'getNewMessageCount.php' ?></a></li>
@@ -696,7 +707,8 @@ var j =document.getElementsByTagName('script')[0];j.parentNode.insertBefore(s,j)
 <!-- SMARTADDON END -->
 <br/><br/>
 
-        <div class="col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8 roll-call ">
+<!--Middle Column -->
+        <div class=" col-md-9 col-lg-9 roll-call col-md-offset-1 col-lg-offset-1">
             <img src="/images/roll-call.gif" height="150px" width="150px" alt="Roll Call"/>
             <br/>
 
@@ -724,9 +736,8 @@ var j =document.getElementsByTagName('script')[0];j.parentNode.insertBefore(s,j)
                         <br/>
                     <input type="submit" class="post-button" name="submit" id="submit" value="Post"/>
             </form>
-        </div>
-    </div>
 
+<br/><br/>
 <div align = "center">
 <select id="genre" name="genre" onchange="getGenre()">
             <option value="">Show Post By Category</option>
@@ -734,6 +745,8 @@ var j =document.getElementsByTagName('script')[0];j.parentNode.insertBefore(s,j)
                             <?php echo category() ?>
                         </select>
 </div>
+        </div>
+
 
     <?php
 $genre = $_GET['genre'];
@@ -741,11 +754,16 @@ if (!empty($genre) && $genre != "Show-All") {
     $genreCondition = "And Posts.Category = '$genre' ";
 }
 else if($genre = "Show-All") {
-    $genreCondition = " ";
+    $genre = '';
+    $genreCondition = "And Posts.Category > '' ";
 }
-else { $genreCondition = " "; }
+else { $genreCondition = "And Posts.Category > '' "; }
 
-$sql = "SELECT DISTINCT
+
+
+$ads = getAds($genre, $age, $state, $interests);
+
+$sql = " SELECT DISTINCT
     Members.ID As MemberID,
     Members.FirstName As FirstName,
     Members.LastName As LastName,
@@ -760,13 +778,24 @@ $sql = "SELECT DISTINCT
     And Members.ID = Posts.Member_ID
     And Members.ID = Profile.Member_ID
     And Posts.IsDeleted = 0
+    AND Posts.Category <> 'Sponsored'
     $genreCondition
-    Group By Posts.ID
-    Order By Posts.ID DESC ";
+    UNION
+    $ads
+    Group By PostID
+    Order By PostID DESC ";
 
 
 $result = mysql_query($sql) or die(mysql_error());
 
+// if no results
+if (mysql_num_rows($result) == 0) {
+    ?>
+    <div class=" col-lg-9 col-md-9 roll-call col-md-offset-1 col-lg-offset-1"
+         style="background:white;border-radius:10px;margin-top:20px;border:2px solid black;" align="left">
+    No Results
+    </div>
+<?php }
 
 if (mysql_numrows($result) > 0) {
     while ($rows = mysql_fetch_assoc($result)) {
@@ -778,8 +807,11 @@ if (mysql_numrows($result) > 0) {
         $postID = $rows['PostID'];
         $postOwner = $memberID;
         ?>
-        <div class="row row-padding">
-        <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 "
+
+
+
+
+        <div class=" col-lg-9 col-md-9 roll-call col-md-offset-1 col-lg-offset-1"
              style="background:white;border-radius:10px;margin-top:20px;border:2px solid black;" align="left">
 
             <img src="<?php echo $mediaPath. $profilePhoto ?>" class="profilePhoto-Feed" alt=""
@@ -1022,21 +1054,58 @@ if (mysql_numrows($result) > 0) {
                                   ----------------------------------------------------->
 
             </div>
-        </div>
-
 
     <?php
     }
+
 }
-else {
-    echo "<div align ='center' class='notFound'><h2>No $genre Posts Found</h2></div>";
+
+?>
+</div>
+
+
+<!--Right Column -->
+        <div class="col-md-3 col-lg-3 col-md-offset-9 col-lg-offset-9 ad-desktop hidden-sm hidden-xs " >
+        <h3><a href="ad-manager.php">Advertise</a></h3>
+        <?php
+
+$rightColumnAds = getRightColumnAds($genre, $age, $state, $interests);
+$rightColSql = $rightColumnAds;
+$rightColResult = mysql_query($rightColSql) or die(mysql_error());
+//$rows = mysql_fetch_assoc($result);
+if (mysql_num_rows($rightColResult) > 0) { ?>
+
+    <div style="padding:10px;width:200px;">
+        <?php
+        while ($rightColRows = mysql_fetch_assoc($rightColResult)) {
+            echo $rightColRows["Post"];
+            ?>
+            <hr class="ad-border" />
+        <?php
+        } ?>
+    </div>
+<?php
 }
 ?>
+        </div>
+
+
+
+
+
+</div> <!--Middle Column -->
+
 
 
     </div>
 
+
     <br/><br/>
+
+
+
+
+            </div>
 
 </body>
 </html>

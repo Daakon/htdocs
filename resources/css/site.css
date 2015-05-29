@@ -53,6 +53,31 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom:20px !important;
 }
 
+.ad-desktop {
+    background: white;
+    color: black;
+    border: 2px solid black;
+    border-radius: 5px;
+    padding-bottom: 20px;
+    margin-bottom:20px !important;
+    margin-right:10px;
+    width:250px;
+    top:160px;
+    left: 20px;
+    position:absolute;
+    overflow-y:hidden;
+}
+
+.ad-border {
+    background-color:#000000;
+    border-width:0;
+    color:#000000;
+    height:2px;
+    lineheight:0;
+    display: inline-block;
+    text-align: left;
+    width:100%;
+}
 .post-button {
     background: red;
     color: white;
@@ -60,6 +85,7 @@ h1, h2, h3, h4, h5, h6 {
     padding: 5px 10px;
     font-size: 20px;
 }
+
 
 .roll-call-post {
     background-color: white;

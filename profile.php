@@ -363,6 +363,20 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
     }
 </script>
 
+<script>
+    function capFname() {
+        var fName = document.getElementById('FirstName').value;
+        document.getElementById('FirstName').value = fName.substring(0,1).toUpperCase() + fName.substring(1, fName.length);
+    }
+</script>
+
+<script>
+    function capLname() {
+        var lName = document.getElementById('LastName').value;
+        document.getElementById('LastName').value = lName.substring(0,1).toUpperCase() + lName.substring(1, lName.length);
+    }
+</script>
+
 <body>
 
 
@@ -536,12 +550,12 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
                 <div class="form-group">
                     <label for="FirstName">First Name</label>
                     <br/>
-                    <input type ="text" class="form-control" id="FirstName" name="FirstName" value="<?php echo $firstName ?>" onblur="saveData();" />
+                    <input type ="text" class="form-control" id="FirstName" name="FirstName" value="<?php echo $firstName ?>" onblur="capFname()" />
                 </div>
 
                 <div class="form-group">
                     <label for="LastName">Last Name</label>
-                    <input type="text" class="form-control" id="LastName" name="LastName" value="<?php echo $lastName ?>" />
+                    <input type="text" class="form-control" id="LastName" name="LastName" value="<?php echo $lastName ?>" onblur="capLname()" />
                 </div>
 
                 <div class="form-group">
@@ -564,7 +578,7 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
 
                 <div class="form-group">
                     <label for="CurrentState">Current State</label>
-                    <select id="CurrentState" name="CurrentState" name="" class="form-control">
+                    <select id="CurrentState" name="CurrentState" class="form-control">
                         <option value="<?php echo $currentState ?>"><?php echo $currentState ?></option>
                         <?php getState() ?>
                     </select>

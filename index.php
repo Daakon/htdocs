@@ -112,6 +112,20 @@ get_head_files();
     }
 </script>
 
+<script>
+    function capFname() {
+        var fName = document.getElementById('firstName').value;
+        document.getElementById('firstName').value = fName.substring(0,1).toUpperCase() + fName.substring(1, fName.length);
+    }
+</script>
+
+<script>
+    function capLname() {
+        var lName = document.getElementById('lastName').value;
+        document.getElementById('lastName').value = lName.substring(0,1).toUpperCase() + lName.substring(1, lName.length);
+    }
+</script>
+
 <?php require 'checkLogin.php'; ?>
 
 <div class="container-fluid">
@@ -172,7 +186,7 @@ get_head_files();
                     <div class="col-xs-12 col-md-12 col-md-6 col-lg-6 ">
                         <label class="sr-only" for="firstName">First Name</label>
                         <input class=" form-control input-lg" type="text" name="firstName" id="firstName"
-                               placeholder="First Name"/>
+                               placeholder="First Name" onblur="capFname()" />
                     </div>
                     <div class="col-md-6">
                         <div class="error-text"></div>
@@ -182,7 +196,7 @@ get_head_files();
                     <div class="col-md-6">
                         <label class="sr-only" for="lastName">Last Name</label>
                         <input class="form-control input-lg" type="text" name="lastName" id="lastName"
-                               placeholder="Last Name"/>
+                               placeholder="Last Name" onblur="capLname()"/>
                     </div>
                     <div class="col-md-6">
                         <div class="error-text"></div>
