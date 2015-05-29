@@ -708,7 +708,7 @@ var j =document.getElementsByTagName('script')[0];j.parentNode.insertBefore(s,j)
 <br/><br/>
 
 <!--Middle Column -->
-        <div class=" col-md-9 col-lg-9 roll-call col-md-offset-1 col-lg-offset-1">
+        <div class=" col-md-9 col-lg-9 roll-call ">
             <img src="/images/roll-call.gif" height="150px" width="150px" alt="Roll Call"/>
             <br/>
 
@@ -811,7 +811,7 @@ if (mysql_numrows($result) > 0) {
 
 
 
-        <div class=" col-lg-9 col-md-9 roll-call col-md-offset-1 col-lg-offset-1"
+        <div class=" col-lg-9 col-md-9 roll-call "
              style="background:white;border-radius:10px;margin-top:20px;border:2px solid black;" align="left">
 
             <img src="<?php echo $mediaPath. $profilePhoto ?>" class="profilePhoto-Feed" alt=""
