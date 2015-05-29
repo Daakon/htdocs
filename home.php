@@ -687,7 +687,7 @@ $interests = $interests[0];
 ?>
 
     <div class="row row-padding">
-<div class=" col-md-10  col-lg-10 col-md-offset-1 col-lg-offset-2 ">
+<div class=" col-md-10  col-lg-10 col-md-offset-2 col-lg-offset-2 ">
 
 
         <ul class="list-inline">
