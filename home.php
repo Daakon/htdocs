@@ -1064,9 +1064,9 @@ if (mysql_numrows($result) > 0) {
 
 <!--Right Column -->
         <div class="col-md-3 col-lg-3 col-md-offset-9 col-lg-offset-9 ad-desktop hidden-sm hidden-xs " >
-        <h3><a href="advertising.php">Advertise</a></h3>
+        <h3><a href="advertising.php">Advertise
         <img src="<?php echo $images ?>ad-pic.jpg" style="border-bottom:1px solid black;" />
-
+        </a></h3>
         <?php
 
 $rightColumnAds = getRightColumnAds($genre, $age, $state, $interests);
