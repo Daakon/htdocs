@@ -243,11 +243,11 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == "Submit AD") {
             }
 
             $adTitle = mysql_real_escape_string($adTitle);
-            $ad = mysql_real_escape_string("<span style='color:red;font-weight:bold;'><h3>" . $adTitle . "</h3>" . $adText . "<br/><br/>" . $img . "<br/>");
-            echo "<script>alert('$ad');</script>";
+            $ad = mysql_real_escape_string("<h3>" . $adTitle . "</h3>" . $adText . "<br/><br/>" . $img . "<br/>");
+
             // insert ad
-            $sqlInsertPost = "INSERT INTO Posts (Post,     Member_ID,   Category,   AdTitle,    AdText,   Interests,    TalentFeed,     RightColumn,   AgeStart,    AgeEnd,    AdState,    AdCategory,    TransID,   PostDate,    AdEnd ) Values
-                                                ('$ad',    '$ID',      'Sponsored', '$adTitle', '$adText', '$interests', '$talentFeed',  '$rightCol', '$ageStart', '$ageEnd', '$state', '$adCategory', '$transID',   CURDATE(),  ADDDATE(CURDATE(), INTERVAL 30 DAY) ) ";
+            $sqlInsertPost = "INSERT INTO Posts (Post,  MediaSource,   Member_ID,   Category,   AdTitle,    AdText,   Interests,    TalentFeed,     RightColumn,   AgeStart,    AgeEnd,    AdState,    AdCategory,    TransID,   PostDate,    AdEnd ) Values
+                                                ('$ad',  '$img',        '$ID',      'Sponsored', '$adTitle', '$adText', '$interests', '$talentFeed',  '$rightCol', '$ageStart', '$ageEnd', '$state', '$adCategory', '$transID',   CURDATE(),  ADDDATE(CURDATE(), INTERVAL 30 DAY) ) ";
             mysql_query($sqlInsertPost) or die(mysql_error());
             $newPostID = mysql_insert_id();
 
@@ -282,6 +282,23 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == "Submit AD") {
 
 }
 ?>
+
+<script>
+    function checkAd() {
+        var adTitle = document.getElementById('AdTitle').value;
+        var adText = document.getElementById('AdText').value;
+
+        if (adTitle.length == 0) {
+            alert('You must provide an Ad Title');
+            return false;
+        }
+        if (adText.length == 0) {
+            alert('You must provide Ad Text');
+            return false
+        }
+        return true;
+    }
+</script>
 
 <body>
 
@@ -333,7 +350,7 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == "Submit AD") {
 
                 <img src="<?php echo $images ?>bullseye.png" style="margin-top:-50px;margin-bottom:-50px;" />
 
-                <form id="" method="post" enctype="multipart/form-data" action = "" >
+                <form id="" method="post" enctype="multipart/form-data" action = "" onsubmit="return checkAd()" >
 
                     <strong>Attach Photo/Video To Your Ad</strong>
                     <input type="file" width="10px;" name="flPostMedia" id="flPostMedia"/>
@@ -363,7 +380,7 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == "Submit AD") {
                         <br/>
                         Talent Feed&nbsp;<input type="radio" name="AdPosition" id="AdPosition" value="1"<?php echo $check0 ?>>
                         <br/>
-                        Right Column&nbsp;<input type="radio" name="AdPosition" id="AdPosition" value="0"<?php echo $check1 ?>>
+                        Right Column&nbsp;<input type="radio" name="AdPosition" id="AdPosition" value="0"<?php echo $check1 ?>>&nbsp;(Desktop Only)
                     </div>
 
                     <br/>

@@ -134,8 +134,9 @@ function get_header()
 <?php if (!empty($_COOKIE['ID']) && isset($_COOKIE['ID'])) { ?>
     <div class="visible-xs black-link" style="padding-top:10px;">
         <ul class="list-inline">
-            <li><a href="/support.php" style="color:black">Support</a></li>
-            <li><a href ="/logout.php" onclick="FB.logout()" style="color:black" >Log Out</a></li>
+            <li><a href="/support.php" class="mobileLink">Support</a></li>
+            <li><a href="/advertising.php" class="mobileLink">Advertise</a></li>
+            <li><a href ="/logout.php" onclick="FB.logout()" class="mobileLink" >Log Out</a></li>
         </ul>
 
     </div>

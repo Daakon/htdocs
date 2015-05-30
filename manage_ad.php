@@ -27,6 +27,8 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == "Update AD") {
     $ageEnd = $_POST['AgeEnd'];
     $adState = $_POST['AdState'];
     $interests = $_POST['Interests'];
+    $mediaExist = $_POST['MediaExist'];
+
 
     $talentFeed;
     $rightCol;
@@ -247,9 +249,20 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == "Update AD") {
     else {
 
         // build ad
-        $adTitle = mysql_real_escape_string($adTitle);
-        $ad = mysql_real_escape_string("<span style='color:red;font-weight:bold;'><h3>" . $adTitle . "</h3>" . $adText);
+        if ($mediaExist == 1) {
+            $sql = "SELECT MediaSource FROM Posts WHERE ID = $adID ";
+            $result = mysql_query($sql) or die(mysql_error());
+            $rows = mysql_fetch_assoc($result);
+            $mediaSrc = $rows['MediaSource'];
 
+            $adTitle = mysql_real_escape_string($adTitle);
+            $ad = mysql_real_escape_string("<h3>" . $adTitle . "</h3>" . $adText . "<br/><br/>" . $mediaSrc . "<br/>");
+
+        }
+        else {
+            $adTitle = mysql_real_escape_string($adTitle);
+            $ad = mysql_real_escape_string("<h3>" . $adTitle . "</h3>" . $adText);
+        }
 
         // update ad
         $sqlUpdatePost = "Update Posts SET
@@ -271,7 +284,26 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == "Update AD") {
 ?>
 
 <?php include('media_sizes.html'); ?>
-<body>
+
+    <script>
+        function checkAd() {
+            var adTitle = document.getElementById('AdTitle').value;
+            var adText = document.getElementById('AdText').value;
+
+            if (adTitle.length == 0) {
+                alert('You must provide an Ad Title');
+                return false;
+            }
+            if (adText.length == 0) {
+                alert('You must provide Ad Text');
+                return false
+            }
+            return true;
+        }
+    </script>
+
+    <body>
+
 <div class="container">
 
 
@@ -296,6 +328,7 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == "Update AD") {
             $adID = $rows['ID'];
             $adTitle = $rows['AdTitle'];
             $adText = $rows['AdText'];
+            $mediaSrc = $rows['MediaSource'];
             $talentFeed = $rows['TalentFeed'];
             $rightColumn = $rows['RightColumn'];
             $adCategory = $rows['AdCategory'];
@@ -325,6 +358,10 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == "Update AD") {
             $mediaFilePath = trim("media/" . $mediaName);
             $posterName = $rows2['Poster'];
 
+            $mediaExist = 0;
+            if (strlen($mediaSrc) > 0) {
+                $mediaExist = 1;
+            }
 
             if (strlen($posterName) == 0) {
             $posterName = "video-bg.jpg";
@@ -361,8 +398,9 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == "Update AD") {
             <?php }
              ?>
 
-            <form id="" method="post" enctype="multipart/form-data" action = "" >
+            <form id="" method="post" enctype="multipart/form-data" action = "" onsubmit="return checkAd()">
                 <input type="hidden" name="AdID" id="AdID" value="<?php echo $adID ?>" />
+                <input type="hidden" name="MediaExist" id="MediaExist" value="<?php echo $mediaExist ?>" />
 
                 <strong>Update your ad Photo/Video</strong>
                 <input type="file" width="10px;" name="flPostMedia" id="flPostMedia"/>
