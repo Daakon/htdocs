@@ -29,7 +29,6 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == "Update AD") {
     $interests = $_POST['Interests'];
     $mediaExist = $_POST['MediaExist'];
 
-
     $talentFeed;
     $rightCol;
 
@@ -232,7 +231,7 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == "Update AD") {
               RightColumn =  '$rightCol',
               AgeStart = '$ageStart',
               AgeEnd = '$ageEnd',
-              AdState = '$state',
+              AdState = '$adState',
               AdCategory =  '$adCategory'
               WHERE ID = '$adID' ";
             mysql_query($sqlUpdatePost) or die(mysql_error());
@@ -273,7 +272,7 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == "Update AD") {
               RightColumn =  '$rightCol',
               AgeStart = '$ageStart',
               AgeEnd = '$ageEnd',
-              AdState = '$state',
+              AdState = '$adState',
               AdCategory =  '$adCategory'
               WHERE ID = '$adID' ";
         mysql_query($sqlUpdatePost) or die(mysql_error());
@@ -445,12 +444,12 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == "Update AD") {
                     <label for="AdTitle">Age Group (Optional)</label>
                     <br/>
                     <select id="AgeStart" name="AgeStart">
-                        <option value="<?php echo $_POST['AgeStart'] ?>"><?php echo $ageStart ?></option>
+                        <option value="<?php echo $ageStart ?>"><?php echo $ageStart ?></option>
                         <?php age() ?>
                     </select>
                     To
                     <select id="AgeEnd" name="AgeEnd">
-                        <option value="<?php echo $_POST['AgeEnd'] ?>"><?php echo $ageEnd ?></option>
+                        <option value="<?php echo $ageEnd ?>"><?php echo $ageEnd ?></option>
                         <?php age() ?>
                     </select>
                 </div>
