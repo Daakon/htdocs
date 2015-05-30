@@ -681,9 +681,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 $age = getAge($ID);
 $state = getState($ID);
 $interests = getInterests($ID);
-$interests = explode(" ", $interests);
-$interests = $interests[0];
-
+$interests = strtolower($interests);
 ?>
 
     <div class="row row-padding">
@@ -761,7 +759,7 @@ else { $genreCondition = "And Posts.Category > '' "; }
 
 
 
-$ads = getAds($genre, $age, $state, $interests);
+$ads = getAds($genre, $age, $state, $interests, $interests2);
 
 $sql = " SELECT DISTINCT
     Members.ID As MemberID,

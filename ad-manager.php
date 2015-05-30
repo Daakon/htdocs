@@ -414,7 +414,7 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == "Submit AD") {
                     <br/>
 
                     <div class="form-group">
-                        <label for="AdTitle">Interests (Optional)</label>
+                        <label for="Interests">Interests (Optional - <span style="font-style:italic;color:red;">Add up to 5 Interests</span>)</label>
                         <br/>
                         <input type ="text" class="form-control" id="Interests" name="Interests" value = "<?php echo $_POST['Interests'] ?>"  />
                     </div>
