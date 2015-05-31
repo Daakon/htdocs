@@ -227,6 +227,7 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == "Update AD") {
             $sqlUpdatePost = "Update Posts SET
               Post = '$ad',  AdTitle = '$adTitle',
               AdText = '$adText',
+              MediaSource = '$img',
               Interests = '$interests',
               TalentFeed = '$talentFeed',
               RightColumn =  '$rightCol',
@@ -244,7 +245,7 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == "Update AD") {
             }
         }
         // redirect to manage-ad
-        echo "<script>alert('Ad Submitted'); location='manage_ad.php?adID=$adID'</script>";
+        echo "<script>alert('Ad Updated'); location='manage_ad.php?adID=$adID'</script>";
     } // if no media
     else {
 
@@ -346,56 +347,14 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == "Update AD") {
 
         <div class="row" style="padding:10px;">
 <?php
-            $sql2 = "SELECT * FROM Media WHERE Member_ID = '$ID' And Post_ID = '$adID' AND (IsDeleted IS NULL Or IsDeleted = 0)";
 
-            $result2 = mysql_query($sql2) or die(mysql_error());
-            $rows2 = mysql_fetch_assoc($result2);
-
-            $mediaName = $rows2['MediaName'];
-            $mediaType = $rows2['MediaType'];
-            $mediaDate = $rows2['MediaDate'];
-            $mediaID = $rows2['ID'];
-            $mediaFilePath = trim("media/" . $mediaName);
-            $posterName = $rows2['Poster'];
 
             $mediaExist = 0;
             if (strlen($mediaSrc) > 0) {
                 $mediaExist = 1;
+                echo $mediaSrc;
             }
 
-            if (strlen($posterName) == 0) {
-            $posterName = "video-bg.jpg";
-            }
-
-            if (file_exists($mediaFilePath)) {
-
-            // check if file type is a photo
-            $videoFileTypes = array("video/mpeg", "video/mpg", "video/ogg", "video/mp4",
-            "video/quicktime", "video/webm", "video/x-matroska",
-            "video/x-ms-wmw");
-            // video file types
-            $photoFileTypes = array("image/jpg", "image/jpeg", "image/png", "image/tiff",
-            "image/gif", "image/raw");
-
-            // check if file type is a photo
-            if (in_array($mediaType, $photoFileTypes)) {
-
-            $img = '<a href = "media.php?id=' . $ID . '&mediaName=' . $mediaName . '&mid=' . $mediaID . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '" ><img src = "' . $mediaPath . $mediaName . '" style="border:2px solid black;" /></a>
-            <br/>';
-
-            } // check if file type is a video
-            elseif (in_array($mediaType, $videoFileTypes)) {
-
-            $img = '<a href = "' . $videoPath . $mediaName . '"><video src = "' . $videoPath . $mediaName . '" poster="/poster/'.$posterName.'" preload="auto" controls /></a>
-            <a href = "media.php?id=' . $ID . '&mediaName=' . $mediaName . '&mid=' . $mediaID . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '" ><br/>More</a><br/><br/>';
-
-            }
-            ?>
-            <?php
-            echo "<div>$img</div>";
-            echo "<br/>";
-            ?>
-            <?php }
              ?>
 
             <form id="" method="post" enctype="multipart/form-data" action = "" onsubmit="return checkAd()">
