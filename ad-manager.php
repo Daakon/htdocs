@@ -343,6 +343,33 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == "Submit AD") {
 
                 </div>
 
+        <?php
+            if (empty($_POST['AdTitle'])) {
+                $_POST['AdTitle'] = $_GET['AdTitle'];
+            }
+            if (empty($_POST['AdText'])) {
+                $_POST['AdText'] = $_GET['AdText'];
+            }
+            if (empty($_POST['AdPosition'])) {
+                $_POST['AdPosition'] = $_GET['AdPosition'];
+            }
+            if (empty($_POST['AgeStart'])) {
+                $_POST['AgeStart'] = $_GET['AgeStart'];
+            }
+            if (empty($_POST['AgeEnd'])) {
+                $_POST['AgeEnd'] = $_GET['AgeEnd'];
+            }
+            if (empty($_POST['AdCategory'])) {
+                $_POST['AdCategory'] = $_GET['AdCategory'];
+            }
+            if (empty($_POST['AdState'])) {
+                $_POST['AdState'] = $_GET['AdState'];
+            }
+            if (empty($_POST['Interests'])) {
+                $_POST['Interests'] = $_GET['Interests'];
+            }
+        ?>
+
 
             <div class="row" style="padding:10px;">
 
@@ -437,14 +464,16 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == "Submit AD") {
                     <input type = "submit" value = "Submit AD" name = "Submit" id = "Submit" class="btn btn-default" />
                 </form>
 
-                <h3>Get Unlimited AD impressions for just $10 a month</h3>
+                <h3>Get Unlimited AD impressions for just $5 a month</h3>
                 <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
                     <input type="hidden" name="cmd" value="_s-xclick">
-                    <input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
+                    <input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
 ">
                     <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
                     <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
                 </form>
+
+
 
             </div>
 

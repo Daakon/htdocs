@@ -13,6 +13,7 @@ get_header();
 $ID = $_SESSION['ID'];
 ?>
 
+
 <?php
 
 if (isset($_POST['Submit']) && $_POST['Submit'] == "Update AD") {
@@ -488,8 +489,14 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == "Update AD") {
                 <input type = "submit" value = "Update AD" name = "Submit" id = "Submit" class="btn btn-default" />
             </form>
 
+            <?php
+            if (date('Y-m-d H:i:s') < $adEnd) { ?>
             <h3>This ad expires on <?php echo date("l M d Y", strtotime($adEnd)); ?></h3>
-
+            <?php } else { ?>
+            <h3>This ad expired on <?php echo date("l M d Y", strtotime($adEnd)); ?></h3>
+            <br/>
+                <a href="/ad-manager.php?AdTitle=<?php echo $adTitle ?>&AdText=<?php echo $adText ?>&AgeStart=<?php echo $ageStart ?>&AgeEnd=<?php echo $ageEnd ?>&AdState=<?php echo $adState ?>&AdCategory=<?php echo $adCategory ?>&Interests=<?php echo $interests ?>">Rerun Ad</a>
+            <?php } ?>
 
         </div>
 
