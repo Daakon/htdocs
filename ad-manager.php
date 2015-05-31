@@ -300,6 +300,8 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == "Submit AD") {
     }
 </script>
 
+<?php include('media_sizes.html'); ?>
+
 <body>
 
 
@@ -318,7 +320,7 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == "Submit AD") {
             <h3 style="color:red;">Manage Existing Ads</h3>
 
                 <?php
-                $sql = "SELECT ID, AdTitle, AdEnd FROM Posts WHERE Member_ID = $ID ";
+                $sql = "SELECT ID, AdTitle, AdEnd FROM Posts WHERE Member_ID = $ID AND Category = 'Sponsored' ";
                 $result = mysql_query($sql) or die(mysql_error());
 
                 if (mysql_numrows($result) > 0) {
@@ -327,8 +329,8 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == "Submit AD") {
                         $adLink = $rows['AdTitle'];
                         $adEnd = $rows['AdEnd'];
 
-                        if ($adEnd > date('now')) {
-                            echo "<a href='manage_ad.php?adID=$adID' style='display:block'>$adLink (Ad Over)</a>";
+                        if ($adEnd < date('Y-m-d H:i:s')) {
+                            echo "<a href='manage_ad.php?adID=$adID' style='display:block'>$adLink <span style='color:red;'>(Ad Ended on ". date("l M d Y", strtotime($adEnd)).")</span></a>";
                         }
                         else {
                             echo "<a href='manage_ad.php?adID=$adID' style='display:block'>$adLink</a>";
