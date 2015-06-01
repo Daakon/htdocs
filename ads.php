@@ -13,6 +13,15 @@ function getInterests($ID) {
     return $interests;
 }
 
+function getGender($ID) {
+    // return member gender
+    $sql = "SELECT Gender FROM Members WHERE ID = $ID ";
+    $result = mysql_query($sql) or die(mysql_error());
+    $row = mysql_fetch_assoc($result);
+    $gender = $row['Gender'];
+    return $gender;
+}
+
 function getState($ID) {
     // returns member state
     $sql = "SELECT CurrentState FROM Profile WHERE ID = $ID ";
@@ -35,7 +44,7 @@ function getAge($ID) {
     return $age;
 }
 
-function getAds($category, $age, $state, $interests) {
+function getAds($category, $age, $state, $interests, $gender) {
     $interests = preg_split('/((^\p{P}+)|(\p{P}*\s+\p{P}*)|(\p{P}+$))/', $interests, -1, PREG_SPLIT_NO_EMPTY);
 
     $interest1 = $interests[0];
@@ -43,6 +52,13 @@ function getAds($category, $age, $state, $interests) {
     $interest3 = $interests[2];
     $interest4 = $interests[3];
     $interest5 = $interests[4];
+
+    if ($gender == 0) {
+        $genderQuery = "AND (Posts.Gender = 1 Or Posts.Gender = 2 Or Posts.Gender = 0)";
+    }
+    else {
+        $genderQuery = "AND (Posts.Gender = $gender)";
+    }
 
     $ads = "SELECT DISTINCT Members.ID As MemberID,
     Members.FirstName As FirstName,
@@ -59,16 +75,17 @@ function getAds($category, $age, $state, $interests) {
     And Members.ID = Profile.Member_ID
     And Posts.IsDeleted = 0
     AND Posts.Category = 'Sponsored'
-    And (Posts.AgeStart <= $age || Posts.AgeStart = 0)
-    And (Posts.AgeEnd <= $age || Posts.AgeEnd = 0)
-    And (Posts.AdState = '$state' || Posts.AdState = '')
-    And (LOWER(Posts.Interests) LIKE '%$interest1%' ||
-    LOWER(Posts.Interests) LIKE '%$interest2%' ||
-    LOWER(Posts.Interests) LIKE '%$interest3' ||
-    LOWER(Posts.Interests) LIKE '%$interest4%' ||
-    LOWER(Posts.Interests) LIKE '%$interest4' ||
-    LOWER(Posts.Interests) LIKE '%$interest5' ||
+    And (Posts.AgeStart <= $age Or Posts.AgeStart = 0)
+    And (Posts.AgeEnd <= $age Or Posts.AgeEnd = 0)
+    And (Posts.AdState = '$state' Or Posts.AdState = '')
+    And (LOWER(Posts.Interests) LIKE '%$interest1%' Or
+    LOWER(Posts.Interests) LIKE '%$interest2%' Or
+    LOWER(Posts.Interests) LIKE '%$interest3' Or
+    LOWER(Posts.Interests) LIKE '%$interest4%' Or
+    LOWER(Posts.Interests) LIKE '%$interest4' Or
+    LOWER(Posts.Interests) LIKE '%$interest5' Or
     Posts.Interests = '')
+    $genderQuery
     And (Posts.AdCategory = '$category' || Posts.AdCategory = '')
     And (Posts.TalentFeed = 1)
     And (CURRENT_DATE() < Posts.AdEnd)
@@ -77,7 +94,7 @@ function getAds($category, $age, $state, $interests) {
      return $ads;
 }
 
-function getRightColumnAds($category, $age, $state, $interests) {
+function getRightColumnAds($category, $age, $state, $interests, $gender) {
 
     $interests = preg_split('/((^\p{P}+)|(\p{P}*\s+\p{P}*)|(\p{P}+$))/', $interests, -1, PREG_SPLIT_NO_EMPTY);
 
@@ -87,23 +104,31 @@ function getRightColumnAds($category, $age, $state, $interests) {
     $interest4 = $interests[3];
     $interest5 = $interests[4];
 
+    if ($gender == 0) {
+        $genderQuery = "AND (Posts.Gender = 1 Or Posts.Gender = 2 Or Posts.Gender = 0)";
+    }
+    else {
+        $genderQuery = "AND (Posts.Gender = $gender)";
+    }
+
     $rightColumnAds = "SELECT DISTINCT
     Post
     FROM Posts
     WHERE
     Posts.IsDeleted = 0
     AND Posts.Category = 'Sponsored'
-    And (Posts.AgeStart <= $age || Posts.AgeStart = 0
-    And Posts.AgeEnd <= $age || Posts.AgeEnd = 0)
-    And ((Posts.AdState = '$state') || (Posts.AdState = ''))
-    And (LOWER(Posts.Interests) LIKE '%$interest1%' ||
-    LOWER(Posts.Interests) LIKE '%$interest2%' ||
-    LOWER(Posts.Interests) LIKE '%$interest3' ||
-    LOWER(Posts.Interests) LIKE '%$interest4%' ||
-    LOWER(Posts.Interests) LIKE '%$interest4' ||
-    LOWER(Posts.Interests) LIKE '%$interest5' ||
+    And (Posts.AgeStart <= $age Or Posts.AgeStart = 0
+    And Posts.AgeEnd <= $age Or Posts.AgeEnd = 0)
+    And ((Posts.AdState = '$state') Or (Posts.AdState = ''))
+    And (LOWER(Posts.Interests) LIKE '%$interest1%' Or
+    LOWER(Posts.Interests) LIKE '%$interest2%' Or
+    LOWER(Posts.Interests) LIKE '%$interest3' Or
+    LOWER(Posts.Interests) LIKE '%$interest4%' Or
+    LOWER(Posts.Interests) LIKE '%$interest4' Or
+    LOWER(Posts.Interests) LIKE '%$interest5' Or
     Posts.Interests = '')
-    And (Posts.AdCategory = '$category' || Posts.AdCategory = '')
+    $genderQuery
+    And (Posts.AdCategory = '$category' Or Posts.AdCategory = '')
     And (Posts.RightColumn = 1)
     And (CURDATE() < Posts.AdEnd)
     Order By Posts.ID DESC LIMIT 3";

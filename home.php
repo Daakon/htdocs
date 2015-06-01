@@ -682,6 +682,7 @@ $age = getAge($ID);
 $state =  getState($ID);
 $interests = getInterests($ID);
 $interests = strtolower($interests);
+$gender = getGender($ID);
 ?>
 
     <div class="row row-padding">
@@ -759,7 +760,7 @@ else { $genreCondition = "And Posts.Category > '' "; }
 
 
 
-$ads = getAds($genre, $age, $state, $interests, $interests2);
+$ads = getAds($genre, $age, $state, $interests, $gender);
 
 $sql = " SELECT DISTINCT
     Members.ID As MemberID,

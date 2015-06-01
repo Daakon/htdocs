@@ -24,8 +24,13 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == "Submit AD") {
     $ageEnd = $_POST['AgeEnd'];
     $state = $_POST['AdState'];
     $interests = mysql_real_escape_string($_POST['Interests']);
+    $gender = $_POST['Gender'];
     $adCategory = $_POST['AdCategory'];
     $transID = $_POST['TransID'];
+
+    if (!strstr($adText, "mailto:")) {
+        $adText = preg_replace('/([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6})/', '<a href="mailto:$1">$1</a>', $adText);
+    }
 
     // check transaction ID
     /*if (strlen($transID) == 0 || strlen($transID) == "") {
@@ -250,8 +255,8 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == "Submit AD") {
             $adTitle = makeLinks($adTitle);
 
             // insert ad
-            $sqlInsertPost = "INSERT INTO Posts (Post,  MediaSource,   Member_ID,   Category,   AdTitle,    AdText,   Interests,    TalentFeed,     RightColumn,   AgeStart,    AgeEnd,    AdState,    AdCategory,    TransID,   PostDate,    AdEnd ) Values
-                                                ('$ad',  '$img',        '$ID',      'Sponsored', '$adTitle', '$adText', '$interests', '$talentFeed',  '$rightCol', '$ageStart', '$ageEnd', '$state', '$adCategory', '$transID',   CURDATE(),  ADDDATE(CURDATE(), INTERVAL 30 DAY) ) ";
+        $sqlInsertPost = "INSERT INTO Posts (Post,      MediaSource,   Member_ID,    Category,      AdTitle,    AdText,    Interests,    Gender,       TalentFeed,     RightColumn,   AgeStart,    AgeEnd,    AdState,    AdCategory,    TransID,   PostDate,    AdEnd ) Values
+                                                ('$ad',  '$img',        '$ID',      'Sponsored', '$adTitle',  '$adText',  '$interests', '$gender',   '$talentFeed',  '$rightCol', '$ageStart', '$ageEnd', '$state', '$adCategory', '$transID',   CURDATE(),  ADDDATE(CURDATE(), INTERVAL 30 DAY) ) ";
             mysql_query($sqlInsertPost) or die(mysql_error());
             $newPostID = mysql_insert_id();
 
@@ -275,8 +280,8 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == "Submit AD") {
         $adTitle = makeLinks($adTitle);
 
         // insert ad
-        $sqlInsertPost = "INSERT INTO Posts (Post,     Member_ID,   Category,   AdTitle,    AdText,   Interests,    TalentFeed,     RightColumn,   AgeStart,    AgeEnd,    AdState,    AdCategory,    TransID,   PostDate,    AdEnd ) Values
-                                        ('$ad',    '$ID',      'Sponsored', '$adTitle', '$adText', '$interests', '$talentFeed',  '$rightCol', '$ageStart', '$ageEnd', '$state', '$adCategory', '$transID',   CURDATE(),  ADDDATE(CURDATE(), INTERVAL 30 DAY) ) ";
+        $sqlInsertPost = "INSERT INTO Posts (Post,     Member_ID,   Category,   AdTitle,  AdText,   Interests,     Gender,    TalentFeed,     RightColumn,   AgeStart,    AgeEnd,    AdState,    AdCategory,    TransID,   PostDate,    AdEnd ) Values
+                                        ('$ad',    '$ID',      'Sponsored', '$adTitle',  '$adText', '$interests', '$gender', '$talentFeed',  '$rightCol', '$ageStart', '$ageEnd', '$state', '$adCategory', '$transID',   CURDATE(),  ADDDATE(CURDATE(), INTERVAL 30 DAY) ) ";
         mysql_query($sqlInsertPost) or die(mysql_error());
         $newPostID = mysql_insert_id();
         // redirect to manage-ad
@@ -377,6 +382,10 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == "Submit AD") {
             if (empty($_POST['Interests'])) {
                 $_POST['Interests'] = $_GET['Interests'];
             }
+
+            if (empty($_POST['Gender'])) {
+                $_POST['Gender'] = $_GET['Gender'];
+            }
         ?>
 
 
@@ -453,6 +462,22 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == "Submit AD") {
                         <label for="Interests">Interests (Optional - <span style="font-style:italic;color:red;">Add up to 5 Interests</span>)</label>
                         <br/>
                         <input type ="text" class="form-control" id="Interests" name="Interests" value = "<?php echo $_POST['Interests'] ?>"  />
+                    </div>
+
+                    <?php if ($gender == 1) { $genderText = 'Male'; }
+                                else if ( $gender == 2) { $genderText = 'Female'; }
+                                else { $genderText = 'Both'; }
+                    ?>
+
+                    <div class="form-group">
+                        <label for="Gender">Gender (Optional)</label>
+                        <br/>
+                        <select class='form-control input-lg' name="Gender" id="Gender">
+                            <option value="<?php echo $gender ?>"><?php echo $genderText ?></option>
+                            <option value="0">Both</option>
+                            <option value="1">Male</option>
+                            <option value="2">Female</option>
+                        </select>
                     </div>
 
                     <label for="AdTitle">Ad Category (Optional)</label>

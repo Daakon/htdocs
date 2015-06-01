@@ -28,7 +28,12 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == "Update AD") {
     $ageEnd = $_POST['AgeEnd'];
     $adState = $_POST['AdState'];
     $interests = $_POST['Interests'];
+    $gender = $_POST['Gender'];
     $mediaExist = $_POST['MediaExist'];
+
+    if (!strstr($adText, "mailto:")) {
+        $adText = preg_replace('/([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6})/', '<a href="mailto:$1">$1</a>', $adText);
+    }
 
     $talentFeed;
     $rightCol;
@@ -233,6 +238,7 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == "Update AD") {
               AdText = '$adText',
               MediaSource = '$img',
               Interests = '$interests',
+              Gender = '$gender',
               TalentFeed = '$talentFeed',
               RightColumn =  '$rightCol',
               AgeStart = '$ageStart',
@@ -279,6 +285,7 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == "Update AD") {
               Post = '$ad',  AdTitle = '$adTitle',
               AdText = '$adText',
               Interests = '$interests',
+              Gender = '$gender',
               TalentFeed = '$talentFeed',
               RightColumn =  '$rightCol',
               AgeStart = '$ageStart',
@@ -316,7 +323,6 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == "Update AD") {
 
 <div class="container">
 
-
     <div class="col-xs-12 col-md-10 col-lg-10 col-md-offset-2 roll-call">
 
         <a href="/home.php">Back to Roll Call</a>
@@ -346,6 +352,7 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == "Update AD") {
             $ageEnd = $rows['AgeEnd'];
             $adState = $rows['AdState'];
             $interests = $rows['Interests'];
+            $gender = $rows['Gender'];
             $transID = $rows['TransID'];
             $impressions = $rows['Impressions'];
             $adEnd = $rows['AdEnd'];
@@ -439,6 +446,22 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == "Update AD") {
                     <input type ="text" class="form-control" id="Interests" name="Interests" value = "<?php echo $interests ?>"  />
                 </div>
 
+                <?php if ($gender == 1) { $genderText = 'Male'; }
+                else if ( $gender == 2) { $genderText = 'Female'; }
+                else { $genderText = 'Both';}
+                ?>
+
+                <div class="form-group">
+                    <label for="Gender">Gender (Optional)</label>
+                    <br/>
+                    <select class='form-control input-lg' name="Gender" id="Gender">
+                        <option value="<?php echo $gender ?>"><?php echo $genderText ?></option>
+                        <option value="0">Both</option>
+                        <option value="1">Male</option>
+                        <option value="2">Female</option>
+                    </select>
+                </div>
+
                 <label for="AdTitle">Ad Category (Optional)</label>
                 <select class="form-control input-lg" id="AdCategory" name="AdCategory">
                     <option value=""><?php echo $adCategory ?></option>
@@ -456,6 +479,8 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == "Update AD") {
 
                 <input type = "submit" value = "Update AD" name = "Submit" id = "Submit" class="btn btn-default" />
             </form>
+
+            <a href ="ad_view.php?adID=<?php echo $adID ?>"><h2>View Ad</h2></a>
 
             <?php
             if (date('Y-m-d H:i:s') < $adEnd) { ?>
