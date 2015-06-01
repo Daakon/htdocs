@@ -93,9 +93,9 @@ function getRightColumnAds($category, $age, $state, $interests) {
     WHERE
     Posts.IsDeleted = 0
     AND Posts.Category = 'Sponsored'
-    And (Posts.AgeStart <= $age || Posts.AgeStart = 0)
-    And (Posts.AgeEnd <= $age || Posts.AgeEnd = 0)
-    And (Posts.AdState = '$state' || Posts.AdState = '')
+    And (Posts.AgeStart <= $age || Posts.AgeStart = 0
+    And Posts.AgeEnd <= $age || Posts.AgeEnd = 0)
+    And ((Posts.AdState = '$state') || (Posts.AdState = ''))
     And (LOWER(Posts.Interests) LIKE '%$interest1%' ||
     LOWER(Posts.Interests) LIKE '%$interest2%' ||
     LOWER(Posts.Interests) LIKE '%$interest3' ||

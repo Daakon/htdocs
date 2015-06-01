@@ -679,7 +679,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 <?php
 // ad demographics
 $age = getAge($ID);
-$state = getState($ID);
+$state =  getState($ID);
 $interests = getInterests($ID);
 $interests = strtolower($interests);
 ?>
