@@ -223,6 +223,10 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == "Update AD") {
             $adTitle = mysql_real_escape_string($adTitle);
             $ad = mysql_real_escape_string("<span style='color:red;font-weight:bold;'><h3>" . $adTitle . "</h3>" . $adText . "<br/><br/>" . $img . "<br/>");
 
+            $ad = makeLinks($ad);
+            $adText = makeLinks($adText);
+            $adTitle = makeLinks($adTitle);
+
             // update ad
             $sqlUpdatePost = "Update Posts SET
               Post = '$ad',  AdTitle = '$adTitle',
@@ -258,11 +262,16 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == "Update AD") {
 
             $adTitle = mysql_real_escape_string($adTitle);
             $ad = mysql_real_escape_string("<h3>" . $adTitle . "</h3>" . $adText . "<br/><br/>" . $mediaSrc . "<br/>");
-
+            $ad = makeLinks($ad);
+            $adText = makeLinks($adText);
+            $adTitle = makeLinks($adTitle);
         }
         else {
             $adTitle = mysql_real_escape_string($adTitle);
             $ad = mysql_real_escape_string("<h3>" . $adTitle . "</h3>" . $adText);
+            $ad = makeLinks($ad);
+            $adText = makeLinks($adText);
+            $adTitle = makeLinks($adTitle);
         }
 
         // update ad
@@ -378,7 +387,7 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == "Update AD") {
                 <div class="form-group">
                     <label for="AdText">Ad Text</label>
                     <br/>
-                    <input type ="text" class="form-control" id="AdText" name="AdText" value = "<?php echo $adText ?>"  />
+                    <textarea type ="text" class="form-control" id="AdText" name="AdText" class="textArea"><?php echo $adText ?></textarea>
                 </div>
 
                 <?php

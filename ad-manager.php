@@ -245,6 +245,10 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == "Submit AD") {
             $adTitle = mysql_real_escape_string($adTitle);
             $ad = mysql_real_escape_string("<h3>" . $adTitle . "</h3>" . $adText . "<br/><br/>" . $img . "<br/>");
 
+            $ad = makeLinks($ad);
+            $adText = makeLinks($adText);
+            $adTitle = makeLinks($adTitle);
+
             // insert ad
             $sqlInsertPost = "INSERT INTO Posts (Post,  MediaSource,   Member_ID,   Category,   AdTitle,    AdText,   Interests,    TalentFeed,     RightColumn,   AgeStart,    AgeEnd,    AdState,    AdCategory,    TransID,   PostDate,    AdEnd ) Values
                                                 ('$ad',  '$img',        '$ID',      'Sponsored', '$adTitle', '$adText', '$interests', '$talentFeed',  '$rightCol', '$ageStart', '$ageEnd', '$state', '$adCategory', '$transID',   CURDATE(),  ADDDATE(CURDATE(), INTERVAL 30 DAY) ) ";
@@ -266,6 +270,9 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == "Submit AD") {
         $adTitle = mysql_real_escape_string($adTitle);
         $ad = mysql_real_escape_string("<span style='color:red;font-weight:bold;'><h3>" . $adTitle . "</h3>" . $adText);
 
+        $ad = makeLinks($ad);
+        $adText = makeLinks($adText);
+        $adTitle = makeLinks($adTitle);
 
         // insert ad
         $sqlInsertPost = "INSERT INTO Posts (Post,     Member_ID,   Category,   AdTitle,    AdText,   Interests,    TalentFeed,     RightColumn,   AgeStart,    AgeEnd,    AdState,    AdCategory,    TransID,   PostDate,    AdEnd ) Values
@@ -396,7 +403,7 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == "Submit AD") {
                     <div class="form-group">
                         <label for="AdText">Ad Text</label>
                         <br/>
-                        <input type ="text" class="form-control" id="AdText" name="AdText" value = "<?php echo $_POST['AdText'] ?>"  />
+                        <textarea type ="text" class="form-control" id="AdText" name="AdText"><?php echo $_POST['AdText'] ?></textarea>
                     </div>
 
                     <?php

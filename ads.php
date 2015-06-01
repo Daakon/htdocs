@@ -67,6 +67,7 @@ function getAds($category, $age, $state, $interests) {
     LOWER(Posts.Interests) LIKE '%$interest3' ||
     LOWER(Posts.Interests) LIKE '%$interest4%' ||
     LOWER(Posts.Interests) LIKE '%$interest4' ||
+    LOWER(Posts.Interests) LIKE '%$interest5' ||
     Posts.Interests = '')
     And (Posts.AdCategory = '$category' || Posts.AdCategory = '')
     And (Posts.TalentFeed = 1)
@@ -78,6 +79,14 @@ function getAds($category, $age, $state, $interests) {
 
 function getRightColumnAds($category, $age, $state, $interests) {
 
+    $interests = preg_split('/((^\p{P}+)|(\p{P}*\s+\p{P}*)|(\p{P}+$))/', $interests, -1, PREG_SPLIT_NO_EMPTY);
+
+    $interest1 = $interests[0];
+    $interest2 = $interests[1];
+    $interest3 = $interests[2];
+    $interest4 = $interests[3];
+    $interest5 = $interests[4];
+
     $rightColumnAds = "SELECT DISTINCT
     Post
     FROM Posts
@@ -87,10 +96,16 @@ function getRightColumnAds($category, $age, $state, $interests) {
     And (Posts.AgeStart <= $age || Posts.AgeStart = 0)
     And (Posts.AgeEnd <= $age || Posts.AgeEnd = 0)
     And (Posts.AdState = '$state' || Posts.AdState = '')
-    And (Posts.Interests LIKE '%$interests%' || Posts.Interests = '')
+    And (LOWER(Posts.Interests) LIKE '%$interest1%' ||
+    LOWER(Posts.Interests) LIKE '%$interest2%' ||
+    LOWER(Posts.Interests) LIKE '%$interest3' ||
+    LOWER(Posts.Interests) LIKE '%$interest4%' ||
+    LOWER(Posts.Interests) LIKE '%$interest4' ||
+    LOWER(Posts.Interests) LIKE '%$interest5' ||
+    Posts.Interests = '')
     And (Posts.AdCategory = '$category' || Posts.AdCategory = '')
     And (Posts.RightColumn = 1)
-    And (CURRENT_DATE() < Posts.AdEnd)
+    And (CURDATE() < Posts.AdEnd)
     Order By Posts.ID DESC LIMIT 3";
 
 return $rightColumnAds;
