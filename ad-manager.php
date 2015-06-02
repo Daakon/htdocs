@@ -32,11 +32,6 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == "Submit AD") {
         $adText = preg_replace('/([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6})/', '<a href="mailto:$1">$1</a>', $adText);
     }
 
-    // check transaction ID
-    /*if (strlen($transID) == 0 || strlen($transID) == "") {
-        echo "<script>alert('Your ad must have a PayPal transaction ID to be sumbitted');</script>";
-        exit;
-    }*/
 
     $talentFeed;
     $rightCol;
@@ -299,6 +294,7 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == "Submit AD") {
     function checkAd() {
         var adTitle = document.getElementById('AdTitle').value;
         var adText = document.getElementById('AdText').value;
+        var transID = document.getElementById('TransID').value;
 
         if (adTitle.length == 0) {
             alert('You must provide an Ad Title');
@@ -307,6 +303,11 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == "Submit AD") {
         if (adText.length == 0) {
             alert('You must provide Ad Text');
             return false
+        }
+
+        if (transID.length < 5) {
+            alert('You must provide a Pay Pal Transaction ID');
+            return false;
         }
         return true;
     }
