@@ -21,6 +21,7 @@ function category()
     echo '<option value = "Rap">Rap</option>';
     echo '<option value = "R&B">R&B</option>';
     echo '<option value = "Recreation">Recreation</option>';
+    echo '<option value = "Theatrical">Theatrical</option>';
 }
 
 function age() {
