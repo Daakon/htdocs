@@ -790,7 +790,7 @@ $result = mysql_query($sql) or die(mysql_error());
 // if no results
 if (mysql_num_rows($result) == 0) {
     ?>
-    <div class=" col-lg-9 col-md-9 roll-call col-md-offset-1 col-lg-offset-1"
+    <div class=" col-lg-9 col-md-9 roll-call"
          style="background:white;border-radius:10px;margin-top:20px;border:2px solid black;" align="left">
     No Results
     </div>
