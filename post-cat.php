@@ -9,6 +9,7 @@ require 'findURL.php';
 
 require 'email.php';
 require 'category.php';
+require 'ads.php';
 
 get_head_files();
 get_header();
@@ -657,9 +658,17 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 <body>
 
 <div class="container">
-
+<?php
+// ad demographics
+$age = getAge($ID);
+$state =  getState($ID);
+$interests = getInterests($ID);
+$interests = strtolower($interests);
+$gender = getGender($ID);
+?>
 
     <div class="row row-padding">
+<div class=" col-md-10  col-lg-10 col-md-offset-2 col-lg-offset-2 ">
 
         <ul class="list-inline">
             <li><a href="/profile.php/<?php echo get_username($ID) ?>">Go To Your Profile <?php require 'getNewMessageCount.php' ?></a></li>
@@ -674,6 +683,8 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 <h2><?php echo $category ?> Posts</h2>
 
 <?php
+
+$ads = getAds($genre, $age, $state, $interests, $gender);
 
 $sql = "SELECT DISTINCT
     Members.ID As MemberID,
@@ -691,12 +702,21 @@ $sql = "SELECT DISTINCT
     And Members.ID = Profile.Member_ID
     And Posts.IsDeleted = 0
     AND Posts.Category = '$category'
-    Group By Posts.ID
-    Order By Posts.ID DESC ";
-
+    UNION
+    $ads
+    Group By PostID
+    Order By PostID DESC ";
 
 $result = mysql_query($sql) or die(mysql_error());
 
+// if no results
+if (mysql_num_rows($result) == 0) {
+    ?>
+    <div class=" col-lg-9 col-md-9 roll-call"
+         style="background:white;border-radius:10px;margin-top:20px;border:2px solid black;" align="left">
+        No Results
+    </div>
+<?php }
 
 if (mysql_numrows($result) > 0) {
     while ($rows = mysql_fetch_assoc($result)) {
@@ -708,8 +728,8 @@ if (mysql_numrows($result) > 0) {
         $postID = $rows['PostID'];
         $postOwner = $memberID;
         ?>
-        <div class="row row-padding">
-        <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 "
+
+        <div class="col-lg-9 col-md-9 roll-call "
              style="background:white;border-radius:10px;margin-top:20px;border:2px solid black;" align="left">
 
             <img src="<?php echo $mediaPath. $profilePhoto ?>" class="profilePhoto-Feed" alt=""
@@ -959,6 +979,35 @@ if (mysql_numrows($result) > 0) {
     }
 }
 ?>
+
+</div>
+
+<!--Right Column -->
+        <div class="col-md-3 col-lg-3 col-md-offset-9 col-lg-offset-9 ad-desktop hidden-sm hidden-xs " >
+        <h3><a href="advertising.php">Advertise
+        <img src="<?php echo $images ?>ad-pic.jpg" style="border-bottom:1px solid black;" />
+        </a></h3>
+        <?php
+
+$rightColumnAds = getRightColumnAds($genre, $age, $state, $interests);
+$rightColSql = $rightColumnAds;
+$rightColResult = mysql_query($rightColSql) or die(mysql_error());
+//$rows = mysql_fetch_assoc($result);
+if (mysql_num_rows($rightColResult) > 0) { ?>
+
+    <div style="padding:10px;width:200px;">
+        <?php
+        while ($rightColRows = mysql_fetch_assoc($rightColResult)) {
+            echo $rightColRows["Post"];
+            ?>
+            <hr class="ad-border" />
+        <?php
+        } ?>
+    </div>
+<?php
+}
+?>
+        </div>
 
 
     </div>
