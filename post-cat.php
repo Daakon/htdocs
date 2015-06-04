@@ -680,8 +680,9 @@ $gender = getGender($ID);
 
 ?>
 
-<h2><?php echo $category ?> Posts</h2>
-
+<span style="font-size:16px;font-weight:bold"><?php echo $category ?> Posts
+<br/>
+</span>
 <?php
 
 $ads = getAds($genre, $age, $state, $interests, $gender);
@@ -970,8 +971,6 @@ if (mysql_numrows($result) > 0) {
                 <!---------------------------------------------------
                                   End of comments div
                                   ----------------------------------------------------->
-
-            </div>
         </div>
 
 
