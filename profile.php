@@ -1,11 +1,17 @@
 <?php
 require 'connect.php';
+require 'model_functions.php';
+require 'mediaPath.php';
 require 'getSession.php';
 require 'html_functions.php';
-require 'mediaPath.php';
+
 require 'findURL.php';
-require 'model_functions.php';
+
+require 'email.php';
+require 'category.php';
+
 require 'getState.php';
+
 
 get_head_files();
 get_header();
@@ -391,9 +397,9 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
 
         <?php require 'profile_menu.php'; ?>
 
-        <br/><br/>
+        <br/>
 
-        <div class="col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8 roll-call ">
+        <div class="col-md-7  col-lg-7 col-md-offset-2 col-lg-offset-2 roll-call ">
 
             <?php
             $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
@@ -663,6 +669,36 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
 
             <!------------->
         </div>
+
+
+        <!--Right Column -->
+        <div class="col-md-3 col-lg-3 col-md-offset-9 col-lg-offset-9 ad-desktop hidden-sm hidden-xs " >
+            <h3><a href="advertising.php">Advertise
+                    <img src="<?php echo $images ?>ad-pic.jpg" style="border-bottom:1px solid black;" />
+                </a></h3>
+            <?php
+            require 'ads.php';
+            $rightColumnAds = getRightColumnAds($genre, $age, $state, $interests);
+            $rightColSql = $rightColumnAds;
+            $rightColResult = mysql_query($rightColSql) or die(mysql_error());
+            //$rows = mysql_fetch_assoc($result);
+            if (mysql_num_rows($rightColResult) > 0) { ?>
+
+                <div style="padding:10px;width:200px;">
+                    <?php
+                    while ($rightColRows = mysql_fetch_assoc($rightColResult)) {
+                        echo $rightColRows["Post"];
+                        ?>
+                        <hr class="ad-border" />
+                    <?php
+                    } ?>
+                </div>
+            <?php
+            }
+            ?>
+        </div>
+
+
     </div>
 </div>
 
