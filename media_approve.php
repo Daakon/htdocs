@@ -50,7 +50,7 @@ foreach ($comment_ids as $item) {
     if (strlen($item) > 0) {
         if (checkActive($item)) {
             if (checkEmailActive($item)) {
-                build_and_send_email($user_id, $item, 6, $postID);
+                build_and_send_email($user_id, $item, 2, $postID);
             }
         }
     }
@@ -66,7 +66,7 @@ foreach ($comment_ids as $item) {
     $creatorID = $rows['Member_ID'];
 
     if (checkEmailActive($ID)) {
-        build_and_send_email($ID, $creatorID, 6, $postID, '');
+        build_and_send_email($ID, $creatorID, 2, $postID, '');
     }
 }
 
