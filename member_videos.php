@@ -12,6 +12,7 @@ $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 $ID = $_SESSION['ID'];
 ?>
 
+
 <?php
 // handle photo/video uploads
 
@@ -196,13 +197,14 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
 
         // Setup and send a message
         $text = str_replace(' ', '%20', $link);
+        $text = $name .' sent you a video from Rapportbook '. $text;
         $message = array( 'to' => $number, 'message' => $text );
         $result = $clockwork->send( $message );
 
         // Check if the send was successful
         if($result['success']) {
             //echo 'Message sent - ID: ' . $result['id'];
-            echo "<script>alert('SMS Sent');</script>";
+            echo "<script>alert('SMS Sent'); location='/member_videos.php'</script>";
         } else {
             $error = $result['error_message'];
             echo "<script>alert('Message failed - Error: $error');</script>";
@@ -218,14 +220,17 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
 
 <?php include('media_sizes.html'); ?>
 
+
+
+<body>
+
+
 <script>
     // show uploading
     function showUploading() {
         document.getElementById("progressBar").style.display = "block";
     }
 </script>
-
-<body>
 
 <div class="container">
     <?php require 'profile_menu.php'; ?>
@@ -236,7 +241,7 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
         <div class="col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8 roll-call">
             <h2>Videos</h2>
 
-            <form method="post" enctype="multipart/form-data" action="" onsubmit="showUploading()">
+            <form method="post" enctype="multipart/form-data" action="" >
                 <img src="/images/image-icon.png" height="30px" width="30px" alt="Video"/>
                 <strong>Upload a Video to your media library</strong>
                 <br/><br/>
@@ -260,7 +265,7 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
                     </div>
                 </div>
                 <br/>
-                <input type="submit" class="post-button" name="Upload" id="Upload" value="Upload"/>
+                <input type="submit" class="post-button" name="Upload" id="Upload" value="Upload" onclick="showUploading()"/>
             </form>
             <br/>
             <hr/>
