@@ -22,7 +22,7 @@ if (!empty($_GET['btnDelete']) && ($_GET['btnDelete'] == 'Delete')) {
 
     mysql_query($sql) or die(mysql_error());
 
-    echo "<script>location = 'member_photos.php'</script>";
+    echo "<script>location = 'member_videos.php'</script>";
 
 }
 ?>
@@ -539,6 +539,8 @@ $profileMediaSrc = trim("media/" . $profilePhoto);
         video.play();
     },false);
 </script>
+
+<?php include('media_sizes.html'); ?>
 
 <body style="background:black;">
 

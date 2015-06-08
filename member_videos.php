@@ -22,7 +22,7 @@ if (isset($_POST['Upload'])) {
     if (strlen($_FILES['flPostMedia']['name']) > 0) {
 
 // check file size
-        if ($_FILES['flPostMedia']['size'] > 500000000) {
+        if ($_FILES['flPostMedia']['size'] > 1000000000) {
 
             exit();
         }
@@ -127,43 +127,6 @@ if (isset($_POST['Upload'])) {
             }
 
         } else {
-
-            if (in_array($type, $photoFileTypes)) {
-
-                // read exif data
-                $exif = exif_read_data($mediaFile);
-
-                if (!empty($exif['Orientation'])) {
-
-                    $ort = $exif['Orientation'];
-
-                    switch ($ort) {
-                        case 8:
-                            $src = imagerotate($src, 90, 0);
-                            break;
-                        case 3:
-                            $src = imagerotate($src, 180, 0);
-                            break;
-                        case 6:
-                            $src = imagerotate($src, -90, 0);
-                            break;
-                    }
-                }
-
-            }
-
-
-            if ($type == "image/jpg" || $type == "image/jpeg") {
-                imagejpeg($src, $postMediaFilePath, 100);
-            } else if ($type == "image/png") {
-
-                imagepng($src, $postMediaFilePath, 0, NULL);
-
-
-            } else if ($type == "image/gif") {
-                imagegif($src, $postMediaFilePath, 100);
-
-            } else {
                 echo "<script>alert('Invalid File Type'); location = 'home.php'</script>";
                 exit;
             }
@@ -172,7 +135,7 @@ if (isset($_POST['Upload'])) {
 
 // if photo didn't get uploaded, notify the user
         if (!file_exists($postMediaFilePath)) {
-            echo "<script>alert('File could not be uploaded, try uploading a different file type.'); location= 'home.php'</script>";
+            echo "<script>alert('File could not be uploaded, try uploading a different video file type.'); location= 'home.php'</script>";
         }
 
 
@@ -198,7 +161,58 @@ And Members.IsActive = 1 ";
         if (mysql_numrows($result) == 0) {
             echo '<script>alert("This profile could not be found");location = "/index.php"</script>';
         }
+}
+?>
+
+<?php
+
+// handle profile text
+
+require 'class-Clockwork.php';
+
+if (isset($_POST['text']) && $_POST['text'] == "Text") {
+
+    $mediaName = $_POST['mediaName'];
+    $mediaType = $_POST['mediaType'];
+    $mediaID = $_POST['mediaID'];
+    $mediaDate = $_POST['mediaDate'];
+
+    if (strstr($url, "dev")) {
+        $link = "http://dev.rapportbook.com/media/$mediaName";
     }
+    else {
+        $link = "http://rapportbook.com/media/$mediaName";
+    }
+
+
+    $number = $_POST['number'];
+    $number = "1".$number;
+    $name = get_users_name($ID);
+    $API_KEY = '7344d6254838e6d2c917c4cb78305a3235ba951d';
+    try
+    {
+        // Create a Clockwork object using your API key
+        $clockwork = new Clockwork( $API_KEY );
+
+        // Setup and send a message
+        $text = str_replace(' ', '%20', $link);
+        $message = array( 'to' => $number, 'message' => $text );
+        $result = $clockwork->send( $message );
+
+        // Check if the send was successful
+        if($result['success']) {
+            //echo 'Message sent - ID: ' . $result['id'];
+            echo "<script>alert('SMS Sent');</script>";
+        } else {
+            $error = $result['error_message'];
+            echo "<script>alert('Message failed - Error: $error');</script>";
+        }
+    }
+    catch (ClockworkException $e)
+    {
+        echo 'Exception sending SMS: ' . $e->getMessage();
+    }
+
 }
 ?>
 
@@ -207,7 +221,7 @@ And Members.IsActive = 1 ";
 <script>
     // show uploading
     function showUploading() {
-        document.getElementById("progress").style.display = "block";
+        document.getElementById("progressBar").style.display = "block";
     }
 </script>
 
@@ -220,24 +234,25 @@ And Members.IsActive = 1 ";
     <div class="row row-padding">
 
         <div class="col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8 roll-call">
-            <h2>Photos & Videos</h2>
+            <h2>Videos</h2>
 
             <form method="post" enctype="multipart/form-data" action="" onsubmit="showUploading()">
-                <img src="/images/image-icon.png" height="30px" width="30px" alt="Photos/Video"/>
-                <strong>Upload a Photo or Video to your profile</strong>
+                <img src="/images/image-icon.png" height="30px" width="30px" alt="Video"/>
+                <strong>Upload a Video to your media library</strong>
                 <br/><br/>
                 <span style="padding-left:5px;font-style:italic;color:red">
-                    (Only people you share your profile with will see the photos and videos you upload here)
-                    *Photos are noted as public and private.
+                    Public videos have been shared in Roll Call.
+                    <br/>
+                    Private videos have been uploaded only here.
                     </span>
                 <br/><br/>
 
                 <input type="file" width="10px;" name="flPostMedia" id="flPostMedia"/>
-                <input type="hidden" name="MAX_FILE_SIZE" value="500000000"
+                <input type="hidden" name="MAX_FILE_SIZE" value="1000000000" />
 
                 <br/><br/>
 
-                <div id="progress" style="display:none;">
+                <div id="progressBar" style="display:none;">
                     <div class="progress">
                         <div class="progress-bar progress-bar-striped progress-bar-danger active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
                             <span class="sr-only">Loading</span>
@@ -275,37 +290,50 @@ And Members.IsActive = 1 ";
                     $posterName = "video-bg.jpg";
                 }
 
-                if (file_exists($mediaFilePath)) {
-
                     // check if file type is a photo
                     $videoFileTypes = array("video/mpeg", "video/mpg", "video/ogg", "video/mp4",
                         "video/quicktime", "video/webm", "video/x-matroska",
                         "video/x-ms-wmw");
-// video file types
-                    $photoFileTypes = array("image/jpg", "image/jpeg", "image/png", "image/tiff",
-                        "image/gif", "image/raw");
 
-// check if file type is a photo
-                    if (in_array($mediaType, $photoFileTypes)) {
-
-                        $img = '<a href = "media.php?id=' . $ID . '&mediaName=' . $mediaName . '&mid=' . $mediaID . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '" ><img src = "' . $mediaPath . $mediaName . '" style="border:2px solid black;" /></a>
-                        <br/>'.$privateString;
-
-                    } // check if file type is a video
-                    elseif (in_array($mediaType, $videoFileTypes)) {
+                    if (in_array($mediaType, $videoFileTypes)) {
 
                         $img = '<a href = "' . $videoPath . $mediaName . '"><video src = "' . $videoPath . $mediaName . '" poster="/poster/'.$posterName.'" preload="auto" controls /></a>
                         <a href = "media.php?id=' . $ID . '&mediaName=' . $mediaName . '&mid=' . $mediaID . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '" ><br/>More</a><br/><br/>'
-                            .$privateString;
+                            .$privateString.'<br/>';
 
-                    }
+
+                    echo "
+                    <div>
+                    $img
+
+                    </div>";
+
                     ?>
+
+            <form method="post" action="">
+                <div class="form-group">
+                    <label for="text">Text this video</label>
+
+                      <br/>
+                            <input type="hidden" id="mediaName" name="mediaName" value="<?php echo $mediaName ?>" />
+                            <input type="hidden" id="mediaID" name="mediaID" value="<?php echo $mediaID ?>" />
+                            <input type="hidden" id="mediaType" name="mediaType" value="<?php echo $mediaType ?>" />
+                            <input type="hidden" id="mediaDate" name="mediaDate" value="<?php echo $mediaDate ?>" />
+                            <input type="text" id="number" name="number" class="form-control text-center" style="width:150px;" placeholder="2125551212"/>
+                        </div>
+                        <input type="submit" id="text" name="text" value="Text" style="border-radius: 10px" class="btn btn-default" />
+                    </form>
+                    <br/><br/>
+
+
                     <?php
-                    echo "<div>$img</div>";
-                    echo "<br/>";
+
+                    echo "<hr/><br/>";
                     ?>
-                <?php }
-            } ?>
+
+                    <?php
+
+                    } } ?>
         </div>
 
     </div>
