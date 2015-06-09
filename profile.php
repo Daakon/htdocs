@@ -408,7 +408,7 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
 
             require 'checkUsername.php';
 
-            $sql = "SELECT
+            $sql = "SELECT DISTINCT
                         Members.ID As MemberID,
                         Members.FirstName As FirstName,
                         Members.LastName As LastName,
@@ -431,7 +431,8 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
                         Profile.Plan As Plan
                         FROM Members, Profile
                         WHERE Members.ID = $ID
-                        AND Profile.Member_ID = $ID ";
+                        AND Profile.Member_ID = $ID
+                        Order By MemberID ";
 
             $result = mysql_query($sql) or die(mysql_error());
 

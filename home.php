@@ -42,7 +42,7 @@ if (isset($_POST['submit'])) {
 
 
                 // check file size
-                if ($_FILES['flPostMedia']['size'] > 600000000) {
+                if ($_FILES['flPostMedia']['size'] > 1000000000) {
 
                     exit();
                 }

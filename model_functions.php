@@ -64,7 +64,7 @@ function get_users_name_by_id($user_id)
 function get_users_photo_by_id($user_id)
 {
 
-    $sql = "SELECT DISTINCT ProfilePhoto FROM Profile WHERE Member_ID =$user_id ";
+    $sql = "SELECT DISTINCT ProfilePhoto FROM Profile WHERE Member_ID = $user_id Order By Member_ID ";
     $result = mysql_query($sql) or die(mysql_error());
     $rows = mysql_fetch_assoc($result);
 

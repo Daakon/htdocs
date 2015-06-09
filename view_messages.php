@@ -278,7 +278,7 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
 
                     echo "<img src = '$mediaPath$pic' class='profilePhoto-Feed' alt='' /> $name";
 
-                    echo "<div class='post'>$message</div>";
+                    echo "<div class='post'>".nl2br($message)."</div>";
 
                     echo "<div style='opacity:0.5'>".date('l F d Y g:i:s A',strtotime($date))."</div>";
                     echo "<hr/>";
