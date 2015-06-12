@@ -748,6 +748,7 @@ var j =document.getElementsByTagName('script')[0];j.parentNode.insertBefore(s,j)
 
 
     <?php
+// get genre selection
 $genre = $_GET['genre'];
 if (!empty($genre) && $genre != "Show-All") {
     $genreCondition = "And Posts.Category = '$genre' ";
@@ -758,7 +759,21 @@ else if($genre = "Show-All") {
 }
 else { $genreCondition = "And Posts.Category > '' "; }
 
+// get member name
+$queryName = $_GET['mn'];
+if (!empty($queryName)) {
+    $memberName = preg_split('/((^\p{P}+)|(\p{P}*\s+\p{P}*)|(\p{P}+$))/', $queryName, -1, PREG_SPLIT_NO_EMPTY);
+    $memberFirstName = $memberName[0];
+    $memberLastName = $memberName[1];
 
+    if (strlen($memberLastName) > 0) {
+        $memberCondition = " And (Members.FirstName Like '%$memberFirstName%' And Members.LastName Like '%$memberLastName%') ";
+    }
+    else {
+        $memberCondition = "And (Members.FirstName Like '%$memberFirstName%') ";
+    }
+}
+else { $memberCondition = ""; }
 
 $ads = getAds($genre, $age, $state, $interests, $gender);
 
@@ -779,6 +794,7 @@ $sql = " SELECT DISTINCT
     And Posts.IsDeleted = 0
     AND Posts.Category <> 'Sponsored'
     $genreCondition
+    $memberCondition
     UNION
     $ads
     Group By PostID
@@ -821,9 +837,9 @@ if (mysql_numrows($result) > 0) {
             <div class="post">
                 <?php
 
-                if (strlen($post) > 500) {
+                if (strlen($post) > 700) {
 
-                    $post500 = mb_substr($post, 0, 500); ?>
+                    $post500 = mb_substr($post, 0, 700); ?>
 
                     <div id="short<?php echo $postID ?>">
                         <?php echo nl2br($post500) ?>...<a href="javascript:showPost('long<?php echo $postID ?>', 'short<?php echo $postID ?>');">Show More</a>
@@ -1064,7 +1080,7 @@ if (mysql_numrows($result) > 0) {
 
 
 <!--Right Column -->
-        <div class="col-md-3 col-lg-3 col-md-offset-9 col-lg-offset-9 ad-desktop hidden-sm hidden-xs " >
+        <div class="col-md-3 col-lg-3 col-md-offset-9 col-lg-offset-9 ad-desktop hidden-sm hidden-xs" style="margin-top:20px;" >
         <h3><a href="advertising.php">Advertise
         <img src="<?php echo $images ?>ad-pic.jpg" style="border-bottom:1px solid black;" />
         </a></h3>

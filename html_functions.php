@@ -119,6 +119,18 @@ function get_header()
         <?php } ?>
 
         <!--desktop layout -->
+
+        <!--search box -->
+<?php $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+if (strstr($url, "home.php")) { ?>
+
+        <form class="hidden-xs hidden-sm searchBox" action="" method="get">
+            <input type="text" id="mn" name="mn" placeholder="Search Roll Call By Member Name" style="border:1px solid black;border-radius:10px;width:400px;" />
+            <input type="submit" id="search" name="search" value="Search" class="btn btn-default" />
+        </form>
+<?php } ?>
+
+
         <?php if (!empty($_COOKIE['ID']) && isset($_COOKIE['ID'])) { ?>
             <div class=" visible-sm visible-md visible-lg pull-right">
                 <ul class="list-inline">
@@ -132,7 +144,22 @@ function get_header()
 
     <!--mobile layout -->
 <?php if (!empty($_COOKIE['ID']) && isset($_COOKIE['ID'])) { ?>
+
+    <!--search box -->
+    <?php $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+if (strstr($url, "home.php")) { ?>
+
+    <form class="visible-xs visible-sm searchBoxMobile" action="" method="get">
+        <input type="text" id="mn" name="mn" placeholder="Search Roll Call By Member Name" style="border:1px solid black;border-radius:10px;width:250px" />
+        <input type="submit" id="search" name="search" value="Search" class="btn btn-default" />
+    </form>
+<?php } ?>
+
+<br/>
+
+
     <div class="visible-xs black-link" style="padding-top:10px;">
+
         <ul class="list-inline">
             <li><a href="/support.php" class="mobileLink">Support</a></li>
             <li><a href="/advertising.php" class="mobileLink">Advertise</a></li>

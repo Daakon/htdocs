@@ -41,7 +41,7 @@ $ID = $_SESSION['ID'];
 
 <h4>How long can my video be?</h4>
         <small>
-            Videos typically can be about 5 minutes or less.
+            Videos typically can be up to 10 minutes long.
         </small>
 
         <h4>How private are my photos/videos</h4>
@@ -84,6 +84,11 @@ $ID = $_SESSION['ID'];
         <small>
             Contact us at <a href="mailto:info@rapportbook.com">info@rapportbook.com</a> and include
             your user name and the issue that you are experiencing.
+        </small>
+
+        <h4>Media Requests</h4>
+        <small>
+            Contact us at <a href="mailto:marketing@rapportbook.com">marketing@rapportbook.com</a>
         </small>
 
     </div>
