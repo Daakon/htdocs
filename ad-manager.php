@@ -28,6 +28,14 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == "Submit AD") {
     $adCategory = $_POST['AdCategory'];
     $transID = $_POST['TransID'];
 
+    if ($ageStart == 0) {
+        $ageStart = 18;
+    }
+
+    if ($ageEnd == 0) {
+        $ageEnd = 90;
+    }
+
     if (!strstr($adText, "mailto:")) {
         $adText = preg_replace('/([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6})/', '<a href="mailto:$1">$1</a>', $adText);
     }

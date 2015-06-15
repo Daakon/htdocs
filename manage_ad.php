@@ -16,8 +16,8 @@ $ID = $_SESSION['ID'];
 
 <?php
 
-if (isset($_POST['Submit']) && $_POST['Submit'] == "Update AD") {
-
+if (isset($_POST['Update'])) {
+    echo "<script>alert('test');</script>";
 // update ad
     $adID = $_POST['AdID'];
     $adTitle = $_POST['AdTitle'];
@@ -356,6 +356,13 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == "Update AD") {
             $transID = $rows['TransID'];
             $impressions = $rows['Impressions'];
             $adEnd = $rows['AdEnd'];
+
+            if ($ageStart == 0) {
+                $ageStart = 18;
+            }
+            if ($ageEnd == 0) {
+                $ageEnd = 18;
+            }
             ?>
 
         </div>
@@ -373,7 +380,8 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == "Update AD") {
 
              ?>
 
-            <form id="" method="post" enctype="multipart/form-data" action = "" onsubmit="return checkAd()">
+            <form method="post" enctype="multipart/form-data" action = "" onsubmit="return checkAd()">
+
                 <input type="hidden" name="AdID" id="AdID" value="<?php echo $adID ?>" />
                 <input type="hidden" name="MediaExist" id="MediaExist" value="<?php echo $mediaExist ?>" />
 
@@ -384,17 +392,15 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == "Update AD") {
                        <br/><br/>
 
                 <div class="form-group">
-                    <label for="AdTitle">Ad Title</label>
+                    <label for="AdTitle">Ad Title:</label>
                     <br/>
-                    <input type ="text" class="form-control" id="AdTitle" name="AdTitle"  value = "<?php echo $adTitle ?>" />
+                    <input type ="text" class="form-control" id="AdTitle" name="AdTitle"  value = "<?php //echo $adTitle ?>" />
                 </div>
 
-
-
                 <div class="form-group">
-                    <label for="AdText">Ad Text</label>
+                    <label for="AdText">Ad Text:</label>
                     <br/>
-                    <textarea type ="text" class="form-control" id="AdText" name="AdText" class="textArea"><?php echo $adText ?></textarea>
+                    <textarea type ="text" class="form-control" id="AdText" name="AdText"><?php echo $adText ?></textarea>
                 </div>
 
                 <?php
@@ -416,19 +422,7 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == "Update AD") {
 
                 <br/>
 
-                <div class="form-group">
-                    <label for="AdTitle">Age Group (Optional)</label>
-                    <br/>
-                    <select id="AgeStart" name="AgeStart">
-                        <option value="<?php echo $ageStart ?>"><?php echo $ageStart ?></option>
-                        <?php age() ?>
-                    </select>
-                    To
-                    <select id="AgeEnd" name="AgeEnd">
-                        <option value="<?php echo $ageEnd ?>"><?php echo $ageEnd ?></option>
-                        <?php age() ?>
-                    </select>
-                </div>
+
 
                 <br/>
 
@@ -477,7 +471,7 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == "Update AD") {
 
                 <br/><br/>
 
-                <input type = "submit" value = "Update AD" name = "Submit" id = "Submit" class="btn btn-default" />
+                <input type = "submit" name = "Update" value = "Update" class="btn btn-default" />
             </form>
 
             <a href ="ad_view.php?adID=<?php echo $adID ?>"><h2>View Ad</h2></a>

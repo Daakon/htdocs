@@ -982,7 +982,7 @@ if (mysql_numrows($result) > 0) {
 </div>
 
 <!--Right Column -->
-        <div class="col-md-3 col-lg-3 col-md-offset-9 col-lg-offset-9 ad-desktop hidden-sm hidden-xs " >
+        <div class="col-md-3 col-lg-3 col-md-offset-9 col-lg-offset-9 ad-desktop hidden-sm hidden-xs rightColumn" >
         <h3><a href="advertising.php">Advertise
         <img src="<?php echo $images ?>ad-pic.jpg" style="border-bottom:1px solid black;" />
         </a></h3>
