@@ -718,7 +718,7 @@ var j =document.getElementsByTagName('script')[0];j.parentNode.insertBefore(s,j)
                 <input type="hidden" name="MAX_FILE_SIZE" value="500000000"
                 <br/>
                 <textarea name="post" id="post" class="form-control textArea"
-                       placeholder="Share Your Talent" ></textarea>
+                       placeholder="Share something interesting..." ></textarea>
                 <br/>
                 <div id="progress" style="display:none;">
                     <div class="progress">
