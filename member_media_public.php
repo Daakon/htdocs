@@ -80,6 +80,9 @@ if (mysql_numrows($result) == 0) {
                     $photoFileTypes = array("image/jpg", "image/jpeg", "image/png", "image/tiff",
                         "image/gif", "image/raw");
 
+                    // audio file types
+                    $audioFileTypes = array("audio/wav", "audio/mp3");
+
 // check if file type is a photo
                     if (in_array($mediaType, $photoFileTypes)) {
                         if (isset($_SESSION['ID']) && !empty($_SESSION['ID'])) {
@@ -103,6 +106,15 @@ if (mysql_numrows($result) == 0) {
                             $img = '<a href = "' . $videoPath . $mediaName . '"><img src = "' . $images . 'video-bg.jpg" height="100" width = "100" /></a>'
                                 . $privateString;
                         }
+                    }
+                    if (in_array($mediaType, $audioFileTypes)) {
+                        $text = "song";
+                        $img = '<audio controls>
+                            <source src="' . $mediaPath . $mediaName . '" type="' . $mediaType . '">
+                            Your browser does not support the audio element.
+                            </audio>
+                            <a href = "media.php?id=' . $ID . '&mediaName=' . $mediaName . '&mid=' . $mediaID . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '" ><br/>More</a><br/><br/>'
+                            . $privateString . '<br/>';
                     }
                     ?>
                     <?php

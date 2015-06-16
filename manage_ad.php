@@ -17,7 +17,7 @@ $ID = $_SESSION['ID'];
 <?php
 
 if (isset($_POST['Update'])) {
-    echo "<script>alert('test');</script>";
+
 // update ad
     $adID = $_POST['AdID'];
     $adTitle = $_POST['AdTitle'];

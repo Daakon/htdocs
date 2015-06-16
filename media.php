@@ -66,6 +66,9 @@ $comment = makeLinks($comment);
             $photoFileTypes = array("image/jpg", "image/jpeg", "image/png", "image/tiff",
                 "image/gif", "image/raw");
 
+            // audio file types
+            $audioFileTypes = array("audio/wav", "audio/mp3");
+
 // add unique id to image name to make it unique and add it to the file server
             $mediaName = $_FILES["flPostMedia"]["name"];
             $mediaName = trim(uniqid() . $mediaName);
@@ -300,7 +303,8 @@ $videoFileTypes = array("video/mpeg", "video/mpg", "video/ogg", "video/mp4",
 // video file types
 $photoFileTypes = array("image/jpg", "image/jpeg", "image/png", "image/tiff",
     "image/gif", "image/raw");
-
+// audio file types
+$audioFileTypes = array("audio/wav", "audio/mp3");
 
 // check if file type is a photo
 if (in_array($mediaType, $photoFileTypes)) {
@@ -311,6 +315,14 @@ if (in_array($mediaType, $photoFileTypes)) {
 elseif (in_array($mediaType, $videoFileTypes)) {
 
     $img = '<a href = "' . $videoPath . $mediaName . '"><img src = "' . $images . 'video-bg.jpg" height="100" width = "100" /></a>';
+
+}
+elseif (in_array($mediaType, $videoFileTypes)) {
+
+    $img = '<audio controls>
+                            <source src="'.$mediaPath . $mediaName.'" type="'.$mediaType.'">
+                            Your browser does not support the audio element.
+                            </audio>';
 
 }
 ?>
@@ -586,6 +598,13 @@ $profileMediaSrc = trim("media/" . $profilePhoto);
                 elseif (in_array($mediaType, $videoFileTypes)) {
 
                     $post = '<video src = "' . $videoPath . $mediaName . '" poster="/poster/'.$posterName.'" preload="auto" controls />';
+                }
+                elseif (in_array($mediaType, $audioFileTypes)) {
+
+                    $post = '<audio controls>
+                            <source src="'.$mediaPath . $mediaName.'" type="'.$mediaType.'">
+                            Your browser does not support the audio element.
+                            </audio>';
                 }
             }
             ?>

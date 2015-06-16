@@ -69,17 +69,15 @@ get_header()
         <div class="row">
 
             <div class="col-xs-12 col-md-5 col-md-offset-1"> 
-                <img src="<?php echo $images ?>ad-pic.jpg" class="how-it-works-img" align="left"/> 
+                <img src="<?php echo $images ?>promotion.png" class="how-it-works-img" align="left"/> 
             </div>
               
             <div class="col-xs-12 col-md-6"> 
-                <span class="how-it-works-header">Advertise</span> 
+                <span class="how-it-works-header">Promote</span> 
                 <p>
-                    Do you need to get the word out about an upcoming event or an artistic service that the talented members on
-                    Rapportbook may be interested in? Well advertise with us.
-                    Simply post an ad in Roll Call to let everyone know about your event
-                    or service. Post a video/commercial or picture to help paint the picture
-                    of what you have going on.
+                    Do you need to get the word out about something?
+                    Simply post your promotion in Roll Call to let everyone know.
+                    Add a video or picture to make your post more rich.
                 </p>
             </div>
         </div>
