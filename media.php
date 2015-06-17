@@ -22,7 +22,7 @@ if (!empty($_GET['btnDelete']) && ($_GET['btnDelete'] == 'Delete')) {
 
     mysql_query($sql) or die(mysql_error());
 
-    echo "<script>location = 'member_videos.php'</script>";
+    echo "<script>location = 'member_media.php'</script>";
 
 }
 ?>
@@ -317,7 +317,7 @@ elseif (in_array($mediaType, $videoFileTypes)) {
     $img = '<a href = "' . $videoPath . $mediaName . '"><img src = "' . $images . 'video-bg.jpg" height="100" width = "100" /></a>';
 
 }
-elseif (in_array($mediaType, $videoFileTypes)) {
+elseif (in_array($mediaType, $audioFileTypes)) {
 
     $img = '<audio controls>
                             <source src="'.$mediaPath . $mediaName.'" type="'.$mediaType.'">
@@ -582,12 +582,13 @@ $profileMediaSrc = trim("media/" . $profilePhoto);
             // if the
             if ($post == "<p></p>") {
                 $isPost = false;
-                $sqlPost = "SELECT MediaName, MediaType, Poster FROM Media WHERE MediaName = '$mediaName' ";
+                $sqlPost = "SELECT MediaName, MediaType, Poster, AudioName FROM Media WHERE MediaName = '$mediaName' ";
                 $resultPost = mysql_query($sqlPost) or die(mysql_error());
                 $rowPost = mysql_fetch_assoc($resultPost);
                 $mediaName = $rowPost['MediaName'];
                 $mediaType = $rowPost['MediaType'];
                 $posterName = $rowPost['Poster'];
+                $audioName = $rowPost['AudioName'];
 
                 // check if file type is a photo
                 if (in_array($mediaType, $photoFileTypes)) {
@@ -601,7 +602,7 @@ $profileMediaSrc = trim("media/" . $profilePhoto);
                 }
                 elseif (in_array($mediaType, $audioFileTypes)) {
 
-                    $post = '<audio controls>
+                    $post = $audioName.'<br/><audio controls>
                             <source src="'.$mediaPath . $mediaName.'" type="'.$mediaType.'">
                             Your browser does not support the audio element.
                             </audio>';

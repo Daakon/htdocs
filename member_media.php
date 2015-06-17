@@ -21,6 +21,17 @@ if (isset($_POST['Upload'])) {
     // if photo is provided
     if (strlen($_FILES['flPostMedia']['name']) > 0) {
 
+        $audioFileTypes = array("audio/wav", "audio/mp3");
+        $audioName;
+        $mediaName = $_FILES["flPostMedia"]["name"];
+        $mediaFile = $_FILES['flPostMedia']['tmp_name'];
+        $type = $_FILES['flPostMedia']['type'];
+        $fileName = pathinfo($mediaName, PATHINFO_FILENAME);
+
+
+        if (in_array($type, $audioFileTypes)) {
+            $audioName = $fileName;
+        }
 
         // check file size
         if ($_FILES['flPostMedia']['size'] > 1000000000) {
@@ -36,22 +47,19 @@ if (isset($_POST['Upload'])) {
         $photoFileTypes = array("image/jpg", "image/jpeg", "image/png", "image/tiff",
             "image/gif", "image/raw");
 
-        $audioFileTypes = array("audio/wav", "audio/mp3");
+
 
         // add unique id to image name to make it unique and add it to the file server
-        $mediaName = $_FILES["flPostMedia"]["name"];
         $mediaName = trim(uniqid() . $mediaName);
-        $mediaFile = $_FILES['flPostMedia']['tmp_name'];
-        $type = $_FILES['flPostMedia']['type'];
+
 
         require 'media_post_file_path.php';
 
         if (in_array($type, $videoFileTypes)) {
 
             // convert to mp4
-            $fileName = pathinfo($mediaName, PATHINFO_FILENAME);
-            $newFileName = $fileName.".mp4";
 
+            $newFileName = $fileName.".mp4";
             exec("ffmpeg -i $fileName -vcodec libx264 -pix_fmt yuv420p -profile:v baseline -preset slow -crf 22 -movflags +faststart $newFileName");
             $mediaName = $newFileName;
 
@@ -123,12 +131,6 @@ if (isset($_POST['Upload'])) {
         }
 
 
-            // store media pointer
-            $sql = "INSERT INTO Media (Member_ID,  MediaName,  MediaType,  MediaDate    ) Values
-                                          ('$ID',    '$mediaName', '$type',   CURRENT_DATE())";
-            mysql_query($sql) or die(mysql_error());
-
-
             if (in_array($type, $videoFileTypes)) {
 
                 // where ffmpeg is located
@@ -192,12 +194,9 @@ if (isset($_POST['Upload'])) {
     }
 
 
-
-
-
 // store media pointer
-    $sql = "INSERT INTO Media (Member_ID,  MediaName,  MediaType,  MediaDate, Private,  Poster    ) Values
-                                  ('$ID',    '$mediaName', '$type',   CURRENT_DATE(), 1,   '$posterName')";
+    $sql = "INSERT INTO Media (Member_ID,  MediaName,  MediaType,  MediaDate,         AudioName,  Private,  Poster    ) Values
+                                  ('$ID',  '$mediaName', '$type',   CURRENT_DATE(), '$audioName',    1,     '$posterName')";
     mysql_query($sql) or die(mysql_error());
 
 
@@ -294,16 +293,16 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
     <div class="row row-padding">
 
         <div class="col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8 roll-call">
-            <h2>Videos</h2>
+            <h2>Media</h2>
 
             <form method="post" enctype="multipart/form-data" action="" >
                 <img src="/images/image-icon.png" height="30px" width="30px" alt="Video"/>
-                <strong>Upload a Video to your media library</strong>
+                <strong>Upload Photos, Videos & Music to your media library</strong>
                 <br/><br/>
                 <span style="padding-left:5px;font-style:italic;color:red">
-                    Public videos have been shared in Roll Call.
+                    Public content has been shared in Roll Call.
                     <br/>
-                    Private videos have been uploaded only here.
+                    Private content has been uploaded only here.
                     </span>
                 <br/><br/>
 
@@ -339,6 +338,7 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
                 $private = $rows['Private'];
                 $mediaFilePath = trim("media/" . $mediaName);
                 $posterName = $rows['Poster'];
+                $audioName = $rows['AudioName'];
 
                 $privateString = "Public";
 
@@ -361,6 +361,8 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
                 $audioFileTypes = array("audio/wav", "audio/mp3");
 
                 $text;
+
+                // video type
                 if (in_array($mediaType, $videoFileTypes)) {
                     $text = "video";
                     $img = '<a href = "' . $videoPath . $mediaName . '"><video src = "' . $videoPath . $mediaName . '" poster="/poster/'.$posterName.'" preload="auto" controls /></a>
@@ -402,6 +404,7 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
 
                 }
 
+                // photo type
             if (in_array($mediaType, $photoFileTypes)) {
                 $text = "photo";
                 $img = '<a href = "media.php?id=' . $ID . '&mediaName=' . $mediaName . '&mid=' . $mediaID . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '" ><br/><img src = "' . $mediaPath . $mediaName . '" class="img-responsive"/></a><br/><br/>'
@@ -431,9 +434,11 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
 
             <?php
             }
+
+                // audio type
                 if (in_array($mediaType, $audioFileTypes)) {
                     $text = "song";
-                    $img = '<audio controls>
+                    $img = '<b>'.$audioName.'</b><br/><audio controls>
                             <source src="'.$mediaPath . $mediaName.'" type="'.$mediaType.'">
                             Your browser does not support the audio element.
                             </audio>
