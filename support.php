@@ -62,17 +62,6 @@ $ID = $_SESSION['ID'];
             the lawful owner of the video to post it.
         </small>
 
-        <h4>What type of content can I not post?</h4>
-            <small>
-                Here is a list of content that is under no means tolerable:
-                <ul>
-                    <li style="display:block" class="list-group-item list-group-item-danger">Pornographic material of any nature</li>
-                    <li style="display:block" class="list-group-item list-group-item-danger"><font color="red">*</font>Nude art will be at the discretion of our content team.</li>
-                    <li style="display:block" class="list-group-item list-group-item-danger">Any video committing a crime</li>
-                </ul>
-                Any of these offenses can result in account suspension and/or termination as well as contacting proper authorities.
-            </small>
-
         <h4>How do I report content that is offensive, abusive or illegal</h4>
         <small>
             Contact us immediately at <a href="mailto:info@rapportbook.com">info@rapportbook.com</a> and include

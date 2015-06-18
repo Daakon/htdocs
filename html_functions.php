@@ -38,9 +38,10 @@ function get_head_files()
 
     <form method="post" action="login.php" class="form-inline" >
         <header class="navbar navbar-default navbar-static-top header">
+            <a href="/index.php" title="Login or Sign Up">
             <img src="/images/Rapportbook-Logo-White-Text-Large.png" alt="Rapportbook" height="40" width="auto"
                  class="logo-image"/>
-
+            </a>
 
             <div class="form-group hidden-xs" >
                 <label class="sr-only" for="login_email">Your Email </label>

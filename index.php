@@ -274,10 +274,15 @@ get_head_files();
                         <div class="error-text"></div>
                     </div>
                 </div>
+                
+                <small>By clicking sign up, you agree to our <a href="/terms.php">terms</a></small>
+                <br/><br/>
+
                 <div class="form-group row">
                     <div class="col-md-6">
                         <input class="btn btn-default " type="submit" name="signup" id="signup"
                                value="Sign Up"/>
+
                     </div>
                 </div>
 
