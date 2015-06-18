@@ -274,7 +274,7 @@ get_head_files();
                         <div class="error-text"></div>
                     </div>
                 </div>
-                
+
                 <small>By clicking sign up, you agree to our <a href="/terms.php">terms</a></small>
                 <br/><br/>
 

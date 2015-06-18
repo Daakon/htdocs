@@ -62,15 +62,17 @@ get_head_files();
 
     <p>
         <h5>Advertisement</h5>
-        Our goal is to deliver advertising content that is valuable to our members and advertisers. In order to help us do that, you agree to the following:
-            1. We will use the information you provide in your profile to help provide you the most interesting
+        Our goal is to deliver advertising content that is valuable to our members and advertisers. In order to help us do that,
+        we will use the information you provide in your profile to help provide you the most interesting
             products and services.
     </p>
 
     <p>
         <h5>Term Updates</h5>
-            1. We’ll notify you before we make changes to these terms and give you the opportunity to review and comment on the revised terms before continuing to use our Services.
-            2. Your continued use of Rapportbook constitutes your acceptance of our terms.
+    <ul>
+            <li style="display:block">1. We’ll notify you before we make changes to these terms and give you the opportunity to review and comment on the revised terms before continuing to use our Services.</li>
+            <li style="display:block">2. Your continued use of Rapportbook constitutes your acceptance of our terms.</li>
+    </ul>
     </p>
 
     <p>
