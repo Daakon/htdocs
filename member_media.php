@@ -322,7 +322,7 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
                 <input type="submit" class="post-button" name="Upload" id="Upload" value="Upload" onclick="showUploading()"/>
             </form>
             <br/>
-            <hr/>
+            <hr style = 'background-color:#000000; border-width:0; color:#000000; height:2px; lineheight:0; display: inline-block; text-align: left; width:100%;' />
             <br/>
             <?php
 

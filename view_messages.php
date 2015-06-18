@@ -18,6 +18,18 @@ $ID = $_SESSION['ID'];
 
 
 <?php
+// check if member exists for messaging
+$senderID = $_GET['id'];
+
+$sql = "SELECT ID FROM Members WHERE ID = $senderID ";
+$result = mysql_query($sql) or die(mysql_error());
+$row = mysql_fetch_assoc($result);
+if (mysql_num_rows($result) == 0) {
+    echo "<script>alert('Member does not exist'); location='/home.php' </script>";
+}
+?>
+
+<?php
 // handle message
 if (isset($_POST['send']) && $_POST['send'] == "Send") {
 

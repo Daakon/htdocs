@@ -292,3 +292,17 @@ li {
 .rightColumn {
     margin-top:20px;
 }
+
+audio {
+    -webkit-transition:all 0.5s linear;
+    -moz-transition:all 0.5s linear;
+    -o-transition:all 0.5s linear;
+    transition:all 0.5s linear;
+    -moz-box-shadow: 4px 4px 4px 4px black;
+    -webkit-box-shadow:  4px 4px 4px 4px black;
+    box-shadow: 4px 4px 4px 4px black;
+    -moz-border-radius:4px 4px 4px 4px ;
+    -webkit-border-radius:4px 4px 4px 4px ;
+    border-radius:5px 5px 5px 5px ;
+    background-color: red;
+}

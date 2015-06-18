@@ -602,7 +602,7 @@ $profileMediaSrc = trim("media/" . $profilePhoto);
                 }
                 elseif (in_array($mediaType, $audioFileTypes)) {
 
-                    $post = $audioName.'<br/><audio controls>
+                    $post = '<b>'.$audioName.'</b><br/><audio controls>
                             <source src="'.$mediaPath . $mediaName.'" type="'.$mediaType.'">
                             Your browser does not support the audio element.
                             </audio>';
