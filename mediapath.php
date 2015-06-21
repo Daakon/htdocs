@@ -17,4 +17,6 @@ else {
     $videoPath = "http://rapportbook.com/media/";
     $posterPath = "/home/rapportbook/public_html/poster/";
 }
+
+
 ?>

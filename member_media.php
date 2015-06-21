@@ -60,7 +60,8 @@ if (isset($_POST['Upload'])) {
             // convert to mp4
 
             $newFileName = $fileName.".mp4";
-            exec("ffmpeg -i $fileName -vcodec libx264 -pix_fmt yuv420p -profile:v baseline -preset slow -crf 22 -movflags +faststart $newFileName");
+            $ffmpeg = '/usr/bin/ffmpeg';
+            exec("$ffmpeg -i $fileName -vcodec copy $newFileName");
             $mediaName = $newFileName;
 
 
@@ -157,38 +158,23 @@ if (isset($_POST['Upload'])) {
                 $poster = imagecreatefromjpeg($poster);
                 $exif = @exif_read_data($poster);
 
-                if ( isset($exif['Orientation']) && !empty($exif['Orientation']) ) {
+                $size = getimagesize("$posterPath$posterName");
+                $width = $size[0];
+                $height = $size[1];
 
-                    // Decide orientation
-                    if ( $exif['Orientation'] == 3 ) {
-                        $rotation = 180;
-                    } else if ( $exif['Orientation'] == 6 ) {
-                        $rotation = 90;
-                    } else if ( $exif['Orientation'] == 8 ) {
-                        $rotation = -90;
-                    } else {
-                        $rotation = 0;
-                    }
+                if ($width > $height && $height < 1000) {
+                    // video shot in landscape, needs to be flipped
+                    $img = imagerotate($poster, 180, 0);
+                    imagejpeg($img, $posterPath.$posterName, 100);
+                }
 
-                    // Rotate the image
-                    if ( $rotation ) {
-                        $img = imagerotate($poster, $rotation, 0);
-                        imagejpeg($img, $posterPath.$posterName, 100);
-                    }
+                if ($width > $height && $height > 1000) {
+                    // video shot in portrait, but still needs to be flipped
+                    $img = imagerotate($poster, -90, 0);
+                    imagejpeg($img, $posterPath.$posterName, 100);
                 }
-                else {
-                    // if we cannot determine the exif data
-                    // then we will rotate the image if it is wider than it is tall
-                    // this is the best fallback so far.
-                    $size = getimagesize("$posterPath$posterName");
-                    $width = $size[0];
-                    $height = $size[1];
-                    if ($width > $height) {
-                        $img = imagerotate($poster, -90, 0);
-                        imagejpeg($img, $posterPath.$posterName, 100);
-                    }
-                }
-                $img = '<video src = "' . $videoPath . $mediaName . '" poster="/poster/'.$posterName.'" preload="none" controls />';
+
+                $img = '<video src = "' . $videoPath . $mediaName . '" poster="/poster/'.$posterName.'" preload="auto" controls />';
 
             }
     }
@@ -314,7 +300,7 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
                 <div id="progressBar" style="display:none;">
                     <div class="progress">
                         <div class="progress-bar progress-bar-striped progress-bar-danger active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-                            <span class="sr-only">Loading</span>
+                            <b>File Uploading...please wait</b>
                         </div>
                     </div>
                 </div>
