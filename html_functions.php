@@ -9,7 +9,7 @@ function get_head_files()
     <html xmlns="http://www.w3.org/1999/xhtml">
     <head lang="<?php echo $str_language; ?>" xml:lang="<?php echo $str_language; ?>">
         <meta name="description" content="Rapportbook is a platform that lets individuals share their talent with the world.
-        Post photos, videos, network and much more. It's free to Join!">
+        Post photos, videos & music, network and much more. It's free to Join!">
         <meta name="keywords" content="networking, promotion, advertise, photos, videos, messaging">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
@@ -158,10 +158,12 @@ if (strstr($url, "home.php")) { ?>
 
 <br/>
 
-
+<div class="visible-sm black-link" style="padding-top:10px;padding-left:30px;">
+    <li><a href="/advertising.php" class="mobileLink">Advertise</a></li>
+</div>
     <div class="visible-xs black-link" style="padding-top:10px;">
 
-        <ul class="list-inline">
+        <ul class="list-inline" style="padding-left:10px;">
             <li><a href="/support.php" class="mobileLink">Support</a></li>
             <li><a href="/advertising.php" class="mobileLink">Advertise</a></li>
             <li><a href ="/logout.php" onclick="FB.logout()" class="mobileLink" >Log Out</a></li>

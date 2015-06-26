@@ -29,7 +29,7 @@ if (isset($_POST['submit'])) {
             // if photo is provided
             if (strlen($_FILES['flPostMedia']['name']) > 0) {
                 // check file size
-                if ($_FILES['flPostMedia']['size'] > 1000000000) {
+                if ($_FILES['flPostMedia']['size'] > 2500000000) {
                     exit();
                 }
                 // create media type arrays
@@ -39,18 +39,35 @@ if (isset($_POST['submit'])) {
                 // video file types
                 $photoFileTypes = array("image/jpg", "image/jpeg", "image/png", "image/tiff",
                     "image/gif", "image/raw");
+
+                $audioFileTypes = array("audio/wav", "audio/mp3");
+
                 // add unique id to image name to make it unique and add it to the file server
                 $mediaName = $_FILES["flPostMedia"]["name"];
+                $fileName = pathinfo($mediaName, PATHINFO_FILENAME);
                 $mediaName = trim(uniqid() . $mediaName);
                 $mediaFile = $_FILES['flPostMedia']['tmp_name'];
                 $type = $_FILES['flPostMedia']['type'];
+
+
                 require 'media_post_file_path.php';
+
+                if (in_array($type, $audioFileTypes) || in_array($type, $videoFileTypes)) {
+                    $audioName = $fileName;
+                }
+
                 if (in_array($type, $videoFileTypes)) {
                     // convert to mp4
-                    $fileName = pathinfo($mediaName, PATHINFO_FILENAME);
-                    $newFileName = $fileName.".mp4";
-                    exec("ffmpeg -i $fileName -vcodec libx264 -pix_fmt yuv420p -profile:v baseline -preset slow -crf 22 -movflags +faststart $newFileName");
-                    $mediaName = $newFileName;
+                    $audioName = $fileName;
+                    if ($type == "video/mpeg") {
+                        $newFileName = $fileName . ".avi";
+                    }
+                    else { $newFileName = $fileName . ".mp4"; }
+
+                        $ffmpeg = '/usr/bin/ffmpeg';
+                        exec("$ffmpeg -i $fileName $newFileName");
+                        $mediaName = $newFileName;
+
                 } else {
                     if ($type == "image/jpg" || $type == "image/jpeg") {
                         $src = imagecreatefromjpeg($mediaFile);
@@ -59,16 +76,14 @@ if (isset($_POST['submit'])) {
                     } else if ($type == "image/gif") {
                         $src = imagecreatefromgif($mediaFile);
                     } else {
-                        echo "<script>alert('Invalid File Type');</script>";
+                       /* echo "<script>alert('Invalid File Type');</script>";
                         header('Location:home.php');
-                        exit;
+                        exit;*/
                     }
                 }
                 require 'media_post_file_path.php';
 // save photo/video
-                if (in_array($type, $videoFileTypes)) {
-                    $cmd = "ffmpeg -i $mediaFile -vf 'transpose=1' $mediaFile";
-                    exec($cmd);
+                if (in_array($type, $videoFileTypes) || in_array($type, $audioFileTypes)) {
                     move_uploaded_file($mediaFile, $postMediaFilePath);
                 } else {
                     if (in_array($type, $photoFileTypes)) {
@@ -98,9 +113,9 @@ if (isset($_POST['submit'])) {
                     } else if ($type == "image/gif") {
                         imagegif($src, $postMediaFilePath, 100);
                     } else {
-                        echo "<script>alert('Invalid File Type');</script>";
+                        /*echo "<script>alert('Invalid File Type');</script>";
                         header('Location:home.php');
-                        exit;
+                        exit;*/
                     }
                 }
                 // if photo didn't get uploaded, notify the user
@@ -109,23 +124,31 @@ if (isset($_POST['submit'])) {
                 }
                 else {
                     // store media pointer
-                    $sql = "INSERT INTO Media (Member_ID,  MediaName,  MediaType,  MediaDate    ) Values
-                                          ('$ID',    '$mediaName', '$type',   CURRENT_DATE())";
+                    $sql = "INSERT INTO Media (Member_ID,  MediaName,  MediaType,  MediaDate,  AudioName    ) Values
+                                          ('$ID',    '$mediaName', '$type',   CURRENT_DATE(), '$audioName'  )";
                     mysql_query($sql) or die(mysql_error());
+                    $mediaID = mysql_insert_id();
                     // get media ID
                     $sqlGetMedia = "SELECT * FROM Media WHERE MediaName = '$mediaName'";
                     $mediaResult = mysql_query($sqlGetMedia) or die(mysql_error());
                     $mediaRow = mysql_fetch_assoc($mediaResult);
-                    $mediaID = $mediaRow['ID'];
+                    //$mediaID = $mediaRow['ID'];
                     $media = $mediaRow['MediaName'];
                     $mediaType = $mediaRow['MediaType'];
                     $mediaDate = $mediaRow['MediaDate'];
                     // build post links based on media type
+                    if (in_array($type, $audioFileTypes)) {
+                        $img = '<b>'.$audioName.'</b><br/><audio controls>
+                            <source src="'.$mediaPath . $mediaName.'" type="'.$mediaType.'">
+                            Your browser does not support the audio element.
+                            </audio>';
+                        $img = '<a href = "media.php?id=' . $ID . '&mediaName=' . $mediaName . '&mid=' . $mediaID . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '" ><br/>'.$img.'</a><br/><br/>';
+                    }
                     if (in_array($type, $photoFileTypes)) {
                         $img = '<img src = "' . $mediaPath . $mediaName . '" class="img-responsive"/>';
                         $img = '<a href = "media.php?id=' . $ID . '&mid=' . $mediaID . '&mediaName=' . $media . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '">' . $img . '</a>';
                     } // check if file type is a video
-                    elseif (in_array($type, $videoFileTypes)) {
+                    if (in_array($type, $videoFileTypes)) {
                         // where ffmpeg is located
                         $ffmpeg = '/usr/bin/ffmpeg';
                         // poster file name
@@ -145,36 +168,46 @@ if (isset($_POST['submit'])) {
                         $width = $size[0];
                         $height = $size[1];
 
-                        //echo "<script>alert('$width');</script>";
+
                         if ($width > $height && $height < 1000) {
                             // video shot in landscape, needs to be flipped
                             $img = imagerotate($poster, 180, 0);
                             imagejpeg($img, $posterPath.$posterName, 100);
                         }
 
-                        if ($width > $height && $height > 1000) {
-                            // video shot in portrait, but still needs to be flipped
+                        if ($width > $height && $height > 1000 && $type == "video/quicktime") {
+                            // video shot in landscape, needs to be flipped
                             $img = imagerotate($poster, -90, 0);
                             imagejpeg($img, $posterPath.$posterName, 100);
                         }
 
+
                         $img = '<video src = "' . $videoPath . $mediaName . '" poster="/poster/'.$posterName.'" preload="none" controls />';
                     } else {
                         // if invalid file type
-                        echo '<script>alert("Invalid File Type!");</script>';
+                        /*echo '<script>alert("Invalid File Type!");</script>';
                         header('Location:home.php');
-                        exit;
+                        exit;*/
                     }
-                    $post = $post . '<br/><br/>' . $img . '<br/>';
+
+                    if (in_array($type, $audioFileTypes)) {
+                        $post = $post . '<br/>'. $img . '<br/>';
+                    }
+                    elseif (in_array($type, $videoFileTypes)) {
+                        $post = $post . '<br/><br/><a href="'. $videoPath . $mediaName . '" download="'.$audioName.'"">View in native player </a>' . $img . '<br/>';
+                    }
+                    else {
+                        $post = $post . '<br/><br/>' . $img . '<br/>';
+                    }
+
                     $sql = "INSERT INTO Posts (Post,    Poster,	      Category,  Member_ID,   PostDate) Values
                                               ('$post', '$posterName', '$category', '$ID',       CURDATE())";
                     mysql_query($sql) or die(mysql_error());
                     $newPostID = mysql_insert_id();
+
                     // update Media table with new post id
-                    if (isset($_SESSION['ID'])) {
-                        $sqlUpdateMedia = "UPDATE Media SET Post_ID = '$newPostID', Poster='$posterName' WHERE MediaName = '$mediaName' ";
+                        $sqlUpdateMedia = "UPDATE Media SET Post_ID = $newPostID, Poster='$posterName' WHERE ID = '$mediaID' ";
                         mysql_query($sqlUpdateMedia) or die(mysql_error());
-                    }
                 }
             } // if no media
             else {
@@ -207,7 +240,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 // if photo is provided
             if (isset($_FILES['flPostMedia']) && strlen($_FILES['flPostMedia']['name']) > 1) {
 // check file size
-                if ($_FILES['flPostMedia']['size'] > 50000000) {
+                if ($_FILES['flPostMedia']['size'] > 250000000) {
                     echo '<script>alert("File is too large. The maximum file size is 50MB.");</script>';
                     header('Location:home.php');
                     exit;
@@ -546,6 +579,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
             }
         </script>
 
+
 <body>
 
 <div class="container">
@@ -588,7 +622,6 @@ var j =document.getElementsByTagName('script')[0];j.parentNode.insertBefore(s,j)
                 <img src="/images/image-icon.png" height="30px" width="30px" alt="Photos/Video"/>
                 <strong>Attach Photo/Video To Your Post</strong>
                 <input type="file" width="10px;" name="flPostMedia" id="flPostMedia"/>
-                <input type="hidden" name="MAX_FILE_SIZE" value="500000000"
                 <br/>
                 <textarea name="post" id="post" class="form-control textArea"
                        placeholder="Share something interesting..." ></textarea>

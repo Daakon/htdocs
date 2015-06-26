@@ -29,12 +29,12 @@ if (isset($_POST['Upload'])) {
         $fileName = pathinfo($mediaName, PATHINFO_FILENAME);
 
 
-        if (in_array($type, $audioFileTypes)) {
+        if (in_array($type, $audioFileTypes) || in_array($type, $videoFileTypes)) {
             $audioName = $fileName;
         }
 
         // check file size
-        if ($_FILES['flPostMedia']['size'] > 1000000000) {
+        if ($_FILES['flPostMedia']['size'] > 150000000) {
 
             exit();
         }
@@ -293,7 +293,7 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
                 <br/><br/>
 
                 <input type="file" width="10px;" name="flPostMedia" id="flPostMedia"/>
-                <input type="hidden" name="MAX_FILE_SIZE" value="1000000000" />
+                <input type="hidden" name="MAX_FILE_SIZE" value="1500000000" />
 
                 <br/><br/>
 
