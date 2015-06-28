@@ -58,7 +58,7 @@ if (mysql_numrows($result) == 0) {
                 $private = $rows['Private'];
                 $mediaFilePath = trim("media/" . $mediaName);
                 $poster = $rows['Poster'];
-
+                $audioName = $rows['AudioName'];
                 /*$privateString = "Public";
 
                 if ($private == 1) {
@@ -102,7 +102,7 @@ if (mysql_numrows($result) == 0) {
                     }
                     if (in_array($mediaType, $audioFileTypes)) {
                         $text = "song";
-                        $img = '<audio controls>
+                        $img = '<b>'.$audioName.'</b><br/><audio controls>
                             <source src="' . $mediaPath . $mediaName . '" type="' . $mediaType . '">
                             Your browser does not support the audio element.
                             </audio>
