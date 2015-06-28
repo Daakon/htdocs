@@ -41,8 +41,8 @@
           <file leaf-file-name="member_media.php" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/member_media.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.41762453" vertical-offset="5976" max-vertical-offset="8816">
-                  <caret line="326" column="48" selection-start-line="326" selection-start-column="16" selection-end-line="326" selection-end-column="48" />
+                <state vertical-scroll-proportion="0.3448276" vertical-offset="5710" max-vertical-offset="8816">
+                  <caret line="310" column="162" selection-start-line="310" selection-start-column="16" selection-end-line="310" selection-end-column="162" />
                   <folding />
                 </state>
               </provider>
@@ -55,12 +55,13 @@
           <file leaf-file-name="member_media_public.php" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/member_media_public.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.45210728" vertical-offset="904" max-vertical-offset="2470">
-                  <caret line="60" column="48" selection-start-line="60" selection-start-column="48" selection-end-line="60" selection-end-column="48" />
+                <state vertical-scroll-proportion="0.59770113" vertical-offset="524" max-vertical-offset="2489">
+                  <caret line="44" column="150" selection-start-line="44" selection-start-column="150" selection-end-line="44" selection-end-column="150" />
                   <folding>
-                    <marker date="1435511421000" expanded="true" signature="349:432" placeholder="SELECT * FRO..Members..." />
-                    <marker date="1435511421000" expanded="true" signature="1072:1191" placeholder="SELECT * FRO..Media..." />
-                    <marker date="1435511421000" expanded="true" signature="4078:4293" placeholder="..." />
+                    <element signature="n#style#0;n#hr#0;n#div#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
+                    <marker date="1435511611000" expanded="true" signature="349:432" placeholder="SELECT * FRO..Members..." />
+                    <marker date="1435511611000" expanded="true" signature="1242:1361" placeholder="SELECT * FRO..Media..." />
+                    <marker date="1435511611000" expanded="true" signature="4248:4463" placeholder="..." />
                   </folding>
                 </state>
               </provider>
@@ -437,11 +438,21 @@
           <line>61</line>
           <option name="timeStamp" value="16" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/member_media.php</url>
+          <line>323</line>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/member_media.php</url>
+          <line>321</line>
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="17" />
+      <option name="time" value="19" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -827,20 +838,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/member_media.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.41762453" vertical-offset="5976" max-vertical-offset="8816">
-          <caret line="326" column="48" selection-start-line="326" selection-start-column="16" selection-end-line="326" selection-end-column="48" />
+        <state vertical-scroll-proportion="0.3448276" vertical-offset="5710" max-vertical-offset="8816">
+          <caret line="310" column="162" selection-start-line="310" selection-start-column="16" selection-end-line="310" selection-end-column="162" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/member_media_public.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.45210728" vertical-offset="904" max-vertical-offset="2470">
-          <caret line="60" column="48" selection-start-line="60" selection-start-column="48" selection-end-line="60" selection-end-column="48" />
+        <state vertical-scroll-proportion="0.59770113" vertical-offset="524" max-vertical-offset="2489">
+          <caret line="44" column="150" selection-start-line="44" selection-start-column="150" selection-end-line="44" selection-end-column="150" />
           <folding>
-            <marker date="1435511421000" expanded="true" signature="349:432" placeholder="SELECT * FRO..Members..." />
-            <marker date="1435511421000" expanded="true" signature="1072:1191" placeholder="SELECT * FRO..Media..." />
-            <marker date="1435511421000" expanded="true" signature="4078:4293" placeholder="..." />
+            <element signature="n#style#0;n#hr#0;n#div#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
+            <marker date="1435511611000" expanded="true" signature="349:432" placeholder="SELECT * FRO..Members..." />
+            <marker date="1435511611000" expanded="true" signature="1242:1361" placeholder="SELECT * FRO..Media..." />
+            <marker date="1435511611000" expanded="true" signature="4248:4463" placeholder="..." />
           </folding>
         </state>
       </provider>
