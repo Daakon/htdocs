@@ -57,17 +57,19 @@ if (isset($_POST['submit'])) {
                 }
 
                 if (in_array($type, $videoFileTypes)) {
-                    // convert to mp4
-                    $audioName = $fileName;
-                    if ($type == "video/mpeg") {
-                        $newFileName = $fileName . ".avi";
-                    }
-                    else { $newFileName = $fileName . ".mp4"; }
+                    // convert to mp4 if not already an mp4
+                    if ($type != "video/mp4") {
+                        $audioName = $fileName;
+                        if ($type == "video/mpeg") {
+                            $newFileName = $fileName . ".avi";
+                        } else {
+                            $newFileName = $fileName . ".mp4";
+                        }
 
                         $ffmpeg = '/usr/bin/ffmpeg';
                         exec("$ffmpeg -i $fileName $newFileName");
                         $mediaName = $newFileName;
-
+                    }
                 } else {
                     if ($type == "image/jpg" || $type == "image/jpeg") {
                         $src = imagecreatefromjpeg($mediaFile);

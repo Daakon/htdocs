@@ -96,16 +96,9 @@ if (mysql_numrows($result) == 0) {
 
                     } // check if file type is a video
                     elseif (in_array($mediaType, $videoFileTypes)) {
-
-                        if (isset($_SESSION['ID']) && !empty($_SESSION['ID'])) {
                             $img = '<video src = "' . $videoPath . $mediaName . '" poster="/poster/'.$poster.'" preload="auto" controls />
                         <a href = "/media.php?id=' . $ID . '&mediaName=' . $mediaName . '&mid=' . $mediaID . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '" >More</a><br/>'
                                 . $privateString;
-                        }
-                        else {
-                            $img = '<a href = "' . $videoPath . $mediaName . '"><img src = "' . $images . 'video-bg.jpg" height="100" width = "100" /></a>'
-                                . $privateString;
-                        }
                     }
                     if (in_array($mediaType, $audioFileTypes)) {
                         $text = "song";
