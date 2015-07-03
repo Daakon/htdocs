@@ -60,14 +60,10 @@ if (isset($_POST['submit'])) {
                     // convert to mp4 if not already an mp4
                     if ($type != "video/mp4") {
                         $audioName = $fileName;
-                        if ($type == "video/mpeg") {
-                            $newFileName = $fileName . ".avi";
-                        } else {
-                            $newFileName = $fileName . ".mp4";
-                        }
+                        $newFileName = $fileName . ".mp4";
 
                         $ffmpeg = '/usr/bin/ffmpeg';
-                        exec("$ffmpeg -i $fileName $newFileName");
+                        exec("$ffmpeg -i $fileName -profile:v baseline -level 3.0 $newFileName");
                         $mediaName = $newFileName;
                     }
                 } else {
@@ -177,7 +173,8 @@ if (isset($_POST['submit'])) {
                             imagejpeg($img, $posterPath.$posterName, 100);
                         }
 
-                        if ($width > $height && $height > 1000 && $type == "video/quicktime") {
+                        // handle images from videos shot with Iphone
+                        if ($width > $height && $height > 700 && $type == "video/quicktime" || $type == "video/mp4") {
                             // video shot in landscape, needs to be flipped
                             $img = imagerotate($poster, -90, 0);
                             imagejpeg($img, $posterPath.$posterName, 100);
@@ -229,6 +226,7 @@ if (isset($_POST['submit'])) {
 // handle post comments
 //-------------------------------------------------
 if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
+
     $postID = $_POST['postID'];
     $ownerId = $_POST['memberID'];
     $comment = $_POST['postComment'];
@@ -241,8 +239,9 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
         } else {
 // if photo is provided
             if (isset($_FILES['flPostMedia']) && strlen($_FILES['flPostMedia']['name']) > 1) {
+
 // check file size
-                if ($_FILES['flPostMedia']['size'] > 250000000) {
+                if ($_FILES['flPostMedia']['size'] > 25000000000) {
                     echo '<script>alert("File is too large. The maximum file size is 50MB.");</script>';
                     header('Location:home.php');
                     exit;
@@ -254,17 +253,27 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 // video file types
                 $photoFileTypes = array("image/jpg", "image/jpeg", "image/png", "image/tiff",
                     "image/gif", "image/raw");
+
+                $audioFileTypes = array("audio/wav", "audio/mp3");
+
                 // add unique id to image name to make it unique and add it to the file server
                 $mediaName = $_FILES["flPostMedia"]["name"];
+                $fileName = pathinfo($mediaName, PATHINFO_FILENAME);
                 $mediaName = trim(uniqid() . $mediaName);
                 $mediaFile = $_FILES['flPostMedia']['tmp_name'];
                 $type = trim($_FILES["flPostMedia"]["type"]);
+
                 require 'media_post_file_path.php';
+
                 // create file type instance
+                if (in_array($type, $audioFileTypes) || in_array($type, $videoFileTypes)) {
+                    $audioName = $fileName;
+                }
+
                 if (in_array($type, $videoFileTypes)) {
                     // convert to mp4
-                    $fileName = pathinfo($mediaName, PATHINFO_FILENAME);
                     $newFileName = $fileName.".mp4";
+                    $audioName = $fileName;
                     $ffmpeg = '/usr/bin/ffmpeg';
                     exec("$ffmpeg -i $newFileName -vcodec libx264 -pix_fmt yuv420p -profile:v baseline -preset slow -crf 22 -movflags +faststart $newFileName");
                     $mediaName = $newFileName;
@@ -277,9 +286,9 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                     } else if ($type == "image/gif") {
                         $src = imagecreatefromgif($mediaFile);
                     } else {
-                        echo "<script>alert('Invalid File Type');</script>";
+                        /*echo "<script>alert('Invalid File Type');</script>";
                         header('Location:home.php');
-                        exit;
+                        exit;*/
                     }
                     // read exif data
                     $exif = @exif_read_data($mediaFile);
@@ -300,7 +309,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                 }
 // save photo/video
                 require 'media_post_file_path.php';
-                if (in_array($type, $videoFileTypes)) {
+                if (in_array($type, $videoFileTypes) || in_array($type, $audioFileTypes)) {
                     move_uploaded_file($mediaFile, $postMediaFilePath);
                 } else {
                     // handle transparency
@@ -320,8 +329,8 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                 } else {
                     // determine which table to put photo pointer in
                     // store media pointer
-                    $sql = "INSERT INTO Media (Member_ID,  MediaName,  MediaType,  MediaDate    ) Values
-                                      ('$ID',    '$mediaName', '$type',   CURRENT_DATE())";
+                    $sql = "INSERT INTO Media (Member_ID,  MediaName,  MediaType,  MediaDate,     AudioName    ) Values
+                                              ('$ID',    '$mediaName', '$type',   CURRENT_DATE(), '$audioName')";
                     mysql_query($sql) or die(mysql_error());
                     // get media ID
                     $sqlGetMedia = "SELECT * FROM Media WHERE MediaName = '$mediaName'";
@@ -331,7 +340,16 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                     $media = $mediaRow['MediaName'];
                     $mediaType = $mediaRow['MediaType'];
                     $mediaDate = $mediaRow['MediaDate'];
-// check if file type is a photo
+
+                    // build post links based on media type
+                    if (in_array($type, $audioFileTypes)) {
+
+                        $img = '<b>'.$audioName.'</b><br/><audio controls>
+                            <source src="'.$mediaPath . $mediaName.'" type="'.$mediaType.'">
+                            Your browser does not support the audio element.
+                            </audio>';
+                        $img = '<a href = "media.php?id=' . $ID . '&mediaName=' . $mediaName . '&mid=' . $mediaID . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '" ><br/>'.$img.'</a><br/><br/>';
+                    }
                     if (in_array($type, $photoFileTypes)) {
                         $img = '<img src = "' . $mediaPath . $mediaName .'" class="img-responsive"/>';
                         $img = '<a href = "media.php?id=' . $ID . '&mid=' . $mediaID . '&mediaName=' . $media . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '">' . $img . '</a>';
@@ -356,24 +374,25 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                         $width = $size[0];
                         $height = $size[1];
 
-                        //echo "<script>alert('$width');</script>";
                         if ($width > $height && $height < 1000) {
                             // video shot in landscape, needs to be flipped
                             $img = imagerotate($poster, 180, 0);
                             imagejpeg($img, $posterPath.$posterName, 100);
                         }
 
-                        if ($width > $height && $height > 1000) {
-                            // video shot in portrait, but still needs to be flipped
+                        // handle images from videos shot with Iphone
+                        if ($width > $height && $height > 700 && $type == "video/quicktime" || $type == "video/mp4") {
+                            // video shot in landscape, needs to be flipped
                             $img = imagerotate($poster, -90, 0);
                             imagejpeg($img, $posterPath.$posterName, 100);
                         }
+
                         $img = '<video src = "' . $videoPath . $mediaName . '" poster="/media/shot.jpg" preload="auto" controls />';
                     } else {
                         // if invalid file type
-                        echo '<script>alert("Invalid File Type!");</script>';
+                        /*echo '<script>alert("Invalid File Type!");</script>';
                         header('Location:home.php');
-                        exit;
+                        exit; */
                     }
                     $comment = $comment . '<br/><br/>' . $img . '<br/>';
                     $sql = "INSERT INTO PostComments (Post_ID,     Member_ID,   Comment  ) Values

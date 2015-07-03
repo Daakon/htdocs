@@ -4,24 +4,34 @@ function category()
     echo '<option value = "Art">Art</option>';
     echo '<option value = "Alternative">Alternative</option>';
     echo '<option value = "Announcement">Announcement</option>';
+    echo '<option value = "Business">Business</option>';
     echo '<option value = "Christian">Christian</option>';
     echo '<option value = "Classical">Classical</option>';
     echo '<option value = "Comedy">Comedy</option>';
     echo '<option value = "Cosmetology">Cosmetology</option>';
     echo '<option value = "Country">Country</option>';
+    echo '<option value = "Culinary">Culinary</option>';
+    echo '<option value = "Design">Design</option>';
     echo '<option value = "Dance">Dance</option>';
+    echo '<option value = "Education">Education</option>';
     echo '<option value = "Event">Events</option>';
     echo '<option value = "Film">Film</option>';
     echo '<option value = "Fitness">Fitness</option>';
+    echo '<option value = "Landscaping">Landscaping</option>';
     echo '<option value = "Literature">Literature</option>';
     echo '<option value = "Magic">Magic</option>';
     echo '<option value = "Miscellaneous">Miscellaneous</option>';
     echo '<option value = "Model">Models</option>';
+    echo '<option value = "Night Life">Night Life</option>';
     echo '<option value = "Photography">Photography</option>';
     echo '<option value = "Pop">Pop</option>';
-    echo '<option value = "Rap">Rap</option>';
+    echo '<option value = "Question">Question</option>';
     echo '<option value = "R&B">R&B</option>';
+    echo '<option value = "Rap">Rap</option>';
     echo '<option value = "Recreation">Recreation</option>';
+    echo '<option value = "Social">Social</option>';
+    echo '<option value = "Sports">Sports</option>';
+    echo '<option value = "Technology">Technology</option>';
     echo '<option value = "Theatrical">Theatrical</option>';
 }
 
