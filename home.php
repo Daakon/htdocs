@@ -641,7 +641,7 @@ var j =document.getElementsByTagName('script')[0];j.parentNode.insertBefore(s,j)
 
             <form method="post" enctype="multipart/form-data" action="" onsubmit="showUploading()">
                 <img src="/images/image-icon.png" height="30px" width="30px" alt="Photos/Video"/>
-                <strong>Attach Photo/Video To Your Post</strong>
+                <strong>Attach A Photo,Video or Music File To Your Post</strong>
                 <input type="file" width="10px;" name="flPostMedia" id="flPostMedia"/>
                 <br/>
                 <textarea name="post" id="post" class="form-control textArea"
@@ -820,8 +820,9 @@ if (mysql_numrows($result) > 0) {
                 <input type="text" class="form-control" name="postComment" id="postComment"
                        placeholder="Write a comment" title='' style="border:1px solid black"/>
 
-
+                <strong style="color:red">Attach A Photo,Video or Music File To Your Comment</strong>
                 <input type="file" name="flPostMedia" id="flPostMedia" style="max-width:180px;"/>
+
                 <br/>
                 <div id="comment<?php echo $postID ?>" style="display:none;">
                     <div class="progress">
