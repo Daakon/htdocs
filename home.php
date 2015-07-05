@@ -661,7 +661,7 @@ var j =document.getElementsByTagName('script')[0];j.parentNode.insertBefore(s,j)
                 </div>
                 <br/>
                     <select class="form-control input-lg" id="category" name="category">
-                            <option value="">Category</option>
+                            <option value="">Select Your Interest</option>
                             <?php echo category() ?>
                         </select>
                         <br/>
