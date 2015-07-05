@@ -105,11 +105,11 @@ if (isset($_POST['submit'])) {
                     // handle transparency
                     imagesavealpha($src, true);
                     if ($type == "image/jpg" || $type == "image/jpeg") {
-                        imagejpeg($src, $postMediaFilePath, 100);
+                        imagejpeg($src, $postMediaFilePath, 50);
                     } else if ($type == "image/png") {
                         imagepng($src, $postMediaFilePath, 0, NULL);
                     } else if ($type == "image/gif") {
-                        imagegif($src, $postMediaFilePath, 100);
+                        imagegif($src, $postMediaFilePath, 50);
                     } else {
                         /*echo "<script>alert('Invalid File Type');</script>";
                         header('Location:home.php');
@@ -170,14 +170,14 @@ if (isset($_POST['submit'])) {
                         if ($width > $height && $height < 1000) {
                             // video shot in landscape, needs to be flipped
                             $img = imagerotate($poster, 180, 0);
-                            imagejpeg($img, $posterPath.$posterName, 100);
+                            imagejpeg($img, $posterPath.$posterName, 50);
                         }
 
                         // handle images from videos shot with Iphone
                         if ($width > $height && $height > 700 && $type == "video/quicktime" || $type == "video/mp4") {
                             // video shot in landscape, needs to be flipped
                             $img = imagerotate($poster, -90, 0);
-                            imagejpeg($img, $posterPath.$posterName, 100);
+                            imagejpeg($img, $posterPath.$posterName, 50);
                         }
 
 
@@ -216,7 +216,7 @@ if (isset($_POST['submit'])) {
             }
         }
     }
-    echo '<meta http-equiv="Location" content="/home.php">';
+    header('Location:home.php');
 }
 ?>
 
@@ -315,11 +315,11 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                     // handle transparency
                     imagesavealpha($src, true);
                     if ($type == "image/jpg" || $type == "image/jpeg") {
-                        imagejpeg($src, $postMediaFilePath, 100);
+                        imagejpeg($src, $postMediaFilePath, 50);
                     } else if ($type == "image/png") {
                         imagepng($src, $postMediaFilePath, 0, NULL);
                     } else {
-                        imagegif($src, $postMediaFilePath, 100);
+                        imagegif($src, $postMediaFilePath, 50);
                     }
                 }
 // if photo didn't get uploaded, notify the user
@@ -377,14 +377,14 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                         if ($width > $height && $height < 1000) {
                             // video shot in landscape, needs to be flipped
                             $img = imagerotate($poster, 180, 0);
-                            imagejpeg($img, $posterPath.$posterName, 100);
+                            imagejpeg($img, $posterPath.$posterName, 50);
                         }
 
                         // handle images from videos shot with Iphone
                         if ($width > $height && $height > 700 && $type == "video/quicktime" || $type == "video/mp4") {
                             // video shot in landscape, needs to be flipped
                             $img = imagerotate($poster, -90, 0);
-                            imagejpeg($img, $posterPath.$posterName, 100);
+                            imagejpeg($img, $posterPath.$posterName, 50);
                         }
 
                         $img = '<video src = "' . $videoPath . $mediaName . '" poster="/media/shot.jpg" preload="auto" controls />';
@@ -488,7 +488,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 //BELOW IS END OF POST COMMENT HANDLING CODE ==========================================================================//
         }
     }
-    echo '<meta http-equiv="Location" content="/home.php">';
+    header('Location:home.php');
 }
 if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
     $commentID = $_POST['commentID'];
@@ -602,6 +602,11 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
 
 <body>
+
+<?php
+// compress the page
+if (substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip')) ob_start("ob_gzhandler"); else ob_start();
+?>
 
 <div class="container">
 <?php

@@ -22,6 +22,8 @@ get_header()
             <a href="/home.php">Back to Roll Call</a>
             <?php } ?>
 
+            <h4>Rapportbook is a multi-media rich platform that enables people share things that interest them.</h4>
+
         <div class="row how-it-works-row">
 
             <div class="col-xs-12 col-md-5 col-md-offset-1">
@@ -50,7 +52,7 @@ get_header()
             <div class="col-xs-12 col-md-6"> 
                 <span class="how-it-works-header">Photos</span> 
                 <p>
-                    A great photo is one that shares your talent or interests.
+                    A great photo is one that shares your interests.
                     Tell your story today by uploading a pic!
                 </p>
                  

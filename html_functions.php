@@ -8,7 +8,7 @@ function get_head_files()
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
     <html xmlns="http://www.w3.org/1999/xhtml">
     <head lang="<?php echo $str_language; ?>" xml:lang="<?php echo $str_language; ?>">
-        <meta name="description" content="Rapportbook is a platform that lets individuals share their talent with the world.
+        <meta name="description" content="Rapportbook is a platform that lets individuals share their interests with the world.
         Post photos, videos & music, network and much more. It's free to Join!">
         <meta name="keywords" content="networking, promotion, advertise, photos, videos, messaging">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -35,36 +35,6 @@ function get_head_files()
 
 <?php function get_login_header()
 { ?>
-
-    <form method="post" action="login.php" class="form-inline" >
-        <header class="navbar navbar-default navbar-static-top header">
-            <a href="/index.php" title="Login or Sign Up">
-            <img src="/images/Rapportbook-Logo-White-Text-Large.png" alt="Rapportbook" height="40" width="auto"
-                 class="logo-image"/>
-            </a>
-
-            <div class="form-group hidden-xs" >
-                <label class="sr-only" for="login_email">Your Email </label>
-                <input type="text" name="login_email" id="login_email" placeholder="Email" class="form-control"/>
-                <label class="sr-only" for="login_password">Password</label>
-                <input type="password" name="login_password" id="login_password" placeholder="Password"
-                       class="form-control"/>
-                <input type="submit" name="login" id="login" value="Login" class="btn btn-default"/>
-
-
-                <a href="forgot-password.php" class="forgot-password-link hidden-xs" style="color:white">Forgot Your Password?</a>
-            </div>
-
-        </header>
-    </form>
-
-<?php } ?>
-
-<?php
-
-function get_header()
-{
-    ?>
     <script>
         // Load the SDK asynchronously
         function logout() { alert('here');
@@ -106,6 +76,37 @@ function get_header()
         }(document, 'script', 'facebook-jssdk'));
 
     </script>
+
+    <form method="post" action="login.php" class="form-inline" >
+        <header class="navbar navbar-default navbar-static-top header">
+            <a href="/index.php" title="Login or Sign Up">
+            <img src="/images/Rapportbook-Logo-White-Text-Large.png" alt="Rapportbook" height="40" width="auto"
+                 class="logo-image"/>
+            </a>
+
+            <div class="form-group hidden-xs" >
+                <label class="sr-only" for="login_email">Your Email </label>
+                <input type="text" name="login_email" id="login_email" placeholder="Email" class="form-control"/>
+                <label class="sr-only" for="login_password">Password</label>
+                <input type="password" name="login_password" id="login_password" placeholder="Password"
+                       class="form-control"/>
+                <input type="submit" name="login" id="login" value="Login" class="btn btn-default"/>
+
+
+                <a href="forgot-password.php" class="forgot-password-link hidden-xs" style="color:white">Forgot Your Password?</a>
+            </div>
+
+        </header>
+    </form>
+
+<?php } ?>
+
+<?php
+
+function get_header()
+{
+    ?>
+
 
     <header class="navbar navbar-default navbar-static-top header">
         <a href="/homepage.php">

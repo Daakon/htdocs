@@ -134,7 +134,7 @@ get_head_files();
     <div class="row">
         <div class="col-lg-6 col-md-5 hidden-sm hidden-xs">
             <img src="/images/interests.png" height="350" width="100%" alt="" />
-            <h2>Share Your Talent & Interests</h2>
+            <h2 align="center">Share Your Interests</h2>
         </div>
 
         <div class="col-lg-6 col-md-7 col-sm-12 col-xs-12 ">
@@ -180,7 +180,7 @@ get_head_files();
                     <span style="font-size:20px;font-weight:bold;">Or</span>
                     <h2 style="color:red;">Sign Up with Rapportbook</h2>
                 </div>
-                <h4><a href="how_it_works.php">Click Here To See How It Works</a></h4>
+                <h4><a href="learn_more.php">Click Here To Learn More</a></h4>
 
                 <div class="form-group row" id="form-group-firstName">
                     <div class="col-xs-12 col-md-12 col-md-6 col-lg-6 ">

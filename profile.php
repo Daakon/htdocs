@@ -94,13 +94,13 @@ if (isset($_POST['photo']) && ($_POST['photo'] == "Upload Photo")) {
         // handle transparency
         imagesavealpha($src, true);
         if ($type == "image/jpg" || $type == "image/jpeg") {
-            imagejpeg($src, $postMediaFilePath, 100);
+            imagejpeg($src, $postMediaFilePath, 50);
 
         } else if ($type == "image/png") {
             imagepng($src, $postMediaFilePath, 0, NULL);
 
         } else {
-            imagegif($src, $postMediaFilePath, 100);
+            imagegif($src, $postMediaFilePath, 50);
 
         }
 
@@ -191,7 +191,7 @@ if (isset($_POST['video']) && ($_POST['video'] == "Upload Video")) {
                 // Rotate the image
                 if ( $rotation ) {
                     $img = imagerotate($poster, $rotation, 0);
-                    imagejpeg($img, $posterPath.$posterName, 100);
+                    imagejpeg($img, $posterPath.$posterName, 50);
                 }
             }
             else {
@@ -203,7 +203,7 @@ if (isset($_POST['video']) && ($_POST['video'] == "Upload Video")) {
                 $height = $size[1];
                 if ($width > $height) {
                     $img = imagerotate($poster, -90, 0);
-                    imagejpeg($img, $posterPath.$posterName, 100);
+                    imagejpeg($img, $posterPath.$posterName, 50);
                 }
             }
         }

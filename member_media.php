@@ -116,13 +116,13 @@ if (isset($_POST['Upload'])) {
             // handle transparency
             imagesavealpha($src, true);
             if ($type == "image/jpg" || $type == "image/jpeg") {
-                imagejpeg($src, $postMediaFilePath, 100);
+                imagejpeg($src, $postMediaFilePath, 50);
             } else if ($type == "image/png") {
                 imagepng($src, $postMediaFilePath, 0, NULL);
 
 
             } else if ($type == "image/gif") {
-                imagegif($src, $postMediaFilePath, 100);
+                imagegif($src, $postMediaFilePath, 50);
 
             } /*else {
                 echo "<script>alert('Invalid File Type');</script>";
@@ -165,13 +165,13 @@ if (isset($_POST['Upload'])) {
                 if ($width > $height && $height < 1000) {
                     // video shot in landscape, needs to be flipped
                     $img = imagerotate($poster, 180, 0);
-                    imagejpeg($img, $posterPath.$posterName, 100);
+                    imagejpeg($img, $posterPath.$posterName, 50);
                 }
 
                 if ($width > $height && $height > 1000) {
                     // video shot in portrait, but still needs to be flipped
                     $img = imagerotate($poster, -90, 0);
-                    imagejpeg($img, $posterPath.$posterName, 100);
+                    imagejpeg($img, $posterPath.$posterName, 50);
                 }
 
                 $img = '<video src = "' . $videoPath . $mediaName . '" poster="/poster/'.$posterName.'" preload="auto" controls />';
