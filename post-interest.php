@@ -1,5 +1,7 @@
 <?php
 require 'connect.php';
+// compress the page
+if (substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip')) ob_start("ob_gzhandler"); else ob_start();
 require 'model_functions.php';
 require 'mediaPath.php';
 require 'getSession.php';
@@ -676,7 +678,7 @@ $gender = getGender($ID);
         </ul>
 
 
-<?php $category = $_GET['cat'];
+<?php $category = $_GET['interest'];
 
 ?>
 

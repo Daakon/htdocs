@@ -1,5 +1,7 @@
 <?php
 require 'connect.php';
+// compress the page
+if (substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip')) ob_start("ob_gzhandler"); else ob_start();
 require 'model_functions.php';
 require 'mediaPath.php';
 require 'getSession.php';
@@ -603,10 +605,6 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
 <body>
 
-<?php
-// compress the page
-if (substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip')) ob_start("ob_gzhandler"); else ob_start();
-?>
 
 <div class="container">
 <?php
@@ -671,7 +669,7 @@ var j =document.getElementsByTagName('script')[0];j.parentNode.insertBefore(s,j)
 <br/><br/>
 <div align = "center">
 <select id="genre" name="genre" onchange="getGenre()">
-            <option value="">Show Post By Category</option>
+            <option value="">Show Post By Interest</option>
             <option value="Show-All">Show All</option>
                             <?php echo category() ?>
                         </select>
@@ -778,7 +776,7 @@ if (mysql_numrows($result) > 0) {
 
         </div>
 
-        <a href='/post-cat.php?cat=<?php echo urlencode($category) ?>' class='category'><h5><?php echo $category ?></h5></a>
+        <a href='/post-interest.php?interest=<?php echo urlencode($category) ?>' class='category'><h5><?php echo $category ?></h5></a>
         <br/><br/>
         <?php
         //check if member has approved this post
