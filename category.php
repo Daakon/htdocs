@@ -112,94 +112,97 @@ function age() {
 }
 
 function interestIcon($interest) {
+
+    $path = "/post-glyphs/";
+
     if ($interest == "Art") {
-        ?><img src="/post-icons/art.png" class="icon" alt="Photos/Video"/><?
+        ?><img src="<?php echo $path ?>art.png" class="icon" alt="Photos/Video"/><?
     }
     elseif ($interest == "Alternative") {
-        ?><img src="/post-icons/alternative.png" class="icon" alt="Photos/Video"/><?
+        ?><img src="<?php echo $path ?>alternative.png" class="icon" alt="Photos/Video"/><?
     }
     elseif ($interest == "Announcement") {
-        ?><img src="/post-icons/announcement.jpeg" class="icon" alt="Photos/Video"/><?
+        ?><img src="<?php echo $path ?>announcement.jpeg" class="icon" alt="Photos/Video"/><?
     }
     elseif ($interest == "Business") {
-        ?><img src="/post-icons/business.jpeg" class="icon" alt="Photos/Video"/><?
+        ?><img src="<?php echo $path ?>business.jpeg" class="icon" alt="Photos/Video"/><?
     }
     elseif ($interest == "Christian") {
-        ?><img src="/post-icons/christian.jpeg" class="icon" alt="Photos/Video"/><?
+        ?><img src="<?php echo $path ?>christian.jpeg" class="icon" alt="Photos/Video"/><?
     }
     elseif ($interest == "Classical") {
-        ?><img src="/post-icons/classical.png" class="icon" alt="Photos/Video"/><?
+        ?><img src="<?php echo $path ?>classical.png" class="icon" alt="Photos/Video"/><?
     }
     elseif ($interest == "Comedy") {
-        ?><img src="/post-icons/comedy.jpg" class="icon" alt="Photos/Video"/><?
+        ?><img src="<?php echo $path ?>comedy.jpg" class="icon" alt="Photos/Video"/><?
     }
     elseif ($interest == "Cosmetology") {
-        ?><img src="/post-icons/cosmetology.png" class="icon" alt="Photos/Video"/><?
+        ?><img src="<?php echo $path ?>cosmetology.png" class="icon" alt="Photos/Video"/><?
     }
     elseif ($interest == "Country") {
-        ?><img src="/post-icons/country.jpeg" class="icon" alt="Photos/Video"/><?
+        ?><img src="<?php echo $path ?>country.jpeg" class="icon" alt="Photos/Video"/><?
     }
     elseif ($interest == "Culinary") {
-        ?><img src="/post-icons/culinary.png" class="icon" alt="Photos/Video"/><?
+        ?><img src="<?php echo $path ?>culinary.png" class="icon" alt="Photos/Video"/><?
     }
     elseif ($interest == "Design") {
-        ?><img src="/post-icons/design.png" class="icon" alt="Photos/Video"/><?
+        ?><img src="<?php echo $path ?>design.png" class="icon" alt="Photos/Video"/><?
     }
     elseif ($interest == "Dance") {
-        ?><img src="/post-icons/dance.jpg" class="icon" alt="Photos/Video"/><?
+        ?><img src="<?php echo $path ?>dance.jpg" class="icon" alt="Photos/Video"/><?
     }
     elseif ($interest == "Education") {
-        ?><img src="/post-icons/education.png" class="icon" alt="Photos/Video"/><?
+        ?><img src="<?php echo $path ?>education.png" class="icon" alt="Photos/Video"/><?
     }
     elseif ($interest == "Event") {
-        ?><img src="/post-icons/event.png" class="icon" alt="Photos/Video"/><?
+        ?><img src="<?php echo $path ?>event.png" class="icon" alt="Photos/Video"/><?
     }
     elseif ($interest == "Film") {
-        ?><img src="/post-icons/film.png" class="icon" alt="Photos/Video"/><?
+        ?><img src="<?php echo $path ?>film.png" class="icon" alt="Photos/Video"/><?
     }
     elseif ($interest == "Fitness") {
-        ?><img src="/post-icons/fitness.png" class="icon" alt="Photos/Video"/><?
+        ?><img src="<?php echo $path ?>fitness.png" class="icon" alt="Photos/Video"/><?
     }
     elseif ($interest == "Literature") {
-        ?><img src="/post-icons/literature.jpg" class="icon" alt="Photos/Video"/><?
+        ?><img src="<?php echo $path ?>literature.jpg" class="icon" alt="Photos/Video"/><?
     }
     elseif ($interest == "Magic") {
-        ?><img src="/post-icons/magic.jpg" class="icon" alt="Photos/Video"/><?
+        ?><img src="<?php echo $path ?>magic.jpg" class="icon" alt="Photos/Video"/><?
     }
     elseif ($interest == "Miscellaneous") {
-        ?><img src="/post-icons/miscellaneous.jpg" class="icon" alt="Photos/Video"/><?
+        ?><img src="<?php echo $path ?>miscellaneous.jpg" class="icon" alt="Photos/Video"/><?
     }
     elseif ($interest == "Model") {
-        ?><img src="/post-icons/model.png" class="icon" alt="Photos/Video"/><?
+        ?><img src="<?php echo $path ?>model.png" class="icon" alt="Photos/Video"/><?
     }
     elseif ($interest == "Night Life") {
-        ?><img src="/post-icons/night-life.png" class="icon" alt="Photos/Video"/><?
+        ?><img src="<?php echo $path ?>night-life.png" class="icon" alt="Photos/Video"/><?
     }
     elseif ($interest == "Photography") {
-         ?><img src="/post-icons/photo.png" class="icon" alt="Photos/Video"/><?
+         ?><img src="<?php echo $path ?>photo.png" class="icon" alt="Photos/Video"/><?
     }
     elseif ($interest == "Pop") {
-        ?><img src="/post-icons/pop.jpeg" class="icon" alt="Photos/Video"/><?
+        ?><img src="<?php echo $path ?>pop.jpeg" class="icon" alt="Photos/Video"/><?
     }
     elseif ($interest == "Question") {
-        ?><img src="/post-icons/question-mark.jpeg" class="icon" alt="Photos/Video"/><?
+        ?><img src="<?php echo $path ?>question-mark.jpeg" class="icon" alt="Photos/Video"/><?
     }
     elseif ($interest == "R&B") {
-        ?><img src="/post-icons/r&b.png" class="icon" alt="Photos/Video"/><?
+        ?><img src="<?php echo $path ?>r&b.png" class="icon" alt="Photos/Video"/><?
     }
     elseif ($interest == "Rap") {
-        ?><img src="/post-icons/rap.png" class="icon" alt="Photos/Video"/><?
+        ?><img src="<?php echo $path ?>rap.png" class="icon" alt="Photos/Video"/><?
     }
     elseif ($interest == "Recreation") {
-        ?><img src="/post-icons/recreation.jpg" class="icon" alt="Photos/Video"/><?
+        ?><img src="<?php echo $path ?>recreation.jpg" class="icon" alt="Photos/Video"/><?
     }
     elseif ($interest == "Sports") {
-        ?><img src="/post-icons/sports.png" class="icon" alt="Photos/Video"/><?
+        ?><img src="<?php echo $path ?>sports.png" class="icon" alt="Photos/Video"/><?
     }
     elseif ($interest == "Technology") {
-        ?><img src="/post-icons/technology.png" class="icon" alt="Photos/Video"/><?
+        ?><img src="<?php echo $path ?>technology.png" class="icon" alt="Photos/Video"/><?
     }
     elseif ($interest == "Theatrical") {
-        ?><img src="/post-icons/theatrical.png" class="icon" alt="Photos/Video"/><?
+        ?><img src="<?php echo $path ?>theatrical.png" class="icon" alt="Photos/Video"/><?
     }
 }
