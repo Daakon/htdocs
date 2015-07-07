@@ -24,7 +24,7 @@ $conn = mysql_connect($localhost, $username, $pass);
 if (!$conn) {
     die(mysql_error());
 } else {
-    mysql_selectdb($rapportbook, $conn);
+    mysql_select_db($rapportbook, $conn);
 }
 
 ?>

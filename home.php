@@ -714,11 +714,11 @@ $sql = " SELECT DISTINCT
     FROM Members,Posts,Profile
     WHERE
     Members.IsActive = 1
-    And Members.IsSuspended = 0
-    And Members.ID = Posts.Member_ID
-    And Members.ID = Profile.Member_ID
-    And Posts.IsDeleted = 0
-    AND Posts.Category <> 'Sponsored'
+    And (Members.IsSuspended = 0)
+    And (Members.ID = Posts.Member_ID)
+    And (Members.ID = Profile.Member_ID)
+    And (Posts.IsDeleted = 0)
+    AND (Posts.Category <> 'Sponsored')
     $genreCondition
     $memberCondition
     UNION
@@ -734,7 +734,7 @@ if (mysql_num_rows($result) == 0) {
         No Results
     </div>
 <?php }
-if (mysql_numrows($result) > 0) {
+if (mysql_num_rows($result) > 0) {
     while ($rows = mysql_fetch_assoc($result)) {
         $memberID = $rows['MemberID'];
         $name = $rows['FirstName'] . ' ' . $rows['LastName'];
@@ -776,7 +776,7 @@ if (mysql_numrows($result) > 0) {
 
         </div>
 
-        <a href='/post-interest.php?interest=<?php echo urlencode($category) ?>' class='category'><h5><?php echo $category ?></h5></a>
+        <a href='/post-interest.php?interest=<?php echo urlencode($category) ?>' class='category'><h5><?php echo $category ." ". interestIcon($category) ?></h5></a>
         <br/><br/>
         <?php
         //check if member has approved this post

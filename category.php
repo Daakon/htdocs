@@ -14,14 +14,13 @@ function category()
     echo '<option value = "Design">Design</option>';
     echo '<option value = "Dance">Dance</option>';
     echo '<option value = "Education">Education</option>';
-    echo '<option value = "Event">Events</option>';
+    echo '<option value = "Event">Event</option>';
     echo '<option value = "Film">Film</option>';
     echo '<option value = "Fitness">Fitness</option>';
-    echo '<option value = "Landscaping">Landscaping</option>';
     echo '<option value = "Literature">Literature</option>';
     echo '<option value = "Magic">Magic</option>';
     echo '<option value = "Miscellaneous">Miscellaneous</option>';
-    echo '<option value = "Model">Models</option>';
+    echo '<option value = "Model">Model</option>';
     echo '<option value = "Night Life">Night Life</option>';
     echo '<option value = "Photography">Photography</option>';
     echo '<option value = "Pop">Pop</option>';
@@ -110,4 +109,97 @@ function age() {
     echo '<option value = "89">89</option>';
     echo '<option value = "90">90</option>';
 
+}
+
+function interestIcon($interest) {
+    if ($interest == "Art") {
+        ?><img src="/post-icons/art.png" class="icon" alt="Photos/Video"/><?
+    }
+    elseif ($interest == "Alternative") {
+        ?><img src="/post-icons/alternative.png" class="icon" alt="Photos/Video"/><?
+    }
+    elseif ($interest == "Announcement") {
+        ?><img src="/post-icons/announcement.jpeg" class="icon" alt="Photos/Video"/><?
+    }
+    elseif ($interest == "Business") {
+        ?><img src="/post-icons/business.jpeg" class="icon" alt="Photos/Video"/><?
+    }
+    elseif ($interest == "Christian") {
+        ?><img src="/post-icons/christian.jpeg" class="icon" alt="Photos/Video"/><?
+    }
+    elseif ($interest == "Classical") {
+        ?><img src="/post-icons/classical.png" class="icon" alt="Photos/Video"/><?
+    }
+    elseif ($interest == "Comedy") {
+        ?><img src="/post-icons/comedy.jpg" class="icon" alt="Photos/Video"/><?
+    }
+    elseif ($interest == "Cosmetology") {
+        ?><img src="/post-icons/cosmetology.png" class="icon" alt="Photos/Video"/><?
+    }
+    elseif ($interest == "Country") {
+        ?><img src="/post-icons/country.jpeg" class="icon" alt="Photos/Video"/><?
+    }
+    elseif ($interest == "Culinary") {
+        ?><img src="/post-icons/culinary.png" class="icon" alt="Photos/Video"/><?
+    }
+    elseif ($interest == "Design") {
+        ?><img src="/post-icons/design.png" class="icon" alt="Photos/Video"/><?
+    }
+    elseif ($interest == "Dance") {
+        ?><img src="/post-icons/dance.jpg" class="icon" alt="Photos/Video"/><?
+    }
+    elseif ($interest == "Education") {
+        ?><img src="/post-icons/education.png" class="icon" alt="Photos/Video"/><?
+    }
+    elseif ($interest == "Event") {
+        ?><img src="/post-icons/event.png" class="icon" alt="Photos/Video"/><?
+    }
+    elseif ($interest == "Film") {
+        ?><img src="/post-icons/film.png" class="icon" alt="Photos/Video"/><?
+    }
+    elseif ($interest == "Fitness") {
+        ?><img src="/post-icons/fitness.png" class="icon" alt="Photos/Video"/><?
+    }
+    elseif ($interest == "Literature") {
+        ?><img src="/post-icons/literature.jpg" class="icon" alt="Photos/Video"/><?
+    }
+    elseif ($interest == "Magic") {
+        ?><img src="/post-icons/magic.jpg" class="icon" alt="Photos/Video"/><?
+    }
+    elseif ($interest == "Miscellaneous") {
+        ?><img src="/post-icons/miscellaneous.jpg" class="icon" alt="Photos/Video"/><?
+    }
+    elseif ($interest == "Model") {
+        ?><img src="/post-icons/model.png" class="icon" alt="Photos/Video"/><?
+    }
+    elseif ($interest == "Night Life") {
+        ?><img src="/post-icons/night-life.png" class="icon" alt="Photos/Video"/><?
+    }
+    elseif ($interest == "Photography") {
+         ?><img src="/post-icons/photo.png" class="icon" alt="Photos/Video"/><?
+    }
+    elseif ($interest == "Pop") {
+        ?><img src="/post-icons/pop.jpeg" class="icon" alt="Photos/Video"/><?
+    }
+    elseif ($interest == "Question") {
+        ?><img src="/post-icons/question-mark.jpeg" class="icon" alt="Photos/Video"/><?
+    }
+    elseif ($interest == "R&B") {
+        ?><img src="/post-icons/r&b.png" class="icon" alt="Photos/Video"/><?
+    }
+    elseif ($interest == "Rap") {
+        ?><img src="/post-icons/rap.png" class="icon" alt="Photos/Video"/><?
+    }
+    elseif ($interest == "Recreation") {
+        ?><img src="/post-icons/recreation.jpg" class="icon" alt="Photos/Video"/><?
+    }
+    elseif ($interest == "Sports") {
+        ?><img src="/post-icons/sports.png" class="icon" alt="Photos/Video"/><?
+    }
+    elseif ($interest == "Technology") {
+        ?><img src="/post-icons/technology.png" class="icon" alt="Photos/Video"/><?
+    }
+    elseif ($interest == "Theatrical") {
+        ?><img src="/post-icons/theatrical.png" class="icon" alt="Photos/Video"/><?
+    }
 }

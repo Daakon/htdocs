@@ -6,6 +6,7 @@ require 'html_functions.php';
 require 'mediaPath.php';
 require 'findURL.php';
 require 'model_functions.php';
+require 'category.php';
 get_head_files();
 get_header();
 require 'memory_settings.php';
@@ -444,6 +445,9 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                     size="4"><?php echo $name ?></font></b>
 
             <div class="post"><?php echo nl2br($post); ?></div>
+
+            <br/>
+            <a href='/post-interest.php?interest=<?php echo urlencode($category) ?>' class='category'><h5><?php echo $category ." ". interestIcon($category) ?></h5></a>
 
             <!--DELETE BUTTON ------------------>
             <form action="" method="post" onsubmit="return confirm('Do you really want to delete this post?')">

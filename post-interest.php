@@ -752,14 +752,14 @@ if (mysql_numrows($result) > 0) {
                     </div>
                     <?php
                     echo "<div id='long$postID' style='display:none;'>";
-                    echo nl2br($post);
-                    echo "<br/><br/><a href='/post-cat.php?cat=$category' class='category' >$category</a>";
-                    echo "</div>";
+                    echo nl2br($post);?>
+                    <br/><br/><a href='/post-interest.php?interest=<?php echo urlencode($category) ?>' class='category'><h5><?php echo $category ." ". interestIcon($category) ?></h5></a>
+                    <?php echo "</div>";
                 }
                 else {
-                    echo nl2br($post);
-                    echo "<br/><br/><a href='/post-cat.php?cat=$category' class='category' >$category</a>";
-                }
+                    echo nl2br($post); ?>
+                    <br/><br/><a href='/post-interest.php?interest=<?php echo urlencode($category) ?>' class='category'><h5><?php echo $category ." ". interestIcon($category) ?></h5></a>
+                <?php }
                 echo '<br/><br/>';
                 ?>
 

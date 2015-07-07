@@ -603,6 +603,8 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
             </div>
 
 
+            <a href='/post-interest.php?interest=<?php echo urlencode($category) ?>' class='category'><h5><?php echo $category ." ". interestIcon($category) ?></h5></a>
+
             <?php
 
             //check if member has approved this post

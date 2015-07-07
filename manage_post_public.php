@@ -6,7 +6,7 @@ require 'html_functions.php';
 require 'mediaPath.php';
 require 'model_functions.php';
 require 'findURL.php';
-
+require 'category.php';
 get_head_files();
 get_header();
 require 'memory_settings.php';
@@ -456,6 +456,8 @@ if (isset($_POST['Delete']) && $_POST['Delete'] == "Delete") {
             <div class="post"><?php echo nl2br($post); ?></div>
 
 
+            <a href='/post-interest.php?interest=<?php echo urlencode($category) ?>' class='category'><h5><?php echo $category ." ". interestIcon($category) ?></h5></a>
+            <br/>
             <!------------------------------------->
 
             <?php
