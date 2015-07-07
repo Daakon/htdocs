@@ -111,7 +111,7 @@ function age() {
 
 }
 
-function interestIcon($interest) {
+function interestGlyphs($interest) {
 
     $path = "/post-glyphs/";
 

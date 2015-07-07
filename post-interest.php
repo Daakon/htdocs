@@ -753,12 +753,12 @@ if (mysql_numrows($result) > 0) {
                     <?php
                     echo "<div id='long$postID' style='display:none;'>";
                     echo nl2br($post);?>
-                    <a href='/post-interest.php?interest=<?php echo urlencode($category) ?>' class='category'><h5><?php echo $category ." ". interestIcon($category) ?></h5></a>
+                    <a href='/post-interest.php?interest=<?php echo urlencode($category) ?>' class='category'><h5><?php echo $category ." ". interestGlyphs($category) ?></h5></a>
                     <?php echo "</div>";
                 }
                 else {
                     echo nl2br($post); ?>
-                    <a href='/post-interest.php?interest=<?php echo urlencode($category) ?>' class='category'><h5><?php echo $category ." ". interestIcon($category) ?></h5></a>
+                    <a href='/post-interest.php?interest=<?php echo urlencode($category) ?>' class='category'><h5><?php echo $category ." ". interestGlyphs($category) ?></h5></a>
                 <?php }
                 echo '<br/>';
                 ?>

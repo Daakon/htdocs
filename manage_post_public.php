@@ -456,7 +456,7 @@ if (isset($_POST['Delete']) && $_POST['Delete'] == "Delete") {
             <div class="post"><?php echo nl2br($post); ?></div>
 
 
-            <a href='/post-interest.php?interest=<?php echo urlencode($category) ?>' class='category'><h5><?php echo $category ." ". interestIcon($category) ?></h5></a>
+            <a href='/post-interest.php?interest=<?php echo urlencode($category) ?>' class='category'><h5><?php echo $category ." ". interestGlyphs($category) ?></h5></a>
             <br/>
             <!------------------------------------->
 
