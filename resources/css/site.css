@@ -314,3 +314,67 @@ audio {
     width: auto;
     padding-right:5px;
 }
+
+html, body {
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+}
+iframe {
+    max-width: 100%;
+    width:500px;
+    max-height: 500px;
+}
+
+img {
+    max-width: 100%;
+    max-height:500px;
+}
+
+video {
+    max-width: 100%;
+    width:500px;
+    max-height: 500px;
+}
+
+embed {
+    max-width: 100%;
+    max-height: 500px;
+}
+
+script {
+    max-width: 100%;
+    max-height: 500px;
+}
+
+.btnApprove {
+    background: url("/images/gray_check.png") no-repeat;
+    width: 30px;
+    height: 30px;
+    border: none;
+}
+
+.btnDisapprove {
+    background: url("/images/red_check.png") no-repeat;
+    width: 30px;
+    height: 30px;
+    border: none;
+}
+
+.enlarge-onhover {
+    width: 50px;
+    height: 50px;
+}
+
+.enlarge-onhover:hover {
+    width: 100px;
+    height: 100px;
+    position: inherit;
+
+    margin-top: 0px;
+    margin-left: 0px;
+
+}
+
+a {
+    word-wrap:break-word
+}
