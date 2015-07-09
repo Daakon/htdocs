@@ -608,6 +608,21 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
             }
         </script>
 
+<style>
+.btnApprove {
+    background: url("/images/gray_check.png") no-repeat;
+    width: 30px;
+    height: 30px;
+    border: none;
+}
+
+.btnDisapprove {
+    background: url("/images/red_check.png") no-repeat;
+    width: 30px;
+    height: 30px;
+    border: none;
+}
+</style>
 
 <body>
 
