@@ -1,3 +1,8 @@
+<!------------------------------------------------------
+ALWAYS COMPRESS THIS FILE BEFORE PUSHING TO PRODUCTION
+IT WILL INCREASE THE RENDERING TIME OF HTML ELEMENTS
+------------------------------------------------------->
+
 <?php
 require 'connect.php';
 // compress the page

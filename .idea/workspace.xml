@@ -5,8 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="51867226-c8dd-43fb-9a46-7c8a9e9ab742" name="Default" comment="Added media page.&#10;&#10;">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/category.php" afterPath="$PROJECT_DIR$/category.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/home.php" afterPath="$PROJECT_DIR$/home.php" />
     </list>
     <ignored path="htdocs.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -36,7 +35,47 @@
     <favorites_list name="htdocs" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="home.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/home.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.10344828" vertical-offset="0" max-vertical-offset="19969">
+              <caret line="3" column="53" selection-start-line="3" selection-start-column="53" selection-end-line="3" selection-end-column="53" />
+              <folding>
+                <marker date="1436446940000" expanded="true" signature="5930:6128" placeholder="INSERT INTO ..." />
+                <marker date="1436446940000" expanded="true" signature="6314:6364" placeholder="SELECT * FRO..Media..." />
+                <marker date="1436446940000" expanded="true" signature="6926:7133" placeholder="..." />
+                <marker date="1436446940000" expanded="true" signature="10430:10620" placeholder="INSERT INTO ..." />
+                <marker date="1436446940000" expanded="true" signature="10839:10920" placeholder="UPDATE Media..." />
+                <marker date="1436446940000" expanded="true" signature="11090:11255" placeholder="INSERT INTO ..." />
+                <marker date="1436446940000" expanded="true" signature="16574:16777" placeholder="INSERT INTO ..." />
+                <marker date="1436446940000" expanded="true" signature="16913:16963" placeholder="SELECT * FRO..Media..." />
+                <marker date="1436446940000" expanded="true" signature="17525:17732" placeholder="..." />
+                <marker date="1436446940000" expanded="true" signature="20576:20735" placeholder="INSERT INTO ..." />
+                <marker date="1436446940000" expanded="true" signature="20887:20955" placeholder="SELECT ID, F..Members..." />
+                <marker date="1436446940000" expanded="true" signature="21391:21430" placeholder="SELECT Membe..Posts..." />
+                <marker date="1436446940000" expanded="true" signature="21651:21716" placeholder="SELECT ID, F..Members..." />
+                <marker date="1436446940000" expanded="true" signature="22737:22882" placeholder="INSERT INTO ..." />
+                <marker date="1436446940000" expanded="true" signature="23095:23165" placeholder="UPDATE Media..." />
+                <marker date="1436446940000" expanded="true" signature="23379:23521" placeholder="INSERT INTO ..." />
+                <marker date="1436446940000" expanded="true" signature="23949:24000" placeholder="SELECT Membe..PostComments..." />
+                <marker date="1436446940000" expanded="true" signature="24911:24959" placeholder="SELECT Membe..Posts..." />
+                <marker date="1436446940000" expanded="true" signature="25709:25760" placeholder="Update PostC..." />
+                <marker date="1436446940000" expanded="true" signature="33137:33726" placeholder="SELECT DISTI..Members..." />
+                <marker date="1436446940000" expanded="true" signature="35269:35282" placeholder="..." />
+                <marker date="1436446940000" expanded="true" signature="35848:35924" placeholder="SELECT ID FR..PostApprovals..." />
+                <marker date="1436446940000" expanded="true" signature="36122:36175" placeholder="SELECT * FRO..PostApprovals..." />
+                <marker date="1436446940000" expanded="true" signature="36739:36778" placeholder="..." />
+                <marker date="1436446940000" expanded="true" signature="37229:37268" placeholder="..." />
+                <marker date="1436446940000" expanded="true" signature="39578:40364" placeholder="SELECT DISTI..PostComments..." />
+                <marker date="1436446940000" expanded="true" signature="41036:41058" placeholder="..." />
+                <marker date="1436446940000" expanded="true" signature="42192:42983" placeholder="SELECT DISTI..PostComments..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -93,8 +132,8 @@
         <option value="$PROJECT_DIR$/roll-call-sql.php" />
         <option value="$PROJECT_DIR$/media_sizes.html" />
         <option value="$PROJECT_DIR$/resources/css/site.css" />
-        <option value="$PROJECT_DIR$/home.php" />
         <option value="$PROJECT_DIR$/category.php" />
+        <option value="$PROJECT_DIR$/home.php" />
       </list>
     </option>
   </component>
@@ -165,7 +204,7 @@
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="full.screen.before.presentation.mode" value="false" />
     <property name="FullScreen" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/category.php" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/home.php" />
     <property name="LayoutCode.rearrangeEntriesPHP" value="false" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="191" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
@@ -233,20 +272,17 @@
     <configuration default="true" type="PhpLocalRunConfigurationType" factoryName="PHP Console">
       <method />
     </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
     <configuration default="true" type="com.intellij.database.run.ConsoleRunConfigurationType" factoryName="Query Language Console">
       <option name="VM_PARAMETERS" value="" />
       <option name="USER_CFG_CLASS" />
       <option name="CONTEXT_PROVIDER" />
       <method />
     </configuration>
-    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
-      <method />
-    </configuration>
     <configuration default="true" type="PhpBehatConfigurationType" factoryName="Behat">
       <BehatRunner />
-      <method />
-    </configuration>
-    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server">
       <method />
     </configuration>
     <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
@@ -256,6 +292,9 @@
       <arguments />
       <pass-parent-envs>true</pass-parent-envs>
       <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server">
       <method />
     </configuration>
     <list size="4">
@@ -337,7 +376,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="14" y="23" width="1243" height="715" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -351,14 +390,14 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32889965" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32769045" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32769045" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3956044" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33893558" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24546553" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.46935484" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.46935484" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24546553" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -418,7 +457,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/home.php</url>
-          <line>172</line>
+          <line>177</line>
           <option name="timeStamp" value="14" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
@@ -443,7 +482,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/home.php</url>
-          <line>59</line>
+          <line>64</line>
           <option name="timeStamp" value="20" />
         </line-breakpoint>
       </breakpoints>
@@ -782,29 +821,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/home.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.87477314" vertical-offset="11393" max-vertical-offset="19874">
-          <caret line="625" column="0" selection-start-line="625" selection-start-column="0" selection-end-line="625" selection-end-column="0" />
-          <folding>
-            <element signature="e#30636#30657#0#HTML" expanded="false" />
-            <element signature="e#30875#30894#0#HTML" expanded="false" />
-            <element signature="e#33698#33781#0#HTML" expanded="false" />
-            <element signature="e#34293#34376#0#HTML" expanded="false" />
-            <element signature="e#37391#37452#0#HTML" expanded="false" />
-            <element signature="e#37770#37800#0#HTML" expanded="false" />
-            <element signature="e#37828#37845#0#HTML" expanded="false" />
-            <element signature="e#37977#38001#0#HTML" expanded="false" />
-            <element signature="e#38082#38103#0#HTML" expanded="false" />
-            <element signature="e#38323#38343#0#HTML" expanded="false" />
-            <element signature="e#38600#38630#0#HTML" expanded="false" />
-            <element signature="e#43086#43107#0#HTML" expanded="false" />
-            <element signature="e#45269#45307#0#HTML" expanded="false" />
-            <element signature="e#45607#45640#0#HTML" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/profile.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.37931034" vertical-offset="1710" max-vertical-offset="13908">
@@ -817,7 +833,43 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.26950353" vertical-offset="171" max-vertical-offset="4332">
           <caret line="17" column="54" selection-start-line="17" selection-start-column="54" selection-end-line="17" selection-end-column="54" />
-          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/home.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.10344828" vertical-offset="0" max-vertical-offset="19969">
+          <caret line="3" column="53" selection-start-line="3" selection-start-column="53" selection-end-line="3" selection-end-column="53" />
+          <folding>
+            <marker date="1436446940000" expanded="true" signature="5930:6128" placeholder="INSERT INTO ..." />
+            <marker date="1436446940000" expanded="true" signature="6314:6364" placeholder="SELECT * FRO..Media..." />
+            <marker date="1436446940000" expanded="true" signature="6926:7133" placeholder="..." />
+            <marker date="1436446940000" expanded="true" signature="10430:10620" placeholder="INSERT INTO ..." />
+            <marker date="1436446940000" expanded="true" signature="10839:10920" placeholder="UPDATE Media..." />
+            <marker date="1436446940000" expanded="true" signature="11090:11255" placeholder="INSERT INTO ..." />
+            <marker date="1436446940000" expanded="true" signature="16574:16777" placeholder="INSERT INTO ..." />
+            <marker date="1436446940000" expanded="true" signature="16913:16963" placeholder="SELECT * FRO..Media..." />
+            <marker date="1436446940000" expanded="true" signature="17525:17732" placeholder="..." />
+            <marker date="1436446940000" expanded="true" signature="20576:20735" placeholder="INSERT INTO ..." />
+            <marker date="1436446940000" expanded="true" signature="20887:20955" placeholder="SELECT ID, F..Members..." />
+            <marker date="1436446940000" expanded="true" signature="21391:21430" placeholder="SELECT Membe..Posts..." />
+            <marker date="1436446940000" expanded="true" signature="21651:21716" placeholder="SELECT ID, F..Members..." />
+            <marker date="1436446940000" expanded="true" signature="22737:22882" placeholder="INSERT INTO ..." />
+            <marker date="1436446940000" expanded="true" signature="23095:23165" placeholder="UPDATE Media..." />
+            <marker date="1436446940000" expanded="true" signature="23379:23521" placeholder="INSERT INTO ..." />
+            <marker date="1436446940000" expanded="true" signature="23949:24000" placeholder="SELECT Membe..PostComments..." />
+            <marker date="1436446940000" expanded="true" signature="24911:24959" placeholder="SELECT Membe..Posts..." />
+            <marker date="1436446940000" expanded="true" signature="25709:25760" placeholder="Update PostC..." />
+            <marker date="1436446940000" expanded="true" signature="33137:33726" placeholder="SELECT DISTI..Members..." />
+            <marker date="1436446940000" expanded="true" signature="35269:35282" placeholder="..." />
+            <marker date="1436446940000" expanded="true" signature="35848:35924" placeholder="SELECT ID FR..PostApprovals..." />
+            <marker date="1436446940000" expanded="true" signature="36122:36175" placeholder="SELECT * FRO..PostApprovals..." />
+            <marker date="1436446940000" expanded="true" signature="36739:36778" placeholder="..." />
+            <marker date="1436446940000" expanded="true" signature="37229:37268" placeholder="..." />
+            <marker date="1436446940000" expanded="true" signature="39578:40364" placeholder="SELECT DISTI..PostComments..." />
+            <marker date="1436446940000" expanded="true" signature="41036:41058" placeholder="..." />
+            <marker date="1436446940000" expanded="true" signature="42192:42983" placeholder="SELECT DISTI..PostComments..." />
+          </folding>
         </state>
       </provider>
     </entry>
