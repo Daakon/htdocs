@@ -15,6 +15,9 @@ get_header();
 require 'memory_settings.php';
 $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 $ID = $_SESSION['ID'];
+
+
+
 // handle roll call post
 $post = mysql_real_escape_string($_POST['post']);
 $category = $_POST['category'];
@@ -26,6 +29,7 @@ if (isset($_POST['submit'])) {
         echo "<script>alert('Your post needs a category');</script>";
     }
     else {
+
         if (strlen($post) > 0) {
             $post = makeLinks($post);
             // if photo is provided
@@ -34,6 +38,7 @@ if (isset($_POST['submit'])) {
                 if ($_FILES['flPostMedia']['size'] > 2500000000) {
                     exit();
                 }
+
                 // create media type arrays
                 $videoFileTypes = array("video/mpeg", "video/mpg", "video/ogg", "video/mp4",
                     "video/quicktime", "video/webm", "video/x-matroska",
@@ -81,11 +86,13 @@ if (isset($_POST['submit'])) {
                         exit;*/
                     }
                 }
+
                 require 'media_post_file_path.php';
 // save photo/video
                 if (in_array($type, $videoFileTypes) || in_array($type, $audioFileTypes)) {
                     move_uploaded_file($mediaFile, $postMediaFilePath);
                 } else {
+
                     if (in_array($type, $photoFileTypes)) {
                         // read exif data
                         $exif = @exif_read_data($mediaFile);
@@ -104,6 +111,7 @@ if (isset($_POST['submit'])) {
                             }
                         }
                     }
+                    echo "<script>alert('test');</script>";
                     // handle transparency
                     imagesavealpha($src, true);
                     if ($type == "image/jpg" || $type == "image/jpeg") {
@@ -145,7 +153,7 @@ if (isset($_POST['submit'])) {
                         $img = '<a href = "media.php?id=' . $ID . '&mediaName=' . $mediaName . '&mid=' . $mediaID . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '" ><br/>'.$img.'</a><br/><br/>';
                     }
                     if (in_array($type, $photoFileTypes)) {
-                        $img = '<img src = "' . $mediaPath . $mediaName . '" class="img-responsive"/>';
+                        $img = '<img src = "' . $mediaPath . $mediaName . '" />';
                         $img = '<a href = "media.php?id=' . $ID . '&mid=' . $mediaID . '&mediaName=' . $media . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '">' . $img . '</a>';
                     } // check if file type is a video
                     if (in_array($type, $videoFileTypes)) {
@@ -218,7 +226,7 @@ if (isset($_POST['submit'])) {
             }
         }
     }
-    header('Location:home.php');
+    echo "<script>location='/home.php'</script>";
 }
 ?>
 
@@ -353,7 +361,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                         $img = '<a href = "media.php?id=' . $ID . '&mediaName=' . $mediaName . '&mid=' . $mediaID . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '" ><br/>'.$img.'</a><br/><br/>';
                     }
                     if (in_array($type, $photoFileTypes)) {
-                        $img = '<img src = "' . $mediaPath . $mediaName .'" class="img-responsive"/>';
+                        $img = '<img src = "' . $mediaPath . $mediaName .'" />';
                         $img = '<a href = "media.php?id=' . $ID . '&mid=' . $mediaID . '&mediaName=' . $media . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '">' . $img . '</a>';
                     } // check if file type is a video
                     elseif (in_array($type, $videoFileTypes)) {
@@ -490,7 +498,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 //BELOW IS END OF POST COMMENT HANDLING CODE ==========================================================================//
         }
     }
-    header('Location:home.php');
+    echo "<script>location='/home.php'</script>";
 }
 if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
     $commentID = $_POST['commentID'];
@@ -608,12 +616,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
 <div class="container">
 <?php
-// ad demographics
-$age = getAge($ID);
-$state =  getState($ID);
-$interests = getInterests($ID);
-$interests = strtolower($interests);
-$gender = getGender($ID);
+
 ?>
 
     <div class="row row-padding">
@@ -678,6 +681,13 @@ var j =document.getElementsByTagName('script')[0];j.parentNode.insertBefore(s,j)
 
 
     <?php
+// ad demographics
+$age = getAge($ID);
+$state =  getState($ID);
+$interests = getInterests($ID);
+$interests = strtolower($interests);
+$gender = getGender($ID);
+// pre-load Roll Call
 // get genre selection
 $genre = $_GET['genre'];
 if (!empty($genre) && $genre != "Show-All") {
@@ -703,7 +713,7 @@ if (!empty($queryName)) {
 }
 else { $memberCondition = ""; }
 $ads = getAds($genre, $age, $state, $interests, $gender);
-$sql = " SELECT DISTINCT
+$sqlRollCall = " SELECT DISTINCT
     Members.ID As MemberID,
     Members.FirstName As FirstName,
     Members.LastName As LastName,
@@ -725,17 +735,18 @@ $sql = " SELECT DISTINCT
     $ads
     Group By PostID
     Order By PostID DESC ";
-$result = mysql_query($sql) or die(mysql_error());
+$rollCallResult = mysql_query($sqlRollCall) or die(mysql_error());
+
 // if no results
-if (mysql_num_rows($result) == 0) {
+if (mysql_num_rows($rollCallResult) == 0) {
     ?>
     <div class=" col-lg-9 col-md-9 roll-call"
          style="background:white;border-radius:10px;margin-top:20px;border:2px solid black;" align="left">
         No Results
     </div>
 <?php }
-if (mysql_num_rows($result) > 0) {
-    while ($rows = mysql_fetch_assoc($result)) {
+if (mysql_num_rows($rollCallResult) > 0) {
+    while ($rows = mysql_fetch_assoc($rollCallResult)) {
         $memberID = $rows['MemberID'];
         $name = $rows['FirstName'] . ' ' . $rows['LastName'];
         $profilePhoto = $rows['ProfilePhoto'];
@@ -751,15 +762,14 @@ if (mysql_num_rows($result) > 0) {
         <div class=" col-lg-9 col-md-9 roll-call "
         style="background:white;border-radius:10px;margin-top:20px;border:2px solid black;" align="left">
 
-        <img src="<?php echo $mediaPath. $profilePhoto ?>" class="profilePhoto-Feed" alt=""
-             title="<?php echo $name ?>" class='enlarge-onhover img-responsive'/> &nbsp <b><font
-                size="4"><?php echo $name ?></font></b>
+        <img src="<?php echo $mediaPath. $profilePhoto ?>" class="profilePhoto-Feed enlarge-onhover " alt=""
+             title="<?php echo $name ?>" /> &nbsp <b><font size="4"><?php echo $name ?></font></b>
 
 
         <div class="post">
             <?php
             if (strlen($post) > 700) {
-                $post500 = mb_substr($post, 0, 700); ?>
+                $post500 = substr($post, 0, 700); ?>
 
                 <div id="short<?php echo $postID ?>">
                     <?php echo nl2br($post500) ?>...<a href="javascript:showPost('long<?php echo $postID ?>', 'short<?php echo $postID ?>');">Show More</a>
@@ -986,20 +996,12 @@ if (mysql_num_rows($rightColResult) > 0) { ?>
         </div>
 
 
-
-
-
 </div> <!--Middle Column -->
-
-
 
     </div>
 
 
     <br/><br/>
-
-
-
 
             </div>
 

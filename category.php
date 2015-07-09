@@ -15,6 +15,7 @@ function category()
     echo '<option value = "Dance">Dance</option>';
     echo '<option value = "Education">Education</option>';
     echo '<option value = "Event">Event</option>';
+    echo '<option value = "Fashion">Fashion</option>';
     echo '<option value = "Film">Film</option>';
     echo '<option value = "Fitness">Fitness</option>';
     echo '<option value = "Literature">Literature</option>';
@@ -32,6 +33,8 @@ function category()
     echo '<option value = "Sports">Sports</option>';
     echo '<option value = "Technology">Technology</option>';
     echo '<option value = "Theatrical">Theatrical</option>';
+    echo '<option value = "TV">TV</option>';
+    echo '<option value = "Video Game">Video Game</option>';
 }
 
 function age() {
@@ -137,7 +140,7 @@ function interestGlyphs($interest) {
         ?><img src="<?php echo $path ?>comedy.jpg" class="icon" alt="Photos/Video"/><?
     }
     elseif ($interest == "Cosmetology") {
-        ?><img src="<?php echo $path ?>cosmetology.png" class="icon" alt="Photos/Video"/><?
+        ?><img src="<?php echo $path ?>cosmetology.jpg" class="icon" alt="Photos/Video"/><?
     }
     elseif ($interest == "Country") {
         ?><img src="<?php echo $path ?>country.jpeg" class="icon" alt="Photos/Video"/><?
@@ -156,6 +159,9 @@ function interestGlyphs($interest) {
     }
     elseif ($interest == "Event") {
         ?><img src="<?php echo $path ?>event.png" class="icon" alt="Photos/Video"/><?
+    }
+    elseif ($interest == "Fashion") {
+        ?><img src="<?php echo $path ?>fashion.png" class="icon" alt="Photos/Video"/><?
     }
     elseif ($interest == "Film") {
         ?><img src="<?php echo $path ?>film.png" class="icon" alt="Photos/Video"/><?
@@ -196,6 +202,9 @@ function interestGlyphs($interest) {
     elseif ($interest == "Recreation") {
         ?><img src="<?php echo $path ?>recreation.jpg" class="icon" alt="Photos/Video"/><?
     }
+    elseif ($interest == "Social") {
+        ?><img src="<?php echo $path ?>social.png" class="icon" alt="Photos/Video"/><?
+    }
     elseif ($interest == "Sports") {
         ?><img src="<?php echo $path ?>sports.png" class="icon" alt="Photos/Video"/><?
     }
@@ -204,5 +213,11 @@ function interestGlyphs($interest) {
     }
     elseif ($interest == "Theatrical") {
         ?><img src="<?php echo $path ?>theatrical.png" class="icon" alt="Photos/Video"/><?
+    }
+    elseif ($interest == "TV") {
+        ?><img src="<?php echo $path ?>tv.png" class="icon" alt="Photos/Video"/><?
+    }
+    elseif ($interest == "Video Game") {
+        ?><img src="<?php echo $path ?>video-game.png" class="icon" alt="Photos/Video"/><?
     }
 }
