@@ -16,12 +16,12 @@ function category()
     echo '<option value = "Education">Education</option>';
     echo '<option value = "Event">Event</option>';
     echo '<option value = "Fashion">Fashion</option>';
-    echo '<option value = "Film">Film</option>';
     echo '<option value = "Fitness">Fitness</option>';
     echo '<option value = "Literature">Literature</option>';
     echo '<option value = "Magic">Magic</option>';
     echo '<option value = "Miscellaneous">Miscellaneous</option>';
     echo '<option value = "Model">Model</option>';
+    echo '<option value = "Movie">Movie</option>';
     echo '<option value = "Night Life">Night Life</option>';
     echo '<option value = "Photography">Photography</option>';
     echo '<option value = "Pop">Pop</option>';
@@ -163,7 +163,7 @@ function interestGlyphs($interest) {
     elseif ($interest == "Fashion") {
         ?><img src="<?php echo $path ?>fashion.png" class="icon" alt="Photos/Video"/><?
     }
-    elseif ($interest == "Film") {
+    elseif ($interest == "Movie") {
         ?><img src="<?php echo $path ?>film.png" class="icon" alt="Photos/Video"/><?
     }
     elseif ($interest == "Fitness") {
