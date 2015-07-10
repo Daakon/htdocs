@@ -544,11 +544,8 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
 
     <div class="row row-padding">
-        <?php if (!isset($_GET['email'])) {?>
-        <ul class="list-inline">
-            <li><a href="javascript:history.back();">Go Back</a></li>
-        </ul>
-<?php } ?>
+
+        <a href = "/home.php">Go to Roll Call</a>
 
     <?php
     $postID = $_GET['postID'];
