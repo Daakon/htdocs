@@ -366,3 +366,17 @@ script {
 a {
     word-wrap:break-word
 }
+
+.btnApprove {
+    background: url("/images/gray_check.png") no-repeat;
+    width: 30px;
+    height: 30px;
+    border: none;
+}
+
+.btnDisapprove {
+    background: url("/images/red_check.png") no-repeat;
+    width: 30px;
+    height: 30px;
+    border: none;
+}

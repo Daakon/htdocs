@@ -9,7 +9,7 @@ function get_head_files()
     <html xmlns="http://www.w3.org/1999/xhtml">
     <head lang="<?php echo $str_language; ?>" xml:lang="<?php echo $str_language; ?>">
         <meta name="description" content="Rapportbook is a platform that lets individuals share their interests with the world.
-        Post photos, videos & music, network and much more. It's free to Join!">
+        Post photos, videos & music, network and much more. It's free to Join! Click here to checkout content on Rapportbook">
         <meta name="keywords" content="networking, promotion, advertise, photos, videos, messaging">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta http-equiv="content-type" content="text/html; charset=utf-8"/>

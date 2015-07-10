@@ -402,7 +402,7 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == "Submit AD") {
 
                 <h3 style="color:green;">Create An Ad </h3>
 
-                <img src="<?php echo $images ?>bullseye.png" style="margin-top:-50px;margin-bottom:-50px;" />
+                <img src="<?php echo $imagesPath ?>bullseye.png" style="margin-top:-50px;margin-bottom:-50px;" />
 
                 <form id="" method="post" enctype="multipart/form-data" action = "" onsubmit="return checkAd()" >
 

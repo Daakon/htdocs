@@ -675,7 +675,7 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
         <!--Right Column -->
         <div class="col-md-3 col-lg-3 col-md-offset-9 col-lg-offset-9 ad-desktop hidden-sm hidden-xs " >
             <h3><a href="advertising.php">Advertise
-                    <img src="<?php echo $images ?>ad-pic.jpg" style="border-bottom:1px solid black;" />
+                    <img src="<?php echo $imagesPath ?>ad-pic.jpg" style="border-bottom:1px solid black;" />
                 </a></h3>
             <?php
             require 'ads.php';

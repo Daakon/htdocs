@@ -467,12 +467,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 }
 ?>
 
-<?php include('media_sizes.html'); ?>
 
-
-<style>
-
-</style>
 
 <script type="text/javascript">
     function saveScrollPositions(theForm) {
@@ -580,6 +575,10 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
     $result = mysql_query($sql) or die(mysql_error());
 
+    if (mysql_numrows($result) == 0) {
+        echo "<h1>This post no longer exists</h1>";
+        echo '<image src = "'.$imagesPath.'/sad-emoticon.png" height="150" width="150"/>';
+    }
 
     if (mysql_numrows($result) > 0) {
     while ($rows = mysql_fetch_assoc($result)) {

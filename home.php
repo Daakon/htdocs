@@ -52,7 +52,7 @@ if (isset($_POST['submit'])) {
                 $photoFileTypes = array("image/jpg", "image/jpeg", "image/png", "image/tiff",
                     "image/gif", "image/raw");
 
-                $audioFileTypes = array("audio/wav", "audio/mp3");
+                $audioFileTypes = array("audio/wav", "audio/mp3", "audio/x-m4a");
 
                 // add unique id to image name to make it unique and add it to the file server
                 $mediaName = $_FILES["flPostMedia"]["name"];
@@ -116,7 +116,7 @@ if (isset($_POST['submit'])) {
                             }
                         }
                     }
-                    echo "<script>alert('test');</script>";
+
                     // handle transparency
                     imagesavealpha($src, true);
                     if ($type == "image/jpg" || $type == "image/jpeg") {
@@ -613,21 +613,6 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
             }
         </script>
 
-<style>
-.btnApprove {
-    background: url("/images/gray_check.png") no-repeat;
-    width: 30px;
-    height: 30px;
-    border: none;
-}
-
-.btnDisapprove {
-    background: url("/images/red_check.png") no-repeat;
-    width: 30px;
-    height: 30px;
-    border: none;
-}
-</style>
 
 <body>
 
@@ -844,6 +829,17 @@ if (mysql_num_rows($rollCallResult) > 0) {
         //-----------------------------------------------------------
         ?>
 
+            <!--Share Post to other social media -->
+            <br/>
+            <?php
+            $showPostURL = "http://rapportbook.com/show_post.php?postID=$postID";
+            $twitterLogo = "<img src='/images/twitter-logo-red.png' height='50px' width='50px' alt='Twitter'/>";
+            $facebookLogo = "<img src='/images/facebook-logo-red.png' height='50px' width='50px' alt='Facebook'/>";
+            ?>
+            Share This Post:
+            <a href = "http://twitter.com/share?text=<?php echo strip_tags($post) ?>&url=<?php echo $showPostURL ?>&hashtags=Rapportbook" target="_blank"><?php echo $twitterLogo ?></a>
+            <a href="http://www.facebook.com/sharer/sharer.php?t=<?php echo strip_tags($post) ?>&u=<?php echo $showPostURL ?>" target="_blank"><?php echo $facebookLogo ?></a>
+
         <div style="padding-top:10px;padding-bottom:10px;margin-top:10px;">
             <form method="post" action="" enctype="multipart/form-data"
                   onsubmit="showCommentUploading('comment<?php echo $postID?>', this);">
@@ -990,7 +986,7 @@ if (mysql_num_rows($rollCallResult) > 0) {
 <!--Right Column -->
         <div class="col-md-3 col-lg-3 col-md-offset-9 col-lg-offset-9 ad-desktop hidden-sm hidden-xs rightColumn" >
         <h3><a href="advertising.php">Advertise
-        <img src="<?php echo $images ?>ad-pic.jpg" style="border-bottom:1px solid black;" />
+        <img src="<?php echo $imagesPath ?>ad-pic.jpg" style="border-bottom:1px solid black;" />
         </a></h3>
         <?php
 $rightColumnAds = getRightColumnAds($genre, $age, $state, $interests);

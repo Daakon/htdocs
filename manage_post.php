@@ -449,6 +449,19 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
             <br/>
             <a href='/post-interest.php?interest=<?php echo urlencode($category) ?>' class='category'><h5><?php echo $category ." ". interestGlyphs($category) ?></h5></a>
 
+            <!--Share Post to other social media -->
+            <br/>
+            <?php
+            $showPostURL = "http://rapportbook.com/show_post.php?postID=$postID";
+            $twitterLogo = "<img src='/images/twitter-logo-red.png' height='50px' width='50px' alt='Twitter'/>";
+            $facebookLogo = "<img src='/images/facebook-logo-red.png' height='50px' width='50px' alt='Facebook'/>";
+            ?>
+            Share This Post:
+            <a href = "http://twitter.com/share?text=<?php echo strip_tags($post) ?>&url=<?php echo $showPostURL ?>&hashtags=Rapportbook" target="_blank"><?php echo $twitterLogo ?></a>
+            <a href="http://www.facebook.com/sharer/sharer.php?t=<?php echo strip_tags($post) ?>&u=<?php echo $showPostURL ?>" target="_blank"><?php echo $facebookLogo ?></a>
+
+            <br/><br/>
+
             <!--DELETE BUTTON ------------------>
             <form action="" method="post" onsubmit="return confirm('Do you really want to delete this post?')">
                 <input type="hidden" name="postID" id="postID" value="<?php echo $postID ?>" />
