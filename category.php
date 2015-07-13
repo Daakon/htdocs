@@ -3,6 +3,7 @@ function category()
 {
     echo '<option value = "Art">Art</option>';
     echo '<option value = "Alternative">Alternative</option>';
+    echo '<option value = "Auto">Auto</option>';
     echo '<option value = "Announcement">Announcement</option>';
     echo '<option value = "Business">Business</option>';
     echo '<option value = "Christian">Christian</option>';
@@ -10,13 +11,15 @@ function category()
     echo '<option value = "Comedy">Comedy</option>';
     echo '<option value = "Cosmetology">Cosmetology</option>';
     echo '<option value = "Country">Country</option>';
-    echo '<option value = "Culinary">Culinary</option>';
     echo '<option value = "Design">Design</option>';
     echo '<option value = "Dance">Dance</option>';
     echo '<option value = "Education">Education</option>';
     echo '<option value = "Event">Event</option>';
     echo '<option value = "Fashion">Fashion</option>';
     echo '<option value = "Fitness">Fitness</option>';
+    echo '<option value = "Food & Drink">Food & Drink</option>';
+    echo '<option value = "For Sale">For Sale</option>';
+    echo '<option value = "Help Wanted">Help Wanted</option>';
     echo '<option value = "Literature">Literature</option>';
     echo '<option value = "Magic">Magic</option>';
     echo '<option value = "Miscellaneous">Miscellaneous</option>';
@@ -29,6 +32,7 @@ function category()
     echo '<option value = "R&B">R&B</option>';
     echo '<option value = "Rap">Rap</option>';
     echo '<option value = "Recreation">Recreation</option>';
+    echo '<option value = "Restaurant">Restaurant</option>';
     echo '<option value = "Social">Social</option>';
     echo '<option value = "Sports">Sports</option>';
     echo '<option value = "Technology">Technology</option>';
@@ -127,6 +131,9 @@ function interestGlyphs($interest) {
     elseif ($interest == "Announcement") {
         ?><img src="<?php echo $path ?>announcement.jpeg" class="icon" alt="Photos/Video"/><?
     }
+    elseif ($interest == "Auto") {
+        ?><img src="<?php echo $path ?>auto.jpg" class="icon" alt="Photos/Video"/><?
+    }
     elseif ($interest == "Business") {
         ?><img src="<?php echo $path ?>business.jpeg" class="icon" alt="Photos/Video"/><?
     }
@@ -145,9 +152,6 @@ function interestGlyphs($interest) {
     elseif ($interest == "Country") {
         ?><img src="<?php echo $path ?>country.jpeg" class="icon" alt="Photos/Video"/><?
     }
-    elseif ($interest == "Culinary") {
-        ?><img src="<?php echo $path ?>culinary.png" class="icon" alt="Photos/Video"/><?
-    }
     elseif ($interest == "Design") {
         ?><img src="<?php echo $path ?>design.png" class="icon" alt="Photos/Video"/><?
     }
@@ -163,11 +167,17 @@ function interestGlyphs($interest) {
     elseif ($interest == "Fashion") {
         ?><img src="<?php echo $path ?>fashion.png" class="icon" alt="Photos/Video"/><?
     }
-    elseif ($interest == "Movie") {
-        ?><img src="<?php echo $path ?>film.png" class="icon" alt="Photos/Video"/><?
-    }
     elseif ($interest == "Fitness") {
         ?><img src="<?php echo $path ?>fitness.png" class="icon" alt="Photos/Video"/><?
+    }
+    elseif ($interest == "Food & Drink") {
+        ?><img src="<?php echo $path ?>food-drink.svg" class="icon" alt="Photos/Video"/><?
+    }
+    elseif ($interest == "For Sale") {
+        ?><img src="<?php echo $path ?>sale.png" class="icon" alt="Photos/Video"/><?
+    }
+    elseif ($interest == "Help Wanted") {
+        ?><img src="<?php echo $path ?>help.png" class="icon" alt="Photos/Video"/><?
     }
     elseif ($interest == "Literature") {
         ?><img src="<?php echo $path ?>literature.jpg" class="icon" alt="Photos/Video"/><?
@@ -180,6 +190,9 @@ function interestGlyphs($interest) {
     }
     elseif ($interest == "Model") {
         ?><img src="<?php echo $path ?>model.png" class="icon" alt="Photos/Video"/><?
+    }
+    elseif ($interest == "Movie") {
+        ?><img src="<?php echo $path ?>film.png" class="icon" alt="Photos/Video"/><?
     }
     elseif ($interest == "Night Life") {
         ?><img src="<?php echo $path ?>night-life.png" class="icon" alt="Photos/Video"/><?

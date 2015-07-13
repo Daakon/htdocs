@@ -26,7 +26,7 @@ get_header();
 
                 <a href="/home.php">Back to Roll Call</a>
 
-                    <img src="<?php echo $images ?>ad-pic.jpg" style="border-bottom:1px solid black;" />
+                    <img src="<?php echo $imagesPath ?>ad-pic.jpg" style="border-bottom:1px solid black;" />
 
             <br/>
 </div>
@@ -34,17 +34,17 @@ get_header();
                     <span class="how-it-works-header"><h2>Advertise</h2></span>
 
                     <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                        <img src="<?php echo $images ?>Placing-ads.gif" height="auto" width="100%" style="max-width:200px;max-height:200px" class="img-responsive" />
+                        <img src="<?php echo $imagesPath ?>Placing-ads.gif" height="auto" width="100%" style="max-width:200px;max-height:200px" class="img-responsive" />
                         <h3>1. Place An Ad</h3>
                     </div>
 
             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                <img src="<?php echo $images ?>demographics.jpg" height="auto" width="100%" style="max-width:200px;max-height:400px" class="img-responsive" />
+                <img src="<?php echo $imagesPath ?>demographics.jpg" height="auto" width="100%" style="max-width:200px;max-height:400px" class="img-responsive" />
                 <h3>2. Choose demographics</h3>
             </div>
 
             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                <img src="<?php echo $images ?>publish.jpg" height="auto" width="100%" style="max-width:200px;max-height:400px" class="img-responsive" />
+                <img src="<?php echo $imagesPath ?>publish.jpg" height="auto" width="100%" style="max-width:200px;max-height:400px" class="img-responsive" />
                 <h3>3. Publish your AD.</h3>
             </div>
     </div>

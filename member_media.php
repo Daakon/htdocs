@@ -21,7 +21,7 @@ if (isset($_POST['Upload'])) {
     // if photo is provided
     if (strlen($_FILES['flPostMedia']['name']) > 0) {
 
-        $audioFileTypes = array("audio/wav", "audio/mp3");
+        $audioFileTypes = array("audio/wav", "audio/mp3", "audio/x-m4a");
         $audioName;
         $mediaName = $_FILES["flPostMedia"]["name"];
         $mediaFile = $_FILES['flPostMedia']['tmp_name'];
@@ -235,9 +235,21 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
         // Create a Clockwork object using your API key
         $clockwork = new Clockwork( $API_KEY );
 
+        $content;
+
+        if (strstr($mediaType, "video")) {
+            $content = 'video';
+        }
+        elseif (strstr($mediaType, "image")) {
+            $content = 'photo';
+        }
+        elseif (strstr($mediaType, "audio")) {
+            $content = 'song';
+        }
+
         // Setup and send a message
         $text = str_replace(' ', '%20', $link);
-        $text = $name .' sent you a video from Rapportbook '. $text;
+        $text = $name .' sent you a '.$content.' from Rapportbook '. $text;
         $message = array( 'to' => $number, 'message' => $text );
         $result = $clockwork->send( $message );
 
@@ -344,7 +356,7 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
                 $photoFileTypes = array("image/jpg", "image/jpeg", "image/png", "image/tiff",
                     "image/gif", "image/raw");
 
-                $audioFileTypes = array("audio/wav", "audio/mp3");
+                $audioFileTypes = array("audio/wav", "audio/mp3", "audio/x-m4a");
 
                 $text;
 

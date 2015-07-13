@@ -7,6 +7,7 @@ require 'mediaPath.php';
 require 'findURL.php';
 require 'model_functions.php';
 require 'category.php';
+require 'ads.php';
 get_head_files();
 get_header();
 require 'memory_settings.php';
@@ -296,6 +297,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 //=========================================================================================================================//
 //BELOW IS END OF POST COMMENT HANDLING CODE ==========================================================================//
     }
+    echo "<script>location='/manage_post.php?scrollx=$scrollx&scrolly=$scrolly'</script>";
 }
 
 // ----------------------------
@@ -395,15 +397,20 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
 
     <div class="row row-padding">
+        <div class=" col-md-10  col-lg-10 col-md-offset-2 col-lg-offset-2 ">
 
+            <ul class="list-inline">
         <?php require 'profile_menu.php'; ?>
-
-
-    </div>
+            </ul>
 
     <?php
-
-
+    // ad demographics
+    $age = getAge($ID);
+    $state =  getState($ID);
+    $interests = getInterests($ID);
+    $interests = strtolower($interests);
+    $gender = getGender($ID);
+    $ads = getAds($genre, $age, $state, $interests, $gender);
     $sql = "SELECT DISTINCT
     Members.ID As MemberID,
     Members.FirstName As FirstName,
@@ -420,14 +427,16 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
     And Members.ID = Posts.Member_ID
     And Members.ID = Profile.Member_ID
     And Posts.IsDeleted = 0
-    Group By Posts.ID
-    Order By Posts.ID DESC ";
+    UNION
+    $ads
+    Group By PostID
+    Order By PostID DESC ";
 
 
     $result = mysql_query($sql) or die(mysql_error());
 
 
-    if (mysql_numrows($result) > 0) {
+    if (mysql_num_rows($result) > 0) {
     while ($rows = mysql_fetch_assoc($result)) {
     $memberID = $rows['MemberID'];
     $name = $rows['FirstName'] . ' ' . $rows['LastName'];
@@ -436,9 +445,8 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
     $post = $rows['Post'];
     $postID = $rows['PostID']
     ?>
-    <div class="row row-padding">
-        <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 "
-             style="background:white;border-radius:10px;margin-top:20px;border:2px solid black;" align="left">
+
+        <div class="col-lg-9 col-md-9 roll-call" >
 
             <img src="<?php echo $mediaPath. $profilePhoto ?>" class="profilePhoto-Feed" alt=""
                  title="<?php echo $name ?>" class='enlarge-onhover img-responsive'/> &nbsp <b><font
@@ -490,7 +498,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
             echo '<td>';
             echo "<div id = 'approvals$postID'>";
 
-            if (mysql_numrows($result2) > 0) {
+            if (mysql_num_rows($result2) > 0) {
 
                 echo '<form>';
 
@@ -567,7 +575,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
 
                 $result3 = mysql_query($sql3) or die(mysql_error());
-                if (mysql_numrows($result3) > 0) {
+                if (mysql_num_rows($result3) > 0) {
                     echo '<br/>';
                     echo '<div class="comment-style">';
                     while ($rows3 = mysql_fetch_assoc($result3)) {
@@ -579,14 +587,15 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                         echo '<div class="user-icon"><img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" style = "border:1px solid black" class ="enlarge-onhover img-responsive" /><div class="user-name">' . $rows3['FirstName'] . ' ' . $rows3['LastName'] . '</div></div><div class="comment-content">' . nl2br($comment) . '</div>';
 
                         //<!--DELETE BUTTON ------------------>
-                        echo '<div class="comment-delete">';
-                        echo '<form action="" method="post" onsubmit="return confirm(\'Do you really want to delete this comment?\')">';
-                        echo '<input type="hidden" name="commentID" id="commentID" value="' .  $commentID . '" />';
-                        echo '<input type ="submit" name="DeleteComment" id="DeleteComment" value="Delete" class="deleteButton" />';
-                        echo '</form>';
-                        echo '</div>';
-                        //<!------------------------------------->
-
+                        if ($memberID == $ID) {
+                            echo '<div class="comment-delete">';
+                            echo '<form action="" method="post" onsubmit="return confirm(\'Do you really want to delete this comment?\')">';
+                            echo '<input type="hidden" name="commentID" id="commentID" value="' . $commentID . '" />';
+                            echo '<input type ="submit" name="DeleteComment" id="DeleteComment" value="Delete" class="deleteButton" />';
+                            echo '</form>';
+                            echo '</div>';
+                            //<!------------------------------------->
+                        }
                         echo '</div>';
                     }
                     echo '</div>';
@@ -639,17 +648,18 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                         echo '<img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" style = "border:1px solid black" class ="enlarge-onhover img-responsive" /><div class="user-name">' . $rows4['FirstName'] . $rows['LastName'] . '</div></div><div class="comment-content">' . nl2br($comment) . '</div>';
 
                         //<!--DELETE BUTTON ------------------>
-                        echo '<div class="comment-delete">';
-                        echo '<form action="" method="post" onsubmit="return confirm(\'Do you really want to delete this comment?\')">';
-                        echo '<input type="hidden" name="commentID" id="commentID" value="' .  $commentID . '" />';
-                        echo '<input type ="submit" name="DeleteComment" id="DeleteComment" value="Delete" class="deleteButton" />';
-                        echo '</form>';
-                        echo '</div>';
-                        //<!------------------------------------->
+                        if ($memberID == $ID) {
+                            echo '<div class="comment-delete">';
+                            echo '<form action="" method="post" onsubmit="return confirm(\'Do you really want to delete this comment?\')">';
+                            echo '<input type="hidden" name="commentID" id="commentID" value="' . $commentID . '" />';
+                            echo '<input type ="submit" name="DeleteComment" id="DeleteComment" value="Delete" class="deleteButton" />';
+                            echo '</form>';
+                            echo '</div>';
+                            //<!------------------------------------->
+                        }
                         echo '</div>';
 
                     }
-                    echo '</div>';
                     echo '</div>'; //end of more comments div
                     }
                     ?>
@@ -661,26 +671,52 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                                   ----------------------------------------------------->
 
             </div>
-        </div>
-
-
         <?php
-        }
+            }
         }
         else { ?>
-            <div class="row row-padding">
-        <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 "
+        <div class="col-lg-9 col-md-9 roll-call "
              style="background:white;border-radius:10px;margin-top:20px;border:2px solid black;" align="left">
             <div style='font-weight:bold;'>You do not have anything posted.</div>
         </div>
-                </div>
             <?php }
         ?>
-
-
     </div>
+        <!--Right Column -->
+        <div class="col-md-3 col-lg-3 col-md-offset-9 col-lg-offset-9 ad-desktop hidden-sm hidden-xs rightColumn-managePost" >
+            <h3><a href="advertising.php">Advertise
+                    <img src="<?php echo $imagesPath ?>ad-pic.jpg" style="border-bottom:1px solid black;" />
+                </a></h3>
+            <?php
+            $rightColumnAds = getRightColumnAds($genre, $age, $state, $interests);
+            $rightColSql = $rightColumnAds;
+            $rightColResult = mysql_query($rightColSql) or die(mysql_error());
+            //$rows = mysql_fetch_assoc($result);
+            if (mysql_num_rows($rightColResult) > 0) { ?>
 
-    <br/><br/>
+                <div style="padding:10px;width:200px;">
+                    <?php
+                    while ($rightColRows = mysql_fetch_assoc($rightColResult)) {
+                        echo $rightColRows["Post"];
+                        ?>
+                        <hr class="ad-border" />
+                        <?php
+                    } ?>
+                </div>
+                <?php
+            }
+            ?>
+        </div>
+
+
+    </div> <!--Middle Column -->
+
+</div>
+
+
+<br/><br/>
+
+</div>
 
 </body>
 </html>

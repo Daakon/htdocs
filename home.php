@@ -231,7 +231,7 @@ if (isset($_POST['submit'])) {
             }
         }
     }
-    echo "<script>location='/home.php'</script>";
+    echo "<script>location='/home.php?scrollx=$scrollx&scrolly=$scrolly'</script>";
 }
 ?>
 
@@ -503,7 +503,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 //BELOW IS END OF POST COMMENT HANDLING CODE ==========================================================================//
         }
     }
-    echo "<script>location='/home.php'</script>";
+    echo "<script>location='/home.php?scrollx=$scrollx&scrolly=$scrolly'</script>";
 }
 if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
     $commentID = $_POST['commentID'];
@@ -763,7 +763,7 @@ if (mysql_num_rows($rollCallResult) > 0) {
 
 
         <div class=" col-lg-9 col-md-9 roll-call "
-        style="background:white;border-radius:10px;margin-top:20px;border:2px solid black;" align="left">
+         align="left">
 
         <img src="<?php echo $mediaPath. $profilePhoto ?>" class="profilePhoto-Feed enlarge-onhover " alt=""
              title="<?php echo $name ?>" /> &nbsp <b><font size="4"><?php echo $name ?></font></b>
@@ -803,7 +803,7 @@ if (mysql_num_rows($rollCallResult) > 0) {
         // show disapprove if members has approved the post
         echo '<div class="post-approvals">';
         echo "<div id = 'approvals$postID'>";
-        if (mysql_numrows($result2) > 0) {
+        if (mysql_num_rows($result2) > 0) {
             echo '<form>';
             echo '<input type ="hidden" class = "postID" id = "postID" value = "' . $postID . '" />';
             echo '<input type ="hidden" class = "ID" id = "ID" value = "' . $ID . '" />';
@@ -893,7 +893,7 @@ if (mysql_num_rows($rollCallResult) > 0) {
                         Order By PostComments.ID DESC LIMIT 3 ";
             $result3 = mysql_query($sql3) or die(mysql_error());
             echo '<br/>';
-            if (mysql_numrows($result3) > 0) {
+            if (mysql_num_rows($result3) > 0) {
                 echo '<div class="comment-style">';
                 while ($rows3 = mysql_fetch_assoc($result3)) {
                     $comment = $rows3['PostComment'];
@@ -903,7 +903,7 @@ if (mysql_num_rows($rollCallResult) > 0) {
                     echo '<div class="comment-row">';
                     echo '<div class="user-icon"><img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" style = "border:1px solid black" class ="enlarge-onhover img-responsive" /><div class="user-name">' . $rows3['FirstName'] . ' ' . $rows3['LastName'] . '</div></div><div class="comment-content">' . nl2br($comment) . '</div>';
                     echo '</div>';
-                    if ($commentOwner == $ID || $postOwner == $ID) {
+                    if ($postOwner == $ID) {
                         //<!--DELETE BUTTON ------------------>
                         echo '<div class="comment-delete">';
                         echo '<form action="" method="post" onsubmit="return confirm(\'Do you really want to delete this comment?\')">';
@@ -936,7 +936,7 @@ if (mysql_num_rows($rollCallResult) > 0) {
                         Group By PostComments.ID
                         Order By PostComments.ID DESC LIMIT 3, 100 ";
             $result4 = mysql_query($sql4) or die(mysql_error());
-            if (mysql_numrows($result4) > 0) {
+            if (mysql_num_rows($result4) > 0) {
             $moreComments = "moreComments$postID";
             ?>
 
@@ -958,7 +958,7 @@ if (mysql_num_rows($rollCallResult) > 0) {
                     echo '</td></tr>';
                 }
                 echo '</div>';
-                if ($commentOwner == $ID || $postOwner == $ID) {
+                if ($postOwner == $ID) {
                     //<!--DELETE BUTTON ------------------>
                     echo '<div class="comment-delete">';
                     echo '<form action="" method="post" onsubmit="return confirm(\'Do you really want to delete this comment?\')">';

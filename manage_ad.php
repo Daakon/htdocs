@@ -35,11 +35,11 @@ if (isset($_POST['Update'])) {
         $adText = preg_replace('/([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6})/', '<a href="mailto:$1">$1</a>', $adText);
     }
 
-    $talentFeed;
+    $rollCall;
     $rightCol;
 
     if ($adPosition == '1') {
-        $talentFeed = 1;
+        $rollCall = 1;
     } else {
         $rightCol = 1;
     }
@@ -239,7 +239,7 @@ if (isset($_POST['Update'])) {
               MediaSource = '$img',
               Interests = '$interests',
               Gender = '$gender',
-              TalentFeed = '$talentFeed',
+              RollCall = '$rollCall',
               RightColumn =  '$rightCol',
               AgeStart = '$ageStart',
               AgeEnd = '$ageEnd',
@@ -256,7 +256,9 @@ if (isset($_POST['Update'])) {
         }
         // redirect to manage-ad
         echo "<script>alert('Ad Updated'); location='manage_ad.php?adID=$adID'</script>";
-    } // if no media
+    }
+
+    // if no new media
     else {
 
         // build ad
@@ -286,7 +288,7 @@ if (isset($_POST['Update'])) {
               AdText = '$adText',
               Interests = '$interests',
               Gender = '$gender',
-              TalentFeed = '$talentFeed',
+              RollCall = '$rollCall',
               RightColumn =  '$rightCol',
               AgeStart = '$ageStart',
               AgeEnd = '$ageEnd',

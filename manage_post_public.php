@@ -26,7 +26,7 @@ $memberID = $rows['ID'];
 $fName = $rows['FirstName'];
 $lName = $rows['LastName'];
 
-if (mysql_numrows($result) == 0) {
+if (mysql_num_rows($result) == 0) {
     echo '<script>alert("This profile could not be found");location = "/index.php"</script>';
 }
 ?>
@@ -311,6 +311,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 //=========================================================================================================================//
 //BELOW IS END OF POST COMMENT HANDLING CODE ==========================================================================//
     }
+    echo "<script>location='/manage_post_public.php?scrollx=$scrollx&scrolly=$scrolly'</script>";
 }
 
 // ----------------------------
@@ -436,7 +437,7 @@ if (isset($_POST['Delete']) && $_POST['Delete'] == "Delete") {
     $result = mysql_query($sql) or die(mysql_error());
 
 
-    if (mysql_numrows($result) > 0) {
+    if (mysql_num_rows($result) > 0) {
     while ($rows = mysql_fetch_assoc($result)) {
     $memberID = $rows['MemberID'];
     $name = $rows['FirstName'] . ' ' . $rows['LastName'];
@@ -480,7 +481,7 @@ if (isset($_POST['Delete']) && $_POST['Delete'] == "Delete") {
             echo '<td>';
             echo "<div id = 'approvals$postID'>";
 
-            if (mysql_numrows($result2) > 0) {
+            if (mysql_num_rows($result2) > 0) {
 
                 echo '<form>';
 
@@ -569,7 +570,7 @@ if (isset($_POST['Delete']) && $_POST['Delete'] == "Delete") {
 
 
                 $result3 = mysql_query($sql3) or die(mysql_error());
-                if (mysql_numrows($result3) > 0) {
+                if (mysql_num_rows($result3) > 0) {
                     echo '<br/>';
                     echo '<div class="comment-style">';
                     while ($rows3 = mysql_fetch_assoc($result3)) {

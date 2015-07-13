@@ -82,7 +82,7 @@ if (mysql_numrows($result) == 0) {
                         "image/gif", "image/raw");
 
                     // audio file types
-                    $audioFileTypes = array("audio/wav", "audio/mp3");
+                    $audioFileTypes = array("audio/wav", "audio/mp3", "audio/x-m4a");
 
 // check if file type is a photo
                     if (in_array($mediaType, $photoFileTypes)) {

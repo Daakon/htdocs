@@ -41,11 +41,11 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == "Submit AD") {
     }
 
 
-    $talentFeed;
+    $rollCall;
     $rightCol;
 
     if ($adPosition == '1') {
-        $talentFeed = 1;
+        $rollCall = 1;
     }
     else {
         $rightCol = 1;
@@ -258,8 +258,8 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == "Submit AD") {
             $adTitle = makeLinks($adTitle);
 
             // insert ad
-        $sqlInsertPost = "INSERT INTO Posts (Post,      MediaSource,   Member_ID,    Category,      AdTitle,    AdText,    Interests,    Gender,       TalentFeed,     RightColumn,   AgeStart,    AgeEnd,    AdState,    AdCategory,    TransID,   PostDate,    AdEnd ) Values
-                                                ('$ad',  '$img',        '$ID',      'Sponsored', '$adTitle',  '$adText',  '$interests', '$gender',   '$talentFeed',  '$rightCol', '$ageStart', '$ageEnd', '$state', '$adCategory', '$transID',   CURDATE(),  ADDDATE(CURDATE(), INTERVAL 30 DAY) ) ";
+        $sqlInsertPost = "INSERT INTO Posts (Post,      MediaSource,   Member_ID,    Category,      AdTitle,    AdText,    Interests,    Gender,       RollCall,     RightColumn,   AgeStart,    AgeEnd,    AdState,    AdCategory,    TransID,   PostDate,    AdEnd ) Values
+                                                ('$ad',  '$img',        '$ID',      'Sponsored', '$adTitle',  '$adText',  '$interests', '$gender',   '$rollCall',  '$rightCol', '$ageStart', '$ageEnd', '$state', '$adCategory', '$transID',   CURDATE(),  ADDDATE(CURDATE(), INTERVAL 30 DAY) ) ";
             mysql_query($sqlInsertPost) or die(mysql_error());
             $newPostID = mysql_insert_id();
 
@@ -432,7 +432,7 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == "Submit AD") {
                     <div class="form-group">
                         <label for="AdPosition">Ad Position</label>
                         <br/>
-                        Talent Feed&nbsp;<input type="radio" name="AdPosition" id="AdPosition" value="1"<?php echo $check0 ?>>
+                        Roll Call&nbsp;<input type="radio" name="AdPosition" id="AdPosition" value="1"<?php echo $check0 ?>>
                         <br/>
                         Right Column&nbsp;<input type="radio" name="AdPosition" id="AdPosition" value="0"<?php echo $check1 ?>>&nbsp;(Desktop Only)
                     </div>

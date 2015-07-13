@@ -464,6 +464,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 //=========================================================================================================================//
 //BELOW IS END OF POST COMMENT HANDLING CODE ==========================================================================//
     }
+    echo "<script>location='/show_post.php?scrollx=$scrollx&scrolly=$scrolly'</script>";
 }
 ?>
 
@@ -621,7 +622,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
             echo '<td>';
             echo "<div id = 'approvals$postID'>";
 
-            if (mysql_numrows($result2) > 0) {
+            if (mysql_num_rows($result2) > 0) {
 
                 echo '<form>';
 
@@ -697,7 +698,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
 
                 $result3 = mysql_query($sql3) or die(mysql_error());
-                if (mysql_numrows($result3) > 0) {
+                if (mysql_num_rows($result3) > 0) {
                     echo '<br/>';
                     echo '<table style = "background:#E0EEEE;width:100%">';
                     while ($rows3 = mysql_fetch_assoc($result3)) {

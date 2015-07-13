@@ -87,7 +87,7 @@ function getAds($category, $age, $state, $interests, $gender) {
     Posts.Interests = '')
     $genderQuery
     And (Posts.AdCategory = '$category' || Posts.AdCategory = '')
-    And (Posts.TalentFeed = 1)
+    And (Posts.RollCall = 1)
     And (CURRENT_DATE() < Posts.AdEnd)
     ";
 

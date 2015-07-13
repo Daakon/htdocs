@@ -12,7 +12,7 @@ if (strstr($url, "local")) {
 elseif (strstr($url, "dev")) {
     $videoPath = "http://dev.rapportbook.com/media/";
     $posterPath = "/home/rapportbook/dev/poster/";
-    $imagesPath = "http://dev.rapportbook.com/images";
+    $imagesPath = "http://dev.rapportbook.com/images/";
 }
 else {
     $videoPath = "http://rapportbook.com/media/";

@@ -17,7 +17,7 @@ function get_head_files()
 
         <!--Facebook API Meta Tags -->
         <meta property="og:site_name" content="Rapportbook"/>
-        <meta property="og:title" content="Click here to check this post out on Rapportbook!">
+        <meta property="og:title" content="Click here to view this post on Rapportbook!">
         <meta property="og:image" content="http://rapportbook.com/images/Rapportbook-Logo.png">
         <meta property="og:description" content="Rapportbook is a multi-media rich platform that lets individuals share their interests with the world.
         Post photos, videos & music, network and much more. It's free to Join!">

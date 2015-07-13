@@ -273,7 +273,7 @@ $comment = makeLinks($comment);
 
 //=========================================================================================================================//
 //BELOW IS END OF POST COMMENT HANDLING CODE ==========================================================================//
-
+    echo "<script>location='/media.php?scrollx=$scrollx&scrolly=$scrolly'</script>";
 }
 
 
@@ -648,7 +648,7 @@ $profileMediaSrc = trim("media/" . $profilePhoto);
             echo '<table><tr><td>';
             echo "<div id = 'approvals$postID'>";
 
-            if (mysql_numrows($result2) > 0) {
+            if (mysql_num_rows($result2) > 0) {
 
                 echo '<form>';
 
@@ -739,7 +739,7 @@ $profileMediaSrc = trim("media/" . $profilePhoto);
                         Group By PostComments.ID DESC LIMIT 3";
 
             $result3 = mysql_query($sql3) or die(mysql_error());
-            if (mysql_numrows($result3) > 0) {
+            if (mysql_num_rows($result3) > 0) {
                 echo '<table class="comment-style">';
                 while ($rows3 = mysql_fetch_assoc($result3)) {
                     $comment = $rows3['Comment'];
