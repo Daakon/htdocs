@@ -628,6 +628,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
         <ul class="list-inline">
             <li><a href="/profile.php/<?php echo get_username($ID) ?>">Go To Your Profile <?php require 'getNewMessageCount.php' ?></a></li>
+            <li><a href="/games.php"><image src = "<?php echo $imagesPath?>play-games.png" height="30" width="30"/>Play Games</a></li>
         </ul>
 
        <!-- SMARTADDON BEGIN -->
