@@ -7,6 +7,20 @@ function get_head_files()
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
     <html xmlns="http://www.w3.org/1999/xhtml">
     <head lang="<?php echo $str_language; ?>" xml:lang="<?php echo $str_language; ?>">
+
+    <!--Allow users to download web app -->
+    <!--Link so Android devices can see the icon -->
+    <link rel=”apple-touch-icon” href=”/apple-touch-icon.png”/>
+    <link rel=”apple-touch-icon-precomposed” href=”/apple-touch-icon.png”/>
+    <link rel="stylesheet" type="text/css" href="/resources/css/addtohomescreen.css">
+    <script type="application/javascript" src="/resources/js/addtohomescreen.js"></script>
+    <script>
+        addToHomescreen();
+    </script>
+
+<script>
+addToHomescreen.removeSession();
+</script>
         <meta name="description" content="Rapportbook is a platform that lets individuals share their interests with the world.
         Post photos, videos & music, network and much more. It's free to Join! Click here to checkout content on Rapportbook">
         <meta name="keywords" content="networking, promotion, advertise, photos, videos, messaging">
@@ -21,6 +35,8 @@ function get_head_files()
         <meta property="og:description" content="Rapportbook is a multi-media rich platform that lets individuals share their interests with the world.
         Post photos, videos & music, network and much more. It's free to Join!">
 
+
+
         <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
         <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 
@@ -32,6 +48,10 @@ function get_head_files()
 
         <!-- Custom stylesheet, located in resources/css -->
         <link rel="stylesheet" href="/resources/css/site.css">
+
+
+
+
 
  <!--JQuery CDN-->
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>

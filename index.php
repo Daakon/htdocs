@@ -126,6 +126,8 @@ get_head_files();
     }
 </script>
 
+
+
 <?php require 'checkLogin.php'; ?>
 
 <div class="container-fluid">

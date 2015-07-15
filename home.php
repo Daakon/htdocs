@@ -59,6 +59,10 @@ if (isset($_POST['submit'])) {
                 $fileName = pathinfo($mediaName, PATHINFO_FILENAME);
                 $mediaName = trim(uniqid() . $mediaName);
                 $mediaFile = $_FILES['flPostMedia']['tmp_name'];
+                $mediaFile2 = "";
+                copy($_FILES['flPostMedia']['tmp_name'], $mediaFile2);
+                $mediaFile3 = "";
+                copy($_FILES['flPostMedia']['tmp_name'], $mediaFile3);
                 $type = $_FILES['flPostMedia']['type'];
 
 
@@ -73,10 +77,19 @@ if (isset($_POST['submit'])) {
                     if ($type != "video/mp4") {
                         $audioName = $fileName;
                         $newFileName = $fileName . ".mp4";
+                        $oggFileName = $fileName . ".ogv";
+                        $webmFileName = $fileName . ".webm";
 
                         $ffmpeg = '/usr/bin/ffmpeg';
-                        exec("$ffmpeg -i $fileName -profile:v baseline -level 3.0 $newFileName");
+                        // convert mp4
+                        exec("$ffmpeg -i $fileName $newFileName");
                         $mediaName = $newFileName;
+
+                        // convert ogg
+                        exec("$ffmpeg -i $fileName  $oggFileName");
+                        // convert webm
+                        exec("$ffmpeg -i $fileName  $webmFileName");
+
                     }
                 } else {
                     if ($type == "image/jpg" || $type == "image/jpeg") {
@@ -94,8 +107,17 @@ if (isset($_POST['submit'])) {
 
                 require 'media_post_file_path.php';
 // save photo/video
+
                 if (in_array($type, $videoFileTypes) || in_array($type, $audioFileTypes)) {
                     move_uploaded_file($mediaFile, $postMediaFilePath);
+                    //copy new mp4 file path to ogg file path
+                    copy($postMediaFilePath, $postOggFilePathTemp);
+                    // overwrite mp4 with real ogg file path
+                    copy($postOggFilePath, $postOggFilePathTemp);
+                    // copy new mp4 file path to webm file path
+                    copy($postMediaFilePath, $postWebmFilePathTemp);
+                    // overwrite mp4 with real webm file path
+                    copy($postWebmFilePath, $postWebmFilePathTemp);
                 } else {
 
                     if (in_array($type, $photoFileTypes)) {
@@ -137,8 +159,8 @@ if (isset($_POST['submit'])) {
                 }
                 else {
                     // store media pointer
-                    $sql = "INSERT INTO Media (Member_ID,  MediaName,  MediaType,  MediaDate,  AudioName    ) Values
-                                          ('$ID',    '$mediaName', '$type',   CURRENT_DATE(), '$audioName'  )";
+                    $sql = "INSERT INTO Media (Member_ID,  MediaName,    MediaOgg,     MediaWebm,      MediaType,  MediaDate,  AudioName    ) Values
+                                              ('$ID',    '$mediaName', '$oggFileName', '$webmFileName',  '$type',   CURRENT_DATE(), '$audioName'  )";
                     mysql_query($sql) or die(mysql_error());
                     $mediaID = mysql_insert_id();
                     // get media ID
@@ -196,7 +218,14 @@ if (isset($_POST['submit'])) {
                         }
 
 
-                        $img = '<video src = "' . $videoPath . $mediaName . '" poster="/poster/'.$posterName.'" preload="none" controls />';
+                        $img = '<video poster="/poster/'.$posterName.'" preload="none" controls>
+                                <source src = "' . $videoPath . $mediaName . '" type="video/mp4" />
+                                <source src = "' . $videoPath . $oggFileName . '" type = "video/ogg" />
+                                <source src = "' . $videoPath . $webmFileName . '" type = "video/webm" />
+                                </video>';
+
+
+
                     } else {
                         // if invalid file type
                         /*echo '<script>alert("Invalid File Type!");</script>';
