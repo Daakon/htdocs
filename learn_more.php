@@ -22,21 +22,19 @@ get_header()
             <a href="/home.php">Back to Roll Call</a>
             <?php } ?>
 
-            <h4>Rapportbook is a multi-media rich platform that enables people share things that interest them.</h4>
+            <h4>Rapportbook is a multi-media rich one stop web shop that you can use for anything.</h4>
 
         <div class="row how-it-works-row">
 
             <div class="col-xs-12 col-md-5 col-md-offset-1">
 
-                <img src="<?php echo $images ?>video.png" class="how-it-works-img"/>
+                <img src="<?php echo $imagesPath ?>video.png" class="how-it-works-img"/>
             </div>
             <div class="col-xs-12 col-md-6">
                 <span class="how-it-works-header">Videos</span>
 
                 <p>
-                    Videos are multi-media rich, compelling and extremely engaging.
-                    Nothing catches a person's attention more than a video.
-                    Rapportbook allows you to post videos up to 10 minutes long.
+                   Watch and Upload Videos
                 </p>
 
             </div>
@@ -46,14 +44,13 @@ get_header()
 
         <div class="row ">
             <div class="col-xs-12 col-md-5 col-md-offset-1"> 
-                <img src="<?php echo $images ?>camera.png" class="how-it-works-img" align="left"/> 
+                <img src="<?php echo $imagesPath ?>camera.png" class="how-it-works-img" align="left"/> 
             </div>
              
             <div class="col-xs-12 col-md-6"> 
                 <span class="how-it-works-header">Photos</span> 
                 <p>
-                    A great photo is one that shares your interests.
-                    Tell your story today by uploading a pic!
+                    View & Upload Photos
                 </p>
                  
             </div>
@@ -62,17 +59,32 @@ get_header()
 
         <!-------------------------------------------------------------->
 
+            <div class="row ">
+                <div class="col-xs-12 col-md-5 col-md-offset-1"> 
+                    <img src="<?php echo $imagesPath ?>video-game.png" class="how-it-works-img" align="left"/> 
+                </div>
+                 
+                <div class="col-xs-12 col-md-6"> 
+                    <span class="how-it-works-header">Games</span> 
+                    <p>
+                        Play Games
+                    </p>
+                     
+                </div>
+                 
+            </div>
+
+            <!-------------------------------------------------------------->
+
         <div class="row ">
             <div class="col-xs-12 col-md-5 col-md-offset-1"> 
-                <img src="<?php echo $images ?>audio.png" class="how-it-works-img" align="left"/> 
+                <img src="<?php echo $imagesPath ?>audio.png" class="how-it-works-img" align="left"/> 
             </div>
              
             <div class="col-xs-12 col-md-6"> 
-                <span class="how-it-works-header">Audio</span> 
+                <span class="how-it-works-header">Music</span> 
                 <p>
-                    Have any original audio files you would like to share?
-                    Feel free to upload them.
-                    Music, inspirational talks, sound bites, etc.
+                    Listen to and Upload Music
                 </p>
                  
             </div>
@@ -84,21 +96,82 @@ get_header()
         <div class="row">
 
             <div class="col-xs-12 col-md-5 col-md-offset-1"> 
-                <img src="<?php echo $images ?>promotion.png" class="how-it-works-img" align="left"/> 
+                <img src="<?php echo $imagesPath ?>promotion.png" class="how-it-works-img" align="left"/> 
             </div>
               
             <div class="col-xs-12 col-md-6"> 
                 <span class="how-it-works-header">Promote</span> 
                 <p>
-                    Do you need to get the word out about something?
-                    Simply post your promotion in Roll Call to let everyone know.
-                    Add a video or picture to make your post even better.
+                    Discover and Post new Events, Services and more.
                 </p>
             </div>
         </div>
 
         <!--------------------------------------------------------------------->
 
+            <div class="row">
+
+                <div class="col-xs-12 col-md-5 col-md-offset-1"> 
+                    <img src="<?php echo $imagesPath ?>help.png" class="how-it-works-img" align="left"/> 
+                </div>
+                  
+                <div class="col-xs-12 col-md-6"> 
+                    <span class="how-it-works-header">Jobs</span> 
+                    <p>
+                        Find Jobs
+                    </p>
+                </div>
+            </div>
+
+            <!--------------------------------------------------------------------->
+
+            <div class="row">
+
+                <div class="col-xs-12 col-md-5 col-md-offset-1"> 
+                    <img src="<?php echo $imagesPath ?>sale.png" class="how-it-works-img" align="left"/> 
+                </div>
+                  
+                <div class="col-xs-12 col-md-6"> 
+                    <span class="how-it-works-header">Sale Stuff</span> 
+                    <p>
+                        Post an AD to sell just about anything you want.
+                    </p>
+                </div>
+            </div>
+
+            <!--------------------------------------------------------------------->
+
+            <div class="row">
+
+                <div class="col-xs-12 col-md-5 col-md-offset-1"> 
+                    <img src="<?php echo $imagesPath ?>question-mark.jpeg" class="how-it-works-img" align="left"/> 
+                </div>
+                  
+                <div class="col-xs-12 col-md-6"> 
+                    <span class="how-it-works-header">Ask Questions</span> 
+                    <p>
+                        Get an answers to questions you might have.
+                    </p>
+                </div>
+            </div>
+
+            <!--------------------------------------------------------------------->
+
+            <div class="row">
+
+                <div class="col-xs-12 col-md-5 col-md-offset-1"> 
+                    <img src="<?php echo $imagesPath ?>private.jpg" class="how-it-works-img" align="left"/> 
+                </div>
+                  
+                <div class="col-xs-12 col-md-6"> 
+                    <span class="how-it-works-header">Share Private Content</span> 
+                    <p>
+                        Share Content with only the people you wish to.
+                    </p>
+                </div>
+            </div>
+
+            <!--------------------------------------------------------------------->
     </div>
 </div>
 

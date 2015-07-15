@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 function get_head_files()
 { ?>
 
@@ -34,6 +33,15 @@ function get_head_files()
         <!-- Custom stylesheet, located in resources/css -->
         <link rel="stylesheet" href="/resources/css/site.css">
 
+ <!--JQuery CDN-->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+    <!--Bootstrap Latest compiled and minified JavaScript-->
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+    <!--Local JS file-->
+    <script type="text/javascript" src="/resources/js/site.js"></script>
+
         <title>Rapportbook</title>
     </head>
 
@@ -51,7 +59,6 @@ function get_head_files()
                 window.location='/logout.php';
             });
         }
-
         function facebookLogout(){
             FB.getLoginStatus(function(response) {
                 if (response.status === 'connected') {
@@ -63,7 +70,6 @@ function get_head_files()
                 }
             });
         }
-
         window.fbAsyncInit = function() {
             FB.init({
                 appId      : '1537351149864603',
@@ -81,7 +87,6 @@ function get_head_files()
             js.src = "//connect.facebook.net/en_US/sdk.js";
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
-
     </script>
 
     <form method="post" action="login.php" class="form-inline" >
@@ -109,7 +114,6 @@ function get_head_files()
 <?php } ?>
 
 <?php
-
 function get_header()
 {
     ?>
@@ -182,7 +186,6 @@ if (strstr($url, "home.php")) { ?>
 
 
 <?php }
-
 } ?>
 
 <?php function get_footer_files()
@@ -191,14 +194,7 @@ if (strstr($url, "home.php")) { ?>
     ?>
 
 
-    <!--JQuery CDN-->
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
-    <!--Bootstrap Latest compiled and minified JavaScript-->
-    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-
-    <!--Local JS file-->
-    <script type="text/javascript" src="/resources/js/site.js"></script>
 
 <?php if (!strstr($url, "dev") && !strstr($url, "localhost")) { ?>
     <script>
@@ -207,10 +203,8 @@ if (strstr($url, "home.php")) { ?>
             (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
             m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
         ga('create', 'UA-59826601-1', 'auto');
         ga('send', 'pageview');
-
     </script>
 <?php } ?>
 

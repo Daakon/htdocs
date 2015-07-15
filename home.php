@@ -717,12 +717,14 @@ if (!empty($queryName)) {
 }
 else { $memberCondition = ""; }
 $ads = getAds($genre, $age, $state, $interests, $gender);
+    
 $sqlRollCall = " SELECT DISTINCT
+    Posts.Post As Post,
     Members.ID As MemberID,
     Members.FirstName As FirstName,
     Members.LastName As LastName,
     Posts.ID As PostID,
-    Posts.Post As Post,
+
     Posts.Category As Category,
     Profile.ProfilePhoto As ProfilePhoto
     FROM Members,Posts,Profile
@@ -738,7 +740,7 @@ $sqlRollCall = " SELECT DISTINCT
     UNION
     $ads
     Group By PostID
-    Order By PostID DESC ";
+    Order By PostID DESC LIMIT 100 ";
 $rollCallResult = mysql_query($sqlRollCall) or die(mysql_error());
 
 // if no results
@@ -836,10 +838,12 @@ if (mysql_num_rows($rollCallResult) > 0) {
             $showPostURL = "http://rapportbook.com/show_post.php?postID=$postID";
             $twitterLogo = "<img src='/images/twitter-logo-red.png' height='50px' width='50px' alt='Twitter'/>";
             $facebookLogo = "<img src='/images/facebook-logo-red.png' height='50px' width='50px' alt='Facebook'/>";
+            $tumblrLogo = "<img src='/images/tumblr-logo-red.png' height='40px' width='40px' alt='Tumblr'/>";
             ?>
             Share This Post:
             <a href = "http://twitter.com/share?text=<?php echo strip_tags($post) ?>&url=<?php echo $showPostURL ?>&hashtags=Rapportbook" target="_blank"><?php echo $twitterLogo ?></a>
             <a href="http://www.facebook.com/sharer/sharer.php?t=<?php echo strip_tags($post) ?>&u=<?php echo $showPostURL ?>" target="_blank"><?php echo $facebookLogo ?></a>
+            <a href="http://www.tumblr.com/share/link?url=<?php echo urlencode($showPostURL) ?>&amp;name=&amp;description=<?php echo strip_tags($post) ?>" target="_blank"><?php echo $tumblrLogo ?></a>
 
         <div style="padding-top:10px;padding-bottom:10px;margin-top:10px;">
             <form method="post" action="" enctype="multipart/form-data"

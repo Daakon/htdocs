@@ -18,19 +18,6 @@ $ID = $_SESSION['ID'];
 ?>
 
 <html>
-<script>
-    $("object").each(function() {
-        var obj = $(this);
-        $("<iframe/>").attr({
-            src: obj.attr("data"),
-            style: obj.attr("style"),
-            frameborder: 0
-        })
-            .after(obj);
-
-        obj.remove();
-    });
-</script>
 <body>
 <h6><a href="/home.php" style="padding-left:10px;">Back to Roll Call</a></h6>
 <div align="center">

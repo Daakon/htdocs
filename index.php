@@ -133,8 +133,8 @@ get_head_files();
 
     <div class="row">
         <div class="col-lg-6 col-md-5 hidden-sm hidden-xs">
-            <img src="/images/interests.png" height="350" width="100%" alt="" />
-            <h2 align="center">Share Your Interests</h2>
+            <img src="/images/Rapportbook-Logo.png" height="350" width="100%" alt="" />
+            <h2 align="center"><span style="font-style: italic;color:red;font-weight: 400">Your One Stop Web Shop</span></h2>
         </div>
 
         <div class="col-lg-6 col-md-7 col-sm-12 col-xs-12 ">

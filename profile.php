@@ -364,8 +364,13 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
 
 <script>
     // show uploading
-    function showUploading() {
-        document.getElementById("progress").style.display = "block";
+    function showPhotoUploading() {
+        document.getElementById("PhotoProgress").style.display = "block";
+    }
+
+    // show uploading
+    function showVideoUploading() {
+        document.getElementById("VideoProgress").style.display = "block";
     }
 </script>
 
@@ -508,8 +513,15 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
                 <input type="file" width="10px;" name="flPostPhoto" id="flPostPhoto"/>
                 <input type="hidden" name="MAX_FILE_SIZE" value="500000000"
                 <br/>
+                <div id="PhotoProgress" style="display:none;">
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped progress-bar-danger active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                            <span class="sr-only">Loading</span>
+                        </div>
+                    </div>
+                </div>
                 <br/>
-                <input type="submit" class="post-button" name="photo" id="photo" value="Upload Photo"/>
+                <input type="submit" class="post-button" name="photo" id="photo" value="Upload Photo" onclick="showPhotoUploading()" />
             </form>
 
             <br/>
@@ -534,7 +546,7 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
                 <input type="file" width="10px;" name="flPostVideo" id="flPostVideo"/>
                 <input type="hidden" name="MAX_FILE_SIZE" value="500000000" />
                 <br/>
-                <div id="progress" style="display:none;">
+                <div id="VideoProgress" style="display:none;">
                     <div class="progress">
                         <div class="progress-bar progress-bar-striped progress-bar-danger active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
                             <span class="sr-only">Loading</span>
@@ -542,7 +554,7 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
                     </div>
                 </div>
                 <br/>
-                <input type="submit" class="post-button" name="video" id="video" value="Upload Video"/>
+                <input type="submit" class="post-button" name="video" id="video" value="Upload Video" onclick="showVideoUploading()" />
 
             </form>
 
