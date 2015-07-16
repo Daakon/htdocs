@@ -138,7 +138,7 @@ get_head_files();
             <a href="http://rapportbook.com/media/trim.AC95253E-8CE6-47A9-B983-83682B787D3E.mp4">View This Video Natively</a>
             <video src="http://rapportbook.com/media/trim.AC95253E-8CE6-47A9-B983-83682B787D3E.mp4" poster="/poster/poster5598c39b0cd8c.jpg" controls=""><br>
             </video>
-            <h2 align="center"><span style="font-style: italic;color:red;font-weight: 400">The Video Only Social Network</span></h2>
+            <h2 align="center"><span style="font-style: italic;color:red;font-weight: 400">Tell Your Story With Videos</span></h2>
         </div>
 
         <div class="col-lg-6 col-md-7 col-sm-12 col-xs-12 ">
@@ -185,7 +185,7 @@ get_head_files();
             </div>
 
             <div class="visible-xs visible-sm">
-                <h3>The Video Only Social Network</h3>
+                <h3>Tell Your Story With Videos</h3>
             </div>
 
             <form method="post" action="signup.php" id="rb_signup_form" >

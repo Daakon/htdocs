@@ -4,6 +4,15 @@ IT WILL INCREASE THE RENDERING TIME OF HTML ELEMENTS
 ------------------------------------------------------->
 
 <?php
+$refresh = $_GET['rf'];
+if (!empty($refresh)) { ?>
+    <!--Clear cache-->
+  <meta http-equiv="refresh" content="0;URL='/home.php'" />
+ <?php
+}
+?>
+
+<?php
 require 'connect.php';
 // compress the page
 if (substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip')) ob_start("ob_gzhandler"); else ob_start();
@@ -197,10 +206,7 @@ if (isset($_POST['submit'])) {
             }
         }
     }
-    ?>
-    <!--Refresh Cache -->
-    <meta http-equiv="refresh" content="0;URL='/home.php'" />
-    <?php
+    echo "<script>location='/home.php?scrollx=$scrollx&scrolly=$scrolly&rf=true'</script>";
 }
 ?>
 
@@ -420,7 +426,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 //BELOW IS END OF POST COMMENT HANDLING CODE ==========================================================================//
         }
     }
-    echo "<script>location='/home.php?scrollx=$scrollx&scrolly=$scrolly'</script>";
+    echo "<script>location='/home.php?scrollx=$scrollx&scrolly=$scrolly&rf=true'</script>";
 }
 if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
     $commentID = $_POST['commentID'];
