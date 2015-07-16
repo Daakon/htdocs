@@ -77,39 +77,14 @@ if (mysql_numrows($result) == 0) {
                     $videoFileTypes = array("video/mpeg", "video/mpg", "video/ogg", "video/mp4",
                         "video/quicktime", "video/webm", "video/x-matroska",
                         "video/x-ms-wmw");
-// video file types
-                    $photoFileTypes = array("image/jpg", "image/jpeg", "image/png", "image/tiff",
-                        "image/gif", "image/raw");
 
-                    // audio file types
-                    $audioFileTypes = array("audio/wav", "audio/mp3", "audio/x-m4a");
 
-// check if file type is a photo
-                    if (in_array($mediaType, $photoFileTypes)) {
-                        if (isset($_SESSION['ID']) && !empty($_SESSION['ID'])) {
-                            $img = '<a href = "/media.php?id=' . $memberID . '&mediaName=' . $mediaName . '&mid=' . $mediaID . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '" ><img src = "' . $mediaPath . $mediaName . '" style="border:2px solid black;" /></a>
-                        <br/>' . $privateString;
-                        }
-                        else {
-                            $img = '<img src = "' . $mediaPath . $mediaName . '" style="border:2px solid black;" />
-                        <br/>' . $privateString;
-                        }
-
-                    } // check if file type is a video
-                    elseif (in_array($mediaType, $videoFileTypes)) {
+                    if (in_array($mediaType, $videoFileTypes)) {
                             $img = '<video src = "' . $videoPath . $mediaName . '" poster="/poster/'.$poster.'" preload="auto" controls />
                         <a href = "/media.php?id=' . $ID . '&mediaName=' . $mediaName . '&mid=' . $mediaID . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '" >More</a><br/>'
                                 . $privateString;
                     }
-                    if (in_array($mediaType, $audioFileTypes)) {
-                        $text = "song";
-                        $img = '<b>'.$audioName.'</b><br/><audio controls>
-                            <source src="' . $mediaPath . $mediaName . '" type="' . $mediaType . '">
-                            Your browser does not support the audio element.
-                            </audio>
-                            <a href = "media.php?id=' . $ID . '&mediaName=' . $mediaName . '&mid=' . $mediaID . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '" ><br/>More</a><br/><br/>'
-                            . $privateString . '<br/>';
-                    }
+
                     ?>
                     <?php
                     echo "<div>$img</div>";

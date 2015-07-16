@@ -37,9 +37,7 @@ if (isset($_POST['submit'])) {
             $videoFileTypes = array("video/mpeg", "video/mpg", "video/ogg", "video/mp4",
                 "video/quicktime", "video/webm", "video/x-matroska",
                 "video/x-ms-wmw");
-            // video file types
-            $photoFileTypes = array("image/jpg", "image/jpeg", "image/png", "image/tiff",
-                "image/gif", "image/raw");
+
 
             // add unique id to image name to make it unique and add it to the file server
             $mediaName = $_FILES["flPostMedia"]["name"];
@@ -53,17 +51,9 @@ if (isset($_POST['submit'])) {
                 // do nothing
 
             } else {
-                if ($type == "image/jpg" || $type == "image/jpeg") {
-                    $src = imagecreatefromjpeg($mediaFile);
-                } else if ($type == "image/png") {
-                    $src = imagecreatefrompng($mediaFile);
-                } else if ($type == "image/gif") {
-                    $src = imagecreatefromgif($mediaFile);
-                } else {
-                    echo "<script>alert('Invalid File Type'); location = 'home.php'";
+                    echo "<script>alert('Invalid File Type'); location = '$url'";
                     exit;
                 }
-            }
 
             // read exif data
             $exif = exif_read_data($_FILES['flPostMedia']['tmp_name']);

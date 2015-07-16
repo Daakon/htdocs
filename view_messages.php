@@ -74,13 +74,11 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
             exit;
         }
 
-// check if file type is a photo
+// check if file type is a video
         $videoFileTypes = array("video/mpeg", "video/mpg", "video/ogg", "video/mp4",
             "video/quicktime", "video/webm", "video/x-matroska",
             "video/x-ms-wmw");
-// video file types
-        $photoFileTypes = array("image/jpg", "image/jpeg", "image/png", "image/tiff",
-            "image/gif", "image/raw");
+
 
         // add unique id to image name to make it unique and add it to the file server
         $mediaName = $_FILES["flPostMedia"]["name"];
@@ -98,68 +96,11 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
             $mediaName = $newFileName;
 
         } else {
-            $mediaString = 'photo';
-            if ($type == "image/jpg" || $type == "image/jpeg") {
-                $src = imagecreatefromjpeg($mediaFile);
-            } else if ($type == "image/png") {
-                $src = imagecreatefrompng($mediaFile);
-            } else if ($type == "image/gif") {
-                $src = imagecreatefromgif($mediaFile);
-            } else {
-                echo "<script>alert('Invalid File Type'); ";
+
+                echo "<script>alert('Invalid File Type');location='/view_messages.php?id=$senderID ";
                 exit;
             }
-        }
 
-        // read exif data
-        $exif = exif_read_data($_FILES['flPostMedia']['tmp_name']);
-
-        if (!empty($exif['Orientation'])) {
-            $ort = $exif['Orientation'];
-
-            switch ($ort) {
-                case 8:
-                    if (strstr($url, 'localhost:8888')) {
-                        // local php imagerotate doesn't work
-
-                    } else {
-                        $src = imagerotate($src, 90, 0);
-                    }
-                    break;
-                case 3:
-                    if (strstr($url, 'localhost:8888')) {
-                        // local php imagerotate doesn't work
-
-                    } else {
-                        $src = imagerotate($src, 180, 0);
-                    }
-                    break;
-                case 6:
-                    if (strstr($url, 'localhost:8888')) {
-                        // local php imagerotate doesn't work
-                    } else {
-                        $src = imagerotate($src, -90, 0);
-                    }
-                    break;
-            }
-        }
-
-// save photo/video
-        require 'media_post_file_path.php';
-        if (in_array($type, $videoFileTypes)) {
-            move_uploaded_file($mediaFile, $postMediaFilePath);
-        } else {
-            if ($type == "image/jpg" || $type == "image/jpeg") {
-                imagejpeg($src, $postMediaFilePath, 100);
-
-            } else if ($type == "image/png") {
-                imagepng($src, $postMediaFilePath, 0, NULL);
-
-            } else {
-                imagegif($src, $postMediaFilePath, 100);
-
-            }
-        }
 
 // if photo didn't get uploaded, notify the user
         if (!file_exists($postMediaFilePath)) {

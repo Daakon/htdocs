@@ -135,18 +135,27 @@ get_head_files();
 
     <div class="row">
         <div class="col-lg-6 col-md-5 hidden-sm hidden-xs">
-            <img src="/images/Rapportbook-Logo.png" height="350" width="100%" alt="" />
-            <h2 align="center"><span style="font-style: italic;color:red;font-weight: 400">Your One Stop Web Shop</span></h2>
+            <a href="http://rapportbook.com/media/trim.AC95253E-8CE6-47A9-B983-83682B787D3E.mp4">View This Video Natively</a>
+            <video src="http://rapportbook.com/media/trim.AC95253E-8CE6-47A9-B983-83682B787D3E.mp4" poster="/poster/poster5598c39b0cd8c.jpg" controls=""><br>
+            </video>
+            <h2 align="center"><span style="font-style: italic;color:red;font-weight: 400">The Video Only Social Network</span></h2>
         </div>
 
         <div class="col-lg-6 col-md-7 col-sm-12 col-xs-12 ">
 
             <fb:login-button data-max-rows="1" data-size="xlarge" data-show-faces="true" data-auto-logout-link="true" scope="public_profile,email" onlogin="checkLoginState();" style="margin-top:10px;">
             </fb:login-button>
-
-
             <div id="status">
             </div>
+
+            <div class="visible-xs visible-sm" style="padding-top:10px">
+                <a href="http://rapportbook.com/media/trim.AC95253E-8CE6-47A9-B983-83682B787D3E.mp4">View This Video Natively</a>
+            <video src="http://rapportbook.com/media/trim.AC95253E-8CE6-47A9-B983-83682B787D3E.mp4" poster="/poster/poster5598c39b0cd8c.jpg" controls=""><br>
+            </video>
+            </div>
+
+
+
 
             <div class="modal fade" id="request_message">
                 <div class="modal-dialog">
@@ -171,18 +180,22 @@ get_head_files();
 
             <div class="visible-xs" style="font-weight: bold;font-size:20px">
                 <br/>
-                <a href="login-mobile.php" style="color:red;">Or Login With Rapportbook</a>
+                <a href="login-mobile.php" style="color:red;">Click here to Login With Rapportbook</a>
+
             </div>
 
+            <div class="visible-xs visible-sm">
+                <h3>The Video Only Social Network</h3>
+            </div>
 
             <form method="post" action="signup.php" id="rb_signup_form" >
                 <br/>
 
-                <div class="visible-lg visible-md visible-sm">
-                    <span style="font-size:20px;font-weight:bold;">Or</span>
-                    <h2 style="color:red;">Sign Up with Rapportbook</h2>
+                <div class="visible-lg visible-md visible-sm visible-xs">
+                    <h2 style="color:red;">Sign Up</h2>
                 </div>
-                <h4><a href="learn_more.php">Click Here To Learn More</a></h4>
+
+
 
                 <div class="form-group row" id="form-group-firstName">
                     <div class="col-xs-12 col-md-12 col-md-6 col-lg-6 ">

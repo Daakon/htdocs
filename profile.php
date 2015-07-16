@@ -23,108 +23,6 @@ $ID = $_SESSION['ID'];
 
 <?php
 
-// handle upload profile pic
-if (isset($_POST['photo']) && ($_POST['photo'] == "Upload Photo")) {
-    if (isset($_FILES['flPostPhoto']) && strlen($_FILES['flPostPhoto']['name']) > 1) {
-
-        if ($_FILES['flPostPhoto']['size'] > 50000000) {
-            echo '<script>alert("File is too large");</script>';
-            exit;
-        }
-
-        // add unique id to image name to make it unique and add it to the file server
-        $mediaName = $_FILES["flPostPhoto"]["name"];
-        $mediaName = uniqid() . $mediaName;
-        $mediaFile = $_FILES['flPostPhoto']['tmp_name'];
-        $type = $_FILES["flPostPhoto"]["type"];
-
-        require 'media_post_file_path.php';
-
-        if ($type == "image/jpg" || $type == "image/jpeg") {
-
-            $src = imagecreatefromjpeg($mediaFile);
-        } else if ($type == "image/png") {
-
-            $src = imagecreatefrompng($mediaFile);
-        } else if ($type == "image/gif") {
-            $src = imagecreatefromgif($mediaFile);
-        } else {
-            echo "<script>alert('Invalid File Type');</script>";
-            exit;
-        }
-
-        $exif = @exif_read_data($mediaFile);
-
-        if (!empty($exif['Orientation'])) {
-            $ort = $exif['Orientation'];
-
-            switch ($ort) {
-                case 8:
-                    if (strstr($url, 'localhost:8888')) {
-                        // local php imagerotate doesn't work
-
-                    } else {
-                        $src = imagerotate($src, 90, 0);
-                    }
-                    break;
-                case 3:
-                    if (strstr($url, 'localhost:8888')) {
-                        // local php imagerotate doesn't work
-
-                    } else {
-                        $src = imagerotate($src, 180, 0);
-                    }
-                    break;
-                case 6:
-                    if (strstr($url, 'localhost:8888')) {
-                        // local php imagerotate doesn't work
-                    } else {
-                        $src = imagerotate($src, -90, 0);
-                    }
-                    break;
-            }
-        }
-
-        require 'media_post_file_path.php';
-
-        // photo file types
-        $photoFileTypes = array("image/jpg", "image/jpeg", "image/png", "image/tiff",
-            "image/gif", "image/raw");
-
-        // handle transparency
-        imagesavealpha($src, true);
-        if ($type == "image/jpg" || $type == "image/jpeg") {
-            imagejpeg($src, $postMediaFilePath, 50);
-
-        } else if ($type == "image/png") {
-            imagepng($src, $postMediaFilePath, 0, NULL);
-
-        } else {
-            imagegif($src, $postMediaFilePath, 50);
-
-        }
-
-
-
-        // write photo to media table
-        $sql2 = "INSERT INTO Media (Member_ID, MediaName,     MediaType,  wasProfilePhoto, MediaDate) Values
-                               ('$ID',     '$mediaName',  '$type',       1,            CURDATE())";
-        mysql_query($sql2) or die(mysql_error());
-
-
-        // update photo pointer in database
-        $sql = "UPDATE Profile Set ProfilePhoto = '$mediaName' WHERE Member_ID = '$ID'";
-        mysql_query($sql) or die(mysql_error());
-
-
-        // alert everything is good
-        echo "<script>alert('Update Successful');</script>";
-    }
-}
-?>
-
-<?php
-
 // handle upload profile video
 if (isset($_POST['video']) && ($_POST['video'] == "Upload Video")) {
     if (isset($_FILES['flPostVideo']) && strlen($_FILES['flPostVideo']['name']) > 1) {
@@ -502,31 +400,7 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
                         <input type="submit" id="text" name="text" value="Text" style="border-radius: 10px" class="btn btn-default" />
                     </div>
                 </form>
-
-                <img src = "<?php echo $mediaPath.$profilePhoto ?>" class="profilePhoto" alt="Profile Photo" />
             </div>
-
-
-            <form method="post" enctype="multipart/form-data" action="" >
-                <img src="/images/image-icon.png" class="img-icon" alt="Photos/Video"/>
-                <strong>Upload A Profile Photo</strong>
-                <input type="file" width="10px;" name="flPostPhoto" id="flPostPhoto"/>
-                <input type="hidden" name="MAX_FILE_SIZE" value="500000000"
-                <br/>
-                <div id="PhotoProgress" style="display:none;">
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-striped progress-bar-danger active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-                            <span class="sr-only">Loading</span>
-                        </div>
-                    </div>
-                </div>
-                <br/>
-                <input type="submit" class="post-button" name="photo" id="photo" value="Upload Photo" onclick="showPhotoUploading()" />
-            </form>
-
-            <br/>
-            <hr/>
-            <br/>
 
             <!--Profile video --------------------------------------------------------------------------------->
 

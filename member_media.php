@@ -29,9 +29,6 @@ if (isset($_POST['Upload'])) {
         $fileName = pathinfo($mediaName, PATHINFO_FILENAME);
 
 
-        if (in_array($type, $audioFileTypes) || in_array($type, $videoFileTypes)) {
-            $audioName = $fileName;
-        }
 
         // check file size
         if ($_FILES['flPostMedia']['size'] > 150000000) {
@@ -43,11 +40,6 @@ if (isset($_POST['Upload'])) {
         $videoFileTypes = array("video/mpeg", "video/mpg", "video/ogg", "video/mp4",
             "video/quicktime", "video/webm", "video/x-matroska",
             "video/x-ms-wmw");
-        // video file types
-        $photoFileTypes = array("image/jpg", "image/jpeg", "image/png", "image/tiff",
-            "image/gif", "image/raw");
-
-
 
         // add unique id to image name to make it unique and add it to the file server
         $mediaName = trim(uniqid() . $mediaName);
@@ -66,18 +58,10 @@ if (isset($_POST['Upload'])) {
 
 
         } else {
-            if ($type == "image/jpg" || $type == "image/jpeg") {
-                $src = imagecreatefromjpeg($mediaFile);
-            } else if ($type == "image/png") {
-                $src = imagecreatefrompng($mediaFile);
-            } else if ($type == "image/gif") {
-                $src = imagecreatefromgif($mediaFile);
-            } /*else {
-                echo "<script>alert('Invalid File Type');</script>";
-                header('Location:member_videos.php');
-                exit;
-            }*/
+
+            echo "<script>alert('Invalid File Type'); location = '/member_media.php'</script>";
         }
+
 
 
         require 'media_post_file_path.php';
@@ -87,48 +71,6 @@ if (isset($_POST['Upload'])) {
 
             move_uploaded_file($mediaFile, $postMediaFilePath);
 
-        } else {
-
-            if (in_array($type, $photoFileTypes)) {
-
-                // read exif data
-                $exif = @exif_read_data($mediaFile);
-
-                if (!empty($exif['Orientation'])) {
-
-                    $ort = $exif['Orientation'];
-
-                    switch ($ort) {
-                        case 8:
-                            $src = imagerotate($src, 90, 0);
-                            break;
-                        case 3:
-                            $src = imagerotate($src, 180, 0);
-                            break;
-                        case 6:
-                            $src = imagerotate($src, -90, 0);
-                            break;
-                    }
-                }
-
-            }
-
-            // handle transparency
-            imagesavealpha($src, true);
-            if ($type == "image/jpg" || $type == "image/jpeg") {
-                imagejpeg($src, $postMediaFilePath, 50);
-            } else if ($type == "image/png") {
-                imagepng($src, $postMediaFilePath, 0, NULL);
-
-
-            } else if ($type == "image/gif") {
-                imagegif($src, $postMediaFilePath, 50);
-
-            } /*else {
-                echo "<script>alert('Invalid File Type');</script>";
-                header('Location:member_videos.php');
-                exit;
-            }*/
         }
 
 
@@ -295,7 +237,7 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
 
             <form method="post" enctype="multipart/form-data" action="" >
                 <img src="/images/image-icon.png" height="30px" width="30px" alt="Video"/>
-                <strong>Upload Photos, Videos & Music to your media library</strong>
+                <strong>Upload Video</strong>
                 <br/><br/>
                 <span style="padding-left:5px;font-style:italic;color:red">
                     Public content has been shared in Roll Call.
@@ -353,10 +295,6 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
                     "video/quicktime", "video/webm", "video/x-matroska",
                     "video/x-ms-wmw");
 
-                $photoFileTypes = array("image/jpg", "image/jpeg", "image/png", "image/tiff",
-                    "image/gif", "image/raw");
-
-                $audioFileTypes = array("audio/wav", "audio/mp3", "audio/x-m4a");
 
                 $text;
 
@@ -397,71 +335,11 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
 
                     echo "<hr/><br/>";
                     ?>
-
-                <?php
-
-                }
-
-                // photo type
-            if (in_array($mediaType, $photoFileTypes)) {
-                $text = "photo";
-                $img = '<a href = "media.php?id=' . $ID . '&mediaName=' . $mediaName . '&mid=' . $mediaID . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '" ><br/><img src = "' . $mediaPath . $mediaName . '" class="img-responsive"/></a><br/><br/>'
-                    . $privateString . '<br/>';
-
-
-                echo "
-                    <div>
-                    $img
-
-                    </div>";
-                ?>
-                <form method="post" action="">
-                    <div class="form-group">
-                        <label for="text">Text this <?php echo $text ?></label>
-
-                        <br/>
-                        <input type="hidden" id="mediaName" name="mediaName" value="<?php echo $mediaName ?>" />
-                        <input type="hidden" id="mediaID" name="mediaID" value="<?php echo $mediaID ?>" />
-                        <input type="hidden" id="mediaType" name="mediaType" value="<?php echo $mediaType ?>" />
-                        <input type="hidden" id="mediaDate" name="mediaDate" value="<?php echo $mediaDate ?>" />
-                        <input type="text" id="number" name="number" class="form-control text-center" style="width:150px;" placeholder="2125551212"/>
-                    </div>
-                    <input type="submit" id="text" name="text" value="Text" style="border-radius: 10px" class="btn btn-default" />
-                </form>
-                <br/><br/>
+            }
 
             <?php
             }
 
-                // audio type
-                if (in_array($mediaType, $audioFileTypes)) {
-                    $text = "song";
-                    $img = '<b>'.$audioName.'</b><br/><audio controls>
-                            <source src="'.$mediaPath . $mediaName.'" type="'.$mediaType.'">
-                            Your browser does not support the audio element.
-                            </audio>
-                            <a href = "media.php?id=' . $ID . '&mediaName=' . $mediaName . '&mid=' . $mediaID . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '" ><br/>More</a><br/><br/>'
-                        .$privateString.'<br/>';
-
-                    echo "<div>$img</div>";
-                    ?>
-            <form method="post" action="">
-                <div class="form-group">
-                    <label for="text">Text this <?php echo $text ?></label>
-
-                    <br/>
-                    <input type="hidden" id="mediaName" name="mediaName" value="<?php echo $mediaName ?>" />
-                    <input type="hidden" id="mediaID" name="mediaID" value="<?php echo $mediaID ?>" />
-                    <input type="hidden" id="mediaType" name="mediaType" value="<?php echo $mediaType ?>" />
-                    <input type="hidden" id="mediaDate" name="mediaDate" value="<?php echo $mediaDate ?>" />
-                    <input type="text" id="number" name="number" class="form-control text-center" style="width:150px;" placeholder="2125551212"/>
-                </div>
-                <input type="submit" id="text" name="text" value="Text" style="border-radius: 10px" class="btn btn-default" />
-            </form>
-            <br/><br/>
-
-            <?php
-                }
             } ?>
         </div>
 

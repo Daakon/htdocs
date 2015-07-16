@@ -108,13 +108,7 @@ $lName = $rows['LastName'];
 
             ?>
 
-            <div align ="center">
 
-                <img src = "<?php echo $mediaPath.$profilePhoto ?>" class="profilePhoto" alt="Profile Photo" />
-            </div>
-
-
-            <br/>
             <hr/>
             <br/>
 
