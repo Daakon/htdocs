@@ -27,18 +27,13 @@ function category()
     echo '<option value = "Movie">Movie</option>';
     echo '<option value = "Night Life">Night Life</option>';
     echo '<option value = "Photography">Photography</option>';
-    echo '<option value = "Pop">Pop</option>';
     echo '<option value = "Question">Question</option>';
-    echo '<option value = "R&B">R&B</option>';
-    echo '<option value = "Rap">Rap</option>';
     echo '<option value = "Recreation">Recreation</option>';
     echo '<option value = "Restaurant">Restaurant</option>';
     echo '<option value = "Social">Social</option>';
     echo '<option value = "Sports">Sports</option>';
-    echo '<option value = "Technology">Technology</option>';
     echo '<option value = "Theatrical">Theatrical</option>';
     echo '<option value = "TV">TV</option>';
-    echo '<option value = "Video Game">Video Game</option>';
 }
 
 function age() {

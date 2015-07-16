@@ -197,7 +197,10 @@ if (isset($_POST['submit'])) {
             }
         }
     }
-    echo "<script>location='/home.php?scrollx=$scrollx&scrolly=$scrolly'</script>";
+    ?>
+    <!--Refresh Cache -->
+    <meta http-equiv="refresh" content="0;URL='/home.php'" />
+    <?php
 }
 ?>
 
