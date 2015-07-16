@@ -128,11 +128,11 @@ get_header()
             <div class="row">
 
                 <div class="col-xs-12 col-md-5 col-md-offset-1"> 
-                    <img src="<?php echo $imagesPath ?>sale.png" class="how-it-works-img" align="left"/> 
+                    <img src="<?php echo $imagesPath ?>dollar-sign.jpg" class="how-it-works-img" align="left"/> 
                 </div>
                   
                 <div class="col-xs-12 col-md-6"> 
-                    <span class="how-it-works-header">Sale Stuff</span> 
+                    <span class="how-it-works-header">Sell Stuff</span> 
                     <p>
                         Post an AD to sell just about anything you want.
                     </p>
