@@ -29,7 +29,6 @@ function category()
     echo '<option value = "Photography">Photography</option>';
     echo '<option value = "Question">Question</option>';
     echo '<option value = "Recreation">Recreation</option>';
-    echo '<option value = "Restaurant">Restaurant</option>';
     echo '<option value = "Social">Social</option>';
     echo '<option value = "Sports">Sports</option>';
     echo '<option value = "Theatrical">Theatrical</option>';
