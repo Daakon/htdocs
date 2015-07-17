@@ -1,6 +1,6 @@
 <?php
 require 'connect.php';
-require 'getSession.php';
+//require 'getSession.php';
 require 'html_functions.php';
 require 'mediaPath.php';
 require 'findURL.php';
@@ -593,7 +593,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
             <a href='/post-interest.php?interest=<?php echo urlencode($category) ?>' class='category'><h5><?php echo $category ." ". interestGlyphs($category) ?></h5></a>
 
             <?php
-
+            if (isset($ID)) {
             //check if member has approved this post
             //----------------------------------------------------------------
             //require 'getSessionType.php';
@@ -670,6 +670,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
                 <br/>
                 <?php
+                }
                 // get post comments
                 $sql3 = "SELECT DISTINCT
                         PostComments.Comment As PostComment,
