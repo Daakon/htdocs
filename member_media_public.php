@@ -25,12 +25,13 @@ $memberID = $rows['ID'];
 $fName = $rows['FirstName'];
 $lName = $rows['LastName'];
 
-if (mysql_numrows($result) == 0) {
+if (mysql_num_rows($result) == 0) {
     echo '<script>alert("This profile could not be found");location = "/index.php"</script>';
 }
 ?>
 
 <?php include('media_sizes.html'); ?>
+
 
 <body>
 
@@ -38,11 +39,10 @@ if (mysql_numrows($result) == 0) {
     <?php require 'profile_menu_public.php'; ?>
     <br/><br/>
 
-    <div class="row row-padding">
+    <div class="row row-padding" >
 
-        <div class="col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8 roll-call">
-            <h2>Photos & Videos</h2>
-<hr style = 'background-color:#000000; border-width:0; color:#000000; height:2px; lineheight:0; display: inline-block; text-align: left; width:100%;' />
+        <div class="col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8 roll-call" style="background-image: url(/images/book.png);background-repeat:repeat-y;margin-right:5px;background-size:100% auto">
+            <h2>Video Book</h2>
             <br/>
 
             <?php

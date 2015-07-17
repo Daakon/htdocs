@@ -58,16 +58,11 @@ $comment = makeLinks($comment);
                 exit;
             }
 
-// check if file type is a photo
+// check if file type is a video
             $videoFileTypes = array("video/mpeg", "video/mpg", "video/ogg", "video/mp4",
                 "video/quicktime", "video/webm", "video/x-matroska",
                 "video/x-ms-wmw");
-// video file types
-            $photoFileTypes = array("image/jpg", "image/jpeg", "image/png", "image/tiff",
-                "image/gif", "image/raw");
 
-            // audio file types
-            $audioFileTypes = array("audio/wav", "audio/mp3");
 
 // add unique id to image name to make it unique and add it to the file server
             $mediaName = $_FILES["flPostMedia"]["name"];
@@ -84,52 +79,17 @@ $comment = makeLinks($comment);
                 $newFileName = $fileName.".mp4";
                 exec("ffmpeg -i $fileName -vcodec libx264 -pix_fmt yuv420p -profile:v baseline -preset slow -crf 22 -movflags +faststart $newFileName");
                 $mediaName = $newFileName;
-            } else {
-                if ($type == "image/jpg" || $type == "image/jpeg") {
-                    $src = imagecreatefromjpeg($mediaFile);
-                } else if ($type == "image/png") {
-                    $src = imagecreatefrompng($mediaFile);
-                } else if ($type == "image/gif") {
-                    $src = imagecreatefromgif($mediaFile);
-                } else {
+            }
+             else {
                     echo "<script>alert('Invalid File Type'); ";
                     exit;
                 }
 
-                $exif = @exif_read_data($mediaFile);
-
-                if (!empty($exif['Orientation'])) {
-                    $ort = $exif['Orientation'];
-
-                    switch ($ort) {
-                        case 8:
-                            $src = imagerotate($src, 90, 0);
-                            break;
-                        case 3:
-                            $src = imagerotate($src, 180, 0);
-                            break;
-                        case 6:
-                            $src = imagerotate($src, -90, 0);
-                            break;
-                    }
-                }
-            }
 
 // save photo/video
             require 'media_post_file_path.php';
             if (in_array($type, $videoFileTypes)) {
                 move_uploaded_file($mediaFile, $postMediaFilePath);
-            } else {
-                if ($type == "image/jpg" || $type == "image/jpeg") {
-                    imagejpeg($src, $postMediaFilePath, 100);
-
-                } else if ($type == "image/png") {
-                    imagepng($src, $postMediaFilePath, 0, NULL);
-
-                } else {
-                    imagegif($src, $postMediaFilePath, 100);
-
-                }
             }
 
             $sql2 = "INSERT INTO Media (Member_ID,  MediaName,   MediaType,   MediaDate     ) Values
@@ -145,14 +105,8 @@ $comment = makeLinks($comment);
             $newPhotoType = $photoRow['MediaType'];
             $newPhotoDate = $photoRow['MediaDate'];
 
-// check if file type is a photo
-            if (in_array($type, $photoFileTypes)) {
-
-                $img = '<img src = "' . $postMediaFilePath . '" style = "width:auto; max-width:400px;max-height:400px;" />';
-
-                $img = '<a href = "media.php?id=' . $ID . '&pid=' . $newPhotoId . '&mediaName=' . $newPhoto . '&mediaType=' . $newPhotoType . '&mediaDate=' . $newPhotoDate . '">' . $img . '</a>';
-            } // check if file type is a video
-            elseif (in_array($type, $videoFileTypes)) {
+ // check if file type is a video
+            if (in_array($type, $videoFileTypes)) {
                 $img = '<a href = "' . $videoPath . $mediaName . '"><img src = "' . $images . 'video-bg.jpg" height="100" width = "100" /></a>';
             }
 
@@ -207,6 +161,7 @@ $comment = makeLinks($comment);
             mysql_query($sql) or die(mysql_error());
 
         }
+
 //----------------------
 // if not comment photo
 //----------------------
@@ -296,35 +251,19 @@ $mediaFilePath = trim("media/" . $mediaName);
 if (!empty($mediaFilePath)){
 if (file_exists($mediaFilePath)) {
 
-// check if file type is a photo
+// check if file type is a video
 $videoFileTypes = array("video/mpeg", "video/mpg", "video/ogg", "video/mp4",
     "video/quicktime", "video/webm", "video/x - matroska",
     "video/x - ms - wmw");
-// video file types
-$photoFileTypes = array("image/jpg", "image/jpeg", "image/png", "image/tiff",
-    "image/gif", "image/raw");
-// audio file types
-$audioFileTypes = array("audio/wav", "audio/mp3");
 
-// check if file type is a photo
-if (in_array($mediaType, $photoFileTypes)) {
 
-    $img = '<img src = "' . $mediaFilePath . '" style = "border:3px solid black;width:400;" />';
 
-} // check if file type is a video
-elseif (in_array($mediaType, $videoFileTypes)) {
+if (in_array($mediaType, $videoFileTypes)) {
 
     $img = '<a href = "' . $videoPath . $mediaName . '"><img src = "' . $images . 'video-bg.jpg" height="100" width = "100" /></a>';
 
 }
-elseif (in_array($mediaType, $audioFileTypes)) {
 
-    $img = '<audio controls>
-                            <source src="'.$mediaPath . $mediaName.'" type="'.$mediaType.'">
-                            Your browser does not support the audio element.
-                            </audio>';
-
-}
 ?>
 
 <?php
@@ -590,22 +529,10 @@ $profileMediaSrc = trim("media/" . $profilePhoto);
                 $posterName = $rowPost['Poster'];
                 $audioName = $rowPost['AudioName'];
 
-                // check if file type is a photo
-                if (in_array($mediaType, $photoFileTypes)) {
 
-                    $post = '<img src = "' . $mediaFilePath . '" style = "border:3px solid black;width:400;" class="img-responsive"/>';
-
-                } // check if file type is a video
-                elseif (in_array($mediaType, $videoFileTypes)) {
+                if (in_array($mediaType, $videoFileTypes)) {
 
                     $post = '<video src = "' . $videoPath . $mediaName . '" poster="/poster/'.$posterName.'" preload="auto" controls />';
-                }
-                elseif (in_array($mediaType, $audioFileTypes)) {
-
-                    $post = '<b>'.$audioName.'</b><br/><audio controls>
-                            <source src="'.$mediaPath . $mediaName.'" type="'.$mediaType.'">
-                            Your browser does not support the audio element.
-                            </audio>';
                 }
             }
             ?>

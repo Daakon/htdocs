@@ -230,10 +230,10 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
     <?php require 'profile_menu.php'; ?>
     <br/><br/>
 
-    <div class="row row-padding">
+    <div class="row row-padding" >
 
-        <div class="col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8 roll-call">
-            <h2>Media</h2>
+        <div class="col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8 roll-call" style="background-image: url(/images/book.png);background-repeat:repeat-y;margin-right:5px;background-size:100% auto">
+            <h2>Video Book</h2>
 
             <form method="post" enctype="multipart/form-data" action="" >
                 <img src="/images/image-icon.png" height="30px" width="30px" alt="Video"/>
@@ -335,7 +335,6 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
 
                     echo "<hr/><br/>";
                     ?>
-            }
 
             <?php
             }
