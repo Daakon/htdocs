@@ -135,8 +135,7 @@ get_head_files();
 
     <div class="row">
         <div class="col-lg-6 col-md-5 hidden-sm hidden-xs">
-            <a href="http://rapportbook.com/media/trim.AC95253E-8CE6-47A9-B983-83682B787D3E.mp4">View This Video Natively</a>
-            <video src="http://rapportbook.com/media/trim.AC95253E-8CE6-47A9-B983-83682B787D3E.mp4" poster="/poster/poster5598c39b0cd8c.jpg" controls=""><br>
+            <video src="http://rapportbook.com/media/trim.AC95253E-8CE6-47A9-B983-83682B787D3E.mp4" poster="http://rapportbook.com/poster/poster5598c39b0cd8c.jpg" controls="controls"><br>
             </video>
             <h2 align="center"><span style="font-style: italic;color:red;font-weight: 400">Tell Your Story With Videos</span></h2>
         </div>
@@ -147,14 +146,6 @@ get_head_files();
             </fb:login-button>
             <div id="status">
             </div>
-
-            <div class="visible-xs visible-sm" style="padding-top:10px">
-                <a href="http://rapportbook.com/media/trim.AC95253E-8CE6-47A9-B983-83682B787D3E.mp4">View This Video Natively</a>
-            <video src="http://rapportbook.com/media/trim.AC95253E-8CE6-47A9-B983-83682B787D3E.mp4" poster="/poster/poster5598c39b0cd8c.jpg" controls=""><br>
-            </video>
-            </div>
-
-
 
 
             <div class="modal fade" id="request_message">
@@ -184,12 +175,15 @@ get_head_files();
 
             </div>
 
-            <div class="visible-xs visible-sm">
-                <h3>Tell Your Story With Videos</h3>
+            <div class="visible-xs visible-sm" style="padding:20px;font-weight:bold;">
+                <a href="http://rapportbook.com/media/trim.AC95253E-8CE6-47A9-B983-83682B787D3E.mp4">
+                    <image src="/images/story.png" height="50" width="auto"/>
+                    <br/>
+                    Click Here To See A Story Told With Video
+                </a>
             </div>
 
             <form method="post" action="signup.php" id="rb_signup_form" >
-                <br/>
 
                 <div class="visible-lg visible-md visible-sm visible-xs">
                     <h2 style="color:red;">Sign Up</h2>
