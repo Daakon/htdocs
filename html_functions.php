@@ -21,19 +21,17 @@ function get_head_files()
 <script>
 addToHomescreen.removeSession();
 </script>
-        <meta name="description" content="Rapportbook is a platform that lets individuals share their interests with the world.
-        Post photos, videos & music, network and much more. It's free to Join! Click here to checkout content on Rapportbook">
-        <meta name="keywords" content="networking, promotion, advertise, photos, videos, messaging">
+        <meta name="description" content="Tell Your Story With Video">
+        <meta name="keywords" content="Video, Social Network">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 
         <!--Facebook API Meta Tags -->
         <meta property="og:site_name" content="Rapportbook"/>
-        <meta property="og:title" content="Click here to view this post on Rapportbook!">
+        <meta property="og:title" content="Click here to view this video on Rapportbook!">
         <meta property="og:image" content="http://rapportbook.com/images/Rapportbook-Logo.png">
-        <meta property="og:description" content="Rapportbook is a multi-media rich platform that lets individuals share their interests with the world.
-        Post photos, videos & music, network and much more. It's free to Join!">
+        <meta property="og:description" content="Tell Your Story With Video">
 
 
 

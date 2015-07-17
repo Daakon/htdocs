@@ -7,7 +7,7 @@ IT WILL INCREASE THE RENDERING TIME OF HTML ELEMENTS
 $refresh = $_GET['rf'];
 if (!empty($refresh)) { ?>
     <!--Clear cache-->
-  <meta http-equiv="refresh" content="0;URL='/home.php'" />
+  <meta http-equiv="refresh" content="0;URL='/home.php/rf='''" />
  <?php
 }
 ?>
@@ -63,12 +63,26 @@ if (isset($_POST['submit'])) {
                 $fileName = pathinfo($mediaName, PATHINFO_FILENAME);
                 $mediaName = trim(uniqid() . $mediaName);
                 $mediaFile = $_FILES['flPostMedia']['tmp_name'];
-                $mediaFile2 = "";
-                copy($_FILES['flPostMedia']['tmp_name'], $mediaFile2);
-                $mediaFile3 = "";
-                copy($_FILES['flPostMedia']['tmp_name'], $mediaFile3);
                 $type = $_FILES['flPostMedia']['type'];
 
+                $ffmpeg = '/usr/bin/ffmpeg';
+
+                // get video dimensions
+                $command = $ffmpeg . ' -i ' . $mediaFile . ' -vstats 2>&1';
+                $output = shell_exec($command);
+                $regex_sizes = "/Video: ([^,]*), ([^,]*), ([0-9]{1,4})x([0-9]{1,4})/";
+
+                if (preg_match($regex_sizes, $output, $regs)) {
+                    $codec = $regs [1] ? $regs [1] : null;
+                    $video_width = $regs [3] ? $regs [3] : null;
+                    $video_height = $regs [4] ? $regs [4] : null;
+                }
+
+                $flip='';
+                if ($video_width > $video_height) {
+                    // video was shot in landscape
+                    $flip=90;
+                }
 
                 require 'media_post_file_path.php';
 
@@ -82,7 +96,7 @@ if (isset($_POST['submit'])) {
                         $oggFileName = $fileName . ".ogv";
                         $webmFileName = $fileName . ".webm";
 
-                        $ffmpeg = '/usr/bin/ffmpeg';
+
                         // convert mp4
                         exec("$ffmpeg -i $fileName $newFileName");
                         $mediaName = $newFileName;
@@ -104,6 +118,8 @@ if (isset($_POST['submit'])) {
 
                 if (in_array($type, $videoFileTypes) || in_array($type, $audioFileTypes)) {
                     move_uploaded_file($mediaFile, $postMediaFilePath);
+
+
                     //copy new mp4 file path to ogg file path
                     copy($postMediaFilePath, $postOggFilePathTemp);
                     // overwrite mp4 with real ogg file path
@@ -157,39 +173,44 @@ if (isset($_POST['submit'])) {
                         exec($cmd);
                         $poster = imagecreatefromjpeg($poster);
 
-                        $white = imagecolorallocate($poster, 255, 255, 255);
+                        /*$white = imagecolorallocate($poster, 255, 255, 255);
                         $text="Rapportbook.com";
-                        $font="/stocky.ttf";
+                        $font="/stocky.ttf";*/
 
-                        imagettftext($poster, 20, 0, 20, 20, $white, $font, $text);
-
-                        $size = getimagesize("$posterPath$posterName");
-                        $width = $size[0];
-                        $height = $size[1];
+                        //imagettftext($poster, 20, 0, 20, 20, $white, $font, $text);
 
 
-                        if ($width > $height && $height < 1000) {
-                            // video shot in landscape, needs to be flipped
+                            $size = getimagesize("$posterPath$posterName");
+                            $width = $size[0];
+                            $height = $size[1];
+
+                            // if video was initially shot in landscape
+                        if ($flip == 90) {
+                            // video was shot in landscape
                             $img = imagerotate($poster, 180, 0);
-                            imagejpeg($img, $posterPath.$posterName, 50);
+                            imagejpeg($img, $posterPath . $posterName, 50);
                         }
+                        else {
 
-                        // handle images from videos shot with Iphone
-                        if ($width > $height && $height > 700 && $type == "video/quicktime" || $type == "video/mp4") {
-                            // video shot in landscape, needs to be flipped
-                            $img = imagerotate($poster, -90, 0);
-                            imagejpeg($img, $posterPath.$posterName, 50);
+                            if ($width > $height && $height < 1000) {
+                                // video shot in landscape, needs to be flipped
+                                $img = imagerotate($poster, 180, 0);
+                                imagejpeg($img, $posterPath . $posterName, 50);
+                            }
+
+                            // handle images from videos shot with Iphone
+                            if ($width > $height && $height > 700 && $type == "video/quicktime" || $type == "video/mp4") {
+                                // video shot in landscape, needs to be flipped
+                                $img = imagerotate($poster, -90, 0);
+                                imagejpeg($img, $posterPath . $posterName, 50);
+                            }
                         }
-
-
 
                         $img = '<video poster="/poster/'.$posterName.'" preload="none" controls>
                                 <source src = "' . $videoPath . $mediaName . '" type="video/mp4" />
                                 <source src = "' . $videoPath . $oggFileName . '" type = "video/ogg" />
                                 <source src = "' . $videoPath . $webmFileName . '" type = "video/webm" />
                                 </video>';
-
-
 
                     }
 
