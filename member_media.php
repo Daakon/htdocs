@@ -278,17 +278,7 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
                 $private = $rows['Private'];
                 $mediaFilePath = trim("media/" . $mediaName);
                 $posterName = $rows['Poster'];
-                $audioName = $rows['AudioName'];
 
-                $privateString = "Public";
-
-                if ($private == 1) {
-                    $privateString = "Private";
-                }
-
-                if (strlen($posterName) == 0) {
-                    $posterName = "video-bg.jpg";
-                }
 
                 // check if file type is a photo
                 $videoFileTypes = array("video/mpeg", "video/mpg", "video/ogg", "video/mp4",
@@ -302,9 +292,7 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
                 if (in_array($mediaType, $videoFileTypes)) {
                     $text = "video";
                     $img = '<a href = "' . $videoPath . $mediaName . '"><video src = "' . $videoPath . $mediaName . '" poster="/poster/'.$posterName.'" preload="auto" controls /></a>
-                        <a href = "media.php?id=' . $ID . '&mediaName=' . $mediaName . '&mid=' . $mediaID . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '" ><br/>More</a><br/><br/>'
-                        .$privateString.'<br/>';
-
+                        <a href = "media.php?id=' . $ID . '&mediaName=' . $mediaName . '&mid=' . $mediaID . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '" ><br/>More</a><br/>';
 
                     echo "
                     <div>
