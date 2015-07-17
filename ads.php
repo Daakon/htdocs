@@ -63,6 +63,7 @@ function getAds($category, $age, $state, $interests, $gender) {
     $ads = "SELECT DISTINCT Members.ID As MemberID,
     Members.FirstName As FirstName,
     Members.LastName As LastName,
+    Members.Username As Username,
     Posts.ID As PostID,
     Posts.Post As Post,
     Posts.Category As Category,

@@ -13,6 +13,14 @@ $result = mysql_query($sql) or die(mysql_error());
 
 if (mysql_num_rows($result) > 0) {
     $rows = mysql_fetch_assoc($result);
+
+    if ($rows['IsSuspended'] == 1) {
+        echo "<script>alert('Your account has been suspended. Contact support for more information.');location = '/index.php'</script>";
+        exit;
+    }
+
+    if ($rows[''])
+
     session_start();
 
     $_SESSION['ID'] = $rows['ID'];
@@ -24,6 +32,12 @@ if (mysql_num_rows($result) > 0) {
     $date = date('Y-m-d H:i:s');
     $sql2 = "UPDATE Members SET LastLogin = '$date' WHERE ID = '$id' ";
     mysql_query($sql2) or die(mysql_error());
+
+    if ($rows['IsActive'] == 0) {
+        $sql = "UPDATE Members SET IsActive = 1 WHERE ID = $id";
+        mysql_query($sql) or die(mysql_error());
+        echo "<script>alert('You are now reactivating your account.'); location='/home.php'</script>";
+    }
 
     header('location:home.php');
 

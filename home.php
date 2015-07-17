@@ -157,6 +157,12 @@ if (isset($_POST['submit'])) {
                         exec($cmd);
                         $poster = imagecreatefromjpeg($poster);
 
+                        $white = imagecolorallocate($poster, 255, 255, 255);
+                        $text="Rapportbook.com";
+                        $font="/stocky.ttf";
+
+                        imagettftext($poster, 20, 0, 20, 20, $white, $font, $text);
+
                         $size = getimagesize("$posterPath$posterName");
                         $width = $size[0];
                         $height = $size[1];
@@ -174,6 +180,7 @@ if (isset($_POST['submit'])) {
                             $img = imagerotate($poster, -90, 0);
                             imagejpeg($img, $posterPath.$posterName, 50);
                         }
+
 
 
                         $img = '<video poster="/poster/'.$posterName.'" preload="none" controls>

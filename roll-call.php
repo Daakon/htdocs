@@ -38,8 +38,8 @@ $sqlRollCall = " SELECT DISTINCT
     Members.ID As MemberID,
     Members.FirstName As FirstName,
     Members.LastName As LastName,
+    Members.Username As Username,
     Posts.ID As PostID,
-
     Posts.Category As Category,
     Profile.ProfilePhoto As ProfilePhoto
     FROM Members,Posts,Profile
@@ -75,6 +75,7 @@ if (mysql_num_rows($rollCallResult) > 0) {
         $post = $rows['Post'];
         $postID = $rows['PostID'];
         $postOwner = $memberID;
+        $userName = $rows['Username'];
         ?>
 
 
@@ -83,9 +84,18 @@ if (mysql_num_rows($rollCallResult) > 0) {
 <div class=" col-lg-9 col-md-9 roll-call "
      align="left">
 
+    <?php if ($memberID = $ID) {
+        $profilePath = "<a href='/profile.php/$userName'>";
+    }
+    else {
+        $profilePath = "<a href='/profile_public.php/$userName'>";
+    }
+    ?>
+
+    <?php echo $profilePath; ?>
     <img src="<?php echo $mediaPath. $profilePhoto ?>" class="profilePhoto-Feed enlarge-onhover " alt=""
          title="<?php echo $name ?>" /> &nbsp <b><font size="4"><?php echo $name ?></font></b>
-
+    </a>
 
     <div class="post">
         <?php

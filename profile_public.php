@@ -191,16 +191,6 @@ $lName = $rows['LastName'];
 
             <br/><br/>
 
-                    <div class="public-profile-label">Email</div>
-                    <?php echo $email ?>
-
-<!--            <br/><br/>-->
-
-                    <!--<div class="public-profile-label">Date Of Birth</div>-->
-                    <?php /*echo $dob */?>
-
-            <br/><br/>
-
                     <?php if (isset($ID) && !empty($ID) && $memberID != $ID) { ?>
                     <div class="public-profile-label">Message Me</div>
                     <a href="/messages_public.php/<?php echo $username ?>"><?php echo $username ?></a>
