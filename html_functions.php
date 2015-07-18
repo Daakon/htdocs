@@ -21,6 +21,7 @@ function get_head_files()
 <script>
 addToHomescreen.removeSession();
 </script>
+        <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
         <meta name="description" content="Tell Your Story With Video">
         <meta name="keywords" content="Video, Social Network">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />

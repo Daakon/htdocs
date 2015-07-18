@@ -4,15 +4,6 @@ IT WILL INCREASE THE RENDERING TIME OF HTML ELEMENTS
 ------------------------------------------------------->
 
 <?php
-$refresh = $_GET['rf'];
-if (!empty($refresh)) { ?>
-    <!--Clear cache-->
-  <meta http-equiv="refresh" content="0;URL='/home.php/rf='''" />
- <?php
-}
-?>
-
-<?php
 require 'connect.php';
 // compress the page
 if (substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip')) ob_start("ob_gzhandler"); else ob_start();
@@ -53,6 +44,13 @@ if (isset($_POST['submit'])) {
                     exit();
                 }
 
+                ?>
+                <script>
+                if(window.innerWidth > window.innerHeight){
+                    alert("Please use Portrait!");
+                }
+                </script>
+                <?php
                 // create media type arrays
                 $videoFileTypes = array("video/mpeg", "video/mpg", "video/ogg", "video/mp4",
                     "video/quicktime", "video/webm", "video/x-matroska",
@@ -67,22 +65,6 @@ if (isset($_POST['submit'])) {
 
                 $ffmpeg = '/usr/bin/ffmpeg';
 
-                // get video dimensions
-                $command = $ffmpeg . ' -i ' . $mediaFile . ' -vstats 2>&1';
-                $output = shell_exec($command);
-                $regex_sizes = "/Video: ([^,]*), ([^,]*), ([0-9]{1,4})x([0-9]{1,4})/";
-
-                if (preg_match($regex_sizes, $output, $regs)) {
-                    $codec = $regs [1] ? $regs [1] : null;
-                    $video_width = $regs [3] ? $regs [3] : null;
-                    $video_height = $regs [4] ? $regs [4] : null;
-                }
-
-                $flip='';
-                if ($video_width > $video_height) {
-                    // video was shot in landscape
-                    $flip=90;
-                }
 
                 require 'media_post_file_path.php';
 
@@ -115,6 +97,8 @@ if (isset($_POST['submit'])) {
 
                 require 'media_post_file_path.php';
 // save photo/video
+
+
 
                 if (in_array($type, $videoFileTypes) || in_array($type, $audioFileTypes)) {
                     move_uploaded_file($mediaFile, $postMediaFilePath);
@@ -165,7 +149,7 @@ if (isset($_POST['submit'])) {
                         //where to save the image
                         $poster = "$posterPath$posterName";
                         //time to take screenshot at
-                        $interval = 5;
+                        //$interval = 5;
                         //screenshot size
                         //$size = '440x280'; -s $size
                         //ffmpeg command
@@ -184,27 +168,32 @@ if (isset($_POST['submit'])) {
                             $width = $size[0];
                             $height = $size[1];
 
-                            // if video was initially shot in landscape
-                        if ($flip == 90) {
-                            // video was shot in landscape
-                            $img = imagerotate($poster, 180, 0);
+
+
+
+                        // mobile Iphone landscape tends to be vertical, flip counter clockwise
+                        if ($width > $height && $height < 1000 && $type!="video/quicktime") {
+                            // video shot in landscape, needs to be flipped
+                            $img = imagerotate($poster, -90, 0);
                             imagejpeg($img, $posterPath . $posterName, 50);
                         }
-                        else {
 
-                            if ($width > $height && $height < 1000) {
+                        // MPGs tend to be upside down, flip 180
+                            elseif ($width > $height && $height < 1000 && $type=="video/mpg") {
                                 // video shot in landscape, needs to be flipped
                                 $img = imagerotate($poster, 180, 0);
                                 imagejpeg($img, $posterPath . $posterName, 50);
                             }
 
-                            // handle images from videos shot with Iphone
-                            if ($width > $height && $height > 700 && $type == "video/quicktime" || $type == "video/mp4") {
-                                // video shot in landscape, needs to be flipped
-                                $img = imagerotate($poster, -90, 0);
-                                imagejpeg($img, $posterPath . $posterName, 50);
+                            // portrait images are created sideways, rotate 90 degrees
+                            // landscape images are created upside but have the same size
+                            // and needs to be rotated 180 but still cannot tell how to tell the difference
+                            // both orientations have the same size
+                            elseif ($width > $height && $height > 700 && $type == "video/quicktime" || $type == "video/mp4") {
+                                    $img = imagerotate($poster, 90, 0);
+                                    imagejpeg($img, $posterPath . $posterName, 50);
                             }
-                        }
+
 
                         $img = '<video poster="/poster/'.$posterName.'" preload="none" controls>
                                 <source src = "' . $videoPath . $mediaName . '" type="video/mp4" />
@@ -234,7 +223,7 @@ if (isset($_POST['submit'])) {
             }
         }
     }
-    echo "<script>location='/home.php?scrollx=$scrollx&scrolly=$scrolly&rf=true'</script>";
+    echo "<script>location='/home.php?scrollx=$scrollx&scrolly=$scrolly'</script>";
 }
 ?>
 
@@ -340,18 +329,29 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                         $width = $size[0];
                         $height = $size[1];
 
-                        if ($width > $height && $height < 1000) {
-                            // video shot in landscape, needs to be flipped
-                            $img = imagerotate($poster, 180, 0);
-                            imagejpeg($img, $posterPath.$posterName, 50);
-                        }
-
-                        // handle images from videos shot with Iphone
-                        if ($width > $height && $height > 700 && $type == "video/quicktime" || $type == "video/mp4") {
+                        // mobile Iphone landscape tends to be vertical, flip counter clockwise
+                        if ($width > $height && $height < 1000 && $type!="video/quicktime") {
                             // video shot in landscape, needs to be flipped
                             $img = imagerotate($poster, -90, 0);
-                            imagejpeg($img, $posterPath.$posterName, 50);
+                            imagejpeg($img, $posterPath . $posterName, 50);
                         }
+
+                        // MPGs tend to be upside down, flip 180
+                        elseif ($width > $height && $height < 1000 && $type=="video/mpg") {
+                            // video shot in landscape, needs to be flipped
+                            $img = imagerotate($poster, 180, 0);
+                            imagejpeg($img, $posterPath . $posterName, 50);
+                        }
+
+                        // portrait images are created sideways, rotate 90 degrees
+                        // landscape images are created upside but have the same size
+                        // and needs to be rotated 180 but still cannot tell how to tell the difference
+                        // both orientations have the same size
+                        elseif ($width > $height && $height > 700 && $type == "video/quicktime" || $type == "video/mp4") {
+                            $img = imagerotate($poster, 90, 0);
+                            imagejpeg($img, $posterPath . $posterName, 50);
+                        }
+
 
                         $img = '<video src = "' . $videoPath . $mediaName . '" poster="/media/shot.jpg" preload="auto" controls />';
                     } else {
@@ -602,6 +602,11 @@ var j =document.getElementsByTagName('script')[0];j.parentNode.insertBefore(s,j)
             <form method="post" enctype="multipart/form-data" action="" onsubmit="showUploading()">
                 <img src="/images/image-icon.png" height="30px" width="30px" alt="Photos/Video"/>
                 <strong>Attach Your Video</strong>
+                <br/>
+                <span style="color:red;font-weight:bold">
+                    Upload Videos in Portrait Only
+                    <img src="<?php echo $imagesPath ?>portrait-mode.jpeg" height='30' width='40' alt='Portrait' />
+                </span>
                 <input type="file" width="10px;" name="flPostMedia" id="flPostMedia"/>
                 <br/>
                 <textarea name="post" id="post" class="form-control textArea"
