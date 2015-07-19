@@ -84,7 +84,7 @@ if (mysql_num_rows($rollCallResult) > 0) {
 <div class=" col-lg-9 col-md-9 roll-call "
      align="left">
 
-    <?php if ($memberID = $ID) {
+    <?php if ($memberID == $ID) {
         $profilePath = "<a href='/profile.php/$userName'>";
     }
     else {
