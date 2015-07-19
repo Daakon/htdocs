@@ -19,7 +19,7 @@ else {
 
 $text = 'login';
 if (isset($_SESSION['ID']) && !empty($_SESSION['ID'])) { ?>
-    <a href="/index.php"><b>Go To Your Profile</b></a>
+    <a href="/index.php"><b>Go To Roll Call</b></a>
 <?php }
 else { ?>
     <a href="<?php echo $howItWorks ?>"><b>New To Rapportbook?...Click here to find out more</b></a>

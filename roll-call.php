@@ -212,7 +212,7 @@ if (mysql_num_rows($rollCallResult) > 0) {
                         Members.ID As MemberID,
                         Members.FirstName as FirstName,
                         Members.LastName As LastName,
-                        Profile.ProfilePhoto As ProfilePhoto
+                        Profile.Poster As ProfilePhoto
                         FROM PostComments,Members, Profile
                         WHERE
                         PostComments.Post_ID = $postID
@@ -231,7 +231,7 @@ if (mysql_num_rows($rollCallResult) > 0) {
                 $commentID = $rows3['PostCommentID'];
                 $commentOwner = $rows3['MemberID'];
                 echo '<div class="comment-row">';
-                echo '<div class="user-icon"><img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" style = "border:1px solid black" class ="enlarge-onhover img-responsive" /><div class="user-name">' . $rows3['FirstName'] . ' ' . $rows3['LastName'] . '</div></div><div class="comment-content">' . nl2br($comment) . '</div>';
+                echo '<div class="user-icon"><img src = "/poster/' . $profilePhoto . '" height = "50" width = "50" style = "border:1px solid black" class ="enlarge-onhover img-responsive" /><div class="user-name">' . $rows3['FirstName'] . ' ' . $rows3['LastName'] . '</div></div><div class="comment-content">' . nl2br($comment) . '</div>';
                 echo '</div>';
                 if ($postOwner == $ID) {
                     //<!--DELETE BUTTON ------------------>
@@ -256,7 +256,7 @@ if (mysql_num_rows($rollCallResult) > 0) {
                         Members.ID As MemberID,
                         Members.FirstName as FirstName,
                         Members.LastName As LastName,
-                        Profile.ProfilePhoto As ProfilePhoto
+                        Profile.Poster As ProfilePhoto
                         FROM PostComments,Members, Profile
                         WHERE
                         PostComments.Post_ID = $postID
@@ -284,7 +284,7 @@ if (mysql_num_rows($rollCallResult) > 0) {
                 $commentID = $rows4['PostCommentID'];
                 $commentOwner = $rows4['MemberID'];
                 echo '<div class="user-icon">';
-                echo '<img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" style = "border:1px solid black" class ="enlarge-onhover img-responsive" /><div class="user-name">' . $rows4['FirstName'] . $rows['LastName'] . '</div></div><div class="comment-content">' . nl2br($comment) . '</div>';
+                echo '<img src = "/poster/' . $profilePhoto . '" height = "50" width = "50" style = "border:1px solid black" class ="enlarge-onhover img-responsive" /><div class="user-name">' . $rows4['FirstName'] . $rows['LastName'] . '</div></div><div class="comment-content">' . nl2br($comment) . '</div>';
                 echo '</td></tr>';
             }
             echo '</div>';

@@ -13,123 +13,6 @@ $ID = $_SESSION['ID'];
 ?>
 
 
-<?php
-// handle photo/video uploads
-
-if (isset($_POST['Upload'])) {
-
-    // if photo is provided
-    if (strlen($_FILES['flPostMedia']['name']) > 0) {
-
-        $audioFileTypes = array("audio/wav", "audio/mp3", "audio/x-m4a");
-        $audioName;
-        $mediaName = $_FILES["flPostMedia"]["name"];
-        $mediaFile = $_FILES['flPostMedia']['tmp_name'];
-        $type = $_FILES['flPostMedia']['type'];
-        $fileName = pathinfo($mediaName, PATHINFO_FILENAME);
-
-
-
-        // check file size
-        if ($_FILES['flPostMedia']['size'] > 150000000) {
-
-            exit();
-        }
-
-        // create media type arrays
-        $videoFileTypes = array("video/mpeg", "video/mpg", "video/ogg", "video/mp4",
-            "video/quicktime", "video/webm", "video/x-matroska",
-            "video/x-ms-wmw");
-
-        // add unique id to image name to make it unique and add it to the file server
-        $mediaName = trim(uniqid() . $mediaName);
-
-
-        require 'media_post_file_path.php';
-
-        if (in_array($type, $videoFileTypes)) {
-
-            // convert to mp4
-
-            $newFileName = $fileName.".mp4";
-            $ffmpeg = '/usr/bin/ffmpeg';
-            exec("$ffmpeg -i $fileName -vcodec copy $newFileName");
-            $mediaName = $newFileName;
-
-
-        } else {
-
-            echo "<script>alert('Invalid File Type'); location = '/member_media.php'</script>";
-        }
-
-
-
-        require 'media_post_file_path.php';
-
-// save photo/video
-        if (in_array($type, $videoFileTypes) || in_array($type, $audioFileTypes)) {
-
-            move_uploaded_file($mediaFile, $postMediaFilePath);
-
-        }
-
-
-            if (in_array($type, $videoFileTypes)) {
-
-                // where ffmpeg is located
-                $ffmpeg = '/usr/bin/ffmpeg';
-
-                // poster file name
-                $posterName = "poster".uniqid().".jpg";
-
-                //where to save the image
-                $poster = "$posterPath$posterName";
-
-
-                //time to take screenshot at
-                $interval = 5;
-
-                //screenshot size
-                //$size = '440x280'; -s $size
-
-                //ffmpeg command
-                $cmd = "$ffmpeg -i \"$postMediaFilePath\" -r 1  -f image2 $poster 2>&1";
-
-                exec($cmd);
-
-                $poster = imagecreatefromjpeg($poster);
-                $exif = @exif_read_data($poster);
-
-                $size = getimagesize("$posterPath$posterName");
-                $width = $size[0];
-                $height = $size[1];
-
-                if ($width > $height && $height < 1000) {
-                    // video shot in landscape, needs to be flipped
-                    $img = imagerotate($poster, 180, 0);
-                    imagejpeg($img, $posterPath.$posterName, 50);
-                }
-
-                if ($width > $height && $height > 1000) {
-                    // video shot in portrait, but still needs to be flipped
-                    $img = imagerotate($poster, -90, 0);
-                    imagejpeg($img, $posterPath.$posterName, 50);
-                }
-
-                $img = '<video src = "' . $videoPath . $mediaName . '" poster="/poster/'.$posterName.'" preload="auto" controls />';
-
-            }
-    }
-
-
-// store media pointer
-    $sql = "INSERT INTO Media (Member_ID,  MediaName,  MediaType,  MediaDate,         AudioName,  Private,  Poster    ) Values
-                                  ('$ID',  '$mediaName', '$type',   CURRENT_DATE(), '$audioName',    1,     '$posterName')";
-    mysql_query($sql) or die(mysql_error());
-
-
-    ?>
-
     <?php
     $sql = "SELECT * FROM Members
 WHERE
@@ -141,10 +24,10 @@ And Members.IsActive = 1 ";
     $fName = $rows['FirstName'];
     $lName = $rows['LastName'];
 
-    if (mysql_numrows($result) == 0) {
+    if (mysql_num_rows($result) == 0) {
         echo '<script>alert("This profile could not be found");location = "/member_media.php"</script>';
     }
-}
+
 ?>
 
 <?php
@@ -235,35 +118,6 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
         <div class="col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8 roll-call" style="background-image: url(/images/book.png);background-repeat:repeat-y;margin-right:5px;background-size:100% auto">
             <h2>Video Book</h2>
 
-            <form method="post" enctype="multipart/form-data" action="" >
-                <img src="/images/image-icon.png" height="30px" width="30px" alt="Video"/>
-                <strong>Upload Video</strong>
-                <br/><br/>
-                <span style="padding-left:5px;font-style:italic;color:red">
-                    Public content has been shared in Roll Call.
-                    <br/>
-                    Private content has been uploaded only here.
-                    </span>
-                <br/><br/>
-
-                <input type="file" width="10px;" name="flPostMedia" id="flPostMedia"/>
-                <input type="hidden" name="MAX_FILE_SIZE" value="1500000000" />
-
-                <br/><br/>
-
-                <div id="progressBar" style="display:none;">
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-striped progress-bar-danger active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-                            <b>File Uploading...please wait</b>
-                        </div>
-                    </div>
-                </div>
-                <br/>
-                <input type="submit" class="post-button" name="Upload" id="Upload" value="Upload" onclick="showUploading()"/>
-            </form>
-            <br/>
-            <hr style = 'background-color:#000000; border-width:0; color:#000000; height:2px; lineheight:0; display: inline-block; text-align: left; width:100%;' />
-            <br/>
             <?php
 
             $sql = "SELECT * FROM Media WHERE Member_ID = '$ID' And (IsDeleted IS NULL Or IsDeleted = 0)
