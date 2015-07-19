@@ -219,17 +219,17 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
                     $date = $rows['MessageDate'];
 
                     // get receiver name
-                    $sql2 = "SELECT FirstName, LastName, ProfilePhoto
+                    $sql2 = "SELECT FirstName, LastName, Poster
                     FROM Members, Profile
                     WHERE Profile.Member_ID = $senderID
                     AND Members.ID = $senderID ";
 
                     $result2 = mysql_query($sql2) or die(mysql_error());
                     $rows2 = mysql_fetch_assoc($result2);
-                    $pic = $rows2['ProfilePhoto'];
+                    $pic = $rows2['Poster'];
                     $name = $rows2['FirstName'] . ' ' . $rows2['LastName'];
 
-                    echo "<img src = '$mediaPath$pic' class='profilePhoto-Feed' alt='' /> $name";
+                    echo "<img src = '/poster/$pic' class='profilePhoto-Feed' alt='' /> $name";
 
                     echo "<div class='post'>".nl2br($message)."</div>";
 
