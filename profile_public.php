@@ -59,7 +59,7 @@ $lName = $rows['LastName'];
                         Members.Email As Email,
                         Members.Password As Password,
                         Members.DOB As DOB,
-                        Profile.ProfilePhoto As ProfilePhoto,
+                        Profile.Poster As ProfilePhoto,
                         Profile.ProfileVideo As ProfileVideo,
                         Profile.Poster As Poster,
                         Profile.HomeCity As HomeCity,
@@ -115,10 +115,10 @@ $lName = $rows['LastName'];
             <!--Profile video --------------------------------------------------------------------------------->
 
             <div align ="center">
-                <?php if ($profileVideo != "default_video.png") { ?>
+                <?php if ($profileVideo != "default_photo.png") { ?>
                     <video src = " <?php echo $videoPath . $profileVideo ?>" poster="/poster/<?php echo $posterName ?>"  preload="auto" controls />
                 <?php } else { ?>
-                    <img src = "<?php echo $mediaPath.$profileVideo ?>" class="defaultProfileVideo" alt="Profile Video" />
+                    <img src = "/poster/<?php echo $posterName ?>" class="defaultProfileVideo" alt="Profile Video" />
                 <?php } ?>
             </div>
 

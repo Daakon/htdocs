@@ -41,7 +41,7 @@ $sqlRollCall = " SELECT DISTINCT
     Members.Username As Username,
     Posts.ID As PostID,
     Posts.Category As Category,
-    Profile.ProfilePhoto As ProfilePhoto
+    Profile.Poster As ProfilePhoto
     FROM Members,Posts,Profile
     WHERE
     Members.IsActive = 1
@@ -93,7 +93,7 @@ if (mysql_num_rows($rollCallResult) > 0) {
     ?>
 
     <?php echo $profilePath; ?>
-    <img src="<?php echo $mediaPath. $profilePhoto ?>" class="profilePhoto-Feed enlarge-onhover " alt=""
+    <img src="/poster/<?php echo $profilePhoto ?>" class="profilePhoto-Feed enlarge-onhover " alt=""
          title="<?php echo $name ?>" /> &nbsp <b><font size="4"><?php echo $name ?></font></b>
     </a>
 

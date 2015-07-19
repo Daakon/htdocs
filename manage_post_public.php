@@ -411,7 +411,7 @@ if (isset($_POST['Delete']) && $_POST['Delete'] == "Delete") {
     Posts.ID As PostID,
     Posts.Post As Post,
     Posts.Category As Category,
-    Profile.ProfilePhoto As ProfilePhoto
+    Profile.Poster As ProfilePhoto
     FROM Members,Posts,Profile
     WHERE
     Posts.Member_ID = $memberID
@@ -440,7 +440,7 @@ if (isset($_POST['Delete']) && $_POST['Delete'] == "Delete") {
         <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 "
              style="background:white;border-radius:10px;margin-top:20px;border:2px solid black;" align="left">
 
-            <img src="<?php echo $mediaPath. $profilePhoto ?>" class="profilePhoto-Feed" alt=""
+            <img src="/poster/<?php echo $profilePhoto ?>" class="profilePhoto-Feed" alt=""
                  title="<?php echo $name ?>" class='enlarge-onhover img-responsive'/> &nbsp <b><font
                     size="4"><?php echo $name ?></font></b>
 

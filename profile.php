@@ -407,10 +407,10 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
 
 
             <div align ="center">
-                <?php if ($profileVideo != "default_video.png") { ?>
+                <?php if ($profileVideo != "default_photo.png") { ?>
                    <video src = " <?php echo $videoPath . $profileVideo ?>" poster="/poster/<?php echo $posterName ?>"  preload="auto" controls />
                 <?php } else { ?>
-                    <img src = "<?php echo $mediaPath.$profileVideo ?>" class="defaultProfileVideo" alt="Profile Video" />
+                    <img src = "/poster/<?php echo $posterName ?>" class="defaultProfileVideo" alt="Profile Video" />
                 <?php } ?>
             </div>
 
@@ -423,7 +423,7 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
                 <div id="VideoProgress" style="display:none;">
                     <div class="progress">
                         <div class="progress-bar progress-bar-striped progress-bar-danger active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-                            <span class="sr-only">Loading</span>
+                            <span >File Uploading...please wait</span>
                         </div>
                     </div>
                 </div>

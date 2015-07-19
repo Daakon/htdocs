@@ -408,7 +408,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
     Posts.ID As PostID,
     Posts.Post As Post,
     Posts.Category As Category,
-    Profile.ProfilePhoto As ProfilePhoto
+    Profile.Poster As ProfilePhoto
     FROM Members,Posts,Profile
     WHERE
     Posts.Member_ID = $ID
@@ -438,7 +438,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
         <div class="col-lg-9 col-md-9 roll-call" >
 
-            <img src="<?php echo $mediaPath. $profilePhoto ?>" class="profilePhoto-Feed" alt=""
+            <img src="/poster/<?php echo $profilePhoto ?>" class="profilePhoto-Feed" alt=""
                  title="<?php echo $name ?>" class='enlarge-onhover img-responsive'/> &nbsp <b><font
                     size="4"><?php echo $name ?></font></b>
 
