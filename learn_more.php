@@ -22,156 +22,38 @@ get_header()
             <a href="/home.php">Back to Roll Call</a>
             <?php } ?>
 
-            <h4>Rapportbook is a multi-media rich one stop web shop that you can use for anything.</h4>
+            <h4>Rapportbook is a video based social network for dating.</h4>
 
-        <div class="row how-it-works-row">
 
-            <div class="col-xs-12 col-md-5 col-md-offset-1">
 
-                <img src="<?php echo $imagesPath ?>video.png" class="how-it-works-img"/>
-            </div>
-            <div class="col-xs-12 col-md-6">
-                <span class="how-it-works-header">Videos</span>
+                <img src="<?php echo $imagesPath ?>mobile-dating.jpg" class="how-it-works-img"/>
+
 
                 <p>
-                   Watch and Upload Videos
+                    <b>We have the real time feed you're accustomed to in Social Networks.
+                    But we removed all the photos and replaced them with video...why?</b>
+                    Video is the now and the future, plus...
+                    the best way to build rapport with someone is by being able
+                    to see all of their mannerisms, see what they look like today.
+                    It helps avoid fraudulent representation. Video is more telling and descriptive.
+                    You don't even have a profile photo, you have a profile video.
                 </p>
 
-            </div>
-        </div>
+            <p>
+                <b>So how do you engage?</b>
+                When you go through the real time feed, if you see a video you like,
+                you can approve(like) their post and or you can direct message
+                them to get the conversation going. You can also check out their profile
+                and see what other videos a person has posted as well as other posts they made.
+            </p>
 
-        <!---------------------------------------------------------------->
+            <p>
+                <b>You can search the real time feed by age as well as post topic.</b>
+                Basically, each post is tagged by an interest topic,
+                so you can filter by topics that interest you and see if someone
+                shares similar interests as you.
+            </p>
 
-        <div class="row ">
-            <div class="col-xs-12 col-md-5 col-md-offset-1"> 
-                <img src="<?php echo $imagesPath ?>camera.png" class="how-it-works-img" align="left"/> 
-            </div>
-             
-            <div class="col-xs-12 col-md-6"> 
-                <span class="how-it-works-header">Photos</span> 
-                <p>
-                    View & Upload Photos
-                </p>
-                 
-            </div>
-             
-        </div>
-
-        <!-------------------------------------------------------------->
-
-            <div class="row ">
-                <div class="col-xs-12 col-md-5 col-md-offset-1"> 
-                    <img src="<?php echo $imagesPath ?>video-game.png" class="how-it-works-img" align="left"/> 
-                </div>
-                 
-                <div class="col-xs-12 col-md-6"> 
-                    <span class="how-it-works-header">Games</span> 
-                    <p>
-                        Play Games
-                    </p>
-                     
-                </div>
-                 
-            </div>
-
-            <!-------------------------------------------------------------->
-
-        <div class="row ">
-            <div class="col-xs-12 col-md-5 col-md-offset-1"> 
-                <img src="<?php echo $imagesPath ?>audio.png" class="how-it-works-img" align="left"/> 
-            </div>
-             
-            <div class="col-xs-12 col-md-6"> 
-                <span class="how-it-works-header">Music</span> 
-                <p>
-                    Listen to and Upload Music
-                </p>
-                 
-            </div>
-             
-        </div>
-
-            <!-------------------------------------------------------------->
-
-        <div class="row">
-
-            <div class="col-xs-12 col-md-5 col-md-offset-1"> 
-                <img src="<?php echo $imagesPath ?>promotion.png" class="how-it-works-img" align="left"/> 
-            </div>
-              
-            <div class="col-xs-12 col-md-6"> 
-                <span class="how-it-works-header">Promote</span> 
-                <p>
-                    Discover and Post new Events, Services and more.
-                </p>
-            </div>
-        </div>
-
-        <!--------------------------------------------------------------------->
-
-            <div class="row">
-
-                <div class="col-xs-12 col-md-5 col-md-offset-1"> 
-                    <img src="<?php echo $imagesPath ?>help.png" class="how-it-works-img" align="left"/> 
-                </div>
-                  
-                <div class="col-xs-12 col-md-6"> 
-                    <span class="how-it-works-header">Jobs</span> 
-                    <p>
-                        Find Jobs
-                    </p>
-                </div>
-            </div>
-
-            <!--------------------------------------------------------------------->
-
-            <div class="row">
-
-                <div class="col-xs-12 col-md-5 col-md-offset-1"> 
-                    <img src="<?php echo $imagesPath ?>dollar-sign.jpg" class="how-it-works-img" align="left"/> 
-                </div>
-                  
-                <div class="col-xs-12 col-md-6"> 
-                    <span class="how-it-works-header">Sell Stuff</span> 
-                    <p>
-                        Post an AD to sell just about anything you want.
-                    </p>
-                </div>
-            </div>
-
-            <!--------------------------------------------------------------------->
-
-            <div class="row">
-
-                <div class="col-xs-12 col-md-5 col-md-offset-1"> 
-                    <img src="<?php echo $imagesPath ?>question-mark.jpeg" class="how-it-works-img" align="left"/> 
-                </div>
-                  
-                <div class="col-xs-12 col-md-6"> 
-                    <span class="how-it-works-header">Ask Questions</span> 
-                    <p>
-                        Get an answers to questions you might have.
-                    </p>
-                </div>
-            </div>
-
-            <!--------------------------------------------------------------------->
-
-            <div class="row">
-
-                <div class="col-xs-12 col-md-5 col-md-offset-1"> 
-                    <img src="<?php echo $imagesPath ?>private.jpg" class="how-it-works-img" align="left"/> 
-                </div>
-                  
-                <div class="col-xs-12 col-md-6"> 
-                    <span class="how-it-works-header">Share Private Content</span> 
-                    <p>
-                        Share Content with only the people you wish to.
-                    </p>
-                </div>
-            </div>
-
-            <!--------------------------------------------------------------------->
     </div>
 </div>
 

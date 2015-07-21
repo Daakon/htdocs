@@ -151,10 +151,6 @@ function get_header()
 <?php $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 if (strstr($url, "home.php")) { ?>
 
-        <form class="hidden-xs hidden-sm searchBox" action="" method="get">
-            <input type="text" id="mn" name="mn" placeholder="Search Roll Call By Member Name" style="border:1px solid black;border-radius:10px;width:400px;" />
-            <input type="submit" id="search" name="search" value="Search" class="btn btn-default" />
-        </form>
 <?php } ?>
 
 
@@ -176,10 +172,6 @@ if (strstr($url, "home.php")) { ?>
     <?php $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 if (strstr($url, "home.php")) { ?>
 
-    <form class="visible-xs visible-sm searchBoxMobile" action="" method="get">
-        <input type="text" id="mn" name="mn" placeholder="Search Roll Call By Member Name" style="border:1px solid black;border-radius:10px;width:250px" />
-        <input type="submit" id="search" name="search" value="Search" class="btn btn-default" />
-    </form>
 <?php } ?>
 
 <br/>

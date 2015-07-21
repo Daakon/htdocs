@@ -319,6 +319,7 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
                         Members.Password As Password,
                         Members.DOB As DOB,
                         Members.EmailActive As EmailStatus,
+                        Members.Username As Username,
                         Profile.ProfilePhoto As ProfilePhoto,
                         Profile.ProfileVideo As ProfileVideo,
                         Profile.Poster As Poster,
@@ -366,6 +367,7 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
             $password = $rows['Password'];
             $dob = $rows['DOB'];
             $emailStatus = $rows['EmailStatus'];
+            $username = $rows['Username'];
 
             if (strlen($posterName) == 0) {
                 $posterName = "video-bg.jpg";
@@ -387,6 +389,8 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
                     }
                 </script>
 
+
+
                 <input onclick="showTextBox('textDiv')" type="image" value="Share" src="/images/share.png" height="50px" width="50px" style="margin-top:10px" />
                 <br/>
 
@@ -403,6 +407,7 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
             </div>
 
             <!--Profile video --------------------------------------------------------------------------------->
+
 
 
 
@@ -432,10 +437,10 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
 
             </form>
 
+            <br/>
+
             <!--Profile ---------------------------------------------------------------------------------------->
 
-            <br/>
-            <p id="notice"></p>
             <br/>
 
             <form id="ajax-form" method="post" action = "" onsubmit="return checkFields();">

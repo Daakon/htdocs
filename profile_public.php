@@ -58,7 +58,7 @@ $lName = $rows['LastName'];
                         Members.LastName As LastName,
                         Members.Email As Email,
                         Members.Password As Password,
-                        Members.DOB As DOB,
+                        TIMESTAMPDIFF(YEAR, Members.DOB, CURDATE()) AS Age,
                         Profile.Poster As ProfilePhoto,
                         Profile.ProfileVideo As ProfileVideo,
                         Profile.Poster As Poster,
@@ -103,8 +103,7 @@ $lName = $rows['LastName'];
             $plan = $rows['Plan'];
             $email = $rows['Email'];
             $password = $rows['Password'];
-            $dob = $rows['DOB'];
-
+            $age = $rows['Age'];
 
             ?>
 
@@ -122,22 +121,14 @@ $lName = $rows['LastName'];
                 <?php } ?>
             </div>
 
-
+            <div class="content-block">
+                <h2>
+            <?php echo $firstName .', '.$age ?>
+                </h2>
+            </div>
 
             <!--Profile ---------------------------------------------------------------------------------------->
 
-            <br/>
-            <br/>
-
-
-
-                    <div class="public-profile-label">First Name</div>
-                   <?php echo $firstName ?>
-
-            <br/><br/>
-
-                    <div class="public-profile-label">Last Name</div>
-                    <?php echo $lastName ?>
 
             <br/><br/>
 
@@ -190,6 +181,7 @@ $lName = $rows['LastName'];
                     <?php echo $plan ?>
 
             <br/><br/>
+
 
                     <?php if (isset($ID) && !empty($ID) && $memberID != $ID) { ?>
                     <div class="public-profile-label">Message Me</div>

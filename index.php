@@ -135,9 +135,9 @@ get_head_files();
 
     <div class="row">
         <div class="col-lg-6 col-md-5 hidden-sm hidden-xs">
-            <video src="http://rapportbook.com/media/trim.AC95253E-8CE6-47A9-B983-83682B787D3E.mp4" poster="http://rapportbook.com/poster/poster5598c39b0cd8c.jpg" controls="controls"><br>
-            </video>
-            <h2 align="center"><span style="font-style: italic;color:red;font-weight: 400">Tell Your Story With Videos</span></h2>
+            <image src="/images/mobile-dating.jpg" class="center-block" ><br>
+            </image>
+            <h2 align="center"><span style="font-style: italic;color:red;font-weight: 400">Build rapport with video.</span></h2>
         </div>
 
         <div class="col-lg-6 col-md-7 col-sm-12 col-xs-12 ">
@@ -171,17 +171,16 @@ get_head_files();
 
             <div class="visible-xs" style="font-weight: bold;font-size:20px">
                 <br/>
-                <a href="login-mobile.php" style="color:red;">Click here to Login With Rapportbook</a>
+                <a href="login-mobile.php" style="color:red;">Login With Rapportbook</a>
 
             </div>
 
-            <div class="visible-xs visible-sm" style="padding:20px;font-weight:bold;">
-                <a href="http://rapportbook.com/media/trim.AC95253E-8CE6-47A9-B983-83682B787D3E.mp4">
-                    <image src="/images/story.png" height="50" width="auto"/>
+
+                <a href="/learn_more.php">
                     <br/>
-                    Click Here To See A Story Told With Video
+                    <h3>Learn More</h3>
                 </a>
-            </div>
+
 
             <form method="post" action="signup.php" id="rb_signup_form" >
 

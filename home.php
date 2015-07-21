@@ -45,11 +45,7 @@ if (isset($_POST['submit'])) {
                 }
 
                 ?>
-                <script>
-                if(window.innerWidth > window.innerHeight){
-                    alert("Please use Portrait!");
-                }
-                </script>
+
                 <?php
                 // create media type arrays
                 $videoFileTypes = array("video/mpeg", "video/mpg", "video/ogg", "video/mp4",
@@ -228,242 +224,6 @@ if (isset($_POST['submit'])) {
 ?>
 
 
-<?php
-//-------------------------------------------------
-// handle post comments
-//-------------------------------------------------
-if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
-
-    $postID = $_POST['postID'];
-    $ownerId = $_POST['memberID'];
-    $comment = $_POST['postComment'];
-    $comment = mysql_real_escape_string($comment);
-    if (strlen($comment) > 0) {
-// find urls
-        $comment = makeLinks($comment);
-        if ($_SESSION['PostComment'] == $_POST['postComment']) {
-            echo "<script>alert('Your comment appears to be empty');</script>";
-        } else {
-// if photo is provided
-            if (isset($_FILES['flPostMedia']) && strlen($_FILES['flPostMedia']['name']) > 1) {
-
-// check file size
-                if ($_FILES['flPostMedia']['size'] > 25000000000) {
-                    echo '<script>alert("File is too large. The maximum file size is 50MB.");</script>';
-                    header('Location:home.php');
-                    exit;
-                }
-// check if file type is a photo
-                $videoFileTypes = array("video/mpeg", "video/mpg", "video/ogg", "video/mp4",
-                    "video/quicktime", "video/webm", "video/x-matroska",
-                    "video/x-ms-wmw");
-
-
-                // add unique id to image name to make it unique and add it to the file server
-                $mediaName = $_FILES["flPostMedia"]["name"];
-                $fileName = pathinfo($mediaName, PATHINFO_FILENAME);
-                $mediaName = trim(uniqid() . $mediaName);
-                $mediaFile = $_FILES['flPostMedia']['tmp_name'];
-                $type = trim($_FILES["flPostMedia"]["type"]);
-
-                require 'media_post_file_path.php';
-
-
-                if (in_array($type, $videoFileTypes)) {
-                    // convert to mp4
-                    $newFileName = $fileName.".mp4";
-                    $audioName = $fileName;
-                    $ffmpeg = '/usr/bin/ffmpeg';
-                    exec("$ffmpeg -i $newFileName -vcodec libx264 -pix_fmt yuv420p -profile:v baseline -preset slow -crf 22 -movflags +faststart $newFileName");
-                    $mediaName = $newFileName;
-                } else {
-
-                        echo "<script>alert('Invalid File Type'); location='home.php'</script>";
-                        exit;
-                }
-
-// save photo/video
-                require 'media_post_file_path.php';
-                if (in_array($type, $videoFileTypes) || in_array($type, $audioFileTypes)) {
-                    move_uploaded_file($mediaFile, $postMediaFilePath);
-                }
-
-// if photo didn't get uploaded, notify the user
-                if (!file_exists($postMediaFilePath)) {
-                    echo "<script>alert('File could not be uploaded, try uploading a different file type.');</script>";
-                    header('Location:home.php');
-                } else {
-                    // determine which table to put photo pointer in
-                    // store media pointer
-                    $sql = "INSERT INTO Media (Member_ID,  MediaName,  MediaType,  MediaDate,     AudioName    ) Values
-                                              ('$ID',    '$mediaName', '$type',   CURRENT_DATE(), '$audioName')";
-                    mysql_query($sql) or die(mysql_error());
-                    // get media ID
-                    $sqlGetMedia = "SELECT * FROM Media WHERE MediaName = '$mediaName'";
-                    $mediaResult = mysql_query($sqlGetMedia) or die(mysql_error());
-                    $mediaRow = mysql_fetch_assoc($mediaResult);
-                    $mediaID = $mediaRow['ID'];
-                    $media = $mediaRow['MediaName'];
-                    $mediaType = $mediaRow['MediaType'];
-                    $mediaDate = $mediaRow['MediaDate'];
-
-
-                   // check if file type is a video
-                    if (in_array($type, $videoFileTypes)) {
-                        // where ffmpeg is located
-                        $ffmpeg = '/usr/bin/ffmpeg';
-                        // poster file name
-                        $posterName = "poster".uniqid().".jpg";
-                        //where to save the image
-                        $poster = "$posterPath$posterName";
-                        //time to take screenshot at
-                        $interval = 5;
-                        //screenshot size
-                        //$size = '440x280'; -s $size
-                        //ffmpeg command
-                        $cmd = "$ffmpeg -i \"$postMediaFilePath\" -r 1 -ss 5 -t 1  -f image2 $poster 2>&1";
-                        exec($cmd);
-                        $poster = imagecreatefromjpeg($poster);
-
-                        $size = getimagesize("$posterPath$posterName");
-                        $width = $size[0];
-                        $height = $size[1];
-
-                        // mobile Iphone landscape tends to be vertical, flip counter clockwise
-                        if ($width > $height && $height < 1000 && $type!="video/quicktime") {
-                            // video shot in landscape, needs to be flipped
-                            $img = imagerotate($poster, -90, 0);
-                            imagejpeg($img, $posterPath . $posterName, 50);
-                        }
-
-                        // MPGs tend to be upside down, flip 180
-                        elseif ($width > $height && $height < 1000 && $type=="video/mpg") {
-                            // video shot in landscape, needs to be flipped
-                            $img = imagerotate($poster, 180, 0);
-                            imagejpeg($img, $posterPath . $posterName, 50);
-                        }
-
-                        // portrait images are created sideways, rotate 90 degrees
-                        // landscape images are created upside but have the same size
-                        // and needs to be rotated 180 but still cannot tell how to tell the difference
-                        // both orientations have the same size
-                        elseif ($width > $height && $height > 700 && $type == "video/quicktime" || $type == "video/mp4") {
-                            $img = imagerotate($poster, 90, 0);
-                            imagejpeg($img, $posterPath . $posterName, 50);
-                        }
-
-
-                        $img = '<video src = "' . $videoPath . $mediaName . '" poster="/media/shot.jpg" preload="auto" controls />';
-                    } else {
-                        // if invalid file type
-                        /*echo '<script>alert("Invalid File Type!");</script>';
-                        header('Location:home.php');
-                        exit; */
-                    }
-                    $comment = $comment . '<br/><br/>' . $img . '<br/>';
-                    $sql = "INSERT INTO PostComments (Post_ID,     Member_ID,   Comment  ) Values
-                                                      ('$postID', '$ID',      '$comment')";
-                    mysql_query($sql) or die(mysql_error());
-// create post
-                    // get poster data
-                    $sqlPoster = "SELECT ID, FirstName, LastName, Gender FROM Members WHERE ID = '$ID' ";
-                    $resultPoster = mysql_query($sqlPoster) or die(mysql_error());
-                    $rowsPoster = mysql_fetch_assoc($resultPoster);
-                    $name = $rowsPoster['FirstName'] . ' ' . $rowsPoster['LastName'];
-                    $posterId = $rowsPoster['ID'];
-                    $gender = $rowsPoster['Gender'];
-                    $nameLink = $name;
-// get photo owner data
-                    $sql = "SELECT Member_ID FROM Posts WHERE ID = $postID";
-                    $result = mysql_query($sql) or die(mysql_error());
-                    $rows = mysql_fetch_assoc($result);
-                    $ownerId = $rows['Member_ID'];
-                    $sqlOwner = "SELECT ID, FirstName, LastName FROM Members WHERE ID = '$ownerId' ";
-                    $resultOwner = mysql_query($sqlOwner) or die(mysql_error());
-                    $rowsOwner = mysql_fetch_assoc($resultOwner);
-                    $name2 = $rowsOwner['FirstName'] . ' ' . $rowsOwner['LastName'];
-                    $name2 = $name2."'s";
-                    $ownerId = $rowsOwner['ID'];
-                    $name2Link = $name2;
-                    // determine noun if profile owner commented on their own post and write bulletin
-                    if ($ownerId == $ID) {
-                        if ($gender == 1) {
-                            $noun = 'his';
-                        } else {
-                            $noun = 'her';
-                        }
-                    }
-                    else {
-                        $noun = $name2;
-                    }
-                    $post = "$nameLink posted a new $mediaString comment on $noun post.<br/><br/>$img<br/>";
-                    $post = mysql_real_escape_string($post);
-                    $sqlInsertPost = "INSERT INTO Posts (Post,     Member_ID,    PostDate  ) Values
-                                                ('$post', '$ID',        CURDATE() ) ";
-                    mysql_query($sqlInsertPost) or die(mysql_error());
-                    $newPostID = mysql_insert_id();
-// update new photo with bulletin id for commenting later
-                    $sql = "UPDATE Media SET Post_ID = '$newPostID' WHERE MediaName = '$mediaName' ";
-                    mysql_query($sql) or die(mysql_error());
-                }
-            }
-//----------------------
-// if not comment video
-//----------------------
-            else {
-                $sql = "INSERT INTO PostComments (Post_ID,  Member_ID,    Comment ) Values
-                                        ('$postID', '$ID',      '$comment')";
-                mysql_query($sql) or die(mysql_error());
-            }
-            $scrollx = $_REQUEST['scrollx'];
-            $scrolly = $_REQUEST['scrolly'];
-//A comment was just made, we need to send out some notifications.
-//The first thing is to identify all of the id's connected with this post
-            $user_id = $_SESSION['ID'];
-//Get the ids of all the members connected with a post comment
-            $sql = "SELECT Member_ID FROM PostComments WHERE Post_ID = $postID ";
-            $result = mysql_query($sql) or die(mysql_error());
-            $comment_ids = array();
-//Iterate over the results
-            while ($rows = mysql_fetch_assoc($result)) {
-                array_push($comment_ids, $rows['Member_ID']);
-            }
-//Boil the id's down to unique values because we dont want to send double emails or notifications
-            $comment_ids = array_unique($comment_ids);
-//Send consumer notifications
-            foreach ($comment_ids as $item) {
-                if (strlen($item) > 0) {
-                    // only send email if account & email active
-                    if (checkActive($item)) {
-                        if (checkEmailActive($item)) {
-                            build_and_send_email($user_id, $item, 1, $postID);
-                        }
-                    }
-                }
-            }
-//Notify the post creator
-            $sql = "SELECT Member_ID FROM Posts WHERE ID = '$postID';";
-            $result = mysql_query($sql) or die(mysql_error());
-            $rows = mysql_fetch_assoc($result);
-            $creatorID = $rows['Member_ID'];
-            if (checkEmailActive($ID)) {
-                build_and_send_email($ID, $creatorID, 1, $postID, '');
-            }
-//------------------
-//=========================================================================================================================//
-//BELOW IS END OF POST COMMENT HANDLING CODE ==========================================================================//
-        }
-    }
-    echo "<script>location='/home.php?scrollx=$scrollx&scrolly=$scrolly&rf=true'</script>";
-}
-if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
-    $commentID = $_POST['commentID'];
-    $sql = "Update PostComments SET IsDeleted = '1' WHERE ID = $commentID";
-    mysql_query($sql) or die (mysql_error());
-}
-?>
-
-
 <script type="text/javascript">
     function saveScrollPositions(theForm) {
         if(theForm) {
@@ -557,10 +317,20 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 </script>
 
 <script type = "text/javascript">
-            function getGenre() {
+            function updateFeed() {
                var selection = document.getElementById('genre');
                var genre = selection.options[selection.selectedIndex].value;
-               window.location = "/home.php?genre="+encodeURIComponent(genre);
+
+                var ageStartSelect = document.getElementById('AgeStart');
+                var ageStart = ageStartSelect.options[ageStartSelect.selectedIndex].value;
+
+                var ageEndSelect = document.getElementById('AgeEnd');
+                var ageEnd = ageEndSelect.options[ageEndSelect.selectedIndex].value;
+
+                var stateSelect = document.getElementById('AgeEnd');
+                var state = stateSelect.options[stateSelect.selectedIndex].value;
+
+                window.location = "/home.php?genre="+encodeURIComponent(genre)+"&ageStart="+encodeURIComponent(ageStart)+"&ageEnd="+encodeURIComponent(ageEnd)+"&state="+encodeURIComponent(state);
             }
         </script>
 
@@ -594,8 +364,53 @@ var j =document.getElementsByTagName('script')[0];j.parentNode.insertBefore(s,j)
 <!-- SMARTADDON END -->
 <br/><br/>
 
+    <?php
+    $ageStart = $_GET['ageStart'];
+    $ageEnd = $_GET['ageEnd'];
+    if (!empty($ageStart)) {
+        $_SESSION['ageStart'] = $ageStart;
+        $ageStart = $_SESSION['ageStart'];
+    }
+    else {
+        $ageStart = 18;
+    }
+
+    if (!empty($ageEnd)) {
+        $_SESSION['ageEnd'] = $ageEnd;
+        $ageEnd = $_SESSION['ageEnd'];
+    }
+    else {
+        $ageEnd = 50;
+    }
+    ?>
+
+    <?php
+    $state = $_GET['state'];
+    if (!empty($ageStart)) {
+        $_SESSION['state'] = $state;
+        $state = $_SESSION['state'];
+    }
+    ?>
+
 <!--Middle Column -->
+    <form>
+        Select Age Range
+        <select id="AgeStart" name="AgeStart" onchange="updateFeed()">
+            <option value="<?php echo $ageStart ?>"><?php echo $ageStart ?></option>
+            <?php age() ?>
+        </select>
+        To
+        <select id="AgeEnd" name="AgeEnd" onchange="updateFeed()">
+            <option value="<?php echo $ageEnd ?>"><?php echo $ageEnd ?></option>
+            <?php age() ?>
+        </select>
+    </form>
+<br/>
+
         <div class=" col-md-9 col-lg-9 roll-call ">
+
+
+
             <img src="/images/roll-call.gif" height="150px" width="150px" alt="Roll Call"/>
             <br/>
 
@@ -603,10 +418,7 @@ var j =document.getElementsByTagName('script')[0];j.parentNode.insertBefore(s,j)
                 <img src="/images/image-icon.png" height="30px" width="30px" alt="Photos/Video"/>
                 <strong>Attach Your Video</strong>
                 <br/>
-                <span style="color:red;font-weight:bold">
-                    Upload Videos in Portrait Only
-                    <img src="<?php echo $imagesPath ?>portrait-mode.jpeg" height='30' width='40' alt='Portrait' />
-                </span>
+
                 <input type="file" width="10px;" name="flPostMedia" id="flPostMedia"/>
                 <br/>
                 <textarea name="post" id="post" class="form-control textArea"
@@ -621,7 +433,7 @@ var j =document.getElementsByTagName('script')[0];j.parentNode.insertBefore(s,j)
                 </div>
                 <br/>
                     <select class="form-control input-lg" id="category" name="category">
-                            <option value="">Select A Video Category</option>
+                            <option value="">Select A Post Category</option>
                             <?php echo category() ?>
                         </select>
                         <br/>
@@ -630,8 +442,8 @@ var j =document.getElementsByTagName('script')[0];j.parentNode.insertBefore(s,j)
 
 <br/><br/>
 <div align = "center">
-<select id="genre" name="genre" onchange="getGenre()">
-            <option value="">Show Videos By Category</option>
+<select id="genre" name="genre" onchange="updateFeed()">
+            <option value="">Show Posts By Category</option>
             <option value="Show-All">Show All</option>
                             <?php echo category() ?>
                         </select>
