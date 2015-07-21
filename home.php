@@ -5,6 +5,7 @@ IT WILL INCREASE THE RENDERING TIME OF HTML ELEMENTS
 
 <?php
 require 'connect.php';
+
 // compress the page
 if (substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip')) ob_start("ob_gzhandler"); else ob_start();
 require 'model_functions.php';
@@ -13,6 +14,7 @@ require 'getSession.php';
 require 'html_functions.php';
 require 'findURL.php';
 require 'email.php';
+require 'getState.php';
 require 'category.php';
 require 'ads.php';
 get_head_files();
@@ -327,7 +329,7 @@ if (isset($_POST['submit'])) {
                 var ageEndSelect = document.getElementById('AgeEnd');
                 var ageEnd = ageEndSelect.options[ageEndSelect.selectedIndex].value;
 
-                var stateSelect = document.getElementById('AgeEnd');
+                var stateSelect = document.getElementById('searchState');
                 var state = stateSelect.options[stateSelect.selectedIndex].value;
 
                 window.location = "/home.php?genre="+encodeURIComponent(genre)+"&ageStart="+encodeURIComponent(ageStart)+"&ageEnd="+encodeURIComponent(ageEnd)+"&state="+encodeURIComponent(state);
@@ -385,16 +387,20 @@ var j =document.getElementsByTagName('script')[0];j.parentNode.insertBefore(s,j)
     ?>
 
     <?php
-    $state = $_GET['state'];
-    if (!empty($ageStart)) {
-        $_SESSION['state'] = $state;
-        $state = $_SESSION['state'];
+
+    $searchState = $_GET['state'];
+    if (!empty($searchState)) {
+        $_SESSION['state'] = $searchState;
+        $searchState = $_SESSION['state'];
+    }
+    else {
+        $searchState = 'MO';
     }
     ?>
 
 <!--Middle Column -->
-    <form>
-        Select Age Range
+
+        <b>Age Range</b>
         <select id="AgeStart" name="AgeStart" onchange="updateFeed()">
             <option value="<?php echo $ageStart ?>"><?php echo $ageStart ?></option>
             <?php age() ?>
@@ -404,8 +410,14 @@ var j =document.getElementsByTagName('script')[0];j.parentNode.insertBefore(s,j)
             <option value="<?php echo $ageEnd ?>"><?php echo $ageEnd ?></option>
             <?php age() ?>
         </select>
-    </form>
-<br/>
+
+    &nbsp;&nbsp;&nbsp;
+    <b>State</b>
+    <select id="searchState" name="searchState" onchange="updateFeed()">
+        <option value="<?php echo $searchState ?>"><?php echo $searchState?></option>
+        <?php  getState(); ?>
+    </select>
+<br/><br/>
 
         <div class=" col-md-9 col-lg-9 roll-call ">
 

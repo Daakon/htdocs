@@ -1,5 +1,5 @@
 <?php
-require 'connect.php';
+
 function getState() {
 $sql = "SELECT * FROM State Order By State ASC";
                 $result = mysql_query($sql) or die(mysql_error());

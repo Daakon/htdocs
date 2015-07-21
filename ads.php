@@ -22,7 +22,7 @@ function getGender($ID) {
     return $gender;
 }
 
-function getState($ID) {
+function getMemberState($ID) {
     // returns member state
     $sql = "SELECT CurrentState FROM Profile WHERE ID = $ID ";
     $result = mysql_query($sql) or die(mysql_error());

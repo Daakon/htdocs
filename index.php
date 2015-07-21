@@ -3,6 +3,7 @@ require 'connect.php';
 
 require 'html_functions.php';
 require 'calendar.php';
+require 'getState.php';
 get_head_files();
 ?>
 <?php get_login_header() ?>
@@ -229,6 +230,19 @@ get_head_files();
                             <option value="">Gender</option>
                             <option value="1">Male</option>
                             <option value="2">Female</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="error-text"></div>
+                    </div>
+                </div>
+
+                <div class="form-group row" id="form-group-ddGender">
+                    <div class="col-md-6">
+                        <label class="sr-only" for="ddState">State</label>
+                        <select class='form-control input-lg' name="ddState" id="ddState">
+                            <option value="state">State</option>
+                            <?php echo getState() ?>
                         </select>
                     </div>
                     <div class="col-md-6">

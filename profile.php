@@ -179,7 +179,8 @@ if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
             Plan = '$plan'
              WHERE Member_ID = $ID ";
     mysql_query($sql) or die(mysql_error());
-    echo "<script>alert('Update Successful');</script>";
+    $username = $_SESSION['username'];
+    echo "<script>alert('Update Successful');location='/profile/$username</script>";
 
     $scrollx = $_REQUEST['scrollx'];
     $scrolly = $_REQUEST['scrolly'];
@@ -308,7 +309,7 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
             $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
             preg_match("/[^\/]+$/",$url ,$match);
             $username = $match[0];
-
+            $_SESSION['username'] = $username;
             require 'checkUsername.php';
 
             $sql = "SELECT DISTINCT
@@ -564,31 +565,7 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
 
 
         <!--Right Column -->
-        <div class="col-md-3 col-lg-3 col-md-offset-9 col-lg-offset-9 ad-desktop hidden-sm hidden-xs " >
-            <h3><a href="advertising.php">Advertise
-                    <img src="<?php echo $imagesPath ?>ad-pic.jpg" style="border-bottom:1px solid black;" />
-                </a></h3>
-            <?php
-            require 'ads.php';
-            $rightColumnAds = getRightColumnAds($genre, $age, $state, $interests);
-            $rightColSql = $rightColumnAds;
-            $rightColResult = mysql_query($rightColSql) or die(mysql_error());
-            //$rows = mysql_fetch_assoc($result);
-            if (mysql_num_rows($rightColResult) > 0) { ?>
-
-                <div style="padding:10px;width:200px;">
-                    <?php
-                    while ($rightColRows = mysql_fetch_assoc($rightColResult)) {
-                        echo $rightColRows["Post"];
-                        ?>
-                        <hr class="ad-border" />
-                    <?php
-                    } ?>
-                </div>
-            <?php
-            }
-            ?>
-        </div>
+        <div></div>
 
 
     </div>

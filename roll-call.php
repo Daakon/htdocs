@@ -2,7 +2,7 @@
 
 // ad demographics
 $age = getAge($ID);
-$state =  getState($ID);
+$state =  getMemberState($ID);
 $interests = getInterests($ID);
 $interests = strtolower($interests);
 $gender = getGender($ID);
@@ -50,8 +50,8 @@ if (empty($ageEnd)) {
     $ageEnd = 50;
 }
 
-if (!empty($state)) {
-    $stateCondition = "AND (WHERE Member.State = '$state')";
+if (!empty($searchState)) {
+    $stateCondition = "AND (Profile.CurrentState = '$searchState')";
 }
 else {
     $stateCondition = "";

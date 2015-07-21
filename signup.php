@@ -17,6 +17,7 @@ $username = $_POST['username'];
 $pass = $_POST['password'];
 $fb_token = $_POST['fb_token'];
 $fb_id = $_POST['fb_id'];
+$state = $_POST['ddState'];
 
 if($gender=='') $gender = (($_POST['gender']=='male')?1:2);
 
@@ -82,7 +83,7 @@ $result = mysql_query($sql) or die(mysql_error());
 
 // insert default profile pic into profile table
 $sql = "INSERT INTO Profile (Member_ID, Poster,               ProfileVideo,      HomeState, HomeCity, CurrentCity, CurrentState, Interests, Books, Movies, Food, Dislikes, Plan) Values
-                                ('$ID', 'default_photo.png', 'default_video.png', '', '', '', '', '', '', '', '', '', '')    ";
+                            ('$ID',     'default_photo.png', 'default_video.png', '$state',    '',        '',         '$state',     '',       '',    '',    '',    '',       '')    ";
 $result = mysql_query($sql) or die(mysql_error());
 
 
