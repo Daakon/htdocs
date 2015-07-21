@@ -40,7 +40,7 @@ if ($gender == 1) {
     $getGender = 2;
 }
 else {
-    $getGender == 1;
+    $getGender = 1;
 }
 
 if (empty($ageStart)) {
@@ -113,13 +113,12 @@ if (mysql_num_rows($rollCallResult) == 0) {
 if (mysql_num_rows($rollCallResult) > 0) {
     while ($rows = mysql_fetch_assoc($rollCallResult)) {
         $memberID = $rows['MemberID'];
-        $name = $rows['FirstName'] . ' ' . $rows['LastName'];
+        $name = $rows['FirstName'];
         $profilePhoto = $rows['ProfilePhoto'];
         $category = $rows['Category'];
         $post = $rows['Post'];
         $postID = $rows['PostID'];
         $postOwner = $memberID;
-        $userName = $rows['Username'];
         ?>
 
 
@@ -138,7 +137,7 @@ if (mysql_num_rows($rollCallResult) > 0) {
 
     <?php echo $profilePath; ?>
     <img src="/poster/<?php echo $profilePhoto ?>" class="profilePhoto-Feed enlarge-onhover " alt=""
-         title="<?php echo $name ?>" /> &nbsp <b><font size="4"><?php echo $userName ?></font></b>
+         title="<?php echo $name ?>" /> &nbsp <b><font size="4"><?php echo $name ?></font></b>
     </a>
 
     <div class="post">

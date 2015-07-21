@@ -167,30 +167,17 @@ if (isset($_POST['submit'])) {
                             $height = $size[1];
 
 
-
-
-                        // mobile Iphone landscape tends to be vertical, flip counter clockwise
-                        if ($width > $height && $height < 1000 && $type!="video/quicktime") {
+                        if ($width > $height && $height < 1000) {
+                            // video shot in landscape, needs to be flipped
+                            $img = imagerotate($poster, 180, 0);
+                            imagejpeg($img, $posterPath.$posterName, 50);
+                        }
+                        // handle images from videos shot with Iphone
+                        if ($width > $height && $height > 700 && $type == "video/quicktime" || $type == "video/mp4") {
                             // video shot in landscape, needs to be flipped
                             $img = imagerotate($poster, -90, 0);
-                            imagejpeg($img, $posterPath . $posterName, 50);
+                            imagejpeg($img, $posterPath.$posterName, 50);
                         }
-
-                        // MPGs tend to be upside down, flip 180
-                            elseif ($width > $height && $height < 1000 && $type=="video/mpg") {
-                                // video shot in landscape, needs to be flipped
-                                $img = imagerotate($poster, 180, 0);
-                                imagejpeg($img, $posterPath . $posterName, 50);
-                            }
-
-                            // portrait images are created sideways, rotate 90 degrees
-                            // landscape images are created upside but have the same size
-                            // and needs to be rotated 180 but still cannot tell how to tell the difference
-                            // both orientations have the same size
-                            elseif ($width > $height && $height > 700 && $type == "video/quicktime" || $type == "video/mp4") {
-                                    $img = imagerotate($poster, 90, 0);
-                                    imagejpeg($img, $posterPath . $posterName, 50);
-                            }
 
 
                         $img = '<video poster="/poster/'.$posterName.'" preload="none" controls>
