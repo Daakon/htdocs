@@ -106,7 +106,7 @@ if (isset($_POST['video']) && ($_POST['video'] == "Upload Video")) {
             }
         }
         else {
-            echo "<script>alet('Invalid File Type');</script>";
+            echo "<script>alert('Invalid File Type');</script>";
             exit;
         }
 

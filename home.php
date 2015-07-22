@@ -184,6 +184,7 @@ if (isset($_POST['submit'])) {
                                 <source src = "' . $videoPath . $mediaName . '" type="video/mp4" />
                                 <source src = "' . $videoPath . $oggFileName . '" type = "video/ogg" />
                                 <source src = "' . $videoPath . $webmFileName . '" type = "video/webm" />
+                                Your browser does not seem to support the video tag
                                 </video>';
 
                     }

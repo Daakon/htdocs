@@ -548,7 +548,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
     Posts.ID As PostID,
     Posts.Post As Post,
     Posts.Category As Category,
-    Profile.ProfilePhoto As ProfilePhoto
+    Profile.Poster As ProfilePhoto
     FROM Members,Posts,Profile
     WHERE
     Posts.ID = $postID
@@ -581,7 +581,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
         <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 "
              style="background:white;border-radius:10px;margin-top:20px;border:2px solid black;" align="left">
 
-            <img src="<?php echo $mediaPath. $profilePhoto ?>" class="profilePhoto-Feed" alt=""
+            <img src="/poster/<?php echo $profilePhoto ?>" class="profilePhoto-Feed" alt=""
                  title="<?php echo $name ?>" class='enlarge-onhover'/> &nbsp <b><font
                     size="4"><?php echo $name ?></font></b>
 
@@ -607,7 +607,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
             $approvals = mysql_num_rows(mysql_query("SELECT * FROM PostApprovals WHERE Post_ID = '$postID'"));
 
             // show disapprove if members has approved the post
-            echo '<table>';
+            echo '<table style="margin-bottom:20px;">';
             echo '<tr>';
             echo '<td>';
             echo "<div id = 'approvals$postID'>";
@@ -646,145 +646,8 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
             //-------------------------------------------------------------
             // End of approvals
             //-----------------------------------------------------------
-
+            }
             ?>
-
-            <div style="padding-top:10px;padding-bottom:10px;margin-top:10px;">
-                <form method="post" action="" enctype="multipart/form-data"
-                      onsubmit="return saveScrollPositions(this);">
-
-                    <input type="text" class="form-control" name="postComment" id="postComment"
-                           placeholder="Write a comment" title='' style="border:1px solid black"/>
-
-
-                    <input type="file" name="flPostMedia" id="flPostMedia" style="max-width:180px;"/>
-                    <br/>
-                    <input type="submit" name="btnComment" id="btnComment" Value="Comment"
-                           style="border:1px solid black"/>
-                    <input type="hidden" name="postID" id="postID" Value="<?php echo $postID ?>"/>
-                    <input type="hidden" name="ID" id="ID" value="<?php echo $ID ?>"/>
-                    <input type="hidden" name="ownerId" id="ownerId" value="<?php echo $MemberID ?>"/>
-                    <input type="hidden" name="scrollx" id="scrollx" value="0"/>
-                    <input type="hidden" name="scrolly" id="scrolly" value="0"/>
-                </form>
-
-                <br/>
-                <?php
-                }
-                // get post comments
-                $sql3 = "SELECT DISTINCT
-                        PostComments.Comment As PostComment,
-                        PostComments.ID As PostCommentID,
-                        Members.ID As MemberID,
-                        Members.FirstName as FirstName,
-                        Members.LastName As LastName,
-                        Profile.ProfilePhoto As ProfilePhoto
-                        FROM PostComments,Members, Profile
-                        WHERE
-                        PostComments.Post_ID = $postID
-                        AND Members.ID = Profile.Member_ID
-                        And Members.ID = PostComments.Member_ID
-                        Group By PostComments.ID
-                        Order By PostComments.ID DESC LIMIT 3 ";
-
-
-                $result3 = mysql_query($sql3) or die(mysql_error());
-                if (mysql_num_rows($result3) > 0) {
-                    echo '<br/>';
-                    echo '<table style = "background:#E0EEEE;width:100%">';
-                    while ($rows3 = mysql_fetch_assoc($result3)) {
-                        $comment = $rows3['PostComment'];
-                        $profilePhoto = $rows3['ProfilePhoto'];
-                        $commentOwner = $rows3['MemberID'];
-
-                        echo '<tr><td style="width:60px;padding-bottom:10px;" valign = "top">';
-
-                        echo '<img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" style = "border:1px solid black" class ="enlarge-onhover" />&nbsp;</td><td valign = "top"><b>' . $rows3['FirstName'] . ' ' . $rows3['LastName'] . '</b>&nbsp;&nbsp;' . nl2br($comment) . '</span>';
-
-                        if ($commentOwner == $ID || $postOwner == $ID) {
-                            //<!--DELETE BUTTON ------------------>
-
-                            echo '<div class="comment-delete">';
-                            echo '<form action="" method="post" onsubmit="return confirm(\'Do you really want to delete this comment?\')">';
-                            echo '<input type="hidden" name="commentID" id="commentID" value="' .  $commentID . '" />';
-                            echo '<input type ="submit" name="DeleteComment" id="DeleteComment" value="Delete" class="deleteButton" />';
-                            echo '</form>';
-                            echo '</div>';
-                            //<!------------------------------------->
-                        }
-                        echo '</td></tr>';
-                    }
-                    echo '</table>';
-                }
-
-
-
-                ?>
-
-                <!--Show more comments -->
-                <?php
-
-                $sql4 = "SELECT DISTINCT
-                        PostComments.Comment As PostComment,
-                        PostComments.ID As PostCommentID,
-                        Members.ID As MemberID,
-                        Members.FirstName as FirstName,
-                        Members.LastName As LastName,
-                        Profile.ProfilePhoto As ProfilePhoto
-                        FROM PostComments,Members, Profile
-                        WHERE
-                        PostComments.Post_ID = $postID
-                        And Members.ID = PostComments.Member_ID
-                        And Members.ID = Profile.Member_ID
-                        Group By PostComments.ID
-                        Order By PostComments.ID DESC LIMIT 3, 100 ";
-
-                $result4 = mysql_query($sql4) or die(mysql_error());
-                if (mysql_numrows($result4) > 0) {
-                $moreComments = "moreComments$postID";
-                ?>
-
-                <a href="javascript:showComments('<?php echo $moreComments ?>');">Show More</a>
-
-                <div id="<?php echo $moreComments ?>" style="display:none;">
-
-
-                    <?php
-                    echo '<br/>';
-                    echo '<table style = "background:#E0EEEE;width:100%">';
-                    while ($rows4 = mysql_fetch_assoc($result4)) {
-                        $comment = $rows4['PostComment'];
-                        $profilePhoto = $rows4['ProfilePhoto'];
-                        $commentOwner = $rows4['MemberID'];
-
-                        echo '<tr><td style = "width:60px;padding-bottom:10px;" valign = "top">';
-                        echo '<img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" style = "border:1px solid black" class ="enlarge-onhover" />&nbsp;</td><td valign = "top"><b>' . $rows4['FirstName'] .' '. $rows4['LastName'] . '</b>&nbsp;&nbsp;' . nl2br($comment) . '</span>';
-
-                        if ($commentOwner == $ID || $postOwner == $ID) {
-                            //<!--DELETE BUTTON ------------------>
-
-                            echo '<div class="comment-delete">';
-                            echo '<form action="" method="post" onsubmit="return confirm(\'Do you really want to delete this comment?\')">';
-                            echo '<input type="hidden" name="commentID" id="commentID" value="' .  $commentID . '" />';
-                            echo '<input type ="submit" name="DeleteComment" id="DeleteComment" value="Delete" class="deleteButton" />';
-                            echo '</form>';
-                            echo '</div>';
-                            //<!------------------------------------->
-                        }
-
-                        echo '</td></tr>';
-
-                    }
-                    echo '</table>';
-                    echo '</div>'; //end of more comments div
-                    }
-                    ?>
-
-
-                </div>
-                <!---------------------------------------------------
-                                  End of comments div
-                                  ----------------------------------------------------->
 
             </div>
         </div>

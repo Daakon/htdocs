@@ -114,6 +114,7 @@ if (mysql_num_rows($rollCallResult) > 0) {
     while ($rows = mysql_fetch_assoc($rollCallResult)) {
         $memberID = $rows['MemberID'];
         $name = $rows['FirstName'];
+        $userName = $rows['Username'];
         $profilePhoto = $rows['ProfilePhoto'];
         $category = $rows['Category'];
         $post = $rows['Post'];

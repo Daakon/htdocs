@@ -3,6 +3,11 @@ session_start();
 $username = $_SESSION['Username'];
 $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 
+$sql = "SELECT FirstName FROM Members WHERE Username = '$username'";
+$result = mysql_query($sql) or die(mysql_error());
+$row = mysql_fetch_assoc($result);
+$firstName = $row['FirstName'];
+
 // file paths
 if (strstr($url, "local")) {
     $howItWorks = "/how_it_works.php";
@@ -32,5 +37,5 @@ else { ?>
 <ul class="list-inline">
     <li><a href="/profile_public.php/<?php echo $username ?>">Profile</a></li>
     <li><a href="/member_media_public.php/<?php echo $username ?>">Video Book</a></li>
-    <li><a href="/manage_post_public.php/<?php echo $username ?>"><?php echo $username ?>'s Post</a></li>
+    <li><a href="/manage_post_public.php/<?php echo $username ?>"><?php echo $firstName ?>'s Post</a></li>
 </ul>
