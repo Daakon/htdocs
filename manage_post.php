@@ -127,7 +127,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
     <?php
     // ad demographics
     $age = getAge($ID);
-    $state =  getState($ID);
+    $state =  getMemberState($ID);
     $interests = getInterests($ID);
     $interests = strtolower($interests);
     $gender = getGender($ID);
@@ -260,33 +260,9 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
         ?>
     </div>
         <!--Right Column -->
-        <div class="col-md-3 col-lg-3 col-md-offset-9 col-lg-offset-9 ad-desktop hidden-sm hidden-xs rightColumn-managePost" >
-            <h3><a href="advertising.php">Advertise
-                    <img src="<?php echo $imagesPath ?>ad-pic.jpg" style="border-bottom:1px solid black;" />
-                </a></h3>
-            <?php
-            $rightColumnAds = getRightColumnAds($genre, $age, $state, $interests);
-            $rightColSql = $rightColumnAds;
-            $rightColResult = mysql_query($rightColSql) or die(mysql_error());
-            //$rows = mysql_fetch_assoc($result);
-            if (mysql_num_rows($rightColResult) > 0) { ?>
-
-                <div style="padding:10px;width:200px;">
-                    <?php
-                    while ($rightColRows = mysql_fetch_assoc($rightColResult)) {
-                        echo $rightColRows["Post"];
-                        ?>
-                        <hr class="ad-border" />
-                        <?php
-                    } ?>
-                </div>
-                <?php
-            }
-            ?>
-        </div>
 
 
-    </div> <!--Middle Column -->
+    </div> <!--End Middle Column -->
 
 </div>
 

@@ -8,7 +8,7 @@ require 'getSession.php';
 require 'html_functions.php';
 
 require 'findURL.php';
-
+//require 'getState.php';
 require 'email.php';
 require 'category.php';
 require 'ads.php';
@@ -663,7 +663,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 <?php
 // ad demographics
 $age = getAge($ID);
-$state =  getState($ID);
+$state =  getMemberState($ID);
 $interests = getInterests($ID);
 $interests = strtolower($interests);
 $gender = getGender($ID);
@@ -674,7 +674,7 @@ $gender = getGender($ID);
 
         <ul class="list-inline">
             <li><a href="/profile.php/<?php echo get_username($ID) ?>">Go To Your Profile <?php require 'getNewMessageCount.php' ?></a></li>
-             <li><a href="javascript:history.back();">Go Back</a></li>
+             <li><a href="javascript:history.back();">Roll Call</a></li>
         </ul>
 
 
@@ -688,15 +688,35 @@ $gender = getGender($ID);
 <?php
 
 $ads = getAds($genre, $age, $state, $interests, $gender);
+$ageStart = $_GET['ageStart'];
+$ageEnd = $_GET['ageEnd'];
+$gender = $_GET['gender'];
+
+if (empty($ageStart)) {
+$ageStart = 18;
+}
+if (empty($ageEnd)) {
+$ageEnd = 50;
+}
+if (empty($gender)) {
+$gender = getGender($ID);
+if ($gender == 1) {
+$gender = 2;
+}
+else {
+$gender = 1;
+}
+}
 
 $sql = "SELECT DISTINCT
     Members.ID As MemberID,
     Members.FirstName As FirstName,
     Members.LastName As LastName,
+    Members.Username As Username,
     Posts.ID As PostID,
     Posts.Post As Post,
     Posts.Category As Category,
-    Profile.ProfilePhoto As ProfilePhoto
+    Profile.Poster As ProfilePhoto
     FROM Members,Posts,Profile
     WHERE
     Members.IsActive = 1
@@ -705,6 +725,27 @@ $sql = "SELECT DISTINCT
     And Members.ID = Profile.Member_ID
     And Posts.IsDeleted = 0
     AND Posts.Category = '$category'
+    AND (Members.Gender = '$gender')
+    AND TIMESTAMPDIFF(YEAR, Members.DOB, CURDATE()) >= $ageStart
+    AND TIMESTAMPDIFF(YEAR, Members.DOB, CURDATE()) <= $ageEnd
+    $stateCondition
+    UNION
+    SELECT DISTINCT
+    Members.ID As MemberID,
+    Members.FirstName As FirstName,
+    Members.LastName As LastName,
+    Members.Username As Username,
+    Posts.ID As PostID,
+    Posts.Post As Post,
+    Posts.Category As Category,
+    Profile.Poster As ProfilePhoto
+    FROM Members,Posts,Profile
+    WHERE
+    Members.ID = $ID
+    And (Posts.Member_ID = $ID)
+    And (Profile.Member_ID = $ID)
+    And (Posts.IsDeleted = 0)
+    AND (Posts.Category = '$category')
     UNION
     $ads
     Group By PostID
@@ -721,10 +762,10 @@ if (mysql_num_rows($result) == 0) {
     </div>
 <?php }
 
-if (mysql_numrows($result) > 0) {
+if (mysql_num_rows($result) > 0) {
     while ($rows = mysql_fetch_assoc($result)) {
         $memberID = $rows['MemberID'];
-        $name = $rows['FirstName'] . ' ' . $rows['LastName'];
+        $name = $rows['FirstName'];
         $profilePhoto = $rows['ProfilePhoto'];
         $category = $rows['Category'];
         $post = $rows['Post'];
@@ -735,7 +776,7 @@ if (mysql_numrows($result) > 0) {
         <div class="col-lg-9 col-md-9 roll-call "
              style="background:white;border-radius:10px;margin-top:20px;border:2px solid black;" align="left">
 
-            <img src="<?php echo $mediaPath. $profilePhoto ?>" class="profilePhoto-Feed" alt=""
+            <img src="/poster/<?php echo $profilePhoto ?>" class="profilePhoto-Feed" alt=""
                  title="<?php echo $name ?>" class='enlarge-onhover img-responsive'/> &nbsp <b><font
                     size="4"><?php echo $name ?></font></b>
 
@@ -745,7 +786,7 @@ if (mysql_numrows($result) > 0) {
 
                 if (strlen($post) > 500) {
 
-                    $post500 = mb_substr($post, 0, 500); ?>
+                    $post500 = substr($post, 0, 500); ?>
 
                     <div id="short<?php echo $postID ?>">
                         <?php echo nl2br($post500) ?>...<a href="javascript:showPost('long<?php echo $postID ?>', 'short<?php echo $postID ?>');">Show More</a>
@@ -821,32 +862,6 @@ if (mysql_numrows($result) > 0) {
 
             ?>
 
-            <div style="padding-top:10px;padding-bottom:10px;margin-top:10px;">
-                <form method="post" action="" enctype="multipart/form-data"
-                      onsubmit="showCommentUploading('comment<?php echo $postID?>', this);">
-
-                    <input type="text" class="form-control" name="postComment" id="postComment"
-                           placeholder="Write a comment" title='' style="border:1px solid black"/>
-
-
-                    <input type="file" name="flPostMedia" id="flPostMedia" style="max-width:180px;"/>
-                    <br/>
-                    <div id="comment<?php echo $postID ?>" style="display:none;">
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-striped progress-bar-danger active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-                                <span class="sr-only">Loading</span>
-                            </div>
-                        </div>
-                    </div>
-                    <input type="submit" name="btnComment" id="btnComment" Value="Comment"
-                           style="border:1px solid black"/>
-                    <input type="hidden" name="postID" id="postID" Value="<?php echo $postID ?>"/>
-                    <input type="hidden" name="ID" id="ID" value="<?php echo $ID ?>"/>
-                    <input type="hidden" name="ownerId" id="ownerId" value="<?php echo $MemberID ?>"/>
-                    <input type="hidden" name="scrollx" id="scrollx" value="0"/>
-                    <input type="hidden" name="scrolly" id="scrolly" value="0"/>
-                </form>
-
                 <br/>
 
                 <?php if ($memberID != $ID) { ?>
@@ -854,125 +869,6 @@ if (mysql_numrows($result) > 0) {
                 <?php } ?>
                 <br/>
 
-
-                <?php
-                $sql3 = "SELECT DISTINCT
-                        PostComments.Comment As PostComment,
-                        PostComments.ID As PostCommentID,
-                        Members.ID As MemberID,
-                        Members.FirstName as FirstName,
-                        Members.LastName As LastName,
-                        Profile.ProfilePhoto As ProfilePhoto
-                        FROM PostComments,Members, Profile
-                        WHERE
-                        PostComments.Post_ID = $postID
-                        AND Members.ID = Profile.Member_ID
-                        And Members.ID = PostComments.Member_ID
-                        And PostComments.IsDeleted = 0
-                        Group By PostComments.ID
-                        Order By PostComments.ID DESC LIMIT 3 ";
-
-
-                $result3 = mysql_query($sql3) or die(mysql_error());
-                echo '<br/>';
-                if (mysql_numrows($result3) > 0) {
-                    echo '<div class="comment-style">';
-                    while ($rows3 = mysql_fetch_assoc($result3)) {
-                        $comment = $rows3['PostComment'];
-                        $profilePhoto = $rows3['ProfilePhoto'];
-                        $commentID = $rows3['PostCommentID'];
-                        $commentOwner = $rows3['MemberID'];
-
-                        echo '<div class="comment-row">';
-
-                        echo '<div class="user-icon"><img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" style = "border:1px solid black" class ="enlarge-onhover img-responsive" /><div class="user-name">' . $rows3['FirstName'] . ' ' . $rows3['LastName'] . '</div></div><div class="comment-content">' . nl2br($comment) . '</div>';
-                        echo '</div>';
-
-                        if ($commentOwner == $ID || $postOwner == $ID) {
-                            //<!--DELETE BUTTON ------------------>
-
-                            echo '<div class="comment-delete">';
-                            echo '<form action="" method="post" onsubmit="return confirm(\'Do you really want to delete this comment?\')">';
-                            echo '<input type="hidden" name="commentID" id="commentID" value="' .  $commentID . '" />';
-                            echo '<input type ="submit" name="DeleteComment" id="DeleteComment" value="Delete" class="deleteButton" />';
-                            echo '</form>';
-                            echo '</div>';
-                            //<!------------------------------------->
-                        }
-                    }
-                    echo '</div>';
-                }
-
-
-
-                ?>
-
-                <!--Show more comments -->
-                <?php
-
-                $sql4 = "SELECT DISTINCT
-                        PostComments.Comment As PostComment,
-                        PostComments.ID As PostCommentID,
-                        Members.ID As MemberID,
-                        Members.FirstName as FirstName,
-                        Members.LastName As LastName,
-                        Profile.ProfilePhoto As ProfilePhoto
-                        FROM PostComments,Members, Profile
-                        WHERE
-                        PostComments.Post_ID = $postID
-                        And Members.ID = PostComments.Member_ID
-                        And PostComments.IsDeleted = 0
-                        And Members.ID = Profile.Member_ID
-
-
-                        Group By PostComments.ID
-                        Order By PostComments.ID DESC LIMIT 3, 100 ";
-
-                $result4 = mysql_query($sql4) or die(mysql_error());
-                if (mysql_numrows($result4) > 0) {
-                $moreComments = "moreComments$postID";
-                ?>
-
-                <a href="javascript:showComments('<?php echo $moreComments ?>');">Show More</a>
-
-                <div id="<?php echo $moreComments ?>" style="display:none;">
-
-
-                    <?php
-                    echo '<br/>';
-                    echo '<div class="comment-style">';
-                    while ($rows4 = mysql_fetch_assoc($result4)) {
-                        $comment = $rows4['PostComment'];
-                        $profilePhoto = $rows4['ProfilePhoto'];
-                        $commentID = $rows4['PostCommentID'];
-                        $commentOwner = $rows4['MemberID'];
-                        echo '<div class="user-icon">';
-                        echo '<img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" style = "border:1px solid black" class ="enlarge-onhover img-responsive" /><div class="user-name">' . $rows4['FirstName'] . $rows['LastName'] . '</div></div><div class="comment-content">' . nl2br($comment) . '</div>';
-
-                        echo '</td></tr>';
-
-                    }
-                    echo '</div>';
-                    if ($commentOwner == $ID || $postOwner == $ID) {
-                        //<!--DELETE BUTTON ------------------>
-
-                        echo '<div class="comment-delete">';
-                        echo '<form action="" method="post" onsubmit="return confirm(\'Do you really want to delete this comment?\')">';
-                        echo '<input type="hidden" name="commentID" id="commentID" value="' .  $commentID . '" />';
-                        echo '<input type ="submit" name="DeleteComment" id="DeleteComment" value="Delete" class="deleteButton" />';
-                        echo '</form>';
-                        echo '</div>';
-                        //<!------------------------------------->
-                    }
-                    echo '</div>'; //end of more comments div
-                    }
-                    ?>
-
-
-                </div>
-                <!---------------------------------------------------
-                                  End of comments div
-                                  ----------------------------------------------------->
         </div>
 
 
@@ -984,31 +880,7 @@ if (mysql_numrows($result) > 0) {
 </div>
 
 <!--Right Column -->
-        <div class="col-md-3 col-lg-3 col-md-offset-9 col-lg-offset-9 ad-desktop hidden-sm hidden-xs rightColumn" >
-        <h3><a href="advertising.php">Advertise
-        <img src="<?php echo $imagesPath ?>ad-pic.jpg" style="border-bottom:1px solid black;" />
-        </a></h3>
-        <?php
 
-$rightColumnAds = getRightColumnAds($genre, $age, $state, $interests);
-$rightColSql = $rightColumnAds;
-$rightColResult = mysql_query($rightColSql) or die(mysql_error());
-//$rows = mysql_fetch_assoc($result);
-if (mysql_num_rows($rightColResult) > 0) { ?>
-
-    <div style="padding:10px;width:200px;">
-        <?php
-        while ($rightColRows = mysql_fetch_assoc($rightColResult)) {
-            echo $rightColRows["Post"];
-            ?>
-            <hr class="ad-border" />
-        <?php
-        } ?>
-    </div>
-<?php
-}
-?>
-        </div>
 
 
     </div>

@@ -382,7 +382,7 @@ var j =document.getElementsByTagName('script')[0];j.parentNode.insertBefore(s,j)
         $searchState = $_SESSION['state'];
     }
     else {
-        $searchState = 'MO';
+        $searchState = getMemberState($ID);
     }
     ?>
 
