@@ -170,7 +170,7 @@ if (isset($_POST['Delete']) && $_POST['Delete'] == "Delete") {
     ?>
     <div class="row row-padding">
         <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 "
-             style="background:white;border-radius:10px;margin-top:20px;border:2px solid black;" align="left">
+             style="background:white;border-radius:10px;margin-top:20px;border:2px solid black;margin-bottom:20px" align="left">
 
             <img src="/poster/<?php echo $profilePhoto ?>" class="profilePhoto-Feed" alt=""
                  title="<?php echo $name ?>" class='enlarge-onhover img-responsive'/> &nbsp <b><font
@@ -248,121 +248,7 @@ if (isset($_POST['Delete']) && $_POST['Delete'] == "Delete") {
             //-----------------------------------------------------------
 
             ?>
-
-            <div style="padding-top:10px;padding-bottom:10px;margin-top:10px;">
-                <form method="post" action="" enctype="multipart/form-data"
-                      onsubmit="return saveScrollPositions(this);">
-
-                    <input type="text" class="form-control" name="postComment" id="postComment"
-                           placeholder="Write a comment" title='' style="border:1px solid black"/>
-
-                    <?php if (!empty($ID) && isset($ID)) { ?>
-                        <input type="file" name="flPostMedia" id="flPostMedia" style="max-width:180px;"/>
-                        <br/>
-
-                        <input type="submit" name="btnComment" id="btnComment" Value="Comment"
-                               style="border:1px solid black"/>
-                    <?php } ?>
-
-                    <input type="hidden" name="postID" id="postID" Value="<?php echo $postID ?>"/>
-                    <input type="hidden" name="ID" id="ID" value="<?php echo $ID ?>"/>
-                    <input type="hidden" name="ownerId" id="ownerId" value="<?php echo $memberID ?>"/>
-                    <input type="hidden" name="scrollx" id="scrollx" value="0"/>
-                    <input type="hidden" name="scrolly" id="scrolly" value="0"/>
-                </form>
-
-                <br/>
-                <?php
-                // get post comments
-                $sql3 = "SELECT DISTINCT
-                        PostComments.Comment As PostComment,
-                        PostComments.ID As PostCommentID,
-                        Members.ID As MemberID,
-                        Members.FirstName as FirstName,
-                        Members.LastName As LastName,
-                        Profile.ProfilePhoto As ProfilePhoto
-                        FROM PostComments,Members, Profile
-                        WHERE
-                        PostComments.Post_ID = $postID
-                        AND Members.ID = Profile.Member_ID
-                        And Members.ID = PostComments.Member_ID
-                        And PostComments.IsDeleted = 0
-                        Group By PostComments.ID
-                        Order By PostComments.ID ASC LIMIT 3 ";
-
-
-                $result3 = mysql_query($sql3) or die(mysql_error());
-                if (mysql_num_rows($result3) > 0) {
-                    echo '<br/>';
-                    echo '<div class="comment-style">';
-                    while ($rows3 = mysql_fetch_assoc($result3)) {
-                        $comment = $rows3['PostComment'];
-                        $profilePhoto = $rows3['ProfilePhoto'];
-
-                        echo '<div class="comment-row">';
-
-                        echo '<div class="user-icon"><img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" style = "border:1px solid black" class ="enlarge-onhover img-responsive" />&nbsp;</td><td valign = "top"><b>' . $rows3['FirstName'] . ' ' . $rows3['LastName'] . '</b>&nbsp;&nbsp;' . nl2br($comment) . '</div>';
-                        echo '</div>';
-                    }
-                    echo '</div>';
-                }
-
-
-
-                ?>
-
-                <!--Show more comments -->
-                <?php
-
-                $sql4 = "SELECT DISTINCT
-                        PostComments.Comment As PostComment,
-                        PostComments.ID As PostCommentID,
-                        Members.ID As MemberID,
-                        Members.FirstName as FirstName,
-                        Members.LastName As LastName,
-                        Profile.ProfilePhoto As ProfilePhoto
-                        FROM PostComments,Members, Profile
-                        WHERE
-                        PostComments.Post_ID = $postID
-                        And Members.ID = PostComments.Member_ID
-                        And Members.ID = Profile.Member_ID
-                        Group By PostComments.ID
-                        Order By PostComments.ID ASC LIMIT 3, 100 ";
-
-                $result4 = mysql_query($sql4) or die(mysql_error());
-                if (mysql_numrows($result4) > 0) {
-                $moreComments = "moreComments$postID";
-                ?>
-
-                <a href="javascript:showComments('<?php echo $moreComments ?>');">Show More</a>
-
-                <div id="<?php echo $moreComments ?>" style="display:none;">
-
-
-                    <?php
-                    echo '<br/>';
-                    echo '<div class="comment-style">';
-                    while ($rows4 = mysql_fetch_assoc($result4)) {
-                        $comment = $rows4['PostComment'];
-                        $profilePhoto = $rows4['ProfilePhoto'];
-
-                        echo '<div class="user-icon">';
-                        echo '<img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" style = "border:1px solid black" class ="enlarge-onhover img-responsive" />&nbsp;</td><td valign = "top"><b>' . $rows4['FirstName'] . $rows['LastName'] . '</b>&nbsp;&nbsp;' . nl2br($comment) . '</span>';
-
-                        echo '</td></tr>';
-
-                    }
-                    echo '</div>';
-                    echo '</div>'; //end of more comments div
-                    }
-                    ?>
-
-
-                </div>
-                <!---------------------------------------------------
-                                  End of comments div
-                                  ----------------------------------------------------->
-
+<br/><br/>
             </div>
         </div>
 
