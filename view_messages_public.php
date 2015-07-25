@@ -76,9 +76,6 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
         $videoFileTypes = array("video/mpeg", "video/mpg", "video/ogg", "video/mp4",
             "video/quicktime", "video/webm", "video/x-matroska",
             "video/x-ms-wmw");
-// video file types
-        $photoFileTypes = array("image/jpg", "image/jpeg", "image/png", "image/tiff",
-            "image/gif", "image/raw");
 
         // add unique id to image name to make it unique and add it to the file server
         $mediaName = $_FILES["flPostMedia"]["name"];
@@ -96,67 +93,51 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
             $mediaName = $newFileName;
 
         } else {
-            $mediaString = 'photo';
-            if ($type == "image/jpg" || $type == "image/jpeg") {
-                $src = imagecreatefromjpeg($mediaFile);
-            } else if ($type == "image/png") {
-                $src = imagecreatefrompng($mediaFile);
-            } else if ($type == "image/gif") {
-                $src = imagecreatefromgif($mediaFile);
-            } else {
-                echo "<script>alert('Invalid File Type'); ";
-                exit;
-            }
+
+            echo "<script>alert('Invalid File Type 1');location='/view_messages.php?id=$senderID ";
+            exit;
         }
 
-        // read exif data
-        $exif = exif_read_data($_FILES['flPostMedia']['tmp_name']);
+        if (in_array($type, $videoFileTypes)) {
+            // convert to mp4 if not already an mp4
+            if ($type != "video/mp4") {
+                $audioName = $fileName;
+                $newFileName = $fileName . ".mp4";
+                $oggFileName = $fileName . ".ogv";
+                $webmFileName = $fileName . ".webm";
 
-        if (!empty($exif['Orientation'])) {
-            $ort = $exif['Orientation'];
 
-            switch ($ort) {
-                case 8:
-                    if (strstr($url, 'localhost:8888')) {
-                        // local php imagerotate doesn't work
+                // convert mp4
+                exec("$ffmpeg -i $fileName $newFileName");
+                $mediaName = $newFileName;
 
-                    } else {
-                        $src = imagerotate($src, 90, 0);
-                    }
-                    break;
-                case 3:
-                    if (strstr($url, 'localhost:8888')) {
-                        // local php imagerotate doesn't work
+                // convert ogg
+                exec("$ffmpeg -i $fileName  $oggFileName");
+                // convert webm
+                exec("$ffmpeg -i $fileName  $webmFileName");
 
-                    } else {
-                        $src = imagerotate($src, 180, 0);
-                    }
-                    break;
-                case 6:
-                    if (strstr($url, 'localhost:8888')) {
-                        // local php imagerotate doesn't work
-                    } else {
-                        $src = imagerotate($src, -90, 0);
-                    }
-                    break;
             }
+        } else {
+
+            echo "<script>alert('Invalid File Type'); location='/home.php'</script>";
+            exit;
         }
+
+        require 'media_post_file_path.php';
 
 // save photo/video
-        require 'media_post_file_path.php';
-        if (in_array($type, $videoFileTypes)) {
+        if (in_array($type, $videoFileTypes) || in_array($type, $audioFileTypes)) {
             move_uploaded_file($mediaFile, $postMediaFilePath);
-        } else {
-            if ($type == "image/jpg" || $type == "image/jpeg") {
-                imagejpeg($src, $postMediaFilePath, 100);
 
-            } else if ($type == "image/png") {
-                imagepng($src, $postMediaFilePath, 0, NULL);
 
-            } else {
-                imagegif($src, $postMediaFilePath, 100);
-
-            }
+            //copy new mp4 file path to ogg file path
+            copy($postMediaFilePath, $postOggFilePathTemp);
+            // overwrite mp4 with real ogg file path
+            copy($postOggFilePath, $postOggFilePathTemp);
+            // copy new mp4 file path to webm file path
+            copy($postMediaFilePath, $postWebmFilePathTemp);
+            // overwrite mp4 with real webm file path
+            copy($postWebmFilePath, $postWebmFilePathTemp);
         }
 
 // if photo didn't get uploaded, notify the user
@@ -164,20 +145,62 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
             echo "<script>alert('File could not be uploaded, try uploading a different file type.');</script>";
         }
 
-        imagedestroy($src);
-        //imagedestroy($tmp);
-
 
 // check if file type is a photo
-        if (in_array($type, $photoFileTypes)) {
+        // check if file type is a video
+        if (in_array($type, $videoFileTypes)) {
+            // where ffmpeg is located
+            $ffmpeg = '/usr/bin/ffmpeg';
+            // poster file name
+            $posterName = "poster".uniqid().".jpg";
+            //where to save the image
+            $poster = "$posterPath$posterName";
+            //time to take screenshot at
+            //$interval = 5;
+            //screenshot size
+            //$size = '440x280'; -s $size
+            //ffmpeg command
+            $cmd = "$ffmpeg -i \"$postMediaFilePath\" -r 1 -ss 3 -t 1  -f image2 $poster 2>&1";
+            exec($cmd);
+            $poster = imagecreatefromjpeg($poster);
 
-            $img = '<img src = "' . $postMediaFilePath . '" />';
-        } // check if file type is a video
-        elseif (in_array($type, $videoFileTypes)) {
-            $img = '<a href = "' . $videoPath . $mediaName . '"><img src = "' . $images . 'video-bg.jpg" height="100" width = "100" /></a>';
-        } else {
+            /*$white = imagecolorallocate($poster, 255, 255, 255);
+            $text="Rapportbook.com";
+            $font="/stocky.ttf";*/
+
+            //imagettftext($poster, 20, 0, 20, 20, $white, $font, $text);
+
+
+            $size = getimagesize("$posterPath$posterName");
+            $width = $size[0];
+            $height = $size[1];
+
+
+            if ($width > $height && $height < 1000) {
+                // video shot in landscape, needs to be flipped
+                $img = imagerotate($poster, 180, 0);
+                imagejpeg($img, $posterPath.$posterName, 50);
+            }
+            // handle images from videos shot with Iphone
+            if ($width > $height && $height > 700 && $type == "video/quicktime" || $type == "video/mp4") {
+                // video shot in landscape, needs to be flipped
+                $img = imagerotate($poster, -90, 0);
+                imagejpeg($img, $posterPath.$posterName, 50);
+            }
+
+
+            $img = '<video poster="/poster/'.$posterName.'" preload="none" controls>
+                                <source src = "' . $videoPath . $mediaName . '" type="video/mp4" />
+                                <source src = "' . $videoPath . $oggFileName . '" type = "video/ogg" />
+                                <source src = "' . $videoPath . $webmFileName . '" type = "video/webm" />
+                                Your browser does not seem to support the video tag
+                                </video>';
+
+        }
+
+        else {
             // if invalid file type
-            echo '<script>alert("Invalid File Type!");</script>';
+            echo '<script>alert("Invalid File Type 1!");</script>';
             exit;
         }
 
@@ -263,7 +286,8 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
             $sql = "SELECT * FROM Messages
                     WHERE ThreadOwner_ID = $ID
                     AND (Receiver_ID = $memberID Or Sender_ID = $memberID)
-                    AND (IsDeleted = 0) ";
+                    AND (IsDeleted = 0)
+                    ORDER BY ID DESC";
             $result = mysql_query($sql) or die(mysql_error());
 
             if (mysql_num_rows($result) > 0) {
