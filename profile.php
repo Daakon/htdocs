@@ -149,6 +149,13 @@ if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
     $emailStatus = $_POST['EmailStatus'];
     $password = $_POST['Password'];
     $username = $_POST['Username'];
+    $email = $_POST['Email'];
+
+
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        echo "<script>alert('Invalid email format');location='/profile.php/$username'</script>";
+        exit;
+    }
 
 //only if password has changed do we hash it
     if (check_password($ID, $password)==false) {
@@ -160,6 +167,7 @@ if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
           FirstName = '$firstName',
           LastName = '$lastName',
           DOB = '$dob',
+          Email = '$email',
           EmailActive = '$emailStatus ',
           Password = '$password'
           WHERE ID = $ID ";
@@ -177,7 +185,7 @@ if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
             Food = '$food',
             Dislikes = '$dislikes',
             Plan = '$plan'
-             WHERE Member_ID = $ID ";
+            WHERE Member_ID = $ID ";
     mysql_query($sql) or die(mysql_error());
     $username = $_SESSION['username'];
     echo "<script>alert('Update Successful');location='/profile/$username</script>";

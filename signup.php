@@ -9,10 +9,11 @@ require 'email.php';
 $fName = $_POST['firstName'];
 $lName = $_POST['lastName'];
 $email = $_POST['email'];
-$gender = $_POST['ddGender'];
+$gender = $_POST['gender'];
 $month = $_POST['ddMonth'];
 $day = $_POST['ddDay'];
 $year = $_POST['ddYear'];
+$birthday = $_POST['birthday'];
 $username = $_POST['username'];
 $pass = $_POST['password'];
 $fb_token = $_POST['fb_token'];
@@ -21,8 +22,12 @@ $state = $_POST['ddState'];
 
 if($gender=='') $gender = (($_POST['gender']=='male')?1:2);
 
-$dob = $year . '-' . $month . '-' . $day;
-
+if ($year != '') {
+    $dob = $year . '-' . $month . '-' . $day;
+}
+else {
+    $dob = $birthday;
+}
 
 $sql = "SELECT * FROM Members WHERE Email = '$email'";
 $result = mysql_query($sql) or die(mysql_error());

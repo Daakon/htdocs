@@ -23,7 +23,7 @@ require 'memory_settings.php';
 $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 $ID = $_SESSION['ID'];
 
-
+require 'checkDemographics.php';
 
 // handle roll call post
 $post = mysql_real_escape_string($_POST['post']);

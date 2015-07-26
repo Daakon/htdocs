@@ -89,10 +89,15 @@ get_head_files();
             document.getElementById('status').innerHTML =
                 'Thanks for logging in, ' + response.name + '!';
 
-
+            // parse birthday sent from FB to match MySQL Format
+            var date = new Date(response.birthday);
+            var d = date.getDate();
+            var m = date.getMonth() + 1;
+            var y = date.getFullYear();
+            var birthday = '' + y + '-' + (m<=9 ? '0' + m : m) + '-' + (d <= 9 ? '0' + d : d);
 
             var data ={
-                firstName:response.first_name,lastName:response.last_name,email:response.email,gender:response.gender,fb_id:response.id
+                firstName:response.first_name,lastName:response.last_name,email:response.email,gender:response.gender,birthday:birthday,fb_id:response.id
             };
 
             $.post( 'signup.php', data)
@@ -225,7 +230,7 @@ get_head_files();
 
                 <div class="form-group row" id="form-group-ddGender">
                     <div class="col-md-6">
-                        <label class="sr-only" for="ddGender">Gender</label>
+                        <label class="sr-only" for="gender">Gender</label>
                         <select class='form-control input-lg' name="ddGender" id="ddGender">
                             <option value="">Gender</option>
                             <option value="1">Male</option>
