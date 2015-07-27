@@ -22,17 +22,17 @@ function get_head_files()
 addToHomescreen.removeSession();
 </script>
         <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
-        <meta name="description" content="Tell Your Story With Video">
-        <meta name="keywords" content="Video, Social Network">
+        <meta name="description" content="Rapportbook is a  Video Only Dating Web App">
+        <meta name="keywords" content="Video, Social Network, Dating">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 
-        <!--Facebook API Meta Tags -->
+        <!--Social Media API Meta Tags -->
         <meta property="og:site_name" content="Rapportbook"/>
         <meta property="og:title" content="Click here to view this video on Rapportbook!">
         <meta property="og:image" content="http://rapportbook.com/images/Rapportbook-Logo.png">
-        <meta property="og:description" content="Tell Your Story With Video">
+        <meta property="og:description" content="Rapportbook is a  Video Only Dating Web App">
 
 
 

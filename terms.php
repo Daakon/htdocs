@@ -12,23 +12,20 @@ get_head_files();
 <h3>Rapportbook Terms:</h3>
     <br/>
     <p>
-    <h5>Content</h5>
-        You own all of the content and information you post on Rapportbook. Rapportbook does
-        reserve the right to use any content posted for the sole purpose of marketing its
-        services. Never will Rapportbook attempt to profit off the content of it's artists
-        without written consent from the artist.
+    <h5>Content Ownership</h5>
+        You own all of the content and information you post on Rapportbook
+        and none of your uploaded videos will be used outside of our domain.
 
     </p>
 
     <p>
         <h5>Registration & Account Security</h5>
-        Since Rapportbook members are predominately artists, they are allowed to use psuedo or
-        stage names for their accounts. Members who are not artistic or do not have artistic
-        expressive intentions are encouraged to use their real names.
+        Rapportbook members must sign up with their government name but only
+        your first name will be used to reference your profile.
 
         Our account rules are as follows:
     <ul>
-            <li style="display:block">1. You will not use Rapportbook if you are under 13.</li>
+            <li style="display:block">1. You will not use Rapportbook if you are under 18.</li>
             <li style="display:block">2. You will keep your contact information accurate and up-to-date.</li>
             <li style="display:block">3. You will not share your password</li>
             <li style="display:block">4. You will not transfer your account</li>
@@ -50,9 +47,8 @@ get_head_files();
         Here is a list of content that is under no means tolerable:
         <ul>
             <li style="display:block" class="list-group-item list-group-item-danger">Pornographic material of any nature</li>
-            <li style="display:block" class="list-group-item list-group-item-danger"><font color="red">*</font>Nude art will be at the discretion of our content team.</li>
             <li style="display:block" class="list-group-item list-group-item-danger">Any video committing a crime</li>
-            <li style="display:block" class="list-group-item list-group-item-danger">Racists behaviour or bullying tactics </li>
+            <li style="display:block" class="list-group-item list-group-item-danger">Racist behaviour or bullying tactics </li>
             <li style="display:block" class="list-group-item list-group-item-danger">Posting media content you do not have ownership rights to.</li>
 
         </ul>
