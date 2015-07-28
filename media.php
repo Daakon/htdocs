@@ -70,13 +70,13 @@ WHERE Members.ID = '$memberID'
 And Profile.Member_ID = '$memberID' ";
 $result = mysql_query($sql) or die(mysql_error());
 $pRows = mysql_fetch_assoc($result);
-$profilePhoto = $pRows['ProfilePhoto'];
+$profilePhoto = $pRows['Poster'];
 $name = $pRows['FirstName'] . ' ' . $pRows['LastName'];
 
 ?>
 
 <?php
-$profileMediaSrc = trim("media/" . $profilePhoto);
+$profileMediaSrc = trim("/poster/" . $profilePhoto);
 ?>
 
 
@@ -84,7 +84,7 @@ $profileMediaSrc = trim("media/" . $profilePhoto);
 
 
 
-<script type="text / javascript">
+<script type="text/javascript">
         function confirmPhotoDelete(theForm) {
             if (!confirm('Are you sure you want to delete this photo')) {
                 return false;
@@ -92,12 +92,6 @@ $profileMediaSrc = trim("media/" . $profilePhoto);
 
             return true;
         }
-
-
-
-
-
-
 </script>
 
 <script type="text/javascript">
@@ -168,117 +162,7 @@ $profileMediaSrc = trim("media/" . $profilePhoto);
     });
 </script>
 
-<style>
-    html, body {
-        max-width: 100% !important;
-        overflow-x: hidden !important;
-    }
 
-    iframe {
-        max-width: 100%;
-        height: auto;
-    }
-
-    img {
-        max-width: 100%;
-        max-height: 500px;
-    }
-
-    video {
-        max-width: 100%;
-        max-height: 500px;
-    }
-
-    embed {
-        max-width: 100%;
-        max-height: 500px;
-    }
-
-    script {
-        max-width: 100%;
-        max-height: 500px;
-    }
-
-    .btnApprove {
-        background: url("/images/gray_check.png");
-        display: inline-block;
-        background-repeat: no-repeat;
-        background-color: white;
-        background-position: center;
-        width: 30px;
-        height: 30px;
-        border: none;
-    }
-
-    .btnDisapprove {
-        background: url("/images/red_check.png");
-        display: inline-block;
-        background-repeat: no-repeat;
-        background-color: transparent;
-        background-position: center;
-        width: 30px;
-        height: 30px;
-        border: none;
-    }
-
-    h1, .h1 {
-        font-size: 20px;
-        word-wrap: normal;
-    }
-
-    h1 a {
-        word-break: break-all; /*breaks hyperlinks */
-    }
-
-    h2, .h2 {
-        font-size: 18px;
-        word-wrap: normal;
-    }
-
-    h2 a {
-        word-break: break-all; /*breaks hyperlinks */
-    }
-
-    h3, .h3 {
-        font-size: 16px;
-        word-wrap: normal;
-    }
-
-    h3 a {
-        word-break: break-all; /*breaks hyperlinks */
-    }
-
-    h4, .h4 {
-        font-size: 15px;
-        word-wrap: normal;
-    }
-
-    h4 a {
-        word-break: break-all; /*breaks hyperlinks */
-    }
-
-    h5, .h5 {
-        font-size: 14px;
-        padding-bottom: .4666666666666666em;
-        word-wrap: normal;
-    }
-
-    h5 a {
-        word-break: break-all; /*breaks hyperlinks */
-    }
-
-    h6, .h6 {
-        font-size: 13px;
-        padding-bottom: .4666666666666666em;
-        text-transform: uppercase;
-        color: #888;
-        word-wrap: normal;
-    }
-
-    h6 a {
-        word-break: break-all; /*breaks hyperlinks */
-    }
-</style>
 
 <script>
     // for android video playback
@@ -359,82 +243,82 @@ $profileMediaSrc = trim("media/" . $profilePhoto);
 
             if ($isPost == true) {
 
-            $sql2 = "SELECT * FROM PostApprovals WHERE Post_ID = '$postID' AND Member_ID = '$ID' ";
-            $result2 = mysql_query($sql2) or die(mysql_error());
-            $rows2 = mysql_fetch_assoc($result2);
+                $sql2 = "SELECT * FROM PostApprovals WHERE Post_ID = '$postID' AND Member_ID = '$ID' ";
+                $result2 = mysql_query($sql2) or die(mysql_error());
+                $rows2 = mysql_fetch_assoc($result2);
 
-            // get approvals for each bulletin
-            $sql3 = "SELECT * FROM PostApprovals WHERE Post_ID = '$postID' ";
-            $result3 = mysql_query($sql3) or die(mysql_error());
-            $rows3 = mysql_fetch_assoc($result3);
-            $approvals = mysql_numrows($result3);
+                // get approvals for each bulletin
+                $sql3 = "SELECT * FROM PostApprovals WHERE Post_ID = '$postID' ";
+                $result3 = mysql_query($sql3) or die(mysql_error());
+                $rows3 = mysql_fetch_assoc($result3);
+                $approvals = mysql_numrows($result3);
 
-            echo '<table><tr><td>';
-            echo "<div id = 'approvals$postID'>";
+                echo '<table><tr><td>';
+                echo "<div id = 'approvals$postID'>";
 
-            if (mysql_num_rows($result2) > 0) {
+                if (mysql_num_rows($result2) > 0) {
 
-                echo '<form>';
+                    echo '<form>';
 
-                echo '<input type ="hidden" class = "postID" value = "' . $postID . '" />';
-                echo '<input type ="hidden" class = "ID" value="' . $ID . '"/>';
-                echo '<input type ="hidden" class = "mediaID" value = "' . $mediaID . '" />';
-                echo '<input type ="hidden" class = "mediaName" value ="' . $mediaName . '" />';
-                echo '<input type ="hidden" class = "mediaType" value = "' . $mediaType . '" />';
-                echo '<input type ="hidden" class = "mediaDate" id = "mediaDate" value = "' . $mediaDate . '" />';
-                echo '<input type ="button" class = "btnDisapprove" />';
-
-
-                if ($approvals > 0) {
-                    //echo '<tr><td>';
-
-                    echo '&nbsp;<span style = "color:red;font-weight:bold;font-size:16px">' . $approvals . '</font>';
-                }
-                echo '</form>';
-            } else {
-
-                echo '<form>';
-
-                echo '<input type ="hidden" class = "postID" id = "postID" value = "' . $postID . '" />';
-                echo '<input type ="hidden" class = "ID" value="' . $ID . '"/>';
-                echo '<input type ="hidden" class = "mediaID" value = "' . $mediaID . '" />';
-                echo '<input type ="hidden" class = "mediaName" id = "mediaName" value ="' . $mediaName . '" />';
-                echo '<input type ="hidden" class = "mediaType" id = "type" value = "' . $mediaType . '" />';
-                echo '<input type ="hidden" class = "mediaDate" id = "mediaDate" value = "' . $mediaDate . '" />';
-                echo '<input type ="button" class = "btnApprove" />';
+                    echo '<input type ="hidden" class = "postID" value = "' . $postID . '" />';
+                    echo '<input type ="hidden" class = "ID" value="' . $ID . '"/>';
+                    echo '<input type ="hidden" class = "mediaID" value = "' . $mediaID . '" />';
+                    echo '<input type ="hidden" class = "mediaName" value ="' . $mediaName . '" />';
+                    echo '<input type ="hidden" class = "mediaType" value = "' . $mediaType . '" />';
+                    echo '<input type ="hidden" class = "mediaDate" id = "mediaDate" value = "' . $mediaDate . '" />';
+                    echo '<input type ="button" class = "btnDisapprove" />';
 
 
-                if ($approvals > 0) {
+                    if ($approvals > 0) {
+                        //echo '<tr><td>';
 
-
-                    echo '&nbsp;<span style = "color:red;font-weight:bold;font-size:16px">' . $approvals . '</font>';
-                }
-                echo '</form>';
-            }
-            echo "</div>"; // end of approval div
-            echo '</td></tr></table>';
-
-                }
-
-                if ($_SESSION['ID'] == $memberID) {
-                ?>
-                <br/><br/>
-                <form method="get" action="" onsubmit="return confirm('Are you sure you want to delete this photo')">
-                    <?php
-                    echo '<input type = "submit" name = "btnDelete" id = "btnDelete" value = "Delete" class="deleteButton" /><br/><br/>';
-                    echo '<input type ="hidden" name = "mediaID" id = "mediaID" value = "' . $mediaID . '" />';
-                    echo '<input type = "hidden" name = "ID" id = "ID" value="' . $ID . '"/>';
+                        echo '&nbsp;<span style = "color:red;font-weight:bold;font-size:16px">' . $approvals . '</font>';
+                    }
                     echo '</form>';
-                    echo '<hr/>';
-                    }
+                } else {
+
+                    echo '<form>';
+
+                    echo '<input type ="hidden" class = "postID" id = "postID" value = "' . $postID . '" />';
+                    echo '<input type ="hidden" class = "ID" value="' . $ID . '"/>';
+                    echo '<input type ="hidden" class = "mediaID" value = "' . $mediaID . '" />';
+                    echo '<input type ="hidden" class = "mediaName" id = "mediaName" value ="' . $mediaName . '" />';
+                    echo '<input type ="hidden" class = "mediaType" id = "type" value = "' . $mediaType . '" />';
+                    echo '<input type ="hidden" class = "mediaDate" id = "mediaDate" value = "' . $mediaDate . '" />';
+                    echo '<input type ="button" class = "btnApprove" />';
 
 
-                    if (empty($profileMediaSrc)) {
-                        echo "<script>alert('Image not found');location='home.php'</script>";
-                    }
+                    if ($approvals > 0) {
 
+
+                        echo '&nbsp;<span style = "color:red;font-weight:bold;font-size:16px">' . $approvals . '</font>';
                     }
-                    }
+                    echo '</form>';
+                }
+                echo "</div>"; // end of approval div
+                echo '</td></tr></table>';
+
+            }
+
+            if ($_SESSION['ID'] == $memberID) {
+            ?>
+            <br/><br/>
+            <form method="get" action="" onsubmit="return confirm('Are you sure you want to delete this photo')">
+                <?php
+                echo '<input type = "submit" name = "btnDelete" id = "btnDelete" value = "Delete" class="deleteButton" /><br/><br/>';
+                echo '<input type ="hidden" name = "mediaID" id = "mediaID" value = "' . $mediaID . '" />';
+                echo '<input type = "hidden" name = "ID" id = "ID" value="' . $ID . '"/>';
+                echo '</form>';
+                echo '<hr/>';
+                }
+
+
+                if (empty($profileMediaSrc)) {
+                    echo "<script>alert('Image not found');location='home.php'</script>";
+                }
+
+                }
+                }
                 ?>
 
 

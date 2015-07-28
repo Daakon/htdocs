@@ -10,15 +10,15 @@ $firstName = $row['FirstName'];
 
 // file paths
 if (strstr($url, "local")) {
-    $howItWorks = "/how_it_works.php";
+    $howItWorks = "/learn_more.php";
     $login = "/index.php";
 }
 elseif (strstr($url, "dev")) {
-    $howItWorks = "http://dev.rapportbook.com/how_it_works.php";
+    $howItWorks = "http://dev.rapportbook.com/learn_more.php";
     $login = "http://dev.rapportbook.com/";
 }
 else {
-    $howItWorks = "http://rapportbook.com/how_it_works.php/";
+    $howItWorks = "http://rapportbook.com/learn_more.php/";
     $login = "http://rapportbook.com/";
 }
 
