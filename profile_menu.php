@@ -1,6 +1,6 @@
 
 <?php if ($_SESSION['ID'] == $ID) { ?>
-<ul class="list-inline demoText" style="display:inline-block;background:white;border:1px solid black;border-radius: 10px;">
+<ul class="list-inline demoText profileMenu">
     <li><a href="/home.php">Roll Call</a></li>
     <li><a href="/profile.php/<?php echo get_username($ID) ?>">Profile</a></li>
     <li><a href="/member_media.php">Video Book</a></li>

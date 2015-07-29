@@ -21,7 +21,11 @@ else {
     $howItWorks = "http://rapportbook.com/learn_more.php/";
     $login = "http://rapportbook.com/";
 }
+?>
 
+<div class="profileMenu">
+
+<?php
 $text = 'login';
 if (isset($_SESSION['ID']) && !empty($_SESSION['ID'])) { ?>
     <a href="/index.php"><b>Go To Roll Call</b></a>
@@ -31,10 +35,10 @@ else { ?>
     Or  <a href="/index.php"><b>Login</b></a>
 <?php } ?>
 
-
+</div>
 <br/><br/>
 
-<ul class="list-inline">
+<ul class="list-inline profileMenu">
     <li><a href="/profile_public.php/<?php echo $username ?>">Profile</a></li>
     <li><a href="/member_media_public.php/<?php echo $username ?>">Video Book</a></li>
     <li><a href="/manage_post_public.php/<?php echo $username ?>"><?php echo $firstName ?>'s Post</a></li>

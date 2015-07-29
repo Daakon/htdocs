@@ -37,8 +37,30 @@ $lName = $rows['LastName'];
 <link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet"/>
 <script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
 
+<?php $sql = "SELECT Poster FROM Profile WHERE Member_ID = $memberID";
+$result = mysql_query($sql) or die(mysql_error());
+$row = mysql_fetch_assoc($result);
+$bgPhoto = $row['Poster'];
+?>
 
-<body>
+<body style="
+    background-image: url(/poster/<?php echo $bgPhoto ?>);
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0.9;
+    background-repeat: no-repeat;
+    background-position: 50% 0;
+    -ms-background-size: cover;
+    -o-background-size: cover;
+    -moz-background-size: cover;
+    -webkit-background-size: cover;
+    background-size: cover;
+    ">
 
 
 <div class="container" >

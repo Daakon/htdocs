@@ -341,7 +341,7 @@ if (isset($_POST['submit'])) {
 
 
         <ul class="list-inline">
-            <li><a href="/profile.php/<?php echo get_username($ID) ?>">Go To Your Profile <?php require 'getNewMessageCount.php' ?></a></li>
+            <li class="demoText"><a href="/profile.php/<?php echo get_username($ID) ?>">Go To Your Profile <?php require 'getNewMessageCount.php' ?></a></li>
         </ul>
 
        <!-- SMARTADDON BEGIN -->
