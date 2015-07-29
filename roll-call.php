@@ -34,14 +34,8 @@ if (!empty($queryName)) {
 }
 else { $memberCondition = ""; }
 $ads = getAds($genre, $age, $state, $interests, $gender);
-$gender = getGender($ID);
 
-if ($gender == 1) {
-    $getGender = 2;
-}
-else {
-    $getGender = 1;
-}
+
 
 if (empty($ageStart)) {
     $ageStart = 18;

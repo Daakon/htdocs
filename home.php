@@ -320,7 +320,10 @@ if (isset($_POST['submit'])) {
                 var stateSelect = document.getElementById('searchState');
                 var state = stateSelect.options[stateSelect.selectedIndex].value;
 
-                window.location = "/home.php?genre="+encodeURIComponent(genre)+"&ageStart="+encodeURIComponent(ageStart)+"&ageEnd="+encodeURIComponent(ageEnd)+"&state="+encodeURIComponent(state);
+                var genderSelect = document.getElementById('Gender');
+                var gender = genderSelect.options[genderSelect.selectedIndex].value;
+
+                window.location = "/home.php?genre="+encodeURIComponent(genre)+"&ageStart="+encodeURIComponent(ageStart)+"&ageEnd="+encodeURIComponent(ageEnd)+"&state="+encodeURIComponent(state)+"&gender="+encodeURIComponent(gender);
             }
         </script>
 
@@ -386,6 +389,28 @@ var j =document.getElementsByTagName('script')[0];j.parentNode.insertBefore(s,j)
     }
     ?>
 
+    <?php
+    $gender = getGender($ID);
+    if (!empty($_GET['gender'])) {
+        $getGender = $_GET['gender'];
+    }
+    else {
+        if ($gender == 1) {
+            $getGender = 2;
+        } else {
+            $getGender = 1;
+        }
+    }
+
+$gendeText;
+    if ($getGender == 1) {
+        $genderText = "Male";
+    }
+    else {
+        $genderText = "Female";
+    }
+    ?>
+
 <!--Middle Column -->
 
         <b>Age Range</b>
@@ -399,7 +424,15 @@ var j =document.getElementsByTagName('script')[0];j.parentNode.insertBefore(s,j)
             <?php age() ?>
         </select>
 
-    &nbsp;&nbsp;&nbsp;
+    <br/><br/>
+        <b>You are looking for</b>
+        <select id="Gender" name="Gender" onchange="updateFeed()">
+            <option value="<?php echo $gender ?>"><?php echo $genderText ?></option>
+            <option value="1">Male</option>
+            <option value="2">Female</option>
+        </select>
+
+    <br/><br/>
     <b>State</b>
     <select id="searchState" name="searchState" onchange="updateFeed()">
         <option value="<?php echo $searchState ?>"><?php echo $searchState?></option>

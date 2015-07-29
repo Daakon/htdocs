@@ -35,7 +35,7 @@ $ID = $_SESSION['ID'];
         <?php } ?>
         </div>
         
-        <img src="<?php echo $images ?>faq.jpg" class="img-responsive" />
+        <img src="<?php echo $imagesPath ?>faq.jpg" class="img-responsive" />
 
         <br/>
 
@@ -44,29 +44,22 @@ $ID = $_SESSION['ID'];
             Videos typically can be up to 10 minutes long.
         </small>
 
-        <h4>How private are my photos/videos</h4>
-        <small>
-             Photos & videos that are marked as private indicate that you have not uploaded
-        them in Roll Call so the general public cannot see them. If you text your profile to
-        someone, then they will be able to see those photos and/or video.
-        </small>
 
-        <h4>What type of content can I post</h4>
+        <h4>What type of videos can I post</h4>
         <small>
-            Anything you believe is a photo or video that depicts talent.
+            Anything you believe shows who you are as a person.
         </small>
 
         <h4>Does the video have to be mine?</h4>
         <small>
-            No, the video does not have to be yours but you do have to have permission from
-            the lawful owner of the video to post it.
+            You have to have rights to the video.
+            Typically, it should be something you recorded.
         </small>
 
         <h4>How do I report content that is offensive, abusive or illegal</h4>
         <small>
             Contact us immediately at <a href="mailto:info@rapportbook.com">info@rapportbook.com</a> and include
-            your username as well as the full name of the person causing the issue along with
-            the description of the issue.
+            your username as well as any details you can provide concerning the issue at hand.
         </small>
 
         <h4>I'm experiencing technical difficulties</h4>
