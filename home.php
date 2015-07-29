@@ -455,7 +455,7 @@ $gendeText;
                 <input type="file" width="10px;" name="flPostMedia" id="flPostMedia"/>
                 <br/>
                 <textarea name="post" id="post" class="form-control textArea"
-                       placeholder="Share a cool video" ></textarea>
+                       placeholder="Describe Your Video" ></textarea>
                 <br/>
                 <div id="progress" style="display:none;">
                     <div class="progress">
