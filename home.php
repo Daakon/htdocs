@@ -328,7 +328,7 @@ if (isset($_POST['submit'])) {
         </script>
 
 
-<body>
+<body class="home-background">
 
 
 <div class="container">
@@ -413,7 +413,7 @@ $gendeText;
 
 <!--Middle Column -->
 
-        <b>Age Range</b>
+        <div class="demoText">Age Range</div>
         <select id="AgeStart" name="AgeStart" onchange="updateFeed()">
             <option value="<?php echo $ageStart ?>"><?php echo $ageStart ?></option>
             <?php age() ?>
@@ -425,7 +425,7 @@ $gendeText;
         </select>
 
     <br/><br/>
-        <b>You are looking for</b>
+    <div class="demoText">You are looking for</div>
         <select id="Gender" name="Gender" onchange="updateFeed()">
             <option value="<?php echo $gender ?>"><?php echo $genderText ?></option>
             <option value="1">Male</option>
@@ -433,7 +433,7 @@ $gendeText;
         </select>
 
     <br/><br/>
-    <b>State</b>
+    <div class="demoText">State</div>
     <select id="searchState" name="searchState" onchange="updateFeed()">
         <option value="<?php echo $searchState ?>"><?php echo $searchState?></option>
         <?php  getState(); ?>

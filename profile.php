@@ -295,7 +295,30 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
     }
 </script>
 
-<body>
+<?php $sql = "SELECT Poster FROM Profile WHERE Member_ID = $ID";
+$result = mysql_query($sql) or die(mysql_error());
+$row = mysql_fetch_assoc($result);
+$bgPhoto = $row['Poster'];
+?>
+<body
+    style="
+    background-image: url(/poster/<?php echo $bgPhoto ?>);
+display: block;
+position: absolute;
+left: 0;
+top: 0;
+width: 100%;
+height: 100%;
+z-index: 1;
+opacity: 0.9;
+background-repeat: no-repeat;
+background-position: 50% 0;
+-ms-background-size: cover;
+-o-background-size: cover;
+-moz-background-size: cover;
+-webkit-background-size: cover;
+background-size: cover;
+">
 
 
 <div class="container" >
