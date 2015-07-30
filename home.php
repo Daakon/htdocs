@@ -344,19 +344,7 @@ if (isset($_POST['submit'])) {
             <li class="demoText"><a href="/profile.php/<?php echo get_username($ID) ?>">Go To Your Profile <?php require 'getNewMessageCount.php' ?></a></li>
         </ul>
 
-       <!-- SMARTADDON BEGIN -->
-<script type="text/javascript">
-(function() {
-var s=document.createElement('script');s.type='text/javascript';s.async = true;
-s.src='http://s1.smartaddon.com/share_addon.js';
-var j =document.getElementsByTagName('script')[0];j.parentNode.insertBefore(s,j);
-})();
-</script>
-
-<a href="http://www.smartaddon.com/?share" title="Share Button" onclick="return sa_tellafriend('','bookmarks')"><img alt="Share" src="http://s1.smartaddon.com/s12.png" border="0" /></a>
-<!-- SMARTADDON END -->
-<br/><br/>
-
+      
     <?php
     $ageStart = $_GET['ageStart'];
     $ageEnd = $_GET['ageEnd'];
@@ -406,17 +394,20 @@ var j =document.getElementsByTagName('script')[0];j.parentNode.insertBefore(s,j)
     ?>
 
     <?php
+    // if gender search has a value
     $gender = $_GET['gender'];
     if (!empty($gender)) {
         $_SESSION['gender'] = $gender;
         $getGender = $_SESSION['gender'];
     }
     else {
+        // if no gender search check to see if there was a prior search
         if (!empty($_SESSION['gender'])) {
             $gender = $_SESSION['gender'];
             $getGender = $_SESSION['gender'];
         }
         else {
+            // if no prior search, get the initial gender value
             $gender = getGender($ID);
             if ($gender == 1) {
                 $getGender = 2;
