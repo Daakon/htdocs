@@ -273,8 +273,13 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
             <h2>View Messages</h2>
             <hr/>
 
-            <?php $senderID = $_GET['id']; ?>
-            <h5>Message: <span class="viewMessage"><?php echo get_users_name($senderID) ?></span></h5>
+            <?php $senderID = $_GET['id'];
+            $sql = "SELECT Username FROM Members WHERE ID = $senderID";
+            $result = mysql_query($sql) or die(mysql_error());
+            $row = mysql_fetch_assoc($result);
+            $username = $row['Username'];
+            ?>
+            <h5>Message: <span class="viewMessage"><a href="/profile_public.php/<?php echo $username ?>"><?php echo get_users_name($senderID) ?></a></span></h5>
             <?php
             // get subject
             $sql = "SELECT * FROM Messages
