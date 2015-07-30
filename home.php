@@ -365,15 +365,27 @@ var j =document.getElementsByTagName('script')[0];j.parentNode.insertBefore(s,j)
         $ageStart = $_SESSION['ageStart'];
     }
     else {
-        $ageStart = 18;
+        if (!empty($_SESSION['ageStart'])) {
+            $ageStart = $_SESSION['ageStart'];
+        }
+        else {
+            $ageStart = 18;
+        }
     }
+
+
 
     if (!empty($ageEnd)) {
         $_SESSION['ageEnd'] = $ageEnd;
         $ageEnd = $_SESSION['ageEnd'];
     }
     else {
-        $ageEnd = 50;
+        if (!empty($_SESSION['ageEnd'])) {
+            $ageEnd = $_SESSION['ageEnd'];
+        }
+        else {
+            $ageEnd = 50;
+        }
     }
     ?>
 
@@ -385,20 +397,32 @@ var j =document.getElementsByTagName('script')[0];j.parentNode.insertBefore(s,j)
         $searchState = $_SESSION['state'];
     }
     else {
-        $searchState = getMemberState($ID);
+        if (!empty($_SESSION['state'])) {
+            $searchState = $_SESSION['state'];
+        } else {
+            $searchState = getMemberState($ID);
+        }
     }
     ?>
 
     <?php
-    $gender = getGender($ID);
-    if (!empty($_GET['gender'])) {
-        $getGender = $_GET['gender'];
+    $gender = $_GET['gender'];
+    if (!empty($gender)) {
+        $_SESSION['gender'] = $gender;
+        $getGender = $_SESSION['gender'];
     }
     else {
-        if ($gender == 1) {
-            $getGender = 2;
-        } else {
-            $getGender = 1;
+        if (!empty($_SESSION['gender'])) {
+            $gender = $_SESSION['gender'];
+            $getGender = $_SESSION['gender'];
+        }
+        else {
+            $gender = getGender($ID);
+            if ($gender == 1) {
+                $getGender = 2;
+            } else {
+                $getGender = 1;
+            }
         }
     }
 

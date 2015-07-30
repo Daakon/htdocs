@@ -155,7 +155,7 @@ if (mysql_num_rows($rollCallResult) > 0) {
 
     </div>
 
-    <a href='/post-interest.php?interest=<?php echo urlencode($category) ?>&gender=<?php echo urlencode($getGender) ?>&ageStart=<?php echo urlencode($ageStart) ?>&ageEnd=<?php echo urlencode($ageEnd) ?>' class='category'><h5><?php echo $category ." ". interestGlyphs($category) ?></h5></a>
+    <a href='/post-interest.php?interest=<?php echo urlencode($category) ?>&gender=<?php echo urlencode($getGender) ?>&ageStart=<?php echo urlencode($ageStart) ?>&ageEnd=<?php echo urlencode($ageEnd) ?>&state=<?php echo urlencode($state) ?>' class='category'><h5><?php echo $category ." ". interestGlyphs($category) ?></h5></a>
     <br/><br/>
     <?php
     //check if member has approved this post
