@@ -94,7 +94,7 @@ $result = mysql_query($sql) or die(mysql_error());
 
 // Send out sign up email
 $toId = $rows['ID'];
-build_and_send_email(1,$ID, 3, null);
+build_and_send_email(0,$ID, 3, null);
 
 echo '<script>alert("Your profile was successfully set up");location = "home.php"</script>';
 

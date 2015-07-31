@@ -94,12 +94,10 @@ function build_and_send_email($senderId, $toId, $notification, $postID)
         }
 
         $name = get_users_name_by_id($toId);
-        $pass = get_password($toId);
         $nameArray = explode(' ', $name);
         $name = $nameArray[0];
         $subject = "Congratulations $name, you now have a new profile on Rapportbook.<br/>";
-        $subject .= "You can now start posting videos and messaging people.<br/><br/>";
-        $subject .= "<br/>";
+        $subject .= "You can now start posting videos and messaging people.<br/>";
         $subject .= "Text your profile to new people in your life outside of Rapportbook.<br/>";
         $subject .= '<a href = "http://www.rapportbook.com">Login</a> to your account now!';
     }
@@ -259,7 +257,24 @@ function build_and_send_email($senderId, $toId, $notification, $postID)
     // if we have a notification, then send the email.
 
     if (strlen($notification) > 0) {
-        $profilePhoto = get_users_photo_by_id($senderId);
+
+        if (strstr($url, "local")) {
+            $link = "index.php";
+        }
+        else if (strstr($url, "dev")) {
+            $profilePhoto = "http://dev.rapportbook.com/images/Rapportbook-Logo.png";
+        }
+        else {
+            $profilePhoto = "http://www.rapportbook.com/images/Rapportbook-Logo.png";
+        }
+
+        if ($senderId == 0) {
+            $profilePhoto = $profilePhoto;
+        }
+        else {
+            $profilePhoto = get_users_photo_by_id($senderId);
+        }
+
         $message = "<html><body>";
         $message .= "<table style = 'background:red;height:400px;width:600px;border-radius:10px;border:2px solid black;'><tr style = 'color:white;border-radius:10px;'><td>";
         $message .= "<tr><td><img src = '$profilePhoto' height = '200' width = '200' style = 'border:2px solid black' /></td></tr>";
