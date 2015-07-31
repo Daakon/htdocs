@@ -394,8 +394,23 @@ if (isset($_POST['submit'])) {
     ?>
 
     <?php
-    // if gender search has a value
-    $gender = $_GET['gender'];
+    // first get gender value
+    if (!empty($_GET['gender'])) {
+        $gender = $_GET['gender'];
+    }
+    else {
+        $gender = getGender($ID);
+        if ($gender == 1) {
+            $gender = 2;
+            $getGender = 2;
+        }
+        else {
+            $gender = 1;
+            $getGender = 1;
+        }
+    }
+
+    // proceed to set gender session
     if (!empty($gender)) {
         $_SESSION['gender'] = $gender;
         $getGender = $_SESSION['gender'];
@@ -405,15 +420,6 @@ if (isset($_POST['submit'])) {
         if (!empty($_SESSION['gender'])) {
             $gender = $_SESSION['gender'];
             $getGender = $_SESSION['gender'];
-        }
-        else {
-            // if no prior search, get the initial gender value
-            $gender = getGender($ID);
-            if ($gender == 1) {
-                $getGender = 2;
-            } else {
-                $getGender = 1;
-            }
         }
     }
 
