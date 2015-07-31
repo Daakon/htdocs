@@ -433,8 +433,8 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == "Submit AD") {
                         <label for="AdPosition">Ad Position</label>
                         <br/>
                         Roll Call&nbsp;<input type="radio" name="AdPosition" id="AdPosition" value="1"<?php echo $check0 ?>>
-                        <br/>
-                        Right Column&nbsp;<input type="radio" name="AdPosition" id="AdPosition" value="0"<?php echo $check1 ?>>&nbsp;(Desktop Only)
+                        <!--<br/>
+                        Right Column&nbsp;<input type="radio" name="AdPosition" id="AdPosition" value="0"<?php /*echo $check1 */?>>&nbsp;(Desktop Only)-->
                     </div>
 
                     <br/>

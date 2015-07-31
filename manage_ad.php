@@ -414,8 +414,8 @@ if (isset($_POST['Update'])) {
                     <label for="AdPosition">Ad Position</label>
                     <br/>
                     Talent Feed&nbsp;<input type="radio" name="AdPosition" id="AdPosition" value="1"<?php echo $check0 ?>>
-                    <br/>
-                    Right Column&nbsp;<input type="radio" name="AdPosition" id="AdPosition" value="0"<?php echo $check1 ?>>
+                   <!-- <br/>
+                    Right Column&nbsp;<input type="radio" name="AdPosition" id="AdPosition" value="0"--><?php /*echo $check1 */?>>
                 </div>
 
                 <br/>

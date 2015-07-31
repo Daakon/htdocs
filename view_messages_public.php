@@ -265,8 +265,14 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
             <h2>View Messages</h2>
             <hr/>
 
-            <?php $memberID = $_GET['id']; ?>
-            <h5>Message: <span class="viewMessage"><?php echo get_users_name($memberID) ?></span></h5>
+            <?php
+            $memberID = $_GET['id'];
+            $name = get_users_name($memberID);
+            $nameArray = explode(' ', $name);
+            $firstName = $nameArray[0];
+
+            ?>
+            <h5>Message: <span class="viewMessage"><?php echo $firstName ?></span></h5>
             <?php
 
             $sql = "SELECT * FROM Messages
