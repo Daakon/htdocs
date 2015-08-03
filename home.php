@@ -78,13 +78,13 @@ if (isset($_POST['submit'])) {
 
 
                         // convert mp4
-                        exec("$ffmpeg -i $fileName $newFileName");
+                        exec("$ffmpeg -i $fileName -map 0:a -c:a copy $newFileName");
                         $mediaName = $newFileName;
 
                         // convert ogg
-                        exec("$ffmpeg -i $fileName  $oggFileName");
+                        exec("$ffmpeg -i $fileName -map 0:a -c:a copy $oggFileName");
                         // convert webm
-                        exec("$ffmpeg -i $fileName  $webmFileName");
+                        exec("$ffmpeg -i $fileName -map 0:a -c:a copy $webmFileName");
 
                     }
                 } else {
@@ -151,7 +151,7 @@ if (isset($_POST['submit'])) {
                         //screenshot size
                         //$size = '440x280'; -s $size
                         //ffmpeg command
-                        $cmd = "$ffmpeg -i \"$postMediaFilePath\" -r 1 -ss 3 -t 1  -f image2 $poster 2>&1";
+                        $cmd = "$ffmpeg -i \"$postMediaFilePath\" -r 1 -ss 2 -t 1  -f image2 $poster 2>&1";
                         exec($cmd);
                         $poster = imagecreatefromjpeg($poster);
 
