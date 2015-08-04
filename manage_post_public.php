@@ -260,7 +260,11 @@ if (isset($_POST['Delete']) && $_POST['Delete'] == "Delete") {
             <div class="row row-padding">
                 <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 "
                      style="background:white;border-radius:10px;margin-top:20px;border:2px solid black;" align="left">
+                    <?php if ($ID == $memberID) { ?>
                     <div style='font-weight:bold;'>You do not have anything posted.</div>
+                    <?php } else { ?>
+                    <div style='font-weight:bold;'><?php echo $firstName ?> does not have anything posted.</div>
+                    <?php } ?>
                 </div>
             </div>
         <?php }
