@@ -169,7 +169,7 @@ if (isset($_POST['video']) && ($_POST['video'] == "Upload Video")) {
                                 Your browser does not seem to support the video tag
                                 </video>';
 
-        $post= 'New Profile Pic <br/><br/><a href="'. $videoPath . $mediaName .'">View in native player </a>' . $img . '<br/>';
+        $post= 'New Profile Video! <br/><br/><a href="'. $videoPath . $mediaName .'">View in native player </a>' . $img . '<br/>';
 
         $sql = "INSERT INTO Posts (Post,    Poster,	      Category,  Member_ID,   PostDate) Values
                                   ('$post', '$posterName', 'Social', '$ID',       CURDATE())";

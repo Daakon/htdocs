@@ -5,10 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="51867226-c8dd-43fb-9a46-7c8a9e9ab742" name="Default" comment="Added media page.&#10;&#10;">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dictionaries/chrismoney.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/chrismoney.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/home.php" afterPath="$PROJECT_DIR$/home.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/profile.php" afterPath="$PROJECT_DIR$/profile.php" />
     </list>
     <ignored path="htdocs.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -39,16 +36,20 @@
       <file leaf-file-name="profile.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/profile.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="2.524735">
-              <caret line="183" column="31" selection-start-line="183" selection-start-column="31" selection-end-line="183" selection-end-column="31" />
+            <state vertical-scroll-proportion="0.7791519">
+              <caret line="171" column="34" selection-start-line="171" selection-start-column="34" selection-end-line="171" selection-end-column="34" />
               <folding>
-                <marker date="1438739502000" expanded="true" signature="3554:3777" placeholder="INSERT INTO ..." />
-                <marker date="1438739502000" expanded="true" signature="3892:3986" placeholder="UPDATE Profi..." />
-                <marker date="1438739502000" expanded="true" signature="5366:5612" placeholder="Update Membe..." />
-                <marker date="1438739502000" expanded="true" signature="5715:6115" placeholder="Update Profi..." />
-                <marker date="1438739502000" expanded="true" signature="6521:6561" placeholder="SELECT Usern..Members..." />
-                <marker date="1438739502000" expanded="true" signature="9350:9395" placeholder="SELECT Poste..Profile..." />
-                <marker date="1438739502000" expanded="true" signature="10623:11948" placeholder="SELECT DISTI..Members..." />
+                <marker date="1438739798000" expanded="true" signature="2570:2838" placeholder="INSERT INTO ..." />
+                <marker date="1438739798000" expanded="true" signature="2992:3042" placeholder="SELECT * FRO..Media..." />
+                <marker date="1438739798000" expanded="true" signature="5421:5644" placeholder="INSERT INTO ..." />
+                <marker date="1438739798000" expanded="true" signature="5759:5853" placeholder="UPDATE Profi..." />
+                <marker date="1438739798000" expanded="true" signature="6573:6748" placeholder="INSERT INTO ..." />
+                <marker date="1438739798000" expanded="true" signature="6915:6996" placeholder="UPDATE Media..." />
+                <marker date="1438739798000" expanded="true" signature="8387:8633" placeholder="Update Membe..." />
+                <marker date="1438739798000" expanded="true" signature="8736:9136" placeholder="Update Profi..." />
+                <marker date="1438739798000" expanded="true" signature="9542:9582" placeholder="SELECT Usern..Members..." />
+                <marker date="1438739798000" expanded="true" signature="12371:12416" placeholder="SELECT Poste..Profile..." />
+                <marker date="1438739798000" expanded="true" signature="13644:14969" placeholder="SELECT DISTI..Members..." />
               </folding>
             </state>
           </provider>
@@ -111,8 +112,8 @@
         <option value="$PROJECT_DIR$/view_messages.php" />
         <option value="$PROJECT_DIR$/view_messages_public.php" />
         <option value="$PROJECT_DIR$/manage_post_public.php" />
-        <option value="$PROJECT_DIR$/profile.php" />
         <option value="$PROJECT_DIR$/home.php" />
+        <option value="$PROJECT_DIR$/profile.php" />
       </list>
     </option>
   </component>
@@ -128,8 +129,8 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" interpreter_name="PHP 5.5" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="96" />
-    <option name="y" value="31" />
+    <option name="x" value="82" />
+    <option name="y" value="24" />
     <option name="width" value="1128" />
     <option name="height" value="717" />
   </component>
@@ -226,6 +227,8 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="990" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.splitter.proportion" value="0.2" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -383,7 +386,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="96" y="31" width="1128" height="717" extended-state="0" />
+    <frame x="82" y="24" width="1128" height="717" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -457,7 +460,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/profile.php</url>
-          <line>347</line>
+          <line>405</line>
           <option name="timeStamp" value="13" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
@@ -866,16 +869,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/profile.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.524735">
-          <caret line="183" column="31" selection-start-line="183" selection-start-column="31" selection-end-line="183" selection-end-column="31" />
+        <state vertical-scroll-proportion="0.7791519">
+          <caret line="171" column="34" selection-start-line="171" selection-start-column="34" selection-end-line="171" selection-end-column="34" />
           <folding>
-            <marker date="1438739502000" expanded="true" signature="3554:3777" placeholder="INSERT INTO ..." />
-            <marker date="1438739502000" expanded="true" signature="3892:3986" placeholder="UPDATE Profi..." />
-            <marker date="1438739502000" expanded="true" signature="5366:5612" placeholder="Update Membe..." />
-            <marker date="1438739502000" expanded="true" signature="5715:6115" placeholder="Update Profi..." />
-            <marker date="1438739502000" expanded="true" signature="6521:6561" placeholder="SELECT Usern..Members..." />
-            <marker date="1438739502000" expanded="true" signature="9350:9395" placeholder="SELECT Poste..Profile..." />
-            <marker date="1438739502000" expanded="true" signature="10623:11948" placeholder="SELECT DISTI..Members..." />
+            <marker date="1438739798000" expanded="true" signature="2570:2838" placeholder="INSERT INTO ..." />
+            <marker date="1438739798000" expanded="true" signature="2992:3042" placeholder="SELECT * FRO..Media..." />
+            <marker date="1438739798000" expanded="true" signature="5421:5644" placeholder="INSERT INTO ..." />
+            <marker date="1438739798000" expanded="true" signature="5759:5853" placeholder="UPDATE Profi..." />
+            <marker date="1438739798000" expanded="true" signature="6573:6748" placeholder="INSERT INTO ..." />
+            <marker date="1438739798000" expanded="true" signature="6915:6996" placeholder="UPDATE Media..." />
+            <marker date="1438739798000" expanded="true" signature="8387:8633" placeholder="Update Membe..." />
+            <marker date="1438739798000" expanded="true" signature="8736:9136" placeholder="Update Profi..." />
+            <marker date="1438739798000" expanded="true" signature="9542:9582" placeholder="SELECT Usern..Members..." />
+            <marker date="1438739798000" expanded="true" signature="12371:12416" placeholder="SELECT Poste..Profile..." />
+            <marker date="1438739798000" expanded="true" signature="13644:14969" placeholder="SELECT DISTI..Members..." />
           </folding>
         </state>
       </provider>
