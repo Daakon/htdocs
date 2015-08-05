@@ -89,9 +89,9 @@ if (isset($_POST['submit'])) {
                     }
                 } else {
 
-                        echo "<script>alert('Invalid File Type'); location='/home.php'</script>";
-                        exit;
-                    }
+                    echo "<script>alert('Invalid File Type'); location='/home.php'</script>";
+                    exit;
+                }
 
                 require 'media_post_file_path.php';
 // save photo/video
@@ -138,7 +138,7 @@ if (isset($_POST['submit'])) {
                         $img = '<a href = "media.php?id=' . $ID . '&mediaName=' . $mediaName . '&mid=' . $mediaID . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '" ><br/>'.$img.'</a><br/><br/>';
                     }
 
-                     // check if file type is a video
+                    // check if file type is a video
                     if (in_array($type, $videoFileTypes)) {
                         // where ffmpeg is located
                         $ffmpeg = '/usr/bin/ffmpeg';
@@ -162,9 +162,9 @@ if (isset($_POST['submit'])) {
                         //imagettftext($poster, 20, 0, 20, 20, $white, $font, $text);
 
 
-                            $size = getimagesize("$posterPath$posterName");
-                            $width = $size[0];
-                            $height = $size[1];
+                        $size = getimagesize("$posterPath$posterName");
+                        $width = $size[0];
+                        $height = $size[1];
 
 
                         if ($width > $height && $height < 1000) {
@@ -200,8 +200,8 @@ if (isset($_POST['submit'])) {
                     $newPostID = mysql_insert_id();
 
                     // update Media table with new post id
-                        $sqlUpdateMedia = "UPDATE Media SET Post_ID = $newPostID, Poster='$posterName' WHERE ID = '$mediaID' ";
-                        mysql_query($sqlUpdateMedia) or die(mysql_error());
+                    $sqlUpdateMedia = "UPDATE Media SET Post_ID = $newPostID, Poster='$posterName' WHERE ID = '$mediaID' ";
+                    mysql_query($sqlUpdateMedia) or die(mysql_error());
                 }
             } // if no media
             else {
@@ -307,220 +307,220 @@ if (isset($_POST['submit'])) {
 </script>
 
 <script type = "text/javascript">
-            function updateFeed() {
-               var selection = document.getElementById('genre');
-               var genre = selection.options[selection.selectedIndex].value;
+    function updateFeed() {
+        var selection = document.getElementById('genre');
+        var genre = selection.options[selection.selectedIndex].value;
 
-                var ageStartSelect = document.getElementById('AgeStart');
-                var ageStart = ageStartSelect.options[ageStartSelect.selectedIndex].value;
+        var ageStartSelect = document.getElementById('AgeStart');
+        var ageStart = ageStartSelect.options[ageStartSelect.selectedIndex].value;
 
-                var ageEndSelect = document.getElementById('AgeEnd');
-                var ageEnd = ageEndSelect.options[ageEndSelect.selectedIndex].value;
+        var ageEndSelect = document.getElementById('AgeEnd');
+        var ageEnd = ageEndSelect.options[ageEndSelect.selectedIndex].value;
 
-                var stateSelect = document.getElementById('searchState');
-                var state = stateSelect.options[stateSelect.selectedIndex].value;
+        var stateSelect = document.getElementById('searchState');
+        var state = stateSelect.options[stateSelect.selectedIndex].value;
 
-                var genderSelect = document.getElementById('Gender');
-                var gender = genderSelect.options[genderSelect.selectedIndex].value;
+        var genderSelect = document.getElementById('Gender');
+        var gender = genderSelect.options[genderSelect.selectedIndex].value;
 
-                window.location = "/home.php?genre="+encodeURIComponent(genre)+"&ageStart="+encodeURIComponent(ageStart)+"&ageEnd="+encodeURIComponent(ageEnd)+"&state="+encodeURIComponent(state)+"&gender="+encodeURIComponent(gender);
-            }
-        </script>
+        window.location = "/home.php?genre="+encodeURIComponent(genre)+"&ageStart="+encodeURIComponent(ageStart)+"&ageEnd="+encodeURIComponent(ageEnd)+"&state="+encodeURIComponent(state)+"&gender="+encodeURIComponent(gender);
+    }
+</script>
 
 
 <body class="home-background">
 
 
 <div class="container">
-<?php
+    <?php
 
-?>
+    ?>
 
     <div class="row row-padding">
-<div class=" col-md-10  col-lg-10 col-md-offset-2 col-lg-offset-2 ">
+        <div class=" col-md-10  col-lg-10 col-md-offset-2 col-lg-offset-2 ">
 
 
-        <ul class="list-inline">
-            <li class="demoText"><a href="/profile.php/<?php echo get_username($ID) ?>">Go To Your Profile <?php require 'getNewMessageCount.php' ?></a></li>
-        </ul>
-
-      
-    <?php
-    $ageStart = $_GET['ageStart'];
-    $ageEnd = $_GET['ageEnd'];
-    if (!empty($ageStart)) {
-        $_SESSION['ageStart'] = $ageStart;
-        $ageStart = $_SESSION['ageStart'];
-    }
-    else {
-        if (!empty($_SESSION['ageStart'])) {
-            $ageStart = $_SESSION['ageStart'];
-        }
-        else {
-            $ageStart = 18;
-        }
-    }
+            <ul class="list-inline">
+                <li class="demoText"><a href="/profile.php/<?php echo get_username($ID) ?>">Go To Your Profile <?php require 'getNewMessageCount.php' ?></a></li>
+            </ul>
 
 
-
-    if (!empty($ageEnd)) {
-        $_SESSION['ageEnd'] = $ageEnd;
-        $ageEnd = $_SESSION['ageEnd'];
-    }
-    else {
-        if (!empty($_SESSION['ageEnd'])) {
-            $ageEnd = $_SESSION['ageEnd'];
-        }
-        else {
-            $ageEnd = 50;
-        }
-    }
-    ?>
-
-    <?php
-
-    $searchState = $_GET['state'];
-    if (!empty($searchState)) {
-        $_SESSION['state'] = $searchState;
-        $searchState = $_SESSION['state'];
-    }
-    else {
-        if (!empty($_SESSION['state'])) {
-            $searchState = $_SESSION['state'];
-        } else {
-            $searchState = getMemberState($ID);
-        }
-    }
-    ?>
-
-    <?php
-    // first get gender value
-    if (!empty($_GET['gender'])) {
-        $gender = $_GET['gender'];
-    }
-    else {
-        $gender = getGender($ID);
-        if ($gender == 1) {
-            $gender = 2;
-            $getGender = 2;
-        }
-        else {
-            $gender = 1;
-            $getGender = 1;
-        }
-    }
-
-    // proceed to set gender session
-    if (!empty($gender)) {
-        $_SESSION['gender'] = $gender;
-        $getGender = $_SESSION['gender'];
-    }
-    else {
-        // if no gender search check to see if there was a prior search
-        if (!empty($_SESSION['gender'])) {
-            $gender = $_SESSION['gender'];
-            $getGender = $_SESSION['gender'];
-        }
-    }
-
-$gendeText;
-    if ($getGender == 1) {
-        $genderText = "Male";
-    }
-    else {
-        $genderText = "Female";
-    }
-    ?>
-
-<!--Middle Column -->
-
-        <div class="demoText">Age Range</div>
-        <select id="AgeStart" name="AgeStart" onchange="updateFeed()">
-            <option value="<?php echo $ageStart ?>"><?php echo $ageStart ?></option>
-            <?php age() ?>
-        </select>
-        To
-        <select id="AgeEnd" name="AgeEnd" onchange="updateFeed()">
-            <option value="<?php echo $ageEnd ?>"><?php echo $ageEnd ?></option>
-            <?php age() ?>
-        </select>
-
-    <br/><br/>
-    <div class="demoText">You are looking for</div>
-        <select id="Gender" name="Gender" onchange="updateFeed()">
-            <option value="<?php echo $gender ?>"><?php echo $genderText ?></option>
-            <option value="1">Male</option>
-            <option value="2">Female</option>
-        </select>
-
-    <br/><br/>
-    <div class="demoText">State</div>
-    <select id="searchState" name="searchState" onchange="updateFeed()">
-        <option value="<?php echo $searchState ?>"><?php echo $searchState?></option>
-        <?php  getState(); ?>
-    </select>
-<br/><br/>
-
-        <div class=" col-md-9 col-lg-9 roll-call ">
+            <?php
+            $ageStart = $_GET['ageStart'];
+            $ageEnd = $_GET['ageEnd'];
+            if (!empty($ageStart)) {
+                $_SESSION['ageStart'] = $ageStart;
+                $ageStart = $_SESSION['ageStart'];
+            }
+            else {
+                if (!empty($_SESSION['ageStart'])) {
+                    $ageStart = $_SESSION['ageStart'];
+                }
+                else {
+                    $ageStart = 18;
+                }
+            }
 
 
 
-            <img src="/images/roll-call.gif" height="150px" width="150px" alt="Roll Call"/>
-            <br/>
+            if (!empty($ageEnd)) {
+                $_SESSION['ageEnd'] = $ageEnd;
+                $ageEnd = $_SESSION['ageEnd'];
+            }
+            else {
+                if (!empty($_SESSION['ageEnd'])) {
+                    $ageEnd = $_SESSION['ageEnd'];
+                }
+                else {
+                    $ageEnd = 50;
+                }
+            }
+            ?>
 
-            <form method="post" enctype="multipart/form-data" action="" onsubmit="showUploading()">
-                <img src="/images/image-icon.png" height="30px" width="30px" alt="Photos/Video"/>
-                <strong>Attach Your Video</strong>
+            <?php
+
+            $searchState = $_GET['state'];
+            if (!empty($searchState)) {
+                $_SESSION['state'] = $searchState;
+                $searchState = $_SESSION['state'];
+            }
+            else {
+                if (!empty($_SESSION['state'])) {
+                    $searchState = $_SESSION['state'];
+                } else {
+                    $searchState = getMemberState($ID);
+                }
+            }
+            ?>
+
+            <?php
+            // first get gender value
+            if (!empty($_GET['gender'])) {
+                $gender = $_GET['gender'];
+            }
+            else {
+                $gender = getGender($ID);
+                if ($gender == 1) {
+                    $gender = 2;
+                    $getGender = 2;
+                }
+                else {
+                    $gender = 1;
+                    $getGender = 1;
+                }
+            }
+
+            // proceed to set gender session
+            if (!empty($gender)) {
+                $_SESSION['gender'] = $gender;
+                $getGender = $_SESSION['gender'];
+            }
+            else {
+                // if no gender search check to see if there was a prior search
+                if (!empty($_SESSION['gender'])) {
+                    $gender = $_SESSION['gender'];
+                    $getGender = $_SESSION['gender'];
+                }
+            }
+
+            $gendeText;
+            if ($getGender == 1) {
+                $genderText = "Male";
+            }
+            else {
+                $genderText = "Female";
+            }
+            ?>
+
+            <!--Middle Column -->
+
+            <div class="demoText">Age Range</div>
+            <select id="AgeStart" name="AgeStart" onchange="updateFeed()">
+                <option value="<?php echo $ageStart ?>"><?php echo $ageStart ?></option>
+                <?php age() ?>
+            </select>
+            To
+            <select id="AgeEnd" name="AgeEnd" onchange="updateFeed()">
+                <option value="<?php echo $ageEnd ?>"><?php echo $ageEnd ?></option>
+                <?php age() ?>
+            </select>
+
+            <br/><br/>
+            <div class="demoText">You are looking for</div>
+            <select id="Gender" name="Gender" onchange="updateFeed()">
+                <option value="<?php echo $gender ?>"><?php echo $genderText ?></option>
+                <option value="1">Male</option>
+                <option value="2">Female</option>
+            </select>
+
+            <br/><br/>
+            <div class="demoText">State</div>
+            <select id="searchState" name="searchState" onchange="updateFeed()">
+                <option value="<?php echo $searchState ?>"><?php echo $searchState?></option>
+                <?php  getState(); ?>
+            </select>
+            <br/><br/>
+
+            <div class=" col-md-9 col-lg-9 roll-call ">
+
+
+
+                <img src="/images/roll-call.gif" height="150px" width="150px" alt="Roll Call"/>
                 <br/>
 
-                <input type="file" width="10px;" name="flPostMedia" id="flPostMedia"/>
-                <br/>
+                <form method="post" enctype="multipart/form-data" action="" onsubmit="showUploading()">
+                    <img src="/images/image-icon.png" height="30px" width="30px" alt="Photos/Video"/>
+                    <strong>Attach Your Video</strong>
+                    <br/>
+
+                    <input type="file" width="10px;" name="flPostMedia" id="flPostMedia"/>
+                    <br/>
                 <textarea name="post" id="post" class="form-control textArea"
-                       placeholder="Describe Your Video" ></textarea>
-                <br/>
-                <div id="progress" style="display:none;">
-                    <div class="progress">
-                      <div class="progress-bar progress-bar-striped progress-bar-danger active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-                        <b>File uploading...please wait</b>
-                      </div>
+                          placeholder="Describe Your Video" ></textarea>
+                    <br/>
+                    <div id="progress" style="display:none;">
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped progress-bar-danger active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                                <b>File uploading...please wait</b>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <br/>
+                    <br/>
                     <select class="form-control input-lg" id="category" name="category">
-                            <option value="">Select A Post Category</option>
-                            <?php echo category() ?>
-                        </select>
-                        <br/>
+                        <option value="">Select A Post Category</option>
+                        <?php echo category() ?>
+                    </select>
+                    <br/>
                     <input type="submit" class="post-button" name="submit" id="submit" value="Post"/>
-            </form>
+                </form>
+
+                <br/><br/>
+                <div align = "center">
+                    <select id="genre" name="genre" onchange="updateFeed()">
+                        <option value="">Show Posts By Category</option>
+                        <option value="Show-All">Show All</option>
+                        <?php echo category() ?>
+                    </select>
+                </div>
+            </div>
+
+
+            <?php
+            $limit = "100";
+            require 'roll-call.php'
+            ?>
+
+        </div>
+
+
+    </div> <!--Middle Column -->
+
+</div>
+
 
 <br/><br/>
-<div align = "center">
-<select id="genre" name="genre" onchange="updateFeed()">
-            <option value="">Show Posts By Category</option>
-            <option value="Show-All">Show All</option>
-                            <?php echo category() ?>
-                        </select>
+
 </div>
-        </div>
-
-
-<?php
-$limit = "100";
-require 'roll-call.php'
-?>
-
-        </div>
-
-
-</div> <!--Middle Column -->
-
-    </div>
-
-
-    <br/><br/>
-
-            </div>
 
 </body>
 </html>

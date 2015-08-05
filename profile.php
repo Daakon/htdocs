@@ -34,6 +34,7 @@ if (isset($_POST['video']) && ($_POST['video'] == "Upload Video")) {
 
         // add unique id to image name to make it unique and add it to the file server
         $mediaName = $_FILES["flPostVideo"]["name"];
+        $fileName = pathinfo($mediaName, PATHINFO_FILENAME);
         $mediaName = uniqid() . $mediaName;
         $mediaFile = $_FILES['flPostVideo']['tmp_name'];
         $type = $_FILES["flPostVideo"]["type"];
@@ -45,10 +46,50 @@ if (isset($_POST['video']) && ($_POST['video'] == "Upload Video")) {
             "video/quicktime", "video/webm", "video/x-matroska",
             "video/x-ms-wmw");
 
+        // convert to mp4 if not already an mp4
+        if ($type != "video/mp4") {
+            $newFileName = $fileName . ".mp4";
+            $oggFileName = $fileName . ".ogv";
+            $webmFileName = $fileName . ".webm";
+
+
+            // convert mp4
+            exec("$ffmpeg -i $fileName -map 0:a -c:a copy $newFileName");
+            $mediaName = $newFileName;
+
+            // convert ogg
+            exec("$ffmpeg -i $fileName -map 0:a -c:a copy $oggFileName");
+            // convert webm
+            exec("$ffmpeg -i $fileName -map 0:a -c:a copy $webmFileName");
+
+        }
+        require 'media_post_file_path.php';
+
+
         if (in_array($type, $videoFileTypes)) {
-            $cmd = "ffmpeg -i $mediaFile -vf 'transpose=1' $mediaFile";
-            exec($cmd);
             move_uploaded_file($mediaFile, $postMediaFilePath);
+
+            //copy new mp4 file path to ogg file path
+            copy($postMediaFilePath, $postOggFilePathTemp);
+            // overwrite mp4 with real ogg file path
+            copy($postOggFilePath, $postOggFilePathTemp);
+            // copy new mp4 file path to webm file path
+            copy($postMediaFilePath, $postWebmFilePathTemp);
+            // overwrite mp4 with real webm file path
+            copy($postWebmFilePath, $postWebmFilePathTemp);
+
+            $sql = "INSERT INTO Media (Member_ID,  MediaName,    MediaOgg,     MediaWebm,      MediaType,  MediaDate,  AudioName    ) Values
+                                              ('$ID',    '$mediaName', '$oggFileName', '$webmFileName',  '$type',   CURRENT_DATE(), '$audioName'  )";
+            mysql_query($sql) or die(mysql_error());
+            $mediaID = mysql_insert_id();
+            // get media ID
+            $sqlGetMedia = "SELECT * FROM Media WHERE MediaName = '$mediaName'";
+            $mediaResult = mysql_query($sqlGetMedia) or die(mysql_error());
+            $mediaRow = mysql_fetch_assoc($mediaResult);
+            //$mediaID = $mediaRow['ID'];
+            $media = $mediaRow['MediaName'];
+            $mediaType = $mediaRow['MediaType'];
+            $mediaDate = $mediaRow['MediaDate'];
 
             // where ffmpeg is located
             $ffmpeg = '/usr/bin/ffmpeg';
@@ -121,6 +162,23 @@ if (isset($_POST['video']) && ($_POST['video'] == "Upload Video")) {
         $sql = "UPDATE Profile Set ProfileVideo = '$mediaName', Poster = '$posterName' WHERE Member_ID = '$ID'";
         mysql_query($sql) or die(mysql_error());
 
+        $img = '<video poster="/poster/'.$posterName.'" preload="none" controls>
+                                <source src = "' . $videoPath . $mediaName . '" type="video/mp4" />
+                                <source src = "' . $videoPath . $oggFileName . '" type = "video/ogg" />
+                                <source src = "' . $videoPath . $webmFileName . '" type = "video/webm" />
+                                Your browser does not seem to support the video tag
+                                </video>';
+
+        $post= 'New Profile Pic <br/><br/><a href="'. $videoPath . $mediaName .'">View in native player </a>' . $img . '<br/>';
+
+        $sql = "INSERT INTO Posts (Post,    Poster,	      Category,  Member_ID,   PostDate) Values
+                                  ('$post', '$posterName', 'Social', '$ID',       CURDATE())";
+        mysql_query($sql) or die(mysql_error());
+        $newPostID = mysql_insert_id();
+
+        // update Media table with new post id
+        $sqlUpdateMedia = "UPDATE Media SET Post_ID = $newPostID, Poster='$posterName' WHERE ID = '$mediaID' ";
+        mysql_query($sqlUpdateMedia) or die(mysql_error());
 
         // alert everything is good
         echo "<script>alert('Update Successful');</script>";
