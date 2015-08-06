@@ -5,8 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="51867226-c8dd-43fb-9a46-7c8a9e9ab742" name="Default" comment="Added media page.&#10;&#10;">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html_functions.php" afterPath="$PROJECT_DIR$/html_functions.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/learn_more.php" afterPath="$PROJECT_DIR$/learn_more.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/profile.php" afterPath="$PROJECT_DIR$/profile.php" />
     </list>
     <ignored path="htdocs.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -34,22 +33,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="learn_more.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/learn_more.php">
+      <file leaf-file-name="profile.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/profile.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.928571">
-              <caret line="21" column="53" selection-start-line="21" selection-start-column="53" selection-end-line="21" selection-end-column="53" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="html_functions.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/html_functions.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.77208483">
-              <caret line="34" column="97" selection-start-line="34" selection-start-column="97" selection-end-line="34" selection-end-column="97" />
-              <folding />
+            <state vertical-scroll-proportion="0.18021202">
+              <caret line="498" column="23" selection-start-line="498" selection-start-column="23" selection-end-line="498" selection-end-column="23" />
+              <folding>
+                <marker date="1438876314000" expanded="true" signature="2570:2838" placeholder="INSERT INTO ..." />
+                <marker date="1438876314000" expanded="true" signature="2992:3042" placeholder="SELECT * FRO..Media..." />
+                <marker date="1438876314000" expanded="true" signature="5421:5644" placeholder="INSERT INTO ..." />
+                <marker date="1438876314000" expanded="true" signature="6327:6444" placeholder="UPDATE Profi..." />
+                <marker date="1438876314000" expanded="true" signature="6645:6820" placeholder="INSERT INTO ..." />
+                <marker date="1438876314000" expanded="true" signature="6987:7068" placeholder="UPDATE Media..." />
+                <marker date="1438876314000" expanded="true" signature="8459:8705" placeholder="Update Membe..." />
+                <marker date="1438876314000" expanded="true" signature="8808:9208" placeholder="Update Profi..." />
+                <marker date="1438876314000" expanded="true" signature="9614:9654" placeholder="SELECT Usern..Members..." />
+                <marker date="1438876314000" expanded="true" signature="12443:12488" placeholder="SELECT Poste..Profile..." />
+                <marker date="1438876314000" expanded="true" signature="13716:15041" placeholder="SELECT DISTI..Members..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -104,7 +105,6 @@
         <option value="$PROJECT_DIR$/ad-manager.php" />
         <option value="$PROJECT_DIR$/manage_ad.php" />
         <option value="$PROJECT_DIR$/manage_post_public.php" />
-        <option value="$PROJECT_DIR$/profile.php" />
         <option value="$PROJECT_DIR$/connect.php" />
         <option value="$PROJECT_DIR$/category.php" />
         <option value="$PROJECT_DIR$/home.php" />
@@ -113,6 +113,7 @@
         <option value="$PROJECT_DIR$/view_messages_public.php" />
         <option value="$PROJECT_DIR$/learn_more.php" />
         <option value="$PROJECT_DIR$/html_functions.php" />
+        <option value="$PROJECT_DIR$/profile.php" />
       </list>
     </option>
   </component>
@@ -171,7 +172,7 @@
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="full.screen.before.presentation.mode" value="false" />
     <property name="FullScreen" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/html_functions.php" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/profile.php" />
     <property name="LayoutCode.rearrangeEntriesPHP" value="false" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="191" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
@@ -422,7 +423,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/profile.php</url>
-          <line>405</line>
+          <line>408</line>
           <option name="timeStamp" value="13" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
@@ -740,6 +741,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.25795054">
           <caret line="265" column="76" selection-start-line="265" selection-start-column="76" selection-end-line="265" selection-end-column="76" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -754,14 +756,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.8551236">
           <caret line="125" column="55" selection-start-line="125" selection-start-column="55" selection-end-line="125" selection-end-column="55" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/profile.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7791519">
-          <caret line="171" column="34" selection-start-line="171" selection-start-column="34" selection-end-line="171" selection-end-column="34" />
           <folding />
         </state>
       </provider>
@@ -801,6 +795,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.84452295">
           <caret line="318" column="0" selection-start-line="318" selection-start-column="0" selection-end-line="318" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -808,13 +803,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.8992933">
           <caret line="328" column="130" selection-start-line="328" selection-start-column="130" selection-end-line="328" selection-end-column="130" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/learn_more.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.928571">
-          <caret line="21" column="53" selection-start-line="21" selection-start-column="53" selection-end-line="21" selection-end-column="53" />
           <folding />
         </state>
       </provider>
@@ -824,6 +812,34 @@
         <state vertical-scroll-proportion="0.77208483">
           <caret line="34" column="97" selection-start-line="34" selection-start-column="97" selection-end-line="34" selection-end-column="97" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/learn_more.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.24381626">
+          <caret line="21" column="53" selection-start-line="21" selection-start-column="53" selection-end-line="21" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/profile.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.18021202">
+          <caret line="498" column="23" selection-start-line="498" selection-start-column="23" selection-end-line="498" selection-end-column="23" />
+          <folding>
+            <marker date="1438876314000" expanded="true" signature="2570:2838" placeholder="INSERT INTO ..." />
+            <marker date="1438876314000" expanded="true" signature="2992:3042" placeholder="SELECT * FRO..Media..." />
+            <marker date="1438876314000" expanded="true" signature="5421:5644" placeholder="INSERT INTO ..." />
+            <marker date="1438876314000" expanded="true" signature="6327:6444" placeholder="UPDATE Profi..." />
+            <marker date="1438876314000" expanded="true" signature="6645:6820" placeholder="INSERT INTO ..." />
+            <marker date="1438876314000" expanded="true" signature="6987:7068" placeholder="UPDATE Media..." />
+            <marker date="1438876314000" expanded="true" signature="8459:8705" placeholder="Update Membe..." />
+            <marker date="1438876314000" expanded="true" signature="8808:9208" placeholder="Update Profi..." />
+            <marker date="1438876314000" expanded="true" signature="9614:9654" placeholder="SELECT Usern..Members..." />
+            <marker date="1438876314000" expanded="true" signature="12443:12488" placeholder="SELECT Poste..Profile..." />
+            <marker date="1438876314000" expanded="true" signature="13716:15041" placeholder="SELECT DISTI..Members..." />
+          </folding>
         </state>
       </provider>
     </entry>

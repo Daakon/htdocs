@@ -158,9 +158,7 @@ if (isset($_POST['video']) && ($_POST['video'] == "Upload Video")) {
         mysql_query($sql2) or die(mysql_error());
 
 
-        // update photo pointer in database
-        $sql = "UPDATE Profile Set ProfileVideo = '$mediaName', Poster = '$posterName' WHERE Member_ID = '$ID'";
-        mysql_query($sql) or die(mysql_error());
+
 
         $img = '<video poster="/poster/'.$posterName.'" preload="none" controls>
                                 <source src = "' . $videoPath . $mediaName . '" type="video/mp4" />
@@ -168,6 +166,11 @@ if (isset($_POST['video']) && ($_POST['video'] == "Upload Video")) {
                                 <source src = "' . $videoPath . $webmFileName . '" type = "video/webm" />
                                 Your browser does not seem to support the video tag
                                 </video>';
+
+        // update photo pointer in database
+        $img = mysql_real_escape_string($img);
+        $sql = "UPDATE Profile Set ProfileVideo = '$mediaName', Poster = '$posterName', ProfileVideo = '$img' WHERE Member_ID = '$ID'";
+        mysql_query($sql) or die(mysql_error());
 
         $post= 'New Profile Video! <br/><br/><a href="'. $videoPath . $mediaName .'">View in native player </a>' . $img . '<br/>';
 
@@ -502,9 +505,9 @@ background-size: cover;
 
 
             <div align ="center">
-                <?php if ($profileVideo != "default_photo.png") { ?>
-                   <video src = " <?php echo $videoPath . $profileVideo ?>" poster="/poster/<?php echo $posterName ?>"  preload="auto" controls />
-                <?php } else { ?>
+                <?php if ($profileVideo != "default_photo.png") {
+                  echo $profileVideo;
+                 } else { ?>
                     <img src = "/poster/<?php echo $posterName ?>" class="defaultProfileVideo" alt="Profile Video" />
                 <?php } ?>
             </div>
