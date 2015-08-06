@@ -1,5 +1,5 @@
 body {
-    background-color: lightgray;
+    background-color: #60A3BD;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -274,16 +274,16 @@ li {
 }
 
 .mobileLink {
-    color:red;
+    color:black;
     font-weight: bold;
-    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    /*text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;*/
     display:inline;
 }
 
 .demoText {
     color:black;
     font-weight: bold;
-    text-shadow: -1px 0 red, 0 1px red, 1px 0 red, 0 -1px red;
+    /*text-shadow: -1px 0 red, 0 1px red, 1px 0 red, 0 -1px red;*/
     display:inline;
 }
 
@@ -407,21 +407,3 @@ a {
     border: none;
 }
 
-.home-background {
-    background-image: url(/images/girl-sending-video.JPG);
-    display: block;
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    opacity: 0.9;
-    background-repeat: no-repeat;
-    background-position: 50% 0;
-    -ms-background-size: cover;
-    -o-background-size: cover;
-    -moz-background-size: cover;
-    -webkit-background-size: cover;
-    background-size: cover;
-}
