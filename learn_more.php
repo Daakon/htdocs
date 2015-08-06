@@ -22,7 +22,7 @@ get_header()
             <a href="/home.php">Back to Roll Call</a>
             <?php } ?>
 
-            <h4>Rapportbook is a video only dating web app.</h4>
+            <h4>Rapportbook creates a unique blend of social networking and video dating.</h4>
 
 
 
