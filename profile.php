@@ -196,10 +196,9 @@ if (isset($_POST['video']) && ($_POST['video'] == "Upload Video")) {
 if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
     $firstName = $_POST['FirstName'];
     $lastName = $_POST['LastName'];
-    $homeCity = $_POST['HomeCity'];
-    $homeState = $_POST['HomeState'];
-    $currentCity = $_POST['CurrentCity'];
-    $currentState = $_POST['CurrentState'];
+    $city = $_POST['City'];
+    $state = $_POST['State'];
+    $zip = $_POST['Zip'];
     $interests = mysql_real_escape_string($_POST['Interests']);
     $books = mysql_real_escape_string($_POST['Books']);
     $movies = mysql_real_escape_string($_POST['Movies']);
@@ -236,10 +235,9 @@ if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
 
     // update Profile table
     $sql = "Update Profile
-            Set HomeCity = '$homeCity',
-            HomeState = '$homeState',
-            CurrentCity = '$currentCity',
-            CurrentState = '$currentState',
+            Set City = '$city',
+            State = '$state',
+            Zip = '$zip',
             Interests = '$interests',
             Books = '$books',
             Movies = '$movies',
@@ -416,10 +414,9 @@ background-size: cover;
                         Profile.ProfilePhoto As ProfilePhoto,
                         Profile.ProfileVideo As ProfileVideo,
                         Profile.Poster As Poster,
-                        Profile.HomeCity As HomeCity,
-                        Profile.HomeState As HomeState,
-                        Profile.CurrentCity As CurrentCity,
-                        Profile.CurrentState As CurrentState,
+                        Profile.City As City,
+                        Profile.State As State,
+                        Profile.Zip As Zip,
                         Profile.Interests As Interests,
                         Profile.Books As Books,
                         Profile.Movies As Movies,
@@ -446,10 +443,9 @@ background-size: cover;
             $posterName = $rows['Poster'];
             $firstName = $rows['FirstName'];
             $lastName = $rows['LastName'];
-            $homeCity = $rows["HomeCity"];
-            $homeState = $rows['HomeState'];
-            $currentCity = $rows['CurrentCity'];
-            $currentState = $rows['CurrentState'];
+            $city = $rows["City"];
+            $state = $rows['State'];
+            $zip = $rows['Zip'];
             $interests = $rows['Interests'];
             $books = $rows['Books'];
             $movies = $rows['Movies'];
@@ -505,7 +501,7 @@ background-size: cover;
 
 
             <div align ="center">
-                <?php if ($profileVideo != "default_photo.png") {
+                <?php if ($profileVideo != "default_video.png") {
                   echo $profileVideo;
                  } else { ?>
                     <img src = "/poster/<?php echo $posterName ?>" class="defaultProfileVideo" alt="Profile Video" />
@@ -550,29 +546,22 @@ background-size: cover;
                 </div>
 
                 <div class="form-group">
-                    <label for="HomeCity">Home City</label>
-                    <input type="text" class="form-control" id="HomeCity" name="HomeCity" value="<?php echo $homeCity ?>" />
+                    <label for="HomeCity">City</label>
+                    <input type="text" class="form-control" id="City" name="City" value="<?php echo $city ?>" />
                 </div>
 
                 <div class="form-group">
-                    <label for="HomeState">Home State</label>
-                    <select id="HomeState" name="HomeState" class="form-control">
-                        <option  value="<?php echo $homeState ?>"><?php echo $homeState ?></option>
+                    <label for="HomeState">State</label>
+                    <select id="State" name="State" class="form-control">
+                        <option  value="<?php echo $homeState ?>"><?php echo $state ?></option>
                         <?php getState() ?>
                     </select>
                 </div>
 
                 <div class="form-group">
-                    <label for="CurrentCity">Current City</label>
-                    <input type="text" class="form-control" id="CurrentCity" name="CurrentCity" value="<?php echo $currentCity ?>" />
-                </div>
-
-                <div class="form-group">
-                    <label for="CurrentState">Current State</label>
-                    <select id="CurrentState" name="CurrentState" class="form-control">
-                        <option value="<?php echo $currentState ?>"><?php echo $currentState ?></option>
-                        <?php getState() ?>
-                    </select>
+                    <label for="Zip">Zip Code</label>
+                    <br/>
+                    <input type ="text" class="form-control" id="Zip" name="Zip" value="<?php echo $zip ?>" onblur="capFname()" />
                 </div>
 
                 <div class="form-group">

@@ -24,10 +24,10 @@ function getGender($ID) {
 
 function getMemberState($ID) {
     // returns member state
-    $sql = "SELECT CurrentState FROM Profile WHERE ID = $ID ";
+    $sql = "SELECT State FROM Profile WHERE ID = $ID ";
     $result = mysql_query($sql) or die(mysql_error());
     $row = mysql_fetch_assoc($result);
-    $state = $row['CurrentState'];
+    $state = $row['State'];
     return $state;
 }
 

@@ -84,10 +84,8 @@ $bgPhoto = $row['Poster'];
                         Profile.Poster As ProfilePhoto,
                         Profile.ProfileVideo As ProfileVideo,
                         Profile.Poster As Poster,
-                        Profile.HomeCity As HomeCity,
-                        Profile.HomeState As HomeState,
-                        Profile.CurrentCity As CurrentCity,
-                        Profile.CurrentState As CurrentState,
+                        Profile.City As City,
+                        Profile.State As State,
                         Profile.Interests As Interests,
                         Profile.Books As Books,
                         Profile.Movies As Movies,
@@ -113,10 +111,8 @@ $bgPhoto = $row['Poster'];
             $posterName = $rows['Poster'];
             $firstName = $rows['FirstName'];
             $lastName = $rows['LastName'];
-            $homeCity = $rows["HomeCity"];
-            $homeState = $rows['HomeState'];
-            $currentCity = $rows['CurrentCity'];
-            $currentState = $rows['CurrentState'];
+            $city = $rows["City"];
+            $state = $rows['State'];
             $interests = $rows['Interests'];
             $books = $rows['Books'];
             $movies = $rows['Movies'];
@@ -154,23 +150,13 @@ $bgPhoto = $row['Poster'];
 
             <br/><br/>
 
-                   <div class="public-profile-label">Home City</div>
-                   <?php echo $homeCity ?>
+                   <div class="public-profile-label">City</div>
+                   <?php echo $city ?>
 
             <br/><br/>
 
-                    <div class="public-profile-label">Home State</div>
-                   <?php echo $homeState ?>
-
-            <br/><br/>
-
-                    <div class="public-profile-label">Current City</div>
-                    <?php echo $currentCity ?>
-
-            <br/><br/>
-
-                    <div class="public-profile-label">Current State</div>
-                    <?php echo $currentState ?>
+                    <div class="public-profile-label">State</div>
+                   <?php echo $state ?>
 
             <br/><br/>
 

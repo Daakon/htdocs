@@ -255,6 +255,17 @@ get_head_files();
                     </div>
                 </div>
 
+                <div class="form-group row" id="form-group-zip">
+                    <div class="col-md-6">
+                        <label class="sr-only" for="username">Zip</label>
+                        <input class="form-control input-lg" type="text" name="zip" id="zip"
+                               placeholder="Zip Code"/>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="error-text"></div>
+                    </div>
+                </div>
+
                 <label>Birthday</label>
 
                 <div class="form-group form-inline row" id="form-group-birthday">

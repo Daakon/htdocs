@@ -22,7 +22,7 @@ function get_head_files()
 addToHomescreen.removeSession();
 </script>
         <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
-        <meta name="description" content="Rapportbook is a Social Network Video Dating App">
+        <meta name="description" content="Rapportbook is a Video Dating Social Network">
         <meta name="keywords" content="Video, Social Network, Dating">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
@@ -32,7 +32,7 @@ addToHomescreen.removeSession();
         <meta property="og:site_name" content="Rapportbook"/>
         <meta property="og:title" content="Click here to view this video on Rapportbook!">
         <meta property="og:image" content="http://rapportbook.com/images/Rapportbook-Logo.png">
-        <meta property="og:description" content="Rapportbook is a Social Network Video Dating App">
+        <meta property="og:description" content="Rapportbook is a Video Dating Social Network">
 
 
 

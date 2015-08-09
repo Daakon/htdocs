@@ -87,8 +87,8 @@ $sql = "UPDATE Members SET SignupDate = '$date' WHERE ID = '$ID' ";
 $result = mysql_query($sql) or die(mysql_error());
 
 // insert default profile pic into profile table
-$sql = "INSERT INTO Profile (Member_ID, Poster,               ProfileVideo,      HomeState, HomeCity, CurrentCity, CurrentState, Interests, Books, Movies, Food, Dislikes, Plan) Values
-                            ('$ID',     'default_photo.png', 'default_video.png', '$state',    '',        '',         '$state',     '',       '',    '',    '',    '',       '')    ";
+$sql = "INSERT INTO Profile (Member_ID, Poster,               ProfileVideo,        State,    City,  Interests, Books, Movies, Food, Dislikes, Plan) Values
+                            ('$ID',     'default_photo.png', 'default_video.png', '$state',    '',     '',       '',    '',    '',    '',       '')    ";
 $result = mysql_query($sql) or die(mysql_error());
 
 

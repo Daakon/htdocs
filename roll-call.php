@@ -45,7 +45,7 @@ if (empty($ageEnd)) {
 }
 
 if (!empty($searchState)) {
-    $stateCondition = "AND (Profile.CurrentState = '$searchState')";
+    $stateCondition = "AND (Profile.State = '$searchState')";
 }
 else {
     $stateCondition = "";
