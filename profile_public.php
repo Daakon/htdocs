@@ -81,17 +81,10 @@ $bgPhoto = $row['Poster'];
                         Members.Email As Email,
                         Members.Password As Password,
                         TIMESTAMPDIFF(YEAR, Members.DOB, CURDATE()) AS Age,
-                        Profile.Poster As ProfilePhoto,
-                        Profile.ProfileVideo As ProfileVideo,
+                        Profile.ProfilePhoto As ProfilePhoto,
                         Profile.Poster As Poster,
                         Profile.City As City,
-                        Profile.State As State,
-                        Profile.Interests As Interests,
-                        Profile.Books As Books,
-                        Profile.Movies As Movies,
-                        Profile.Food As Food,
-                        Profile.Dislikes As Dislikes,
-                        Profile.Plan As Plan
+                        Profile.State As State
                         FROM Members, Profile
                         WHERE Members.ID = $memberID
                         AND Profile.Member_ID = $memberID ";
@@ -113,12 +106,6 @@ $bgPhoto = $row['Poster'];
             $lastName = $rows['LastName'];
             $city = $rows["City"];
             $state = $rows['State'];
-            $interests = $rows['Interests'];
-            $books = $rows['Books'];
-            $movies = $rows['Movies'];
-            $food = $rows['Food'];
-            $dislikes = $rows["Dislikes"];
-            $plan = $rows['Plan'];
             $email = $rows['Email'];
             $password = $rows['Password'];
             $age = $rows['Age'];
@@ -132,16 +119,12 @@ $bgPhoto = $row['Poster'];
             <!--Profile video --------------------------------------------------------------------------------->
 
             <div align ="center">
-                <?php if ($profileVideo != "default_photo.png") { ?>
-                    <video src = " <?php echo $videoPath . $profileVideo ?>" poster="/poster/<?php echo $posterName ?>"  preload="auto" controls />
-                <?php } else { ?>
-                    <img src = "/poster/<?php echo $posterName ?>" class="defaultProfileVideo" alt="Profile Video" />
-                <?php } ?>
+                <img src = "<?php echo $mediaPath.$profilePhoto ?>" class="profilePhoto" alt="Profile Photo" />
             </div>
 
             <div class="content-block">
                 <h2>
-            <?php echo $firstName .', '.$age ?>
+            <?php echo $firstName ?>
                 </h2>
             </div>
 
@@ -157,36 +140,6 @@ $bgPhoto = $row['Poster'];
 
                     <div class="public-profile-label">State</div>
                    <?php echo $state ?>
-
-            <br/><br/>
-
-                    <div class="public-profile-label">Interests</div>
-                   <?php echo $interests ?>
-
-            <br/><br/>
-
-                    <div class="public-profile-label">Favorite Books</div>
-                    <?php echo $books ?>
-
-            <br/><br/>
-
-                    <div class="public-profile-label">Favorite Movies</div>
-                    <?php echo $movies ?>
-
-            <br/><br/>
-
-                    <div class="public-profile-label">Favorite Food</div>
-                    <?php echo $food ?>
-
-            <br/><br/>
-
-                    <div class="public-profile-label">Dislikes</div>
-                    <?php echo $dislikes ?>
-
-            <br/><br/>
-
-                    <div class="public-profile-label">5 Year Plan</div>
-                    <?php echo $plan ?>
 
             <br/><br/>
 

@@ -1,16 +1,7 @@
 <?php
-
-// ad demographics
-$age = getAge($ID);
-$state =  getMemberState($ID);
-$interests = getInterests($ID);
-$interests = strtolower($interests);
-$gender = getGender($ID);
 // pre-load Roll Call
 // get genre selection
 $genre = $_GET['genre'];
-
-
 if (!empty($genre) && $genre != "Show-All") {
     $genreCondition = "And Posts.Category = '$genre' ";
 }
@@ -34,32 +25,15 @@ if (!empty($queryName)) {
 }
 else { $memberCondition = ""; }
 $ads = getAds($genre, $age, $state, $interests, $gender);
-
-
-
-if (empty($ageStart)) {
-    $ageStart = 18;
-}
-if (empty($ageEnd)) {
-    $ageEnd = 50;
-}
-
-if (!empty($searchState)) {
-    $stateCondition = "AND (Profile.State = '$searchState')";
-}
-else {
-    $stateCondition = "";
-}
 $sqlRollCall = " SELECT DISTINCT
-
     Posts.Post As Post,
     Members.ID As MemberID,
     Members.FirstName As FirstName,
     Members.LastName As LastName,
-    Members.Username As Username,
+    Members.IsServiceProvider As ServiceProvider,
     Posts.ID As PostID,
     Posts.Category As Category,
-    Profile.Poster As ProfilePhoto
+    Profile.ProfilePhoto As ProfilePhoto
     FROM Members,Posts,Profile
     WHERE
     Members.IsActive = 1
@@ -68,34 +42,11 @@ $sqlRollCall = " SELECT DISTINCT
     And (Members.ID = Profile.Member_ID)
     And (Posts.IsDeleted = 0)
     AND (Posts.Category <> 'Sponsored')
-    AND (Members.Gender = '$getGender')
-    AND TIMESTAMPDIFF(YEAR, Members.DOB, CURDATE()) >= $ageStart
-    AND TIMESTAMPDIFF(YEAR, Members.DOB, CURDATE()) <= $ageEnd
-    $stateCondition
     $genreCondition
     $memberCondition
-    UNION
-    SELECT DISTINCT
-    Posts.Post As Post,
-    Members.ID As MemberID,
-    Members.FirstName As FirstName,
-    Members.LastName As LastName,
-    Members.Username As Username,
-    Posts.ID As PostID,
-    Posts.Category As Category,
-    Profile.Poster As ProfilePhoto
-    FROM Members,Posts,Profile
-    WHERE
-    Members.ID = $ID
-    And (Posts.Member_ID = $ID)
-    And (Profile.Member_ID = $ID)
-    And (Posts.IsDeleted = 0)
-    UNION
-    $ads
     Group By PostID
     Order By PostID DESC LIMIT $limit ";
 $rollCallResult = mysql_query($sqlRollCall) or die(mysql_error());
-
 // if no results
 if (mysql_num_rows($rollCallResult) == 0) {
     ?>
@@ -105,16 +56,16 @@ if (mysql_num_rows($rollCallResult) == 0) {
     </div>
 <?php }
 if (mysql_num_rows($rollCallResult) > 0) {
-    while ($rows = mysql_fetch_assoc($rollCallResult)) {
-        $memberID = $rows['MemberID'];
-        $name = $rows['FirstName'];
-        $userName = $rows['Username'];
-        $profilePhoto = $rows['ProfilePhoto'];
-        $category = $rows['Category'];
-        $post = $rows['Post'];
-        $postID = $rows['PostID'];
-        $postOwner = $memberID;
-        ?>
+while ($rows = mysql_fetch_assoc($rollCallResult)) {
+$memberID = $rows['MemberID'];
+$isServiceProvider = $rows['IsServiceProvider'];
+$name = $rows['FirstName'] . ' ' . $rows['LastName'];
+$profilePhoto = $rows['ProfilePhoto'];
+$category = $rows['Category'];
+$post = $rows['Post'];
+$postID = $rows['PostID'];
+$postOwner = $memberID;
+?>
 
 
 
@@ -122,18 +73,9 @@ if (mysql_num_rows($rollCallResult) > 0) {
 <div class=" col-lg-9 col-md-9 roll-call "
      align="left">
 
-    <?php if ($memberID == $ID) {
-        $profilePath = "<a href='/profile.php/$userName'>";
-    }
-    else {
-        $profilePath = "<a href='/profile_public.php/$userName'>";
-    }
-    ?>
-
-    <?php echo $profilePath; ?>
-    <img src="/poster/<?php echo $profilePhoto ?>" class="profilePhoto-Feed enlarge-onhover " alt=""
+    <img src="<?php echo $mediaPath. $profilePhoto ?>" class="profilePhoto-Feed enlarge-onhover " alt=""
          title="<?php echo $name ?>" /> &nbsp <b><font size="4"><?php echo $name ?></font></b>
-    </a>
+
 
     <div class="post">
         <?php
@@ -155,7 +97,7 @@ if (mysql_num_rows($rollCallResult) > 0) {
 
     </div>
 
-    <a href='/post-interest.php?interest=<?php echo urlencode($category) ?>&gender=<?php echo urlencode($getGender) ?>&ageStart=<?php echo urlencode($ageStart) ?>&ageEnd=<?php echo urlencode($ageEnd) ?>&state=<?php echo urlencode($state) ?>' class='category'><h5><?php echo $category ." ". interestGlyphs($category) ?></h5></a>
+    <a href='/post-interest.php?interest=<?php echo urlencode($category) ?>' class='category'><h5><?php echo $category ?></h5></a>
     <br/><br/>
     <?php
     //check if member has approved this post
@@ -195,16 +137,21 @@ if (mysql_num_rows($rollCallResult) > 0) {
     //-----------------------------------------------------------
     ?>
 
+
+    <div style="padding-top:10px;padding-bottom:10px;margin-top:10px;">
+
+
         <br/>
 
-        <?php if ($memberID != $ID) { ?>
-            <a href="/view_messages.php?id=<?php echo $memberID ?>">Direct Message <?php echo $rows['FirstName'] ?></a>
+        <?php
+            $isServiceProvider = $_SESSION['IsServiceProvider'];
+            if ($memberID != $ID && $isServiceProvider == 1) { ?>
+            <a href="/view_messages.php?id=<?php echo $memberID ?>">Message <?php echo $rows['FirstName'] ?> </a>
         <?php } ?>
         <br/>
 
-        <!---------------------------------------------------
-                          End of comments div
-                          ----------------------------------------------------->
+
+
     </div>
     <?php
     }
@@ -212,4 +159,3 @@ if (mysql_num_rows($rollCallResult) > 0) {
     ?>
 </div>
 <!--Right Column -->
-

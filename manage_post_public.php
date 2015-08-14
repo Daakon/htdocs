@@ -143,7 +143,7 @@ if (isset($_POST['Delete']) && $_POST['Delete'] == "Delete") {
     Posts.ID As PostID,
     Posts.Post As Post,
     Posts.Category As Category,
-    Profile.Poster As ProfilePhoto
+    Profile.ProfilePhoto As ProfilePhoto
     FROM Members,Posts,Profile
     WHERE
     Posts.Member_ID = $memberID
@@ -178,8 +178,13 @@ if (isset($_POST['Delete']) && $_POST['Delete'] == "Delete") {
 
             <div class="post"><?php echo nl2br($post); ?></div>
 
-
-            <a href='/post-interest.php?interest=<?php echo urlencode($category) ?>' class='category'><h5><?php echo $category ." ". interestGlyphs($category) ?></h5></a>
+            <br/>
+            <?php
+            $isServiceProvider = $_SESSION['IsServiceProvider'];
+            if ($memberID != $ID && $isServiceProvider == 1) { ?>
+                <a href="/view_messages.php?id=<?php echo $memberID ?>">Message <?php echo $rows['FirstName'] ?> </a>
+            <?php } ?>
+            <br/>
             <br/>
             <!------------------------------------->
 

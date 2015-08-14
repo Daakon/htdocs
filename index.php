@@ -141,9 +141,9 @@ get_head_files();
 
     <div class="row">
         <div class="col-lg-6 col-md-5 hidden-sm hidden-xs">
-            <image src="/images/mobile-dating.jpg" class="center-block" ><br>
+            <image src="/images/services.jpg" style="border:2px solid black" class="center-block" ><br>
             </image>
-            <h2 align="center"><span style="font-style: italic;color:red;font-weight: 400">Build rapport with video.</span></h2>
+            <h2 align="center"><span style="font-style: italic;color:red;font-weight: 400">Find The Service You Need.</span></h2>
         </div>
 
         <div class="col-lg-6 col-md-7 col-sm-12 col-xs-12 ">
@@ -307,6 +307,20 @@ get_head_files();
                         <label class="sr-only" for="password">Password</label>
                         <input class="form-control input-lg" type="password" name="password" id="password"
                                placeholder="Password"/>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="error-text"></div>
+                    </div>
+                </div>
+
+                <div class="form-group row" id="form-group-goal">
+                    <div class="col-md-6">
+                        <label class="sr-only" for="goal">Goal</label>
+                        <select class="form-control input-lg" id="ddGoal" name="ddGoal">
+                            <option value="">What is your goal?</option>
+                            <option value="0">I am looking for a service</option>
+                            <option value="1">I am a service provider</option>
+                        </select>
                     </div>
                     <div class="col-md-6">
                         <div class="error-text"></div>

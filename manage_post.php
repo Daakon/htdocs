@@ -140,7 +140,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
     Posts.ID As PostID,
     Posts.Post As Post,
     Posts.Category As Category,
-    Profile.Poster As ProfilePhoto
+    Profile.ProfilePhoto As ProfilePhoto
     FROM Members,Posts,Profile
     WHERE
     Posts.Member_ID = $ID

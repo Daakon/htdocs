@@ -22,18 +22,11 @@ function get_head_files()
 addToHomescreen.removeSession();
 </script>
         <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
-        <meta name="description" content="Rapportbook is a Video Dating Social Network">
-        <meta name="keywords" content="Video, Social Network, Dating">
+        <meta name="description" content="Find The Service You Need">
+        <meta name="keywords" content="Services">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-
-        <!--Social Media API Meta Tags -->
-        <meta property="og:site_name" content="Rapportbook"/>
-        <meta property="og:title" content="Click here to view this video on Rapportbook!">
-        <meta property="og:image" content="http://rapportbook.com/images/Rapportbook-Logo.png">
-        <meta property="og:description" content="Rapportbook is a Video Dating Social Network">
-
 
 
         <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>

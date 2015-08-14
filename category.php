@@ -1,14 +1,14 @@
 <?php
 function category()
 {
-    echo '<option value = "Announcement">Announcement</option>';
-    echo '<option value = "Comedy">Comedy</option>';
-    echo '<option value = "Event">Event</option>';
-    echo '<option value = "Fitness">Fitness</option>';
-    echo '<option value = "Food & Drink">Food & Drink</option>';
-    echo '<option value = "Miscellaneous">Miscellaneous</option>';
-    echo '<option value = "Night Life">Night Life</option>';
-    echo '<option value = "Social">Social</option>';
+    echo '<option value = "Advertising & Marketing">Advertising & Marketing</option>';
+    echo '<option value = "Automotive Repair">Automotive Repair</option>';
+    echo '<option value = "Babysitter">Baby Sitter</option>';
+    echo '<option value = "Commercial Cleaning">Cleaning-Commercial</option>';
+    echo '<option value = "Cleaning-Residential">Cleaning-Residential</option>';
+    echo '<option value = "Wedding Planner">Fitness Trainer</option>';
+    echo '<option value = "Painter">Painter</option>';
+    echo '<option value = "Photography">Photography</option>';
 }
 
 function age() {
@@ -88,40 +88,40 @@ function age() {
 
 }
 
-function interestGlyphs($interest) {
+/*function interestGlyphs($interest) {
 
     $path = "/post-glyphs/";
 
     if ($interest == "Art") {
-        ?><img src="<?php echo $path ?>art.png" class="icon" alt="Photos/Video"/><?
+        */?><!--<img src="<?php /*echo $path */?>art.png" class="icon" alt="Photos/Video"/><?/*
     }
 
     elseif ($interest == "Announcement") {
-        ?><img src="<?php echo $path ?>announcement.jpeg" class="icon" alt="Photos/Video"/><?
+        */?><img src="<?php /*echo $path */?>announcement.jpeg" class="icon" alt="Photos/Video"/><?/*
     }
 
     elseif ($interest == "Comedy") {
-        ?><img src="<?php echo $path ?>comedy.jpg" class="icon" alt="Photos/Video"/><?
+        */?><img src="<?php /*echo $path */?>comedy.jpg" class="icon" alt="Photos/Video"/><?/*
     }
 
     elseif ($interest == "Event") {
-        ?><img src="<?php echo $path ?>event.png" class="icon" alt="Photos/Video"/><?
+        */?><img src="<?php /*echo $path */?>event.png" class="icon" alt="Photos/Video"/><?/*
     }
     elseif ($interest == "Fitness") {
-        ?><img src="<?php echo $path ?>fitness.png" class="icon" alt="Photos/Video"/><?
+        */?><img src="<?php /*echo $path */?>fitness.png" class="icon" alt="Photos/Video"/><?/*
     }
     elseif ($interest == "Food & Drink") {
-        ?><img src="<?php echo $path ?>food-drink.svg" class="icon" alt="Photos/Video"/><?
+        */?><img src="<?php /*echo $path */?>food-drink.svg" class="icon" alt="Photos/Video"/><?/*
     }
 
     elseif ($interest == "Miscellaneous") {
-        ?><img src="<?php echo $path ?>miscellaneous.jpg" class="icon" alt="Photos/Video"/><?
+        */?><img src="<?php /*echo $path */?>miscellaneous.jpg" class="icon" alt="Photos/Video"/><?/*
     }
 
     elseif ($interest == "Night Life") {
-        ?><img src="<?php echo $path ?>night-life.png" class="icon" alt="Photos/Video"/><?
+        */?><img src="<?php /*echo $path */?>night-life.png" class="icon" alt="Photos/Video"/><?/*
     }
     elseif ($interest == "Social") {
-        ?><img src="<?php echo $path ?>social.png" class="icon" alt="Photos/Video"/><?
+        */?><img src="<?php /*echo $path */?>social.png" class="icon" alt="Photos/Video"/>--><?/*
     }
-}
+}*/

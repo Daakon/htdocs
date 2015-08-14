@@ -27,6 +27,9 @@ if (mysql_num_rows($result) > 0) {
 
     setcookie("ID", $rows['ID'], time() + (10 * 365 * 24 * 60 * 60)); // set cookie for 10 years
 
+    $_SESSION['IsServiceProvider'] = $rows['IsServiceProvider'];
+    setcookie("IsServiceProvider", $rows['IsServiceProvider'], time() + (10 * 365 * 24 * 60 * 60)); // set cookie for 10 years
+
     //update last login
     $id = $rows['ID'];
     $date = date('Y-m-d H:i:s');
