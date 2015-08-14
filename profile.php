@@ -185,6 +185,8 @@ if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
     $lastName = $_POST['LastName'];
     $city = $_POST['City'];
     $state = $_POST['State'];
+    $zip = $_POST['Zip'];
+    $phone = $_POST['Phone'];
     $dob = $_POST['DOB'];
     $emailStatus = $_POST['EmailStatus'];
     $password = $_POST['Password'];
@@ -206,7 +208,9 @@ if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
     // update Profile table
     $sql = "Update Profile
             Set City = '$city',
-            State = '$state'
+            State = '$state',
+             Phone = '$phone',
+          Zip = '$zip'
              WHERE Member_ID = $ID ";
     mysql_query($sql) or die(mysql_error());
     echo "<script>alert('Update Successful');</script>";
@@ -339,7 +343,9 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
                         Profile.ProfileVideo As ProfileVideo,
                         Profile.Poster As Poster,
                         Profile.City As City,
-                        Profile.State As State
+                        Profile.State As State,
+                        Profile.Zip As Zip,
+                        Profile.Phone As Phone
                         FROM Members, Profile
                         WHERE Members.ID = $ID
                         AND Profile.Member_ID = $ID
@@ -358,6 +364,8 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
             $lastName = $rows['LastName'];
             $city = $rows["City"];
             $state = $rows['State'];
+            $zip = $rows['Zip'];
+            $phone = $rows['Phone'];
             $email = $rows['Email'];
             $password = $rows['Password'];
             $dob = $rows['DOB'];
@@ -383,7 +391,7 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
 
                 <input onclick="showTextBox('textDiv')" type="image" value="Share" src="/images/share.png" height="50px" width="50px" style="margin-top:10px" />
                 <br/>
-                
+
 
                 <img src = "<?php echo $mediaPath.$profilePhoto ?>" class="profilePhoto" alt="Profile Photo" />
             </div>
@@ -461,11 +469,20 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
                 <div class="form-group">
                     <label for="State">State</label>
                     <select id="State" name="State" class="form-control">
-                        <option  value="<?php echo $homeState ?>"><?php echo $state ?></option>
+                        <option  value="<?php echo $state ?>"><?php echo $state ?></option>
                         <?php getState() ?>
                     </select>
                 </div>
 
+                <div class="form-group">
+                    <label for="Zip">Zip Code</label>
+                    <input type="text" class="form-control" id="Zip" name="Zip" value="<?php echo $zip ?>" />
+                </div>
+
+                <div class="form-group">
+                    <label for="Phone">Phone</label>
+                    <input type="text" class="form-control" id="Phone" name="Phone" value="<?php echo $phone ?>" />
+                </div>
 
                 <div class="form-group">
                     <label for="Email">Email</label>

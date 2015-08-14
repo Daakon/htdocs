@@ -24,7 +24,13 @@ if (!empty($queryName)) {
     }
 }
 else { $memberCondition = ""; }
-$ads = getAds($genre, $age, $state, $interests, $gender);
+
+$getOnlyServiceSeekerPost = "";
+if ($isServiceProvider == 0) {
+    $getOnlyServiceSeekerPost = "AND (Members.ID = $ID)";
+}
+
+//$ads = getAds($genre, $age, $state, $interests, $gender);
 $sqlRollCall = " SELECT DISTINCT
     Posts.Post As Post,
     Members.ID As MemberID,
@@ -44,6 +50,7 @@ $sqlRollCall = " SELECT DISTINCT
     AND (Posts.Category <> 'Sponsored')
     $genreCondition
     $memberCondition
+    $getOnlyServiceSeekerPost
     Group By PostID
     Order By PostID DESC LIMIT $limit ";
 $rollCallResult = mysql_query($sqlRollCall) or die(mysql_error());
@@ -97,13 +104,20 @@ $postOwner = $memberID;
 
     </div>
 
-    <a href='/post-interest.php?interest=<?php echo urlencode($category) ?>' class='category'><h5><?php echo $category ?></h5></a>
+    <h5 style="color:#60A3BD"><?php echo $category ?></h5>
     <br/><br/>
     <?php
+
+    if ($isServiceProvider == 0) {
+        echo "<h5>A service provider will contact you shortly</h5>";
+        echo "<span style='color:red;'>Make sure you have provided your phone number in your profile to receive text
+        messages when a service provider responds</span>";
+    }
+
     //check if member has approved this post
     //----------------------------------------------------------------
     //require 'getSessionType.php';
-    $sql2 = "SELECT ID FROM PostApprovals WHERE Post_ID = '$postID' AND Member_ID = '$ID'";
+    /*$sql2 = "SELECT ID FROM PostApprovals WHERE Post_ID = '$postID' AND Member_ID = '$ID'";
     $result2 = mysql_query($sql2) or die(mysql_error());
     $rows2 = mysql_fetch_assoc($result2);
     // get approvals for each post
@@ -131,7 +145,7 @@ $postOwner = $memberID;
         echo '</form>';
     }
     echo '</div>'; // end of approval div
-    echo '</div>';
+    echo '</div>';*/
     //-------------------------------------------------------------
     // End of approvals
     //-----------------------------------------------------------

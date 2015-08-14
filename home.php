@@ -644,7 +644,14 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                 </form>
                 <?php } ?>
 
+                <?php
+                $isServiceProvider = $_SESSION['IsServiceProvider'];
+                if ($isServiceProvider == 0) {
+                    echo "<h3>All of your service requests are listed below</h3>";
+                }
+                ?>
             </div>
+
 
 
             <?php
