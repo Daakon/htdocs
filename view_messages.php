@@ -223,6 +223,11 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
         mysql_query($sql) or die(mysql_error());
 
         echo "<script>alert('Message Sent'); </script>";
+
+        // sent notification
+        if (strlen(check_phone($receiverID)) > 0) {
+            text_notification($receiverID, $ID);
+        }
     }
 //----------------------
 // if not comment photo
@@ -241,6 +246,11 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
         mysql_query($sql) or die(mysql_error());
 
         echo "<script>alert('Message Sent'); </script>";
+
+        // sent notification
+        if (strlen(check_phone($receiverID)) > 0) {
+            text_notification($receiverID, $ID);
+        }
     }
 
     // notify recipient of email

@@ -430,7 +430,7 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
                 <?php if ($profileVideo != "default_video.png") { ?>
                     <video src = " <?php echo $videoPath . $profileVideo ?>" poster="/poster/<?php echo $posterName ?>"  preload="auto" controls />
                 <?php } else { ?>
-                   <h2>No Profile Video Uploaded</h2>
+                   <h5>No Profile Video Uploaded</h5>
             </div>
                 <?php } ?>
 
@@ -494,6 +494,7 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
                 </div>
 
                 <?php if (get_is_service_provider($ID) == 1) { ?>
+                    <label for="Service">Primary Service</label>
                 <div class="form-group">
                     <select class="form-control input-lg" id="service" name="service">
                         <option value="<?php echo $service ?>"><?php echo $service ?></option>

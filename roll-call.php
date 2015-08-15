@@ -103,8 +103,6 @@ $postOwner = $memberID;
 
     if (get_is_service_provider($ID) == 0) {
         echo "<h5>A service provider will contact you shortly</h5>";
-        echo "<span style='color:red;'>Make sure you have provided your phone number to your profile to receive text
-        messages when a service provider responds</span>";
     }
 
     if (get_is_service_provider($ID) == 1) {
@@ -116,44 +114,6 @@ $postOwner = $memberID;
     if (strlen(check_phone($ID)) == 0) {
         echo "<h5>You should consider adding a phone number to your profile for text notifications</h5>";
     }
-
-
-
-    //check if member has approved this post
-    //----------------------------------------------------------------
-    //require 'getSessionType.php';
-    /*$sql2 = "SELECT ID FROM PostApprovals WHERE Post_ID = '$postID' AND Member_ID = '$ID'";
-    $result2 = mysql_query($sql2) or die(mysql_error());
-    $rows2 = mysql_fetch_assoc($result2);
-    // get approvals for each post
-    $approvals = mysql_num_rows(mysql_query("SELECT * FROM PostApprovals WHERE Post_ID = '$postID'"));
-    // show disapprove if members has approved the post
-    echo '<div class="post-approvals">';
-    echo "<div id = 'approvals$postID'>";
-    if (mysql_num_rows($result2) > 0) {
-        echo '<form>';
-        echo '<input type ="hidden" class = "postID" id = "postID" value = "' . $postID . '" />';
-        echo '<input type ="hidden" class = "ID" id = "ID" value = "' . $ID . '" />';
-        echo '<input type ="button" class = "btnDisapprove" />';
-        if ($approvals > 0) {
-            echo '&nbsp;<span style = "color:red;font-weight:bold;font-size:16">' . $approvals . '</font>';
-        }
-        echo '</form>';
-    } else {
-        echo '<form>';
-        echo '<input type ="hidden" class = "postID" id = "postID" value = "' . $postID . '" />';
-        echo '<input type ="hidden" class = "ID" id = "ID" value = "' . $ID . '" />';
-        echo '<input type ="button" class = "btnApprove" />';
-        if ($approvals > 0) {
-            echo '&nbsp;<span style = "color:red;font-weight:bold;font-size:16">' . $approvals . '</font>';
-        }
-        echo '</form>';
-    }
-    echo '</div>'; // end of approval div
-    echo '</div>';*/
-    //-------------------------------------------------------------
-    // End of approvals
-    //-----------------------------------------------------------
     ?>
 
 
@@ -169,11 +129,12 @@ $postOwner = $memberID;
         <br/>
 
 
-
     </div>
+</div>
     <?php
     }
     }
     ?>
-</div>
+
+
 <!--Right Column -->

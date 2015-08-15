@@ -97,8 +97,6 @@ function build_and_send_email($senderId, $toId, $notification, $postID)
         $nameArray = explode(' ', $name);
         $name = $nameArray[0];
         $subject = "Congratulations $name, you now have a new profile on Rapportbook.<br/>";
-        $subject .= "You can now start posting videos and messaging people.<br/>";
-        $subject .= "Text your profile to new people in your life outside of Rapportbook.<br/>";
         $subject .= '<a href = "http://www.rapportbook.com">Login</a> to your account now!';
     }
 

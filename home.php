@@ -229,7 +229,9 @@ if (isset($_POST['submit'])) {
                                           ('$post',   '$category',   '$ID',      CURDATE())";
                 mysql_query($sql) or die(mysql_error());
             }
+            alert_all_matching_service_providers($category);
         }
+
     }
     echo "<script>location='/home.php?scrollx=$scrollx&scrolly=$scrolly'</script>";
 }
@@ -601,6 +603,21 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
             </ul>
 
             <?php
+            $genre = $_GET['genre'];
+            if (!empty($genre)) {
+                $_SESSION['Genre'] = $genre;
+                $genre = $_SESSION['Genre'];
+            }
+            else {
+                if (!empty($_SESSION['Genre'])) {
+                    $genre = $_SESSION['Genre'];
+                } else {
+                    $genre = "Show-All";
+                }
+            }
+            ?>
+
+            <?php
             $searchState = $_GET['state'];
             if (!empty($searchState)) {
             $_SESSION['state'] = $searchState;
@@ -615,35 +632,35 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
             }
             ?>
 
-            <?php if (get_is_service_provider($ID) == 1) { ?>
-            <br/><br/>
-            <div class="demoText">Search Service Requests By State</div>
-            <select id="searchState" name="searchState" onchange="updateFeed()">
-                <option value="<?php echo $searchState ?>"><?php echo $searchState?></option>
-                <?php include 'getState.php'; getState(); ?>
-            </select>
-            <br/><br/>
-<?php } ?>
-
             <!--Middle Column -->
             <div class=" col-md-9 col-lg-9 roll-call ">
 
 <!--If a service provider -->
                 <?php if (get_is_service_provider($ID) == 1) { ?>
                     <div align = "center">
-                        <h3>Search Services Needed By Category</h3>
+                        <h5>Search Services Needed By Category</h5>
                         <select id="genre" name="genre" onchange="updateFeed()">
-                            <option value="">Show By Service Needed</option>
+                            <option value="<?php echo $genre ?>"><?php echo $genre ?></option>
                             <option value="Show-All">Show All</option>
                             <?php echo category() ?>
                         </select>
+
+                        <br/><br/>
+                        <div><h5>Search Service Requests By State</h5></div>
+                        <select id="searchState" name="searchState" onchange="updateFeed()">
+                            <option value="<?php echo $searchState ?>"><?php echo $searchState?></option>
+                            <?php include 'getState.php'; getState(); ?>
+                        </select>
+                        <br/><br/>
+
                     </div>
                 <?php } ?>
 
+                <?php if (get_is_service_provider($ID) == 0) { ?>
+                    <h4><span style="font-style:italic;font-weight:bold;color:red;">Find The Service You Need</span></h4>
+                    <br/>
 <!--If NOT a service provider -->
-                <?php if ($isServiceProvider == 0) { ?>
-                <h2><span style="font-style:italic;font-weight:bold">Find The Service You Need</span></h2>
-                <br/>
+
                 <form method="post" enctype="multipart/form-data" action="" onsubmit="showUploading()">
                     <img src="/images/image-icon.png" height="30px" width="30px" alt="Photos/Video"/>
                     <strong>Attach A Photo or Video To Your Post</strong>
@@ -673,9 +690,8 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                 <?php } ?>
 
                 <?php
-                $isServiceProvider = $_SESSION['IsServiceProvider'];
-                if ($isServiceProvider == 0) {
-                    echo "<h3>All of your service requests are listed below</h3>";
+                if (get_is_service_provider($ID) == 0) {
+                    echo "<h5>All of your service requests are listed below</h5>";
                 }
                 ?>
             </div>
