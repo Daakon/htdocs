@@ -5,12 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="51867226-c8dd-43fb-9a46-7c8a9e9ab742" name="Default" comment="Added media page.&#10;&#10;">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.php" afterPath="$PROJECT_DIR$/index.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/model_functions.php" afterPath="$PROJECT_DIR$/model_functions.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/profile.php" afterPath="$PROJECT_DIR$/profile.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/roll-call.php" afterPath="$PROJECT_DIR$/roll-call.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/signup.php" afterPath="$PROJECT_DIR$/signup.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/support.php" afterPath="$PROJECT_DIR$/support.php" />
     </list>
     <ignored path="htdocs.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -38,10 +33,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="model_functions.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="model_functions.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/model_functions.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.49646643">
+            <state vertical-scroll-proportion="-10.035714">
               <caret line="149" column="46" selection-start-line="149" selection-start-column="46" selection-end-line="149" selection-end-column="46" />
               <folding>
                 <marker date="1439660098000" expanded="true" signature="102:142" placeholder="SELECT IsAct..Members..." />
@@ -58,6 +53,25 @@
                 <marker date="1439660098000" expanded="true" signature="3418:3467" placeholder="SELECT IsSer..Members..." />
                 <marker date="1439660098000" expanded="true" signature="3665:3704" placeholder="SELECT Servi..Members..." />
                 <marker date="1439660098000" expanded="true" signature="3960:4004" placeholder="SELECT Phone..Members..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="profile.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/profile.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.6572438">
+              <caret line="206" column="31" selection-start-line="206" selection-start-column="31" selection-end-line="206" selection-end-column="31" />
+              <folding>
+                <marker date="1439660553000" expanded="true" signature="3111:3300" placeholder="INSERT INTO ..." />
+                <marker date="1439660553000" expanded="true" signature="3413:3483" placeholder="UPDATE Profi..." />
+                <marker date="1439660553000" expanded="true" signature="6781:7004" placeholder="INSERT INTO ..." />
+                <marker date="1439660553000" expanded="true" signature="7117:7211" placeholder="UPDATE Profi..." />
+                <marker date="1439660553000" expanded="true" signature="8024:8274" placeholder="Update Membe..." />
+                <marker date="1439660553000" expanded="true" signature="8376:8538" placeholder="Update Profi..." />
+                <marker date="1439660553000" expanded="true" signature="8872:8912" placeholder="SELECT Usern..Members..." />
+                <marker date="1439660553000" expanded="true" signature="12361:13338" placeholder="SELECT DISTI..Members..." />
               </folding>
             </state>
           </provider>
@@ -118,10 +132,10 @@
         <option value="$PROJECT_DIR$/terms.php" />
         <option value="$PROJECT_DIR$/support.php" />
         <option value="$PROJECT_DIR$/signup.php" />
-        <option value="$PROJECT_DIR$/profile.php" />
         <option value="$PROJECT_DIR$/index.php" />
         <option value="$PROJECT_DIR$/model_functions.php" />
         <option value="$PROJECT_DIR$/roll-call.php" />
+        <option value="$PROJECT_DIR$/profile.php" />
       </list>
     </option>
   </component>
@@ -454,7 +468,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/profile.php</url>
-          <line>336</line>
+          <line>338</line>
           <option name="timeStamp" value="13" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
@@ -946,23 +960,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/profile.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7526502">
-          <caret line="496" column="85" selection-start-line="496" selection-start-column="85" selection-end-line="496" selection-end-column="85" />
-          <folding>
-            <marker date="1439658315000" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
-            <marker date="1439658315000" expanded="true" signature="-1:-1" placeholder="UPDATE Profi..." />
-            <marker date="1439658315000" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
-            <marker date="1439658315000" expanded="true" signature="-1:-1" placeholder="UPDATE Profi..." />
-            <marker date="1439658315000" expanded="true" signature="-1:-1" placeholder="Update Membe..." />
-            <marker date="1439658315000" expanded="true" signature="-1:-1" placeholder="Update Profi..." />
-            <marker date="1439658315000" expanded="true" signature="-1:-1" placeholder="SELECT Usern..Members..." />
-            <marker date="1439658315000" expanded="true" signature="-1:-1" placeholder="SELECT DISTI..Members..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/signup.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="2.45053">
@@ -1011,7 +1008,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/model_functions.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.49646643">
+        <state vertical-scroll-proportion="-10.035714">
           <caret line="149" column="46" selection-start-line="149" selection-start-column="46" selection-end-line="149" selection-end-column="46" />
           <folding>
             <marker date="1439660098000" expanded="true" signature="102:142" placeholder="SELECT IsAct..Members..." />
@@ -1028,6 +1025,23 @@
             <marker date="1439660098000" expanded="true" signature="3418:3467" placeholder="SELECT IsSer..Members..." />
             <marker date="1439660098000" expanded="true" signature="3665:3704" placeholder="SELECT Servi..Members..." />
             <marker date="1439660098000" expanded="true" signature="3960:4004" placeholder="SELECT Phone..Members..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/profile.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6572438">
+          <caret line="206" column="31" selection-start-line="206" selection-start-column="31" selection-end-line="206" selection-end-column="31" />
+          <folding>
+            <marker date="1439660553000" expanded="true" signature="3111:3300" placeholder="INSERT INTO ..." />
+            <marker date="1439660553000" expanded="true" signature="3413:3483" placeholder="UPDATE Profi..." />
+            <marker date="1439660553000" expanded="true" signature="6781:7004" placeholder="INSERT INTO ..." />
+            <marker date="1439660553000" expanded="true" signature="7117:7211" placeholder="UPDATE Profi..." />
+            <marker date="1439660553000" expanded="true" signature="8024:8274" placeholder="Update Membe..." />
+            <marker date="1439660553000" expanded="true" signature="8376:8538" placeholder="Update Profi..." />
+            <marker date="1439660553000" expanded="true" signature="8872:8912" placeholder="SELECT Usern..Members..." />
+            <marker date="1439660553000" expanded="true" signature="12361:13338" placeholder="SELECT DISTI..Members..." />
           </folding>
         </state>
       </provider>

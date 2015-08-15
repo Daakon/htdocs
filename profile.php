@@ -188,6 +188,7 @@ if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
     $state = $_POST['State'];
     $zip = $_POST['Zip'];
     $phone = $_POST['Phone'];
+    $service = $_POST['service'];
     $dob = $_POST['DOB'];
     $emailStatus = $_POST['EmailStatus'];
     $password = $_POST['Password'];
@@ -203,6 +204,7 @@ if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
           LastName = '$lastName',
           DOB = '$dob',
           EmailActive = '$emailStatus ',
+          Service = '$service',
           Password = '$password'
           WHERE ID = $ID ";
     $result = mysql_query($sql) or die(mysql_error());
@@ -493,7 +495,7 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
 
                 <?php if (get_is_service_provider($ID) == 1) { ?>
                 <div class="form-group">
-                    <select class="form-control input-lg" id="category" name="category">
+                    <select class="form-control input-lg" id="service" name="service">
                         <option value="<?php echo $service ?>"><?php echo $service ?></option>
                         <?php echo category() ?>
                     </select>
