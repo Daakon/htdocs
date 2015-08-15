@@ -22,7 +22,7 @@ get_header()
             <a href="/home.php">Back to Roll Call</a>
             <?php } ?>
 
-            <h4>Rapportbook allows people to find services they are looking for.</h4>
+            <h4>Rapportbook allows people to find the services they are looking for.</h4>
 
 
 
