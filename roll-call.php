@@ -103,9 +103,21 @@ $postOwner = $memberID;
 
     if (get_is_service_provider($ID) == 0) {
         echo "<h5>A service provider will contact you shortly</h5>";
-        echo "<span style='color:red;'>Make sure you have provided your phone number in your profile to receive text
+        echo "<span style='color:red;'>Make sure you have provided your phone number to your profile to receive text
         messages when a service provider responds</span>";
     }
+
+    if (get_is_service_provider($ID) == 1) {
+        if (strlen(check_service_is_provided($ID)) == 0) {
+            echo "<h5>To receive notifications when someone posts a request related to your service, you need to add your service in your profile</h5>";
+        }
+    }
+
+    if (strlen(check_phone($ID)) == 0) {
+        echo "<h5>You should consider adding a phone number to your profile for text notifications</h5>";
+    }
+
+
 
     //check if member has approved this post
     //----------------------------------------------------------------

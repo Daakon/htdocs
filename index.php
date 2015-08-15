@@ -4,6 +4,7 @@ require 'connect.php';
 require 'html_functions.php';
 require 'calendar.php';
 require 'getState.php';
+require 'category.php';
 get_head_files();
 ?>
 <?php get_login_header() ?>
@@ -132,7 +133,22 @@ get_head_files();
     }
 </script>
 
+<script type = "text/javascript">
+    function checkGoal() {
+        var selection = document.getElementById('ddGoal');
+        var goal = selection.options[selection.selectedIndex].value;
 
+        if (goal == 1) {
+            var service = document.getElementById('service');
+            if (service.style.display == 'none') {
+                service.style.display = 'block';
+            }
+            else {
+                service.style.display = 'none';
+            }
+        }
+    }
+</script>
 
 <?php require 'checkLogin.php'; ?>
 
@@ -327,7 +343,7 @@ get_head_files();
                 <div class="form-group row" id="form-group-goal">
                     <div class="col-md-6">
                         <label class="sr-only" for="goal">Goal</label>
-                        <select class="form-control input-lg" id="ddGoal" name="ddGoal">
+                        <select class="form-control input-lg" id="ddGoal" name="ddGoal" onchange="checkGoal()">
                             <option value="">What is your goal?</option>
                             <option value="0">I am looking for a service</option>
                             <option value="1">I am a service provider</option>
@@ -336,6 +352,14 @@ get_head_files();
                     <div class="col-md-6">
                         <div class="error-text"></div>
                     </div>
+                </div>
+
+                <div id="service" style="display:none">
+                <select class="form-control input-lg" id="service" name="service">
+                    <option value="">Select Your Main Service</option>
+                    <?php echo category() ?>
+                </select>
+                    <br/>
                 </div>
 
                 <div class="form-group row" id="form-group-phone">

@@ -35,9 +35,9 @@ $ID = $_SESSION['ID'];
         <?php } ?>
         </div>
 
-        <h2>
+        <h5>
             Please direct all questions & concerts to: <a href="mailto:info@rapportbook.com">info@rapportbook.com</a>
-        </h2>
+        </h5>
 
     </div>
 </div>

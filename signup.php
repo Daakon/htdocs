@@ -21,6 +21,7 @@ $username = $_POST['username'];
 $pass = $_POST['password'];
 $goal = $_POST['ddGoal'];
 $phone = $_POST['phone'];
+$service = $_POST['service'];
 $fb_token = $_POST['fb_token'];
 $fb_id = $_POST['fb_id'];
 
@@ -70,8 +71,8 @@ if (strlen($username) == 0 || $username == '') {
     $username = $fb_id;
 }
 
-$sql = "INSERT INTO Members (FirstName, LastName, Email,    Gender,    DOB,    Username,      Password,       IsServiceProvider,     SignupDate,   IsSuspended, EmailActive, LastLogin,      fb_token,   fb_id)
-Values 			            ('$fName', '$lName', '$email', '$gender', '$dob', '$username',  '".md5($pass)."',      '$goal',          CURRENT_DATE(),   0,           1,        CURRENT_DATE(),'$fb_token','$fb_id')";
+$sql = "INSERT INTO Members (FirstName, LastName, Email,    Gender,    DOB,    Username,      Password,       IsServiceProvider,    Service,     SignupDate,   IsSuspended, EmailActive, LastLogin,      fb_token,   fb_id)
+Values 			            ('$fName', '$lName', '$email', '$gender', '$dob', '$username',  '".md5($pass)."',      '$goal',        '$service',     CURRENT_DATE(),   0,           1,        CURRENT_DATE(),'$fb_token','$fb_id')";
 $result = mysql_query($sql) or die(mysql_error());
 
 $ID = mysql_insert_id();

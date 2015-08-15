@@ -142,3 +142,19 @@ function get_is_service_provider($ID) {
     return $rows['IsServiceProvider'];
 }
 
+function check_service_is_provided($ID) {
+    $sql = "SELECT Service FROM Members WHERE ID = $ID ";
+    $result = mysql_query($sql) or die(mysql_error());
+    $rows = mysql_fetch_assoc($result);
+    $service =  $rows['Service'];;
+    echo "<script>alrt('$service');</script>";
+    return $rows['Service'];
+}
+
+function check_phone($ID) {
+    $sql = "SELECT Phone FROM Profile WHERE Member_ID = $ID ";
+    $result = mysql_query($sql) or die(mysql_error());
+    $rows = mysql_fetch_assoc($result);
+    return $rows['Phone'];
+}
+

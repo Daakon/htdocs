@@ -339,6 +339,7 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
                         Members.Email As Email,
                         Members.Password As Password,
                         Members.DOB As DOB,
+                        Members.Service As Service,
                         Members.EmailActive As EmailStatus,
                         Profile.ProfilePhoto As ProfilePhoto,
                         Profile.ProfileVideo As ProfileVideo,
@@ -370,6 +371,7 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
             $email = $rows['Email'];
             $password = $rows['Password'];
             $dob = $rows['DOB'];
+            $service = $rows['Service'];
             $emailStatus = $rows['EmailStatus'];
             if (strlen($posterName) == 0) {
                 $posterName = "video-bg.jpg";
@@ -488,6 +490,15 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
                     <label for="Phone">Phone</label>
                     <input type="text" class="form-control" id="Phone" name="Phone" value="<?php echo $phone ?>" />
                 </div>
+
+                <?php if (get_is_service_provider($ID) == 1) { ?>
+                <div class="form-group">
+                    <select class="form-control input-lg" id="category" name="category">
+                        <option value="<?php echo $service ?>"><?php echo $service ?></option>
+                        <?php echo category() ?>
+                    </select>
+                </div>
+                <?php } ?>
 
                 <div class="form-group">
                     <label for="Email">Email</label>
