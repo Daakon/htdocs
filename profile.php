@@ -394,7 +394,7 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
                     }
                 </script>
 
-                <input onclick="showTextBox('textDiv')" type="image" value="Share" src="/images/share.png" height="50px" width="50px" style="margin-top:10px" />
+                <!--<input onclick="showTextBox('textDiv')" type="image" value="Share" src="/images/share.png" height="50px" width="50px" style="margin-top:10px" />-->
                 <br/>
 
 
