@@ -7,7 +7,7 @@ $state = $_GET['state'];
 ?>
 
 <ul class="list-inline demoText profileMenu">
-    <li><a href="/home.php?ageStart=<?php echo $ageStart ?>&ageEnd=<?php echo $ageEnd ?>&gender=<?php echo $gender ?>&state=<?php echo $state ?>">Roll Call</a></li>
+    <li><a href="/home.php">Service Requests</a></li>
     <li><a href="/profile.php/<?php echo get_username($ID) ?>">Profile</a></li>
     <li><a href="/member_media.php">Video Book</a></li>
     <li><a href="/messages.php">Messaging <?php require 'getNewMessageCount.php' ?></a></li>

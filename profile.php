@@ -13,6 +13,7 @@ get_header();
 require 'memory_settings.php';
 $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 $ID = $_SESSION['ID'];
+
 ?>
 
 
@@ -416,16 +417,19 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
 
             <br/>
             <hr/>
-            <br/>
 
+            <?php
+
+            if (get_is_service_provider($ID) == 1) {?>
             <!--Profile video --------------------------------------------------------------------------------->
             <div align ="center">
                 <?php if ($profileVideo != "default_video.png") { ?>
                     <video src = " <?php echo $videoPath . $profileVideo ?>" poster="/poster/<?php echo $posterName ?>"  preload="auto" controls />
                 <?php } else { ?>
-                    <img src = "<?php echo $mediaPath.$profileVideo ?>" class="defaultProfileVideo" alt="Profile Video" />
-                <?php } ?>
+                   <h2>No Profile Video Uploaded</h2>
             </div>
+                <?php } ?>
+
             <form method="post" enctype="multipart/form-data" action="" onsubmit="showUploading()">
                 <img src="/images/image-icon.png" class="img-icon" alt="Photos/Video"/>
                 <strong>Upload A Profile Video</strong>
@@ -443,6 +447,7 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
                 <input type="submit" class="post-button" name="video" id="video" value="Upload Video" onclick="showVideoUploading()" />
             </form>
             <!--Profile ---------------------------------------------------------------------------------------->
+<?php } ?>
 
             <br/>
             <p id="notice"></p>

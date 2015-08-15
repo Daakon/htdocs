@@ -22,11 +22,11 @@ get_header()
             <a href="/home.php">Back to Roll Call</a>
             <?php } ?>
 
-            <h4>Rapportbook is a Video Dating Social Network.</h4>
+            <h4>Rapportbook allows people to find services they are looking for.</h4>
 
 
 
-                <img src="<?php echo $imagesPath ?>mobile-dating.jpg" class="how-it-works-img"/>
+                <img src="<?php echo $imagesPath ?>services.jpg" class="how-it-works-img"/>
 
 
                 <p>

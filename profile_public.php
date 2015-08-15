@@ -122,6 +122,16 @@ $bgPhoto = $row['Poster'];
                 <img src = "<?php echo $mediaPath.$profilePhoto ?>" class="profilePhoto" alt="Profile Photo" />
             </div>
 
+            <?php if (get_is_service_provider($memberID) == 1) { ?>
+            <!--Profile video --------------------------------------------------------------------------------->
+            <div align ="center">
+                <?php if ($profileVideo != "default_video.png") { ?>
+                    <video src = " <?php echo $videoPath . $profileVideo ?>" poster="/poster/<?php echo $posterName ?>"  preload="auto" controls />
+                <?php } else { ?>
+                <h2>No Profile Video Uploaded</h2>
+            </div>
+        <?php }} ?>
+
             <div class="content-block">
                 <h2>
             <?php echo $firstName ?>

@@ -135,3 +135,10 @@ function get_id_by_email($email)
     return $rows['ID'];
 }
 
+function get_is_service_provider($ID) {
+    $sql = "SELECT IsServiceProvider FROM Members WHERE ID = $ID ";
+    $result = mysql_query($sql) or die(mysql_error());
+    $rows = mysql_fetch_assoc($result);
+    return $rows['IsServiceProvider'];
+}
+

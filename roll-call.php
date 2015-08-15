@@ -10,23 +10,11 @@ else if($genre = "Show-All") {
     $genreCondition = "And Posts.Category > '' ";
 }
 else { $genreCondition = "And Posts.Category > '' "; }
-// get member name
-$queryName = $_GET['mn'];
-if (!empty($queryName)) {
-    $memberName = preg_split('/((^\p{P}+)|(\p{P}*\s+\p{P}*)|(\p{P}+$))/', $queryName, -1, PREG_SPLIT_NO_EMPTY);
-    $memberFirstName = $memberName[0];
-    $memberLastName = $memberName[1];
-    if (strlen($memberLastName) > 0) {
-        $memberCondition = " And (Members.FirstName Like '%$memberFirstName%' And Members.LastName Like '%$memberLastName%') ";
-    }
-    else {
-        $memberCondition = "And (Members.FirstName Like '%$memberFirstName%') ";
-    }
-}
-else { $memberCondition = ""; }
 
-$getOnlyServiceSeekerPost = "";
-if ($isServiceProvider == 0) {
+
+
+$getOnlyServiceSeekerPost = null;
+if (get_is_service_provider($ID) == 0) {
     $getOnlyServiceSeekerPost = "AND (Members.ID = $ID)";
 }
 
@@ -49,7 +37,6 @@ $sqlRollCall = " SELECT DISTINCT
     And (Posts.IsDeleted = 0)
     AND (Posts.Category <> 'Sponsored')
     $genreCondition
-    $memberCondition
     $getOnlyServiceSeekerPost
     Group By PostID
     Order By PostID DESC LIMIT $limit ";
@@ -108,7 +95,7 @@ $postOwner = $memberID;
     <br/><br/>
     <?php
 
-    if ($isServiceProvider == 0) {
+    if (get_is_service_provider($ID) == 0) {
         echo "<h5>A service provider will contact you shortly</h5>";
         echo "<span style='color:red;'>Make sure you have provided your phone number in your profile to receive text
         messages when a service provider responds</span>";
@@ -158,8 +145,7 @@ $postOwner = $memberID;
         <br/>
 
         <?php
-            $isServiceProvider = $_SESSION['IsServiceProvider'];
-            if ($memberID != $ID && $isServiceProvider == 1) { ?>
+            if ($memberID != $ID && get_is_service_provider($ID) == 1) { ?>
             <a href="/view_messages.php?id=<?php echo $memberID ?>">Message <?php echo $rows['FirstName'] ?> </a>
         <?php } ?>
         <br/>
