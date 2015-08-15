@@ -25,7 +25,7 @@ get_head_files();
 
         Our account rules are as follows:
     <ul>
-            <li style="display:block">1. You will not use Rapportbook if you are under 18.</li>
+            <li style="display:block">1. You will not use Rapportbook if you are under 13.</li>
             <li style="display:block">2. You will keep your contact information accurate and up-to-date.</li>
             <li style="display:block">3. You will not share your password</li>
             <li style="display:block">4. You will not transfer your account</li>
@@ -46,8 +46,7 @@ get_head_files();
     <small>
         Here is a list of content that is under no means tolerable:
         <ul>
-            <li style="display:block" class="list-group-item list-group-item-danger">Pornographic material of any nature</li>
-            <li style="display:block" class="list-group-item list-group-item-danger">Any video committing a crime</li>
+            <li style="display:block" class="list-group-item list-group-item-danger">Any content that depicts committing a crime</li>
             <li style="display:block" class="list-group-item list-group-item-danger">Racist behaviour or bullying tactics </li>
             <li style="display:block" class="list-group-item list-group-item-danger">Posting media content you do not have ownership rights to.</li>
 

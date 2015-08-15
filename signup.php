@@ -14,12 +14,16 @@ $month = $_POST['ddMonth'];
 $day = $_POST['ddDay'];
 $year = $_POST['ddYear'];
 $birthday = $_POST['birthday'];
+$city = $_POST['city'];
+$state = $_POST['ddState'];
+$zip = $_POST['zip'];
 $username = $_POST['username'];
 $pass = $_POST['password'];
 $goal = $_POST['ddGoal'];
+$phone = $_POST['phone'];
 $fb_token = $_POST['fb_token'];
 $fb_id = $_POST['fb_id'];
-$state = $_POST['ddState'];
+
 
 if($gender=='') $gender = (($_POST['gender']=='male')?1:2);
 
@@ -91,8 +95,8 @@ $sql = "UPDATE Members SET SignupDate = '$date' WHERE ID = '$ID' ";
 $result = mysql_query($sql) or die(mysql_error());
 
 // insert default profile pic into profile table
-$sql = "INSERT INTO Profile (Member_ID, Poster,               ProfileVideo,        State,    City,  Zip) Values
-                            ('$ID',     'default_photo.png', 'default_video.png', '$state',    '',   '')    ";
+$sql = "INSERT INTO Profile (Member_ID, Poster,               ProfileVideo,        State,    City,  Zip,    Phone) Values
+                            ('$ID',     'default_photo.png', 'default_video.png', '$state',   '$city', '$zip', '$phone')    ";
 $result = mysql_query($sql) or die(mysql_error());
 
 

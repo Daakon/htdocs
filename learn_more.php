@@ -30,29 +30,34 @@ get_header()
 
 
                 <p>
-                    <b>We have the real time feed you're accustomed to in Social Networks.
-                    But we removed all the photos and replaced them with video...why?</b>
-                    Video is the now and the future, plus...
-                    the best way to build rapport with someone is by being able
-                    to see all of their mannerisms, see what they look like today.
-                    It helps avoid fraudulent representation. Video is more telling and descriptive.
-                    You don't even have a profile photo, you have a profile video.
+                    <b>Service Seekers</b>
+                    When you sign up, you select "I am looking for a service".
+                    Once you sign up, you simply post what you are looking for from
+                    the drop down along with text that describes what you are looking for.
+                    You can also add a photo or video to better describe you problem if it helps.
+
+                    <br/>
+                    Once you hit post, a notification via email and text will got out to all service providers
+                    who focus on the service you need. The service providers will then come back
+                    to Rapportbook and return you message. From there, you and the service provider
+                    will be able to discuss the problem at hand. You can choose to talk to as many
+                    services providers as possible before making your decision on who you will work with.
+
+                    <br/>
+                    All of your service requests will be stored in your profile a viewable by service
+                    providers once they start a conversation with you. You can delete any of these at any time.
                 </p>
 
-            <p>
-                <b>So how do you engage?</b>
-                When you go through the real time feed, if you see a video you like,
-                you can approve(like) their post and or you can direct message
-                them to get the conversation going. You can also check out their profile
-                and see what other videos a person has posted as well as other posts they made.
-            </p>
-
-            <p>
-                <b>You can search the real time feed by age as well as post topic.</b>
-                Basically, each post is tagged by an interest topic,
-                so you can filter by topics that interest you and see if someone
-                shares similar interests as you.
-            </p>
+                <p>
+                    <b>Service Providers</b>
+                    When you sign up, you select "I am providing a service".
+                    Once you sign up, you can scroll through all service requests,
+                    even the ones you don't specialize in. But you will receive notifications
+                    whenever their is a post related to you primary focus.
+                    You can then respond to the request. Service providers can also post
+                    a profile video to better explain what their service does. You will also have
+                    a library of videos for service seekers to explore.
+                </p>
 
     </div>
 </div>

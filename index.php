@@ -242,6 +242,17 @@ get_head_files();
                     </div>
                 </div>
 
+                <div class="form-group row" id="form-group-email">
+                    <div class="col-md-6">
+                        <label class="sr-only" for="email">City</label>
+                        <input class="form-control input-lg" type="text" name="city" id="city"
+                               placeholder="City"/>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="error-text"></div>
+                    </div>
+                </div>
+
                 <div class="form-group row" id="form-group-ddGender">
                     <div class="col-md-6">
                         <label class="sr-only" for="ddState">State</label>
@@ -321,6 +332,18 @@ get_head_files();
                             <option value="0">I am looking for a service</option>
                             <option value="1">I am a service provider</option>
                         </select>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="error-text"></div>
+                    </div>
+                </div>
+
+                <div class="form-group row" id="form-group-phone">
+                    <div class="col-md-6">
+                        <label class="sr-only" for="phone">Phone</label>
+                        <input class="form-control input-lg" type="text" name="phone" id="phone"
+                               placeholder="2125551212"/>
+                        <small>Your phone number will only be used for text notifications when you receive a service match.</small>
                     </div>
                     <div class="col-md-6">
                         <div class="error-text"></div>

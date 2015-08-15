@@ -579,13 +579,17 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
         saveScrollPositions(theForm);
     }
 </script>
+
 <script type = "text/javascript">
-    function getGenre() {
+    function updateFeed() {
         var selection = document.getElementById('genre');
         var genre = selection.options[selection.selectedIndex].value;
-        window.location = "/home.php?genre="+encodeURIComponent(genre);
+        var stateSelect = document.getElementById('searchState');
+        var state = stateSelect.options[stateSelect.selectedIndex].value;
+        window.location = "/home.php?genre="+encodeURIComponent(genre)+"&state="+encodeURIComponent(state);
     }
 </script>
+
 <body>
 <div class="container">
     <?php
@@ -596,15 +600,39 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                 <li><a href="/profile.php/<?php echo get_username($ID) ?>"><span style="color:black;font-weight:bold;">Go To Your Profile</span> <?php require 'getNewMessageCount.php' ?></a></li>
             </ul>
 
+            <?php
+            $searchState = $_GET['state'];
+            if (!empty($searchState)) {
+            $_SESSION['state'] = $searchState;
+            $searchState = $_SESSION['state'];
+            }
+            else {
+            if (!empty($_SESSION['state'])) {
+            $searchState = $_SESSION['state'];
+            } else {
+            $searchState = getMemberState($ID);
+            }
+            }
+            ?>
+
+            <?php if (get_is_service_provider($ID) == 1) { ?>
+            <br/><br/>
+            <div class="demoText">Search Service Requests By State</div>
+            <select id="searchState" name="searchState" onchange="updateFeed()">
+                <option value="<?php echo $searchState ?>"><?php echo $searchState?></option>
+                <?php include 'getState.php'; getState(); ?>
+            </select>
+            <br/><br/>
+<?php } ?>
 
             <!--Middle Column -->
             <div class=" col-md-9 col-lg-9 roll-call ">
 
 <!--If a service provider -->
-                <?php if ($isServiceProvider == 1) { ?>
+                <?php if (get_is_service_provider($ID) == 1) { ?>
                     <div align = "center">
                         <h3>Search Services Needed By Category</h3>
-                        <select id="genre" name="genre" onchange="getGenre()">
+                        <select id="genre" name="genre" onchange="updateFeed()">
                             <option value="">Show By Service Needed</option>
                             <option value="Show-All">Show All</option>
                             <?php echo category() ?>

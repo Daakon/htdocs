@@ -11,7 +11,12 @@ else if($genre = "Show-All") {
 }
 else { $genreCondition = "And Posts.Category > '' "; }
 
-
+if (!empty($searchState)) {
+    $stateCondition = "AND (Profile.State = '$searchState')";
+}
+else {
+    $stateCondition = "";
+}
 
 $getOnlyServiceSeekerPost = null;
 if (get_is_service_provider($ID) == 0) {
@@ -38,6 +43,7 @@ $sqlRollCall = " SELECT DISTINCT
     AND (Posts.Category <> 'Sponsored')
     $genreCondition
     $getOnlyServiceSeekerPost
+    $stateCondition
     Group By PostID
     Order By PostID DESC LIMIT $limit ";
 $rollCallResult = mysql_query($sqlRollCall) or die(mysql_error());
