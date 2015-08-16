@@ -64,7 +64,7 @@ if (mysql_numrows($result) == 0) {
                     $subject = $rows['Subject'];
 
                     // get sender name
-                    $sql2 = "SELECT Username, ProfilePhoto
+                    $sql2 = "SELECT FirstName, ProfilePhoto
                 FROM Members, Profile
                 WHERE Profile.Member_ID = $otherID
                 AND Members.ID = $otherID ";
@@ -72,10 +72,14 @@ if (mysql_numrows($result) == 0) {
                     $result2 = mysql_query($sql2) or die(mysql_error());
                     $rows2 = mysql_fetch_assoc($result2);
                     $pic = $rows2['ProfilePhoto'];
-                    $userName = $rows2['Username'];
+                    $userName = $rows2['FirstName'];
+
+                    $sql3 = "SELECT New FROM Messages WHERE ThreadOwner_ID = $ID And (Sender_ID = $otherID) AND (Receiver_ID = $ID) AND (New = 1)";
+                    $result3 = mysql_query($sql3) or die(mysql_error());
+                    $row3 = mysql_fetch_assoc($result3);
 
                     echo "<a href = '/view_messages_public.php?id=$otherID'><img src = '$mediaPath$pic' class='profilePhoto-Feed' alt='' /> $userName </a>";
-                    if ($rows['New'] == 1) { echo "<span style='color:red;font-weight:bold'>New</font>"; }
+                    if (mysql_num_rows($result3) > 0) { echo "<span style='color:red;font-weight:bold'>New</font>"; }
                     echo "<br/>";
                     echo "$subject";
                     echo "<hr/>";
