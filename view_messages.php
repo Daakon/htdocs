@@ -279,7 +279,7 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
             $nameArray = explode(' ', $name);
             $firstName = $nameArray[0];
             ?>
-            <h5>Message: <span class="viewMessage"><a href="/profile_public.php/<?php echo $username ?>"><?php echo $firstName ?></a></span></h5>
+            <h5><span class="viewMessage"><a href="/profile_public.php/<?php echo $username ?>">Visit <?php echo $firstName ?>'s Profile</a></span></h5>
             <?php
             // get subject
             $sql = "SELECT * FROM Messages
@@ -323,7 +323,7 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
                     $name = $rows2['FirstName'];
                     $username = $rows2['Username'];
 
-                    echo "<a href='/profile.php/$username'><img src = '/poster/$pic' class='profilePhoto-Feed' alt='' /> $name</a>";
+                    echo "<a href='/profile_public.php/$username'><img src = '/poster/$pic' class='profilePhoto-Feed' alt='' /> $name</a>";
 
                     echo "<div class='post'>".nl2br($message)."</div>";
 

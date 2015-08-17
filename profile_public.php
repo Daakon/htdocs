@@ -82,9 +82,11 @@ $bgPhoto = $row['Poster'];
                         Members.Password As Password,
                         TIMESTAMPDIFF(YEAR, Members.DOB, CURDATE()) AS Age,
                         Profile.ProfilePhoto As ProfilePhoto,
+                        Profile.ProfileVideo As ProfileVideo,
                         Profile.Poster As Poster,
                         Profile.City As City,
-                        Profile.State As State
+                        Profile.State As State,
+                        Profile.About As About
                         FROM Members, Profile
                         WHERE Members.ID = $memberID
                         AND Profile.Member_ID = $memberID ";
@@ -106,6 +108,7 @@ $bgPhoto = $row['Poster'];
             $lastName = $rows['LastName'];
             $city = $rows["City"];
             $state = $rows['State'];
+            $about = $rows['About'];
             $email = $rows['Email'];
             $password = $rows['Password'];
             $age = $rows['Age'];
@@ -153,8 +156,13 @@ $bgPhoto = $row['Poster'];
 
             <br/><br/>
 
+            <?php if (get_is_service_provider($memberID)) { ?>
+            <div class="public-profile-label">About</div>
+            <?php echo $about ?>
+            <?php } ?>
 
                     <?php if (isset($ID) && !empty($ID) && $memberID != $ID) { ?>
+                        <br/><br/>
                     <div class="public-profile-label">Message Me</div>
                         <a href="/view_messages.php?id=<?php echo $memberID ?>"><?php echo $username ?></a>
                     <?php } elseif ($memberID == $ID) { ?>

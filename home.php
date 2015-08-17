@@ -13,7 +13,8 @@ require 'html_functions.php';
 require 'findURL.php';
 require 'email.php';
 require 'category.php';
-require 'ads.php';
+//require 'ads.php';
+
 get_head_files();
 get_header();
 require 'memory_settings.php';

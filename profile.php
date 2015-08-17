@@ -188,6 +188,7 @@ if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
     $state = $_POST['State'];
     $zip = $_POST['Zip'];
     $phone = $_POST['Phone'];
+    $about = $_POST['About'];
     $service = $_POST['service'];
     $dob = $_POST['DOB'];
     $emailStatus = $_POST['EmailStatus'];
@@ -211,9 +212,10 @@ if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
     // update Profile table
     $sql = "Update Profile
             Set City = '$city',
-            State = '$state',
-             Phone = '$phone',
-          Zip = '$zip'
+                State = '$state',
+                Phone = '$phone',
+                Zip = '$zip',
+                About = '$about'
              WHERE Member_ID = $ID ";
     mysql_query($sql) or die(mysql_error());
     echo "<script>alert('Update Successful');</script>";
@@ -349,7 +351,8 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
                         Profile.City As City,
                         Profile.State As State,
                         Profile.Zip As Zip,
-                        Profile.Phone As Phone
+                        Profile.Phone As Phone,
+                        Profile.About As About
                         FROM Members, Profile
                         WHERE Members.ID = $ID
                         AND Profile.Member_ID = $ID
@@ -370,6 +373,7 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
             $state = $rows['State'];
             $zip = $rows['Zip'];
             $phone = $rows['Phone'];
+            $about = $rows['About'];
             $email = $rows['Email'];
             $password = $rows['Password'];
             $dob = $rows['DOB'];
@@ -500,6 +504,13 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
                         <option value="<?php echo $service ?>"><?php echo $service ?></option>
                         <?php echo category() ?>
                     </select>
+                </div>
+                <?php } ?>
+
+                <?php if (get_is_service_provider($ID) == 1) { ?>
+                <div class="form-group">
+                    <label for="About">About</label>
+                    <textarea class="form-control" id="About" name="About"><?php echo $about ?></textarea>
                 </div>
                 <?php } ?>
 

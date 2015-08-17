@@ -40,6 +40,13 @@ else { ?>
 
 <ul class="list-inline profileMenu">
     <li><a href="/profile_public.php/<?php echo $username ?>">Profile</a></li>
-    <li><a href="/member_media_public.php/<?php echo $username ?>">Video Book</a></li>
+<!--    <li><a href="/member_media_public.php/--><?php //echo $username ?><!--">Video Book</a></li>-->
+
+    <?php
+        $profileID = get_id_from_username($username);
+        if (get_is_service_provider($profileID) == 0) {
+    ?>
     <li><a href="/manage_post_public.php/<?php echo $username ?>"><?php echo $firstName ?>'s Service Requests</a></li>
+    <?php } ?>
+
 </ul>
