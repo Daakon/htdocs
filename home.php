@@ -229,7 +229,7 @@ if (isset($_POST['submit'])) {
                                           ('$post',   '$category',   '$ID',      CURDATE())";
                 mysql_query($sql) or die(mysql_error());
             }
-            alert_all_matching_service_providers($category);
+            alert_all_matching_service_providers($category, getMemberState($ID));
         }
 
     }

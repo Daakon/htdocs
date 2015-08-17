@@ -151,6 +151,39 @@ function check_service_is_provided($ID) {
     return $rows['Service'];
 }
 
+function getGender($ID) {
+    // return member gender
+    $sql = "SELECT Gender FROM Members WHERE ID = $ID ";
+    $result = mysql_query($sql) or die(mysql_error());
+    $row = mysql_fetch_assoc($result);
+    $gender = $row['Gender'];
+    return $gender;
+}
+
+
+
+function getAge($ID) {
+    // returns member age
+    $sql = "SELECT DOB FROM Members WHERE ID = $ID ";
+    $result = mysql_query($sql) or die(mysql_error());
+    $row = mysql_fetch_assoc($result);
+    $birthDate = $row['DOB'];
+
+    $age = date_diff(date_create($birthDate), date_create('today'))->y;
+    $format = 'Y-m-j G:i:s';
+    $date = date($format);
+    return $age;
+}
+
+function getMemberState($ID) {
+    // returns member state
+    $sql = "SELECT State FROM Profile WHERE ID = $ID ";
+    $result = mysql_query($sql) or die(mysql_error());
+    $row = mysql_fetch_assoc($result);
+    $state = $row['State'];
+    return $state;
+}
+
 function check_phone($ID) {
     $sql = "SELECT Phone FROM Profile WHERE Member_ID = $ID ";
     $result = mysql_query($sql) or die(mysql_error());
@@ -199,7 +232,7 @@ function text_notification($receiverID, $senderID)
         }
 }
 
-function alert_all_matching_service_providers($service)
+function alert_all_matching_service_providers($service, $state)
 {
     require 'class-Clockwork.php';
     $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
@@ -210,7 +243,7 @@ function alert_all_matching_service_providers($service)
         while ($rows = mysql_fetch_assoc($result)) {
             $serviceID = $rows['ID'];
             // send all of the service providers with a phone an SMS
-            $serviceResults = mysql_query("SELECT Phone FROM Profile WHERE Member_ID = $serviceID");
+            $serviceResults = mysql_query("SELECT Phone FROM Profile WHERE Member_ID = $serviceID And State = '$state'");
 
             if (mysql_num_rows($serviceResults) > 0) {
                 while ($serviceRows = mysql_fetch_assoc($serviceResults)) {

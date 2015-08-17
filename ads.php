@@ -13,36 +13,7 @@ function getInterests($ID) {
     return $interests;
 }
 
-function getGender($ID) {
-    // return member gender
-    $sql = "SELECT Gender FROM Members WHERE ID = $ID ";
-    $result = mysql_query($sql) or die(mysql_error());
-    $row = mysql_fetch_assoc($result);
-    $gender = $row['Gender'];
-    return $gender;
-}
 
-function getMemberState($ID) {
-    // returns member state
-    $sql = "SELECT State FROM Profile WHERE ID = $ID ";
-    $result = mysql_query($sql) or die(mysql_error());
-    $row = mysql_fetch_assoc($result);
-    $state = $row['State'];
-    return $state;
-}
-
-function getAge($ID) {
-    // returns member age
-    $sql = "SELECT DOB FROM Members WHERE ID = $ID ";
-    $result = mysql_query($sql) or die(mysql_error());
-    $row = mysql_fetch_assoc($result);
-    $birthDate = $row['DOB'];
-
-    $age = date_diff(date_create($birthDate), date_create('today'))->y;
-    $format = 'Y-m-j G:i:s';
-    $date = date($format);
-    return $age;
-}
 
 function getAds($category, $age, $state, $interests, $gender) {
     $interests = preg_split('/((^\p{P}+)|(\p{P}*\s+\p{P}*)|(\p{P}+$))/', $interests, -1, PREG_SPLIT_NO_EMPTY);
