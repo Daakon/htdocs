@@ -663,7 +663,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
                 <form method="post" enctype="multipart/form-data" action="" onsubmit="showUploading()">
                     <img src="/images/image-icon.png" height="30px" width="30px" alt="Photos/Video"/>
-                    <strong>Attach A Photo or Video To Your Post</strong>
+                    <strong>Attach A Photo or Video To Your Service Request</strong>
                     <input type="file" width="10px;" name="flPostMedia" id="flPostMedia"/>
                     <br/>
                 <textarea name="post" id="post" class="form-control textArea"
