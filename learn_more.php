@@ -58,6 +58,8 @@ get_header()
                     a profile video along with about us text to better explain what your service does.
                 </p>
 
+            <h4><span style="font-weight:bold;">Our Service is 100% <font color="red">FREE!</font></span></h4>
+
     </div>
 </div>
 
