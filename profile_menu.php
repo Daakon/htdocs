@@ -6,7 +6,7 @@ $gender = $_GET['gender'];
 $state = $_GET['state'];
 ?>
 
-<ul class="list-inline demoText profileMenu">
+<ul class="list-inline profileMenu">
     <li><a href="/home.php">Service Requests</a></li>
     <li><a href="/profile.php/<?php echo get_username($ID) ?>">Profile</a></li>
     <li><a href="/member_media.php">Video Book</a></li>
