@@ -1,17 +1,22 @@
 <?php
 function category()
 {
-    echo '<option value = "Business">Business</option>';
-    echo '<option value = "Automotive">Automotive</option>';
-    echo '<option value = "Beauty">Beauty</option>';
+
+    echo '<option value = "Automotive-Repair">Automotive-Repair</option>';
+    echo '<option value = "Automotive-Sales">Automotive-Sales</option>';
+    echo '<option value = "Automotive-Detail">Automotive-Detail</option>';
+    echo '<option value = "Barber">Barber</option>';
+    echo '<option value = "Cosmetology">Cosmetology</option>';
     echo '<option value = "Creative">Creative</option>';
     echo '<option value = "Computer">Computer</option>';
     echo '<option value = "Financial">Financial</option>';
     echo '<option value = "Fitness">Fitness</option>';
+    echo '<option value = "Insurance">Insurance</option>';
     echo '<option value = "Household">Household</option>';
     echo '<option value = "Labor">Labor</option>';
     echo '<option value = "Legal">Legal</option>';
     echo '<option value = "Lessons">Lessons</option>';
+    echo '<option value = "Marketing">Marketing</option>';
     echo '<option value = "Therapeutic">Therapeutic</option>';
     echo '<option value = "Photography">Photography</option>';
     echo '<option value = "Real Estate">Real Estate</option>';
