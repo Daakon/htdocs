@@ -50,7 +50,7 @@ get_header()
 
                 <span style="color:red;font-weight:bold">Service Seeker Features Recapped:</span>
             <ul>
-                <li style="display:block;font-weight: bold">&bull; SMS Notification For Service Provider Responses</li>
+                <li style="display:block;font-weight: bold">&bull; SMS & Email Notification For Service Provider Responses</li>
                 <li style="display:block;font-weight: bold">&bull; Photo & Video Attachments in service request posts</li>
                 <li style="display:block;font-weight: bold">&bull; Photo & Video Attachments in direct messages</li>
             </ul>
@@ -66,7 +66,7 @@ get_header()
 
             <span style="color:red;font-weight:bold">Service Provider Features Recapped:</span>
             <ul>
-                <li style="display:block;font-weight: bold" >&bull; SMS Notification when service posts are made related to your primary service</li>
+                <li style="display:block;font-weight: bold" >&bull; SMS & Email Notification when service posts are made related to your primary service</li>
                 <li style="display:block;font-weight: bold">&bull; Photo & Video Attachments in direct messages</li>
                 <li style="display:block;font-weight: bold">&bull; Ability to search other service request categories if you offer multiple services</li>
             </ul>
