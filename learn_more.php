@@ -22,7 +22,7 @@ get_header()
             <a href="/home.php">Back to Roll Call</a>
             <?php } ?>
 
-            <h4>Rapportbook helps people find the servies they need.</h4>
+            <h4>Rapportbook connects people to services.</h4>
 
 
 
@@ -48,6 +48,12 @@ get_header()
                     providers once they start a conversation with you. You can delete any of these requests at any time.
                 </p>
 
+                <span style="color:red;font-weight:bold">Service Seeker Features Recapped:</span>
+            <ul>
+                <li style="display:block;font-weight: bold">&bull; SMS Notification For Service Provider Responses</li>
+                <li style="display:block;font-weight: bold">&bull; Photo & Video Attachments in service request posts</li>
+                <li style="display:block;font-weight: bold">&bull; Photo & Video Attachments in direct messages</li>
+            </ul>
                 <p>
                     <b>Service Providers</b>
                     When you sign up, you select "I am providing a service".
@@ -57,6 +63,14 @@ get_header()
                     You can then respond to the request. Service providers can also post
                     a profile video along with about us text to better explain what your service does.
                 </p>
+
+            <span style="color:red;font-weight:bold">Service Provider Features Recapped:</span>
+            <ul>
+                <li style="display:block;font-weight: bold" >&bull; SMS Notification when service posts are made related to your primary service</li>
+                <li style="display:block;font-weight: bold">&bull; Photo & Video Attachments in direct messages</li>
+                <li style="display:block;font-weight: bold">&bull; Ability to search other service request categories if you offer multiple services</li>
+            </ul>
+
 
             <h4><span style="font-weight:bold;">Our Service is 100% <font color="red">FREE!</font></span></h4>
 

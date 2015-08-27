@@ -177,7 +177,7 @@ function getAge($ID) {
 
 function getMemberState($ID) {
     // returns member state
-    $sql = "SELECT State FROM Profile WHERE ID = $ID ";
+    $sql = "SELECT State FROM Profile WHERE Member_ID = $ID ";
     $result = mysql_query($sql) or die(mysql_error());
     $row = mysql_fetch_assoc($result);
     $state = $row['State'];
@@ -193,11 +193,29 @@ function get_id_from_username($username) {
     return $id;
 }
 
+function get_service($ID) {
+    // returns business category
+    $sql = "SELECT Service FROM Members WHERE ID = $ID ";
+    $result = mysql_query($sql) or die(mysql_error());
+    $row = mysql_fetch_assoc($result);
+    $service = $row['Service'];
+    return $service;
+}
+
 function check_phone($ID) {
     $sql = "SELECT Phone FROM Profile WHERE Member_ID = $ID ";
     $result = mysql_query($sql) or die(mysql_error());
     $rows = mysql_fetch_assoc($result);
     return $rows['Phone'];
+}
+
+function check_email($email) {
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
+        return true;
+    }
+    else {
+        return false;
+    }
 }
 
 // text function to all service providers for related service post

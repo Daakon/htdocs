@@ -159,7 +159,7 @@ get_head_files();
         <div class="col-lg-6 col-md-5 hidden-sm hidden-xs">
             <image src="/images/services.jpg" style="border:2px solid black" class="center-block" ><br>
             </image>
-            <h2 align="center"><span style="font-style: italic;color:red;font-weight: 400">Find The Service You Need.</span></h2>
+            <h3 align="center"><span style="font-style: italic;color:red;font-weight: bold">Connecting People To Services</span></h3>
         </div>
 
         <div class="col-lg-6 col-md-7 col-sm-12 col-xs-12 ">
@@ -366,8 +366,8 @@ get_head_files();
                     <div class="col-md-6">
                         <label class="sr-only" for="phone">Phone</label>
                         <input class="form-control input-lg" type="text" name="phone" id="phone"
-                               placeholder="2125551212"/>
-                        <small>Your phone number will only be used for text notifications when you receive a service match.</small>
+                               placeholder="2125551212 (Mobile)"/>
+                        <small>Your mobile phone number will only be used for text notifications when you receive a service match.</small>
                     </div>
                     <div class="col-md-6">
                         <div class="error-text"></div>

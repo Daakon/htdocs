@@ -1,7 +1,8 @@
 <?php
 // pre-load Roll Call
 // get genre selection
-$genre = $_GET['genre'];
+
+
 if (!empty($genre) && $genre != "Show-All") {
     $genreCondition = "And Posts.Category = '$genre' ";
 }
@@ -9,7 +10,7 @@ else if($genre = "Show-All") {
     $genre = '';
     $genreCondition = "And Posts.Category > '' ";
 }
-else { $genreCondition = "And Posts.Category > '' "; }
+else { $genreCondition = "And Posts.Category = '$genre' "; }
 
 if (!empty($searchState)) {
     $stateCondition = "AND (Profile.State = '$searchState')";

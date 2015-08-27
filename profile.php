@@ -188,6 +188,7 @@ if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
     $state = $_POST['State'];
     $zip = $_POST['Zip'];
     $phone = $_POST['Phone'];
+    $email = $_POST['Email'];
     $about = $_POST['About'];
     $service = $_POST['service'];
     $dob = $_POST['DOB'];
@@ -198,12 +199,20 @@ if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
     if (check_password($ID, $password)==false) {
         $password = md5($password);
     }
+
+    // check email
+    if (check_email($email) == false) {
+        echo "<script>alert('Invalid Email');location='profile.php/$username'</script>";
+        exit();
+    }
+
     // update Member table first
     $sql = "Update Members
           Set
           FirstName = '$firstName',
           LastName = '$lastName',
           DOB = '$dob',
+          Email = '$email',
           EmailActive = '$emailStatus ',
           Service = '$service',
           Password = '$password'
