@@ -36,7 +36,7 @@ $ID = $_SESSION['ID'];
         </div>
 
         <h5>
-            Please direct all questions & concerns to: <a href="mailto:info@rapportbook.com">info@rapportbook.com</a>
+            Please direct all questions & concerns to: <a href="mailto:info@rapportbook.com" style="color:red">info@rapportbook.com</a>
         </h5>
 
     </div>

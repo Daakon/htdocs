@@ -263,12 +263,13 @@ function alert_all_matching_service_providers($service, $state)
 {
     require 'class-Clockwork.php';
     $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-    $result = mysql_query("SELECT ID FROM Members WHERE Service = '$service'");
+    $result = mysql_query("SELECT ID, Service FROM Members WHERE Service = '$service'");
 
     if (mysql_num_rows($result) > 0) {
         // stuff all of the service providers into an array
         while ($rows = mysql_fetch_assoc($result)) {
             $serviceID = $rows['ID'];
+
             // send all of the service providers with a phone an SMS
             $serviceResults = mysql_query("SELECT Phone FROM Profile WHERE Member_ID = $serviceID And State = '$state'");
 
@@ -285,9 +286,9 @@ function alert_all_matching_service_providers($service, $state)
                         $clockwork = new Clockwork($API_KEY);
                         $domain;
                         if (strstr($url, "dev")) {
-                            $domain = "http://dev.rapportbook.com/messages.php";
+                            $domain = "http://dev.rapportbook.com/home.php";
                         } else {
-                            $domain = "http://rapportbook.com/messages.php";
+                            $domain = "http://rapportbook.com/home.php";
                         }
                         // Setup and send a message
                         $text = "There is a new post that matches your service on Rapportbook. $domain";
@@ -305,6 +306,10 @@ function alert_all_matching_service_providers($service, $state)
                         echo 'Exception sending SMS: ' . $e->getMessage();
                     }
                 }
+            }
+            // send out an email after text
+            if (checkEmailActive($serviceID)) {
+                build_and_send_email(0, $serviceID, 11, null, $service);
             }
         }
     }

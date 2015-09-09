@@ -7,7 +7,7 @@ require 'mediaPath.php';
 require 'findURL.php';
 require 'model_functions.php';
 require 'category.php';
-require 'ads.php';
+//require 'ads.php';
 get_head_files();
 get_header();
 require 'memory_settings.php';
@@ -126,12 +126,12 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
     <?php
     // ad demographics
-    $age = getAge($ID);
+    /*$age = getAge($ID);
     $state =  getMemberState($ID);
     $interests = getInterests($ID);
     $interests = strtolower($interests);
     $gender = getGender($ID);
-    $ads = getAds($genre, $age, $state, $interests, $gender);
+    $ads = getAds($genre, $age, $state, $interests, $gender);*/
     $sql = "SELECT DISTINCT
     Members.ID As MemberID,
     Members.FirstName As FirstName,
@@ -149,8 +149,6 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
     And Members.ID = Posts.Member_ID
     And Members.ID = Profile.Member_ID
     And Posts.IsDeleted = 0
-    UNION
-    $ads
     Group By PostID
     Order By PostID DESC ";
 
@@ -170,14 +168,14 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
         <div class="col-lg-9 col-md-9 roll-call" >
 
-            <img src="/poster/<?php echo $profilePhoto ?>" class="profilePhoto-Feed" alt=""
+            <img src="<?php echo $mediaPath.$profilePhoto ?>" class="profilePhoto-Feed" alt=""
                  title="<?php echo $name ?>" class='enlarge-onhover img-responsive'/> &nbsp <b><font
                     size="4"><?php echo $name ?></font></b>
 
             <div class="post"><?php echo nl2br($post); ?></div>
 
             <br/>
-            <a href='/post-interest.php?interest=<?php echo urlencode($category) ?>' class='category'><h5><?php echo $category ." ". interestGlyphs($category) ?></h5></a>
+            <a href='/post-interest.php?interest=<?php echo urlencode($category) ?>' class='category'><h5><?php echo $category ?></h5></a>
 
             <br/><br/>
 

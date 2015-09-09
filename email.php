@@ -252,6 +252,25 @@ function build_and_send_email($senderId, $toId, $notification, $postID)
                 Pictures are EVERYTHING so login and upload your profile photo today.";
     }
 
+    if ($notification == 11) {
+
+        $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+        $link;
+
+        if (strstr($url, "local")) {
+            $link = "home.php";
+        }
+        else if (strstr($url, "dev")) {
+            $link = "http://dev.rapportbook.com/home.php?genre=$service";
+        }
+        else {
+            $link = "http://www.rapportbook.com/home.php?genre=$service";
+        }
+
+        // a post status update related to your service has been posted
+        $subject = "There is a new post related to your service. <a href='".$link."'>Login</a> to see the request";
+    }
+
     // if we have a notification, then send the email.
 
     if (strlen($notification) > 0) {
