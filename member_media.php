@@ -110,10 +110,15 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
 </script>
 
 <div class="container">
-    <?php require 'profile_menu.php'; ?>
-    <br/><br/>
 
     <div class="row row-padding" >
+
+        <div class="col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8 ">
+            <ul class="list-inline">
+
+                <?php require 'profile_menu.php'; ?>
+            </ul>
+        </div>
 
         <div class="col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8 roll-call" style="background-image: url(/images/book.png);background-repeat:repeat-y;margin-right:5px;background-size:100% auto">
             <h2>Video Book</h2>

@@ -21,10 +21,12 @@ $ID = $_SESSION['ID'];
 <div class="container" >
     <div class="row row-padding">
 
+        <div class="col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8 ">
         <ul class="list-inline">
 
             <?php require 'profile_menu.php'; ?>
         </ul>
+            </div>
         <br/><br/>
 
         <div class="col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8 roll-call ">

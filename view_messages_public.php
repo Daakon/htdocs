@@ -255,7 +255,12 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
 <div class="container" >
     <div class="row row-padding">
 
-        <?php require 'profile_menu_public.php'; ?>
+        <div class="col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8 ">
+            <ul class="list-inline">
+
+                <?php require 'profile_menu_public.php'; ?>
+            </ul>
+        </div>
 
         <br/><br/>
 

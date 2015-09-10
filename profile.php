@@ -334,11 +334,16 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
 
     <div class="row row-padding">
 
-        <?php require 'profile_menu.php'; ?>
+        <div class="col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8 ">
+            <ul class="list-inline">
+
+                <?php require 'profile_menu.php'; ?>
+            </ul>
+        </div>
 
         <br/>
 
-        <div class="col-md-7  col-lg-7 col-md-offset-2 col-lg-offset-2 roll-call ">
+        <div class="col-md-8  col-lg-8 col-md-offset-2 col-lg-offset-2 roll-call ">
 
             <?php
             $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
