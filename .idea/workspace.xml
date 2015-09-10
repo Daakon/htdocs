@@ -5,14 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="51867226-c8dd-43fb-9a46-7c8a9e9ab742" name="Default" comment="Added media page.&#10;&#10;">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/marketing_manager.php" afterPath="$PROJECT_DIR$/marketing_manager.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/member_media.php" afterPath="$PROJECT_DIR$/member_media.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/messages.php" afterPath="$PROJECT_DIR$/messages.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/profile.php" afterPath="$PROJECT_DIR$/profile.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/profile_public.php" afterPath="$PROJECT_DIR$/profile_public.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/view_messages.php" afterPath="$PROJECT_DIR$/view_messages.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/view_messages_public.php" afterPath="$PROJECT_DIR$/view_messages_public.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/js/addtohomescreen.js" afterPath="$PROJECT_DIR$/resources/js/addtohomescreen.js" />
     </list>
     <ignored path="htdocs.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -89,7 +82,6 @@
         <option value="$PROJECT_DIR$/support.php" />
         <option value="$PROJECT_DIR$/email.php" />
         <option value="$PROJECT_DIR$/model_functions.php" />
-        <option value="$PROJECT_DIR$/resources/js/addtohomescreen.js" />
         <option value="$PROJECT_DIR$/manage_post.php" />
         <option value="$PROJECT_DIR$/messages.php" />
         <option value="$PROJECT_DIR$/profile.php" />
@@ -98,6 +90,7 @@
         <option value="$PROJECT_DIR$/view_messages_public.php" />
         <option value="$PROJECT_DIR$/view_messages.php" />
         <option value="$PROJECT_DIR$/marketing_manager.php" />
+        <option value="$PROJECT_DIR$/resources/js/addtohomescreen.js" />
       </list>
     </option>
   </component>
@@ -156,7 +149,7 @@
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="full.screen.before.presentation.mode" value="false" />
     <property name="FullScreen" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/marketing_manager.php" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/html_functions.php" />
     <property name="LayoutCode.rearrangeEntriesPHP" value="false" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="191" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
@@ -348,14 +341,14 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.336478" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3956044" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33893558" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.46935484" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24546553" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.46935484" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -660,14 +653,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/html_functions.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.409894">
-          <caret line="171" column="0" selection-start-line="171" selection-start-column="0" selection-end-line="171" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/login.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-12.928572">
@@ -741,16 +726,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.06713781">
-          <caret line="352" column="0" selection-start-line="352" selection-start-column="0" selection-end-line="353" selection-end-column="0" />
-          <folding>
-            <element signature="e#5729#5783#0#HTML" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/terms.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.13427562">
@@ -801,14 +776,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.13427562">
           <caret line="4" column="70" selection-start-line="4" selection-start-column="70" selection-end-line="4" selection-end-column="70" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/js/addtohomescreen.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5707071">
-          <caret line="150" column="22" selection-start-line="150" selection-start-column="22" selection-end-line="150" selection-end-column="22" />
         </state>
       </provider>
     </entry>
@@ -816,15 +783,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-4.535714">
           <caret line="120" column="8" selection-start-line="120" selection-start-column="8" selection-end-line="120" selection-end-column="76" />
-          <folding>
-            <marker date="1441824715000" expanded="true" signature="-1:-1" placeholder="Update Posts..." />
-            <marker date="1441824715000" expanded="true" signature="-1:-1" placeholder="Update PostC..." />
-            <marker date="1441824715000" expanded="true" signature="-1:-1" placeholder="SELECT DISTI..Members..." />
-            <marker date="1441824715000" expanded="true" signature="-1:-1" placeholder="SELECT ID FR..PostApprovals..." />
-            <marker date="1441824715000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..PostApprovals..." />
-            <marker date="1441824715000" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1441824715000" expanded="true" signature="-1:-1" placeholder="..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -832,12 +791,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-6.107143">
           <caret line="28" column="18" selection-start-line="23" selection-start-column="7" selection-end-line="28" selection-end-column="18" />
-          <folding>
-            <marker date="1441918278000" expanded="true" signature="-1:-1" placeholder="SELECT DISTI..Messages..." />
-            <marker date="1441918278000" expanded="true" signature="-1:-1" placeholder="SELECT First..Members..." />
-            <marker date="1441918278000" expanded="true" signature="-1:-1" placeholder="SELECT New F..Messages..." />
-            <marker date="1441918278000" expanded="true" signature="-1:-1" placeholder="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -845,21 +798,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.8233216">
           <caret line="270" column="8" selection-start-line="270" selection-start-column="8" selection-end-line="270" selection-end-column="8" />
-          <folding>
-            <marker date="1441919142000" expanded="true" signature="-1:-1" placeholder="SELECT ID FR..Members..." />
-            <marker date="1441919142000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..Messages..." />
-            <marker date="1441919142000" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
-            <marker date="1441919142000" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
-            <marker date="1441919142000" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
-            <marker date="1441919142000" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
-            <marker date="1441919142000" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
-            <marker date="1441919142000" expanded="true" signature="-1:-1" placeholder="SELECT Usern..Members..." />
-            <marker date="1441919142000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..Messages..." />
-            <marker date="1441919142000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..Messages..." />
-            <marker date="1441919142000" expanded="true" signature="-1:-1" placeholder="SELECT First..Members..." />
-            <marker date="1441919142000" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1441919142000" expanded="true" signature="-1:-1" placeholder="UPDATE Messa..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -867,19 +805,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.28268552">
           <caret line="262" column="14" selection-start-line="262" selection-start-column="14" selection-end-line="262" selection-end-column="14" />
-          <folding>
-            <marker date="1441918961000" expanded="true" signature="-1:-1" placeholder="SELECT ID FR..Members..." />
-            <marker date="1441918961000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..Messages..." />
-            <marker date="1441918961000" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
-            <marker date="1441918961000" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
-            <marker date="1441918961000" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
-            <marker date="1441918961000" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
-            <marker date="1441918961000" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
-            <marker date="1441918961000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..Messages..." />
-            <marker date="1441918961000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..Messages..." />
-            <marker date="1441918961000" expanded="true" signature="-1:-1" placeholder="SELECT First..Members..." />
-            <marker date="1441918961000" expanded="true" signature="-1:-1" placeholder="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -887,12 +812,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.4187279">
           <caret line="73" column="14" selection-start-line="68" selection-start-column="8" selection-end-line="73" selection-end-column="14" />
-          <folding>
-            <marker date="1441918815000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..Members..." />
-            <marker date="1441918815000" expanded="true" signature="-1:-1" placeholder="SELECT Poste..Profile..." />
-            <marker date="1441918815000" expanded="true" signature="-1:-1" placeholder="SELECT Membe..Members..." />
-            <marker date="1441918815000" expanded="true" signature="-1:-1" placeholder="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -900,11 +819,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.50530034">
           <caret line="120" column="14" selection-start-line="115" selection-start-column="8" selection-end-line="120" selection-end-column="14" />
-          <folding>
-            <marker date="1441918815000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..Members..." />
-            <marker date="1441918815000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..Media..." />
-            <marker date="1441918815000" expanded="true" signature="-1:-1" placeholder="..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -912,9 +827,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.93286216">
           <caret line="31" column="10" selection-start-line="31" selection-start-column="10" selection-end-line="31" selection-end-column="10" />
-          <folding>
-            <marker date="1441919142000" expanded="true" signature="-1:-1" placeholder="SELECT Count..Members..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -922,16 +834,31 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5">
           <caret line="345" column="28" selection-start-line="345" selection-start-column="28" selection-end-line="345" selection-end-column="28" />
-          <folding>
-            <marker date="1441918521000" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
-            <marker date="1441918521000" expanded="true" signature="-1:-1" placeholder="UPDATE Profi..." />
-            <marker date="1441918521000" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
-            <marker date="1441918521000" expanded="true" signature="-1:-1" placeholder="UPDATE Profi..." />
-            <marker date="1441918521000" expanded="true" signature="-1:-1" placeholder="Update Membe..." />
-            <marker date="1441918521000" expanded="true" signature="-1:-1" placeholder="Update Profi..." />
-            <marker date="1441918521000" expanded="true" signature="-1:-1" placeholder="SELECT Usern..Members..." />
-            <marker date="1441918521000" expanded="true" signature="-1:-1" placeholder="SELECT DISTI..Members..." />
-          </folding>
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/js/addtohomescreen.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.42592594">
+          <caret line="149" column="21" selection-start-line="149" selection-start-column="21" selection-end-line="149" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="8.416822">
+          <caret line="237" column="68" selection-start-line="237" selection-start-column="65" selection-end-line="237" selection-end-column="68" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/html_functions.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="5.713781">
+          <caret line="171" column="0" selection-start-line="171" selection-start-column="0" selection-end-line="171" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
