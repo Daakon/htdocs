@@ -143,7 +143,7 @@ ath.defaults = {
 	logging: false,				// log reasons for showing or not showing to js console; defaults to true when debug is true
 	modal: false,				// prevent further actions until the message is closed
 	mandatory: false,			// you can't proceed if you don't add the app to the homescreen
-	autostart: true,			// show the message automatically
+	autostart: false,			// show the message automatically
 	skipFirstVisit: false,		// show only to returning visitors (ie: skip the first time you visit)
 	startDelay: 1,				// display the message after that many seconds from page load
 	lifespan: 15,				// life of the message in seconds

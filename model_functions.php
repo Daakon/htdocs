@@ -64,11 +64,11 @@ function get_users_name_by_id($user_id)
 function get_users_photo_by_id($user_id)
 {
 
-    $sql = "SELECT DISTINCT Poster FROM Profile WHERE Member_ID = $user_id Order By Member_ID ";
+    $sql = "SELECT DISTINCT ProfilePhoto FROM Profile WHERE Member_ID = $user_id Order By Member_ID ";
     $result = mysql_query($sql) or die(mysql_error());
     $rows = mysql_fetch_assoc($result);
 
-    $photo = $rows['Poster'];
+    $photo = $rows['ProfilePhoto'];
 
     $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
     $fullMediaPath = "";
@@ -76,9 +76,9 @@ function get_users_photo_by_id($user_id)
     if (strstr($url, "localhost")) {
         $fullMediaPath = "/poster/$photo";
     } elseif (strstr($url, "dev")) {
-        $fullMediaPath = "http://dev.rapportbook.com/poster/$photo";
+        $fullMediaPath = "http://dev.rapportbook.com/media/$photo";
     } else {
-        $fullMediaPath = "http://rapportbook.com/poster/$photo";
+        $fullMediaPath = "http://rapportbook.com/media/$photo";
     }
     return $fullMediaPath;
 }
