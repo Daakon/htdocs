@@ -21,7 +21,7 @@ $sql = " SELECT DISTINCT
     And (Members.IsSuspended = 0)
     And (Members.ID = Reviews.Member_ID)
     And (Members.ID = Profile.Member_ID)
-    AND (Reviews.Provider_ID = 1)
+    AND (Reviews.Provider_ID = $providerID)
     And (Reviews.IsDeleted = 0)
     Group By ReviewID
     Order By ReviewID DESC LIMIT 1 ";

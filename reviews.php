@@ -239,7 +239,7 @@ $sql = "INSERT INTO Reviews (Review,    Member_ID,    Provider_ID,   ReviewDate)
                           ('$post',   '$ID',        '$providerID',         CURDATE())";
 mysql_query($sql) or die(mysql_error());
 }
-alert_all_matching_service_providers($category, getMemberState($ID));
+//alert_all_matching_service_providers($category, getMemberState($ID));
 }
 
 }
@@ -297,7 +297,12 @@ echo "<script>location='/reviews.php/$username'</script>";
         <br/>
 
         <div style="clear:both">
-            <h4>Reviews</h4>
+            <?php
+            $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+            preg_match("/[^\/]+$/",$url ,$match);
+            $username = $match[0];
+            ?>
+            <h4>Reviews For <?php echo $username ?></h4>
         </div>
 
         <?php
