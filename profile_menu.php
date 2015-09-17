@@ -11,7 +11,6 @@ $state = $_GET['state'];
     <li><a href="/profile.php/<?php echo get_username($ID) ?>">Profile</a></li>
     <li><a href="/member_media.php">Video Book</a></li>
     <li><a href="/messages.php">Messaging <?php require 'getNewMessageCount.php' ?></a></li>
-    <li><a href="/reviews.php/<?php echo get_username($ID) ?>">Reviews</a></li>
     <li><a href="/manage_post.php">Manage Service Requests</a></li>
 
     <?php
