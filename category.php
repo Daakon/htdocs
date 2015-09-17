@@ -13,12 +13,14 @@ function category()
     echo '<option value = "Fitness">Fitness</option>';
     echo '<option value = "Insurance">Insurance</option>';
     echo '<option value = "Moving">Moving</option>';
+    echo '<option value = "Music">Music</option>';
     echo '<option value = "Legal">Legal</option>';
     echo '<option value = "Lessons">Lessons</option>';
     echo '<option value = "Marketing">Marketing</option>';
     echo '<option value = "Therapeutic">Therapeutic</option>';
     echo '<option value = "Photography">Photography</option>';
     echo '<option value = "Real Estate">Real Estate</option>';
+    echo '<option value = "Softwre">Software</option>';
 }
 
 function age() {

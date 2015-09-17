@@ -30,7 +30,7 @@ $sqlRollCall = " SELECT DISTINCT
     Members.ID As MemberID,
     Members.FirstName As FirstName,
     Members.LastName As LastName,
-    Members.IsServiceProvider As ServiceProvider,
+    Members.IsServiceProvider As IsServiceProvider,
     Posts.ID As PostID,
     Posts.Category As Category,
     Profile.ProfilePhoto As ProfilePhoto
