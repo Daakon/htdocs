@@ -22,55 +22,25 @@ get_header()
             <a href="/home.php">Back to Roll Call</a>
             <?php } ?>
 
-            <h4>Rapportbook connects people to services.</h4>
-
-
+            <h4>Rapportbook connects people with similar interests.</h4>
 
                 <img src="<?php echo $imagesPath ?>services.jpg" />
 
 
                 <p>
-                    <b>Service Seekers</b>
-                    When you sign up, you select "I am looking for a service".
-                    Once you sign up, you simply post what you are looking for from
-                    the drop down along with text that describes what you are looking for.
-                    You can also add a photo or video to better describe your problem if it helps.
-
-                    <br/>
-                    Once you hit post, a notification via email and SMS text will got out to all service providers
-                    who focus on the service you need. The service providers will then come back
-                    to Rapportbook and return your message. From there, you and the service provider
-                    will be able to discuss the problem at hand. You can choose to talk to as many
-                    services providers as possible before making your decision on who you will work with.
-
-                    <br/>
-                    All of your service requests will be stored in your profile and be viewable by service
-                    providers once they start a conversation with you. You can delete any of these requests at any time.
+                    Rapportbook is a platform that allows people to
+                    network, share, meet up and grow together based off similar interests.
+                    You don't have to necessarily meet up; You can simply share information,
+                    tips, pointers, resources, etc. Conversation starts off simple between two people
+                    and grows from there. It's simple, it's easy, it's fun. Share your interests through
+                    public posts, comments, photos, videos and private direct messages.
                 </p>
-
-                <span style="color:red;font-weight:bold">Service Seeker Features Recapped:</span>
-            <ul>
-                <li style="display:block;font-weight: bold">&bull; SMS & Email Notification for Service Provider Responses</li>
-                <li style="display:block;font-weight: bold">&bull; Photo & Video Attachments in Service Request Posts</li>
-                <li style="display:block;font-weight: bold">&bull; Photo & Video Attachments in Direct Messages</li>
-            </ul>
-                <p>
-                    <b>Service Providers</b>
-                    When you sign up, you select "I am providing a service".
-                    Once you sign up, you can scroll through all service requests,
-                    even the ones you don't specialize in. But you will receive notifications
-                    whenever their is a post related to your primary focus.
-                    You can then respond to the request. Service providers can also post
-                    a profile video along with about us text to better explain what your service does.
-                </p>
-
-            <span style="color:red;font-weight:bold">Service Provider Features Recapped:</span>
-            <ul>
+            <!--<ul>
                 <li style="display:block;font-weight: bold" >&bull; SMS & Email Notification when Service Posts are made related to your primary service</li>
                 <li style="display:block;font-weight: bold">&bull; Photo & Video Attachments in Direct Messages</li>
                 <li style="display:block;font-weight: bold">&bull; Ability to search other Service Request Categories if you offer multiple services</li>
                 <li style="display:block;font-weight: bold">&bull; Profile Photo and Video uploads to Market Your Service</li>
-            </ul>
+            </ul>-->
 
 
             <h4><span style="font-weight:bold;">Our Service is 100% <font color="red">FREE!</font></span></h4>

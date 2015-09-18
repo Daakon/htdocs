@@ -70,7 +70,7 @@ WHERE Members.ID = '$memberID'
 And Profile.Member_ID = '$memberID' ";
 $result = mysql_query($sql) or die(mysql_error());
 $pRows = mysql_fetch_assoc($result);
-$profilePhoto = $pRows['Poster'];
+$profilePhoto = $pRows['ProfilePhoto'];
 $name = $pRows['FirstName'] . ' ' . $pRows['LastName'];
 
 ?>

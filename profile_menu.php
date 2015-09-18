@@ -9,7 +9,7 @@ $state = $_GET['state'];
 <ul class="list-inline profileMenu">
     <li><a href="/home.php">Home</a></li>
     <li><a href="/profile.php/<?php echo get_username($ID) ?>">Profile</a></li>
-    <li><a href="/member_media.php">Media</a></li>
+    <li><a href="/member_media.php/<?php echo get_username($ID) ?>">Media</a></li>
     <li><a href="/messages.php">Messaging <?php require 'getNewMessageCount.php' ?></a></li>
     <li><a href="/manage_post.php">Manage Posts</a></li>
 

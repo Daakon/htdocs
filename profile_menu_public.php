@@ -40,7 +40,7 @@ else { ?>
 
 <ul class="list-inline profileMenu">
     <li><a href="/profile_public.php/<?php echo $username ?>">Profile</a></li>
-    <li><a href="/member_media_public.php/--><?php //echo $username ?><!--">Media</a></li>
+    <li><a href="/member_media_public.php/<?php echo $username ?>">Media</a></li>
     <li><a href="/manage_post_public.php/<?php echo $username ?>"><?php echo $firstName ?>'s Posts</a></li>
 
 </ul>

@@ -14,9 +14,14 @@ $ID = $_SESSION['ID'];
 
 
     <?php
+    $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+    preg_match("/[^\/]+$/",$url ,$match);
+    $username = $match[0];
+
+    $profileID = get_id_from_username($username);
     $sql = "SELECT * FROM Members
 WHERE
-Members.ID = '$ID'
+Members.ID = '$profileID'
 And Members.IsActive = 1 ";
 
     $result = mysql_query($sql) or die(mysql_error());
@@ -125,7 +130,7 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
 
             <?php
 
-            $sql = "SELECT * FROM Media WHERE Member_ID = '$ID' And (IsDeleted IS NULL Or IsDeleted = 0)
+            $sql = "SELECT * FROM Media WHERE Member_ID = '$profileID' And (IsDeleted IS NULL Or IsDeleted = 0)
             Order By ID DESC ";
 
             $result = mysql_query($sql) or die(mysql_error());
@@ -143,49 +148,60 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
                 $videoFileTypes = array("video/mpeg", "video/mpg", "video/ogg", "video/mp4",
                     "video/quicktime", "video/webm", "video/x-matroska",
                     "video/x-ms-wmw");
-
-
+                $photoFileTypes = array("image/jpg", "image/jpeg", "image/png", "image/tiff",
+                    "image/gif", "image/raw");
+                $audioFileTypes = array("audio/wav", "audio/mp3");
                 $text;
-
                 // video type
                 if (in_array($mediaType, $videoFileTypes)) {
                     $text = "video";
                     $img = '<a href = "' . $videoPath . $mediaName . '"><video src = "' . $videoPath . $mediaName . '" poster="/poster/'.$posterName.'" preload="auto" controls /></a>
-                        <a href = "media.php?id=' . $ID . '&mediaName=' . $mediaName . '&mid=' . $mediaID . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '" ><br/>More</a><br/>';
-
+                        <a href = "/media.php?id=' . $ID . '&mediaName=' . $mediaName . '&mid=' . $mediaID . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '" ><br/>More</a><br/><br/>'
+                        .$privateString.'<br/>';
                     echo "
                     <div>
                     $img
-
                     </div>";
-
-
                     ?>
 
-                    <form method="post" action="">
-                        <div class="form-group">
-                            <label for="text">Text this <?php echo $text ?></label>
-
-                            <br/>
-                            <input type="hidden" id="mediaName" name="mediaName" value="<?php echo $mediaName ?>" />
-                            <input type="hidden" id="mediaID" name="mediaID" value="<?php echo $mediaID ?>" />
-                            <input type="hidden" id="mediaType" name="mediaType" value="<?php echo $mediaType ?>" />
-                            <input type="hidden" id="mediaDate" name="mediaDate" value="<?php echo $mediaDate ?>" />
-                            <input type="text" id="number" name="number" class="form-control text-center" style="width:150px;" placeholder="2125551212"/>
-                        </div>
-                        <input type="submit" id="text" name="text" value="Text" style="border-radius: 10px" class="btn btn-default" />
-                    </form>
-                    <br/><br/>
 
 
                     <?php
-
                     echo "<hr/><br/>";
                     ?>
 
-            <?php
-            }
+                    <?php
+                }
+                // photo type
+                if (in_array($mediaType, $photoFileTypes)) {
+                    $text = "photo";
+                    $img = '<a href = "/media.php?id=' . $ID . '&mediaName=' . $mediaName . '&mid=' . $mediaID . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '" ><br/><img src = "' . $mediaPath . $mediaName . '" class="img-responsive"/></a><br/><br/>'
+                        . $privateString . '<br/>';
+                    echo "
+                    <div>
+                    $img
+                    </div>";
+                    ?>
 
+                    <br/><br/>
+
+                    <?php
+                }
+                // audio type
+                if (in_array($mediaType, $audioFileTypes)) {
+                    $text = "song";
+                    $img = '<b>'.$audioName.'</b><br/><audio controls>
+                            <source src="'.$mediaPath . $mediaName.'" type="'.$mediaType.'">
+                            Your browser does not support the audio element.
+                            </audio>
+                            <a href = "/media.php?id=' . $ID . '&mediaName=' . $mediaName . '&mid=' . $mediaID . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '" ><br/>More</a><br/><br/>'
+                        .$privateString.'<br/>';
+                    echo "<div>$img</div>";
+                    ?>
+
+
+                    <?php
+                }
             } ?>
         </div>
 
