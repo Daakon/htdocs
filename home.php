@@ -230,7 +230,7 @@ if (isset($_POST['submit'])) {
                                           ('$post',   '$category',   '$ID',      CURDATE())";
                 mysql_query($sql) or die(mysql_error());
             }
-            alert_all_matching_service_providers($category, getMemberState($ID));
+            alert_all_matching_interests($category, getMemberState($ID));
         }
 
     }
@@ -614,7 +614,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                     $genre = $_SESSION['Genre'];
                 } else {
                     if (get_is_service_provider($ID)) {
-                        $genre = get_service($ID);
+                        $genre = get_interest($ID);
                     }
                 }
             }
@@ -639,9 +639,9 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
             <div class=" col-md-9 col-lg-9 roll-call ">
 
 <!--If a service provider -->
-                <?php if (get_is_service_provider($ID) == 1) { ?>
+
                     <div align = "center">
-                        <h5>Search Services Needed By Category</h5>
+                        <h5>Search Posts By Interests</h5>
                         <select id="genre" name="genre" onchange="updateFeed()">
                             <option value="<?php echo $genre ?>"><?php echo $genre ?></option>
                             <option value="Show-All">Show All</option>
@@ -649,7 +649,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                         </select>
 
                         <br/><br/>
-                        <div><h5>Search Service Requests By State</h5></div>
+                        <div><h5>Search Posts By State</h5></div>
                         <select id="searchState" name="searchState" onchange="updateFeed()">
                             <option value="<?php echo $searchState ?>"><?php echo $searchState?></option>
                             <?php include 'getState.php'; getState(); ?>
@@ -657,16 +657,16 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                         <br/><br/>
 
                     </div>
-                <?php } ?>
 
-                <?php if (get_is_service_provider($ID) == 0) { ?>
-                    <h4><span style="font-style:italic;font-weight:bold;color:red;">Find The Service You Need</span></h4>
+
+
+                    <h5><span style="font-style:italic;font-weight:bold;color:red;">Post Something of Interest To You</span></h5>
                     <br/>
 <!--If NOT a service provider -->
 
                 <form method="post" enctype="multipart/form-data" action="" onsubmit="showUploading()">
                     <img src="/images/image-icon.png" height="30px" width="30px" alt="Photos/Video"/>
-                    <strong>Attach A Photo or Video To Your Service Request</strong>
+                    <strong>Attach A Photo or Video To Your Post</strong>
                     <input type="file" width="10px;" name="flPostMedia" id="flPostMedia"/>
                     <br/>
                 <textarea name="post" id="post" class="form-control textArea"
@@ -683,20 +683,14 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
                     <br/>
                     <select class="form-control input-lg" id="category" name="category">
-                        <option value="">Select A Service Category</option>
+                        <option value="">Select An Interest</option>
                         <?php echo category() ?>
                     </select>
                     <br/>
 
                     <input type="submit" class="post-button" name="submit" id="submit" value="Post"/>
                 </form>
-                <?php } ?>
 
-                <?php
-                if (get_is_service_provider($ID) == 0) {
-                    echo "<h5>All of your service requests are listed below</h5>";
-                }
-                ?>
             </div>
 
 

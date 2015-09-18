@@ -159,7 +159,7 @@ get_head_files();
         <div class="col-lg-6 col-md-5 hidden-sm hidden-xs">
             <image src="/images/services.jpg" style="border:2px solid black" class="center-block" ><br>
             </image>
-            <h3 align="center"><span style="font-style: italic;color:red;font-weight: bold">Connecting People To Services</span></h3>
+            <h3 align="center"><span style="font-style: italic;color:red;font-weight: bold">Connect With People Like You</span></h3>
         </div>
 
         <div class="col-lg-6 col-md-7 col-sm-12 col-xs-12 ">
@@ -340,34 +340,20 @@ get_head_files();
                     </div>
                 </div>
 
-                <div class="form-group row" id="form-group-goal">
-                    <div class="col-md-6">
-                        <label class="sr-only" for="goal">Goal</label>
-                        <select class="form-control input-lg" id="ddGoal" name="ddGoal" onchange="checkGoal()">
-                            <option value="">What is your goal?</option>
-                            <option value="0">I am looking for a service</option>
-                            <option value="1">I am a service provider</option>
-                        </select>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="error-text"></div>
-                    </div>
-                </div>
 
-                <div id="service" style="display:none">
                 <select class="form-control input-lg" id="service" name="service">
-                    <option value="">Select Your Main Service</option>
+                    <option value="">Select Your Main Interest</option>
                     <?php echo category() ?>
                 </select>
                     <br/>
-                </div>
+
 
                 <div class="form-group row" id="form-group-phone">
                     <div class="col-md-6">
                         <label class="sr-only" for="phone">Phone</label>
                         <input class="form-control input-lg" type="text" name="phone" id="phone"
                                placeholder="2125551212 (Mobile)"/>
-                        <small>Your mobile phone number will only be used for text notifications when you receive a service match.</small>
+                        <small>Your mobile phone number will only be used for text notifications when we receive interest matches.</small>
                     </div>
                     <div class="col-md-6">
                         <div class="error-text"></div>

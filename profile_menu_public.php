@@ -28,7 +28,7 @@ else {
 <?php
 $text = 'login';
 if (isset($_SESSION['ID']) && !empty($_SESSION['ID'])) { ?>
-    <a href="/index.php"><b>Go To Service Requests</b></a>
+    <a href="/index.php"><b>Home</b></a>
 <?php }
 else { ?>
     <a href="<?php echo $howItWorks ?>"><b>New To Rapportbook?...Click here to find out more</b></a>
@@ -40,15 +40,7 @@ else { ?>
 
 <ul class="list-inline profileMenu">
     <li><a href="/profile_public.php/<?php echo $username ?>">Profile</a></li>
-    <li><a href="/reviews.php/<?php echo $username ?>">Reviews</a></li>
-<!--    <li><a href="/member_media_public.php/--><?php //echo $username ?><!--">Video Book</a></li>-->
-
-    <?php
-        $profileID = get_id_from_username($username);
-        if (get_is_service_provider($profileID) == 0) {
-    ?>
-    <li><a href="/manage_post_public.php/<?php echo $username ?>"><?php echo $firstName ?>'s Service Requests</a></li>
-
-        <?php } ?>
+    <li><a href="/member_media_public.php/--><?php //echo $username ?><!--">Media</a></li>
+    <li><a href="/manage_post_public.php/<?php echo $username ?>"><?php echo $firstName ?>'s Posts</a></li>
 
 </ul>

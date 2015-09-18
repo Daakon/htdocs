@@ -172,18 +172,16 @@ if (isset($_POST['Delete']) && $_POST['Delete'] == "Delete") {
         <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 "
              style="background:white;border-radius:10px;margin-top:20px;border:2px solid black;margin-bottom:20px" align="left">
 
-            <img src="/poster/<?php echo $profilePhoto ?>" class="profilePhoto-Feed" alt=""
+            <img src="/media/<?php echo $profilePhoto ?>" class="profilePhoto-Feed" alt=""
                  title="<?php echo $name ?>" class='enlarge-onhover img-responsive'/> &nbsp <b><font
                     size="4"><?php echo $name ?></font></b>
 
             <div class="post"><?php echo nl2br($post); ?></div>
 
             <br/>
-            <?php
-            $isServiceProvider = $_SESSION['IsServiceProvider'];
-            if ($memberID != $ID && $isServiceProvider == 1) { ?>
+
                 <a href="/view_messages.php?id=<?php echo $memberID ?>">Message <?php echo $rows['FirstName'] ?> </a>
-            <?php } ?>
+
             <br/>
             <br/>
             <!------------------------------------->

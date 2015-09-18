@@ -120,7 +120,7 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
             </ul>
         </div>
 
-        <div class="col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8 roll-call" style="background-image: url(/images/book.png);background-repeat:repeat-y;margin-right:5px;background-size:100% auto">
+        <div class="col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8 roll-call" style="margin-right:5px;background-size:100% auto">
             <h2>Video Book</h2>
 
             <?php

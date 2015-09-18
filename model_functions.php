@@ -193,9 +193,9 @@ function get_id_from_username($username) {
     return $id;
 }
 
-function get_service($ID) {
+function get_interest($ID) {
     // returns business category
-    $sql = "SELECT Service FROM Members WHERE ID = $ID ";
+    $sql = "SELECT Interest FROM Members WHERE ID = $ID ";
     $result = mysql_query($sql) or die(mysql_error());
     $row = mysql_fetch_assoc($result);
     $service = $row['Service'];
@@ -259,24 +259,24 @@ function text_notification($receiverID, $senderID)
         }
 }
 
-function alert_all_matching_service_providers($service, $state)
+function alert_all_matching_interests($interest, $state)
 {
     require 'class-Clockwork.php';
     $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-    $result = mysql_query("SELECT ID, Service FROM Members WHERE Service = '$service'");
+    $result = mysql_query("SELECT ID, Interest FROM Members WHERE Interest = '$interest'");
 
     if (mysql_num_rows($result) > 0) {
         // stuff all of the service providers into an array
         while ($rows = mysql_fetch_assoc($result)) {
-            $serviceID = $rows['ID'];
+            $interestID = $rows['ID'];
 
             // send all of the service providers with a phone an SMS
-            $serviceResults = mysql_query("SELECT Phone FROM Profile WHERE Member_ID = $serviceID And State = '$state'");
+            $interestResults = mysql_query("SELECT Phone FROM Profile WHERE Member_ID = $interestID And State = '$state'");
 
-            if (mysql_num_rows($serviceResults) > 0) {
-                while ($serviceRows = mysql_fetch_assoc($serviceResults)) {
+            if (mysql_num_rows($interestResults) > 0) {
+                while ($interestRows = mysql_fetch_assoc($interestResults)) {
 
-                    $number = $serviceRows['Phone'];
+                    $number = $interestRows['Phone'];
                     $number = preg_replace('/\D+/', '', $number);
                     $number = "1" . $number;
                     $API_KEY = '7344d6254838e6d2c917c4cb78305a3235ba951d';
@@ -291,7 +291,7 @@ function alert_all_matching_service_providers($service, $state)
                             $domain = "http://rapportbook.com/home.php";
                         }
                         // Setup and send a message
-                        $text = "There is a new post that matches your service on Rapportbook. $domain";
+                        $text = "There is a new post that matches your interest on Rapportbook. $domain";
                         $message = array('to' => $number, 'message' => $text);
                         $result = $clockwork->send($message);
 
@@ -308,8 +308,8 @@ function alert_all_matching_service_providers($service, $state)
                 }
             }
             // send out an email after text
-            if (checkEmailActive($serviceID)) {
-                build_and_send_email(0, $serviceID, 11, null, $service);
+            if (checkEmailActive($interestID)) {
+                build_and_send_email(0, $interestID, 11, null, $interest);
             }
         }
     }

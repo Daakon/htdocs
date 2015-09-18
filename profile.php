@@ -190,7 +190,7 @@ if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
     $phone = $_POST['Phone'];
     $email = $_POST['Email'];
     $about = $_POST['About'];
-    $service = $_POST['service'];
+    $interest = $_POST['Interest'];
     $dob = $_POST['DOB'];
     $emailStatus = $_POST['EmailStatus'];
     $password = $_POST['Password'];
@@ -214,7 +214,7 @@ if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
           DOB = '$dob',
           Email = '$email',
           EmailActive = '$emailStatus ',
-          Service = '$service',
+          Interest = '$interest',
           Password = '$password'
           WHERE ID = $ID ";
     $result = mysql_query($sql) or die(mysql_error());
@@ -357,7 +357,7 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
                         Members.Email As Email,
                         Members.Password As Password,
                         Members.DOB As DOB,
-                        Members.Service As Service,
+                        Members.Interest As Interest,
                         Members.EmailActive As EmailStatus,
                         Profile.ProfilePhoto As ProfilePhoto,
                         Profile.ProfileVideo As ProfileVideo,
@@ -391,7 +391,7 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
             $email = $rows['Email'];
             $password = $rows['Password'];
             $dob = $rows['DOB'];
-            $service = $rows['Service'];
+            $interests = $rows['Interests'];
             $emailStatus = $rows['EmailStatus'];
             if (strlen($posterName) == 0) {
                 $posterName = "video-bg.jpg";
@@ -511,15 +511,15 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
                     <input type="text" class="form-control" id="Phone" name="Phone" value="<?php echo $phone ?>" />
                 </div>
 
-                <?php if (get_is_service_provider($ID) == 1) { ?>
-                    <label for="Service">Primary Service</label>
+
+                    <label for="Service">Primary Interest</label>
                 <div class="form-group">
-                    <select class="form-control input-lg" id="service" name="service">
-                        <option value="<?php echo $service ?>"><?php echo $service ?></option>
+                    <select class="form-control input-lg" id="Interest" name="Interest">
+                        <option value="<?php echo $interest ?>"><?php echo $interest ?></option>
                         <?php echo category() ?>
                     </select>
                 </div>
-                <?php } ?>
+
 
                 <?php if (get_is_service_provider($ID) == 1) { ?>
                 <div class="form-group">
