@@ -227,7 +227,7 @@ $profileMediaSrc = trim("/media/" . $profilePhoto);
                     $post = '<video src = "' . $videoPath . $mediaName . '" poster="/poster/'.$posterName.'" preload="auto" controls />';
                 }
             }
-            else { echo "<script>alert('test');</script>";}
+
             ?>
 
 
@@ -239,7 +239,7 @@ $profileMediaSrc = trim("/media/" . $profilePhoto);
 
         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 ">
 
-            <img src=" <?php echo $profileMediaSrc ?>" height="100px" width="100px"/>
+            <img src="/media/<?php echo $profilePhoto ?>" height="100px" width="100px"/>
 
             <?php echo $name; ?><br/>
             <?php echo date("F j, Y", strtotime($mediaDate)) ?>
