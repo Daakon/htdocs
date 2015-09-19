@@ -126,7 +126,7 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
         </div>
 
         <div class="col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8 roll-call" style="margin-right:5px;background-size:100% auto">
-            <h2>Video Book</h2>
+            <h2>Media</h2>
 
             <?php
 
@@ -156,7 +156,7 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
                 if (in_array($mediaType, $videoFileTypes)) {
                     $text = "video";
                     $img = '<a href = "' . $videoPath . $mediaName . '"><video src = "' . $videoPath . $mediaName . '" poster="/poster/'.$posterName.'" preload="auto" controls /></a>
-                        <a href = "/media.php?id=' . $ID . '&mediaName=' . $mediaName . '&mid=' . $mediaID . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '" ><br/>More</a><br/><br/>'
+                        <a href = "/media.php?id=' . $profileID . '&mediaName=' . $mediaName . '&mid=' . $mediaID . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '" ><br/>More</a><br/><br/>'
                         .$privateString.'<br/>';
                     echo "
                     <div>
@@ -175,7 +175,7 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
                 // photo type
                 if (in_array($mediaType, $photoFileTypes)) {
                     $text = "photo";
-                    $img = '<a href = "/media.php?id=' . $ID . '&mediaName=' . $mediaName . '&mid=' . $mediaID . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '" ><br/><img src = "' . $mediaPath . $mediaName . '" class="img-responsive"/></a><br/><br/>'
+                    $img = '<a href = "/media.php?id=' . $profileID . '&mediaName=' . $mediaName . '&mid=' . $mediaID . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '" ><br/><img src = "' . $mediaPath . $mediaName . '" class="img-responsive"/></a><br/><br/>'
                         . $privateString . '<br/>';
                     echo "
                     <div>
@@ -194,7 +194,7 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
                             <source src="'.$mediaPath . $mediaName.'" type="'.$mediaType.'">
                             Your browser does not support the audio element.
                             </audio>
-                            <a href = "/media.php?id=' . $ID . '&mediaName=' . $mediaName . '&mid=' . $mediaID . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '" ><br/>More</a><br/><br/>'
+                            <a href = "/media.php?id=' . $profileID . '&mediaName=' . $mediaName . '&mid=' . $mediaID . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '" ><br/>More</a><br/><br/>'
                         .$privateString.'<br/>';
                     echo "<div>$img</div>";
                     ?>

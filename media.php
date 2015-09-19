@@ -76,7 +76,7 @@ $name = $pRows['FirstName'] . ' ' . $pRows['LastName'];
 ?>
 
 <?php
-$profileMediaSrc = trim("/poster/" . $profilePhoto);
+$profileMediaSrc = trim("/media/" . $profilePhoto);
 ?>
 
 
@@ -182,6 +182,13 @@ $profileMediaSrc = trim("/poster/" . $profilePhoto);
 
 
             <?php
+            // check if file type is a photo
+            $videoFileTypes = array("video/mpeg", "video/mpg", "video/ogg", "video/mp4",
+                "video/quicktime", "video/webm", "video/x-matroska",
+                "video/x-ms-wmw");
+            $photoFileTypes = array("image/jpg", "image/jpeg", "image/png", "image/tiff",
+                "image/gif", "image/raw");
+            $audioFileTypes = array("audio/wav", "audio/mp3");
 
 
             $sqlGetPostID = "SELECT Post_ID FROM Media WHERE ID = '$mediaID' ";
@@ -210,12 +217,17 @@ $profileMediaSrc = trim("/poster/" . $profilePhoto);
                 $posterName = $rowPost['Poster'];
                 $audioName = $rowPost['AudioName'];
 
+                if (in_array($mediaType, $photoFileTypes)) {
+
+                    $post = '<img src = "' . $mediaPath . $mediaName . '" class="img-responsive"/>';
+                }
 
                 if (in_array($mediaType, $videoFileTypes)) {
 
                     $post = '<video src = "' . $videoPath . $mediaName . '" poster="/poster/'.$posterName.'" preload="auto" controls />';
                 }
             }
+            else { echo "<script>alert('test');</script>";}
             ?>
 
 
@@ -239,6 +251,7 @@ $profileMediaSrc = trim("/poster/" . $profilePhoto);
             <?php
 
 
+
             // check if user has approved this post
 
             if ($isPost == true) {
@@ -251,7 +264,7 @@ $profileMediaSrc = trim("/poster/" . $profilePhoto);
                 $sql3 = "SELECT * FROM PostApprovals WHERE Post_ID = '$postID' ";
                 $result3 = mysql_query($sql3) or die(mysql_error());
                 $rows3 = mysql_fetch_assoc($result3);
-                $approvals = mysql_numrows($result3);
+                $approvals = mysql_num_rows($result3);
 
                 echo '<table><tr><td>';
                 echo "<div id = 'approvals$postID'>";

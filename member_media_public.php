@@ -42,7 +42,7 @@ if (mysql_num_rows($result) == 0) {
     <div class="row row-padding" >
 
         <div class="col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8 roll-call" style="margin-right:5px;background-size:100% auto">
-            <h2>Video Book</h2>
+            <h2>Media</h2>
             <br/>
 
             <?php
