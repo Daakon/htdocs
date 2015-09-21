@@ -391,7 +391,7 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
             $email = $rows['Email'];
             $password = $rows['Password'];
             $dob = $rows['DOB'];
-            $interests = $rows['Interests'];
+            $interest = $rows['Interest'];
             $emailStatus = $rows['EmailStatus'];
             if (strlen($posterName) == 0) {
                 $posterName = "video-bg.jpg";

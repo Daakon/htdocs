@@ -198,8 +198,8 @@ function get_interest($ID) {
     $sql = "SELECT Interest FROM Members WHERE ID = $ID ";
     $result = mysql_query($sql) or die(mysql_error());
     $row = mysql_fetch_assoc($result);
-    $service = $row['Service'];
-    return $service;
+    $interest = $row['Interest'];
+    return $interest;
 }
 
 function check_phone($ID) {

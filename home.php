@@ -613,9 +613,8 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                 if (!empty($_SESSION['Genre'])) {
                     $genre = $_SESSION['Genre'];
                 } else {
-                    if (get_is_service_provider($ID)) {
                         $genre = get_interest($ID);
-                    }
+                    echo "<script>alert('$genre');</script>";
                 }
             }
             ?>

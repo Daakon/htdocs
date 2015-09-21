@@ -164,7 +164,7 @@ $postOwner = $memberID;
                 <input type="text" class="form-control" name="postComment" id="postComment"
                        placeholder="Write a comment" title='' style="border:1px solid black"/>
 
-                <strong style="color:red">Attach A Photo,Video or Music File To Your Comment</strong>
+                <strong style="color:red">Attach A Photo or Video File To Your Comment</strong>
                 <input type="file" name="flPostMedia" id="flPostMedia" style="max-width:180px;"/>
 
                 <br/>
