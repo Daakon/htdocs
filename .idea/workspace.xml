@@ -5,8 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="51867226-c8dd-43fb-9a46-7c8a9e9ab742" name="Default" comment="Added media page.&#10;&#10;">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/home.php" afterPath="$PROJECT_DIR$/home.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html_functions.php" afterPath="$PROJECT_DIR$/html_functions.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/roll-call.php" afterPath="$PROJECT_DIR$/roll-call.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="htdocs.iws" />
@@ -35,12 +34,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="html_functions.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/html_functions.php">
+      <file leaf-file-name="roll-call.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/roll-call.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.8392226">
-              <caret line="25" column="94" selection-start-line="25" selection-start-column="94" selection-end-line="25" selection-end-column="94" />
-              <folding />
+            <state vertical-scroll-proportion="0.7385159">
+              <caret line="166" column="74" selection-start-line="166" selection-start-column="74" selection-end-line="166" selection-end-column="74" />
+              <folding>
+                <element signature="n#style#0;n#h6#0;n#form#0;n#div#0;n#div#1;n#div#1;n#!!top" expanded="true" />
+                <marker date="1442852668000" expanded="true" signature="525:1135" placeholder="SELECT DISTI..Members..." />
+                <marker date="1442852668000" expanded="true" signature="2746:2759" placeholder="..." />
+                <marker date="1442852668000" expanded="true" signature="3407:3483" placeholder="SELECT ID FR..PostApprovals..." />
+                <marker date="1442852668000" expanded="true" signature="3681:3734" placeholder="SELECT * FRO..PostApprovals..." />
+                <marker date="1442852668000" expanded="true" signature="4299:4338" placeholder="..." />
+                <marker date="1442852668000" expanded="true" signature="4789:4828" placeholder="..." />
+                <marker date="1442852668000" expanded="true" signature="7116:7902" placeholder="SELECT DISTI..PostComments..." />
+                <marker date="1442852668000" expanded="true" signature="8575:8597" placeholder="..." />
+                <marker date="1442852668000" expanded="true" signature="9707:10498" placeholder="SELECT DISTI..PostComments..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -99,11 +109,11 @@
         <option value="$PROJECT_DIR$/member_media_public.php" />
         <option value="$PROJECT_DIR$/member_media.php" />
         <option value="$PROJECT_DIR$/media.php" />
-        <option value="$PROJECT_DIR$/roll-call.php" />
         <option value="$PROJECT_DIR$/profile.php" />
         <option value="$PROJECT_DIR$/model_functions.php" />
         <option value="$PROJECT_DIR$/home.php" />
         <option value="$PROJECT_DIR$/html_functions.php" />
+        <option value="$PROJECT_DIR$/roll-call.php" />
       </list>
     </option>
   </component>
@@ -162,7 +172,7 @@
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="full.screen.before.presentation.mode" value="false" />
     <property name="FullScreen" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/html_functions.php" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/roll-call.php" />
     <property name="LayoutCode.rearrangeEntriesPHP" value="false" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="191" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
@@ -354,14 +364,14 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.336478" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.336478" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3956044" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33893558" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24546553" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.46935484" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.46935484" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24546553" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -858,14 +868,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/roll-call.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7031802">
-          <caret line="166" column="60" selection-start-line="166" selection-start-column="60" selection-end-line="166" selection-end-column="60" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/home.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.06713781">
@@ -879,6 +881,25 @@
         <state vertical-scroll-proportion="0.8392226">
           <caret line="25" column="94" selection-start-line="25" selection-start-column="94" selection-end-line="25" selection-end-column="94" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/roll-call.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7385159">
+          <caret line="166" column="74" selection-start-line="166" selection-start-column="74" selection-end-line="166" selection-end-column="74" />
+          <folding>
+            <element signature="n#style#0;n#h6#0;n#form#0;n#div#0;n#div#1;n#div#1;n#!!top" expanded="true" />
+            <marker date="1442852668000" expanded="true" signature="525:1135" placeholder="SELECT DISTI..Members..." />
+            <marker date="1442852668000" expanded="true" signature="2746:2759" placeholder="..." />
+            <marker date="1442852668000" expanded="true" signature="3407:3483" placeholder="SELECT ID FR..PostApprovals..." />
+            <marker date="1442852668000" expanded="true" signature="3681:3734" placeholder="SELECT * FRO..PostApprovals..." />
+            <marker date="1442852668000" expanded="true" signature="4299:4338" placeholder="..." />
+            <marker date="1442852668000" expanded="true" signature="4789:4828" placeholder="..." />
+            <marker date="1442852668000" expanded="true" signature="7116:7902" placeholder="SELECT DISTI..PostComments..." />
+            <marker date="1442852668000" expanded="true" signature="8575:8597" placeholder="..." />
+            <marker date="1442852668000" expanded="true" signature="9707:10498" placeholder="SELECT DISTI..PostComments..." />
+          </folding>
         </state>
       </provider>
     </entry>
