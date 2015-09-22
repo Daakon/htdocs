@@ -642,7 +642,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                         <h5>Search Posts By Interests</h5>
                         <select id="genre" name="genre" onchange="updateFeed()">
                             <option value="<?php echo $genre ?>"><?php echo $genre ?></option>
-                            <option value="Show-All">Show All</option>
+                            <option value="Show All">Show All</option>
                             <?php echo category() ?>
                         </select>
 

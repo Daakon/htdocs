@@ -322,7 +322,38 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
     }
 </script>
 
-<body>
+<?php
+$url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+preg_match("/[^\/]+$/",$url ,$match);
+$username = $match[0];
+$_SESSION['Username'] = $username;
+$token = $match[1];
+$username = $_SESSION['Username'];
+$profileID = get_id_from_username($username);
+$sql = "SELECT ProfilePhoto FROM Profile WHERE Member_ID = $profileID";
+$result = mysql_query($sql) or die(mysql_error());
+$row = mysql_fetch_assoc($result);
+$bgPhoto = $row['ProfilePhoto'];
+?>
+
+<body style="
+    background-image: url(/media/<?php echo $bgPhoto ?>);
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0.9;
+    background-repeat: no-repeat;
+    background-position: 50% 0;
+    -ms-background-size: cover;
+    -o-background-size: cover;
+    -moz-background-size: cover;
+    -webkit-background-size: cover;
+    background-size: cover;
+    ">
 
 
 <div class="container" >
@@ -521,12 +552,11 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
                 </div>
 
 
-                <?php if (get_is_service_provider($ID) == 1) { ?>
                 <div class="form-group">
                     <label for="About">About</label>
                     <textarea class="form-control" id="About" name="About"><?php echo $about ?></textarea>
                 </div>
-                <?php } ?>
+
 
                 <div class="form-group">
                     <label for="Email">Email</label>

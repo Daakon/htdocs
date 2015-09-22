@@ -3,10 +3,10 @@
 // get genre selection
 
 
-if (!empty($genre) && $genre != "Show-All") {
+if (!empty($genre) && $genre != "Show All") {
     $genreCondition = "And Posts.Category = '$genre' ";
 }
-else if($genre = "Show-All") {
+else if($genre = "Show All") {
     $genre = '';
     $genreCondition = "And Posts.Category > '' ";
 }

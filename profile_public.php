@@ -37,14 +37,14 @@ $lName = $rows['LastName'];
 <link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet"/>
 <script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
 
-<?php $sql = "SELECT Poster FROM Profile WHERE Member_ID = $memberID";
+<?php $sql = "SELECT ProfilePhoto FROM Profile WHERE Member_ID = $memberID";
 $result = mysql_query($sql) or die(mysql_error());
 $row = mysql_fetch_assoc($result);
-$bgPhoto = $row['Poster'];
+$bgPhoto = $row['ProfilePhoto'];
 ?>
 
 <body style="
-    background-image: url(/poster/<?php echo $bgPhoto ?>);
+    background-image: url(/media/<?php echo $bgPhoto ?>);
     display: block;
     position: absolute;
     left: 0;
@@ -162,10 +162,9 @@ $bgPhoto = $row['Poster'];
 
             <br/><br/>
 
-            <?php if (get_is_service_provider($memberID)) { ?>
             <div class="public-profile-label">About</div>
             <?php echo $about ?>
-            <?php } ?>
+
 
                     <?php if (isset($ID) && !empty($ID) && $memberID != $ID) { ?>
                         <br/><br/>
