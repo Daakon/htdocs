@@ -14,11 +14,13 @@ $ID = $_SESSION['ID'];
 
 
     <?php
-    $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-    preg_match("/[^\/]+$/",$url ,$match);
-    $username = $match[0];
+        $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+        preg_match("/[^\/]+$/",$url ,$match);
+        $username = $match[0];
 
-    $profileID = get_id_from_username($username);
+        $profileID = get_id_from_username($username);
+
+
     $sql = "SELECT * FROM Members
 WHERE
 Members.ID = '$profileID'
@@ -30,7 +32,7 @@ And Members.IsActive = 1 ";
     $lName = $rows['LastName'];
 
     if (mysql_num_rows($result) == 0) {
-        echo '<script>alert("This profile could not be found");location = "/member_media.php"</script>';
+        echo '<script>alert("This profile could not be found");location = "/home.php"</script>';
     }
 
 ?>
@@ -129,6 +131,11 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
             <h2>Media</h2>
 
             <?php
+            $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+            preg_match("/[^\/]+$/",$url ,$match);
+            $username = $match[0];
+
+            $profileID = get_id_from_username($username);
 
             $sql = "SELECT * FROM Media WHERE Member_ID = '$profileID' And (IsDeleted IS NULL Or IsDeleted = 0)
             Order By ID DESC ";

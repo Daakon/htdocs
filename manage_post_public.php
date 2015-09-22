@@ -128,8 +128,9 @@ if (isset($_POST['Delete']) && $_POST['Delete'] == "Delete") {
 
     <div class="row row-padding">
 
+        <div class=" col-md-10  col-lg-10 col-md-offset-2 col-lg-offset-2 ">
         <?php require 'profile_menu_public.php'; ?>
-
+        </div>
 
     </div>
 

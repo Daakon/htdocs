@@ -3,10 +3,11 @@ session_start();
 $username = $_SESSION['Username'];
 $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 
-$sql = "SELECT FirstName FROM Members WHERE Username = '$username'";
+$sql = "SELECT FirstName, ID FROM Members WHERE Username = '$username'";
 $result = mysql_query($sql) or die(mysql_error());
 $row = mysql_fetch_assoc($result);
 $firstName = $row['FirstName'];
+$profileID = $row['ID'];
 
 // file paths
 if (strstr($url, "local")) {
@@ -38,9 +39,12 @@ else { ?>
 </div>
 <br/><br/>
 
+<?php if ($_SESSION['ID'] != $profileID) { ?>
 <ul class="list-inline profileMenu">
     <li><a href="/profile_public.php/<?php echo $username ?>">Profile</a></li>
     <li><a href="/member_media.php/<?php echo $username ?>">Media</a></li>
     <li><a href="/manage_post_public.php/<?php echo $username ?>"><?php echo $firstName ?>'s Posts</a></li>
 
 </ul>
+
+<?php } else { require 'profile_menu.php'; } ?>

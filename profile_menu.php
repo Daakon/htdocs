@@ -1,8 +1,12 @@
 <?php if ($_SESSION['ID'] == $ID) {
 
 $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-preg_match("/[^\/]+$/",$url ,$match);
+preg_match("/[^\/]+$/", $url, $match);
 $username = $match[0];
+$profileID = get_id_from_username($username);
+
+if ($profileID == $ID) {
+
 ?>
 
 <ul class="list-inline profileMenu">
@@ -14,21 +18,28 @@ $username = $match[0];
 
 
     <?php
+
+    $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+    preg_match("/[^\/]+$/", $url, $match);
+    $username = $match[0];
+    $profileID = get_id_from_username($username);
+
+    $sql = "SELECT Admin FROM Members WHERE ID = $ID ";
+    $result = mysql_query($sql) or die(mysql_error());
+    $rows = mysql_fetch_assoc($result);
+        if ($rows['Admin'] == 1) { ?>
+        <li><a href="/marketing_manager.php/<?php echo $username ?>">Marketing Manager</a></li>
+        <?php }
+
     }
     else {
-        require 'profile_menu.php';
+        require 'profile_menu_public.php';
+    }
     }
     ?>
 
     <br/><br/>
 
-    <?php
-$sql = "SELECT Admin FROM Members WHERE ID = $ID ";
-$result = mysql_query($sql) or die(mysql_error());
-$rows = mysql_fetch_assoc($result);
-    if ($rows['Admin'] == 1) { ?>
-        <li><a href="/marketing_manager.php">Marketing Manager</a></li>
-    <?php }
-?>
+
 
 </ul>

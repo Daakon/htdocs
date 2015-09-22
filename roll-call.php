@@ -70,9 +70,9 @@ $postOwner = $memberID;
      align="left">
 
     <?php
-    $profileUrl;
-
+    $profileUrl = "";
     if ($memberID == $ID) {
+
         $profileUrl = "/profile.php/$username";
     }
     else {
