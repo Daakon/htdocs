@@ -471,17 +471,15 @@ $bgPhoto = $row['ProfilePhoto'];
             <br/>
             <hr/>
 
-            <?php
 
-            if (get_is_service_provider($ID) == 1) {?>
-            <!--Profile video --------------------------------------------------------------------------------->
+
+
             <div align ="center">
-                <?php if ($profileVideo != "default_video.png") { ?>
+
                     <video src = " <?php echo $videoPath . $profileVideo ?>" poster="/poster/<?php echo $posterName ?>"  preload="auto" controls />
-                <?php } else { ?>
-                   <h5>No Profile Video Uploaded</h5>
+
             </div>
-                <?php } ?>
+
 
             <form method="post" enctype="multipart/form-data" action="" onsubmit="showUploading()">
                 <img src="/images/image-icon.png" class="img-icon" alt="Photos/Video"/>
@@ -500,7 +498,7 @@ $bgPhoto = $row['ProfilePhoto'];
                 <input type="submit" class="post-button" name="video" id="video" value="Upload Video" onclick="showVideoUploading()" />
             </form>
             <!--Profile ---------------------------------------------------------------------------------------->
-<?php } ?>
+
 
             <br/>
             <p id="notice"></p>
