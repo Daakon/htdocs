@@ -135,21 +135,6 @@ function get_id_by_email($email)
     return $rows['ID'];
 }
 
-function get_is_service_provider($ID) {
-    $sql = "SELECT IsServiceProvider FROM Members WHERE ID = $ID ";
-    $result = mysql_query($sql) or die(mysql_error());
-    $rows = mysql_fetch_assoc($result);
-    return $rows['IsServiceProvider'];
-}
-
-function check_service_is_provided($ID) {
-    $sql = "SELECT Service FROM Members WHERE ID = $ID ";
-    $result = mysql_query($sql) or die(mysql_error());
-    $rows = mysql_fetch_assoc($result);
-    $service =  $rows['Service'];;
-    echo "<script>alrt('$service');</script>";
-    return $rows['Service'];
-}
 
 function getGender($ID) {
     // return member gender
@@ -191,6 +176,13 @@ function get_id_from_username($username) {
     $row = mysql_fetch_assoc($result);
     $id = $row['ID'];
     return $id;
+}
+
+function get_username_from_url() {
+    $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+    preg_match("/[^\/]+$/", $url, $match);
+    $username = $match[0];
+    return $username;
 }
 
 function get_interest($ID) {

@@ -1,8 +1,8 @@
 <?php
 session_start();
-$username = $_SESSION['Username'];
 $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 
+$username = get_username_from_url();
 $sql = "SELECT FirstName, ID FROM Members WHERE Username = '$username'";
 $result = mysql_query($sql) or die(mysql_error());
 $row = mysql_fetch_assoc($result);
