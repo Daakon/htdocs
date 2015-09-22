@@ -1,11 +1,14 @@
 <?php
 require 'connect.php';
+
+require 'model_functions.php';
+require 'mediaPath.php';
 //require 'getSession.php';
 require 'html_functions.php';
-require 'mediaPath.php';
 require 'findURL.php';
-require 'model_functions.php';
+require 'email.php';
 require 'category.php';
+
 get_head_files();
 get_header();
 require 'memory_settings.php';
@@ -403,58 +406,42 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
 //A comment was just made, we need to send out some notifications.
 //The first thing is to identify all of the id's connected with this post
-        require 'email.php';
-
         $user_id = $_SESSION['ID'];
-
-
 //Get the ids of all the members connected with a post comment
-        $sql = "SELECT Member_ID FROM PostComments WHERE ID = $postID ";
-
+        $sql = "SELECT Member_ID FROM PostComments WHERE Post_ID = $postID ";
         $result = mysql_query($sql) or die(mysql_error());
-
         $comment_ids = array();
-
 //Iterate over the results
         while ($rows = mysql_fetch_assoc($result)) {
-            array_push($comment_ids, $rows['ID']);
+            array_push($comment_ids, $rows['Member_ID']);
         }
-
 //Boil the id's down to unique values because we dont want to send double emails or notifications
         $comment_ids = array_unique($comment_ids);
 //Send consumer notifications
-
         foreach ($comment_ids as $item) {
-
-            // only send email if account & email active
-            if (checkActive($item, 1)) {
-                if (checkEmailActive($item, 1)) {
-                    build_and_send_email($user_id, $item , 1, $postID);
+            if (strlen($item) > 0) {
+                // only send email if account & email active
+                if (checkActive($item)) {
+                    if (checkEmailActive($item)) {
+                        build_and_send_email($user_id, $item, 1, $postID);
+                    }
                 }
             }
         }
-
-
 //Notify the post creator
-
-        $sql = "SELECT ID FROM Posts WHERE ID = '$postID';";
-
+        $sql = "SELECT Member_ID FROM Posts WHERE ID = '$postID';";
         $result = mysql_query($sql) or die(mysql_error());
         $rows = mysql_fetch_assoc($result);
-
-
+        $creatorID = $rows['Member_ID'];
         if (checkEmailActive($ID)) {
-            build_and_send_email($ID, $user_id, 1, $postID, '');
+            build_and_send_email($ID, $creatorID, 1, $postID, '');
         }
-        $result = mysql_query($sql) or die(mysql_error());
-
-
 //------------------
 
 //=========================================================================================================================//
 //BELOW IS END OF POST COMMENT HANDLING CODE ==========================================================================//
     }
-    echo "<script>location='/show_post.php?scrollx=$scrollx&scrolly=$scrolly'</script>";
+    echo "<script>location='/show_post.php?postID=$postID&email=1&scrollx=$scrollx&scrolly=$scrolly'</script>";
 }
 ?>
 
