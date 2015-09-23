@@ -668,7 +668,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                     <input type="file" width="10px;" name="flPostMedia" id="flPostMedia"/>
                     <br/>
                 <textarea name="post" id="post" class="form-control textArea"
-                          placeholder="Tell Us What You Need" ></textarea>
+                          placeholder="Share Your Interest" ></textarea>
                     <br/>
                     <div id="progress" style="display:none;">
                         <div class="progress">

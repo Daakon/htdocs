@@ -111,9 +111,9 @@ $postOwner = $memberID;
     <div style="padding-top:10px;padding-bottom:10px;margin-top:10px;">
 
         <br/>
-
+            <?php if ($ID != $memberID) {?>
             <a href="/view_messages.php/<?php echo $username ?>">Message <?php echo $rows['FirstName'] ?> </a>
-
+            <?php } ?>
         <br/>
 
 
