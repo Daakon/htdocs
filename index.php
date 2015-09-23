@@ -157,9 +157,9 @@ get_head_files();
 
     <div class="row">
         <div class="col-lg-6 col-md-5 hidden-sm hidden-xs">
-            <image src="/images/services.jpg" style="border:2px solid black" class="center-block" ><br>
+            <image src="/images/interests-lg.JPG" style="border:2px solid black" class="center-block" ><br>
             </image>
-            <h3 align="center"><span style="font-style: italic;color:red;font-weight: bold">Connect With People Like You</span></h3>
+            <h3 align="center"><span style="font-style: italic;color:red;font-weight: bold">Network And Promote Your Interests</span></h3>
         </div>
 
         <div class="col-lg-6 col-md-7 col-sm-12 col-xs-12 ">

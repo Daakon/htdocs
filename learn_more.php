@@ -24,7 +24,7 @@ get_header()
 
             <h4>Rapportbook connects people with similar interests.</h4>
 
-                <img src="<?php echo $imagesPath ?>services.jpg" />
+                <img src="<?php echo $imagesPath ?>interests-lg.JPG" />
 
 
                 <p>
