@@ -19,7 +19,8 @@ $ID = $_SESSION['ID'];
 
 <?php
 // check if member exists for messaging
-$senderID = $_GET['id'];
+$urlUsername = get_username_from_url();
+$senderID = get_id_from_username($urlUsername);
 
 $sql = "SELECT ID FROM Members WHERE ID = $senderID ";
 $result = mysql_query($sql) or die(mysql_error());
@@ -276,7 +277,7 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
             <h2>View Messages</h2>
             <hr/>
 
-            <?php $senderID = $_GET['id'];
+            <?php $senderID = get_id_from_username($urlUsername);
             $sql = "SELECT Username FROM Members WHERE ID = $senderID";
             $result = mysql_query($sql) or die(mysql_error());
             $row = mysql_fetch_assoc($result);
@@ -344,7 +345,7 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
 
 <?php
 // reinitialize sender ID
-$senderID = $_GET['id'];
+$senderID = get_id_from_username($urlUsername);
 ?>
 
             <form action="" method="post" enctype="multipart/form-data">

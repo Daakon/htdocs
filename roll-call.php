@@ -112,7 +112,7 @@ $postOwner = $memberID;
 
         <br/>
 
-            <a href="/view_messages.php?id=<?php echo $memberID ?>">Message <?php echo $rows['FirstName'] ?> </a>
+            <a href="/view_messages.php/<?php echo $username ?>">Message <?php echo $rows['FirstName'] ?> </a>
 
         <br/>
 
