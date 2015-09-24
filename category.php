@@ -3,12 +3,12 @@ function category()
 {
     echo '<option value = "Art">Art</option>';
     echo '<option value = "Automotive">Automotive</option>';
+    echo '<option value = "Barber">Automotive</option>';
     echo '<option value = "Books">Books</option>';
     echo '<option value = "Chess">Chess</option>';
     echo '<option value = "Computer Programming">Computer Programming</option>';
     echo '<option value = "Cosmetology">Cosmetology</option>';
     echo '<option value = "Dance">Dance</option>';
-    echo '<option value = "Education">Education</option>';
     echo '<option value = "Fitness">Fitness</option>';
     echo '<option value = "Music">Music</option>';
     echo '<option value = "Poetry">Poetry</option>';

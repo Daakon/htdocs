@@ -105,7 +105,7 @@ $postOwner = $memberID;
 
     </div>
 
-    <h5 style="color:#60A3BD"><?php echo $category ?></h5>
+    <a href='/post-interest.php?interest=<?php echo urlencode($category) ?>' class='category'><h5><?php echo $category ?></h5></a>
 
 
     <div style="padding-top:10px;padding-bottom:10px;margin-top:10px;">

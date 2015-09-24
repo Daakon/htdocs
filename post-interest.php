@@ -11,7 +11,7 @@ require 'findURL.php';
 //require 'getState.php';
 require 'email.php';
 require 'category.php';
-require 'ads.php';
+//require 'ads.php';
 
 get_head_files();
 get_header();
@@ -662,19 +662,19 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 <div class="container">
 <?php
 // ad demographics
-$age = getAge($ID);
+/*$age = getAge($ID);
 $state =  getMemberState($ID);
 $interests = getInterests($ID);
 $interests = strtolower($interests);
-$gender = getGender($ID);
+$gender = getGender($ID);*/
 ?>
 
     <div class="row row-padding">
 <div class=" col-md-10  col-lg-10 col-md-offset-2 col-lg-offset-2 ">
 
         <ul class="list-inline">
+            <li><a href="javascript:history.back();">Back</a></li>
             <li><a href="/profile.php/<?php echo get_username($ID) ?>">Go To Your Profile <?php require 'getNewMessageCount.php' ?></a></li>
-             <li><a href="javascript:history.back();">Roll Call</a></li>
         </ul>
 
 
@@ -687,26 +687,12 @@ $gender = getGender($ID);
 </span>
 <?php
 
-$ads = getAds($genre, $age, $state, $interests, $gender);
+/*$ads = getAds($genre, $age, $state, $interests, $gender);
 $ageStart = $_GET['ageStart'];
 $ageEnd = $_GET['ageEnd'];
-$gender = $_GET['gender'];
+$gender = $_GET['gender'];*/
 
-if (empty($ageStart)) {
-$ageStart = 18;
-}
-if (empty($ageEnd)) {
-$ageEnd = 50;
-}
-if (empty($gender)) {
-$gender = getGender($ID);
-if ($gender == 1) {
-$gender = 2;
-}
-else {
-$gender = 1;
-}
-}
+
 
 $sql = "SELECT DISTINCT
     Members.ID As MemberID,
@@ -716,7 +702,7 @@ $sql = "SELECT DISTINCT
     Posts.ID As PostID,
     Posts.Post As Post,
     Posts.Category As Category,
-    Profile.Poster As ProfilePhoto
+    Profile.ProfilePhoto As ProfilePhoto
     FROM Members,Posts,Profile
     WHERE
     Members.IsActive = 1
@@ -725,29 +711,6 @@ $sql = "SELECT DISTINCT
     And Members.ID = Profile.Member_ID
     And Posts.IsDeleted = 0
     AND Posts.Category = '$category'
-    AND (Members.Gender = '$gender')
-    AND TIMESTAMPDIFF(YEAR, Members.DOB, CURDATE()) >= $ageStart
-    AND TIMESTAMPDIFF(YEAR, Members.DOB, CURDATE()) <= $ageEnd
-    $stateCondition
-    UNION
-    SELECT DISTINCT
-    Members.ID As MemberID,
-    Members.FirstName As FirstName,
-    Members.LastName As LastName,
-    Members.Username As Username,
-    Posts.ID As PostID,
-    Posts.Post As Post,
-    Posts.Category As Category,
-    Profile.Poster As ProfilePhoto
-    FROM Members,Posts,Profile
-    WHERE
-    Members.ID = $ID
-    And (Posts.Member_ID = $ID)
-    And (Profile.Member_ID = $ID)
-    And (Posts.IsDeleted = 0)
-    AND (Posts.Category = '$category')
-    UNION
-    $ads
     Group By PostID
     Order By PostID DESC ";
 
@@ -776,7 +739,7 @@ if (mysql_num_rows($result) > 0) {
         <div class="col-lg-9 col-md-9 roll-call "
              style="background:white;border-radius:10px;margin-top:20px;border:2px solid black;" align="left">
 
-            <img src="/poster/<?php echo $profilePhoto ?>" class="profilePhoto-Feed" alt=""
+            <img src="/media/<?php echo $profilePhoto ?>" class="profilePhoto-Feed" alt=""
                  title="<?php echo $name ?>" class='enlarge-onhover img-responsive'/> &nbsp <b><font
                     size="4"><?php echo $name ?></font></b>
 
@@ -794,12 +757,12 @@ if (mysql_num_rows($result) > 0) {
                     <?php
                     echo "<div id='long$postID' style='display:none;'>";
                     echo nl2br($post);?>
-                    <a href='/post-interest.php?interest=<?php echo urlencode($category) ?>' class='category'><h5><?php echo $category ." ". interestGlyphs($category) ?></h5></a>
+                    <a href='/post-interest.php?interest=<?php echo urlencode($category) ?>' class='category'><h5><?php echo $category ?></h5></a>
                     <?php echo "</div>";
                 }
                 else {
                     echo nl2br($post); ?>
-                    <a href='/post-interest.php?interest=<?php echo urlencode($category) ?>' class='category'><h5><?php echo $category ." ". interestGlyphs($category) ?></h5></a>
+                    <a href='/post-interest.php?interest=<?php echo urlencode($category) ?>' class='category'><h5><?php echo $category ?></h5></a>
                 <?php }
                 echo '<br/>';
                 ?>
