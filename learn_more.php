@@ -22,17 +22,17 @@ get_header()
             <a href="/home.php">Back to Roll Call</a>
             <?php } ?>
 
-            <h4>Rapportbook connects people with similar interests.</h4>
+            <h4 style="color:red;">Network And Promote Your Interests.</h4>
 
                 <img src="<?php echo $imagesPath ?>interests-lg.JPG" />
 
 
                 <p>
                     Rapportbook is a platform that allows people to
-                    network, share, meet up and grow together based off similar interests.
-                    You don't have to necessarily meet up; You can simply share information,
-                    tips, pointers, resources, etc. Conversation starts off simple between two people
-                    and grows from there. It's simple, it's easy, it's fun. Share your interests through
+                    network, promote and discover their interests.
+                    You can share information, events, tips, pointers, resources, etc.
+                    Expand your social circle by meeting new people with similar commonalities.
+                    It's simple, it's easy, it's fun. Share your interests through
                     public posts, comments, photos, videos and private direct messages.
                 </p>
             <!--<ul>

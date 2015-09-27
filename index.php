@@ -341,7 +341,7 @@ get_head_files();
                 </div>
 
 
-                <select class="form-control input-lg" id="service" name="service">
+                <select class="form-control input-lg" id="interest" name="interest">
                     <option value="">Select Your Main Interest</option>
                     <?php echo category() ?>
                 </select>

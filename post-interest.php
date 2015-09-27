@@ -692,8 +692,7 @@ $ageStart = $_GET['ageStart'];
 $ageEnd = $_GET['ageEnd'];
 $gender = $_GET['gender'];*/
 
-
-
+// Get All Categories nationwide
 $sql = "SELECT DISTINCT
     Members.ID As MemberID,
     Members.FirstName As FirstName,
