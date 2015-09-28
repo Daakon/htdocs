@@ -589,7 +589,30 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
         var genre = selection.options[selection.selectedIndex].value;
         var stateSelect = document.getElementById('searchState');
         var state = stateSelect.options[stateSelect.selectedIndex].value;
-        window.location = "/home.php?genre="+encodeURIComponent(genre)+"&state="+encodeURIComponent(state);
+        var citySelection = document.getElementById('ddCity');
+        var city = citySelection.options[citySelection.selectedIndex].value;
+        window.location = "/home.php?genre="+encodeURIComponent(genre)+"&state="+encodeURIComponent(state)+"&city="+city;
+
+    }
+</script>
+
+<script>
+    function getCity(sel) {
+        var state = sel.options[sel.selectedIndex].value;
+
+        $.ajax({
+            type: "POST",
+            url: "/getCity.php",
+            data: "state="+state+"&page=home",
+            cache: false,
+            beforeSend: function () {
+
+            },
+            success: function(html) {
+                $("#divCity").html(html);
+            }
+        });
+
     }
 </script>
 
@@ -633,12 +656,28 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
             }
             ?>
 
+            <?php
+            $searchCity = $_GET['city'];
+            if (!empty($searchCity)) {
+                $_SESSION['city'] = $searchCity;
+                $searchCity = $_SESSION['city'];
+            }
+            else {
+                if (!empty($_SESSION['city'])) {
+                    $searchCity = $_SESSION['city'];
+                } else {
+                    $searchCity = getMemberCity($ID);
+                }
+            }
+            ?>
+
             <!--Middle Column -->
             <div class=" col-md-9 col-lg-9 roll-call ">
 
 <!--If a service provider -->
 
                     <div align = "center">
+
                         <h5>Search Posts By Interests</h5>
                         <select id="genre" name="genre" onchange="updateFeed()">
                             <option value="<?php echo $genre ?>"><?php echo $genre ?></option>
@@ -647,19 +686,27 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                         </select>
 
                         <br/><br/>
-                        <div><h5>Search Posts By State</h5></div>
-                        <select id="searchState" name="searchState" onchange="updateFeed()">
+                        <div><h5>Search Posts By Area</h5></div>
+                        <select id="searchState" name="searchState" onchange="getCity(this)">
                             <option value="<?php echo $searchState ?>"><?php echo $searchState?></option>
                             <?php include 'getState.php'; getState(); ?>
                         </select>
                         <br/><br/>
 
+                        Current City: <b><?php echo $searchCity ?></b>
+
+                        <div id="divCity">
+                        </div>
+
+                        <br/>
+                        <h5><span style="font-style:italic;font-weight:bold;color:red;">Post Something of Interest To You</span></h5>
+                        <br/>
                     </div>
 
 
 
-                    <h5><span style="font-style:italic;font-weight:bold;color:red;">Post Something of Interest To You</span></h5>
-                    <br/>
+
+
 <!--If NOT a service provider -->
 
                 <form method="post" enctype="multipart/form-data" action="" onsubmit="showUploading()">

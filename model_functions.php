@@ -170,6 +170,15 @@ function getMemberState($ID) {
     return $state;
 }
 
+function getMemberCity($ID) {
+    // returns member state
+    $sql = "SELECT City FROM Profile WHERE Member_ID = $ID ";
+    $result = mysql_query($sql) or die(mysql_error());
+    $row = mysql_fetch_assoc($result);
+    $city = $row['City'];
+    return $city;
+}
+
 function get_id_from_username($username) {
     // returns member state
     $sql = "SELECT ID FROM Members WHERE Username = '$username' ";

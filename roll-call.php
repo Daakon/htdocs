@@ -13,7 +13,7 @@ else if($genre = "Show All") {
 else { $genreCondition = "And Posts.Category = '$genre' "; }
 
 if (!empty($searchState)) {
-    $stateCondition = "AND (Profile.State = '$searchState')";
+    $stateCondition = "AND (Profile.State = '$searchState' AND Profile.City = '$searchCity')";
 }
 else {
     $stateCondition = "";

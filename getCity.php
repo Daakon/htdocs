@@ -1,10 +1,11 @@
 <?php
 
 require 'connect.php';
-
+$url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 
 // variables that get sent in post must have identical names every where they exist
 $state = $_POST['state'];
+$page = $_POST['page'];
 
 $sql = "SELECT ID FROM State WHERE State = '$state'";
 $result = mysql_query($sql) or die(mysql_error());
@@ -20,8 +21,11 @@ if (mysql_num_rows($result2) > 0) { ?>
                     <div class="col-md-6">
                         <label class="sr-only" for="city">City</label>
 
+                        <?php if (!empty($page)) {?>
+                        <select name="ddCity" id="ddCity" onchange="updateFeed();">
+                            <?php } else { ?>
                         <select class='form-control input-lg' name="ddCity" id="ddCity">
-
+                        <?php } ?>
                             <option value="state">City</option>
 
     <?php
