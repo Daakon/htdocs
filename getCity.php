@@ -21,7 +21,7 @@ if (mysql_num_rows($result2) > 0) { ?>
                     <div class="col-md-6">
                         <label class="sr-only" for="city">City</label>
 
-                        <?php if (!empty($page)) {?>
+                        <?php if ($page =='home') {?>
                         <select name="ddCity" id="ddCity" onchange="updateFeed();">
                             <?php } else { ?>
                         <select class='form-control input-lg' name="ddCity" id="ddCity">

@@ -184,7 +184,7 @@ if (isset($_POST['video']) && ($_POST['video'] == "Upload Video")) {
 if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
     $firstName = $_POST['FirstName'];
     $lastName = $_POST['LastName'];
-    $city = $_POST['City'];
+    $city = $_POST['ddCity'];
     $state = $_POST['State'];
     $zip = $_POST['Zip'];
     $phone = $_POST['Phone'];
@@ -443,6 +443,26 @@ $bgPhoto = $row['ProfilePhoto'];
                     }
                 </script>
 
+                <script>
+                    function getCity(sel) {
+                        var state = sel.options[sel.selectedIndex].value;
+
+                        $.ajax({
+                            type: "POST",
+                            url: "/getCity.php",
+                            data: "state="+state+"&page=profile",
+                            cache: false,
+                            beforeSend: function () {
+
+                            },
+                            success: function(html) {
+                                $("#divCity").html(html);
+                            }
+                        });
+
+                    }
+                </script>
+
                 <!--<input onclick="showTextBox('textDiv')" type="image" value="Share" src="/images/share.png" height="50px" width="50px" style="margin-top:10px" />-->
                 <br/>
 
@@ -518,17 +538,22 @@ $bgPhoto = $row['ProfilePhoto'];
                 </div>
 
                 <div class="form-group">
-                    <label for="City">City</label>
-                    <input type="text" class="form-control" id="City" name="City" value="<?php echo $city ?>" />
-                </div>
-
-                <div class="form-group">
                     <label for="State">State</label>
-                    <select id="State" name="State" class="form-control">
+                    <select id="State" name="State" class="form-control" onchange="getCity(this);" >
                         <option  value="<?php echo $state ?>"><?php echo $state ?></option>
                         <?php getState() ?>
                     </select>
                 </div>
+
+                <label for="City">City:</label>
+                <br/>
+                <?php echo $city ?>
+
+                <br/>
+
+                <div id="divCity"></div>
+
+                <br/>
 
                 <div class="form-group">
                     <label for="Zip">Zip Code</label>
