@@ -589,8 +589,14 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
         var genre = selection.options[selection.selectedIndex].value;
         var stateSelect = document.getElementById('searchState');
         var state = stateSelect.options[stateSelect.selectedIndex].value;
-        var citySelection = document.getElementById('ddCity');
-        var city = citySelection.options[citySelection.selectedIndex].value;
+        // check to see if the city has been reselected
+        if (document.getElementById('ddCity') == null) {
+            var city = "<?php echo $_GET['city'] ?>";
+            }
+        else {
+            var citySelection = document.getElementById('ddCity');
+            var city = citySelection.options[citySelection.selectedIndex].value;
+        }
         window.location = "/home.php?genre="+encodeURIComponent(genre)+"&state="+encodeURIComponent(state)+"&city="+city;
 
     }
@@ -701,8 +707,6 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                                     $('[data-toggle="popover"]').popover();
                                 });
                             </script>
-
-
 
 
 
