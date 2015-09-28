@@ -616,6 +616,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
     }
 </script>
 
+
 <body>
 <div class="container">
     <?php
@@ -685,8 +686,27 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                             <?php echo category() ?>
                         </select>
 
-                        <br/><br/>
-                        <div><h5>Search Posts By Area</h5></div>
+                        <div>
+
+
+                                <h5>Search By Area
+                                <a href="#" style="width:500px" data-toggle="popover" title="Select Another City In The Current State" data-content="To select another city in the state
+                                            you are in now, you must select
+                                            the state again."><span class="glyphicon glyphicon-info-sign" /></a>
+                                </h5>
+
+
+                            <script>
+                                $(document).ready(function(){
+                                    $('[data-toggle="popover"]').popover();
+                                });
+                            </script>
+
+
+
+
+
+                        </div>
                         <select id="searchState" name="searchState" onchange="getCity(this)">
                             <option value="<?php echo $searchState ?>"><?php echo $searchState?></option>
                             <?php include 'getState.php'; getState(); ?>

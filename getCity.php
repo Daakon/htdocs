@@ -15,15 +15,13 @@ $stateID = $rows['ID'];
 $sql2 = "SELECT City FROM City WHERE State_ID = $stateID Order By City ASC ";
 $result2 = mysql_query($sql2) or die(mysql_error());
 
-if (mysql_num_rows($result2) > 0) { ?>
-
+if (mysql_num_rows($result2) > 0) {
+ if ($page =='home') {?>
+<select class='form-control input-lg' name="ddCity" id="ddCity" onchange="updateFeed();">
+    <?php } else { ?>
     <div class="form-group row" id="form-group-email">
                     <div class="col-md-6">
                         <label class="sr-only" for="city">City</label>
-
-                        <?php if ($page =='home') {?>
-                        <select name="ddCity" id="ddCity" onchange="updateFeed();">
-                            <?php } else { ?>
                         <select class='form-control input-lg' name="ddCity" id="ddCity">
                         <?php } ?>
                             <option value="state">City</option>
