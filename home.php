@@ -181,21 +181,7 @@ if (isset($_POST['submit'])) {
                         //ffmpeg command
                         $cmd = "$ffmpeg -i \"$postMediaFilePath\" -r 1 -ss 5 -t 1  -f image2 $poster 2>&1";
                         exec($cmd);
-                        $poster = imagecreatefromjpeg($poster);
-                        $size = getimagesize("$posterPath$posterName");
-                        $width = $size[0];
-                        $height = $size[1];
-                        if ($width > $height && $height < 1000) {
-                            // video shot in landscape, needs to be flipped
-                            $img = imagerotate($poster, 180, 0);
-                            imagejpeg($img, $posterPath.$posterName, 50);
-                        }
-                        // handle images from videos shot with Iphone
-                        if ($width > $height && $height > 700 && $type == "video/quicktime" || $type == "video/mp4") {
-                            // video shot in landscape, needs to be flipped
-                            $img = imagerotate($poster, -90, 0);
-                            imagejpeg($img, $posterPath.$posterName, 50);
-                        }
+
                         $img = '<video poster="/poster/'.$posterName.'" preload="none" controls>
                                 <source src = "' . $videoPath . $mediaName . '" type="video/mp4" />
                                 <source src = "' . $videoPath . $oggFileName . '" type = "video/ogg" />
@@ -375,22 +361,13 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                         //ffmpeg command
                         $cmd = "$ffmpeg -i \"$postMediaFilePath\" -r 1 -ss 5 -t 1  -f image2 $poster 2>&1";
                         exec($cmd);
-                        $poster = imagecreatefromjpeg($poster);
-                        $size = getimagesize("$posterPath$posterName");
-                        $width = $size[0];
-                        $height = $size[1];
-                        if ($width > $height && $height < 1000) {
-                            // video shot in landscape, needs to be flipped
-                            $img = imagerotate($poster, 180, 0);
-                            imagejpeg($img, $posterPath.$posterName, 50);
-                        }
-                        // handle images from videos shot with Iphone
-                        if ($width > $height && $height > 700 && $type == "video/quicktime" || $type == "video/mp4") {
-                            // video shot in landscape, needs to be flipped
-                            $img = imagerotate($poster, -90, 0);
-                            imagejpeg($img, $posterPath.$posterName, 50);
-                        }
-                        $img = '<video src = "' . $videoPath . $mediaName . '" poster="/media/shot.jpg" preload="auto" controls />';
+
+                        $img = '<video poster="/poster/'.$posterName.'" preload="none" controls>
+                                <source src = "' . $videoPath . $mediaName . '" type="video/mp4" />
+                                <source src = "' . $videoPath . $oggFileName . '" type = "video/ogg" />
+                                <source src = "' . $videoPath . $webmFileName . '" type = "video/webm" />
+                                </video>';
+
                     } else {
                         // if invalid file type
                         /*echo '<script>alert("Invalid File Type!");</script>';
@@ -398,6 +375,9 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                         exit; */
                     }
                     $comment = $comment . '<br/><br/>' . $img . '<br/>';
+
+
+
                     $sql = "INSERT INTO PostComments (Post_ID,     Member_ID,   Comment  ) Values
                                                       ('$postID', '$ID',      '$comment')";
                     mysql_query($sql) or die(mysql_error());
