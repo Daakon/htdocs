@@ -268,7 +268,7 @@ function build_and_send_email($senderId, $toId, $notification, $postID)
         }
 
         // a post status update related to your service has been posted
-        $subject = "Someone just shared a post related to your interest. <a href='".$link."'>Login</a> to see the request";
+        $subject = "Someone just shared a post related to your interest. <a href='".$link."'>Login</a> to see the post";
     }
 
     // if we have a notification, then send the email.
