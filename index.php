@@ -150,6 +150,26 @@ get_head_files();
     }
 </script>
 
+<script>
+        function getCity(sel) {
+            var state = sel.options[sel.selectedIndex].value;
+
+                $.ajax({
+                    type: "POST",
+                    url: "/getCity.php",
+                    data: "state="+state,
+                    cache: false,
+                    beforeSend: function () {
+
+                    },
+                    success: function(html) {
+                        $("#divCity").html(html);
+                    }
+                });
+
+        }
+</script>
+
 <?php require 'checkLogin.php'; ?>
 
 <div class="container-fluid">
@@ -258,21 +278,10 @@ get_head_files();
                     </div>
                 </div>
 
-                <div class="form-group row" id="form-group-email">
-                    <div class="col-md-6">
-                        <label class="sr-only" for="email">City</label>
-                        <input class="form-control input-lg" type="text" name="city" id="city"
-                               placeholder="City"/>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="error-text"></div>
-                    </div>
-                </div>
-
-                <div class="form-group row" id="form-group-ddGender">
+                <div class="form-group row" id="form-group-ddGender" >
                     <div class="col-md-6">
                         <label class="sr-only" for="ddState">State</label>
-                        <select class='form-control input-lg' name="ddState" id="ddState">
+                        <select class='form-control input-lg' name="ddState" id="ddState" onchange="getCity(this);">
                             <option value="state">State</option>
                             <?php echo getState() ?>
                         </select>
@@ -281,6 +290,11 @@ get_head_files();
                         <div class="error-text"></div>
                     </div>
                 </div>
+
+                <div id="divCity">
+
+                </div>
+
 
                 <div class="form-group row" id="form-group-zip">
                     <div class="col-md-6">

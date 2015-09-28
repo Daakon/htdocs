@@ -160,6 +160,7 @@ function getAge($ID) {
     return $age;
 }
 
+
 function getMemberState($ID) {
     // returns member state
     $sql = "SELECT State FROM Profile WHERE Member_ID = $ID ";
