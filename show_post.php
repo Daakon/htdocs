@@ -532,6 +532,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
     Members.ID As MemberID,
     Members.FirstName As FirstName,
     Members.LastName As LastName,
+    Members.Username As Username,
     Posts.ID As PostID,
     Posts.Post As Post,
     Posts.Category As Category,
@@ -559,6 +560,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
     while ($rows = mysql_fetch_assoc($result)) {
     $memberID = $rows['MemberID'];
     $name = $rows['FirstName'] . ' ' . $rows['LastName'];
+    $username = $rows['Username'];
     $profilePhoto = $rows['ProfilePhoto'];
     $category = $rows['Category'];
     $post = $rows['Post'];
@@ -666,7 +668,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                 <br/>
 
                 <?php if ($memberID != $ID) { ?>
-                    <a href="/view_messages.php?id=<?php echo $memberID ?>">Direct Message <?php echo $rows['FirstName'] ?></a>
+                    <a href="/view_messages.php/<?php echo $username ?>">Direct Message <?php echo $rows['FirstName'] ?></a>
                 <?php } ?>
                 <br/>
 
