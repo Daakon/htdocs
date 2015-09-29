@@ -193,6 +193,7 @@ if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
     $interest = $_POST['Interest'];
     $dob = $_POST['DOB'];
     $emailStatus = $_POST['EmailStatus'];
+    $smsStatus = $_POST['SmsStatus'];
     $password = $_POST['Password'];
     $username = $_POST['Username'];
 //only if password has changed do we hash it
@@ -214,6 +215,7 @@ if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
           DOB = '$dob',
           Email = '$email',
           EmailActive = '$emailStatus ',
+          SmsActive = '$smsStatus ',
           Interest = '$interest',
           Password = '$password'
           WHERE ID = $ID ";
@@ -390,6 +392,7 @@ $bgPhoto = $row['ProfilePhoto'];
                         Members.DOB As DOB,
                         Members.Interest As Interest,
                         Members.EmailActive As EmailStatus,
+                        Members.SmsActive As SmsStatus,
                         Profile.ProfilePhoto As ProfilePhoto,
                         Profile.ProfileVideo As ProfileVideo,
                         Profile.Poster As Poster,
@@ -424,6 +427,7 @@ $bgPhoto = $row['ProfilePhoto'];
             $dob = $rows['DOB'];
             $interest = $rows['Interest'];
             $emailStatus = $rows['EmailStatus'];
+            $smsStatus = $rows['SmsStatus'];
             if (strlen($posterName) == 0) {
                 $posterName = "video-bg.jpg";
             }
@@ -612,6 +616,30 @@ $bgPhoto = $row['ProfilePhoto'];
                     <select id="EmailStatus" name="EmailStatus" name="EmailStatus" class="form-control">
                         <option value="<?php echo $emailStatus ?>"><?php echo $emailStatusText ?></option>
                         <option value="<?php echo $otherEmailValue ?>"><?php echo $otherEmailText ?></option>
+                    </select>
+                </div>
+
+
+                <?php
+                $otherSmsValue = "";
+                $otherSmsText = "";
+                if ($smsStatus == 1) {
+                    $smsStatusText = "On";
+                    $otherSmsValue = 0;
+                    $otherSmsText = "Off";
+                }
+                else {
+                    $smsStatusText = "Off";
+                    $otherSmsValue = 1;
+                    $otherSmsText = "On";
+                }
+                ?>
+
+                <div class="form-group">
+                    <label for="SmsStatus">SMS Notification</label>
+                    <select id="SmsStatus" name="SmsStatus" name="SmsStatus" class="form-control">
+                        <option value="<?php echo $smsStatus ?>"><?php echo $smsStatusText ?></option>
+                        <option value="<?php echo $otherSmsValue ?>"><?php echo $otherSmsText ?></option>
                     </select>
                 </div>
 

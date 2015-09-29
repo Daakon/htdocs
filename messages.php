@@ -50,7 +50,7 @@ $ID = $_SESSION['ID'];
                     $subject = $rows['Subject'];
 
                     // get sender name
-                    $sql2 = "SELECT FirstName, ProfilePhoto
+                    $sql2 = "SELECT FirstName,Username, ProfilePhoto
                 FROM Members, Profile
                 WHERE Profile.Member_ID = $otherID
                 AND Members.ID = $otherID ";
@@ -59,6 +59,7 @@ $ID = $_SESSION['ID'];
                     $rows2 = mysql_fetch_assoc($result2);
                     $pic = $rows2['ProfilePhoto'];
                     $name = $rows2['FirstName'];
+                    $username = $rows2['Username'];
 
                     // get new message
 
@@ -66,7 +67,7 @@ $ID = $_SESSION['ID'];
                     $result3 = mysql_query($sql3) or die(mysql_error());
                     $row3 = mysql_fetch_assoc($result3);
 
-                    echo "<a href = 'view_messages.php?id=$otherID'><img src = '$mediaPath$pic' class='profilePhoto-Feed' alt='' /> $name </a>";
+                    echo "<a href = '/view_messages.php/$username'><img src = '$mediaPath$pic' class='profilePhoto-Feed' alt='' /> $name </a>";
                     if (mysql_num_rows($result3) > 0) { echo "<span style='color:red;font-weight:bold'>New</font>"; }
                     echo "<br/>";
                     echo "$subject";

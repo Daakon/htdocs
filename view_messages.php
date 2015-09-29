@@ -35,6 +35,7 @@ if (mysql_num_rows($result) == 0) {
 if (isset($_POST['send']) && $_POST['send'] == "Send") {
 
     $receiverID = $_POST['receiverID'];
+    $receiverUsername = $_POST['username'];
     $subject = $_POST['subject'];
     $message = $_POST['message'];
     $message = mysql_real_escape_string($message);
@@ -243,7 +244,7 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
 
     // notify recipient of email
     build_and_send_email($ID, $receiverID,8, "");
-    echo "<script>location = 'view_messages.php?id=$receiverID'</script>";
+    echo "<script>location = '/view_messages.php/$receiverUsername'</script>";
 }
 ?>
 
@@ -354,6 +355,7 @@ $senderID = get_id_from_username($urlUsername);
                 <textarea name="message" id="message" class="form-control"></textarea>
                 <input type="hidden" id="subject" name="subject" value="<?php echo $subject ?>" />
                 <input type="hidden" id="receiverID" name="receiverID" value="<?php echo $senderID ?>" />
+                <input type="hidden" id="username" name="username" value="<?php echo $urlUsername ?>"/>
                 <input type="submit" class="btn btn-default" id="send" name="send" value="Send" />
             </form>
 

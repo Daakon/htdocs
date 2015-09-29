@@ -17,7 +17,7 @@ $result2 = mysql_query($sql2) or die(mysql_error());
 
 if (mysql_num_rows($result2) > 0) {
  if ($page =='home') {?>
-<select class='form-control input-lg' name="ddCity" id="ddCity" onchange="updateFeed();">
+<select name="ddCity" id="ddCity" onchange="updateFeed();">
     <?php } else { ?>
     <div class="form-group row" id="form-group-email">
                     <div class="col-md-6">
