@@ -3,7 +3,7 @@ require 'connect.php';
 
 require 'model_functions.php';
 require 'mediaPath.php';
-//require 'getSession.php';
+require 'getSession_public.php';
 require 'html_functions.php';
 require 'findURL.php';
 require 'email.php';
@@ -676,7 +676,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                 $sql3 = "SELECT DISTINCT
                         PostComments.Comment As PostComment,
                         PostComments.ID As PostCommentID,
-                        Members.ID As CommeterID,
+                        Members.ID As CommenterID,
                         Members.FirstName as FirstName,
                         Members.LastName As LastName,
                         Profile.ProfilePhoto As ProfilePhoto
@@ -700,6 +700,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                         echo '<div class="comment-row">';
                         echo '<div class="user-icon"><img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" style = "border:1px solid black" class ="enlarge-onhover img-responsive" /><div class="user-name">' . $rows3['FirstName'] . ' ' . $rows3['LastName'] . '</div></div><div class="comment-content">' . nl2br($comment) . '</div>';
                         echo '</div>';
+
                         if ($commentOwnerID == $ID) {
                             //<!--DELETE BUTTON ------------------>
                             echo '<div class="comment-delete">';
