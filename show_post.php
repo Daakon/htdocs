@@ -676,7 +676,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                 $sql3 = "SELECT DISTINCT
                         PostComments.Comment As PostComment,
                         PostComments.ID As PostCommentID,
-                        Members.ID As MemberID,
+                        Members.ID As CommeterID,
                         Members.FirstName as FirstName,
                         Members.LastName As LastName,
                         Profile.ProfilePhoto As ProfilePhoto
@@ -696,11 +696,11 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                         $comment = $rows3['PostComment'];
                         $profilePhoto = $rows3['ProfilePhoto'];
                         $commentID = $rows3['PostCommentID'];
-                        $commentOwner = $rows3['MemberID'];
+                        $commentOwnerID = $rows3['CommenterID'];
                         echo '<div class="comment-row">';
                         echo '<div class="user-icon"><img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" style = "border:1px solid black" class ="enlarge-onhover img-responsive" /><div class="user-name">' . $rows3['FirstName'] . ' ' . $rows3['LastName'] . '</div></div><div class="comment-content">' . nl2br($comment) . '</div>';
                         echo '</div>';
-                        if ($postOwner == $ID) {
+                        if ($commentOwnerID == $ID) {
                             //<!--DELETE BUTTON ------------------>
                             echo '<div class="comment-delete">';
                             echo '<form action="" method="post" onsubmit="return confirm(\'Do you really want to delete this comment?\')">';
@@ -720,7 +720,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                 $sql4 = "SELECT DISTINCT
                         PostComments.Comment As PostComment,
                         PostComments.ID As PostCommentID,
-                        Members.ID As MemberID,
+                        Members.ID As CommenterID,
                         Members.FirstName as FirstName,
                         Members.LastName As LastName,
                         Profile.ProfilePhoto As ProfilePhoto
@@ -749,13 +749,13 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                         $comment = $rows4['PostComment'];
                         $profilePhoto = $rows4['ProfilePhoto'];
                         $commentID = $rows4['PostCommentID'];
-                        $commentOwner = $rows4['MemberID'];
+                        $commentOwnerID = $rows4['CommenterID'];
                         echo '<div class="user-icon">';
                         echo '<img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" style = "border:1px solid black" class ="enlarge-onhover img-responsive" /><div class="user-name">' . $rows4['FirstName'] . $rows['LastName'] . '</div></div><div class="comment-content">' . nl2br($comment) . '</div>';
                         echo '</td></tr>';
                     }
                     echo '</div>';
-                    if ($postOwner == $ID) {
+                    if ($commentOwnerID == $ID) {
                         //<!--DELETE BUTTON ------------------>
                         echo '<div class="comment-delete">';
                         echo '<form action="" method="post" onsubmit="return confirm(\'Do you really want to delete this comment?\')">';

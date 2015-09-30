@@ -28,8 +28,8 @@ get_header()
 
 
                 <p>
-                    Rapportbook is a platform that allows people to
-                    network, promote and discover their interests.
+                    Rapportbook is a platform that allows people in the same local area
+                    to network, promote and discover their interests.
                     You can share information, events, tips, pointers, resources, etc.
                     Expand your social circle by meeting new people with similar commonalities.
                     It's simple, it's easy, it's fun. Share your interests through
