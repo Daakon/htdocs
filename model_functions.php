@@ -28,6 +28,18 @@ function checkEmailActive($user_id)
     }
 }
 
+function checkSMSActive($user_id)
+{
+    $sql = "SELECT SMSActive FROM Members where ID = $user_id ";
+    $result = mysql_query($sql) or die(mysql_error());
+    $rows = mysql_fetch_assoc($result);
+    if ($rows['SMSActive'] == 1) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 function get_users_name($user_id)
 {
 
@@ -225,8 +237,9 @@ function check_email($email) {
 // text function for direct messages
 function text_notification($receiverID, $senderID)
 {
-    require 'class-Clockwork.php';
-    $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+    if (checkSMSActive($receiverID)) {
+        require 'class-Clockwork.php';
+        $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
         $result = mysql_query("SELECT Phone FROM Profile WHERE Member_ID = $receiverID");
         $row = mysql_fetch_assoc($result);
         $number = $row['Phone'];
@@ -259,6 +272,7 @@ function text_notification($receiverID, $senderID)
         } catch (ClockworkException $e) {
             echo 'Exception sending SMS: ' . $e->getMessage();
         }
+    }
 }
 
 function alert_all_matching_interests($interest, $state)
