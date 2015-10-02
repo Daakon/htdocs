@@ -300,7 +300,7 @@ function build_and_send_email($senderId, $toId, $notification, $postID)
         $message .= "<br/>Rapportbook LLC, 911 Washington Ave, Suite 501, St.Louis,MO 63101 USA </td></tr>";
         $message .= "</table></body></html>";
 
-        $header = "From: Rapporbook <admin@rapportbook.com> \r\n";
+        $header = "From: Rapportbook <admin@rapportbook.com> \r\n";
         $header .= "Content-type: text/html";
         ini_set('sendmail_from', 'info@rapportbook.com');
 
