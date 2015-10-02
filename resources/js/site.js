@@ -79,21 +79,35 @@ $('#signup').on("click", function (event) {
     // check month
     if (!checkRequest('ddMonth', 'month')) {
         $('#form-group-birthday').addClass('has-error');
-        $('#form-group-birthday .error-text').html('Please select the month, day, and year of your birthday.');
+        $('#form-group-birthday .error-text').html('Please select the month of your birthday.');
         request_successful = false;
     }
 
     // check day
     if (!checkRequest('ddDay', 'day')) {
         $('#form-group-birthday').addClass('has-error');
-        $('#form-group-birthday .error-text').html('Please select the month, day, and year of your birthday.');
+        $('#form-group-birthday .error-text').html('Please select the day of your birthday.');
         request_successful = false;
     }
 
     // check year
     if (!checkRequest('ddYear', 'year')) {
-        $('#form-group-birthday').addClass('has-error');
-        $('#form-group-birthday .error-text').html('Please select the month, day, and year of your birthday.');
+        $('#form-group-year').addClass('has-error');
+        $('#form-group-birthday .error-text').html('Please select the year of your birthday.');
+        request_successful = false;
+    }
+
+    // check city
+    if (!checkRequest('ddCity', 'city')) {
+        $('#form-group-city').addClass('has-error');
+        $('#form-group-birthday .error-text').html('Please select your city.');
+        request_successful = false;
+    }
+
+    // check city
+    if (!checkRequest('ddState', 'state')) {
+        $('#form-group-city').addClass('has-error');
+        $('#form-group-state .error-text').html('Please select your state.');
         request_successful = false;
     }
 

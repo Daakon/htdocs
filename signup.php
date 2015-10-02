@@ -26,6 +26,11 @@ $fb_token = $_POST['fb_token'];
 $fb_id = $_POST['fb_id'];
 
 
+if ($city == '') {
+    echo "<script>alert('You did not provide a city'); location='/index.php'</script>";
+    exit;
+}
+
 if($gender=='') $gender = (($_POST['gender']=='male')?1:2);
 
 if ($year != '') {

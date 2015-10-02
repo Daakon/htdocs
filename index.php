@@ -170,6 +170,117 @@ get_head_files();
         }
 </script>
 
+<script>
+    function checkSignup() {
+        // check first name
+        var firstName = document.getElementById('firstName').value;
+        if (firstName == '') {
+            alert('First Name needed');
+            return false;
+        }
+
+        // check last name
+        var lastName = document.getElementById('lastName').value;
+        if (lastName == '') {
+            alert('Last Name needed');
+            return false;
+        }
+
+        // check email
+        var email = document.getElementById('email').value;
+        if (email == '') {
+            alert('Email needed');
+            return false;
+        }
+
+        // check gender
+        var ddGender = document.getElementById('ddGender');
+        var gender = ddGender.options[ddGender.selectedIndex].value;
+
+        if (gender == '') {
+            alert('Gender needed');
+            return false;
+        }
+
+        // check state
+        var ddState = document.getElementById('ddState');
+        var state = ddState.options[ddState.selectedIndex].value;
+
+        if (state == '' || state.length == 0) {
+            alert('State needed');
+            return false;
+        }
+
+        // check city
+        var ddCity = document.getElementById('ddCity');
+        var city = ddCity.options[ddCity.selectedIndex].value;
+
+        if (city == '' || state.length == 0) {
+            alert('City needed');
+            return false;
+        }
+
+        // check zip
+        var zip = document.getElementById('zip').value;
+        if (zip == '') {
+            alert('Zip Code needed');
+            return false;
+        }
+
+        // check birth month
+        var ddMonth = document.getElementById('ddMonth');
+        var month = ddMonth.options[ddMonth.selectedIndex].value;
+
+        if (month == '' || month.length == 0) {
+            alert('Birth Month needed');
+            return false;
+        }
+
+        // check birth day
+        var ddDay = document.getElementById('ddDay');
+        var day = ddDay.options[ddDay.selectedIndex].value;
+
+        if (day == '' || month.length == 0) {
+            alert('Birth Day needed');
+            return false;
+        }
+
+        // check birth year
+        var ddYear = document.getElementById('ddYear');
+        var year = ddYear.options[ddYear.selectedIndex].value;
+
+        if (year == '' || year.length == 0) {
+            alert('Birth Month needed');
+            return false;
+        }
+
+        // check username
+        var username = document.getElementById('username').value;
+        if (username == '') {
+            alert('Username needed');
+            return false;
+        }
+
+        // check password
+        var password = document.getElementById('password').value;
+        if (password == '') {
+            alert('Password needed');
+            return false;
+        }
+
+        // check interest
+        var ddInterest = document.getElementById('interest');
+        var interest = ddInterest.options[ddInterest.selectedIndex].value;
+
+        if (interest == '' || year.length == 0) {
+            alert('Interest needed');
+            return false;
+        }
+        return true;
+
+    }
+</script>
+
 <?php require 'checkLogin.php'; ?>
 
 <div class="container-fluid">
@@ -224,7 +335,7 @@ get_head_files();
                 </a>
 
 
-            <form method="post" action="signup.php" id="rb_signup_form" >
+            <form method="post" action="signup.php" id="signup" onsubmit='return checkSignup();' >
 
                 <div class="visible-lg visible-md visible-sm visible-xs">
                     <h2 style="color:red;">Sign Up</h2>
@@ -278,11 +389,11 @@ get_head_files();
                     </div>
                 </div>
 
-                <div class="form-group row" id="form-group-ddGender" >
+                <div class="form-group row" id="form-group-ddState" >
                     <div class="col-md-6">
                         <label class="sr-only" for="ddState">State</label>
                         <select class='form-control input-lg' name="ddState" id="ddState" onchange="getCity(this);">
-                            <option value="state">State</option>
+                            <option value="">State</option>
                             <?php echo getState() ?>
                         </select>
                     </div>
@@ -313,17 +424,17 @@ get_head_files();
                     <div class="col-md-6">
                         <label class="sr-only" for="ddMonth">Birthday Month</label>
                         <select class="form-control input-lg" id="ddMonth" name="ddMonth">
-                            <option value="month">Month</option>
+                            <option value="">Month</option>
                             <?php echo calendarMonths() ?>
                         </select>
                         <label class="sr-only" for="ddDay">Birthday Day</label>
                         <select class="form-control input-lg" id="ddDay" name="ddDay">
-                            <option value="day">Day</option>
+                            <option value="">Day</option>
                             <?php echo calendarDays() ?>
                         </select>
                         <label class="sr-only" for="ddYear">Birthday Year</label>
                         <select class="form-control input-lg" name="ddYear" id="ddYear">
-                            <option value="year">Year</option>
+                            <option value="">Year</option>
                             <?php echo calendarYears() ?>
                         </select>
                     </div>
