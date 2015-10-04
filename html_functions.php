@@ -52,7 +52,7 @@ addToHomescreen.removeSession();
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
     <!--Local JS file-->
-    <script type="text/javascript" src="/resources/js/site.js"></script>
+<!--    <script type="text/javascript" src="/resources/js/site.js"></script>-->
 
         <title>Rapportbook</title>
     </head>

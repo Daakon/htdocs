@@ -232,6 +232,38 @@ function check_email($email) {
     }
 }
 
+function check_demographics($ID) {
+    $sql = "SELECT * FROM Profile WHERE Member_ID = $ID ";
+    $result = mysql_query($sql) or die(mysql_error());
+    $rows = mysql_fetch_assoc($result);
+    $about = $rows['About'];
+    $city = $rows['City'];
+    $state = $rows['State'];
+    $zip = $rows['Zip'];
+    $date = date('Y-m-d');
+
+    if ($_SESSION['DATE'] != $date) {
+        if ($city == '') {
+            echo "<script>alert('Please provide your current city in your profile');</script>";
+            $_SESSION['DATE'] = $date;
+        }
+        elseif ($state == '') {
+            echo "<script>alert('Please provide your current state in your profile');</script>";
+            $_SESSION['DATE'] = $date;
+        }
+        elseif ($zip == '') {
+            echo "<script>alert('Please provide your current zip code in your profile');</script>";
+            $_SESSION['DATE'] = $date;
+        }
+        elseif ($about == '') {
+            echo "<script>alert('The about section in your profile is empty. Tell everyone a little about yourself');</script>";
+            $_SESSION['DATE'] = $date;
+        }
+    }
+
+
+}
+
 // text function to all service providers for related service post
 
 // text function for direct messages
