@@ -22,7 +22,8 @@ get_head_files();
 
     function createCookie(name,value,days)
     {
-        if (days){var date = new Date();date.setTime(date.getTime()+(days*24*60*60*1000));
+        if (days){
+            var date = new Date();date.setTime(date.getTime()+(days*24*60*60*1000));
             var expires = "; expires="+date.toGMTString();
         }
         else
@@ -220,8 +221,10 @@ get_head_files();
 
         // check email
         var email = document.getElementById('email').value;
-        if (email == '') {
-            alert('Email needed');
+        //var filter = /^(([^<>()[]\.,;:s@"]+(.[^<>()[]\.,;:s@"]+)*)|(".+"))@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}])|(([a-zA-Z-0-9]+.)+[a-zA-Z]{2,}))$/;
+        //if (!filter.test(email)) {
+        if (email = '') {
+            alert('Please provide a valid email address');
             return false;
         }
 
@@ -249,6 +252,7 @@ get_head_files();
 
         if (city == '' || state.length == 0) {
             alert('City needed');
+            ddCity.focus();
             return false;
         }
 
@@ -293,10 +297,15 @@ get_head_files();
             return false;
         }
 
+        if (username.contains("@")) {
+            alert('Username cannot be an email');
+        }
+
         // check password
         var password = document.getElementById('password').value;
         if (password == '') {
             alert('Password needed');
+            password.focus();
             return false;
         }
 

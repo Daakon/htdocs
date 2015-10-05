@@ -147,7 +147,7 @@ if (strstr($url, "home.php")) { ?>
 <?php } ?>
 
 
-        <?php if (!empty($_COOKIE['ID']) && isset($_COOKIE['ID'])) { ?>
+
             <div class=" visible-sm visible-md visible-lg pull-right">
                 <ul class="list-inline">
 <!--                    <li><a href="/advertising.php" style="color:white;">Advertise</a></li>-->
@@ -155,7 +155,7 @@ if (strstr($url, "home.php")) { ?>
                     <li><a href="/logout.php" onclick="facebookLogout()" style="color:white; cursor:pointer" >Log Out</a></li>
                 </ul>
             </div>
-        <?php } ?>
+
 
     </header>
 
