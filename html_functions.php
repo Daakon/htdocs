@@ -175,7 +175,7 @@ if (strstr($url, "home.php")) { ?>
         <ul class="list-inline" style="padding-left:10px;background-color:white;">
             <li><a href="/support.php" class="mobileLink">Support</a></li>
 <!--            <li><a href="/advertising.php" class="mobileLink">Advertise</a></li>-->
-            <li><a href ="/logout.php" onclick="FB.logout()" class="mobileLink" >Log Out</a></li>
+            <li><a href ="/logout.php" class="mobileLink" >Log Out</a></li>
         </ul>
 
     </div>
