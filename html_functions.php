@@ -172,10 +172,10 @@ if (strstr($url, "home.php")) { ?>
 
     <div class="visible-xs black-link" style="padding-top:10px;">
 
-        <ul class="list-inline" style="padding-left:10px;background-color:white;">
-            <li><a href="/support.php" class="mobileLink">Support</a></li>
+        <ul class="list-inline" style="padding-left:10px;background-color:black;color:white;">
+            <li><a href="/support.php" class="mobileLink" style="color:white;">Support</a></li>
 <!--            <li><a href="/advertising.php" class="mobileLink">Advertise</a></li>-->
-            <li><a href ="/logout.php" class="mobileLink" >Log Out</a></li>
+            <li><a href ="/logout.php" class="mobileLink" style="color:white;" >Log Out</a></li>
         </ul>
 
     </div>

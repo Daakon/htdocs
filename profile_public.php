@@ -137,13 +137,13 @@ $bgPhoto = $row['ProfilePhoto'];
                 <?php if ($profileVideo != "default_video.png") { ?>
                     <video src = " <?php echo $videoPath . $profileVideo ?>" poster="/poster/<?php echo $posterName ?>"  preload="auto" controls />
                 <?php } else { ?>
-                <h2>No Profile Video Uploaded</h2>
+                <h2>No Profile Video</h2>
             </div>
         <?php } ?>
 
             <div class="content-block">
                 <h2>
-            <?php echo $firstName ?>
+            <?php echo $firstName .' '. $lastName ?>
                 </h2>
             </div>
 
