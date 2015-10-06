@@ -9,7 +9,8 @@ get_head_files();
 ?>
 <?php get_login_header() ?>
 
-    <body>
+
+
 <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
 
 <script>
@@ -215,17 +216,23 @@ get_head_files();
 
 <?php require 'checkLogin.php'; ?>
 
-<div class="container-fluid">
+    <body style="background-image:url('/images/index-image.jpeg');
+background-repeat:no-repeat;
+background-size:100% 100%;
+background-position:inherit;">
+
+<div class="container-fluid" >
+
+    <div class="row" >
 
 
-    <div class="row">
         <div class="col-lg-6 col-md-5 hidden-sm hidden-xs">
-            <image src="/images/interests-lg.JPG" style="border:2px solid black" class="center-block" ><br>
+            <!--<image src="/images/interests-lg.JPG" style="border:2px solid black" class="center-block" ><br>
             </image>
-            <h3 align="center"><span style="font-style: italic;color:red;font-weight: bold">Network And Promote Your Interests</span></h3>
+            <h3 align="center"><span style="font-style: italic;color:red;font-weight: bold">Network And Promote Your Interests</span></h3>-->
         </div>
 
-        <div class="col-lg-6 col-md-7 col-sm-12 col-xs-12 ">
+        <div class="col-lg-6 col-md-7 col-sm-12 col-xs-12" >
 
 
             <div class="modal fade" id="request_message">
@@ -251,15 +258,19 @@ get_head_files();
 
             <div class="visible-xs" style="font-weight: bold;font-size:20px">
                 <br/>
-                <a href="login-mobile.php" style="color:red;">Login With Rapportbook</a>
+                <div style="background:white;border-radius:10px;width:30%">
+                <a href="login-mobile.php" style="color:red;">
+                    <h4>Login</h4>
+                </a>
+                    </div>
 
             </div>
 
-
+                <div style="background:white;border-radius:10px;width:30%">
                 <a href="/learn_more.php">
-                    <h3>Learn More</h3>
+                    <h4>Learn More</h4>
                 </a>
-
+            </div>
 
             <form method="post" action="signup.php" id="signup" onsubmit='return checkSignup();' >
 
