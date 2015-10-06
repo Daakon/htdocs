@@ -152,7 +152,7 @@ if (strstr($url, "home.php")) { ?>
                 <ul class="list-inline">
 <!--                    <li><a href="/advertising.php" style="color:white;">Advertise</a></li>-->
                     <li><a href="/support.php" style="color:white;">Support</a></li>
-                    <li><a href="/logout.php" onclick="facebookLogout()" style="color:white; cursor:pointer" >Log Out</a></li>
+                    <li><a href="/logout.php"  style="color:white; cursor:pointer" >Log Out</a></li>
                 </ul>
             </div>
 

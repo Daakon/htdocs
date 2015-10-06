@@ -613,7 +613,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
     <div class="row row-padding">
         <div class=" col-md-10  col-lg-10 col-md-offset-2 col-lg-offset-2 ">
             <ul class="list-inline">
-                <li><a href="/profile.php/<?php echo get_username($ID) ?>"><span style="color:black;font-weight:bold;">Go To Your Profile</span> <?php require 'getNewMessageCount.php' ?></a></li>
+                <li><a href="/profile.php/<?php echo get_username($ID) ?>"><span style="background:red;color:white;padding:10px;border:5px solid white;font-weight:bold;">Go To Your Profile</span> <?php require 'getNewMessageCount.php' ?></a></li>
             </ul>
 
             <?php
