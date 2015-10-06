@@ -44,113 +44,6 @@ get_head_files();
     }
 </script>
 
-<script>
-    // This is called with the results from from FB.getLoginStatus().
-    function statusChangeCallback(response) {
-        console.log('statusChangeCallback');
-        console.log(response);
-        // The response object is returned with a status field that lets the
-        // app know the current login status of the person.
-        // Full docs on the response object can be found in the documentation
-        // for FB.getLoginStatus().
-        if (response.status === 'connected') {
-            // Logged into your app and Facebook.
-            testAPI();
-        } else if (response.status === 'not_authorized') {
-            // The person is logged into Facebook, but not your app.
-            document.getElementById('status').innerHTML = 'Please log ' +
-            'into this app.';
-        } else {
-            // The person is not logged into Facebook, so we're not sure if
-            // they are logged into this app or not.
-            document.getElementById('status').innerHTML = 'Please log ' +
-            'into Facebook.';
-        }
-    }
-
-    // This function is called when someone finishes with the Login
-    // Button.  See the onlogin handler attached to it in the sample
-    // code below.
-    function checkLoginState() {
-        FB.getLoginStatus(function(response) {
-            statusChangeCallback(response);
-        });
-    }
-
-    window.fbAsyncInit = function() {
-        FB.init({
-            appId      : '1537351149864603',
-            cookie     : true,  // enable cookies to allow the server to access
-                                // the session
-            xfbml      : true,  // parse social plugins on this page
-            version    : 'v2.2' // use version 2.2
-        });
-
-        // Now that we've initialized the JavaScript SDK, we call
-        // FB.getLoginStatus().  This function gets the state of the
-        // person visiting this page and can return one of three states to
-        // the callback you provide.  They can be:
-        //
-        // 1. Logged into your app ('connected')
-        // 2. Logged into Facebook, but not your app ('not_authorized')
-        // 3. Not logged into Facebook and can't tell if they are logged into
-        //    your app or not.
-        //
-        // These three cases are handled in the callback function.
-
-        FB.getLoginStatus(function(response) {
-            statusChangeCallback(response);
-        });
-
-    };
-
-    // Load the SDK asynchronously
-    (function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/en_US/sdk.js";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-
-    // Here we run a very simple test of the Graph API after login is
-    // successful.  See statusChangeCallback() for when this call is made.
-    function testAPI() {
-        console.log('Welcome!  Fetching your information.... ');
-        FB.api('/me', function(response) {
-            console.log(response);
-            console.log('Successful login for: ' + response.name);
-            document.getElementById('status').innerHTML =
-                'Thanks for logging in, ' + response.name + '!';
-
-            // parse birthday sent from FB to match MySQL Format
-            var date = new Date(response.birthday);
-            var d = date.getDate();
-            var m = date.getMonth() + 1;
-            var y = date.getFullYear();
-            var birthday = '' + y + '-' + (m<=9 ? '0' + m : m) + '-' + (d <= 9 ? '0' + d : d);
-
-            var data ={
-                firstName:response.first_name,lastName:response.last_name,email:response.email,gender:response.gender,birthday:birthday,fb_id:response.id
-            };
-
-            $.post( 'signup.php', data)
-                .done(function( data ) {
-                    //alert("Your profile was successfully set up");
-                    window.location = "/home.php";
-                })
-                .fail(function() {
-                    alert( "error on create account" );
-
-                })
-            ;
-
-        });
-
-
-
-    }
-</script>
 
 <script>
     function capFname() {
@@ -241,7 +134,7 @@ get_head_files();
         var ddState = document.getElementById('ddState');
         var state = ddState.options[ddState.selectedIndex].value;
 
-        if (state == '' || state.length == 0) {
+        if (state == '') {
             alert('State needed');
             return false;
         }
@@ -250,9 +143,8 @@ get_head_files();
         var ddCity = document.getElementById('ddCity');
         var city = ddCity.options[ddCity.selectedIndex].value;
 
-        if (city == '' || state.length == 0) {
+        if (city == '') {
             alert('City needed');
-            ddCity.focus();
             return false;
         }
 
@@ -305,7 +197,6 @@ get_head_files();
         var password = document.getElementById('password').value;
         if (password == '') {
             alert('Password needed');
-            password.focus();
             return false;
         }
 
@@ -335,11 +226,6 @@ get_head_files();
         </div>
 
         <div class="col-lg-6 col-md-7 col-sm-12 col-xs-12 ">
-
-            <fb:login-button data-max-rows="1" data-size="xlarge" data-show-faces="true" data-auto-logout-link="true" scope="public_profile,email" onlogin="checkLoginState();" style="margin-top:10px;">
-            </fb:login-button>
-            <div id="status">
-            </div>
 
 
             <div class="modal fade" id="request_message">
@@ -371,7 +257,6 @@ get_head_files();
 
 
                 <a href="/learn_more.php">
-                    <br/>
                     <h3>Learn More</h3>
                 </a>
 

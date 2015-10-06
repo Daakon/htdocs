@@ -232,6 +232,18 @@ function check_email($email) {
     }
 }
 
+function is_existing_email($email, $ID) {
+    $sql = "SELECT Email FROM Members WHERE Email = '$email' AND ID != $ID  ";
+    $result = mysql_query($sql) or die(mysql_error());
+    $rows = mysql_fetch_assoc($result);
+    if (mysql_num_rows($result) > 0) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
 function check_demographics($ID) {
     $sql = "SELECT * FROM Profile WHERE Member_ID = $ID ";
     $result = mysql_query($sql) or die(mysql_error());

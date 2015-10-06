@@ -24,7 +24,7 @@ if (mysql_num_rows($result2) > 0) {
                         <label class="sr-only" for="city">City</label>
                         <select class='form-control input-lg' name="ddCity" id="ddCity">
                         <?php } ?>
-                            <option value="state">City</option>
+                            <option value="">City</option>
 
     <?php
 

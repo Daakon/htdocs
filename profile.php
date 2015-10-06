@@ -184,7 +184,12 @@ if (isset($_POST['video']) && ($_POST['video'] == "Upload Video")) {
 if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
     $firstName = $_POST['FirstName'];
     $lastName = $_POST['LastName'];
-    $city = $_POST['ddCity'];
+
+    if (!empty($_POST['ddCity']) && isset($_POST['ddCity'])) {
+        $city = $_POST['ddCity'];
+    }
+    else { $city = getMemberCity($ID); }
+
     $state = $_POST['State'];
     $zip = $_POST['Zip'];
     $phone = $_POST['Phone'];
@@ -206,6 +211,13 @@ if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
         echo "<script>alert('Invalid Email');location='profile.php/$username'</script>";
         exit();
     }
+
+    // check that updated email does not exist
+    if (is_existing_email($email, $ID)) {
+        echo "<script>alert('This email already belongs to someone');location='profile.php/$username'</script>";
+        exit();
+    }
+    $email = mysql_real_escape_string($email);
 
     // update Member table first
     $sql = "Update Members
@@ -286,15 +298,79 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
 <script>
     function checkFields() {
         var firstName = document.getElementById('FirstName').value;
-        var lastName = document.getElementById('LastName').value;
+
         if (firstName == "") {
             alert('First Name cannot be empty');
             return false;
         }
+
+        var lastName = document.getElementById('LastName').value;
+
         if (lastName == "") {
             alert('Last Name cannot be empty');
             return false;
         }
+
+        // check state
+        var ddState = document.getElementById('State');
+        var state = ddState.options[ddState.selectedIndex].value;
+
+        if (state == '') {
+            alert('State needed');
+            return false;
+        }
+
+// check city
+        if (document.getElementById('ddCity') != null) {
+            var ddCity = document.getElementById('ddCity');
+            var city = ddCity.options[ddCity.selectedIndex].value;
+
+            if (city == '') {
+                alert('City needed');
+                return false;
+            }
+        }
+
+        // check zip
+        var zip = document.getElementById('Zip').value;
+        if (zip == '' || zip == "0") {
+            alert('Zip Code needed');
+            return false;
+        }
+
+        // check password
+        var password = document.getElementById('Password').value;
+        if (password == '') {
+            alert('Password needed');
+            return false;
+        }
+
+        // check password
+        var about = document.getElementById('About').value;
+        if (about == '') {
+            alert('Please provide something about yourself in your about section');
+            return false;
+        }
+
+        // check interest
+        var ddInterest = document.getElementById('Interest');
+        var interest = ddInterest.options[ddInterest.selectedIndex].value;
+
+        if (interest == '') {
+            alert('Interest needed');
+            return false;
+        }
+
+        // check dob
+        var dob = document.getElementById('DOB').value;
+        if (dob == '') {
+            alert('You must provide your date of birth');
+            return false;
+        }
+
+
+
+
         return true;
     }
 </script>

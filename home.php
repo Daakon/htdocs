@@ -605,7 +605,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
 <body>
 
-<?php check_demographics($ID); ?>
+<?php //check_demographics($ID); ?>
 
 <div class="container">
     <?php
@@ -653,7 +653,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                 $searchCity = $_SESSION['city'];
             }
             else {
-                if (!empty($_SESSION['city'])) {
+                if (!empty($_SESSION['city']) && isset($_SESSION['city'])) {
                     $searchCity = $_SESSION['city'];
                 } else {
                     $searchCity = getMemberCity($ID);
