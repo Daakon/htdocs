@@ -86,7 +86,7 @@ function get_users_photo_by_id($user_id)
     $fullMediaPath = "";
 
     if (strstr($url, "localhost")) {
-        $fullMediaPath = "/poster/$photo";
+        $fullMediaPath = "/media/$photo";
     } elseif (strstr($url, "dev")) {
         $fullMediaPath = "http://dev.rapportbook.com/media/$photo";
     } else {

@@ -138,13 +138,11 @@ function get_header()
         </a>
         <?php $ID = $_SESSION['ID']; ?>
 
+
+
         <!--desktop layout -->
 
-        <!--search box -->
-<?php $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-if (strstr($url, "home.php")) { ?>
 
-<?php } ?>
 
 
 
