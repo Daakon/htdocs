@@ -216,7 +216,7 @@ get_head_files();
 
 <?php require 'checkLogin.php'; ?>
 
-    <body style="background-image:url('/images/index-image.jpeg');
+    <body style="background-image:url('/images/NetworkGraphic.png');
 background-repeat:no-repeat;
 background-size:100% 100%;
 background-position:inherit;">
@@ -266,11 +266,10 @@ background-position:inherit;">
 
             </div>
 
-                <div style="background:white;border-radius:10px;width:30%">
                 <a href="/learn_more.php">
                     <h4>Learn More</h4>
                 </a>
-            </div>
+           
 
             <form method="post" action="signup.php" id="signup" onsubmit='return checkSignup();' >
 
