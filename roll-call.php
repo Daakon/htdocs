@@ -187,11 +187,6 @@ $postOwner = $memberID;
 
             <br/>
 
-            <?php if ($memberID != $ID) { ?>
-                <a href="/view_messages.php?id=<?php echo $memberID ?>">Direct Message <?php echo $rows['FirstName'] ?></a>
-            <?php } ?>
-            <br/>
-
 
             <?php
             $sql3 = "SELECT DISTINCT
