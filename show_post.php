@@ -639,6 +639,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
             ?>
 
             <div style="padding-top:10px;padding-bottom:10px;margin-top:10px;">
+                <?php if (isset($ID)) { ?>
                 <form method="post" action="" enctype="multipart/form-data"
                       onsubmit="showCommentUploading('comment<?php echo $postID?>', this);">
 
@@ -656,6 +657,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                             </div>
                         </div>
                     </div>
+
                     <input type="submit" name="btnComment" id="btnComment" Value="Comment"
                            style="border:1px solid black"/>
                     <input type="hidden" name="postID" id="postID" Value="<?php echo $postID ?>"/>
@@ -663,6 +665,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                     <input type="hidden" name="ownerId" id="ownerId" value="<?php echo $MemberID ?>"/>
                     <input type="hidden" name="scrollx" id="scrollx" value="0"/>
                     <input type="hidden" name="scrolly" id="scrolly" value="0"/>
+
                 </form>
 
                 <br/>
@@ -671,6 +674,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                     <a href="/view_messages.php/<?php echo $username ?>">Direct Message <?php echo $rows['FirstName'] ?></a>
                 <?php } ?>
                 <br/>
+                <?php } ?>
 
                 <?php
                 $sql3 = "SELECT DISTINCT
@@ -752,7 +756,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                         $commentID = $rows4['PostCommentID'];
                         $commentOwnerID = $rows4['CommenterID'];
                         echo '<div class="user-icon">';
-                        echo '<img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" style = "border:1px solid black" class ="enlarge-onhover img-responsive" /><div class="user-name">' . $rows4['FirstName'] . $rows['LastName'] . '</div></div><div class="comment-content">' . nl2br($comment) . '</div>';
+                        echo '<img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" style = "border:1px solid black" class ="enlarge-onhover img-responsive" /><div class="user-name">' . $rows4['FirstName'] .' '. $rows4['LastName'] . '</div></div><div class="comment-content">' . nl2br($comment) . '</div>';
                         echo '</td></tr>';
                     }
                     echo '</div>';

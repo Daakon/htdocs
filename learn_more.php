@@ -22,7 +22,7 @@ get_header()
             <a href="/home.php">Back to Roll Call</a>
             <?php } ?>
 
-            <h4 style="color:red;">Network And Promote Your Interests.</h4>
+            <h5 style="color:red;">Network And Promote Your Interests.</h5>
 
                 <img src="<?php echo $imagesPath ?>interests-lg.JPG" />
 
