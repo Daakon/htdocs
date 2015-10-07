@@ -256,9 +256,8 @@ background-position:inherit;">
             </div>
             <!-- /.modal -->
 
-            <div class="visible-xs" style="font-weight: bold;font-size:20px">
-                <br/>
-                <div style="background:white;border-radius:10px;width:30%">
+            <div class="visible-xs" style="font-weight: bold;font-size:20px;margin-top:-8%;">
+                <div style="border-radius:10px;width:30%">
                 <a href="login-mobile.php" style="color:red;">
                     <h4>Login</h4>
                 </a>
@@ -269,7 +268,7 @@ background-position:inherit;">
                 <a href="/learn_more.php">
                     <h4>Learn More</h4>
                 </a>
-           
+
 
             <form method="post" action="signup.php" id="signup" onsubmit='return checkSignup();' >
 
