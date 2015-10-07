@@ -106,6 +106,7 @@ $postOwner = $memberID;
 
     </div>
 
+    <?php if (isset($ID)) { ?>
     <a href='/post-interest.php?interest=<?php echo urlencode($category) ?>' class='category'><h5><?php echo $category ?></h5></a>
 
 
@@ -116,11 +117,19 @@ $postOwner = $memberID;
             <a href="/view_messages.php/<?php echo $username ?>">Message <?php echo $rows['FirstName'] ?> </a>
             <?php } ?>
         <br/>
-
+<?php } ?>
 
         <br/><br/>
 
         <?php
+
+        if (!isset($ID)) {
+            $readonly = "readonly";
+        }
+        else {
+            $readonly = "";
+        }
+
         //check if member has approved this post
         //----------------------------------------------------------------
         //require 'getSessionType.php';
@@ -136,7 +145,7 @@ $postOwner = $memberID;
             echo '<form>';
             echo '<input type ="hidden" class = "postID" id = "postID" value = "' . $postID . '" />';
             echo '<input type ="hidden" class = "ID" id = "ID" value = "' . $ID . '" />';
-            echo '<input type ="button" class = "btnDisapprove" />';
+            echo '<input type ="button" class = "btnDisapprove"'. $readonly.' />';
             if ($approvals > 0) {
                 echo '&nbsp;<span style = "color:red;font-weight:bold;font-size:16">' . $approvals . '</font>';
             }
@@ -145,7 +154,7 @@ $postOwner = $memberID;
             echo '<form>';
             echo '<input type ="hidden" class = "postID" id = "postID" value = "' . $postID . '" />';
             echo '<input type ="hidden" class = "ID" id = "ID" value = "' . $ID . '" />';
-            echo '<input type ="button" class = "btnApprove" />';
+            echo '<input type ="button" class = "btnApprove"'. $readonly.' />';
             if ($approvals > 0) {
                 echo '&nbsp;<span style = "color:red;font-weight:bold;font-size:16">' . $approvals . '</font>';
             }
@@ -159,6 +168,7 @@ $postOwner = $memberID;
         ?>
 
         <div style="padding-top:10px;padding-bottom:10px;margin-top:10px;">
+            <?php if (isset($ID)) { ?>
             <form method="post" action="" enctype="multipart/form-data"
                   onsubmit="showCommentUploading('comment<?php echo $postID?>', this);">
 
@@ -186,7 +196,7 @@ $postOwner = $memberID;
             </form>
 
             <br/>
-
+<?php } ?>
 
             <?php
             $sql3 = "SELECT DISTINCT
