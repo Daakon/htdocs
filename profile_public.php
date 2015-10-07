@@ -73,8 +73,6 @@ $bgPhoto = $row['ProfilePhoto'];
             </ul>
         </div>
 
-        <br/><br/>
-
         <div class="col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8 roll-call ">
 
             <?php
@@ -136,8 +134,9 @@ $bgPhoto = $row['ProfilePhoto'];
             <div align ="center">
                 <?php if ($profileVideo != "default_video.png") { ?>
                     <video src = " <?php echo $videoPath . $profileVideo ?>" poster="/poster/<?php echo $posterName ?>"  preload="auto" controls />
+                    <br/>
                 <?php } else { ?>
-                <h2>No Profile Video</h2>
+                <!--Display Nothing -->
             </div>
         <?php } ?>
 
@@ -150,7 +149,7 @@ $bgPhoto = $row['ProfilePhoto'];
             <!--Profile ---------------------------------------------------------------------------------------->
 
 
-            <br/><br/>
+            <br/>
 
                    <div class="public-profile-label">City</div>
                    <?php echo $city ?>

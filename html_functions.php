@@ -170,7 +170,7 @@ if (strstr($url, "home.php")) { ?>
 
 <br/>
 
-    <div class="visible-xs black-link" style="padding-top:10px;">
+    <div class="visible-xs black-link" style="padding-top:10px;margin-top:-13%;margin-left:-5%">
 
         <ul class="list-inline" style="padding-left:10px;background-color:black;color:white;">
             <li><a href="/support.php" class="mobileLink" style="color:white;">Support</a></li>

@@ -450,7 +450,6 @@ $bgPhoto = $row['ProfilePhoto'];
             </ul>
         </div>
 
-        <br/>
 
         <div class="col-md-8  col-lg-8 col-md-offset-2 col-lg-offset-2 roll-call ">
 

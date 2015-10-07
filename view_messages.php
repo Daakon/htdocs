@@ -271,8 +271,6 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
             </ul>
         </div>
 
-        <br/><br/>
-
         <div class="col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8 roll-call ">
 
             <h2>View Messages</h2>
