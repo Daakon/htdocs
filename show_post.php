@@ -567,8 +567,8 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
     $postID = $rows['PostID']
     ?>
     <div class="row row-padding">
-        <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 "
-             style="background:white;border-radius:10px;margin-top:20px;border:2px solid black;" align="left">
+        <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 roll-call"
+              align="left">
 
             <img src="<?php echo $mediaPath.$profilePhoto ?>" class="profilePhoto-Feed" alt=""
                  title="<?php echo $name ?>" class='enlarge-onhover'/> &nbsp <b><font

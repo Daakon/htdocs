@@ -611,7 +611,10 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
     <?php
     ?>
     <div class="row row-padding">
-        <div class=" col-md-10  col-lg-10 col-md-offset-2 col-lg-offset-2 ">
+
+<!--        <!--Middle Column -->
+        <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 ">
+
             <ul class="list-inline">
                 <a href="/profile.php/<?php echo get_username($ID) ?>">
                 <img src="<?php echo get_users_photo_by_id($ID) ?>" style="height:50%;width:10%;display:inline;border:2px solid black"/>
@@ -619,6 +622,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                 <li><a href="/profile.php/<?php echo get_username($ID) ?>"><span style="background:red;color:white;padding:10px;border:5px solid white;font-weight:bold;">Go To Your Profile</span> <?php require 'getNewMessageCount.php' ?></a></li>
             </ul>
 
+</div>
             <?php
             $genre = $_GET['genre'];
             if (!empty($genre)) {
@@ -665,7 +669,8 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
             ?>
 
             <!--Middle Column -->
-            <div class=" col-md-9 col-lg-9 roll-call ">
+        <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 roll-call"
+              align="left">
 
 <!--If a service provider -->
 
@@ -748,14 +753,14 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
             </div>
 
-
+<br/>
 
             <?php
             $limit = "100";
             require 'roll-call.php'
             ?>
 
-        </div>
+<!--        </div>-->
 
 
     </div> <!--Middle Column -->

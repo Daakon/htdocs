@@ -670,13 +670,13 @@ $gender = getGender($ID);*/
 ?>
 
     <div class="row row-padding">
-<div class=" col-md-10  col-lg-10 col-md-offset-2 col-lg-offset-2 ">
+<div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 " align="left">
 
         <ul class="list-inline">
             <li><a href="javascript:history.back();">Back</a></li>
             <li><a href="/profile.php/<?php echo get_username($ID) ?>">Go To Your Profile <?php require 'getNewMessageCount.php' ?></a></li>
         </ul>
-
+</div>
 
 <?php $category = $_GET['interest'];
 
@@ -736,8 +736,7 @@ if (mysql_num_rows($result) > 0) {
         $postOwner = $memberID;
         ?>
 
-        <div class="col-lg-9 col-md-9 roll-call "
-             style="background:white;border-radius:10px;margin-top:20px;border:2px solid black;" align="left">
+        <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 roll-call" align="left">
 
             <img src="/media/<?php echo $profilePhoto ?>" class="profilePhoto-Feed" alt=""
                  title="<?php echo $name ?>" class='enlarge-onhover img-responsive'/> &nbsp <b><font
@@ -987,7 +986,7 @@ if (mysql_num_rows($result) > 0) {
 
 
 
-    </div>
+
 
     <br/><br/>
 
