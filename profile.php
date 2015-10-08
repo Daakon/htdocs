@@ -33,7 +33,7 @@ if (isset($_POST['photo']) && ($_POST['photo'] == "Upload Photo")) {
         $mediaFile = $_FILES['flPostPhoto']['tmp_name'];
         $type = $_FILES["flPostPhoto"]["type"];
         require 'media_post_file_path.php';
-        if ($type == "image/jpg" || $type == "image/jpeg") {
+        if ($type == "image/jpeg") {
             $src = imagecreatefromjpeg($mediaFile);
         } else if ($type == "image/png") {
             $src = imagecreatefrompng($mediaFile);
