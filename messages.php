@@ -50,7 +50,7 @@ $ID = $_SESSION['ID'];
                     $subject = $rows['Subject'];
 
                     // get sender name
-                    $sql2 = "SELECT FirstName,Username, ProfilePhoto
+                    $sql2 = "SELECT FirstName,LastName,Username, ProfilePhoto
                 FROM Members, Profile
                 WHERE Profile.Member_ID = $otherID
                 AND Members.ID = $otherID ";
@@ -58,7 +58,7 @@ $ID = $_SESSION['ID'];
                     $result2 = mysql_query($sql2) or die(mysql_error());
                     $rows2 = mysql_fetch_assoc($result2);
                     $pic = $rows2['ProfilePhoto'];
-                    $name = $rows2['FirstName'];
+                    $name = $rows2['FirstName'].' '.$rows2['LastName'];
                     $username = $rows2['Username'];
 
                     // get new message

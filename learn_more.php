@@ -98,7 +98,7 @@ $rollCallResult = mysql_query($sqlRollCall) or die(mysql_error());
 // if no results
 if (mysql_num_rows($rollCallResult) == 0) {
     ?>
-    <div class=" col-lg-9 col-md-9 roll-call"
+    <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 roll-call"
          style="background:white;border-radius:10px;margin-top:20px;border:2px slategray;border-style:dashed" align="left">
         No Results
     </div>
@@ -115,7 +115,7 @@ if (mysql_num_rows($rollCallResult) > 0) {
         $postOwner = $memberID;
         ?>
 
-    <div class=" col-lg-9 col-md-9 roll-call "
+        <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 roll-call"
          style="background:#f5f8fa;border-radius:10px;margin-top:20px;border:2px solid slategray;"
          align="left">
 

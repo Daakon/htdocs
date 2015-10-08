@@ -318,7 +318,7 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
                     $date = $rows['MessageDate'];
 
                     // get receiver name
-                    $sql2 = "SELECT FirstName, ProfilePhoto,Username
+                    $sql2 = "SELECT FirstName,LastName, ProfilePhoto,Username
                     FROM Members, Profile
                     WHERE Profile.Member_ID = $senderID
                     AND Members.ID = $senderID ";
@@ -326,7 +326,7 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
                     $result2 = mysql_query($sql2) or die(mysql_error());
                     $rows2 = mysql_fetch_assoc($result2);
                     $pic = $rows2['ProfilePhoto'];
-                    $name = $rows2['FirstName'];
+                    $name = $rows2['FirstName'] .' '.$rows2['LastName'];
                     $username = $rows2['Username'];
 
                     echo "<a href='/profile_public.php/$username'><img src = '$mediaPath$pic' class='profilePhoto-Feed' alt='' /> $name</a>";
