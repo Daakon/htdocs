@@ -14,7 +14,7 @@ if (isset($_SESSION["ID"]) && !empty($_SESSION['ID'])) {
     echo "<script>location='/profile.php/$username';</script>";
 }
 else {
-    echo "<script>alert('You are not logged in'); location = '/index.php'</script>";
+    echo "<script>location = '/learn_more.php'</script>";
 }
 
 

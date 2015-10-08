@@ -19,7 +19,7 @@ else {
     $videoPath = "http://rapportbook.com/media/";
     $posterPath = "/home/rapportbook/public_html/poster/";
     $imagesPath = "http://rapportbook.com/images/";
-    $mediaPath = "http://rapportbook.com/media";
+    $mediaPath = "http://rapportbook.com/media/";
 }
 
 

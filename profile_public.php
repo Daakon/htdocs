@@ -44,7 +44,7 @@ $bgPhoto = $row['ProfilePhoto'];
 ?>
 
 <body style="
-    background-image: url(/media/<?php echo $bgPhoto ?>);
+    background-image: url(<?php echo $mediaPath.$bgPhoto ?>);
     display: block;
     position: absolute;
     left: 0;

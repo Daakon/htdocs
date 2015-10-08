@@ -103,7 +103,7 @@ addToHomescreen.removeSession();
 
     <form method="post" action="login.php" class="form-inline" >
         <header class="navbar navbar-default navbar-static-top header">
-            <a href="/index.php" title="Login or Sign Up">
+            <a href="/learn_more.php" title="Login or Sign Up">
             <img src="/images/Rapportbook-Logo-White-Text-Large.png" alt="Rapportbook" height="40" width="auto"
                  class="logo-image"/>
             </a>

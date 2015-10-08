@@ -27,6 +27,8 @@ if (isset($_POST['photo']) && ($_POST['photo'] == "Upload Photo")) {
         }
         // add unique id to image name to make it unique and add it to the file server
         $mediaName = $_FILES["flPostPhoto"]["name"];
+        // remove ALL WHITESPACE from image name
+        $mediaName = preg_replace('/\s+/', '', $mediaName);
         $mediaName = uniqid() . $mediaName;
         $mediaFile = $_FILES['flPostPhoto']['tmp_name'];
         $type = $_FILES["flPostPhoto"]["type"];
