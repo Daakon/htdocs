@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="51867226-c8dd-43fb-9a46-7c8a9e9ab742" name="Default" comment="Added media page.&#10;&#10;">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/profile.php" afterPath="$PROJECT_DIR$/profile.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/connect.php" afterPath="$PROJECT_DIR$/connect.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="htdocs.iws" />
@@ -51,7 +51,6 @@
         <option value="$PROJECT_DIR$/getState.php" />
         <option value="$PROJECT_DIR$/ad-manager.php" />
         <option value="$PROJECT_DIR$/manage_ad.php" />
-        <option value="$PROJECT_DIR$/connect.php" />
         <option value="$PROJECT_DIR$/login.php" />
         <option value="$PROJECT_DIR$/terms.php" />
         <option value="$PROJECT_DIR$/messages_public.php" />
@@ -94,6 +93,7 @@
         <option value="$PROJECT_DIR$/category.php" />
         <option value="$PROJECT_DIR$/learn_more.php" />
         <option value="$PROJECT_DIR$/profile.php" />
+        <option value="$PROJECT_DIR$/connect.php" />
       </list>
     </option>
   </component>
@@ -140,7 +140,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -161,6 +160,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="Scratches" />
     </panes>
   </component>
@@ -537,13 +537,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/connect.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.36925796">
-          <caret line="11" column="1" selection-start-line="9" selection-start-column="0" selection-end-line="11" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/images/services.jpg">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -893,17 +886,15 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.30973452">
           <caret line="199" column="46" selection-start-line="199" selection-start-column="46" selection-end-line="199" selection-end-column="46" />
-          <folding>
-            <marker date="1444400516000" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
-            <marker date="1444400516000" expanded="true" signature="-1:-1" placeholder="UPDATE Profi..." />
-            <marker date="1444400516000" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
-            <marker date="1444400516000" expanded="true" signature="-1:-1" placeholder="UPDATE Profi..." />
-            <marker date="1444400516000" expanded="true" signature="-1:-1" placeholder="Update Membe..." />
-            <marker date="1444400516000" expanded="true" signature="-1:-1" placeholder="Update Profi..." />
-            <marker date="1444400516000" expanded="true" signature="-1:-1" placeholder="SELECT Usern..Members..." />
-            <marker date="1444400516000" expanded="true" signature="-1:-1" placeholder="SELECT Profi..Profile..." />
-            <marker date="1444400516000" expanded="true" signature="-1:-1" placeholder="SELECT DISTI..Members..." />
-          </folding>
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/connect.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.57168144">
+          <caret line="17" column="3" selection-start-line="17" selection-start-column="3" selection-end-line="17" selection-end-column="3" />
+          <folding />
         </state>
       </provider>
     </entry>
