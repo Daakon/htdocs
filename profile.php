@@ -197,6 +197,7 @@ if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
     $phone = $_POST['Phone'];
     $email = $_POST['Email'];
     $about = $_POST['About'];
+    $about = mysql_real_escape_string($about);
     $interest = $_POST['Interest'];
     $dob = $_POST['DOB'];
     $emailStatus = $_POST['EmailStatus'];
