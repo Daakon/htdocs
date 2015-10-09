@@ -71,7 +71,7 @@ else {
     $stateCondition = "";
 }
 
-$limit = "5";
+$limit = "10";
 $sqlRollCall = " SELECT DISTINCT
     Posts.Post As Post,
     Members.ID As MemberID,
