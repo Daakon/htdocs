@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="51867226-c8dd-43fb-9a46-7c8a9e9ab742" name="Default" comment="Added media page.&#10;&#10;">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/connect.php" afterPath="$PROJECT_DIR$/connect.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/manage_post.php" afterPath="$PROJECT_DIR$/manage_post.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="htdocs.iws" />
@@ -75,7 +75,6 @@
         <option value="$PROJECT_DIR$/checkDemographics.php" />
         <option value="$PROJECT_DIR$/logout.php" />
         <option value="$PROJECT_DIR$/index.php" />
-        <option value="$PROJECT_DIR$/manage_post.php" />
         <option value="$PROJECT_DIR$/findURL.php" />
         <option value="$PROJECT_DIR$/resources/css/site.css" />
         <option value="$PROJECT_DIR$/model_functions.php" />
@@ -94,6 +93,7 @@
         <option value="$PROJECT_DIR$/learn_more.php" />
         <option value="$PROJECT_DIR$/profile.php" />
         <option value="$PROJECT_DIR$/connect.php" />
+        <option value="$PROJECT_DIR$/manage_post.php" />
       </list>
     </option>
   </component>
@@ -140,6 +140,8 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -160,8 +162,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -755,13 +755,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/manage_post.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="12.25265">
-          <caret line="365" column="232" selection-start-line="365" selection-start-column="232" selection-end-line="365" selection-end-column="232" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/media.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.47349823">
@@ -851,14 +844,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/home.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.928572">
-          <caret line="671" column="8" selection-start-line="671" selection-start-column="8" selection-end-line="671" selection-end-column="80" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/email.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.58480567">
@@ -894,6 +879,33 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.57168144">
           <caret line="17" column="3" selection-start-line="17" selection-start-column="3" selection-end-line="17" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/manage_post.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.1752212">
+          <caret line="126" column="8" selection-start-line="126" selection-start-column="8" selection-end-line="126" selection-end-column="8" />
+          <folding>
+            <marker date="1444421014000" expanded="true" signature="-1:-1" placeholder="Update Posts..." />
+            <marker date="1444421014000" expanded="true" signature="-1:-1" placeholder="Update PostC..." />
+            <marker date="1444421014000" expanded="true" signature="-1:-1" placeholder="SELECT DISTI..Members..." />
+            <marker date="1444421014000" expanded="true" signature="-1:-1" placeholder="SELECT ID FR..PostApprovals..." />
+            <marker date="1444421014000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..PostApprovals..." />
+            <marker date="1444421014000" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1444421014000" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1444421014000" expanded="true" signature="-1:-1" placeholder="SELECT DISTI..PostComments..." />
+            <marker date="1444421014000" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1444421014000" expanded="true" signature="-1:-1" placeholder="SELECT DISTI..PostComments..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/home.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.2318584">
+          <caret line="615" column="8" selection-start-line="615" selection-start-column="8" selection-end-line="615" selection-end-column="72" />
           <folding />
         </state>
       </provider>
