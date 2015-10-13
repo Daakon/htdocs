@@ -619,7 +619,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                 <a href="/profile.php/<?php echo get_username($ID) ?>">
                 <img src="<?php echo get_users_photo_by_id($ID) ?>" style="height:50%;width:10%;display:inline;border:2px solid black"/>
                 </a>
-                <li><a href="/profile.php/<?php echo get_username($ID) ?>"><span style="background:red;color:white;padding:10px;border:5px solid white;font-weight:bold;">Go To Your Profile</span> <?php require 'getNewMessageCount.php' ?></a></li>
+                <li><a href="/profile.php/<?php echo get_username($ID) ?>"><span style="background:red;color:white;padding:10px;border:5px solid gray;font-weight:bold;">Go To Your Profile</span> <?php require 'getNewMessageCount.php' ?></a></li>
             </ul>
 
 </div>
@@ -677,7 +677,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                     <div align = "center">
 
                         <h5>Search Posts By Interests</h5>
-                        <select id="genre" name="genre" onchange="updateFeed()">
+                        <select id="genre" name="genre" onchange="updateFeed()" style="background-color: lightsteelblue;font-weight:bold">
                             <option value="<?php echo $genre ?>"><?php echo $genre ?></option>
                             <option value="Show All">Show All</option>
                             <?php echo category() ?>
@@ -702,7 +702,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
 
                         </div>
-                        <select id="searchState" name="searchState" onchange="getCity(this)">
+                        <select id="searchState" name="searchState" onchange="getCity(this)" style="background-color: lightsteelblue;font-weight:bold">
                             <option value="<?php echo $searchState ?>"><?php echo $searchState?></option>
                             <?php include 'getState.php'; getState(); ?>
                         </select>
@@ -742,7 +742,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
 
                     <br/>
-                    <select class="form-control input-lg" id="category" name="category">
+                    <select class="form-control input-lg" id="category" name="category" style="background-color: lightsteelblue;font-weight:bold">
                         <option value="">Select An Interest</option>
                         <?php echo category() ?>
                     </select>

@@ -31,7 +31,7 @@ $ID = $_SESSION['ID'];
         <?php if (empty($_SESSION['ID']) || !isset($_SESSION['ID'])) { ?>
             <a href="/index.php" ><h4>Login or Sign Up</h4></a></h4>
             <?php } else { ?>
-            <a href="/home.php">Back to Service Requests</a>
+            <a href="javascript:history.go(-1)">Go Back</a>
         <?php } ?>
         </div>
 
