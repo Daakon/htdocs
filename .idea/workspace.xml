@@ -6,8 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="51867226-c8dd-43fb-9a46-7c8a9e9ab742" name="Default" comment="Added media page.&#10;&#10;">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/home.php" afterPath="$PROJECT_DIR$/home.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/css/site.css" afterPath="$PROJECT_DIR$/resources/css/site.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/support.php" afterPath="$PROJECT_DIR$/support.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/learn_more.php" afterPath="$PROJECT_DIR$/learn_more.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="htdocs.iws" />
@@ -88,7 +87,6 @@
         <option value="$PROJECT_DIR$/post-interest.php" />
         <option value="$PROJECT_DIR$/view_messages.php" />
         <option value="$PROJECT_DIR$/messages.php" />
-        <option value="$PROJECT_DIR$/learn_more.php" />
         <option value="$PROJECT_DIR$/profile.php" />
         <option value="$PROJECT_DIR$/connect.php" />
         <option value="$PROJECT_DIR$/manage_post.php" />
@@ -96,6 +94,7 @@
         <option value="$PROJECT_DIR$/support.php" />
         <option value="$PROJECT_DIR$/resources/css/site.css" />
         <option value="$PROJECT_DIR$/home.php" />
+        <option value="$PROJECT_DIR$/learn_more.php" />
       </list>
     </option>
   </component>
@@ -111,7 +110,6 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" interpreter_name="PHP 5.5" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="-7" />
     <option name="y" value="23" />
     <option name="width" value="1265" />
     <option name="height" value="716" />
@@ -172,25 +170,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="htdocs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="htdocs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="css" />
+              <option name="myItemId" value="images" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -386,7 +366,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="23" width="1265" height="716" extended-state="0" />
+    <frame x="0" y="23" width="1265" height="716" extended-state="0" />
     <editor active="false" />
     <layout>
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -500,7 +480,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/home.php</url>
-          <line>647</line>
+          <line>648</line>
           <option name="timeStamp" value="27" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
@@ -510,12 +490,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/home.php</url>
-          <line>627</line>
+          <line>628</line>
           <option name="timeStamp" value="31" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/home.php</url>
-          <line>625</line>
+          <line>626</line>
           <option name="timeStamp" value="32" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
@@ -602,13 +582,6 @@
         <state vertical-scroll-proportion="0.1943463">
           <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/terms.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.13427562">
-          <caret line="48" column="16" selection-start-line="48" selection-start-column="16" selection-end-line="48" selection-end-column="37" />
         </state>
       </provider>
     </entry>
@@ -853,13 +826,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/learn_more.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2932862">
-          <caret line="73" column="12" selection-start-line="73" selection-start-column="12" selection-end-line="73" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/profile.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.30973452">
@@ -914,42 +880,48 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/home.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.29557523">
-          <caret line="704" column="150" selection-start-line="704" selection-start-column="150" selection-end-line="704" selection-end-column="150" />
-          <folding>
-            <element signature="e#30390#30477#0#HTML" expanded="true" />
-            <element signature="e#32295#32352#0#HTML" expanded="true" />
-            <element signature="e#33481#33538#0#HTML" expanded="true" />
-            <element signature="e#35357#35414#0#HTML" expanded="true" />
-            <marker date="1444698366000" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
-            <marker date="1444698366000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..Media..." />
-            <marker date="1444698366000" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1444698366000" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
-            <marker date="1444698366000" expanded="true" signature="-1:-1" placeholder="UPDATE Media..." />
-            <marker date="1444698366000" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
-            <marker date="1444698366000" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
-            <marker date="1444698366000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..Media..." />
-            <marker date="1444698366000" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1444698366000" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
-            <marker date="1444698366000" expanded="true" signature="-1:-1" placeholder="SELECT ID, F..Members..." />
-            <marker date="1444698366000" expanded="true" signature="-1:-1" placeholder="SELECT Membe..Posts..." />
-            <marker date="1444698366000" expanded="true" signature="-1:-1" placeholder="SELECT ID, F..Members..." />
-            <marker date="1444698366000" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
-            <marker date="1444698366000" expanded="true" signature="-1:-1" placeholder="UPDATE Media..." />
-            <marker date="1444698366000" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
-            <marker date="1444698366000" expanded="true" signature="-1:-1" placeholder="SELECT Membe..PostComments..." />
-            <marker date="1444698366000" expanded="true" signature="-1:-1" placeholder="SELECT Membe..Posts..." />
-            <marker date="1444698366000" expanded="true" signature="-1:-1" placeholder="Update PostC..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/css/site.css">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.064080946">
           <caret line="2" column="4" selection-start-line="2" selection-start-column="4" selection-end-line="2" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/home.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.46548674">
+          <caret line="746" column="48" selection-start-line="746" selection-start-column="48" selection-end-line="746" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/learn_more.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.39115044">
+          <caret line="42" column="30" selection-start-line="42" selection-start-column="30" selection-end-line="42" selection-end-column="30" />
+          <folding>
+            <element signature="e#1736#1754#0#HTML" expanded="true" />
+            <element signature="e#3564#3653#0#HTML" expanded="true" />
+            <element signature="e#4837#4871#0#HTML" expanded="true" />
+            <element signature="e#10711#10732#0#HTML" expanded="true" />
+            <marker date="1444839973000" expanded="true" signature="-1:-1" placeholder="SELECT DISTI..Members..." />
+            <marker date="1444839973000" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1444839973000" expanded="true" signature="-1:-1" placeholder="SELECT ID FR..PostApprovals..." />
+            <marker date="1444839973000" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..PostApprovals..." />
+            <marker date="1444839973000" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1444839973000" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1444839973000" expanded="true" signature="-1:-1" placeholder="SELECT DISTI..PostComments..." />
+            <marker date="1444839973000" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1444839973000" expanded="true" signature="-1:-1" placeholder="SELECT DISTI..PostComments..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/terms.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.2761062">
+          <caret line="52" column="13" selection-start-line="47" selection-start-column="8" selection-end-line="52" selection-end-column="13" />
           <folding />
         </state>
       </provider>

@@ -36,23 +36,31 @@ get_header()
 
                 <img src="<?php echo $imagesPath ?>interests-lg.JPG" />
 
+                <br/><br/>
 
-                <p>
-                    Rapportbook is a platform that allows people in the same local area
-                    to network, promote and discover their interests.
-                    You can share information, events, tips, pointers, resources, etc.
-                    Expand your social circle by meeting new people with similar commonalities.
-                    It's simple, it's easy, it's fun. Share your interests through
-                    public posts, comments, photos, videos and private direct messages.
-                </p>
-            <!--<ul>
-                <li style="display:block;font-weight: bold" >&bull; SMS & Email Notification when Service Posts are made related to your primary service</li>
-                <li style="display:block;font-weight: bold">&bull; Photo & Video Attachments in Direct Messages</li>
-                <li style="display:block;font-weight: bold">&bull; Ability to search other Service Request Categories if you offer multiple services</li>
-                <li style="display:block;font-weight: bold">&bull; Profile Photo and Video uploads to Market Your Service</li>
-            </ul>-->
+                    <img src="/images/hand-shake.jpg" height="50" width="50" />
+                    &nbsp;&nbsp;<span class="lead">
+                    Network By Interests.
+                    </span>
 
-            <br/>
+                    <br/><br/>
+
+                    <img src="/images/local.png" height="50" width="50" />
+                    &nbsp;&nbsp;<span class="lead">
+                    Meet People Near You.
+                    </span>
+
+                    <br/><br/>
+
+
+                    <img src="/images/share-people.png" height="50" width="50" />
+                    &nbsp;&nbsp;<span class="lead">
+                    Share Information.
+                    </span>
+
+
+
+            <br/><br/>
 
 </div>
 

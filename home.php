@@ -618,8 +618,9 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
             <ul class="list-inline">
                 <a href="/profile.php/<?php echo get_username($ID) ?>">
                 <img src="<?php echo get_users_photo_by_id($ID) ?>" style="height:50%;width:10%;display:inline;border:2px solid black"/>
+                    My Profile
                 </a>
-                <li><a href="/profile.php/<?php echo get_username($ID) ?>"><span style="background:red;color:white;padding:10px;border:5px solid gray;font-weight:bold;">Go To Your Profile</span> <?php require 'getNewMessageCount.php' ?></a></li>
+                <li><?php require 'getNewMessageCount.php' ?></a></li>
             </ul>
 
 </div>
@@ -743,7 +744,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
                     <br/>
                     <select class="form-control input-lg" id="category" name="category" style="background-color: lightsteelblue;font-weight:bold">
-                        <option value="">Select An Interest</option>
+                        <option value="">Select Interest For Your Post</option>
                         <?php echo category() ?>
                     </select>
                     <br/>
