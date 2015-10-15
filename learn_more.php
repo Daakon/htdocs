@@ -24,7 +24,7 @@ get_header()
 <div class="container">
 
 
-    <div class="col-xs-12 col-md-8 col-lg-8 col-md-offset-2 roll-call">
+    <div class="col-xs-12 col-md-12 col-lg-12 roll-call" >
         <div align="left">
             <?php if (empty($_SESSION['ID']) || !isset($_SESSION['ID'])) { ?>
             <a href="/index.php" ><h4>Login or Sign Up</h4></a></h4>
@@ -32,23 +32,17 @@ get_header()
             <a href="/home.php">Back to Roll Call</a>
             <?php } ?>
 
-            <h5 style="color:red;">Network And Promote Your Interests.</h5>
+            <span class="lead" style="color:red;font-weight:bold">Network By Interests With People Around You.</span>
 
                 <img src="<?php echo $imagesPath ?>interests-lg.JPG" />
 
                 <br/><br/>
 
-                    <img src="/images/hand-shake.jpg" height="50" width="50" />
+                    <img src="/images/camera.png" height="50" width="50" />
                     &nbsp;&nbsp;<span class="lead">
-                    Network By Interests.
+                    Post Photos & Videos
                     </span>
 
-                    <br/><br/>
-
-                    <img src="/images/local.png" height="50" width="50" />
-                    &nbsp;&nbsp;<span class="lead">
-                    Meet People Near You.
-                    </span>
 
                     <br/><br/>
 
@@ -57,6 +51,15 @@ get_header()
                     &nbsp;&nbsp;<span class="lead">
                     Share Information.
                     </span>
+
+                    <br/><br/>
+
+                    <img src="/images/local.png" height="50" width="50" />
+                    &nbsp;&nbsp;<span class="lead">
+                    Discover Your Local Area.
+                    </span>
+
+
 
 
 
