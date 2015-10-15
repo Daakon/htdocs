@@ -659,7 +659,7 @@ $bgPhoto = $row['ProfilePhoto'];
 
                 <div class="form-group">
                     <label for="About">About</label>
-                    <textarea class="form-control" id="About" name="About"><?php echo $about ?></textarea>
+                    <textarea class="form-control textArea" id="About" name="About"><?php echo $about ?></textarea>
                 </div>
 
 

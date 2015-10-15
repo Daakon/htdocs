@@ -22,7 +22,7 @@ h1, h2, h3, h4, h5, h6 {
     height: 50px;
     padding: 10px;
     font-size: 20px;
-    border:3px solid white;
+    border:3px solid gray;
 }
 
 .input-style {
@@ -56,6 +56,8 @@ h1, h2, h3, h4, h5, h6 {
     border-radius: 5px;
     padding-bottom: 20px;
     margin-bottom:20px !important;
+    max-width: 500px;
+    min-width: 150px;
 }
 
 .ad-desktop {
@@ -274,8 +276,9 @@ li {
 }
 
 .textArea {
-    max-width:100%;
-    min-width:100%;
+    width:450px;
+    max-width: 450px;
+    min-width: 450px;
     border:1px solid black;
 }
 

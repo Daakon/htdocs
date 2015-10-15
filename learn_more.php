@@ -32,7 +32,7 @@ get_header()
             <a href="/home.php">Back to Roll Call</a>
             <?php } ?>
 
-            <span class="lead" style="color:red;font-weight:bold">Connect With People By Interests In The Same Local Area.</span>
+            <h4 class="lead" style="color:red;font-weight:bold">Connect With People By Interests In The Same Local Area.</h4>
 
                 <img src="<?php echo $imagesPath ?>interests-lg.JPG" />
 
@@ -68,7 +68,7 @@ get_header()
 </div>
 
 
-        <div class="col-lg-12 col-md-12 col-xs-12" style="background-color: #888888;style="background-image:url('/images/NetworkGraphic.png')">
+        <div class="col-lg-12 col-md-12 col-xs-12" style="background-color: #888888;style=">
 <?php
 
 

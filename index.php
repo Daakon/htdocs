@@ -256,19 +256,24 @@ background-position:inherit;">
             </div>
             <!-- /.modal -->
 
+            <div class="lead" style="font-weight: bold;margin-top:10px;">Connect With People By Interests</div>
+            <a href="/learn_more.php">
+                <h4>Learn More</h4>
+            </a>
+
+
+
             <div class="visible-xs" style="font-weight: bold;font-size:20px;margin-top:-8%;">
                 <div style="border-radius:10px;width:30%">
-                <a href="login-mobile.php" style="color:red;">
+                <a href="login-mobile.php">
+                    <br/><br/>
                     <h4>Login</h4>
                 </a>
                     </div>
 
             </div>
 
-            <span class="lead" style="font-weight: bold;">Connect With People By Interests</span>
-                <a href="/learn_more.php">
-                    <h6>Learn More</h6>
-                </a>
+
 
 
             <form method="post" action="signup.php" id="signup" onsubmit='return checkSignup();' >
