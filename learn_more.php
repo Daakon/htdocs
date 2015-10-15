@@ -18,45 +18,45 @@ get_header()
         }
     </script>
 
-<body>
+<body style="background:white;">
 
 
-<div class="container">
 
 
-    <div class="col-xs-12 col-md-12 col-lg-12 roll-call" >
-        <div align="left">
+
+
+        <div align="left" style="padding-left:10px;">
             <?php if (empty($_SESSION['ID']) || !isset($_SESSION['ID'])) { ?>
             <a href="/index.php" ><h4>Login or Sign Up</h4></a></h4>
             <?php } else { ?>
             <a href="/home.php">Back to Roll Call</a>
             <?php } ?>
 
-            <span class="lead" style="color:red;font-weight:bold">Network By Interests With People Around You.</span>
+            <span class="lead" style="color:red;font-weight:bold">Connect With People By Interests In The Same Local Area.</span>
 
                 <img src="<?php echo $imagesPath ?>interests-lg.JPG" />
 
                 <br/><br/>
 
-                    <img src="/images/camera.png" height="50" width="50" />
-                    &nbsp;&nbsp;<span class="lead">
-                    Post Photos & Videos
+                    <img src="/images/camera.png" height="30" width="30" />
+                    <span class="lead">
+                    Post Photos & Videos of Your Interests
                     </span>
 
 
                     <br/><br/>
 
 
-                    <img src="/images/share-people.png" height="50" width="50" />
-                    &nbsp;&nbsp;<span class="lead">
+                    <img src="/images/share-people.png" height="30" width="30" />
+                    <span class="lead">
                     Share Information.
                     </span>
 
                     <br/><br/>
 
-                    <img src="/images/local.png" height="50" width="50" />
-                    &nbsp;&nbsp;<span class="lead">
-                    Discover Your Local Area.
+                    <img src="/images/local.png" height="30" width="30" />
+                    <span class="lead">
+                    Discover Things Around You.
                     </span>
 
 
@@ -64,11 +64,11 @@ get_header()
 
 
             <br/><br/>
-
+            <h4 style="color:red;">Checkout what people are sharing</h4>
 </div>
 
-    <h5 style="color:red;">Checkout what people are sharing</h5>
 
+        <div class="col-lg-12 col-md-12 col-xs-12" style="background-color: #888888;style="background-image:url('/images/NetworkGraphic.png')">
 <?php
 
 
@@ -310,8 +310,8 @@ if (mysql_num_rows($rollCallResult) > 0) {
 
     } ?>
 
-        </div>
 
+</div>
 
 
 <?php

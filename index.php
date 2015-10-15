@@ -265,8 +265,9 @@ background-position:inherit;">
 
             </div>
 
+            <span class="lead" style="font-weight: bold;">Connect With People By Interests</span>
                 <a href="/learn_more.php">
-                    <h4>Learn More</h4>
+                    <h6>Learn More</h6>
                 </a>
 
 
