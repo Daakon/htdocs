@@ -164,9 +164,10 @@ $bgPhoto = $row['ProfilePhoto'];
             <div class="public-profile-label">About</div>
             <?php echo $about ?>
 
+            <br/><br/>
 
                     <?php if (isset($ID) && !empty($ID) && $memberID != $ID) { ?>
-                        <br/><br/>
+
                     <div class="public-profile-label">Message Me</div>
                         <a href="/view_messages.php/<?php echo $username ?>"><?php echo $username ?></a>
                     <?php } elseif ($memberID == $ID) { ?>
