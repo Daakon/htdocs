@@ -40,41 +40,26 @@ else {
     $dob = $birthday;
 }
 
+// check if email exists
 $sql = "SELECT * FROM Members WHERE Email = '$email'";
 $result = mysql_query($sql) or die(mysql_error());
 
 if (mysql_num_rows($result) > 0) {
 
-    if($fb_id!='') {
-
-        $rows = mysql_fetch_assoc($result);
-        session_start();
-
-        //die(print_r($rows));
-
-        $_SESSION['ID'] = $rows['ID'];
-
-        setcookie("ID", $rows['ID'], time() + (10 * 365 * 24 * 60 * 60)); // set cookie for 10 years
-
-        //update last login
-        $id = $rows['ID'];
-        $date = date('Y-m-d H:i:s');
-        $sql2 = "UPDATE Members SET LastLogin = '$date' WHERE ID = '$id' ";
-        mysql_query($sql2) or die(mysql_error());
-
-        exit;
-
-    }
-    else{
         echo '<script>alert("You already have an profile, please login");location = "index.php"</script>';
         exit;
-    }
 }
 
-// if facebook is used for a sign up then we will use fb_id for a username to keep things unique
-if (strlen($username) == 0 || $username == '') {
-    $username = $fb_id;
+// check if username exists
+$sql = "SELECT * FROM Members WHERE Username = '$username'";
+$result = mysql_query($sql) or die(mysql_error());
+
+if (mysql_num_rows($result) > 0) {
+
+    echo '<script>alert("That username is not available");location = "index.php"</script>';
+    exit;
 }
+
 
 $sql = "INSERT INTO Members (FirstName, LastName, Email,    Gender,    DOB,    Username,      Password,         Interest,     SignupDate,   IsSuspended, EmailActive, LastLogin,      fb_token,   fb_id)
 Values 			            ('$fName', '$lName', '$email', '$gender', '$dob', '$username',  '".md5($pass)."',  '$interest',     CURRENT_DATE(),   0,           1,        CURRENT_DATE(),'$fb_token','$fb_id')";
