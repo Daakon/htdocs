@@ -621,6 +621,8 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                     My Profile
                 </a>
                 <li><?php require 'getNewMessageCount.php' ?></a></li>
+                <li><a href ="/logout.php" >Log Out</a></li>
+
             </ul>
 
 </div>

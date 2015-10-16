@@ -62,44 +62,6 @@ addToHomescreen.removeSession();
 
 <?php function get_login_header()
 { ?>
-    <script>
-        // Load the SDK asynchronously
-        function logout() { alert('here');
-            FB.logout(function(response) {
-                // user is now logged out
-                console.log(response);
-                window.location='/logout.php';
-            });
-        }
-        function facebookLogout(){
-            FB.getLoginStatus(function(response) {
-                if (response.status === 'connected') {
-                    FB.logout(function(response) {
-                        // this part just clears the $_SESSION var
-                        // replace with your own code
-                        window.location='/logout.php';
-                    });
-                }
-            });
-        }
-        window.fbAsyncInit = function() {
-            FB.init({
-                appId      : '1537351149864603',
-                cookie     : true,  // enable cookies to allow the server to access
-                                    // the session
-                xfbml      : true,  // parse social plugins on this page
-                version    : 'v2.2' // use version 2.2
-            });
-        };
-        // Load the SDK asynchronously
-        (function(d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s); js.id = id;
-            js.src = "//connect.facebook.net/en_US/sdk.js";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
-    </script>
 
     <form method="post" action="login.php" class="form-inline" >
         <header class="navbar navbar-default navbar-static-top header">
@@ -117,7 +79,8 @@ addToHomescreen.removeSession();
                 <input type="submit" name="login" id="login" value="Login" class="btn btn-default"/>
 
 
-                <a href="forgot-password.php" class="forgot-password-link hidden-xs" style="color:white">Forgot Your Password?</a>
+                <a href="forgot-password.php" class="forgot-password-link hidden-xs">Forgot Your Password?</a>
+                <a href="/support.php" class="hidden-xs">Support</a>
             </div>
 
         </header>
@@ -150,7 +113,6 @@ function get_header()
                 <ul class="list-inline">
 <!--                    <li><a href="/advertising.php" style="color:white;">Advertise</a></li>-->
                     <li><a href="/support.php" style="color:white;">Support</a></li>
-                    <li><a href="/logout.php"  style="color:white; cursor:pointer" >Log Out</a></li>
                 </ul>
             </div>
 
@@ -168,12 +130,6 @@ if (strstr($url, "home.php")) { ?>
 
 <br/>
 
-    <div class="visible-xs black-link" style="padding-top:10px;margin-top:-13%;margin-left:-5%">
-
-        <ul class="list-inline" style="padding-left:10px;background-color:black;color:white;">
-            <li><a href="/support.php" class="mobileLink" style="color:white;">Support</a></li>
-<!--            <li><a href="/advertising.php" class="mobileLink">Advertise</a></li>-->
-            <li><a href ="/logout.php" class="mobileLink" style="color:white;" >Log Out</a></li>
         </ul>
 
     </div>

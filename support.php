@@ -16,7 +16,7 @@ $ID = $_SESSION['ID'];
 
 
 
-<body>
+<body style="background: url('/images/office.jpg');opacity: 1">
 
 <?php
 
@@ -25,19 +25,38 @@ $ID = $_SESSION['ID'];
 <div class="container" >
 
 
-    <div class="col-xs-12 col-md-8 col-lg-8 col-md-offset-2 roll-call">
+    <div class="col-xs-12 col-md-8 col-lg-8 col-md-offset-2" style="color:yellow;font-size:30px">
 
         <div style="padding-top:10px">
         <?php if (empty($_SESSION['ID']) || !isset($_SESSION['ID'])) { ?>
-            <a href="/index.php" ><h4>Login or Sign Up</h4></a></h4>
+            <a href="/index.php" ><h4><span style="color:white">Login or Sign Up</span></h4></a></h4>
             <?php } else { ?>
             <a href="javascript:history.go(-1)">Go Back</a>
         <?php } ?>
         </div>
 
-        <h5>
-            Please direct all questions & concerns to: <a href="mailto:info@rapportbook.com" style="color:red">info@rapportbook.com</a>
-        </h5>
+        <h4>
+            Direct questions to:<br/>
+            <a href="mailto:info@rapportbook.com" style="color:red;font-weight: bold;font-size:20px;text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;">info@rapportbook.com</a>
+        </h4>
+
+        <span style="color:white;font-weight: bold;text-shadow: -1px 0 blue, 0 1px blue, 1px 0 blue, 0 -1px black;">Office Information:</span>
+        <br/>
+            <span style="font-weight:bold;color:deepskyblue;text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;">
+                <span style="font-size: 30px;color:red;">
+                    Headquarters
+                </span>
+            <br/>
+                <span style="font-size:25px">
+            911 Washington Ave
+            <br/>
+            Suite 501
+            <br/>
+            St.Louis,MO 63103
+            <br>
+            USA
+                    </span>
+</span>
 
     </div>
 </div>

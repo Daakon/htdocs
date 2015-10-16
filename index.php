@@ -258,17 +258,21 @@ background-position:inherit;">
 
             <div class="lead" style="font-weight: bold;margin-top:10px;">Connect With People By Interests</div>
             <a href="/learn_more.php">
-                <h4>Learn More</h4>
+                <h4>About</h4>
             </a>
 
 
 
             <div class="visible-xs" style="font-weight: bold;font-size:20px;margin-top:-8%;">
                 <div style="border-radius:10px;width:30%">
-                <a href="login-mobile.php">
+                <a href="/login-mobile.php">
                     <br/><br/>
                     <h4>Login</h4>
                 </a>
+                    <br/>
+                    <a href="/support.php">
+                        <h4>Support</h4>
+                    </a>
                     </div>
 
             </div>
