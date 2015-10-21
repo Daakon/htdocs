@@ -22,7 +22,7 @@ function get_head_files()
 addToHomescreen.removeSession();
 </script>
         <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
-        <meta name="description" content="Connect With People Like You">
+        <meta name="description" content="Connect With People By Interests In The Same Local Area">
         <meta name="keywords" content="Interests, Connect, Meet Up, Share, Resources, Message, Communicate, Events">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
