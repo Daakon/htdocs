@@ -48,8 +48,9 @@ $rollCallResult = mysql_query($sqlRollCall) or die(mysql_error());
 if (mysql_num_rows($rollCallResult) == 0) {
     ?>
     <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 "
-         style="background:white;border-radius:10px;margin-top:20px;border:2px solid black;" align="left">
-        No Results
+          align="left">
+        <!--add bravery image -->
+        <img src="/images/bravery.jpg" style="height:250px;width: 450px;" />
     </div>
 <?php }
 if (mysql_num_rows($rollCallResult) > 0) {
@@ -91,9 +92,10 @@ $postOwner = $memberID;
         if (strlen($post) > 700) {
             $post500 = substr($post, 0, 700); ?>
 
-            <div id="short<?php echo $postID ?>">
-                <?php echo nl2br($post500) ?>...<a href="javascript:showPost('long<?php echo $postID ?>', 'short<?php echo $postID ?>');">Show More</a>
-            </div>
+                <?php echo $post500 ?>
+                <span style="margin-top:5px">
+                <a href="show_post.php?postID=<?php echo $postID ?>&email=0">Show More</a>
+</span>
             <?php
             echo "<div id='long$postID' style='display:none;'>";
             echo nl2br($post);

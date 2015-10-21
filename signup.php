@@ -92,6 +92,26 @@ $result = mysql_query($sql) or die(mysql_error());
 $toId = $rows['ID'];
 build_and_send_email(0,$ID, 3, null);
 
+// track sign ups through Google
+$url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+if (strstr($url, "localhost")) {
+} elseif (strstr($url, "dev")) {
+} else {
+    ?>
+<noscript>
+    <div style="display:inline;">
+        <img height="1" width="1" style="border-style:none;" alt=""
+             src="//www.googleadservices.com/pagead/conversion/951358222/?label=jDs3CNyP4GAQjqbSxQM&guid=ON&script=0"/>
+    </div>
+</noscript>
+
+    <?php
+}
+?>
+
+
+
+
 echo '<script>alert("Your profile was successfully set up");location = "home.php"</script>';
 
 ?>
