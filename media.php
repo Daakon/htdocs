@@ -458,19 +458,18 @@ $profileMediaSrc = trim("/media/" . $profilePhoto);
             $rowPostID = mysql_fetch_assoc($resultGetPostID);
             $postID = $rowPostID['PostID'];
 
-            $sqlPost = "SELECT Post FROM Posts WHERE ID = '$postID' ";
+            /*$sqlPost = "SELECT Post FROM Posts WHERE ID = '$postID' ";
             $resultPost = mysql_query($sqlPost) or die(mysql_error());
             $rowPost = mysql_fetch_assoc($resultPost);
             // remove image from original body
             $post = preg_replace(" /<img[^>]+\> / i", "", $rowPost['Post']);
             $post = preg_replace(" /<video[^>]+\> / i", "", $post);
-            $post = "<p>" . $post . "</p>";
+            $post = "<p>" . $post . "</p>"; */
 
             $isPost = true;
 
             // if the
-            if ($postID == null) {
-                $isPost = false;
+
                 $sqlPost = "SELECT MediaName, MediaType, Poster, AudioName FROM Media WHERE MediaName = '$mediaName' ";
                 $resultPost = mysql_query($sqlPost) or die(mysql_error());
                 $rowPost = mysql_fetch_assoc($resultPost);
@@ -488,7 +487,7 @@ $profileMediaSrc = trim("/media/" . $profilePhoto);
 
                     $post = '<video src = "' . $videoPath . $mediaName . '" poster="/poster/'.$posterName.'" preload="auto" controls />';
                 }
-            }
+
 
             ?>
 
