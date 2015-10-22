@@ -5,10 +5,10 @@ function category()
     echo '<option value = "Automotive">Automotive</option>';
     echo '<option value = "Books">Books</option>';
     echo '<option value = "Gaming">Gaming</option>';
-    echo '<option value = "Computer Programming">Computer Programming</option>';
     echo '<option value = "Cosmetology">Cosmetology</option>';
     echo '<option value = "Culinary">Culinary</option>';
     echo '<option value = "Design">Design</option>';
+    echo '<option value = "Education">Education</option>';
     echo '<option value = "Fashion">Fashion</option>';
     echo '<option value = "Fitness">Fitness</option>';
     echo '<option value = "Home Improvement">Home Improvement</option>';
@@ -17,6 +17,7 @@ function category()
     echo '<option value = "Non Profit">Non Profit</option>';
     echo '<option value = "Photography">Photography</option>';
     echo '<option value = "Sports">Sports</option>';
+    echo '<option value = "Technology">Technology</option>';
     echo '<option value = "Theatre">Theatre</option>';
     echo '<option value = "Night Life">Night Life</option>';
 }
