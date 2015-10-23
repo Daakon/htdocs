@@ -27,9 +27,13 @@ get_header()
 
         <div align="left" style="padding-left:10px;">
             <?php if (empty($_SESSION['ID']) || !isset($_SESSION['ID'])) { ?>
-            <a href="/index.php" ><h4>Login or Sign Up</h4></a></h4>
+            <a href="/index.php" >
+                <button style="background:red;color:white;padding:10px;border: 2px solid black;border-radius: 10px;">
+                    <span style="font-weight:bold;">Login or Sign Up</span>
+                </button> <span style="font-weight:bold;font-size:26px;">It's Free!</span>
+            </a>
             <?php } else { ?>
-            <a href="/home.php">Back to Roll Call</a>
+            <a href="/home.php">Back</a>
             <?php } ?>
 
             <h4 class="lead" style="color:red;font-weight:bold">Connect With People By Interests In The Same Local Area.</h4>

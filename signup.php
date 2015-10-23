@@ -31,7 +31,7 @@ if ($city == '') {
     exit;
 }
 
-if($gender=='') $gender = (($_POST['gender']=='male')?1:2);
+if($gender=='') $gender = (($_POST['gender']=='Male')?1:2);
 
 if ($year != '') {
     $dob = $year . '-' . $month . '-' . $day;
@@ -91,13 +91,9 @@ $result = mysql_query($sql) or die(mysql_error());
 // Send out sign up email
 $toId = $rows['ID'];
 build_and_send_email(0,$ID, 3, null);
+?>
 
-// track sign ups through Google
-$url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-if (strstr($url, "localhost")) {
-} elseif (strstr($url, "dev")) {
-} else {
-    ?>
+<!--track sign ups through Google-->
 <noscript>
     <div style="display:inline;">
         <img height="1" width="1" style="border-style:none;" alt=""
@@ -106,12 +102,6 @@ if (strstr($url, "localhost")) {
 </noscript>
 
     <?php
-}
-?>
+        echo '<script>alert("Your profile was successfully set up");location = "home.php"</script>';
 
-
-
-
-echo '<script>alert("Your profile was successfully set up");location = "home.php"</script>';
-
-?>
+    ?>

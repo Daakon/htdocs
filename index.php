@@ -216,10 +216,7 @@ get_head_files();
 
 <?php require 'checkLogin.php'; ?>
 
-    <body style="background-image:url('/images/NetworkGraphic.png');
-background-repeat:no-repeat;
-background-size:100% 100%;
-background-position:inherit;">
+    <body style="background: white;">
 
 <div class="container-fluid" >
 
@@ -227,9 +224,8 @@ background-position:inherit;">
 
 
         <div class="col-lg-6 col-md-5 hidden-sm hidden-xs">
-            <!--<image src="/images/interests-lg.JPG" style="border:2px solid black" class="center-block" ><br>
+            <image src="/images/girl-networking.jpg" style="padding-top:20px" class="center-block" ><br>
             </image>
-            <h3 align="center"><span style="font-style: italic;color:red;font-weight: bold">Network And Promote Your Interests</span></h3>-->
         </div>
 
         <div class="col-lg-6 col-md-7 col-sm-12 col-xs-12" >
@@ -257,23 +253,33 @@ background-position:inherit;">
             <!-- /.modal -->
 
             <div class="lead" style="font-weight: bold;margin-top:10px;">Connect With People By Interests</div>
-            <a href="/learn_more.php">
+            <a href="/learn_more.php" class="visible-md visible-lg">
                 <h4>About</h4>
             </a>
 
 
 
-            <div class="visible-xs" style="font-weight: bold;font-size:20px;margin-top:-8%;">
-                <div style="border-radius:10px;width:30%">
-                <a href="/login-mobile.php">
-                    <br/><br/>
-                    <h4>Login</h4>
-                </a>
-                    <br/>
-                    <a href="/support.php">
-                        <h4>Support</h4>
-                    </a>
-                    </div>
+            <div class="visible-xs visible-sm" style="font-weight: bold;font-size:20px;margin-top:1%;">
+
+                    <ul class="list-inline">
+                        <li>
+                            <a href="/learn_more.php">
+                                About
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/login-mobile.php">
+                                Login
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/support.php">
+                                Support
+                            </a>
+                        </li>
+                    </ul>
+
 
             </div>
 
