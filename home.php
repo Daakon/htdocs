@@ -648,7 +648,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
         <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 ">
 
             <ul class="list-inline">
-                <a href="/profile.php/<?php echo get_username($ID) ?>">
+                <a href="/<?php echo get_username($ID) ?>">
                 <img src="<?php echo get_users_photo_by_id($ID) ?>" style="height:50%;width:10%;display:inline;border:2px solid black"/>
                     My Profile
                 </a>

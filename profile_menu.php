@@ -9,7 +9,7 @@ if ($profileID == $ID) {
 
 <ul class="list-inline profileMenu">
     <li><a href="/home.php">Home</a></li>
-    <li><a href="/profile.php/<?php echo $username ?>">Profile</a></li>
+    <li><a href="/<?php echo $username ?>">Profile</a></li>
     <li><a href="/member_media.php/<?php echo $username ?>">Media</a></li>
     <li><a href="/manage_post.php/<?php echo $username ?>">Manage Posts</a></li>
     <li><a href="/messages.php/<?php echo $username ?>">Messaging <?php require 'getNewMessageCount.php' ?></a></li>

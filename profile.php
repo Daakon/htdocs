@@ -17,6 +17,7 @@ $ID = $_SESSION['ID'];
 ?>
 
 
+
 <?php
 // handle upload profile pic
 if (isset($_POST['photo']) && ($_POST['photo'] == "Upload Photo")) {
@@ -460,7 +461,120 @@ $bgPhoto = $row['ProfilePhoto'];
             $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
             preg_match("/[^\/]+$/",$url ,$match);
             $username = $match[0];
-            require 'checkUsername.php';
+            $memberID = get_id_from_username($username);
+
+            // get current member session username
+            $sql = "SELECT Username FROM Members WHERE ID = $ID ";
+            $result = mysql_query($sql) or die(mysql_error());
+            $rows = mysql_fetch_assoc($result);
+
+            // if profile is not the current member session ID
+            // serve the public profile
+            if ($rows['Username'] != $username) {
+                // render profile public view
+
+
+                $sql = "SELECT
+                        Members.ID As MemberID,
+                        Members.FirstName As FirstName,
+                        Members.LastName As LastName,
+                        Members.Email As Email,
+                        Members.Password As Password,
+                        TIMESTAMPDIFF(YEAR, Members.DOB, CURDATE()) AS Age,
+                        Profile.ProfilePhoto As ProfilePhoto,
+                        Profile.ProfileVideo As ProfileVideo,
+                        Profile.Poster As Poster,
+                        Profile.City As City,
+                        Profile.State As State,
+                        Profile.About As About
+                        FROM Members, Profile
+                        WHERE Members.ID = $memberID
+                        AND Profile.Member_ID = $memberID ";
+
+                $result = mysql_query($sql) or die(mysql_error());
+
+                if (mysql_num_rows($result) == 0) {
+                    echo "<script>alert('Profile not found');</script>";
+                    header('Location:home.php');
+                }
+
+                $rows = mysql_fetch_assoc($result);
+
+                $memberID = $rows['MemberID'];
+                $profilePhoto = $rows['ProfilePhoto'];
+                $profileVideo = $rows['ProfileVideo'];
+                $posterName = $rows['Poster'];
+                $firstName = $rows['FirstName'];
+                $lastName = $rows['LastName'];
+                $city = $rows["City"];
+                $state = $rows['State'];
+                $about = $rows['About'];
+                $email = $rows['Email'];
+                $password = $rows['Password'];
+                $age = $rows['Age'];
+
+                ?>
+
+
+                <hr/>
+                <br/>
+
+                <!--Profile video --------------------------------------------------------------------------------->
+
+                <div align ="center">
+                    <img src = "<?php echo $mediaPath.$profilePhoto ?>" class="profilePhoto" alt="Profile Photo" />
+                </div>
+
+
+                <!--Profile video --------------------------------------------------------------------------------->
+                <div align ="center">
+                    <?php if ($profileVideo != "default_video.png") { ?>
+                        <video src = " <?php echo $videoPath . $profileVideo ?>" poster="/poster/<?php echo $posterName ?>"  preload="auto" controls />
+                        <br/>
+                    <?php } else { ?>
+                    <!--Display Nothing -->
+                </div>
+            <?php } ?>
+
+                <div class="content-block">
+                    <h2>
+                        <?php echo $firstName .' '. $lastName ?>
+                    </h2>
+                </div>
+
+                <!--Profile ---------------------------------------------------------------------------------------->
+
+
+                <br/>
+
+                <div class="public-profile-label">City</div>
+            <?php echo $city ?>
+
+                <br/><br/>
+
+                <div class="public-profile-label">State</div>
+            <?php echo $state ?>
+
+                <br/><br/>
+
+                <div class="public-profile-label">About</div>
+            <?php echo $about ?>
+
+                <br/><br/>
+
+            <?php if (isset($ID) && !empty($ID) && $memberID != $ID) { ?>
+
+                <div class="public-profile-label">Message Me</div>
+                <a href="/view_messages.php/<?php echo $username ?>"><?php echo $username ?></a>
+            <?php } elseif ($memberID == $ID) { ?>
+                <?php echo "Sorry but you can't message yourself, that's kind of weird anyway";
+
+            } else { echo "<span style='color:red;'>You must be logged in to message this person</span>"; }
+
+
+            }
+            else {
+                // render edit profile view
             $sql = "SELECT DISTINCT
                         Members.ID As MemberID,
                         Members.FirstName As FirstName,
@@ -734,6 +848,7 @@ $bgPhoto = $row['ProfilePhoto'];
                 <input type = "submit" value = "Update" name = "updateProfile" id = "updateProfile" class="btn btn-default" />
             </form>
 
+            <?php } ?>
             <!------------->
         </div>
 

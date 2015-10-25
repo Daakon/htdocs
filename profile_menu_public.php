@@ -41,7 +41,7 @@ else { ?>
 
 <?php if ($_SESSION['ID'] != $profileID) { ?>
 <ul class="list-inline profileMenu">
-    <li><a href="/profile_public.php/<?php echo $username ?>">Profile</a></li>
+    <li><a href="/<?php echo $username ?>">Profile</a></li>
     <li><a href="/member_media.php/<?php echo $username ?>">Media</a></li>
     <li><a href="/manage_post.php/<?php echo $username ?>"><?php echo $firstName ?>'s Posts</a></li>
 

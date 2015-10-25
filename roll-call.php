@@ -75,10 +75,10 @@ $postOwner = $memberID;
     $profileUrl = "";
     if ($memberID == $ID) {
 
-        $profileUrl = "/profile.php/$username";
+        $profileUrl = "/$username";
     }
     else {
-        $profileUrl = "/profile_public.php/$username";
+        $profileUrl = "/$username";
     }
     ?>
 
