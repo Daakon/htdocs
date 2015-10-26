@@ -72,14 +72,7 @@ $postOwner = $memberID;
      align="left">
 
     <?php
-    $profileUrl = "";
-    if ($memberID == $ID) {
-
         $profileUrl = "/$username";
-    }
-    else {
-        $profileUrl = "/$username";
-    }
     ?>
 
     <a href="<?php echo $profileUrl ?>">
@@ -92,9 +85,9 @@ $postOwner = $memberID;
         if (strlen($post) > 700) {
             $post500 = substr($post, 0, 700); ?>
 
-                <?php echo $post500 ?>
+                <?php echo nl2br($post500) ?>
                 <span style="margin-top:5px">
-                <a href="show_post.php?postID=<?php echo $postID ?>&email=0">Show More</a>
+                <a href="show_post?postID=<?php echo $postID ?>&email=0">Show More</a>
 </span>
             <?php
             echo "<div id='long$postID' style='display:none;'>";
@@ -109,14 +102,14 @@ $postOwner = $memberID;
     </div>
 
     <?php if (isset($ID)) { ?>
-    <a href='/post-interest.php?interest=<?php echo urlencode($category) ?>' class='category'><h5><?php echo $category ?></h5></a>
+    <a href='/post-interest?interest=<?php echo urlencode($category) ?>' class='category'><h5><?php echo $category ?></h5></a>
 
 
     <div style="padding-top:10px;padding-bottom:10px;margin-top:10px;">
 
         <br/>
             <?php if ($ID != $memberID) {?>
-            <a href="/view_messages.php/<?php echo $username ?>">Message <?php echo $rows['FirstName'] ?> </a>
+            <a href="/view_messages/<?php echo $username ?>">Message <?php echo $rows['FirstName'] ?> </a>
             <?php } ?>
         <br/>
 <?php } ?>

@@ -42,9 +42,9 @@ if (mysql_num_rows($result) > 0) {
         echo "<script>alert('You are now reactivating your account.'); location='/home.php'</script>";
     }
 
-    header('location:home.php');
+    header('location:home');
 
 } else {
-    echo '<script>alert("Your email or password was incorrect");location = "index.php"</script>';
+    echo '<script>alert("Your email or password was incorrect");location = "../"</script>';
 }
 ?>

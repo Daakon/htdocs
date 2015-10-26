@@ -13,7 +13,7 @@ $rows = mysql_fetch_assoc($result);
 $stateID = $rows['ID'];
 
 $sql2 = "SELECT City FROM City WHERE State_ID = $stateID Order By City ASC ";
-$result2 = mysql_query($sql2) or die(mysql_error());
+$result2 = mysql_query($sql2) or die(mysql_error("You must select a city"));
 
 if (mysql_num_rows($result2) > 0) {
  if ($page =='home') {?>

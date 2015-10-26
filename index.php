@@ -253,7 +253,7 @@ get_head_files();
             <!-- /.modal -->
 
             <div class="lead" style="font-weight: bold;margin-top:10px;">Connect With People By Interests</div>
-            <a href="/learn_more.php" class="visible-md visible-lg">
+            <a href="/learn_more" class="visible-md visible-lg">
                 <h4>About</h4>
             </a>
 
@@ -263,18 +263,18 @@ get_head_files();
 
                     <ul class="list-inline">
                         <li>
-                            <a href="/learn_more.php">
+                            <a href="/learn_more">
                                 About
                             </a>
                         </li>
                         <li>
-                            <a href="/login-mobile.php">
+                            <a href="/login-mobile">
                                 Login
                             </a>
                         </li>
 
                         <li>
-                            <a href="/support.php">
+                            <a href="/support">
                                 Support
                             </a>
                         </li>
@@ -436,7 +436,7 @@ get_head_files();
                     </div>
                 </div>
 
-                <small>By clicking sign up, you agree to our <a href="/terms.php">terms</a></small>
+                <small>By clicking sign up, you agree to our <a href="/terms">terms</a></small>
                 <br/><br/>
 
                 <div class="form-group row">

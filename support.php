@@ -29,7 +29,7 @@ $ID = $_SESSION['ID'];
 
         <div style="padding-top:10px">
         <?php if (empty($_SESSION['ID']) || !isset($_SESSION['ID'])) { ?>
-            <a href="/index.php" ><h4><span style="color:white">Login or Sign Up</span></h4></a></h4>
+            <a href="../" ><h4><span style="color:white">Login or Sign Up</span></h4></a></h4>
             <?php } else { ?>
             <a href="javascript:history.go(-1)">Go Back</a>
         <?php } ?>

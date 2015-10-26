@@ -4,22 +4,24 @@ function category()
     echo '<option value = "Art">Art</option>';
     echo '<option value = "Automotive">Automotive</option>';
     echo '<option value = "Books">Books</option>';
-    echo '<option value = "Gaming">Gaming</option>';
+    echo '<option value = "Business">Business</option>';
     echo '<option value = "Cosmetology">Cosmetology</option>';
     echo '<option value = "Culinary">Culinary</option>';
     echo '<option value = "Design">Design</option>';
     echo '<option value = "Education">Education</option>';
     echo '<option value = "Fashion">Fashion</option>';
+    echo '<option value = "Financial">Financial</option>';
     echo '<option value = "Fitness">Fitness</option>';
-    echo '<option value = "Home Improvement">Home Improvement</option>';
+    echo '<option value = "Gaming">Gaming</option>';
     echo '<option value = "Modeling">Modeling</option>';
     echo '<option value = "Music">Music</option>';
+    echo '<option value = "Night Life">Night Life</option>';
     echo '<option value = "Non Profit">Non Profit</option>';
     echo '<option value = "Photography">Photography</option>';
     echo '<option value = "Sports">Sports</option>';
     echo '<option value = "Technology">Technology</option>';
     echo '<option value = "Theatre">Theatre</option>';
-    echo '<option value = "Night Life">Night Life</option>';
+
 }
 
 function age() {

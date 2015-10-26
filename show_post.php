@@ -523,7 +523,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
     <div class="row row-padding">
 
-        <a href = "/home.php">Home</a>
+        <a href = "/home">Home</a>
 
     <?php
     $postID = $_GET['postID'];
@@ -579,7 +579,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
             </div>
 
 
-            <a href='/post-interest.php?interest=<?php echo urlencode($category) ?>' class='category'><h5><?php echo $category ?></h5></a>
+            <a href='/post-interest?interest=<?php echo urlencode($category) ?>' class='category'><h5><?php echo $category ?></h5></a>
 
             <?php
             if (!empty($ID)) {

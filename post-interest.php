@@ -674,10 +674,11 @@ $gender = getGender($ID);*/
 
         <ul class="list-inline">
             <li><a href="javascript:history.back();">Back</a></li>
-            <li><a href="/profile.php/<?php echo get_username($ID) ?>">Go To Your Profile <?php require 'getNewMessageCount.php' ?></a></li>
+            <li><a href="/<?php echo get_username($ID) ?>">Go To Your Profile <?php require 'getNewMessageCount.php' ?></a></li>
         </ul>
 </div>
 
+<div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 ">
 <?php $category = $_GET['interest'];
 
 ?>
@@ -685,6 +686,8 @@ $gender = getGender($ID);*/
 <span style="font-size:16px;font-weight:bold"><?php echo $category ?> Posts
 <br/>
 </span>
+</div>
+
 <?php
 
 /*$ads = getAds($genre, $age, $state, $interests, $gender);
@@ -756,12 +759,12 @@ if (mysql_num_rows($result) > 0) {
                     <?php
                     echo "<div id='long$postID' style='display:none;'>";
                     echo nl2br($post);?>
-                    <a href='/post-interest.php?interest=<?php echo urlencode($category) ?>' class='category'><h5><?php echo $category ?></h5></a>
+                    <a href='/post-interest?interest=<?php echo urlencode($category) ?>' class='category'><h5><?php echo $category ?></h5></a>
                     <?php echo "</div>";
                 }
                 else {
                     echo nl2br($post); ?>
-                    <a href='/post-interest.php?interest=<?php echo urlencode($category) ?>' class='category'><h5><?php echo $category ?></h5></a>
+                    <a href='/post-interest?interest=<?php echo urlencode($category) ?>' class='category'><h5><?php echo $category ?></h5></a>
                 <?php }
                 echo '<br/>';
                 ?>
@@ -863,7 +866,7 @@ if (mysql_num_rows($result) > 0) {
             <br/>
 
             <?php if ($memberID != $ID) { ?>
-                <a href="/view_messages.php?id=<?php echo $memberID ?>">Direct Message <?php echo $rows['FirstName'] ?></a>
+                <a href="/view_messages?id=<?php echo $memberID ?>">Direct Message <?php echo $rows['FirstName'] ?></a>
             <?php } ?>
             <br/>
 

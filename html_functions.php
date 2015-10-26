@@ -65,7 +65,7 @@ addToHomescreen.removeSession();
 
     <form method="post" action="login.php" class="form-inline" >
         <header class="navbar navbar-default navbar-static-top header">
-            <a href="/learn_more.php" title="Login or Sign Up">
+            <a href="/learn_more" title="Login or Sign Up">
             <img src="/images/Rapportbook-Logo-White-Text-Large.png" alt="Rapportbook" height="40" width="auto"
                  class="logo-image"/>
             </a>
@@ -79,8 +79,8 @@ addToHomescreen.removeSession();
                 <input type="submit" name="login" id="login" value="Login" class="btn btn-default"/>
 
 
-                <a href="forgot-password.php" class="forgot-password-link hidden-xs">Forgot Your Password?</a>
-                <a href="/support.php" class="hidden-xs">Support</a>
+                <a href="forgot-password" class="forgot-password-link hidden-xs">Forgot Your Password?</a>
+                <a href="/support" class="hidden-xs">Support</a>
             </div>
 
         </header>
@@ -112,7 +112,7 @@ function get_header()
             <div class=" visible-sm visible-md visible-lg pull-right">
                 <ul class="list-inline">
 <!--                    <li><a href="/advertising.php" style="color:white;">Advertise</a></li>-->
-                    <li><a href="/support.php" style="color:white;">Support</a></li>
+                    <li><a href="/support" style="color:white;">Support</a></li>
                 </ul>
             </div>
 
@@ -124,7 +124,7 @@ function get_header()
 
     <!--search box -->
     <?php $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-if (strstr($url, "home.php")) { ?>
+if (strstr($url, "home")) { ?>
 
 <?php } ?>
 

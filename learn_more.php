@@ -27,13 +27,13 @@ get_header()
 
         <div align="left" style="padding-left:10px;">
             <?php if (empty($_SESSION['ID']) || !isset($_SESSION['ID'])) { ?>
-            <a href="/index.php" >
+            <a href="../" >
                 <button style="background:red;color:white;padding:10px;border: 2px solid black;border-radius: 10px;">
                     <span style="font-weight:bold;">Login or Sign Up</span>
                 </button> <span style="font-weight:bold;font-size:26px;">It's Free!</span>
             </a>
             <?php } else { ?>
-            <a href="/home.php">Back</a>
+            <a href="/home">Back</a>
             <?php } ?>
 
             <h4 class="lead" style="color:red;font-weight:bold">Connect With People By Interests In The Same Local Area.</h4>
@@ -135,14 +135,7 @@ if (mysql_num_rows($rollCallResult) > 0) {
          align="left">
 
         <?php
-        $profileUrl = "";
-        if ($memberID == $ID) {
-
-            $profileUrl = "/profile.php/$username";
-        }
-        else {
-            $profileUrl = "/profile_public.php/$username";
-        }
+            $profileUrl = "/profile/$username";
         ?>
 
         <a href="<?php echo $profileUrl ?>">

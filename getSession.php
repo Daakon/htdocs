@@ -8,7 +8,7 @@ if (!isset($_SESSION["ID"])) {
         $ID = $_SESSION['ID'];
 
     } else {
-        echo "<script>alert('You are not logged in'); location = '/learn_more.php'</script>";
+        echo "<script>alert('You are not logged in'); location = '/learn_more'</script>";
     }
 }
 
