@@ -377,7 +377,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                     }
                     if (in_array($type, $photoFileTypes)) {
                         $img = '<img src = "' . $mediaPath . $mediaName .'" />';
-                        $img = '<a href = "media.php?id=' . $ID . '&mid=' . $mediaID . '&mediaName=' . $media . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '">' . $img . '</a>';
+                        $img = '<a href = "media?id=' . $ID . '&mid=' . $mediaID . '&mediaName=' . $media . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '">' . $img . '</a>';
                     } // check if file type is a video
                     elseif (in_array($type, $videoFileTypes)) {
                         // where ffmpeg is located
@@ -609,7 +609,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
             var citySelection = document.getElementById('ddCity');
             var city = citySelection.options[citySelection.selectedIndex].value;
         }
-        window.location = "/home.php?genre="+encodeURIComponent(genre)+"&state="+encodeURIComponent(state)+"&city="+city;
+        window.location = "/home?genre="+encodeURIComponent(genre)+"&state="+encodeURIComponent(state)+"&city="+city;
 
     }
 </script>
@@ -653,7 +653,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                     My Profile
                 </a>
                 <li><?php require 'getNewMessageCount.php' ?></a></li>
-                <li><a href ="/logout.php" >Log Out</a></li>
+                <li><a href ="/logout" >Log Out</a></li>
 
             </ul>
 
