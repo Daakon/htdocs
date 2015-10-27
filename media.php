@@ -20,18 +20,17 @@ $back = 1;
 // handle post comments
 //-------------------------------------------------
 if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
-    $postID = $_POST['postID'];
-    $ownerId = $_POST['memberID'];
-    $comment = $_POST['postComment'];
+
+    $mediaID = $_POST['mediaID'];
+    $ownerID = $_POST['ownerID'];
+    $comment = $_POST['mediaComment'];
     $comment = mysql_real_escape_string($comment);
     if (strlen($comment) > 0) {
 // find urls
         $comment = makeLinks($comment);
-        if ($_SESSION['PostComment'] == $_POST['postComment']) {
-            echo "<script>alert('Your comment appears to be empty');</script>";
-        } else {
 // if photo is provided
             if (isset($_FILES['flPostMedia']) && strlen($_FILES['flPostMedia']['name']) > 1) {
+
 // check file size
                 if ($_FILES['flPostMedia']['size'] > 25000000000) {
                     echo '<script>alert("File is too large. The maximum file size is 50MB.");</script>';
@@ -168,51 +167,10 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                     }
                     $comment = $comment . '<br/><br/>' . $img . '<br/>';
 
-
-
-                    $sql = "INSERT INTO PostComments (Post_ID,     Member_ID,   Comment  ) Values
-                                                      ('$postID', '$ID',      '$comment')";
-                    mysql_query($sql) or die(mysql_error());
-// create post
-                    // get poster data
-                    $sqlPoster = "SELECT ID, FirstName, LastName, Gender FROM Members WHERE ID = '$ID' ";
-                    $resultPoster = mysql_query($sqlPoster) or die(mysql_error());
-                    $rowsPoster = mysql_fetch_assoc($resultPoster);
-                    $name = $rowsPoster['FirstName'] . ' ' . $rowsPoster['LastName'];
-                    $posterId = $rowsPoster['ID'];
-                    $gender = $rowsPoster['Gender'];
-                    $nameLink = $name;
-// get photo owner data
-                    $sql = "SELECT Member_ID FROM Posts WHERE ID = $postID";
-                    $result = mysql_query($sql) or die(mysql_error());
-                    $rows = mysql_fetch_assoc($result);
-                    $ownerId = $rows['Member_ID'];
-                    $sqlOwner = "SELECT ID, FirstName, LastName FROM Members WHERE ID = '$ownerId' ";
-                    $resultOwner = mysql_query($sqlOwner) or die(mysql_error());
-                    $rowsOwner = mysql_fetch_assoc($resultOwner);
-                    $name2 = $rowsOwner['FirstName'] . ' ' . $rowsOwner['LastName'];
-                    $name2 = $name2."'s";
-                    $ownerId = $rowsOwner['ID'];
-                    $name2Link = $name2;
-                    // determine noun if profile owner commented on their own post and write bulletin
-                    if ($ownerId == $ID) {
-                        if ($gender == 1) {
-                            $noun = 'his';
-                        } else {
-                            $noun = 'her';
-                        }
-                    }
-                    else {
-                        $noun = $name2;
-                    }
-                    $post = "$nameLink posted a new $mediaString comment on $noun post.<br/><br/>$img<br/>";
-                    $post = mysql_real_escape_string($post);
-                    $sqlInsertPost = "INSERT INTO Posts (Post,     Member_ID,    PostDate  ) Values
-                                                ('$post', '$ID',        CURDATE() ) ";
-                    mysql_query($sqlInsertPost) or die(mysql_error());
-                    $newPostID = mysql_insert_id();
-// update new photo with bulletin id for commenting later
-                    $sql = "UPDATE Media SET Post_ID = '$newPostID' WHERE MediaName = '$mediaName' ";
+                    // re-declare variable
+                    $mediaID = $_POST['mediaID'];
+                    $sql = "INSERT INTO MediaComments (Media_ID,     Member_ID,   Comment  ) Values
+                                                      ('$mediaID', '$ID',      '$comment')";
                     mysql_query($sql) or die(mysql_error());
                 }
             }
@@ -220,8 +178,8 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 // if not comment photo
 //----------------------
             else {
-                $sql = "INSERT INTO PostComments (Post_ID,  Member_ID,    Comment ) Values
-                                        ('$postID', '$ID',      '$comment')";
+                $sql = "INSERT INTO MediaComments (Media_ID,  Member_ID,    Comment ) Values
+                                                  ('$mediaID', '$ID',      '$comment')";
                 mysql_query($sql) or die(mysql_error());
             }
             $scrollx = $_REQUEST['scrollx'];
@@ -230,7 +188,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 //The first thing is to identify all of the id's connected with this post
             $user_id = $_SESSION['ID'];
 //Get the ids of all the members connected with a post comment
-            $sql = "SELECT Member_ID FROM PostComments WHERE Post_ID = $postID ";
+            $sql = "SELECT Member_ID FROM MediaComments WHERE Media_ID = $mediaID ";
             $result = mysql_query($sql) or die(mysql_error());
             $comment_ids = array();
 //Iterate over the results
@@ -245,13 +203,13 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                     // only send email if account & email active
                     if (checkActive($item)) {
                         if (checkEmailActive($item)) {
-                            build_and_send_email($user_id, $item, 1, $postID);
+                            build_and_send_email($user_id, $item, 1, $mediaID);
                         }
                     }
                 }
             }
 //Notify the post creator
-            $sql = "SELECT Member_ID FROM Posts WHERE ID = '$postID';";
+            $sql = "SELECT Member_ID FROM Media WHERE Member_ID = '$ownerID';";
             $result = mysql_query($sql) or die(mysql_error());
             $rows = mysql_fetch_assoc($result);
             $creatorID = $rows['Member_ID'];
@@ -261,7 +219,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 //------------------
 //=========================================================================================================================//
 //BELOW IS END OF POST COMMENT HANDLING CODE ==========================================================================//
-        }
+
     }
     //echo "<script>location='/home.php?scrollx=$scrollx&scrolly=$scrolly'</script>";
 }
@@ -290,6 +248,7 @@ $mediaType = $_GET['mediaType'];
 $mediaDate = $_GET['mediaDate'];
 $mediaID = $_GET['mid'];
 $memberID = $_GET['id'];
+$_SESSION['MediaMemberID'] = $memberID;
 
 // if a postback, the entire file path is already constructed
 
@@ -517,12 +476,12 @@ $profileMediaSrc = trim("/media/" . $profilePhoto);
 
             if ($isPost == true) {
 
-                $sql2 = "SELECT * FROM PostApprovals WHERE Post_ID = '$postID' AND Member_ID = '$ID' ";
+                $sql2 = "SELECT * FROM MediaApprovals WHERE Media_ID = '$mediaID' AND Member_ID = '$ID' ";
                 $result2 = mysql_query($sql2) or die(mysql_error());
                 $rows2 = mysql_fetch_assoc($result2);
 
                 // get approvals for each bulletin
-                $sql3 = "SELECT * FROM PostApprovals WHERE Post_ID = '$postID' ";
+                $sql3 = "SELECT * FROM MediaApprovals WHERE Media_ID = '$mediaID' ";
                 $result3 = mysql_query($sql3) or die(mysql_error());
                 $rows3 = mysql_fetch_assoc($result3);
                 $approvals = mysql_num_rows($result3);
@@ -534,7 +493,6 @@ $profileMediaSrc = trim("/media/" . $profilePhoto);
 
                     echo '<form>';
 
-                    echo '<input type ="hidden" class = "postID" value = "' . $postID . '" />';
                     echo '<input type ="hidden" class = "ID" value="' . $ID . '"/>';
                     echo '<input type ="hidden" class = "mediaID" value = "' . $mediaID . '" />';
                     echo '<input type ="hidden" class = "mediaName" value ="' . $mediaName . '" />';
@@ -553,7 +511,6 @@ $profileMediaSrc = trim("/media/" . $profilePhoto);
 
                     echo '<form>';
 
-                    echo '<input type ="hidden" class = "postID" id = "postID" value = "' . $postID . '" />';
                     echo '<input type ="hidden" class = "ID" value="' . $ID . '"/>';
                     echo '<input type ="hidden" class = "mediaID" value = "' . $mediaID . '" />';
                     echo '<input type ="hidden" class = "mediaName" id = "mediaName" value ="' . $mediaName . '" />';
@@ -578,7 +535,7 @@ $profileMediaSrc = trim("/media/" . $profilePhoto);
                 <form method="post" action="" enctype="multipart/form-data"
                       onsubmit="showCommentUploading('comment<?php echo $postID?>', this);">
 
-                    <input type="text" class="form-control" name="postComment" id="postComment"
+                    <input type="text" class="form-control" name="mediaComment" id="mediaComment"
                            placeholder="Write a comment" title='' style="border:1px solid black"/>
 
                     <h6 style="color:red">Attach A Photo/Video To Your Comment</h6>
@@ -594,9 +551,9 @@ $profileMediaSrc = trim("/media/" . $profilePhoto);
                     </div>
                     <input type="submit" name="btnComment" id="btnComment" Value="Comment"
                            style="border:1px solid black"/>
-                    <input type="hidden" name="postID" id="postID" Value="<?php echo $postID ?>"/>
+                    <input type="hidden" name="mediaID" id="mediaID" Value="<?php echo $mediaID ?>"/>
                     <input type="hidden" name="ID" id="ID" value="<?php echo $ID ?>"/>
-                    <input type="hidden" name="ownerId" id="ownerId" value="<?php echo $MemberID ?>"/>
+                    <input type="hidden" name="ownerID" id="ownerID" value="<?php echo $memberID ?>"/>
                     <input type="hidden" name="scrollx" id="scrollx" value="0"/>
                     <input type="hidden" name="scrolly" id="scrolly" value="0"/>
                 </form>
@@ -606,28 +563,28 @@ $profileMediaSrc = trim("/media/" . $profilePhoto);
 
             <?php
             $sql3 = "SELECT DISTINCT
-                        PostComments.Comment As PostComment,
-                        PostComments.ID As PostCommentID,
+                        MediaComments.Comment As MediaComment,
+                        MediaComments.ID As MediaCommentID,
                         Members.ID As CommenterID,
                         Members.FirstName as FirstName,
                         Members.LastName As LastName,
                         Profile.ProfilePhoto As ProfilePhoto
-                        FROM PostComments,Members, Profile
+                        FROM MediaComments,Members, Profile
                         WHERE
-                        PostComments.Post_ID = $postID
+                        MediaComments.Media_ID = $mediaID
                         AND Members.ID = Profile.Member_ID
-                        And Members.ID = PostComments.Member_ID
-                        And PostComments.IsDeleted = 0
-                        Group By PostComments.ID
-                        Order By PostComments.ID DESC LIMIT 3 ";
+                        And Members.ID = MediaComments.Member_ID
+                        And MediaComments.IsDeleted = 0
+                        Group By MediaComments.ID
+                        Order By MediaComments.ID DESC LIMIT 3 ";
             $result3 = mysql_query($sql3) or die(mysql_error());
             echo '<br/>';
             if (mysql_num_rows($result3) > 0) {
                 echo '<div class="comment-style">';
                 while ($rows3 = mysql_fetch_assoc($result3)) {
-                    $comment = $rows3['PostComment'];
+                    $comment = $rows3['MediaComment'];
                     $profilePhoto = $rows3['ProfilePhoto'];
-                    $commentID = $rows3['PostCommentID'];
+                    $commentID = $rows3['MediaCommentID'];
                     $commentOwnerID = $rows3['CommenterID'];
                     echo '<div class="comment-row">';
                     echo '<div class="user-icon"><img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" style = "border:1px solid black" class ="enlarge-onhover img-responsive" /><div class="user-name">' . $rows3['FirstName'] . ' ' . $rows3['LastName'] . '</div></div><div class="comment-content">' . nl2br($comment) . '</div>';
@@ -650,20 +607,20 @@ $profileMediaSrc = trim("/media/" . $profilePhoto);
             <!--Show more comments -->
             <?php
             $sql4 = "SELECT DISTINCT
-                        PostComments.Comment As PostComment,
-                        PostComments.ID As PostCommentID,
+                        MediaComments.Comment As MediaComment,
+                        MediaComments.ID As MediaCommentID,
                         Members.ID As CommenterID,
                         Members.FirstName as FirstName,
                         Members.LastName As LastName,
                         Profile.ProfilePhoto As ProfilePhoto
-                        FROM PostComments,Members, Profile
+                        FROM MediaComments,Members, Profile
                         WHERE
-                        PostComments.Post_ID = $postID
-                        And Members.ID = PostComments.Member_ID
-                        And PostComments.IsDeleted = 0
+                        MediaComments.Media_ID = $mediaID
+                        And Members.ID = MediaComments.Member_ID
+                        And MediaComments.IsDeleted = 0
                         And Members.ID = Profile.Member_ID
-                        Group By PostComments.ID
-                        Order By PostComments.ID DESC LIMIT 3, 100 ";
+                        Group By MediaComments.ID
+                        Order By MediaComments.ID DESC LIMIT 3, 100 ";
             $result4 = mysql_query($sql4) or die(mysql_error());
             if (mysql_num_rows($result4) > 0) {
             $moreComments = "moreComments$postID";
@@ -678,9 +635,9 @@ $profileMediaSrc = trim("/media/" . $profilePhoto);
                 echo '<br/>';
                 echo '<div class="comment-style">';
                 while ($rows4 = mysql_fetch_assoc($result4)) {
-                    $comment = $rows4['PostComment'];
+                    $comment = $rows4['MediaComment'];
                     $profilePhoto = $rows4['ProfilePhoto'];
-                    $commentID = $rows4['PostCommentID'];
+                    $commentID = $rows4['MediaCommentID'];
                     $commentOwnerID = $rows4['CommenterID'];
                     echo '<div class="user-icon">';
                     echo '<img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" style = "border:1px solid black" class ="enlarge-onhover img-responsive" /><div class="user-name">' . $rows4['FirstName'] .' '. $rows4['LastName'] . '</div></div><div class="comment-content">' . nl2br($comment) . '</div>';
