@@ -81,7 +81,7 @@ if (isset($_POST['submit'])) {
                                         $newFileName = $fileName . ".mp4";
                                         $oggFileName = $fileName . ".ogv";
                                         $webmFileName = $fileName . ".webm";
-                                        $ffmpeg = '/usr/bin/ffmpeg';
+                                        $ffmpeg = '/usr/local/bin/ffmpeg';
                                         // convert mp4
                                         exec("$ffmpeg -i $fileName $newFileName");
                                         $mediaName = $newFileName;
@@ -182,17 +182,17 @@ if (isset($_POST['submit'])) {
                                 } // check if file type is a video
                                 if (in_array($type, $videoFileTypes)) {
                                     // where ffmpeg is located
-                                    $ffmpeg = '/usr/bin/ffmpeg';
+                                    $ffmpeg = '/usr/local/bin/ffmpeg';
                                     // poster file name
                                     $posterName = "poster" . uniqid() . ".jpg";
                                     //where to save the image
                                     $poster = "$posterPath$posterName";
                                     //time to take screenshot at
-                                    $interval = 5;
+                                    $interval = 3;
                                     //screenshot size
                                     //$size = '440x280'; -s $size
                                     //ffmpeg command
-                                    $cmd = "$ffmpeg -i \"$postMediaFilePath\" -r 1 -ss 5 -t 1  -f image2 $poster 2>&1";
+                                    $cmd = "$ffmpeg -i \"$postMediaFilePath\" -r 1 -ss 3 -t 1  -f image2 $poster 2>&1";
                                     exec($cmd);
 
                                     $img = '<video poster="/poster/' . $posterName . '" preload="none" controls>
@@ -301,7 +301,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                     // convert to mp4
                     $newFileName = $fileName.".mp4";
                     $audioName = $fileName;
-                    $ffmpeg = '/usr/bin/ffmpeg';
+                    $ffmpeg = '/usr/local/bin/ffmpeg';
                     exec("$ffmpeg -i $newFileName -vcodec libx264 -pix_fmt yuv420p -profile:v baseline -preset slow -crf 22 -movflags +faststart $newFileName");
                     $mediaName = $newFileName;
                 } else {
@@ -381,17 +381,17 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                     } // check if file type is a video
                     elseif (in_array($type, $videoFileTypes)) {
                         // where ffmpeg is located
-                        $ffmpeg = '/usr/bin/ffmpeg';
+                        $ffmpeg = '/usr/local/bin/ffmpeg';
                         // poster file name
                         $posterName = "poster".uniqid().".jpg";
                         //where to save the image
                         $poster = "$posterPath$posterName";
                         //time to take screenshot at
-                        $interval = 5;
+                        $interval = 3;
                         //screenshot size
                         //$size = '440x280'; -s $size
                         //ffmpeg command
-                        $cmd = "$ffmpeg -i \"$postMediaFilePath\" -r 1 -ss 5 -t 1  -f image2 $poster 2>&1";
+                        $cmd = "$ffmpeg -i \"$postMediaFilePath\" -r 1 -ss 3 -t 1  -f image2 $poster 2>&1";
                         exec($cmd);
 
                         $img = '<video poster="/poster/'.$posterName.'" preload="none" controls>
@@ -511,6 +511,10 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
     mysql_query($sql) or die (mysql_error());
 }
 ?>
+
+
+
+
 <script type="text/javascript">
     function saveScrollPositions(theForm) {
         if(theForm) {
@@ -635,7 +639,6 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 </script>
 
 
-<body>
 
 <?php //check_demographics($ID); ?>
 

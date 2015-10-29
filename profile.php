@@ -120,17 +120,17 @@ if (isset($_POST['video']) && ($_POST['video'] == "Upload Video")) {
             exec($cmd);
             move_uploaded_file($mediaFile, $postMediaFilePath);
             // where ffmpeg is located
-            $ffmpeg = '/usr/bin/ffmpeg';
+            $ffmpeg = '/usr/local/bin/ffmpeg';
             // poster file name
             $posterName = "poster".uniqid().".jpg";
             //where to save the image
             $poster = "$posterPath$posterName";
             //time to take screenshot at
-            $interval = 5;
+            $interval = 3;
             //screenshot size
             //$size = '440x280'; -s $size -f
             //ffmpeg command
-            $cmd = "$ffmpeg -i \"$postMediaFilePath\" -r 1 -f image2 $poster 2>&1";
+            $cmd = "$ffmpeg -i \"$postMediaFilePath\" -r 1 -ss 3 -f image2 $poster 2>&1";
             exec($cmd);
             $poster = imagecreatefromjpeg($poster);
             $exif = @exif_read_data($poster);
