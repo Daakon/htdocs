@@ -64,14 +64,45 @@ get_header()
                     </span>
 
 
-
-
-
             <br/><br/>
+
+            <h2 style="font-family: cursive;color:green;text-decoration: underline;">Testimonials</h2>
+
+<!--Testimonial 1 -->
+            <div class="row">
+                <div class="col-xs-12 col-sm-1 col-md-1 col-lg-1" style="margin-right:-3%">
+                    <img src="/images/brian-slawin.jpg" style="border:1px solid black;height:50px;width:50px;"/>
+                </div>
+                <div class="col-xs-11 col-sm-11 col-md-11 col-lg-11">
+                   <div style="font-style: italic">
+                        "Rapportbook is all about local reach and I really like that." - <b>Brian Slawin</b>, Co-Founder, <a href="http://busyevent.com" target="_blank">Busy Event </a>
+                        </div>
+                </div>
+            </div>
+<!--End Testimonial 1 -->
+
+            <br/>
+
+            <!--Testimonial 2 -->
+            <div class="row">
+                <div class="col-xs-12 col-sm-1 col-md-1 col-lg-1" style="margin-right:-3%">
+                    <img src="/images/dr-mccarthy.jpg" style="border:1px solid black;height:50px;width:50px;"/>
+                </div>
+                <div class="col-xs-11 col-sm-11 col-md-11 col-lg-11">
+                    <div style="font-style: italic">
+                        "Rapportbook is great for connecting communities." - <b>Dr. Lance McCarthy</b>, <a href="http://tedxgatewayarch.org/lance-mccarthy/" target="_blank">Economist, Investment Advisor, Urban Leader</a>
+                    </div>
+                </div>
+            </div>
+            <!--End Testimonial 1 -->
+
+
+
             <h4 style="color:red;">Checkout what people are sharing</h4>
 </div>
 
 
+        <!--FEED STARTS HERE -->
         <div class="col-lg-12 col-md-12 col-xs-12" style="background-color: #888888;style=">
 <?php
 
