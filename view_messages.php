@@ -277,15 +277,13 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
             <hr/>
 
             <?php $senderID = get_id_from_username($urlUsername);
-            $sql = "SELECT Username FROM Members WHERE ID = $senderID";
+            $sql = "SELECT FirstName, Username FROM Members WHERE ID = $senderID";
             $result = mysql_query($sql) or die(mysql_error());
             $row = mysql_fetch_assoc($result);
             $username = $row['Username'];
-            $name = get_users_name($senderID);
-            $nameArray = explode(' ', $name);
-            $firstName = $nameArray[0];
+            $firstName = $row['FirstName'];
             ?>
-            <h5><span class="viewMessage"><a href="/profile_public.php/<?php echo $username ?>">Visit <?php echo $firstName ?>'s Profile</a></span></h5>
+            <h5><span class="viewMessage"><a href="/<?php echo $username ?>">Visit <?php echo $firstName ?>'s Profile</a></span></h5>
             <?php
             // get subject
             $sql = "SELECT * FROM Messages
@@ -329,7 +327,7 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
                     $name = $rows2['FirstName'] .' '.$rows2['LastName'];
                     $username = $rows2['Username'];
 
-                    echo "<a href='/profile_public.php/$username'><img src = '$mediaPath$pic' class='profilePhoto-Feed' alt='' /> $name</a>";
+                    echo "<a href='/$username'><img src = '$mediaPath$pic' class='profilePhoto-Feed' alt='' /> $name</a>";
 
                     echo "<div class='post'>".nl2br($message)."</div>";
 
