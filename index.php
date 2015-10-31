@@ -326,7 +326,7 @@ get_head_files();
                     </div>
                 </div>
 
-                <div class="form-group row" id="form-group-ddGender">
+               <!-- <div class="form-group row" id="form-group-ddGender">
                     <div class="col-md-6">
                         <label class="sr-only" for="gender">Gender</label>
                         <select class='form-control input-lg' name="ddGender" id="ddGender">
@@ -338,7 +338,7 @@ get_head_files();
                     <div class="col-md-6">
                         <div class="error-text"></div>
                     </div>
-                </div>
+                </div>-->
 
                 <div class="form-group row" id="form-group-ddState" >
                     <div class="col-md-6">
@@ -358,7 +358,7 @@ get_head_files();
                 </div>
 
 
-                <div class="form-group row" id="form-group-zip">
+               <!-- <div class="form-group row" id="form-group-zip">
                     <div class="col-md-6">
                         <label class="sr-only" for="username">Zip</label>
                         <input class="form-control input-lg" type="text" name="zip" id="zip"
@@ -367,32 +367,32 @@ get_head_files();
                     <div class="col-md-6">
                         <div class="error-text"></div>
                     </div>
-                </div>
+                </div>-->
 
-                <label>Birthday</label>
+                <!-- <label>Birthday</label>
 
                 <div class="form-group form-inline row" id="form-group-birthday">
                     <div class="col-md-6">
                         <label class="sr-only" for="ddMonth">Birthday Month</label>
                         <select class="form-control input-lg" id="ddMonth" name="ddMonth">
                             <option value="">Month</option>
-                            <?php echo calendarMonths() ?>
+                            <?php /*echo calendarMonths() */?>
                         </select>
                         <label class="sr-only" for="ddDay">Birthday Day</label>
                         <select class="form-control input-lg" id="ddDay" name="ddDay">
                             <option value="">Day</option>
-                            <?php echo calendarDays() ?>
+                            <?php /*echo calendarDays() */?>
                         </select>
                         <label class="sr-only" for="ddYear">Birthday Year</label>
                         <select class="form-control input-lg" name="ddYear" id="ddYear">
                             <option value="">Year</option>
-                            <?php echo calendarYears() ?>
+                            <?php /*echo calendarYears() */?>
                         </select>
                     </div>
                     <div class="col-md-6">
                         <div class="error-text"></div>
                     </div>
-                </div>
+                </div>-->
 
                 <div class="form-group row" id="form-group-username">
                     <div class="col-md-6">
@@ -424,7 +424,7 @@ get_head_files();
                     <br/>
 
 
-                <div class="form-group row" id="form-group-phone">
+               <!-- <div class="form-group row" id="form-group-phone">
                     <div class="col-md-6">
                         <label class="sr-only" for="phone">Phone</label>
                         <input class="form-control input-lg" type="text" name="phone" id="phone"
@@ -434,7 +434,7 @@ get_head_files();
                     <div class="col-md-6">
                         <div class="error-text"></div>
                     </div>
-                </div>
+                </div>-->
 
                 <small>By clicking sign up, you agree to our <a href="/terms">terms</a></small>
                 <br/><br/>

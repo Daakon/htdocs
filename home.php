@@ -83,12 +83,12 @@ if (isset($_POST['submit'])) {
                                         $webmFileName = $fileName . ".webm";
                                         $ffmpeg = '/usr/local/bin/ffmpeg';
                                         // convert mp4
-                                        exec("$ffmpeg -i $fileName $newFileName");
+                                        exec("$ffmpeg -i $fileName -vcodec h264 $newFileName");
                                         $mediaName = $newFileName;
                                         // convert ogg
-                                        exec("$ffmpeg -i $fileName  $oggFileName");
+                                        exec("$ffmpeg -i $fileName -vcodec libtheora -acodec libvorbis $oggFileName");
                                         // convert webm
-                                        exec("$ffmpeg -i $fileName  $webmFileName");
+                                        exec("$ffmpeg -i $fileName -vcodec libvpx -acodec libvorbis -f webm $webmFileName");
                                     }
                                 } else {
                                     if ($type == "image/jpg" || $type == "image/jpeg") {

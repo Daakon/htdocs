@@ -9,21 +9,18 @@ require 'email.php';
 $fName = $_POST['firstName'];
 $lName = $_POST['lastName'];
 $email = $_POST['email'];
-$gender = $_POST['gender'];
-$month = $_POST['ddMonth'];
-$day = $_POST['ddDay'];
-$year = $_POST['ddYear'];
-$birthday = $_POST['birthday'];
+//$gender = $_POST['gender'];
+//$month = $_POST['ddMonth'];
+//$day = $_POST['ddDay'];
+//$year = $_POST['ddYear'];
+//$birthday = $_POST['birthday'];
 $city = $_POST['ddCity'];
 $state = $_POST['ddState'];
-$zip = $_POST['zip'];
+//$zip = $_POST['zip'];
 $username = $_POST['username'];
 $pass = $_POST['password'];
-$goal = $_POST['ddGoal'];
-$phone = $_POST['phone'];
+//$phone = $_POST['phone'];
 $interest = $_POST['interest'];
-$fb_token = $_POST['fb_token'];
-$fb_id = $_POST['fb_id'];
 
 
 if ($city == '') {
@@ -31,14 +28,14 @@ if ($city == '') {
     exit;
 }
 
-if($gender=='') $gender = (($_POST['gender']=='Male')?1:2);
+//if($gender=='') $gender = (($_POST['gender']=='Male')?1:2);
 
-if ($year != '') {
+/*if ($year != '') {
     $dob = $year . '-' . $month . '-' . $day;
 }
 else {
     $dob = $birthday;
-}
+}*/
 
 // check if email exists
 $sql = "SELECT * FROM Members WHERE Email = '$email'";
@@ -61,8 +58,8 @@ if (mysql_num_rows($result) > 0) {
 }
 
 
-$sql = "INSERT INTO Members (FirstName, LastName, Email,    Gender,    DOB,    Username,      Password,         Interest,     SignupDate,   IsSuspended, EmailActive, LastLogin,      fb_token,   fb_id)
-Values 			            ('$fName', '$lName', '$email', '$gender', '$dob', '$username',  '".md5($pass)."',  '$interest',     CURRENT_DATE(),   0,           1,        CURRENT_DATE(),'$fb_token','$fb_id')";
+$sql = "INSERT INTO Members (FirstName, LastName, Email,    Username,      Password,         Interest,     SignupDate,   IsSuspended, EmailActive, LastLogin     )
+Values 			            ('$fName', '$lName', '$email', '$username',  '".md5($pass)."',  '$interest',   CURRENT_DATE(),   0,           1,       CURRENT_DATE() )";
 $result = mysql_query($sql) or die(mysql_error());
 
 $ID = mysql_insert_id();
@@ -87,6 +84,8 @@ $sql = "INSERT INTO Profile (Member_ID, Poster,               ProfileVideo,     
                             ('$ID',     'default_photo.png', 'default_video.png', '$state',   '$city', '$zip', '$phone')    ";
 $result = mysql_query($sql) or die(mysql_error());
 
+
+// insert default post
 
 // Send out sign up email
 $toId = $rows['ID'];
