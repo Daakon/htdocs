@@ -212,13 +212,13 @@ if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
 
     // check email
     if (check_email($email) == false) {
-        echo "<script>alert('Invalid Email');location='profile.php/$username'</script>";
+        echo "<script>alert('Invalid Email');location='/$username'</script>";
         exit();
     }
 
     // check that updated email does not exist
     if (is_existing_email($email, $ID)) {
-        echo "<script>alert('This email already belongs to someone');location='profile.php/$username'</script>";
+        echo "<script>alert('This email already belongs to someone');location='/$username'</script>";
         exit();
     }
     $email = mysql_real_escape_string($email);
@@ -300,6 +300,7 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
 <script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
 
 <script>
+    // CHECK DEMOGRAPHIC INFORMATION
     function checkFields() {
         var firstName = document.getElementById('FirstName').value;
 

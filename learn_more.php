@@ -30,7 +30,7 @@ get_header()
             <a href="../" >
                 <button style="background:red;color:white;padding:10px;border: 2px solid black;border-radius: 10px;">
                     <span style="font-weight:bold;">Login or Sign Up</span>
-                </button> <span style="font-weight:bold;font-size:26px;">Get Connected!</span>
+                </button> <span style="font-weight:bold;font-size:16px;">Get Connected!</span>
             </a>
             <?php } else { ?>
             <a href="/home">Back</a>
@@ -38,7 +38,7 @@ get_header()
 
             <h4 class="lead" style="color:red;font-weight:bold">Connect With People By Interests In The Same Local Area.</h4>
 
-                <img src="<?php echo $imagesPath ?>interests-lg.JPG" />
+                <img src="<?php echo $imagesPath ?>NetworkGraphic.png" />
 
                 <br/><br/>
 
@@ -109,6 +109,7 @@ get_header()
             <a href="http://tumblr.com/blog/rapportbook" target="_blank"><img src="/images/tumblr-logo-red.png" height="40" width="40"/> </a>
             <a href="http://instagram.com/officialrapportbook" target="_blank"><img src="/images/instagram-logo-red.png" height="50" width="50"/></a> </a>
             <a href="http://pintrest.com/rapportbook" target="_blank"><img src="/images/pintrest-logo-red.png" height="50" width="50" /> </a>
+            <a href="http://linkedin.com/company/rapportbook" target="_blank"><img src="/images/linkedin-logo-red.png" height="40" width="40" /></a> </a>
 
             <h4 style="color:red;">Checkout what people are sharing</h4>
 </div>

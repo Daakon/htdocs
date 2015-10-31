@@ -86,6 +86,13 @@ $result = mysql_query($sql) or die(mysql_error());
 
 
 // insert default post
+$post = "Hey, my name is $fName and my favorite interest is $interest.
+         Comment on my post or Direct Message me if you want to chat.";
+
+$sql = "INSERT INTO Posts (Post,    Category,  Member_ID,   PostDate) Values
+                          ('$post', '$interest', '$ID',       CURDATE())";
+mysql_query($sql) or die(mysql_error());
+
 
 // Send out sign up email
 $toId = $rows['ID'];
