@@ -14,14 +14,13 @@ get_head_files();
     <p>
     <h5>Content Ownership</h5>
         You own all of the content and information you post on Rapportbook
-        and none of your uploaded videos will be used outside of our domain.
+        but we reserve the right to use your uploaded videos outside of our domain for marketing purposes only.
 
     </p>
 
     <p>
         <h5>Registration & Account Security</h5>
-        Rapportbook members must sign up with their government name but only
-        your first name will be used to reference your profile.
+        Rapportbook members must sign up with their government.
 
         Our account rules are as follows:
     <ul>
