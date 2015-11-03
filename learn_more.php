@@ -25,6 +25,7 @@ get_header()
 
 
 
+
         <div align="left" style="padding-left:10px;">
             <?php if (empty($_SESSION['ID']) || !isset($_SESSION['ID'])) { ?>
             <a href="../" >
@@ -37,6 +38,9 @@ get_header()
             <?php } ?>
 
             <h4 class="lead" style="color:red;font-weight:bold">Connect With People By Interests In The Same Local Area.</h4>
+
+            <hr style = 'background-color:gainsboro; border-width:0; color:black; height:2px; lineheight:0; display: inline-block; text-align: left; width:100%;'/>
+
 
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
@@ -52,38 +56,39 @@ get_header()
                     <a href="http://pintrest.com/rapportbook" target="_blank"><img src="/images/pintrest-logo-red.png" height="50" width="50" /> </a>
                     <a href="http://linkedin.com/company/rapportbook" target="_blank"><img src="/images/linkedin-logo-red.png" height="40" width="40" /></a> </a>
 
-                </div>
-            </div>
+                    <br/>
 
+                    <div style="margin-top:60px;">
 
-
-
-            <br/><br/>
-
-
-            <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-
-                    <img src="/images/camera.png" height="30" width="30" />
+                    <img src="/images/camera.png" height="50" width="50" />
                     <span class="lead">
-                    Post Photos & Videos of Your Interests
+                    Post Photos & Videos of Interests
                     </span>
 
 
                     <br/><br/>
 
 
-                    <img src="/images/share-people.png" height="30" width="30" />
+                    <img src="/images/share-people.png" height="50" width="50" />
                     <span class="lead">
                     Share Information.
                     </span>
 
                     <br/><br/>
 
-                    <img src="/images/local.png" height="30" width="30" />
-                    <span class="lead">
+                    <img src="/images/local.png" height="70" width="60" />
+                    <span class="lead" style="margin-left:-10px;">
                     Discover Things Around You.
                     </span>
+
+                        </div>
+
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 
                     <hr/>
 
@@ -115,7 +120,21 @@ get_header()
                             </div>
                         </div>
                     </div>
-                    <!--End Testimonial 1 -->
+                    <!--End Testimonial 2 -->
+                    <hr/>
+
+                    <!--Testimonial 3 -->
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2" style="margin-right:-3%">
+                            <img src="/images/angela-larocca.jpg" style="border:1px solid black;height:50px;width:50px;"/>
+                        </div>
+                        <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+                            <div style="font-style: italic">
+                                "Chris Weathers has a genuine passion for connecting people with similar interests, and Rapportbook  seamlessly allows you to interact with like-minded individuals.." - <b>Angela LaRocca</b>, <a href="http://unidev.com" target="_blank">Brand Manager, Unidev</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!--End Testimonial 3 -->
                     <hr/>
 </div>
 
@@ -136,7 +155,7 @@ get_header()
 
 
         <!--FEED STARTS HERE -->
-        <div class="col-lg-12 col-md-12 col-xs-12" style="background-color: #888888;style=">
+        <div class="col-lg-12 col-md-12 col-xs-12" style="background-color: #888888;">
 <?php
 
 
@@ -150,7 +169,7 @@ else {
     $stateCondition = "";
 }
 
-$limit = "10";
+$limit = "11";
 $sqlRollCall = " SELECT DISTINCT
     Posts.Post As Post,
     Members.ID As MemberID,
@@ -194,7 +213,7 @@ if (mysql_num_rows($rollCallResult) > 0) {
         $postOwner = $memberID;
         ?>
 
-        <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 roll-call"
+        <div class="col-lg-5 col-lg-offset-1 col-md-6 col-sm-6 col-xs-12 roll-call"
          style="background:#f5f8fa;border-radius:10px;margin-top:20px;border:2px solid slategray;"
          align="left">
 
