@@ -38,9 +38,31 @@ get_header()
 
             <h4 class="lead" style="color:red;font-weight:bold">Connect With People By Interests In The Same Local Area.</h4>
 
-                <img src="<?php echo $imagesPath ?>NetworkGraphic.png" />
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <img src="<?php echo $imagesPath ?>NetworkGraphic.png" />
+                </div>
 
-                <br/><br/>
+                <div class="col-lg-5 col-lg-offset-1 col-md-5 col-md-offset-1 col-sm-12 col-xs-12">
+                    <h4 style="font-weight: bold">Follow Us:</h4>
+                    <a href="http://facebook.com/rapportbook" target="_blank"><img src="/images/facebook-logo-red.png" height="50" width="50"></a>
+                    <a href="http://twitter.com/rapportbook" target="_blank"><img src="/images/twitter-logo-red.png" height="=50" width="50"></a>
+                    <a href="http://tumblr.com/blog/rapportbook" target="_blank"><img src="/images/tumblr-logo-red.png" height="40" width="40"/> </a>
+                    <a href="http://instagram.com/officialrapportbook" target="_blank"><img src="/images/instagram-logo-red.png" height="50" width="50"/></a> </a>
+                    <a href="http://pintrest.com/rapportbook" target="_blank"><img src="/images/pintrest-logo-red.png" height="50" width="50" /> </a>
+                    <a href="http://linkedin.com/company/rapportbook" target="_blank"><img src="/images/linkedin-logo-red.png" height="40" width="40" /></a> </a>
+
+                </div>
+            </div>
+
+
+
+
+            <br/><br/>
+
+
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 
                     <img src="/images/camera.png" height="30" width="30" />
                     <span class="lead">
@@ -63,53 +85,51 @@ get_header()
                     Discover Things Around You.
                     </span>
 
+                    <hr/>
 
-            <br/><br/>
+                    <h2 style="font-family: cursive;color:green;text-decoration: underline;">Testimonials</h2>
 
-
-            Rapportbook Founder & CEO Chris Weathers speaks on why he became an entrepreneur.
-            <br/>
-            <iframe max-width="400" height="315" src="https://www.youtube.com/embed/qiFa1-Mtj8c" frameborder="0" allowfullscreen></iframe>
-
-            <h2 style="font-family: cursive;color:green;text-decoration: underline;">Testimonials</h2>
-
-<!--Testimonial 1 -->
-            <div class="row">
-                <div class="col-xs-12 col-sm-1 col-md-1 col-lg-1" style="margin-right:-3%">
-                    <img src="/images/brian-slawin.jpg" style="border:1px solid black;height:50px;width:50px;"/>
-                </div>
-                <div class="col-xs-11 col-sm-11 col-md-11 col-lg-11">
-                   <div style="font-style: italic">
-                        "Rapportbook is all about local reach and I really like that." - <b>Brian Slawin</b>, Co-Founder, <a href="http://busyevent.com" target="_blank">Busy Event </a>
+                    <!--Testimonial 1 -->
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2" style="margin-right:-3%">
+                            <img src="/images/brian-slawin.jpg" style="border:1px solid black;height:50px;width:50px;"/>
                         </div>
-                </div>
-            </div>
-<!--End Testimonial 1 -->
-
-            <br/>
-
-            <!--Testimonial 2 -->
-            <div class="row">
-                <div class="col-xs-12 col-sm-1 col-md-1 col-lg-1" style="margin-right:-3%">
-                    <img src="/images/dr-mccarthy.jpg" style="border:1px solid black;height:50px;width:50px;"/>
-                </div>
-                <div class="col-xs-11 col-sm-11 col-md-11 col-lg-11">
-                    <div style="font-style: italic">
-                        "Rapportbook is great for connecting communities." - <b>Dr. Lance McCarthy</b>, <a href="http://tedxgatewayarch.org/lance-mccarthy/" target="_blank">Economist, Investment Advisor, Urban Leader</a>
+                        <div class="col-xs-12 col-sm-10 col-md-10 col-lg-10">
+                            <div style="font-style: italic">
+                                "Rapportbook is all about local reach and I really like that." - <b>Brian Slawin</b>, Co-Founder, <a href="http://busyevent.com" target="_blank">Busy Event </a>
+                            </div>
+                        </div>
                     </div>
+                    <!--End Testimonial 1 -->
+
+                    <hr/>
+
+                    <!--Testimonial 2 -->
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2" style="margin-right:-3%">
+                            <img src="/images/dr-mccarthy.jpg" style="border:1px solid black;height:50px;width:50px;"/>
+                        </div>
+                        <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+                            <div style="font-style: italic">
+                                "Rapportbook is great for connecting communities." - <b>Dr. Lance McCarthy</b>, <a href="http://tedxgatewayarch.org/lance-mccarthy/" target="_blank">Economist, Investment Advisor, Urban Leader</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!--End Testimonial 1 -->
+                    <hr/>
+</div>
+
+
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="margin-top:20px;">
+
+                        Rapportbook Founder & CEO Chris Weathers speaks on why he became an entrepreneur.
+                        <br/>
+                        <iframe max-width="400" height="315" src="https://www.youtube.com/embed/qiFa1-Mtj8c" frameborder="0" allowfullscreen></iframe>
+</div>
                 </div>
-            </div>
-            <!--End Testimonial 1 -->
 
             <br/>
 
-            <h4>Follow Us:</h4>
-            <a href="http://facebook.com/rapportbook" target="_blank"><img src="/images/facebook-logo-red.png" height="50" width="50"></a>
-            <a href="http://twitter.com/rapportbook" target="_blank"><img src="/images/twitter-logo-red.png" height="=50" width="50"></a>
-            <a href="http://tumblr.com/blog/rapportbook" target="_blank"><img src="/images/tumblr-logo-red.png" height="40" width="40"/> </a>
-            <a href="http://instagram.com/officialrapportbook" target="_blank"><img src="/images/instagram-logo-red.png" height="50" width="50"/></a> </a>
-            <a href="http://pintrest.com/rapportbook" target="_blank"><img src="/images/pintrest-logo-red.png" height="50" width="50" /> </a>
-            <a href="http://linkedin.com/company/rapportbook" target="_blank"><img src="/images/linkedin-logo-red.png" height="40" width="40" /></a> </a>
 
             <h4 style="color:red;">Checkout what people are sharing</h4>
 </div>

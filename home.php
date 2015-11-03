@@ -659,7 +659,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                 <li><a href ="/logout" >Log Out</a></li>
 
             </ul>
-
+<hr style = 'background-color:#ffffff; border-width:0; color:#ffffff; height:3px; lineheight:0; display: inline-block; text-align: left; width:100%;'/>
 </div>
             <?php
             $genre = $_GET['genre'];

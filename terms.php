@@ -94,7 +94,7 @@ get_head_files();
     SO THE ABOVE LIMITATION OR EXCLUSION MAY NOT APPLY TO YOU. IN SUCH CASES, RAPPORTBOOK'S LIABILITY WILL BE LIMITED TO THE FULLEST EXTENT PERMITTED BY APPLICABLE LAW.
     </p>
 
-    <a href="/index.php"><h3>Sign Up or Login</h3></a>
+    <a href="../"><h3>Sign Up or Login</h3></a>
 </div>
 </body>
 
