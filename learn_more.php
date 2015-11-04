@@ -4,7 +4,11 @@ require 'html_functions.php';
 require 'mediaPath.php';
 require 'getSession_public.php';
 get_head_files();
-get_header()
+get_header();
+$_SESSION['ID'] = $ID;
+if (!empty($_SESSION['ID'])) {
+    $ID = $_SESSION['ID'];
+}
 ?>
 
     <script type="text/javascript">
@@ -31,7 +35,7 @@ get_header()
             <a href="../" >
                 <button style="background:red;color:white;padding:10px;border: 2px solid black;border-radius: 10px;">
                     <span style="font-weight:bold;">Login or Sign Up</span>
-                </button> <span style="font-weight:bold;font-size:16px;">Get Connected!</span>
+                </button> <span style="font-weight:bold;font-size:16px;">It's Free!</span>
             </a>
             <?php } else { ?>
             <a href="/home">Back</a>
@@ -101,7 +105,7 @@ get_header()
                         </div>
                         <div class="col-xs-12 col-sm-10 col-md-10 col-lg-10">
                             <div style="font-style: italic">
-                                "Rapportbook is all about local reach and I really like that." - <b>Brian Slawin</b>, Co-Founder, <a href="http://busyevent.com" target="_blank">Busy Event </a>
+                                "Rapportbook is all about local reach and I really like that." - <b>Brian Slawin</b>,<a href="http://busyevent.com" target="_blank">Co-Founder, Busy Event </a>
                             </div>
                         </div>
                     </div>
@@ -138,6 +142,11 @@ get_header()
                     <hr/>
 </div>
 
+                <a href="../" >
+                    <button style="background:red;color:white;padding:10px;border: 2px solid black;border-radius: 10px;margin-left:15px;">
+                        <span style="font-weight:bold;">Login or Sign Up</span>
+                    </button> <span style="font-weight:bold;font-size:16px;">It's Free!</span>
+                </a>
 
                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="margin-top:20px;">
 
@@ -150,6 +159,11 @@ get_header()
             <br/>
 
 
+            <a href="../" >
+                <button style="background:red;color:white;padding:10px;border: 2px solid black;border-radius: 10px;">
+                    <span style="font-weight:bold;">Login or Sign Up</span>
+                </button> <span style="font-weight:bold;font-size:16px;">It's Free!</span>
+            </a>
             <h4 style="color:red;">Checkout what people are sharing</h4>
 </div>
 
@@ -169,7 +183,7 @@ else {
     $stateCondition = "";
 }
 
-$limit = "11";
+$limit = "100";
 $sqlRollCall = " SELECT DISTINCT
     Posts.Post As Post,
     Members.ID As MemberID,
@@ -204,6 +218,7 @@ if (mysql_num_rows($rollCallResult) == 0) {
 if (mysql_num_rows($rollCallResult) > 0) {
     while ($rows = mysql_fetch_assoc($rollCallResult)) {
         $memberID = $rows['MemberID'];
+        $firstName = $rows['FirstName'];
         $name = $rows['FirstName'] . ' ' . $rows['LastName'];
         $username = $rows['Username'];
         $profilePhoto = $rows['ProfilePhoto'];
@@ -226,7 +241,7 @@ if (mysql_num_rows($rollCallResult) > 0) {
                  title="<?php echo $name ?>" /> &nbsp <b><font size="2"><?php echo $name ?></font></b>
         </a>
 
-        <div class="post">
+        <div class="post" style="margin:0px;padding:0px;">
             <?php
             if (strlen($post) > 700) {
                 $post500 = substr($post, 0, 700); ?>
@@ -237,15 +252,49 @@ if (mysql_num_rows($rollCallResult) > 0) {
                 <?php
                 echo "<div id='long$postID' style='display:none;'>";
                 echo nl2br($post);
+
+                ?>
+
+                <br/><br/>
+
+                <?php
+                $messageLink;
+                if (!empty($_SESSION['ID']) && $memberID != $ID) {
+                    $messageLink = "/view_messages/$username";
+                }
+                else {
+                    $messageLink = '../';
+                }
+                ?>
+
+                <a href="<?php $messageLink ?>">
+                    <button style="background:red;color:white;padding:10px;border: 2px solid black;border-radius: 10px;">
+                        <span style="font-weight:bold;">Connect With <?php echo $firstName ?></span>
+                    </button>
+                </a>
+
+                <?php
+
                 echo "</div>";
             }
             else {
                 echo nl2br($post);
+                ?>
+
+                <br/><br/>
+
+            <a href="../" >
+                <button style="background:red;color:white;padding:10px;border: 2px solid black;border-radius: 10px;">
+                    <span style="font-weight:bold;">Connect With <?php echo $firstName ?></span>
+                </button>
+            </a>
+
+            <?php
             }
             ?>
         </div>
 
-        <h4 style="color:red;font-weight:bold"><?php echo $category ?></h4>
+        <h4 class='category'>#<?php echo $category ?></h4>
 
     <?php
 

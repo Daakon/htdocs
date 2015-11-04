@@ -102,7 +102,7 @@ $postOwner = $memberID;
     </div>
 
     <?php if (isset($ID)) { ?>
-    <a href='/post-interest?interest=<?php echo urlencode($category) ?>' class='category'><h5><?php echo $category ?></h5></a>
+    <a href='/post-interest?interest=<?php echo urlencode($category) ?>' class='category'><h4>#<?php echo $category ?></h4></a>
 
 
     <div style="padding-top:10px;padding-bottom:10px;margin-top:10px;">

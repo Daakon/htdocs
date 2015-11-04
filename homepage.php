@@ -11,10 +11,10 @@ if (isset($_SESSION["ID"]) && !empty($_SESSION['ID'])) {
     $rows =  mysql_fetch_assoc($result);
     $username = $rows['Username'];
 
-    echo "<script>location='/profile.php/$username';</script>";
+    echo "<script>location='/$username';</script>";
 }
 else {
-    echo "<script>location = '/learn_more.php'</script>";
+    echo "<script>location = '/learn_more'</script>";
 }
 
 
