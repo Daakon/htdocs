@@ -334,7 +334,7 @@ function dynamicPost($interest) {
     }
 
     elseif ($interest == 'Gaming') {
-        $dynamicText = 'you want to jump online and jam.';
+        $dynamicText = 'you are into video or board games.';
     }
 
     elseif ($interest == 'Modeling') {
