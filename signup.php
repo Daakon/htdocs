@@ -85,8 +85,11 @@ $sql = "INSERT INTO Profile (Member_ID, Poster,               ProfileVideo,     
 $result = mysql_query($sql) or die(mysql_error());
 
 
+// dynamic auto post
+$dynamicText = dynamicPost($interest);
+
 // insert default post
-$post = "Hey!, my name is $fName and my favorite interest is $interest. Comment on my post or direct message me if you want to chat.";
+$post = "Hey!, my name is $fName and my favorite interest is $interest. Comment on my post or direct message me if $dynamicText";
 $post = mysql_real_escape_string($post);
 $sql = "INSERT INTO Posts (Post,    Category,  Member_ID,   PostDate) Values
                           ('$post', '$interest', '$ID',       CURDATE())";
