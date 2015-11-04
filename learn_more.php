@@ -105,7 +105,7 @@ if (!empty($_SESSION['ID'])) {
                         </div>
                         <div class="col-xs-12 col-sm-10 col-md-10 col-lg-10">
                             <div style="font-style: italic">
-                                "Rapportbook is all about local reach and I really like that." - <b>Brian Slawin</b>,<a href="http://busyevent.com" target="_blank">Co-Founder, Busy Event </a>
+                                "Rapportbook is all about local reach and I really like that." - <b>Brian Slawin</b>, <a href="http://busyevent.com" target="_blank">Co-Founder, Busy Event </a>
                             </div>
                         </div>
                     </div>
@@ -233,7 +233,7 @@ if (mysql_num_rows($rollCallResult) > 0) {
          align="left">
 
         <?php
-            $profileUrl = "/profile/$username";
+            $profileUrl = "../";
         ?>
 
         <a href="<?php echo $profileUrl ?>">
