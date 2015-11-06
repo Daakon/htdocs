@@ -62,6 +62,14 @@ function get_user_firstName($user_id)
 
 }
 
+function checkNameLength($name,$firstName,$lastName) {
+    if (strlen($name) > 70) {
+        $lastName = $lastName[0];
+        $name = $firstName.' '.$lastName.'...';
+        return $name;
+    }
+}
+
 function get_username($user_id)
 {
 

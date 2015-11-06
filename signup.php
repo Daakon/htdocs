@@ -5,26 +5,72 @@ require 'model_functions.php';
 require 'email.php';
 
 
-
-$fName = $_POST['firstName'];
-$lName = $_POST['lastName'];
 $email = $_POST['email'];
+
+$emailSplit = explode("@", $email);
+$username = $emailSplit[0];
+
+$fName = $username;
+$lName = ' ';
+
 //$gender = $_POST['gender'];
 //$month = $_POST['ddMonth'];
 //$day = $_POST['ddDay'];
 //$year = $_POST['ddYear'];
 //$birthday = $_POST['birthday'];
-$city = $_POST['ddCity'];
-$state = $_POST['ddState'];
+
+$ip = $_SERVER['REMOTE_ADDR'];
+$key = 'dc5ff2626e3bfffd325504af3e81c54d26e1c6c0bf5312c2ce5ef30043d314f6';
+$url = "http://api.ipinfodb.com/v3/ip-city/?key=$key&ip=$ip&format=json";
+
+$d = file_get_contents($url);
+$data = json_decode($d , true);
+
+/*
+ * JSON Returned
+{
+"statusCode" : "OK",
+"statusMessage" : "",
+"ipAddress" : "74.125.45.100",
+"countryCode" : "US",
+"countryName" : "UNITED STATES",
+"regionName" : "CALIFORNIA",
+"cityName" : "MOUNTAIN VIEW",
+"zipCode" : "94043",
+"latitude" : "37.3956",
+"longitude" : "-122.076",
+"timeZone" : "-08:00"
+}
+*/
+
+if(strlen($data['countryCode'])) {
+    $info = array(
+        'ip' => $data['ipAddress'],
+        'country_code' => $data['countryCode'],
+        'country_name' => $data['countryName'],
+        'region_name' => $data['regionName'],
+        'city' => $data['cityName'],
+        'zip_code' => $data['zipCode'],
+        'latitude' => $data['latitude'],
+        'longitude' => $data['longitude'],
+        'time_zone' => $data['timeZone'],
+    );
+}
+
+//$city = $record['city'];
+$city = $info['city'];
+$state = $info['region_name'];
+$zip = $info['zip_code'];
+
 //$zip = $_POST['zip'];
-$username = $_POST['username'];
-$pass = $_POST['password'];
+$username = $username;
+$pass = 'password10';
 //$phone = $_POST['phone'];
 $interest = $_POST['interest'];
 
 
 if ($city == '') {
-    echo "<script>alert('You did not provide a city'); location='/index.php'</script>";
+    echo "<script>alert('You did not provide a city'); location='../'</script>";
     exit;
 }
 
@@ -47,14 +93,34 @@ if (mysql_num_rows($result) > 0) {
         exit;
 }
 
+$unique = 1;
+a:
 // check if username exists
 $sql = "SELECT * FROM Members WHERE Username = '$username'";
 $result = mysql_query($sql) or die(mysql_error());
 
 if (mysql_num_rows($result) > 0) {
 
-    echo '<script>alert("That username is not available");location = "index.php"</script>';
-    exit;
+
+    $username = $username . $unique;
+    $unique++;
+    goto a;
+}
+
+
+// check if we have this city
+$sql = "SELECT City FROM City WHERE City = '$city'";
+$result = mysql_query($sql) or die(mysql_error());
+if (mysql_num_rows($result) == 0) {
+    // get state key
+    $sql2 = "SELECT ID FROM State WHERE State = '$state'";
+    $result2 = mysql_query($sql2) or die(mysql_error());
+    $stateRow = mysql_fetch_assoc($result2);
+    $stateID = $stateRow['ID'];
+
+    // insert new city with state key
+    $sql3 = "INSERT INTO City (State_ID, City) Values ($stateID, '$city')";
+    mysql_query($sql3) or die(mysql_error());
 }
 
 
@@ -80,7 +146,7 @@ $sql = "UPDATE Members SET SignupDate = '$date' WHERE ID = '$ID' ";
 $result = mysql_query($sql) or die(mysql_error());
 
 // insert default profile pic into profile table
-$sql = "INSERT INTO Profile (Member_ID, Poster,               ProfileVideo,        State,    City,  Zip,    Phone) Values
+$sql = "INSERT INTO Profile (Member_ID, Poster,               ProfileVideo,        State,    City,      Zip,    Phone) Values
                             ('$ID',     'default_photo.png', 'default_video.png', '$state',   '$city', '$zip', '$phone')    ";
 $result = mysql_query($sql) or die(mysql_error());
 

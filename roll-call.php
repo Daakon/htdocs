@@ -56,6 +56,8 @@ if (mysql_num_rows($rollCallResult) == 0) {
 if (mysql_num_rows($rollCallResult) > 0) {
 while ($rows = mysql_fetch_assoc($rollCallResult)) {
 $memberID = $rows['MemberID'];
+$firstName = $rows['FirstName'];
+$lastName = $rows['LastName'];
 $name = $rows['FirstName'] . ' ' . $rows['LastName'];
     $username = $rows['Username'];
 $profilePhoto = $rows['ProfilePhoto'];
@@ -73,6 +75,9 @@ $postOwner = $memberID;
 
     <?php
         $profileUrl = "/$username";
+    if (strlen($name) > 70) {
+        $name = checkNameLength($name,$firstName,$lastName);
+    }
     ?>
 
     <a href="<?php echo $profileUrl ?>">

@@ -559,13 +559,20 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
     if (mysql_num_rows($result) > 0) {
     while ($rows = mysql_fetch_assoc($result)) {
     $memberID = $rows['MemberID'];
+    $firstName = $rows['FirstName'];
+    $lastName = $rows['LastName'];
     $name = $rows['FirstName'] . ' ' . $rows['LastName'];
     $username = $rows['Username'];
     $profilePhoto = $rows['ProfilePhoto'];
     $category = $rows['Category'];
     $post = $rows['Post'];
-    $postID = $rows['PostID']
+    $postID = $rows['PostID'];
+
+    if (strlen($name) > 70) {
+        $name = checkNameLength($name,$firstName,$lastName);
+    }
     ?>
+
     <div class="row row-padding">
         <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 roll-call"
               align="left">

@@ -294,7 +294,7 @@ get_head_files();
 
 
 
-                <div class="form-group row" id="form-group-firstName">
+                <!--<div class="form-group row" id="form-group-firstName">
                     <div class="col-xs-12 col-md-12 col-md-6 col-lg-6 ">
                         <label class="sr-only" for="firstName">First Name</label>
                         <input class=" form-control input-lg" type="text" name="firstName" id="firstName"
@@ -303,8 +303,9 @@ get_head_files();
                     <div class="col-md-6">
                         <div class="error-text"></div>
                     </div>
-                </div>
-                <div class="form-group row" id="form-group-lastName">
+                </div>-->
+
+                <!--<div class="form-group row" id="form-group-lastName">
                     <div class="col-md-6">
                         <label class="sr-only" for="lastName">Last Name</label>
                         <input class="form-control input-lg" type="text" name="lastName" id="lastName"
@@ -313,7 +314,7 @@ get_head_files();
                     <div class="col-md-6">
                         <div class="error-text"></div>
                     </div>
-                </div>
+                </div>-->
 
                 <div class="form-group row" id="form-group-email">
                     <div class="col-md-6">
@@ -340,22 +341,22 @@ get_head_files();
                     </div>
                 </div>-->
 
-                <div class="form-group row" id="form-group-ddState" >
+                <!--<div class="form-group row" id="form-group-ddState" >
                     <div class="col-md-6">
                         <label class="sr-only" for="ddState">State</label>
                         <select class='form-control input-lg' name="ddState" id="ddState" onchange="getCity(this);">
                             <option value="">State</option>
-                            <?php echo getState() ?>
+                            <?php /*echo getState() */?>
                         </select>
                     </div>
                     <div class="col-md-6">
                         <div class="error-text"></div>
                     </div>
-                </div>
+                </div>-->
 
-                <div id="divCity">
+                <!--<div id="divCity">
 
-                </div>
+                </div>-->
 
 
                <!-- <div class="form-group row" id="form-group-zip">
@@ -394,7 +395,7 @@ get_head_files();
                     </div>
                 </div>-->
 
-                <div class="form-group row" id="form-group-username">
+                <!--<div class="form-group row" id="form-group-username">
                     <div class="col-md-6">
                         <label class="sr-only" for="username">Username</label>
                         <input class="form-control input-lg" type="text" name="username" id="username"
@@ -403,9 +404,9 @@ get_head_files();
                     <div class="col-md-6">
                         <div class="error-text"></div>
                     </div>
-                </div>
+                </div>-->
 
-                <div class="form-group row" id="form-group-password">
+                <!--<div class="form-group row" id="form-group-password">
                     <div class="col-md-6">
                         <label class="sr-only" for="password">Password</label>
                         <input class="form-control input-lg" type="password" name="password" id="password"
@@ -414,7 +415,7 @@ get_head_files();
                     <div class="col-md-6">
                         <div class="error-text"></div>
                     </div>
-                </div>
+                </div>-->
 
 
                 <select class="form-control input-lg" id="interest" name="interest">
