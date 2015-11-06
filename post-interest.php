@@ -751,26 +751,24 @@ if (mysql_num_rows($result) > 0) {
 
 
             <div class="post">
-                <?php
+               <?php
+        if (strlen($post) > 700) {
+            $post500 = substr($post, 0, 700); ?>
 
-                if (strlen($post) > 500) {
-
-                    $post500 = substr($post, 0, 500); ?>
-
-                    <div id="short<?php echo $postID ?>">
-                        <?php echo nl2br($post500) ?>...<a href="javascript:showPost('long<?php echo $postID ?>', 'short<?php echo $postID ?>');">Show More</a>
-                    </div>
-                    <?php
-                    echo "<div id='long$postID' style='display:none;'>";
-                    echo nl2br($post);?>
-                    <a href='/post-interest?interest=<?php echo urlencode($category) ?>' class='category'><h5><?php echo $category ?></h5></a>
-                    <?php echo "</div>";
-                }
-                else {
-                    echo nl2br($post); ?>
-                    <a href='/post-interest?interest=<?php echo urlencode($category) ?>' class='category'><h5><?php echo $category ?></h5></a>
-                <?php }
-                echo $city .', '. $state;
+                <?php echo nl2br($post500) ?>
+                <span style="margin-top:5px">
+                <a href="show_post?postID=<?php echo $postID ?>&email=0">Show More</a>
+</span>
+            <?php
+            echo "<div id='long$postID' style='display:none;'>";
+            echo nl2br($post);
+            echo "</div>";
+        }
+        else {
+            echo nl2br($post);
+        }
+                echo '<br/><br/>';
+                echo '<b>'.$city .', '. $state.'</b>';
                 echo '<br/><br/>';
                 ?>
 
