@@ -683,7 +683,7 @@ $gender = getGender($ID);*/
 
 ?>
 
-<span style="font-size:16px;font-weight:bold"><?php echo $category ?> Posts
+<span style="font-size:16px;font-weight:bold">Nationwide <?php echo $category ?> Posts
 <br/>
 </span>
 </div>
@@ -704,7 +704,9 @@ $sql = "SELECT DISTINCT
     Posts.ID As PostID,
     Posts.Post As Post,
     Posts.Category As Category,
-    Profile.ProfilePhoto As ProfilePhoto
+    Profile.ProfilePhoto As ProfilePhoto,
+    Profile.City As City,
+    Profile.State As State
     FROM Members,Posts,Profile
     WHERE
     Members.IsActive = 1
@@ -733,6 +735,8 @@ if (mysql_num_rows($result) > 0) {
         $name = $rows['FirstName']. ' '.$rows['LastName'];
         $username = $rows['Username'];
         $profilePhoto = $rows['ProfilePhoto'];
+        $city = $rows['City'];
+        $state = $rows['State'];
         $category = $rows['Category'];
         $post = $rows['Post'];
         $postID = $rows['PostID'];
@@ -766,7 +770,8 @@ if (mysql_num_rows($result) > 0) {
                     echo nl2br($post); ?>
                     <a href='/post-interest?interest=<?php echo urlencode($category) ?>' class='category'><h5><?php echo $category ?></h5></a>
                 <?php }
-                echo '<br/>';
+                echo $city .', '. $state;
+                echo '<br/><br/>';
                 ?>
 
             </div>
