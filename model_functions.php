@@ -51,6 +51,17 @@ function get_users_name($user_id)
 
 }
 
+function get_user_firstName($user_id)
+{
+
+    $sql = "SELECT FirstName FROM Members where ID = $user_id";
+
+    $result = mysql_query($sql) or die(mysql_error());
+    $rows = mysql_fetch_assoc($result);
+    return $rows['FirstName'];
+
+}
+
 function get_username($user_id)
 {
 

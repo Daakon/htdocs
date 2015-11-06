@@ -165,6 +165,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
     while ($rows = mysql_fetch_assoc($result)) {
     $memberID = $rows['MemberID'];
     $name = $rows['FirstName'] . ' ' . $rows['LastName'];
+    $firstName = $rows['FirstName'];
     $username = $rows['Username'];
     $profilePhoto = $rows['ProfilePhoto'];
     $category = $rows['Category'];
@@ -398,9 +399,11 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
             <div class="row row-padding">
                 <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 "
                      style="background:white;border-radius:10px;margin-top:20px;border:2px solid black;" align="left">
-                    <?php if ($ID == $memberID) { ?>
+                    <?php if ($ID == get_id_from_username($username)) { ?>
                         <div style='font-weight:bold;'>You do not have anything posted.</div>
-                    <?php } else { ?>
+                    <?php } else {
+                        $firstName = get_user_firstName(get_id_from_username($username));
+                        ?>
                         <div style='font-weight:bold;'><?php echo $firstName ?> does not have anything posted.</div>
                     <?php } ?>
                 </div>
