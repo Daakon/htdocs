@@ -224,7 +224,7 @@ get_head_files();
 
 
         <div class="col-lg-6 col-md-5 hidden-sm hidden-xs">
-            <image src="/images/girl-networking.jpg" style="padding-top:20px" class="center-block" ><br>
+            <image src="/images/connections.jpg"  class="center-block" ><br>
             </image>
         </div>
 
@@ -252,7 +252,7 @@ get_head_files();
             </div>
             <!-- /.modal -->
 
-            <div class="lead" style="font-weight: bold;margin-top:10px;">Connect With People By Interests</div>
+            <div class="lead" style="font-weight: bold;margin-top:10px;">Build Connections Through Interests</div>
             <a href="/learn_more" class="visible-md visible-lg">
                 <h4>About</h4>
             </a>
@@ -419,7 +419,7 @@ get_head_files();
 
 
                 <select class="form-control input-lg" id="interest" name="interest">
-                    <option value="">Select Your Main Interest</option>
+                    <option value="">Select Your Favorite Interest</option>
                     <?php echo category() ?>
                 </select>
                     <br/>

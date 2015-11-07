@@ -41,7 +41,7 @@ if (!empty($_SESSION['ID'])) {
             <a href="/home">Back</a>
             <?php } ?>
 
-            <h4 class="lead" style="color:red;font-weight:bold">Connect With People By Interests In The Same Local Area.</h4>
+            <h4 class="lead" style="color:red;font-weight:bold">Build Connections Through Interests.</h4>
 
             <hr style = 'background-color:gainsboro; border-width:0; color:black; height:2px; lineheight:0; display: inline-block; text-align: left; width:100%;'/>
 
@@ -75,14 +75,14 @@ if (!empty($_SESSION['ID'])) {
 
                     <img src="/images/share-people.png" height="50" width="50" />
                     <span class="lead">
-                    Share Information.
+                    Build Connections.
                     </span>
 
                     <br/><br/>
 
-                    <img src="/images/local.png" height="70" width="60" />
+                    <img src="/images/light-bulb.jpg" height="70" width="60" />
                     <span class="lead" style="margin-left:-10px;">
-                    Discover Things Around You.
+                    Discover New Things.
                     </span>
 
                         </div>
@@ -105,7 +105,7 @@ if (!empty($_SESSION['ID'])) {
                         </div>
                         <div class="col-xs-12 col-sm-10 col-md-10 col-lg-10">
                             <div style="font-style: italic">
-                                "Rapportbook is all about local reach and I really like that." - <b>Brian Slawin</b>, <a href="http://busyevent.com" target="_blank">Co-Founder, Busy Event </a>
+                                "Rapportbook is all about building connections and I really like that." - <b>Brian Slawin</b>, <a href="http://busyevent.com" target="_blank">Co-Founder, Busy Event </a>
                             </div>
                         </div>
                     </div>
@@ -120,7 +120,7 @@ if (!empty($_SESSION['ID'])) {
                         </div>
                         <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
                             <div style="font-style: italic">
-                                "Rapportbook is great for connecting communities." - <b>Dr. Lance McCarthy</b>, <a href="http://tedxgatewayarch.org/lance-mccarthy/" target="_blank">Economist, Investment Advisor, Urban Leader</a>
+                                "Rapportbook is a great tool for building personal and professional connections." - <b>Dr. Lance McCarthy</b>, <a href="http://tedxgatewayarch.org/lance-mccarthy/" target="_blank">Economist, Investment Advisor, Urban Leader</a>
                             </div>
                         </div>
                     </div>
@@ -150,10 +150,22 @@ if (!empty($_SESSION['ID'])) {
 
                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="margin-top:20px;">
 
+                       <h4>
                         Rapportbook Founder & CEO Chris Weathers speaks on why he became an entrepreneur.
-                        <br/>
+                       </h4>
                         <iframe max-width="400" height="315" src="https://www.youtube.com/embed/qiFa1-Mtj8c" frameborder="0" allowfullscreen></iframe>
-</div>
+
+                        <br/><br/>
+
+                        <h4>Rapportbook Marketing Specialist Erin Thompson gives a talk about the company.</h4>
+                        <a href="https://www.youtube.com/watch?v=jJMHsWxqF3M&t=27m45s" target="_blank" >
+                        <h4>
+                            Watch Video
+                        </h4>
+
+                        <img src="/images/Erin-Thompson.jpg" width="500" height="350">
+                        </a>
+                    </div>
                 </div>
 
             <br/>

@@ -10,7 +10,8 @@ $email = $_POST['email'];
 $emailSplit = explode("@", $email);
 $username = $emailSplit[0];
 
-$fName = $username;
+// captilize first letter only
+$fName = ucfirst(strtolower($username));
 $lName = ' ';
 
 //$gender = $_POST['gender'];
@@ -164,7 +165,7 @@ mysql_query($sql) or die(mysql_error());
 
 // Send out sign up email
 $toId = $rows['ID'];
-build_and_send_email(0,$ID, 3, null);
+build_and_send_email(0,$ID, 3, null,$pass);
 ?>
 
 <!--track sign ups through Google-->
