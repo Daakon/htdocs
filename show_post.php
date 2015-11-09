@@ -578,8 +578,8 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
               align="left">
 
             <img src="<?php echo $mediaPath.$profilePhoto ?>" class="profilePhoto-Feed" alt=""
-                 title="<?php echo $name ?>" class='enlarge-onhover'/> &nbsp <b><font
-                    size="4"><?php echo $name ?></font></b>
+                 title="<?php echo $name ?>" class='enlarge-onhover'/> &nbsp
+            <b><span class="profileName-Feed"><?php echo $name ?></span>
 
             <div class="post">
                 <?php echo nl2br($post); ?>

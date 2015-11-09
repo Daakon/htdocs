@@ -82,7 +82,7 @@ $postOwner = $memberID;
 
     <a href="<?php echo $profileUrl ?>">
     <img src="<?php echo $mediaPath. $profilePhoto ?>" class="profilePhoto-Feed enlarge-onhover " alt=""
-         title="<?php echo $name ?>" /> &nbsp <b><font size="2"><?php echo $name ?></font></b>
+         title="<?php echo $name ?>" /> &nbsp <span class="profileName-Feed"><?php echo $name ?></span>
 </a>
 
     <div class="post">

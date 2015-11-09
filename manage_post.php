@@ -177,8 +177,8 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                  align="left">
 
             <img src="<?php echo $mediaPath.$profilePhoto ?>" class="profilePhoto-Feed" alt=""
-                 title="<?php echo $name ?>" class='enlarge-onhover img-responsive'/> &nbsp <b><font
-                    size="4"><?php echo $name ?></font></b>
+                 title="<?php echo $name ?>" class='enlarge-onhover img-responsive'/> &nbsp
+                <span class="profileName-Feed"><?php echo $name ?></span>
 
             <div class="post"><?php echo nl2br($post); ?></div>
 
