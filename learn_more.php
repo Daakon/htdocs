@@ -25,23 +25,26 @@ if (!empty($_SESSION['ID'])) {
 <body style="background:white;">
 
 
-
-
-
-
-
         <div align="left" style="padding-left:10px;">
             <?php if (empty($_SESSION['ID']) || !isset($_SESSION['ID'])) { ?>
+<span class="lead slogan">
+                Make The Connections You Need To Be Successful!
+
             <a href="../" >
-                <button style="background:red;color:white;padding:10px;border: 2px solid black;border-radius: 10px;">
-                    <span style="font-weight:bold;">Login or Sign Up</span>
-                </button> <span style="font-weight:bold;font-size:16px;">It's Free!</span>
+                <button class="login-signup-button">
+                    <span class="bold">Login or Sign Up</span>
+                </button>
+                <br/>
             </a>
+    </span>
+
             <?php } else { ?>
             <a href="/home">Back</a>
             <?php } ?>
 
             <hr style = 'background-color:gainsboro; border-width:0; color:black; height:2px; lineheight:0; display: inline-block; text-align: left; width:100%;'/>
+
+
 
 
             <div class="row">
@@ -152,11 +155,16 @@ if (!empty($_SESSION['ID'])) {
                     <hr/>
 </div>
 
+                <div class="lead slogan" style="margin-left:10px;">
+                Make The Connections You Need To Be Successful!
+
                 <a href="../" >
-                    <button style="background:red;color:white;padding:10px;border: 2px solid black;border-radius: 10px;margin-left:15px;">
-                        <span style="font-weight:bold;">Login or Sign Up</span>
-                    </button> <span style="font-weight:bold;font-size:16px;">It's Free!</span>
+                    <button class="login-signup-button">
+                        <span class="bold">Login or Sign Up</span>
+                    </button>
+                    <br/>
                 </a>
+                </div>
 
                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="margin-top:20px;">
 
@@ -174,11 +182,17 @@ if (!empty($_SESSION['ID'])) {
             <br/>
 
 
+           <div class="lead slogan">
+                Make The Connections You Need To Be Successful!
+
             <a href="../" >
-                <button style="background:red;color:white;padding:10px;border: 2px solid black;border-radius: 10px;">
-                    <span style="font-weight:bold;">Login or Sign Up</span>
-                </button> <span style="font-weight:bold;font-size:16px;">It's Free!</span>
+                <button class="login-signup-button">
+                    <span class="bold">Login or Sign Up</span>
+                </button>
+                <br/>
             </a>
+           </div>
+
             <h4 style="color:red;">Checkout what people are sharing</h4>
 </div>
 

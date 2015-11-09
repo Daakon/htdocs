@@ -252,8 +252,9 @@ get_head_files();
             </div>
             <!-- /.modal -->
 
-            <div class="lead" style="font-weight: bold;margin-top:10px;">
-                Make Connections With People Like You</div>
+            <div class="lead slogan" >
+                Make The Connections You Need To Be Successful!
+            </div>
             <a href="/learn_more" class="visible-md visible-lg">
                 <h4>About</h4>
             </a>
