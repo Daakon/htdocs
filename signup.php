@@ -4,6 +4,7 @@ require 'connect.php';
 require 'model_functions.php';
 require 'email.php';
 
+$url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 
 $email = $_POST['email'];
 
@@ -22,9 +23,9 @@ $lName = ' ';
 
 $ip = $_SERVER['REMOTE_ADDR'];
 $key = 'dc5ff2626e3bfffd325504af3e81c54d26e1c6c0bf5312c2ce5ef30043d314f6';
-$url = "http://api.ipinfodb.com/v3/ip-city/?key=$key&ip=$ip&format=json";
+$apiUrl = "http://api.ipinfodb.com/v3/ip-city/?key=$key&ip=$ip&format=json";
 
-$d = file_get_contents($url);
+$d = file_get_contents($apiUrl);
 $data = json_decode($d , true);
 
 /*
@@ -58,10 +59,17 @@ if(strlen($data['countryCode'])) {
     );
 }
 
-//$city = $record['city'];
-$city = $info['city'];
-$state = $info['region_name'];
-$zip = $info['zip_code'];
+if (strstr($url, "local")) {
+    $city = 'Saint Louis';
+    $state = 'MO';
+    $zip = '63101';
+}
+else {
+    $city = $info['city'];
+    $state = $info['region_name'];
+    $zip = $info['zip_code'];
+
+}
 
 //$zip = $_POST['zip'];
 $username = $username;
@@ -84,6 +92,7 @@ else {
     $dob = $birthday;
 }*/
 
+
 // check if email exists
 $sql = "SELECT * FROM Members WHERE Email = '$email'";
 $result = mysql_query($sql) or die(mysql_error());
@@ -101,8 +110,6 @@ $sql = "SELECT * FROM Members WHERE Username = '$username'";
 $result = mysql_query($sql) or die(mysql_error());
 
 if (mysql_num_rows($result) > 0) {
-
-
     $username = $username . $unique;
     $unique++;
     goto a;

@@ -252,7 +252,8 @@ get_head_files();
             </div>
             <!-- /.modal -->
 
-            <div class="lead" style="font-weight: bold;margin-top:10px;">Build Connections Through Interests</div>
+            <div class="lead" style="font-weight: bold;margin-top:10px;">
+                Make Connections Through Interests</div>
             <a href="/learn_more" class="visible-md visible-lg">
                 <h4>About</h4>
             </a>
@@ -419,7 +420,7 @@ get_head_files();
 
 
                 <select class="form-control input-lg" id="interest" name="interest">
-                    <option value="">Select Your Favorite Interest</option>
+                    <option value="">Select Your Connection Interest</option>
                     <?php echo category() ?>
                 </select>
                     <br/>

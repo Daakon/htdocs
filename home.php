@@ -445,10 +445,16 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                     else {
                         $noun = $name2;
                     }
-                    $post = "$nameLink posted a new $mediaString comment on $noun post.<br/><br/>$img<br/>";
+                    $orgPost = "<a href='/show_post.php?postID=$postID'>post</a>";
+                    $orgPostSql = "SELECT Category FROM Posts WHERE ID = $postID ";
+                    $orgPostResult = mysql_query($orgPostSql);
+                    $orgPostRow = mysql_fetch_assoc($orgPostResult);
+                    $orgInterest = $orgPostRow['Category'];
+
+                    $post = "$nameLink posted a new $mediaString comment on $noun $orgPost.<br/><br/>$img<br/>";
                     $post = mysql_real_escape_string($post);
-                    $sqlInsertPost = "INSERT INTO Posts (Post,     Member_ID,    PostDate  ) Values
-                                                ('$post', '$ID',        CURDATE() ) ";
+                    $sqlInsertPost = "INSERT INTO Posts (Post,     Member_ID,   Category,         PostDate  ) Values
+                                                        ('$post', '$ID',      '$orgInterest',    CURDATE() ) ";
                     mysql_query($sqlInsertPost) or die(mysql_error());
                     $newPostID = mysql_insert_id();
 // update new photo with bulletin id for commenting later

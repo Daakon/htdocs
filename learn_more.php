@@ -41,8 +41,6 @@ if (!empty($_SESSION['ID'])) {
             <a href="/home">Back</a>
             <?php } ?>
 
-            <h4 class="lead" style="color:red;font-weight:bold">Build Connections Through Interests.</h4>
-
             <hr style = 'background-color:gainsboro; border-width:0; color:black; height:2px; lineheight:0; display: inline-block; text-align: left; width:100%;'/>
 
 
@@ -64,25 +62,25 @@ if (!empty($_SESSION['ID'])) {
 
                     <div style="margin-top:60px;">
 
-                    <img src="/images/camera.png" height="50" width="50" />
+                    <img src="/images/share-people.png" height="50" width="50" />
                     <span class="lead">
-                    Post Photos & Videos of Interests
+                    Meet People.
                     </span>
 
 
                     <br/><br/>
 
 
-                    <img src="/images/share-people.png" height="50" width="50" />
+                    <img src="/images/plug.png" height="50" width="50" />
                     <span class="lead">
-                    Build Connections.
+                    Make Connections.
                     </span>
 
                     <br/><br/>
 
                     <img src="/images/light-bulb.jpg" height="70" width="60" />
                     <span class="lead" style="margin-left:-10px;">
-                    Discover New Things.
+                    Learn From Others.
                     </span>
 
                         </div>
@@ -101,35 +99,6 @@ if (!empty($_SESSION['ID'])) {
                     <!--Testimonial 1 -->
                     <div class="row">
                         <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2" style="margin-right:-3%">
-                            <img src="/images/brian-slawin.jpg" style="border:1px solid black;height:50px;width:50px;"/>
-                        </div>
-                        <div class="col-xs-12 col-sm-10 col-md-10 col-lg-10">
-                            <div style="font-style: italic">
-                                "Rapportbook is all about building connections and I really like that." - <b>Brian Slawin</b>, <a href="http://busyevent.com" target="_blank">Co-Founder, Busy Event </a>
-                            </div>
-                        </div>
-                    </div>
-                    <!--End Testimonial 1 -->
-
-                    <hr/>
-
-                    <!--Testimonial 2 -->
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2" style="margin-right:-3%">
-                            <img src="/images/dr-mccarthy.jpg" style="border:1px solid black;height:50px;width:50px;"/>
-                        </div>
-                        <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-                            <div style="font-style: italic">
-                                "Rapportbook is a great tool for building personal and professional connections." - <b>Dr. Lance McCarthy</b>, <a href="http://tedxgatewayarch.org/lance-mccarthy/" target="_blank">Economist, Investment Advisor, Urban Leader</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!--End Testimonial 2 -->
-                    <hr/>
-
-                    <!--Testimonial 3 -->
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2" style="margin-right:-3%">
                             <img src="/images/angela-larocca.jpg" style="border:1px solid black;height:50px;width:50px;"/>
                         </div>
                         <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
@@ -138,7 +107,48 @@ if (!empty($_SESSION['ID'])) {
                             </div>
                         </div>
                     </div>
+                    <!--End Testimonial 1 -->
+                    <hr/>
+
+                    <!--Testimonial 2 -->
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2" style="margin-right:-3%">
+                            <img src="/images/brian-slawin.jpg" style="border:1px solid black;height:50px;width:50px;"/>
+                        </div>
+                        <div class="col-xs-12 col-sm-10 col-md-10 col-lg-10">
+                            <div style="font-style: italic">
+                                "Rapportbook is great for making connections and meeting the people you need to know."  - <b>Brian Slawin</b>, <a href="http://busyevent.com" target="_blank">Co-Founder, Busy Event </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!--End Testimonial 2 -->
+
+                    <hr/>
+
+                    <!--Testimonial 3 -->
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2" style="margin-right:-3%">
+                            <img src="/images/dr-mccarthy.jpg" style="border:1px solid black;height:50px;width:50px;"/>
+                        </div>
+                        <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+                            <div style="font-style: italic">
+                                "You will learn a lot from the people you meet on Rapportbook." - <b>Dr. Lance McCarthy</b>, <a href="http://tedxgatewayarch.org/lance-mccarthy/" target="_blank">Economist, Investment Advisor, Urban Leader</a>
+                            </div>
+                        </div>
+                    </div>
                     <!--End Testimonial 3 -->
+
+                    <br/>
+
+                    <h4>Rapportbook Marketing Specialist Erin Thompson gives a talk about the company.</h4>
+                    <a href="https://www.youtube.com/watch?v=jJMHsWxqF3M&t=27m45s" target="_blank" >
+                        <h4>
+                            Watch Video
+                        </h4>
+
+                        <img src="/images/Erin-Thompson.jpg" width="500" height="350">
+                    </a>
+
                     <hr/>
 </div>
 
@@ -157,14 +167,7 @@ if (!empty($_SESSION['ID'])) {
 
                         <br/><br/>
 
-                        <h4>Rapportbook Marketing Specialist Erin Thompson gives a talk about the company.</h4>
-                        <a href="https://www.youtube.com/watch?v=jJMHsWxqF3M&t=27m45s" target="_blank" >
-                        <h4>
-                            Watch Video
-                        </h4>
 
-                        <img src="/images/Erin-Thompson.jpg" width="500" height="350">
-                        </a>
                     </div>
                 </div>
 
