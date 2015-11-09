@@ -64,7 +64,7 @@ if (!empty($_SESSION['ID'])) {
 
                     <img src="/images/share-people.png" height="50" width="50" />
                     <span class="lead">
-                    Meet People.
+                    Meet People Like You.
                     </span>
 
 

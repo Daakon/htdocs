@@ -253,7 +253,7 @@ get_head_files();
             <!-- /.modal -->
 
             <div class="lead" style="font-weight: bold;margin-top:10px;">
-                Make Connections Through Interests</div>
+                Make Connections With People Like You</div>
             <a href="/learn_more" class="visible-md visible-lg">
                 <h4>About</h4>
             </a>

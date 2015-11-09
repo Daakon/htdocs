@@ -2,7 +2,7 @@
 
 
 
-function build_and_send_email($senderId, $toId, $notification, $postID, $password)
+function build_and_send_email($senderId, $toId, $notification, $postID, $pass)
 
 {
     $toEmail = get_email_by_id($toId);
@@ -96,9 +96,8 @@ function build_and_send_email($senderId, $toId, $notification, $postID, $passwor
         $name = get_users_name_by_id($toId);
         $nameArray = explode(' ', $name);
         $name = $nameArray[0];
-        $pass = get_password($toId);
         $subject = "Congratulations $name, you now have a new profile on Rapportbook.<br/>";
-        $subject .= "Your temporary password is <b>password10</b><br/>";
+        $subject .= "Your temporary password is <b>$pass</b><br/>";
         $subject .= '<a href = "http://www.rapportbook.com">Login</a> to your account now!';
     }
 

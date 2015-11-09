@@ -720,7 +720,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
                     <div align = "center">
 
-                        <h5>Search Posts By Interests</h5>
+                        <h5>Search Posts By Connection Interest</h5>
                         <select id="genre" name="genre" onchange="updateFeed()" style="background-color: lightsteelblue;font-weight:bold">
                             <option value="<?php echo $genre ?>"><?php echo $genre ?></option>
                             <option value="Show All">Show All</option>
@@ -762,9 +762,8 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                         <div id="divCity">
                         </div>
 
-                        <br/>
-                        <h5><span style="font-style:italic;font-weight:bold;color:red;">Post Something of Interest To You</span></h5>
-                        <br/>
+                        <hr style = 'background-color:black; border-width:0; color:black; height:2px; lineheight:0; display: inline-block; text-align: left; width:100%;'/>
+
                     </div>
 
 
@@ -785,7 +784,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
                     <br/>
                 <textarea name="post" id="post" class="form-control textArea"
-                          placeholder="Share Your Interest" ></textarea>
+                          placeholder="Make A Connection" ></textarea>
                     <br/>
                     <div id="progress" style="display:none;">
                         <div class="progress">
@@ -798,7 +797,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
                     <br/>
                     <select class="form-control input-lg" id="category" name="category" style="background-color: lightsteelblue;font-weight:bold">
-                        <option value="">Select Interest For Your Post</option>
+                        <option value="">Select A Connection Interest</option>
                         <?php echo category() ?>
                     </select>
                     <br/>
