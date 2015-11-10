@@ -13,6 +13,31 @@ if (!empty($_SESSION['ID'])) {
 }
 ?>
 
+    <script>
+        function checkSignup() {
+
+            // check email
+            var email = document.getElementById('email').value;
+            var filter = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+            if (!filter.test(email)) {
+                alert('Please provide a valid email address');
+                return false;
+            }
+
+
+            // check interest
+            var ddInterest = document.getElementById('interest');
+            var interest = ddInterest.options[ddInterest.selectedIndex].value;
+
+            if (interest == '' || year.length == 0) {
+                alert('Interest needed');
+                return false;
+            }
+            return true;
+
+        }
+    </script>
+
     <script type="text/javascript">
         function showComments(id) {
             var e = document.getElementById(id);
@@ -245,7 +270,9 @@ $sqlRollCall = " SELECT DISTINCT
     Members.Username As Username,
     Posts.ID As PostID,
     Posts.Category As Category,
-    Profile.ProfilePhoto As ProfilePhoto
+    Profile.ProfilePhoto As ProfilePhoto,
+    Profile.City As City,
+    Profile.State As State
     FROM Members,Posts,Profile
     WHERE
     Members.IsActive = 1
@@ -279,6 +306,8 @@ if (mysql_num_rows($rollCallResult) > 0) {
         $category = $rows['Category'];
         $post = $rows['Post'];
         $postID = $rows['PostID'];
+        $city = $rows['City'];
+        $state = $rows['State'];
         $postOwner = $memberID;
         ?>
 
@@ -353,6 +382,8 @@ if (mysql_num_rows($rollCallResult) > 0) {
 
         <h4 class='category'>#<?php echo $category ?></h4>
 
+            <br/>
+            <?php echo $city.', '. $state ?>
     <?php
 
     if (!isset($ID)) {

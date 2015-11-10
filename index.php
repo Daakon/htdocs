@@ -99,107 +99,15 @@ get_head_files();
 
 <script>
     function checkSignup() {
-        // check first name
-        var firstName = document.getElementById('firstName').value;
-        if (firstName == '') {
-            alert('First Name needed');
-            return false;
-        }
-
-        // check last name
-        var lastName = document.getElementById('lastName').value;
-        if (lastName == '') {
-            alert('Last Name needed');
-            return false;
-        }
 
         // check email
         var email = document.getElementById('email').value;
-        //var filter = /^(([^<>()[]\.,;:s@"]+(.[^<>()[]\.,;:s@"]+)*)|(".+"))@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}])|(([a-zA-Z-0-9]+.)+[a-zA-Z]{2,}))$/;
-        //if (!filter.test(email)) {
-        if (email = '') {
+        var filter = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+        if (!filter.test(email)) {
             alert('Please provide a valid email address');
             return false;
         }
 
-        // check gender
-        var ddGender = document.getElementById('ddGender');
-        var gender = ddGender.options[ddGender.selectedIndex].value;
-
-        if (gender == '') {
-            alert('Gender needed');
-            return false;
-        }
-
-        // check state
-        var ddState = document.getElementById('ddState');
-        var state = ddState.options[ddState.selectedIndex].value;
-
-        if (state == '') {
-            alert('State needed');
-            return false;
-        }
-
-        // check city
-        var ddCity = document.getElementById('ddCity');
-        var city = ddCity.options[ddCity.selectedIndex].value;
-
-        if (city == '') {
-            alert('City needed');
-            return false;
-        }
-
-        // check zip
-        var zip = document.getElementById('zip').value;
-        if (zip == '') {
-            alert('Zip Code needed');
-            return false;
-        }
-
-        // check birth month
-        var ddMonth = document.getElementById('ddMonth');
-        var month = ddMonth.options[ddMonth.selectedIndex].value;
-
-        if (month == '' || month.length == 0) {
-            alert('Birth Month needed');
-            return false;
-        }
-
-        // check birth day
-        var ddDay = document.getElementById('ddDay');
-        var day = ddDay.options[ddDay.selectedIndex].value;
-
-        if (day == '' || month.length == 0) {
-            alert('Birth Day needed');
-            return false;
-        }
-
-        // check birth year
-        var ddYear = document.getElementById('ddYear');
-        var year = ddYear.options[ddYear.selectedIndex].value;
-
-        if (year == '' || year.length == 0) {
-            alert('Birth Month needed');
-            return false;
-        }
-
-        // check username
-        var username = document.getElementById('username').value;
-        if (username == '') {
-            alert('Username needed');
-            return false;
-        }
-
-        if (username.contains("@")) {
-            alert('Username cannot be an email');
-        }
-
-        // check password
-        var password = document.getElementById('password').value;
-        if (password == '') {
-            alert('Password needed');
-            return false;
-        }
 
         // check interest
         var ddInterest = document.getElementById('interest');

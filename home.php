@@ -33,7 +33,7 @@ if (isset($_POST['submit'])) {
     if ($_SESSION['Post'] == $_POST['post']) {
         echo "<script>alert('Your post appears to be empty');</script>";
     } else if ($category == "") {
-        echo "<script>alert('Your post needs a category');</script>";
+        echo "<script>alert('Your post needs an interest');</script>";
     } else {
         if (strlen($post) > 0) {
             $post = makeLinks($post);
