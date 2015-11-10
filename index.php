@@ -422,7 +422,7 @@ get_head_files();
 
 
                 <select class="form-control input-lg" id="interest" name="interest">
-                    <option value="">Select Your Connection Type</option>
+                    <option value="">Select Your Favorite Interest</option>
                     <?php echo category() ?>
                 </select>
                     <br/>

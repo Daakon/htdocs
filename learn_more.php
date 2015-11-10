@@ -3,6 +3,8 @@ require 'connect.php';
 require 'html_functions.php';
 require 'mediaPath.php';
 require 'getSession_public.php';
+require 'category.php';
+
 get_head_files();
 get_header();
 $_SESSION['ID'] = $ID;
@@ -30,30 +32,19 @@ if (!empty($_SESSION['ID'])) {
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <span class="lead slogan">Share Your Interests & Make Connections!</span>
 
-        <h4 style="color:maroon">So what does that mean?</h4>
 
-        <h4>If your interest is business...<span class="lead slogan action">Promote It!</span></h4>
+            <h4>
+                    <span class="bold">&#8226</span> <span class="lead slogan action">Promote</span> Your Business
+            </h4>
 
-        <h4>If you interest is a hobby...<span class="lead slogan action">Share It!</span></h4>
+            <h4>
+                    <span class="bold">&#8226</span> <span class="lead slogan action">Share</span> Your Passion
+            </h4>
 
-        <h4>Either way, you make a <span class="lead slogan action">Connection.</span></h4>
-
-        <h4>Now...</h4>
-
-        <?php if (empty($_SESSION['ID']) || !isset($_SESSION['ID'])) { ?>
-            <span class="lead slogan">
-
-            <a href="../" >
-                <button class="login-signup-button">
-                    <span class="bold">Login or Sign Up</span>
-                </button>
-                <br/>
-            </a>
-    </span>
-
-        <?php } else { ?>
-            <a href="/home">Back</a>
-        <?php } ?>
+            <h4>
+                    <span class="bold">&#8226</span> Make<span class="lead slogan action"> Connections</span> With People Who Care About What You Care About.
+            </h4>
+        </ul>
 
         <hr style = 'background-color:gainsboro; border-width:0; color:black; height:2px; lineheight:0; display: inline-block; text-align: left; width:100%;'/>
     </div>
@@ -66,13 +57,44 @@ if (!empty($_SESSION['ID'])) {
 </div>
 
 
-
-
-
-
+            <h2>Sign Up</h2>
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                    <img src="<?php echo $imagesPath ?>NetworkGraphic.png" />
+<!--                    <img src="--><?php //echo $imagesPath ?><!--NetworkGraphic.png" />-->
+
+
+                    <form method="post" action="signup.php" id="signup" onsubmit='return checkSignup();' >
+
+                        <div class="form-group row" id="form-group-email">
+                            <div class="col-md-6">
+                                <label class="sr-only" for="email">Email Address</label>
+                                <input class="form-control input-lg" type="email" name="email" id="email"
+                                       placeholder="Email"/>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="error-text"></div>
+                            </div>
+                        </div>
+
+                        <select class="form-control input-lg" id="interest" name="interest">
+                            <option value="">Select Your Favorite Interest</option>
+                            <?php echo category() ?>
+                        </select>
+                        <br/>
+
+                        <small>By clicking sign up, you agree to our <a href="/terms">terms</a></small>
+                        <br/><br/>
+
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <input class="btn btn-default " type="submit" name="signup" id="signup"
+                                       value="Sign Up"/>
+
+                            </div>
+                        </div>
+
+                        </form>
+
                 </div>
 
                 <div class="col-lg-5 col-lg-offset-1 col-md-5 col-md-offset-1 col-sm-12 col-xs-12">
@@ -90,7 +112,7 @@ if (!empty($_SESSION['ID'])) {
 
                     <img src="/images/share-people.png" height="50" width="50" />
                     <span class="lead">
-                    Meet People Like You.
+                    Network With People Like You.
                     </span>
 
 
@@ -99,7 +121,7 @@ if (!empty($_SESSION['ID'])) {
 
                     <img src="/images/plug.png" height="50" width="50" />
                     <span class="lead">
-                    Make Connections.
+                    Make Local or National Connections.
                     </span>
 
                     <br/><br/>
@@ -178,16 +200,6 @@ if (!empty($_SESSION['ID'])) {
                     <hr/>
 </div>
 
-                <div class="lead slogan" style="margin-left:10px;">
-                Share Your Interests & Make Connections!
-
-                <a href="../" >
-                    <button class="login-signup-button">
-                        <span class="bold">Login or Sign Up</span>
-                    </button>
-                    <br/>
-                </a>
-                </div>
 
                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="margin-top:20px;">
 
@@ -204,17 +216,6 @@ if (!empty($_SESSION['ID'])) {
 
             <br/>
 
-
-           <div class="lead slogan">
-                Share Your Interests & Make Connections!
-
-            <a href="../" >
-                <button class="login-signup-button">
-                    <span class="bold">Login or Sign Up</span>
-                </button>
-                <br/>
-            </a>
-           </div>
 
             <h4 style="color:red;">Checkout what people are sharing</h4>
 </div>
