@@ -301,28 +301,28 @@ function dynamicPost($interest) {
     $dynamicText = '';
 
     if ($interest == 'Art') {
-        $dynamicText = 'you know about any upcoming exhibits or want talk about your favorite artists and pieces.';
+        $dynamicText = 'you have an interest in Art.';
     }
 
     elseif ($interest == 'Automotive') {
-        $dynamicText = 'you are into cars, trucks or bikes.';
+        $dynamicText = 'you have an automotive need.';
     }
 
-    elseif ($interest == 'Books') {
+    /*elseif ($interest == 'Books') {
         $dynamicText = 'you are in a book club or want to talk about some good books you read.';
-    }
+    }*/
 
-    elseif ($interest == 'Business') {
+    /*elseif ($interest == 'Business') {
         $dynamicText = 'you want to network and see how we can work together.';
-    }
+    }*/
 
     elseif ($interest == 'Cosmetology') {
         $dynamicText = 'you are a hair or nail stylist or looking to discover some new styles.';
     }
 
-    elseif ($interest == 'Community') {
+    /*elseif ($interest == 'Community') {
         $dynamicText = 'you are open minded to conversation about community, social events, movements, etc.';
-    }
+    }*/
 
     elseif ($interest == 'Culinary') {
         $dynamicText = 'you are into cooking and trying different recipes.';

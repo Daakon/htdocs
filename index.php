@@ -252,9 +252,10 @@ get_head_files();
             </div>
             <!-- /.modal -->
 
-            <div class="lead slogan" >
-                Make The Connections You Need To Be Successful!
+            <div class="bold" >
+                Share Your Interests & Make Connections!
             </div>
+
             <a href="/learn_more" class="visible-md visible-lg">
                 <h4>About</h4>
             </a>
@@ -421,7 +422,7 @@ get_head_files();
 
 
                 <select class="form-control input-lg" id="interest" name="interest">
-                    <option value="">Select Your Connection Interest</option>
+                    <option value="">Select Your Connection Type</option>
                     <?php echo category() ?>
                 </select>
                     <br/>
