@@ -160,9 +160,18 @@ get_head_files();
             </div>
             <!-- /.modal -->
 
-            <div class="bold" >
-                Share Your Interests & Make Connections!
+            <div class="visible-xs">
+                <div class="bold" >
+                    Share Your Interests & Make Connections!
+                </div>
             </div>
+
+            <div class="hidden-xs">
+                <div class="lead slogan" >
+                    Share Your Interests & Make Connections!
+                </div>
+            </div>
+
 
             <a href="/learn_more" class="visible-md visible-lg">
                 <h4>About</h4>

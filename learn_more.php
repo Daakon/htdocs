@@ -119,6 +119,15 @@ if (!empty($_SESSION['ID'])) {
                         </div>
 
                         </form>
+                    <h4>
+                        <div class="visible-xs">
+                            <a href="/login-mobile.php">Login</a>
+                        </div>
+
+                        <div class="hidden-xs">
+                            <a href="../">Login</a>
+                        </div>
+                    </h4>
 
                 </div>
 
