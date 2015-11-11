@@ -18,7 +18,7 @@ if (!empty($_SESSION['ID'])) {
 
             // check email
             var email = document.getElementById('email').value;
-            var filter = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+            var filter = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;
             if (!filter.test(email)) {
                 alert('Please provide a valid email address');
                 return false;

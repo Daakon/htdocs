@@ -15,6 +15,7 @@ function category()
     echo '<option value = "Finance">Finance</option>';
     echo '<option value = "Fitness">Fitness</option>';
     echo '<option value = "Gaming">Gaming</option>';
+    echo '<option value = "Media">Media</option>';
     echo '<option value = "Modeling">Modeling</option>';
     echo '<option value = "Music">Music</option>';
     echo '<option value = "Night Life">Night Life</option>';

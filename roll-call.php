@@ -70,8 +70,7 @@ $postOwner = $memberID;
 
 
 
-<div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 roll-call"
-     align="left">
+<div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 roll-call">
 
     <?php
         $profileUrl = "/$username";
