@@ -59,15 +59,20 @@ if (!empty($_SESSION['ID'])) {
 
 
             <h4>
-                    <span class="bold">&#8226</span> <span class="lead slogan action">Promote</span> Your Business
+                    <span class="bold">
+                        <img src="/images/promote.png" height="50" width="50" />
+                    </span> <span class="lead slogan action">Promote</span> Your Business.
             </h4>
 
             <h4>
-                    <span class="bold">&#8226</span> <span class="lead slogan action">Share</span> Your Passion
+                    <span class="bold">
+                        <img src="/images/share-people.png" height="50" width="50" />
+                    </span> <span class="lead slogan action">Share</span> Your Passion.
             </h4>
 
             <h4>
-                    <span class="bold">&#8226</span> Make<span class="lead slogan action"> Connections</span> With People Who Care About What You Care About.
+                <img src="/images/plug.png" height="30" width="50" />
+                <span class="bold"></span> Make<span class="lead slogan action"> Connections</span>.
             </h4>
         </ul>
 
@@ -144,26 +149,8 @@ if (!empty($_SESSION['ID'])) {
 
                     <div style="margin-top:60px;">
 
-                    <img src="/images/share-people.png" height="50" width="50" />
-                    <span class="lead">
-                    Network With People Like You.
-                    </span>
 
-
-                    <br/><br/>
-
-
-                    <img src="/images/plug.png" height="50" width="50" />
-                    <span class="lead">
-                    Make Local or National Connections.
-                    </span>
-
-                    <br/><br/>
-
-                    <img src="/images/light-bulb.jpg" height="70" width="60" />
-                    <span class="lead" style="margin-left:-10px;">
-                    Learn From Others.
-                    </span>
+                    <!--Content Goes Here -->
 
                         </div>
 
@@ -181,25 +168,27 @@ if (!empty($_SESSION['ID'])) {
                     <!--Testimonial 1 -->
                     <div class="row">
                         <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2" style="margin-right:-3%">
-                            <img src="/images/angela-larocca.jpg" style="border:1px solid black;height:50px;width:50px;"/>
-                        </div>
-                        <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-                            <div style="font-style: italic">
-                                "Chris Weathers has a genuine passion for connecting people with similar interests, and Rapportbook  seamlessly allows you to interact with like-minded individuals.." - <b>Angela LaRocca</b>, <a href="http://unidev.com" target="_blank">Brand Manager, Unidev</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!--End Testimonial 1 -->
-                    <hr/>
-
-                    <!--Testimonial 2 -->
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2" style="margin-right:-3%">
                             <img src="/images/brian-slawin.jpg" style="border:1px solid black;height:50px;width:50px;"/>
                         </div>
                         <div class="col-xs-12 col-sm-10 col-md-10 col-lg-10">
                             <div style="font-style: italic">
-                                "Rapportbook is great for making connections and meeting the people you need to know."  - <b>Brian Slawin</b>, <a href="http://busyevent.com" target="_blank">Co-Founder, Busy Event </a>
+                                "Rapportbook is a great platform for promoting your business or service."  - <b>Brian Slawin</b>, <a href="http://busyevent.com" target="_blank">Co-Founder, Busy Event </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!--End Testimonial 1 -->
+
+                    <hr/>
+
+
+                    <!--Testimonial 2 -->
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2" style="margin-right:-3%">
+                            <img src="/images/dr-mccarthy.jpg" style="border:1px solid black;height:50px;width:50px;"/>
+                        </div>
+                        <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+                            <div style="font-style: italic">
+                                "People need an outlet to share the things they are passionate about, and Rapportbook lets you do that." - <b>Dr. Lance McCarthy</b>, <a href="http://tedxgatewayarch.org/lance-mccarthy/" target="_blank">Economist, Investment Advisor, Urban Leader</a>
                             </div>
                         </div>
                     </div>
@@ -210,15 +199,16 @@ if (!empty($_SESSION['ID'])) {
                     <!--Testimonial 3 -->
                     <div class="row">
                         <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2" style="margin-right:-3%">
-                            <img src="/images/dr-mccarthy.jpg" style="border:1px solid black;height:50px;width:50px;"/>
+                            <img src="/images/angela-larocca.jpg" style="border:1px solid black;height:50px;width:50px;"/>
                         </div>
                         <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
                             <div style="font-style: italic">
-                                "You will learn a lot from the people you meet on Rapportbook." - <b>Dr. Lance McCarthy</b>, <a href="http://tedxgatewayarch.org/lance-mccarthy/" target="_blank">Economist, Investment Advisor, Urban Leader</a>
+                                "Chris Weathers has a genuine passion for connecting people with similar interests, and Rapportbook  seamlessly allows you to interact with like-minded individuals.." - <b>Angela LaRocca</b>, <a href="http://unidev.com" target="_blank">Brand Manager, Unidev</a>
                             </div>
                         </div>
                     </div>
                     <!--End Testimonial 3 -->
+                    <hr/>
 
                     <br/>
 

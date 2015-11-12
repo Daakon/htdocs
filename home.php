@@ -13,6 +13,8 @@ require 'html_functions.php';
 require 'findURL.php';
 require 'email.php';
 require 'category.php';
+$ffmpeg = '/usr/local/bin/ffmpeg';
+
 //require 'ads.php';
 
 get_head_files();
@@ -39,6 +41,8 @@ if (isset($_POST['submit'])) {
             $post = makeLinks($post);
 
             // Loop through each image uploaded.
+            if (strlen($_FILES['flPostMedia']['name'] > 0)) {
+                
             foreach ($_FILES['flPostMedia']['tmp_name'] as $k => $v) {
                 $mediaName = $_FILES['flPostMedia']['name'][$k];
                 $type = $_FILES['flPostMedia']['type'][$k];
@@ -48,7 +52,8 @@ if (isset($_POST['submit'])) {
                             if (strlen($mediaName) > 0) {
 
 // check file size
-                                if ($size > 2500000000) {
+                                if ($size > 5000000000) {
+                                    echo '<script>alert("File is too large. The maximum file size is 500MB.");</script>';
                                     exit();
                                 }
 
@@ -57,10 +62,13 @@ if (isset($_POST['submit'])) {
                                 $videoFileTypes = array("video/mpeg", "video/mpg", "video/ogg", "video/mp4",
                                     "video/quicktime", "video/webm", "video/x-matroska",
                                     "video/x-ms-wmw");
-                                // video file types
+
+                                // photo file types
                                 $photoFileTypes = array("image/jpg", "image/jpeg", "image/png", "image/tiff",
                                     "image/gif", "image/raw");
+
                                 $audioFileTypes = array("audio/wav", "audio/mp3", "audio/x-m4a");
+
                                 // add unique id to image name to make it unique and add it to the file server
                                 $fileName = pathinfo($mediaName, PATHINFO_FILENAME);
                                 $mediaName = trim(uniqid() . $mediaName);
@@ -81,7 +89,7 @@ if (isset($_POST['submit'])) {
                                         $newFileName = $fileName . ".mp4";
                                         $oggFileName = $fileName . ".ogv";
                                         $webmFileName = $fileName . ".webm";
-                                        $ffmpeg = '/usr/local/bin/ffmpeg';
+
                                         // convert mp4
                                         exec("$ffmpeg -i $fileName -vcodec h264 $newFileName");
                                         $mediaName = $newFileName;
@@ -149,6 +157,7 @@ if (isset($_POST['submit'])) {
                                         exit;*/
                                     }
                                 }
+
                                 // if photo didn't get uploaded, notify the user
                                 if (!file_exists($postMediaFilePath)) {
                                     echo "<script>alert('File could not be uploaded, try uploading a different file type.');location='home.php'</script>";
@@ -220,7 +229,7 @@ if (isset($_POST['submit'])) {
 
                         } // end of loop -----------------------------------
 
-
+}
 
 
 
