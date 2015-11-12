@@ -176,7 +176,7 @@ if (!empty($_SESSION['ID'])) {
 
                     <hr/>
 
-                    <h2 style="font-family: cursive;color:green;text-decoration: underline;">Testimonials</h2>
+                    <h3>Testimonials</h3>
 
                     <!--Testimonial 1 -->
                     <div class="row">

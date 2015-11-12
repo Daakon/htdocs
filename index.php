@@ -132,7 +132,7 @@ get_head_files();
 
 
         <div class="col-lg-6 col-md-5 hidden-sm hidden-xs">
-            <image src="/images/connections.jpg"  class="center-block" ><br>
+            <image src="/images/Rapportbook-Logo.png"  class="center-block" ><br>
             </image>
         </div>
 

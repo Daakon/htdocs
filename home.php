@@ -797,7 +797,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
                     <br/>
                     <select class="form-control input-lg" id="category" name="category" style="background-color: lightsteelblue;font-weight:bold">
-                        <option value="">Select A Connection Interest</option>
+                        <option value="">Select Interest For Your Post</option>
                         <?php echo category() ?>
                     </select>
                     <br/>
