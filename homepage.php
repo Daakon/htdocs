@@ -1,6 +1,6 @@
 <?php
 
-require 'connect.php';
+require 'imports.php';
 $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 session_start();
 if (isset($_SESSION["ID"]) && !empty($_SESSION['ID'])) {

@@ -1,11 +1,6 @@
 <?php
 
-require 'connect.php';
-require 'getSession.php';
-require 'html_functions.php';
-require 'mediaPath.php';
-require 'findURL.php';
-require 'model_functions.php';
+require 'imports.php';
 
 get_head_files();
 get_header();
@@ -67,7 +62,7 @@ $ID = $_SESSION['ID'];
                     $result3 = mysql_query($sql3) or die(mysql_error());
                     $row3 = mysql_fetch_assoc($result3);
 
-                    echo "<a href = '/view_messages.php/$username'><img src = '$mediaPath$pic' class='profilePhoto-Feed' alt='' /> $name </a>";
+                    echo "<a href = '/view_messages/$username'><img src = '$mediaPath$pic' class='profilePhoto-Feed' alt='' /> $name </a>";
                     if (mysql_num_rows($result3) > 0) { echo "<span style='color:red;font-weight:bold'>New</font>"; }
                     echo "<br/>";
                     echo "$subject";

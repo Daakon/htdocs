@@ -1,9 +1,5 @@
 <?php
-require 'connect.php';
-require 'model_functions.php';
-require 'mediaPath.php';
-require 'getSession_public.php';
-require 'html_functions.php';
+require 'imports.php';
 
 
 get_head_files();

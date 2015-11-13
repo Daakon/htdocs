@@ -1,18 +1,8 @@
 <?php
-require 'connect.php';
-
-require 'model_functions.php';
-require 'mediaPath.php';
-require 'getSession_public.php';
-require 'html_functions.php';
-require 'findURL.php';
-require 'email.php';
-require 'category.php';
+require 'imports.php';
 
 get_head_files();
 get_header();
-require 'memory_settings.php';
-$url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 $ID = $_SESSION['ID'];
 
 // handle roll call post

@@ -1,12 +1,6 @@
 <?php
 
-require 'connect.php';
-require 'getSession_public.php';
-require 'html_functions.php';
-require 'mediaPath.php';
-require 'model_functions.php';
-require 'findURL.php';
-require 'category.php';
+require 'imports.php';
 get_head_files();
 get_header();
 require 'memory_settings.php';

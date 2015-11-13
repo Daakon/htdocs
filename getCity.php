@@ -1,6 +1,6 @@
 <?php
 
-require 'connect.php';
+require 'imports.php';
 $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 
 // variables that get sent in post must have identical names every where they exist

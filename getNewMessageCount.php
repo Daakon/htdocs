@@ -1,6 +1,4 @@
 <?php
-require 'connect.php';
-//require 'getSession.php';
 $ID = $_SESSION['ID'];
 
 $sql = "SELECT * FROM Messages WHERE (ThreadOwner_ID = '$ID') And (New = 1)";

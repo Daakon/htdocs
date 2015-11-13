@@ -1,9 +1,6 @@
 <?php
 //handle approves
-require 'connect.php';
-require 'getSession.php';
-require 'model_functions.php';
-require 'email.php';
+require 'imports.php';
 
 // variables that get sent in post must have identical names every where they exist
 $postID = $_POST['postID'];
@@ -45,7 +42,7 @@ foreach ($comment_ids as $item) {
         // only send email if account & email active
         if (checkActive($item)) {
             if (checkEmailActive($item)) {
-                build_and_send_email($ID, $item, 2, $postID);
+                build_and_send_email($ID, $item, 2, $postID, '');
             }
         }
     }

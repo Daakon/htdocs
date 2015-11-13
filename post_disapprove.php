@@ -1,8 +1,7 @@
 <?php
 
 //handle approves
-require 'connect.php';
-require 'getSession.php';
+require 'imports.php';
 
 $postID = $_POST['postID'];
 $ID = $_POST['ID'];

@@ -1,7 +1,4 @@
 <?php
-require 'connect.php';
-require 'mediaPath.php';
-
 
 
 function checkActive($user_id)

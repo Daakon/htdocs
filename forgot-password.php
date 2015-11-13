@@ -1,7 +1,5 @@
 <?php
-require 'connect.php';
-require 'html_functions.php';
-get_head_files();
+require 'imports.php';
 ?>
 
 

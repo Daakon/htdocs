@@ -1,12 +1,6 @@
 <?php
 
-require 'connect.php';
-require 'getSession.php';
-require 'html_functions.php';
-require 'mediaPath.php';
-require 'findURL.php';
-require 'model_functions.php';
-require 'email.php';
+require 'imports.php';
 
 get_head_files();
 get_header();

@@ -1,13 +1,6 @@
 <?php
 
-require 'connect.php';
-require 'getSession.php';
-require 'mediaPath.php';
-require 'model_functions.php';
-require 'memory_settings.php';
-require 'html_functions.php';
-require 'email.php';
-require 'findURL.php';
+require 'imports.php';
 
 $ID = $_SESSION['ID'];
 

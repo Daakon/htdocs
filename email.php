@@ -216,9 +216,9 @@ function build_and_send_email($senderId, $toId, $notification, $postID, $pass)
         //  message notification
         $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
         $link;
-        $username = get_username($senderId);
+        $username = get_username($toId);
         if (strstr($url, "local")) {
-            $link = "view_messages.php?id=$senderId";
+            $link = "view_messages.php/$username";
         }
         else if (strstr($url, "dev")) {
             $link = "http://dev.rapportbook.com/view_messages.php/$username";

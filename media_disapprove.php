@@ -1,11 +1,6 @@
 <?php
 
-require 'connect.php';
-require 'mediaPath.php';
-require 'getSession.php';
-require_once 'email.php';
-
-ini_set('memory_limit', '900M');
+require 'imports.php';
 // handle approves
 
 $mediaName = $_POST['mediaName'];

@@ -1,8 +1,5 @@
 <?php
-require 'connect.php';
-
-require 'html_functions.php';
-require 'calendar.php';
+require 'imports.php';
 get_head_files();
 ?>
 <?php get_login_header() ?>

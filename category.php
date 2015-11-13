@@ -5,8 +5,8 @@ function category()
     echo '<option value = "Automotive">Automotive</option>';
     echo '<option value = "Books">Books</option>';
     echo '<option value = "Business">Business</option>';
-    echo '<option value = "Cosmetology">Cosmetology</option>';
     echo '<option value = "Community">Community</option>';
+    echo '<option value = "Cosmetology">Cosmetology</option>';
     echo '<option value = "Culinary">Culinary</option>';
     echo '<option value = "Design">Design</option>';
     echo '<option value = "Education">Education</option>';
@@ -103,6 +103,21 @@ function age() {
     echo '<option value = "90">90</option>';
 
 }
+
+$keywords = "
+Automotive, Art,Books, Business, Business,
+Community, Cosmetology, Culinary,
+Design,
+Education, Employment,
+Fashion, Finance, Fitness,
+Gaming,
+Media, Modeling, Music,
+Night Life,
+Photography,
+Realty,
+Sports,
+Technology, Theatre
+";
 
 /*function interestGlyphs($interest) {
 

@@ -3,16 +3,7 @@ ALWAYS COMPRESS THIS FILE BEFORE PUSHING TO PRODUCTION
 IT WILL INCREASE THE RENDERING TIME OF HTML ELEMENTS
 ------------------------------------------------------->
 <?php
-require 'connect.php';
-// compress the page
-if (substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip')) ob_start("ob_gzhandler"); else ob_start();
-require 'model_functions.php';
-require 'mediaPath.php';
-require 'getSession.php';
-require 'html_functions.php';
-require 'findURL.php';
-require 'email.php';
-require 'category.php';
+require 'imports.php';
 $ffmpeg = '/usr/local/bin/ffmpeg';
 
 //require 'ads.php';
@@ -20,7 +11,7 @@ $ffmpeg = '/usr/local/bin/ffmpeg';
 get_head_files();
 get_header();
 require 'memory_settings.php';
-$url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+
 $ID = $_SESSION['ID'];
 $isServiceProvider = $_SESSION['IsServiceProvider'];
 
@@ -762,7 +753,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                         </div>
                         <select id="searchState" name="searchState" onchange="getCity(this)" style="background-color: lightsteelblue;font-weight:bold">
                             <option value="<?php echo $searchState ?>"><?php echo $searchState?></option>
-                            <?php include 'getState.php'; getState(); ?>
+                            <?php getState(); ?>
                         </select>
                         <br/><br/>
 

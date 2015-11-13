@@ -1,10 +1,5 @@
 <?php
-require 'connect.php';
-require 'html_functions.php';
-require 'mediaPath.php';
-require 'findURL.php';
-require 'model_functions.php';
-require 'checkLogin.php';
+require 'imports.php';
 
 get_head_files();
 get_header();

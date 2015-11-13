@@ -1,17 +1,5 @@
 <?php
-require 'connect.php';
-// compress the page
-if (substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip')) ob_start("ob_gzhandler"); else ob_start();
-require 'model_functions.php';
-require 'mediaPath.php';
-require 'getSession.php';
-require 'html_functions.php';
-
-require 'findURL.php';
-//require 'getState.php';
-require 'email.php';
-require 'category.php';
-//require 'ads.php';
+require 'imports.php';
 
 get_head_files();
 get_header();
