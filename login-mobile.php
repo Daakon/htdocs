@@ -24,6 +24,8 @@ get_header();
             <a href="forgot-password.php" style="color:black;margin-top:10px;">Forgot Your Password?</a>
     <br/>
 </form>
+
+        <h4><a href="/learn_more">Sign Up</a></h4>
 </div>
 
         </div>

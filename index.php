@@ -131,64 +131,19 @@ get_head_files();
     <div class="row" >
 
 
-        <div class="col-lg-6 col-md-5 hidden-sm hidden-xs">
-            <image src="/images/hand-shake.jpg"  class="center-block" ><br>
-            </image>
-        </div>
-
-        <div class="col-lg-6 col-md-7 col-sm-12 col-xs-12" >
+        <div class="col-lg-12 col-md-12 ">
 
 
-            <div class="modal fade" id="request_message">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                    aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title">Error</h4>
-                        </div>
-                        <div class="modal-body">
-                            <p>There was a problem submitting your request.</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
-                        </div>
-                    </div>
-                    <!-- /.modal-content -->
-                </div>
-                <!-- /.modal-dialog -->
-            </div>
-            <!-- /.modal -->
-
-            <div class="visible-xs">
-                <div class="slogan index-slogan" >
-                    Network & Make Local Or National Connections!
-                </div>
-            </div>
-
-            <div class="hidden-xs">
-                <div class="lead slogan index-slogan" >
-                    Network & Make Local Or National Connections!
-                </div>
-            </div>
-
-
-            <a href="/learn_more" class="visible-md visible-lg">
-                <h4>About</h4>
-            </a>
-
-
-
-            <div class="visible-xs visible-sm" style="font-weight: bold;font-size:20px;margin-top:1%;">
+            <div align="center" style="font-weight: bold;font-size:20px;margin-top:5%;">
 
                     <ul class="list-inline">
                         <li>
                             <a href="/learn_more">
-                                About
+                               About
                             </a>
                         </li>
                         <li>
-                            <a href="/login-mobile">
+                            <a class="visible-xs" href="/login-mobile">
                                 Login
                             </a>
                         </li>
@@ -200,189 +155,13 @@ get_head_files();
                         </li>
                     </ul>
 
+                <img src="/images/Rapportbook-Logo.png" height="200" width="200" />
 
             </div>
-
-
-
-
-            <form method="post" action="signup.php" id="signup" onsubmit='return checkSignup();' >
-
-                <div class="visible-lg visible-md visible-sm visible-xs">
-                    <h2>Sign Up</h2>
-                </div>
-
-
-
-                <!--<div class="form-group row" id="form-group-firstName">
-                    <div class="col-xs-12 col-md-12 col-md-6 col-lg-6 ">
-                        <label class="sr-only" for="firstName">First Name</label>
-                        <input class=" form-control input-lg" type="text" name="firstName" id="firstName"
-                               placeholder="First Name" onblur="capFname()" />
-                    </div>
-                    <div class="col-md-6">
-                        <div class="error-text"></div>
-                    </div>
-                </div>-->
-
-                <!--<div class="form-group row" id="form-group-lastName">
-                    <div class="col-md-6">
-                        <label class="sr-only" for="lastName">Last Name</label>
-                        <input class="form-control input-lg" type="text" name="lastName" id="lastName"
-                               placeholder="Last Name" onblur="capLname()"/>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="error-text"></div>
-                    </div>
-                </div>-->
-
-                <div class="form-group row" id="form-group-email">
-                    <div class="col-md-6">
-                        <label class="sr-only" for="email">Email Address</label>
-                        <input class="form-control input-lg" type="email" name="email" id="email"
-                               placeholder="Email"/>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="error-text"></div>
-                    </div>
-                </div>
-
-               <!-- <div class="form-group row" id="form-group-ddGender">
-                    <div class="col-md-6">
-                        <label class="sr-only" for="gender">Gender</label>
-                        <select class='form-control input-lg' name="ddGender" id="ddGender">
-                            <option value="">Gender</option>
-                            <option value="1">Male</option>
-                            <option value="2">Female</option>
-                        </select>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="error-text"></div>
-                    </div>
-                </div>-->
-
-                <!--<div class="form-group row" id="form-group-ddState" >
-                    <div class="col-md-6">
-                        <label class="sr-only" for="ddState">State</label>
-                        <select class='form-control input-lg' name="ddState" id="ddState" onchange="getCity(this);">
-                            <option value="">State</option>
-                            <?php /*echo getState() */?>
-                        </select>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="error-text"></div>
-                    </div>
-                </div>-->
-
-                <!--<div id="divCity">
-
-                </div>-->
-
-
-               <!-- <div class="form-group row" id="form-group-zip">
-                    <div class="col-md-6">
-                        <label class="sr-only" for="username">Zip</label>
-                        <input class="form-control input-lg" type="text" name="zip" id="zip"
-                               placeholder="Zip Code"/>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="error-text"></div>
-                    </div>
-                </div>-->
-
-                <!-- <label>Birthday</label>
-
-                <div class="form-group form-inline row" id="form-group-birthday">
-                    <div class="col-md-6">
-                        <label class="sr-only" for="ddMonth">Birthday Month</label>
-                        <select class="form-control input-lg" id="ddMonth" name="ddMonth">
-                            <option value="">Month</option>
-                            <?php /*echo calendarMonths() */?>
-                        </select>
-                        <label class="sr-only" for="ddDay">Birthday Day</label>
-                        <select class="form-control input-lg" id="ddDay" name="ddDay">
-                            <option value="">Day</option>
-                            <?php /*echo calendarDays() */?>
-                        </select>
-                        <label class="sr-only" for="ddYear">Birthday Year</label>
-                        <select class="form-control input-lg" name="ddYear" id="ddYear">
-                            <option value="">Year</option>
-                            <?php /*echo calendarYears() */?>
-                        </select>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="error-text"></div>
-                    </div>
-                </div>-->
-
-                <!--<div class="form-group row" id="form-group-username">
-                    <div class="col-md-6">
-                        <label class="sr-only" for="username">Username</label>
-                        <input class="form-control input-lg" type="text" name="username" id="username"
-                               placeholder="Username"/>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="error-text"></div>
-                    </div>
-                </div>-->
-
-                <!--<div class="form-group row" id="form-group-password">
-                    <div class="col-md-6">
-                        <label class="sr-only" for="password">Password</label>
-                        <input class="form-control input-lg" type="password" name="password" id="password"
-                               placeholder="Password"/>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="error-text"></div>
-                    </div>
-                </div>-->
-
-
-                <select class="form-control input-lg" id="interest" name="interest">
-                    <option value="">Select Your Interest</option>
-                    <?php echo category() ?>
-                </select>
-                    <br/>
-
-
-               <!-- <div class="form-group row" id="form-group-phone">
-                    <div class="col-md-6">
-                        <label class="sr-only" for="phone">Phone</label>
-                        <input class="form-control input-lg" type="text" name="phone" id="phone"
-                               placeholder="2125551212 (Mobile)"/>
-                        <small>Your mobile phone number will only be used for text notifications when we receive interest matches.</small>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="error-text"></div>
-                    </div>
-                </div>-->
-
-                <small>By clicking sign up, you agree to our <a href="/terms">terms</a></small>
-                <br/><br/>
-
-                <div class="form-group row">
-                    <div class="col-md-6">
-                        <input class="btn btn-default " type="submit" name="signup" id="signup"
-                            style="background: red;color:white;"   value="Sign Up"/>
-
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <div class="col-md-6">
-
-
-
-                    </div>
-
-
                 </div>
         </div>
-        </form>
-
-
     </div>
-</div>
+
 
 
 

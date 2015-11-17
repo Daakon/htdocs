@@ -54,20 +54,22 @@ if (!empty($_SESSION['ID'])) {
 
             <h4>
                     <span class="bold">
-                        <img src="/images/bullhorn.png" height="50" width="38" />
-                    </span> <span class="lead slogan">Promote</span> <span class="lead">Your Business.</span>
+                        <img src="/images/bullhorn.png" height="50" width="30" />
+                    </span> <span class="lead slogan" style="margin-left:-5px;">Promote</span> <span class="lead" style="font-weight: 500">Your Business.</span>
+            </h4>
+
+            <h4>
+                <img src="/images/white-plug.png" height="40" width="25" />
+                <span class="lead" style="font-weight: 500;margin-left:-3px;">Make Local & National</span> <span class="lead slogan">Connections</span>.
             </h4>
 
             <h4>
                     <span class="bold">
-                        <img src="/images/share-icon.png" height="50" width="40" />
-                    </span> <span class="lead slogan">Share</span> <span class="lead">Your Passion.</span>
+                        <img src="/images/share-icon.png" height="30" width="20" />
+                    </span><span class="lead" style="font-weight: 500">Meet People Who</span> <span class="lead slogan" >Share</span> <span class="lead" style="font-weight: 500">Your Passion.</span>
             </h4>
 
-            <h5>
-                <img src="/images/white-plug.png" height="40" width="40" />
-                <span class="lead">Make Local & National</span> <span class="lead slogan">Connections</span>.
-            </h5>
+
         </ul>
 
 
@@ -204,7 +206,7 @@ if (!empty($_SESSION['ID'])) {
 
                     <br/>
 
-                    <h4>Rapportbook Marketing Specialist Erin Thompson gives a talk about the company.</h4>
+                    <h5>Rapportbook Marketing Specialist Erin Thompson gives a talk about the company.</h5>
                     <a href="https://www.youtube.com/watch?v=jJMHsWxqF3M&t=27m45s" target="_blank" >
                         <h4>
                             Watch Video
@@ -219,9 +221,9 @@ if (!empty($_SESSION['ID'])) {
 
                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="margin-top:20px;">
 
-                       <h4>
+                       <h5>
                         Rapportbook Founder & CEO Chris Weathers speaks on why he became an entrepreneur.
-                       </h4>
+                       </h5>
                         <iframe max-width="400" height="315" src="https://www.youtube.com/embed/qiFa1-Mtj8c" frameborder="0" allowfullscreen></iframe>
 
                         <br/><br/>
@@ -233,7 +235,7 @@ if (!empty($_SESSION['ID'])) {
             <br/>
 
 
-            <h4>Checkout what people are sharing</h4>
+            <h5>Checkout what people are sharing</h5>
 </div>
 
 
@@ -304,7 +306,7 @@ if (mysql_num_rows($rollCallResult) > 0) {
         <div class="col-lg-5 col-lg-offset-1 col-md-6 col-sm-6 col-xs-12 about-roll-call" align="left">
 
         <?php
-            $profileUrl = "../";
+            $profileUrl = "/learn_more";
         if (strlen($name) > 70) {
             $name = checkNameLength($name,$firstName,$lastName);
         }
@@ -337,7 +339,7 @@ if (mysql_num_rows($rollCallResult) > 0) {
                     $messageLink = "/view_messages/$username";
                 }
                 else {
-                    $messageLink = '../';
+                    $messageLink = '/learn_more';
                 }
                 ?>
 
@@ -357,7 +359,7 @@ if (mysql_num_rows($rollCallResult) > 0) {
 
                 <br/><br/>
 
-            <a href="../" >
+            <a href="/learn_more" >
                 <button style="background:#E30022;color:white;padding:10px;border: 2px solid black;border-radius: 10px;">
                     <span style="font-weight:bold;">Connect With <?php echo $firstName ?></span>
                 </button>
