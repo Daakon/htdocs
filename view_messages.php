@@ -284,6 +284,7 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
 
 <?php include('media_sizes.html'); ?>
 
+<body onload="window.scrollTo(0,document.body.scrollHeight);">
     <div class="container" >
     <div class="row row-padding">
 
@@ -327,7 +328,7 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
                     WHERE ThreadOwner_ID = $ID
                     AND (Sender_ID = $senderID Or Receiver_ID = $senderID)
                     AND (IsDeleted = 0)
-                    Order By ID DESC";
+                    Order By ID ASC";
             $result = mysql_query($sql) or die(mysql_error());
 
 

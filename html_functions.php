@@ -24,7 +24,7 @@ function get_head_files()
 addToHomescreen.removeSession();
 </script>
         <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
-        <meta name="description" content="Share Your Interests & Make Connections">
+        <meta name="description" content="">
         <meta name="keywords" content="<?php echo $keywords ?>">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
