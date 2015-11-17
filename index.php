@@ -132,7 +132,7 @@ get_head_files();
 
 
         <div class="col-lg-6 col-md-5 hidden-sm hidden-xs">
-            <image src="/images/Rapportbook-Logo.png"  class="center-block" ><br>
+            <image src="/images/hand-shake.jpg"  class="center-block" ><br>
             </image>
         </div>
 
@@ -161,14 +161,14 @@ get_head_files();
             <!-- /.modal -->
 
             <div class="visible-xs">
-                <div class="bold" >
-                    Share Your Interests & Make Connections!
+                <div class="slogan index-slogan" >
+                    Network & Make Local Or National Connections!
                 </div>
             </div>
 
             <div class="hidden-xs">
-                <div class="lead slogan" >
-                    Share Your Interests & Make Connections!
+                <div class="lead slogan index-slogan" >
+                    Network & Make Local Or National Connections!
                 </div>
             </div>
 
@@ -209,7 +209,7 @@ get_head_files();
             <form method="post" action="signup.php" id="signup" onsubmit='return checkSignup();' >
 
                 <div class="visible-lg visible-md visible-sm visible-xs">
-                    <h2 style="color:red;">Sign Up</h2>
+                    <h2>Sign Up</h2>
                 </div>
 
 
@@ -339,7 +339,7 @@ get_head_files();
 
 
                 <select class="form-control input-lg" id="interest" name="interest">
-                    <option value="">Select Your Favorite Interest</option>
+                    <option value="">Select Your Interest</option>
                     <?php echo category() ?>
                 </select>
                     <br/>
@@ -363,7 +363,7 @@ get_head_files();
                 <div class="form-group row">
                     <div class="col-md-6">
                         <input class="btn btn-default " type="submit" name="signup" id="signup"
-                               value="Sign Up"/>
+                            style="background: red;color:white;"   value="Sign Up"/>
 
                     </div>
                 </div>

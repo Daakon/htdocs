@@ -49,30 +49,28 @@ if (!empty($_SESSION['ID'])) {
 
 <div align="left" style="padding-left:10px;">
 
-<div class="row">
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <span class="lead slogan">Share Your Interests & Make Connections!</span>
-
+<div class="row" style="background: #E30022;color:white;border:1px solid black">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" >
 
             <h4>
                     <span class="bold">
-                        <img src="/images/promote.png" height="50" width="50" />
-                    </span> <span class="lead slogan action">Promote</span> Your Business.
+                        <img src="/images/bullhorn.png" height="50" width="38" />
+                    </span> <span class="lead slogan">Promote</span> <span class="lead">Your Business.</span>
             </h4>
 
             <h4>
                     <span class="bold">
-                        <img src="/images/share-people.png" height="50" width="50" />
-                    </span> <span class="lead slogan action">Share</span> Your Passion.
+                        <img src="/images/share-icon.png" height="50" width="40" />
+                    </span> <span class="lead slogan">Share</span> <span class="lead">Your Passion.</span>
             </h4>
 
-            <h4>
-                <img src="/images/plug.png" height="30" width="50" />
-                <span class="bold"></span> Make<span class="lead slogan action"> Connections</span>.
-            </h4>
+            <h5>
+                <img src="/images/white-plug.png" height="40" width="40" />
+                <span class="lead">Make Local & National</span> <span class="lead slogan">Connections</span>.
+            </h5>
         </ul>
 
-        <hr style = 'background-color:gainsboro; border-width:0; color:black; height:2px; lineheight:0; display: inline-block; text-align: left; width:100%;'/>
+
     </div>
 
 
@@ -103,7 +101,7 @@ if (!empty($_SESSION['ID'])) {
                         </div>
 
                         <select class="form-control input-lg" id="interest" name="interest">
-                            <option value="">Select Your Favorite Interest</option>
+                            <option value="">Select Your Interest</option>
                             <?php echo category() ?>
                         </select>
                         <br/>
@@ -114,7 +112,7 @@ if (!empty($_SESSION['ID'])) {
                         <div class="form-group row">
                             <div class="col-md-6">
                                 <input class="btn btn-default " type="submit" name="signup" id="signup"
-                                       value="Sign Up"/>
+                                       style="background:#E30022;color:white;"     value="Sign Up"/>
 
                             </div>
                         </div>
@@ -154,10 +152,8 @@ if (!empty($_SESSION['ID'])) {
             </div>
 
 
-            <div class="row">
+            <div class="row" style="background:#F6F6F6;border:2px solid #e3e3e3">
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-
-                    <hr/>
 
                     <h3>Testimonials</h3>
 
@@ -237,12 +233,12 @@ if (!empty($_SESSION['ID'])) {
             <br/>
 
 
-            <h4 style="color:red;">Checkout what people are sharing</h4>
+            <h4>Checkout what people are sharing</h4>
 </div>
 
 
         <!--FEED STARTS HERE -->
-        <div class="col-lg-12 col-md-12 col-xs-12" style="background-color: #888888;">
+        <div class="col-lg-12 col-md-12 col-xs-12" style="background-color: #e3e3e3;">
 <?php
 
 
@@ -285,8 +281,7 @@ $rollCallResult = mysql_query($sqlRollCall) or die(mysql_error());
 // if no results
 if (mysql_num_rows($rollCallResult) == 0) {
     ?>
-    <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 roll-call"
-         style="background:white;border-radius:10px;margin-top:20px;border:2px slategray;border-style:dashed" align="left">
+    <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 roll-call about-roll-call" align="left">
         No Results
     </div>
 <?php }
@@ -306,9 +301,7 @@ if (mysql_num_rows($rollCallResult) > 0) {
         $postOwner = $memberID;
         ?>
 
-        <div class="col-lg-5 col-lg-offset-1 col-md-6 col-sm-6 col-xs-12 roll-call"
-         style="background:#f5f8fa;border-radius:10px;margin-top:20px;border:2px solid slategray;"
-         align="left">
+        <div class="col-lg-5 col-lg-offset-1 col-md-6 col-sm-6 col-xs-12 about-roll-call" align="left">
 
         <?php
             $profileUrl = "../";
@@ -365,7 +358,7 @@ if (mysql_num_rows($rollCallResult) > 0) {
                 <br/><br/>
 
             <a href="../" >
-                <button style="background:red;color:white;padding:10px;border: 2px solid black;border-radius: 10px;">
+                <button style="background:#E30022;color:white;padding:10px;border: 2px solid black;border-radius: 10px;">
                     <span style="font-weight:bold;">Connect With <?php echo $firstName ?></span>
                 </button>
             </a>

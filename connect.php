@@ -1,9 +1,9 @@
 <?php
 
-if(strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE') !== FALSE) {
+/*if(strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE') !== FALSE) {
     echo "<script>alert('Rapportbook can only be viewed in Chrome or Safari');location='http://google.com'</script>";
 }
-/*elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Trident') !== FALSE) {
+elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Trident') !== FALSE) {
     //For Supporting IE 11
     echo "<script>alert('Rapportbook can only be viewed in Chrome or Safari');location='http://google.com'</script>";
 }

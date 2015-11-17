@@ -1,10 +1,11 @@
 body {
     /*background-color: #dedede;*/
-    font-family: Georgia, Serif;
-    background-image:url('/images/silk-bg.jpg');
+    font-family: 'proxima-nova', 'Proxima Nova', sans-serif;
+    /*background-image:url('/images/silk-bg.jpg');*/
     background-repeat:no-repeat;
     background-size:100% 100%;
     background-position:inherit;
+    background: #e3e3e3;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -18,7 +19,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .header {
-    background: red;
+    background: #E30022;
     color: white;
     height: 50px;
     padding: 10px;
@@ -41,12 +42,22 @@ h1, h2, h3, h4, h5, h6 {
     border: 2px solid black;
     border-radius: 10px;">
 }
+
+.about-roll-call {
+    background:white;
+    border-radius:10px;
+    margin-top:20px;
+    border:5px solid slategray;
+}
 .input-style {
     border-radius: 10px;
 }
 
-.action {
-    color:red;
+.index-slogan {
+    background:#E30022;
+    color:white;
+    padding:10px;
+    border:2px solid black
 }
 
 .login-button, .login-button:hover {
