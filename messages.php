@@ -30,7 +30,7 @@ $ID = $_SESSION['ID'];
             <hr/>
 
             <?php
-            $sql = "SELECT DISTINCT * FROM Messages WHERE ThreadOwner_ID = $ID AND (Sender_ID != $ID Or Receiver_ID != $ID) AND (InitialMessage = 1) AND (IsDeleted = 0) Order By ID DESC ";
+            $sql = "SELECT DISTINCT * FROM Messages WHERE ThreadOwner_ID = $ID AND (Receiver_ID != $ID) AND (InitialMessage = 1) AND (IsDeleted = 0) Order By ID DESC ";
             $result = mysql_query($sql) or die(mysql_error());
 
             if (mysql_num_rows($result) > 0) {

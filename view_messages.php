@@ -14,6 +14,10 @@ $ID = $_SESSION['ID'];
 <?php
 // check if member exists for messaging
 $urlUsername = get_username_from_url();
+if ($urlUsername == get_username($ID)) {
+    $username = get_username($ID);
+    echo "<script>alert('Error');location='/messages/'</script>";
+}
 $senderID = get_id_from_username($urlUsername);
 
 $sql = "SELECT ID FROM Members WHERE ID = $senderID ";
@@ -287,13 +291,6 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
 <body onload="window.scrollTo(0,document.body.scrollHeight);">
     <div class="container" >
     <div class="row row-padding">
-
-        <div class="col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8 ">
-            <ul class="list-inline">
-
-                <?php require 'profile_menu.php'; ?>
-            </ul>
-        </div>
 
         <div class="col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8 roll-call ">
 

@@ -65,7 +65,7 @@ if (!empty($_SESSION['ID'])) {
 
             <h4>
                     <span class="bold">
-                        <img src="/images/share-icon.png" height="30" width="20" />
+                        <img src="/images/share-people.gif" height="30" width="25" />
                     </span><span class="lead" style="font-weight: 500">Meet People Who Need Your </span> <span class="lead slogan">Product.</span>
             </h4>
 
