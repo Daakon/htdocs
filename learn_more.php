@@ -59,14 +59,14 @@ if (!empty($_SESSION['ID'])) {
             </h4>
 
             <h4>
-                <img src="/images/white-plug.png" height="40" width="25" />
-                <span class="lead" style="font-weight: 500;margin-left:-3px;">Make Local & National</span> <span class="lead slogan">Connections</span>.
+                <img src="/images/location.png" height="40" width="25" />
+                <span class="lead" style="font-weight: 500;margin-left:-3px;">Make Local or National</span> <span class="lead slogan">Connections</span>.
             </h4>
 
             <h4>
                     <span class="bold">
                         <img src="/images/share-icon.png" height="30" width="20" />
-                    </span><span class="lead" style="font-weight: 500">Meet People Who</span> <span class="lead slogan" >Share</span> <span class="lead" style="font-weight: 500">Your Passion.</span>
+                    </span><span class="lead" style="font-weight: 500">Meet People Who Need Your </span> <span class="lead slogan">Product.</span>
             </h4>
 
 
@@ -81,7 +81,12 @@ if (!empty($_SESSION['ID'])) {
         </div>
 
 </div>
-
+<h4>It's as easy as...</h4>
+    <b>1. Signing up</b> <i>(2 Fields)</i>.
+    <br/>
+    <b>2. Post What Your Product Is</b>.
+    <br/>
+    <b>3. Message Others & Start Networking</b></h4>
 
             <h2>Sign Up</h2>
             <div class="row">
@@ -103,7 +108,7 @@ if (!empty($_SESSION['ID'])) {
                         </div>
 
                         <select class="form-control input-lg" id="interest" name="interest">
-                            <option value="">Select Your Interest</option>
+                            <option value="">Select Your Business Type</option>
                             <?php echo category() ?>
                         </select>
                         <br/>
@@ -166,7 +171,7 @@ if (!empty($_SESSION['ID'])) {
                         </div>
                         <div class="col-xs-12 col-sm-10 col-md-10 col-lg-10">
                             <div style="font-style: italic">
-                                "Rapportbook is a great platform for promoting your business or service."  - <b>Brian Slawin</b>, <a href="http://busyevent.com" target="_blank">Co-Founder, Busy Event </a>
+                                "Rapportbook is a great platform for promoting your product on a local or national scale."  - <b>Brian Slawin</b>, <a href="http://busyevent.com" target="_blank">Co-Founder, Busy Event </a>
                             </div>
                         </div>
                     </div>
@@ -197,7 +202,7 @@ if (!empty($_SESSION['ID'])) {
                         </div>
                         <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
                             <div style="font-style: italic">
-                                "Chris Weathers has a genuine passion for connecting people with similar interests, and Rapportbook  seamlessly allows you to interact with like-minded individuals.." - <b>Angela LaRocca</b>, <a href="http://unidev.com" target="_blank">Brand Manager, Unidev</a>
+                                "Chris Weathers has a genuine passion for connecting people with similar interests, and Rapportbook  seamlessly allows you to interact with like-minded individuals." - <b>Angela LaRocca</b>, <a href="http://unidev.com" target="_blank">Brand Manager, Unidev</a>
                             </div>
                         </div>
                     </div>

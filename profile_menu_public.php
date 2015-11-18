@@ -24,23 +24,23 @@ else {
 }
 ?>
 
-<div class="profileMenu">
+
 
 <?php
 $text = 'login';
-if (isset($_SESSION['ID']) && !empty($_SESSION['ID'])) { ?>
-    <a href="/home"><b>Home</b></a>
-<?php }
-else { ?>
+if (!isset($_SESSION['ID']) && empty($_SESSION['ID'])) { ?>
+    <div class="profileMenu">
     <a href="<?php echo $howItWorks ?>"><b>New To Rapportbook?...Click here to find out more</b></a>
     Or  <a href="/index"><b>Login</b></a>
+    </div>
 <?php } ?>
 
-</div>
+
 <br/><br/>
 
 <?php if ($_SESSION['ID'] != $profileID) { ?>
 <ul class="list-inline profileMenu">
+    <li><a href="/home"><b>Home</b></a></li>
     <li><a href="/<?php echo $username ?>">Profile</a></li>
     <li><a href="/member_media/<?php echo $username ?>">Media</a></li>
     <li><a href="/manage_post/<?php echo $username ?>"><?php echo $firstName ?>'s Posts</a></li>

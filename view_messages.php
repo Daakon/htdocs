@@ -28,7 +28,7 @@ if (mysql_num_rows($result) == 0) {
 // handle message
 if (isset($_POST['send']) && $_POST['send'] == "Send") {
 
-    $receiverID = $_POST['receiverID'];
+    $receiverID = get_id_from_username($urlUsername);
     $receiverUsername = $_POST['username'];
     $subject = $_POST['subject'];
     $message = $_POST['message'];
@@ -246,7 +246,7 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
 //----------------------
 
     else {
-
+        $receiverID = get_id_from_username($urlUsername);
         // create thread for sender
         $sql = "INSERT INTO Messages (ThreadOwner_ID, Sender_ID,  Receiver_ID,    Subject,    Message,      InitialMessage,    MessageDate     ) Values
                                       ($ID,             $ID,       $receiverID, '$subject',  '$message',    '$initialMessage', CURRENT_TIMESTAMP ) ";
@@ -364,10 +364,18 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
             ?>
 
 
+
+                <ul class="list-inline">
+
+                    <?php require 'profile_menu.php'; ?>
+                </ul>
+            
+
             <?php
             // reinitialize sender ID
             $senderID = get_id_from_username($urlUsername);
             ?>
+
 
             <form action="" method="post" enctype="multipart/form-data">
                 <img src="/images/image-icon.png" height="30px" width="30px" alt="Photos/Video"/>
