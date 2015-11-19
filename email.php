@@ -216,15 +216,15 @@ function build_and_send_email($senderId, $toId, $notification, $postID, $pass)
         //  message notification
         $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
         $link;
-        $username = get_username($toId);
+        $username = get_username($senderId);
         if (strstr($url, "local")) {
             $link = "view_messages.php/$username";
         }
         else if (strstr($url, "dev")) {
-            $link = "http://dev.rapportbook.com/view_messages.php/$username";
+            $link = "http://dev.rapportbook.com/view_messages/$username";
         }
         else {
-            $link = "http://www.rapportbook.com/view_messages.php/$username";
+            $link = "http://www.rapportbook.com/view_messages/$username";
         }
 
         $senderName = get_users_name_by_id($senderId);

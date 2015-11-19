@@ -411,10 +411,11 @@ function text_notification($receiverID, $senderID)
             // Create a Clockwork object using your API key
             $clockwork = new Clockwork($API_KEY);
             $domain;
+            $username = get_username($senderID);
             if (strstr($url, "dev")) {
-                $domain = "http://dev.rapportbook.com/messages.php";
+                $domain = "http://dev.rapportbook.com/view_messages/$username";
             } else {
-                $domain = "http://rapportbook.com/messages.php";
+                $domain = "http://rapportbook.com/messages.php/$username";
             }
             // Setup and send a message
             $text = "$senderName sent you a new message on Rapportbook. $domain";

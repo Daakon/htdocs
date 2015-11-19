@@ -179,23 +179,7 @@ if (!empty($_SESSION['ID'])) {
 
                     <hr/>
 
-
                     <!--Testimonial 2 -->
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2" style="margin-right:-3%">
-                            <img src="/images/dr-mccarthy.jpg" style="border:1px solid black;height:50px;width:50px;"/>
-                        </div>
-                        <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-                            <div style="font-style: italic">
-                                "People need an outlet to share the things they are passionate about, and Rapportbook lets you do that." - <b>Dr. Lance McCarthy</b>, <a href="http://tedxgatewayarch.org/lance-mccarthy/" target="_blank">Economist, Investment Advisor, Urban Leader</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!--End Testimonial 2 -->
-
-                    <hr/>
-
-                    <!--Testimonial 3 -->
                     <div class="row">
                         <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2" style="margin-right:-3%">
                             <img src="/images/angela-larocca.jpg" style="border:1px solid black;height:50px;width:50px;"/>
@@ -206,7 +190,7 @@ if (!empty($_SESSION['ID'])) {
                             </div>
                         </div>
                     </div>
-                    <!--End Testimonial 3 -->
+                    <!--End Testimonial 2 -->
                     <hr/>
 
                     <br/>

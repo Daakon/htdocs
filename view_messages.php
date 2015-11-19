@@ -16,7 +16,7 @@ $ID = $_SESSION['ID'];
 $urlUsername = get_username_from_url();
 if ($urlUsername == get_username($ID)) {
     $username = get_username($ID);
-    echo "<script>alert('Error');location='/messages/'</script>";
+    echo "<script>alert('Error');location='/messages/$urlUsername'</script>";
 }
 $senderID = get_id_from_username($urlUsername);
 
