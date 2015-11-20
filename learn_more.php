@@ -45,6 +45,17 @@ if (!empty($_SESSION['ID'])) {
         }
     </script>
 
+<style>
+    video {
+        width:90%;
+        max-width: 90%;
+    }
+    iframe {
+        width: 90%;
+        max-width: 90%;
+    }
+</style>
+
 <body style="background:white;">
 
 <div align="left" style="padding-left:10px;">
@@ -86,7 +97,14 @@ if (!empty($_SESSION['ID'])) {
     <br/>
     <b>2. Post What Your Product Offers</b>.
     <br/>
-    <b>3. Start Networking & Grow Your Business</b></h4>
+    <b>3. Start Networking & Building Resources</b></h4>
+
+    <br/>
+    <h4>Wath the video & learn more.</h4>
+    <video width="320" height="240" poster="/poster/how-it-works.png" controls >
+        <source src="/images/Rapportbook-How-It-Works-Lo-Res.mp4" />
+        </video>
+    <br/>
 
             <h2>Sign Up</h2>
             <div class="row">
@@ -201,7 +219,7 @@ if (!empty($_SESSION['ID'])) {
                             Watch Video
                         </h4>
 
-                        <img src="/images/Erin-Thompson.jpg" width="500" height="350">
+                        <img src="/images/Erin-Thompson.jpg" width="90%" height="350">
                     </a>
 
                     <hr/>
