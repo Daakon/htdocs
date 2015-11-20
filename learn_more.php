@@ -82,11 +82,11 @@ if (!empty($_SESSION['ID'])) {
 
 </div>
 <h4>It's as easy as...</h4>
-    <b>1. Signing up</b> <i>(2 Fields)</i>.
+    <b>1. Signing up</b> <i>(Only 2 Fields)</i>.
     <br/>
-    <b>2. Post What Your Product Is</b>.
+    <b>2. Post What Your Product Offers</b>.
     <br/>
-    <b>3. Message Others & Start Networking</b></h4>
+    <b>3. Start Networking & Grow Your Business</b></h4>
 
             <h2>Sign Up</h2>
             <div class="row">

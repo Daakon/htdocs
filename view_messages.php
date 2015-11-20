@@ -270,7 +270,7 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
     }
 
     // notify recipient of email
-    build_and_send_email($ID, $receiverID,8, "");
+    build_and_send_email($ID, $receiverID,8, "","");
     echo "<script>location = '/view_messages.php/$receiverUsername'</script>";
 }
 ?>
