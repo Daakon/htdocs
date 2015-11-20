@@ -60,7 +60,7 @@ if (!empty($_SESSION['ID'])) {
 
 <div align="left" style="padding-left:10px;">
 
-<div class="row" style="background: #E30022;color:white;border:1px solid black">
+<div class="row" style="background: #E30022;color:white;">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" >
 
             <h4>
@@ -101,7 +101,7 @@ if (!empty($_SESSION['ID'])) {
 
     <br/>
     <h4>Wath the video & learn more.</h4>
-    <video width="320" height="240" poster="/poster/how-it-works.png" controls >
+    <video width="320" height="240" poster="/poster/how-it-works-poster.png" controls >
         <source src="/images/Rapportbook-How-It-Works-Lo-Res.mp4" />
         </video>
     <br/>
@@ -177,7 +177,7 @@ if (!empty($_SESSION['ID'])) {
             </div>
 
 
-            <div class="row" style="background:#F6F6F6;border:2px solid #e3e3e3">
+            <div class="row" style="background:#F6F6F6;">
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 
                     <h3>Testimonials</h3>
@@ -213,7 +213,7 @@ if (!empty($_SESSION['ID'])) {
 
                     <br/>
 
-                    <h5>Rapportbook Marketing Specialist Erin Thompson gives a talk about the company.</h5>
+                    <h5>Rapportbook Communications Director Erin Thompson gives a talk about the company.</h5>
                     <a href="https://www.youtube.com/watch?v=jJMHsWxqF3M&t=27m45s" target="_blank" >
                         <h4>
                             Watch Video
@@ -351,8 +351,8 @@ if (mysql_num_rows($rollCallResult) > 0) {
                 ?>
 
                 <a href="<?php $messageLink ?>">
-                    <button style="background:red;color:white;padding:10px;border: 2px solid black;border-radius: 10px;">
-                        <span style="font-weight:bold;">Connect With <?php echo $firstName ?></span>
+                    <button>
+                        <span>Connect With <?php echo $firstName ?></span>
                     </button>
                 </a>
 
@@ -367,8 +367,8 @@ if (mysql_num_rows($rollCallResult) > 0) {
                 <br/><br/>
 
             <a href="/learn_more" >
-                <button style="background:#E30022;color:white;padding:10px;border: 2px solid black;border-radius: 10px;">
-                    <span style="font-weight:bold;">Connect With <?php echo $firstName ?></span>
+                <button >
+                    <span >Connect With <?php echo $firstName ?></span>
                 </button>
             </a>
 

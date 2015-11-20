@@ -14,7 +14,7 @@ $ID = $_SESSION['ID'];
 // handle upload profile pic
 if (isset($_POST['photo']) && ($_POST['photo'] == "Upload Photo")) {
     if (isset($_FILES['flPostPhoto']) && strlen($_FILES['flPostPhoto']['name']) > 1) {
-        if ($_FILES['flPostPhoto']['size'] > 50000000) {
+        if ($_FILES['flPostPhoto']['size'] > 5000000000) {
             echo '<script>alert("File is too large");</script>';
             exit;
         }
@@ -93,7 +93,7 @@ if (isset($_POST['photo']) && ($_POST['photo'] == "Upload Photo")) {
 // handle upload profile video
 if (isset($_POST['video']) && ($_POST['video'] == "Upload Video")) {
     if (isset($_FILES['flPostVideo']) && strlen($_FILES['flPostVideo']['name']) > 1) {
-        if ($_FILES['flPostVideo']['size'] > 50000000) {
+        if ($_FILES['flPostVideo']['size'] > 5000000000) {
             echo '<script>alert("File is too large");</script>';
             exit;
         }
@@ -124,37 +124,6 @@ if (isset($_POST['video']) && ($_POST['video'] == "Upload Video")) {
             //ffmpeg command
             $cmd = "$ffmpeg -i \"$postMediaFilePath\" -r 1 -ss 3 -f image2 $poster 2>&1";
             exec($cmd);
-            $poster = imagecreatefromjpeg($poster);
-            $exif = @exif_read_data($poster);
-            if ( isset($exif['Orientation']) && !empty($exif['Orientation']) ) {
-                // Decide orientation
-                if ( $exif['Orientation'] == 3 ) {
-                    $rotation = 180;
-                } else if ( $exif['Orientation'] == 6 ) {
-                    $rotation = 90;
-                } else if ( $exif['Orientation'] == 8 ) {
-                    $rotation = -90;
-                } else {
-                    $rotation = 0;
-                }
-                // Rotate the image
-                if ( $rotation ) {
-                    $img = imagerotate($poster, $rotation, 0);
-                    imagejpeg($img, $posterPath.$posterName, 50);
-                }
-            }
-            else {
-                // if we cannot determine the exif data
-                // then we will rotate the image if it is wider than it is tall
-                // this is the best fallback so far.
-                $size = getimagesize("$posterPath$posterName");
-                $width = $size[0];
-                $height = $size[1];
-                if ($width > $height) {
-                    $img = imagerotate($poster, -90, 0);
-                    imagejpeg($img, $posterPath.$posterName, 50);
-                }
-            }
         }
         else {
             echo "<script>alet('Invalid File Type');</script>";

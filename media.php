@@ -223,8 +223,8 @@ if (!empty($_GET['btnDelete']) && ($_GET['btnDelete'] == 'Delete Image')) {
     $sql = "UPDATE Media Set IsDeleted = 1 WHERE ID = '$mediaID' And Member_ID = '$ID' ";
 
     mysql_query($sql) or die(mysql_error());
-
-    echo "<script>location = 'member_media.php'</script>";
+    $username = get_username($ID);
+    echo "<script>location = '/member_media/$username'</script>";
 
 }
 ?>

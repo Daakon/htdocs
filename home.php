@@ -26,7 +26,7 @@ if (isset($_POST['submit'])) {
     if ($_SESSION['Post'] == $_POST['post']) {
         echo "<script>alert('Your post appears to be empty');</script>";
     } else if ($category == "") {
-        echo "<script>alert('Your post needs an interest');</script>";
+        echo "<script>alert('Your post needs a business type');</script>";
     } else {
         if (strlen($post) > 0) {
             $post = makeLinks($post);
@@ -594,7 +594,16 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 <script>
     // show uploading
     function showUploading() {
+        if (document.getElementById('post').value == '') {
+            alert('Your post appears to be empty');
+            return false;
+        }
+        if (document.getElementById('category').value == '') {
+            alert('You did not provide a business type');
+            return false
+        }
         document.getElementById("progress").style.display = "block";
+        return true;
     }
 </script>
 <script>
@@ -663,7 +672,6 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                 </a>
                 <li><?php require 'getNewMessageCount.php' ?></a></li>
                 <li><a href ="/logout" >Log Out</a></li>
-                <hr style = 'background-color:#ffffff; border-width:0; color:#ffffff; height:3px; lineheight:0; display: inline-block; text-align: left; width:100%;'/>
             </ul>
 
 </div>
@@ -720,7 +728,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
                     <div align = "center">
 
-                        <h5>Search Posts By Business</h5>
+                        <h5>Search Posts By Business Type For Post</h5>
                         <select id="genre" name="genre" onchange="updateFeed()" style="background-color: lightsteelblue;font-weight:bold">
                             <option value="<?php echo $genre ?>"><?php echo $genre ?></option>
                             <option value="Show All">Show All</option>
@@ -772,7 +780,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
 <!--If NOT a service provider -->
 
-                <form method="post" enctype="multipart/form-data" action="" onsubmit="showUploading()">
+                <form method="post" enctype="multipart/form-data" action="" onsubmit="return showUploading()">
                     <img src="/images/image-icon.png" height="30px" width="30px" alt="Photos/Video"/>
                     <strong>Attach A Photo or Video To Your Post</strong>
                     <input type="file" width="10px;" name="flPostMedia[]" id="flPostMedia" multiple/>
