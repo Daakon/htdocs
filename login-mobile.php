@@ -9,7 +9,10 @@ get_header();
 <div class="container">
 
     <div class="col-xs-12">
- <h2>Login</h2>
+
+        <img src="/images/Rapportbook-Logo.png" height="50" width="50" />
+        <span class="lead bold">Log in</span>
+        <br/>
 
         <form method="post" action="login.php" >
     <label class="sr-only" for="login_email">Email</label>
@@ -19,9 +22,9 @@ get_header();
     <input type="password" name="login_password" id="login_password" placeholder="Password"
            class="form-control"/>
     <br/>
-    <input type="submit" name="login" id="login" value="Login" class="btn btn-default"/>
+    <input type="submit" name="login" id="login" value="Log in" class="btn btn-default" style="background: #E30022;color:white;"/>
             <br/><br/>
-            <a href="forgot-password.php" style="color:black;margin-top:10px;">Forgot Your Password?</a>
+            <a href="forgot-password" style="color:black;margin-top:10px;">Forgot Your Password?</a>
     <br/>
 </form>
 
