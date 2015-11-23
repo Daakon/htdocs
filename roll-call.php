@@ -204,6 +204,7 @@ $postOwner = $memberID;
                         Members.ID As CommenterID,
                         Members.FirstName as FirstName,
                         Members.LastName As LastName,
+                        Members.Username As Username,
                         Profile.ProfilePhoto As ProfilePhoto
                         FROM PostComments,Members, Profile
                         WHERE
@@ -213,6 +214,7 @@ $postOwner = $memberID;
                         And PostComments.IsDeleted = 0
                         Group By PostComments.ID
                         Order By PostComments.ID DESC LIMIT 3 ";
+
             $result3 = mysql_query($sql3) or die(mysql_error());
             echo '<br/>';
             if (mysql_num_rows($result3) > 0) {
@@ -222,8 +224,18 @@ $postOwner = $memberID;
                     $profilePhoto = $rows3['ProfilePhoto'];
                     $commentID = $rows3['PostCommentID'];
                     $commentOwnerID = $rows3['CommenterID'];
+                    $commenterUsername = $rows3['Username'];
+                    $commenterProfileUrl = "/$commenterUsername";
+
                     echo '<div class="comment-row">';
-                    echo '<div class="user-icon"><img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" style = "border:1px solid black" class ="enlarge-onhover img-responsive" /><div class="user-name">' . $rows3['FirstName'] . ' ' . $rows3['LastName'] . '</div></div><div class="comment-content">' . nl2br($comment) . '</div>';
+                    echo '<div class="user-icon">
+                    <a href='.$commenterProfileUrl.'>
+                    <img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" style = "border:1px solid black" class ="enlarge-onhover img-responsive" />
+                    <div class="user-name">' . $rows3['FirstName'] . ' ' . $rows3['LastName'] . '</div>
+                     </a>
+                    </div>
+                    <div class="comment-content">' . nl2br($comment) . '</div>
+                    </a>';
                     echo '</div>';
                     if ($commentOwnerID == $ID) {
                         //<!--DELETE BUTTON ------------------>
@@ -248,6 +260,7 @@ $postOwner = $memberID;
                         Members.ID As CommenterID,
                         Members.FirstName as FirstName,
                         Members.LastName As LastName,
+                        Members.Username As Username,
                         Profile.ProfilePhoto As ProfilePhoto
                         FROM PostComments,Members, Profile
                         WHERE
@@ -275,8 +288,16 @@ $postOwner = $memberID;
                     $profilePhoto = $rows4['ProfilePhoto'];
                     $commentID = $rows4['PostCommentID'];
                     $commentOwnerID = $rows4['CommenterID'];
+                    $commenterUsername = $rows4['Username'];
+                    $commenterProfileUrl = "/$commenterUsername";
+
                     echo '<div class="user-icon">';
-                    echo '<img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" style = "border:1px solid black" class ="enlarge-onhover img-responsive" /><div class="user-name">' . $rows4['FirstName'] .' '. $rows4['LastName'] . '</div></div><div class="comment-content">' . nl2br($comment) . '</div>';
+                    echo '<a href='.$commenterProfileUrl.'>';
+                    echo '<img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" style = "border:1px solid black" class ="enlarge-onhover img-responsive" />
+                    <div class="user-name">' . $rows4['FirstName'] .' '. $rows4['LastName'] .
+                        '</div></div><div class="comment-content">' . nl2br($comment) .
+                        '</div>
+                    </a>';
                     echo '</td></tr>';
                 }
                 echo '</div>';

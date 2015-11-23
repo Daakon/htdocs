@@ -92,6 +92,7 @@ if (!empty($_SESSION['ID'])) {
         </div>
 
 </div>
+
 <h4>It's as easy as...</h4>
     <b>1. Signing up</b> <i>(Only 2 Fields)</i>.
     <br/>
@@ -100,13 +101,16 @@ if (!empty($_SESSION['ID'])) {
     <b>3. Start Networking & Building Resources</b></h4>
 
     <br/>
-    <h4>Wath the video & learn more.</h4>
+
+    <h4>Watch the video to learn more.</h4>
     <video width="320" height="240" poster="/poster/how-it-works-poster.png" controls >
         <source src="/images/Rapportbook-How-It-Works-Lo-Res.mp4" />
         </video>
     <br/>
 
+    <a id="signup"></a>
             <h2>Sign Up</h2>
+
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 <!--                    <img src="--><?php //echo $imagesPath ?><!--NetworkGraphic.png" />-->
@@ -143,6 +147,7 @@ if (!empty($_SESSION['ID'])) {
                         </div>
 
                         </form>
+
                     <h4>
                         <div class="visible-xs">
                             <a href="/login-mobile.php">Login</a>
@@ -313,7 +318,7 @@ if (mysql_num_rows($rollCallResult) > 0) {
         <div class="col-lg-5 col-lg-offset-1 col-md-6 col-sm-6 col-xs-12 about-roll-call" align="left">
 
         <?php
-            $profileUrl = "/learn_more";
+            $profileUrl = "#signup";
         if (strlen($name) > 70) {
             $name = checkNameLength($name,$firstName,$lastName);
         }
@@ -343,10 +348,10 @@ if (mysql_num_rows($rollCallResult) > 0) {
                 <?php
                 $messageLink;
                 if (!empty($_SESSION['ID']) && $memberID != $ID) {
-                    $messageLink = "/view_messages/$username";
+                    $messageLink = "#signup";
                 }
                 else {
-                    $messageLink = '/learn_more';
+                    $messageLink = '#signup';
                 }
                 ?>
 
@@ -366,7 +371,7 @@ if (mysql_num_rows($rollCallResult) > 0) {
 
                 <br/><br/>
 
-            <a href="/learn_more" >
+            <a href="#signup" >
                 <button >
                     <span >Connect With <?php echo $firstName ?></span>
                 </button>

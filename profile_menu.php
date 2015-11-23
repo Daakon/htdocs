@@ -14,7 +14,6 @@ if ($profileID == $ID) {
     <li><a href="/manage_post/<?php echo $username ?>">Manage Posts</a></li>
     <li><a href="/messages/<?php echo $username ?>">Messages <?php require 'getNewMessageCount.php' ?></a></li>
 
-
     <?php
 
     $username = get_username_from_url();

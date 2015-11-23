@@ -728,7 +728,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
                     <div align = "center">
 
-                        <h5>Search Posts By Business Type For Post</h5>
+                        <h5>Search Posts By Business Type</h5>
                         <select id="genre" name="genre" onchange="updateFeed()" style="background-color: lightsteelblue;font-weight:bold">
                             <option value="<?php echo $genre ?>"><?php echo $genre ?></option>
                             <option value="Show All">Show All</option>

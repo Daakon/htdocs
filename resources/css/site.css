@@ -40,16 +40,14 @@ h1, h2, h3, h4, h5, h6 {
     color:white;
     padding:10px;
     border: 2px solid black;
-    border-radius: 10px;">
 }
 
 .about-roll-call {
     background:white;
-    border-radius:10px;
     margin-top:20px;
 }
 .input-style {
-    border-radius: 10px;
+    /*border-radius: 10px;*/
 }
 
 .index-slogan {
@@ -62,7 +60,6 @@ h1, h2, h3, h4, h5, h6 {
 .login-button, .login-button:hover {
     background: black;
     color: white;
-    border-radius: 10px;
 }
 
 .form-fields {
@@ -71,8 +68,6 @@ h1, h2, h3, h4, h5, h6 {
 
 .signup-button {
     margin-left: 350px;
-    border: 1px solid black;
-    border-radius: 10px;
     width: 150px;
     height: 50px;
     font-size: 26px;
@@ -81,7 +76,6 @@ h1, h2, h3, h4, h5, h6 {
 .roll-call {
     background: white;
     color: black;
-    border-radius: 5px;
     padding-top: 5px;
     padding-bottom: 20px;
     margin-bottom:20px !important;
@@ -92,8 +86,6 @@ h1, h2, h3, h4, h5, h6 {
 .ad-desktop {
     background: white;
     color: black;
-    border: 2px solid black;
-    border-radius: 5px;
     padding-bottom: 20px;
     margin-bottom:20px !important;
     margin-right:10px;
@@ -118,7 +110,6 @@ h1, h2, h3, h4, h5, h6 {
 .post-button {
     background: red;
     color: white;
-    border-radius: 10px;
     padding: 5px 10px;
     font-size: 20px;
 }
@@ -130,7 +121,6 @@ h1, h2, h3, h4, h5, h6 {
     border: 5px solid black;
     box-shadow: 10px 10px 5px #888888;
     padding: 10px;
-    border-radius: 10px;
     width: 600px;
     height: 500px;
 
@@ -235,7 +225,6 @@ li {
 
 .notification {
     background-color:red;
-    border-radius:10px;
     color:white;
     padding-left:5px;
     padding-right:5px;
@@ -247,7 +236,6 @@ li {
     background: red;
     color:white;
     font-weight:bold;
-    border-radius: 10px;
 }
 
 .user-icon{
@@ -336,12 +324,9 @@ li {
 
 .profileMenu {
     color:black;
-    font-weight: bold;
     display:inline;
     display:inline-block;
     background-color:white;
-    border:1px solid black;
-    border-radius: 10px;
     padding: 10px;
 }
 .searchBox {
@@ -372,12 +357,6 @@ audio {
     -moz-transition:all 0.5s linear;
     -o-transition:all 0.5s linear;
     transition:all 0.5s linear;
-    -moz-box-shadow: 4px 4px 4px 4px black;
-    -webkit-box-shadow:  4px 4px 4px 4px black;
-    box-shadow: 4px 4px 4px 4px black;
-    -moz-border-radius:4px 4px 4px 4px ;
-    -webkit-border-radius:4px 4px 4px 4px ;
-    border-radius:5px 5px 5px 5px ;
     background-color: red;
 }
 

@@ -45,6 +45,7 @@ if (!isset($_SESSION['ID']) && empty($_SESSION['ID'])) { ?>
     <li><a href="/member_media/<?php echo $username ?>">Media</a></li>
     <li><a href="/manage_post/<?php echo $username ?>"><?php echo $firstName ?>'s Posts</a></li>
     <li><a href="/messages/<?php echo get_username($ID) ?>">Messages</a></li>
+    <li><a href="/<?php echo get_username($ID)?>">My Profile</a></li>
 </ul>
 
 <?php } else { require 'profile_menu.php'; } ?>
