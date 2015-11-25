@@ -28,7 +28,7 @@ get_header();
     <br/>
 </form>
 
-        <h4><a href="/learn_more">Sign Up</a></h4>
+        <h4><a href="/learn_more#signup">Sign Up</a></h4>
 </div>
 
         </div>

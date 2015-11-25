@@ -4,7 +4,11 @@ if (substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip')) ob_start("ob_gzhandl
 require 'connect.php';
 require 'mediaPath.php';
 require 'model_functions.php';
-if (strstr($url, "forgot-password") || strstr($url, "learn_more") || strstr($url, "login") || strstr($url, "signup") || strstr($url, "terms") || strstr($url, "show_post") || strstr($url, "support")) {
+if (strstr($url, "forgot-password") || strstr($url, "learn_more")
+    || strstr($url, "login") || strstr($url, "signup")
+    || strstr($url, "terms") || strstr($url, "show_post")
+    || strstr($url, "support") || strstr($url, "homepage")
+) {
     // dont check session
 }
 else {

@@ -108,10 +108,14 @@ if (!empty($_SESSION['ID'])) {
         </video>
     <br/>
 
+    <div class="row" style="background:#e3e3e3;">
     <a id="signup"></a>
-            <h2>Sign Up</h2>
+        <div style="padding-left:20px;">
+            <h1 class="bold">Sign Up</h1>
+            <span class="lead" style="font-weight: 500;">It's Free!</span>
+            <br/><br/>
+        </div>
 
-            <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 <!--                    <img src="--><?php //echo $imagesPath ?><!--NetworkGraphic.png" />-->
 
@@ -182,7 +186,7 @@ if (!empty($_SESSION['ID'])) {
             </div>
 
 
-            <div class="row" style="background:#F6F6F6;">
+            <div class="row" >
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 
                     <h3>Testimonials</h3>

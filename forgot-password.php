@@ -28,7 +28,7 @@ get_header();
 
         <br/>
        <div class="visible-xs">
-           <a href="login-mobile.php">Log in</a>
+           <a href="login-mobile">Log in</a>
        </div>
         <div class="hidden-xs">
             <a href="../">Log in</a>
