@@ -47,10 +47,9 @@ $rollCallResult = mysql_query($sqlRollCall) or die(mysql_error());
 // if no results
 if (mysql_num_rows($rollCallResult) == 0) {
     ?>
-    <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 "
+    <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 roll-call"
           align="left">
-        <!--add bravery image -->
-        <img src="/images/bravery.jpg" style="height:250px;width: 450px;" />
+        <h3>Make The First <?php echo $genre ?> Connection in <?php echo $searchCity ?></h3>
     </div>
 <?php }
 if (mysql_num_rows($rollCallResult) > 0) {
@@ -90,7 +89,7 @@ $postOwner = $memberID;
             $post500 = substr($post, 0, 700); ?>
 
                 <?php echo nl2br($post500) ?>
-                <span style="margin-top:5px">
+                <span class="margin-top-5">
                 <a href="show_post?postID=<?php echo $postID ?>&email=0">Show More</a>
 </span>
             <?php
@@ -109,7 +108,7 @@ $postOwner = $memberID;
     <a href='/post-interest?interest=<?php echo urlencode($category) ?>' class='category'><h4>#<?php echo $category ?></h4></a>
 
 
-    <div style="padding-top:10px;padding-bottom:10px;margin-top:10px;">
+    <div class="content-space">
 
         <br/>
             <?php if ($ID != $memberID) {?>
@@ -146,7 +145,7 @@ $postOwner = $memberID;
             echo '<input type ="hidden" class = "ID" id = "ID" value = "' . $ID . '" />';
             echo '<input type ="button" class = "btnDisapprove"'. $readonly.' />';
             if ($approvals > 0) {
-                echo '&nbsp;<span style = "color:red;font-weight:bold;font-size:16">' . $approvals . '</font>';
+                echo '&nbsp;<span>' . $approvals . '</font>';
             }
             echo '</form>';
         } else {
@@ -155,7 +154,7 @@ $postOwner = $memberID;
             echo '<input type ="hidden" class = "ID" id = "ID" value = "' . $ID . '" />';
             echo '<input type ="button" class = "btnApprove"'. $readonly.' />';
             if ($approvals > 0) {
-                echo '&nbsp;<span style = "color:red;font-weight:bold;font-size:16">' . $approvals . '</font>';
+                echo '&nbsp;<span>' . $approvals . '</font>';
             }
             echo '</form>';
         }
@@ -166,27 +165,27 @@ $postOwner = $memberID;
         //-----------------------------------------------------------
         ?>
 
-        <div style="padding-top:10px;padding-bottom:10px;margin-top:10px;">
+        <div class="content-space">
             <?php if (isset($ID)) { ?>
             <form method="post" action="" enctype="multipart/form-data"
                   onsubmit="showCommentUploading('comment<?php echo $postID?>', this);">
 
-                <input type="text" class="form-control" name="postComment" id="postComment"
-                       placeholder="Write a comment" title='' style="border:1px solid black"/>
+                <input type="text" class="form-control border-1" name="postComment" id="postComment"
+                       placeholder="Write a comment" title='' />
 
-                <h6 style="color:red">Attach A Photo/Video To Your Comment</h6>
-                <input type="file" name="flPostMedia" id="flPostMedia" style="max-width:180px;"/>
+                <h6>Attach A Photo/Video To Your Comment</h6>
+                <input type="file" name="flPostMedia" id="flPostMedia" class="flPostMedia"/>
 
                 <br/>
                 <div id="comment<?php echo $postID ?>" style="display:none;">
                     <div class="progress">
-                        <div class="progress-bar progress-bar-striped progress-bar-danger active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+                        <div class="progress-bar progress-bar-striped progress-bar-danger active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" >
                             <b>File uploading...please wait</b>
                         </div>
                     </div>
                 </div>
                 <input type="submit" name="btnComment" id="btnComment" Value="Comment"
-                       style="border:1px solid black"/>
+                       class="border-1"/>
                 <input type="hidden" name="postID" id="postID" Value="<?php echo $postID ?>"/>
                 <input type="hidden" name="ID" id="ID" value="<?php echo $ID ?>"/>
                 <input type="hidden" name="ownerId" id="ownerId" value="<?php echo $MemberID ?>"/>
@@ -230,7 +229,7 @@ $postOwner = $memberID;
                     echo '<div class="comment-row">';
                     echo '<div class="user-icon">
                     <a href='.$commenterProfileUrl.'>
-                    <img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" style = "border:1px solid black" class ="enlarge-onhover img-responsive" />
+                    <img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" class ="enlarge-onhover img-responsive border-1" />
                     <div class="user-name">' . $rows3['FirstName'] . ' ' . $rows3['LastName'] . '</div>
                      </a>
                     </div>
@@ -293,7 +292,7 @@ $postOwner = $memberID;
 
                     echo '<div class="user-icon">';
                     echo '<a href='.$commenterProfileUrl.'>';
-                    echo '<img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" style = "border:1px solid black" class ="enlarge-onhover img-responsive" />
+                    echo '<img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" class ="enlarge-onhover img-responsive border-1" />
                     <div class="user-name">' . $rows4['FirstName'] .' '. $rows4['LastName'] .
                         '</div></div><div class="comment-content">' . nl2br($comment) .
                         '</div>

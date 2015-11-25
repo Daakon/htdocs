@@ -124,7 +124,7 @@ get_head_files();
 
 <?php require 'checkLogin.php'; ?>
 
-    <body style="background: white;">
+    <body class="index">
 
 <div class="container-fluid" >
 
@@ -134,7 +134,7 @@ get_head_files();
         <div class="col-lg-12 col-md-12 ">
 
 
-            <div align="center" style="font-weight: bold;font-size:20px;margin-top:5%;">
+            <div align="center" class="index-menu">
 
                     <ul class="list-inline">
                         <li>

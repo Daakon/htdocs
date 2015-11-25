@@ -405,7 +405,7 @@ $bgPhoto = $row['ProfilePhoto'];
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script src = "jquery-1.8.3.min.js"></script>
 
-    <span id = "newMessageCount" style = "padding-left:30px;width:150px;"></span>
+    <span id = "newMessageCount" class="new-message-count"></span>
 
     <div class="row row-padding">
 
@@ -531,7 +531,7 @@ $bgPhoto = $row['ProfilePhoto'];
             <?php } elseif ($memberID == $ID) { ?>
                 <?php echo "Sorry but you can't message yourself, that's kind of weird anyway";
 
-            } else { echo "<span style='color:red;'>You must be logged in to message this person</span>"; }
+            } else { echo "<span class='red-font'>You must be logged in to message this person</span>"; }
 
 
             }
@@ -637,7 +637,7 @@ $bgPhoto = $row['ProfilePhoto'];
                 <br/>
                 <div id="PhotoProgress" style="display:none;">
                     <div class="progress">
-                        <div class="progress-bar progress-bar-striped progress-bar-danger active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                        <div class="progress-bar progress-bar-striped progress-bar-danger active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" class="progress-bar">
                             <span class="sr-only">Loading</span>
                         </div>
                     </div>
@@ -667,7 +667,7 @@ $bgPhoto = $row['ProfilePhoto'];
                 <br/>
                 <div id="VideoProgress" style="display:none;">
                     <div class="progress">
-                        <div class="progress-bar progress-bar-striped progress-bar-danger active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                        <div class="progress-bar progress-bar-striped progress-bar-danger active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" class="progress-bar">
                             <span class="sr-only">Loading</span>
                         </div>
                     </div>

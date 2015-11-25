@@ -671,9 +671,7 @@ $gender = getGender($ID);*/
 
 ?>
 
-<span style="font-size:16px;font-weight:bold">Nationwide <?php echo $category ?> Posts
-<br/>
-</span>
+<h4>Nationwide <?php echo $category ?> Posts</h4>
 </div>
 
 <?php
@@ -711,8 +709,7 @@ $result = mysql_query($sql) or die(mysql_error());
 // if no results
 if (mysql_num_rows($result) == 0) {
     ?>
-    <div class=" col-lg-9 col-md-9 roll-call"
-         style="background:white;border-radius:10px;margin-top:20px;border:2px solid black;" align="left">
+    <div class=" col-lg-9 col-md-9 roll-call" align="left">
         No Results
     </div>
 <?php }
@@ -754,7 +751,7 @@ if (mysql_num_rows($result) > 0) {
             $post500 = substr($post, 0, 700); ?>
 
                 <?php echo nl2br($post500) ?>
-                <span style="margin-top:5px">
+                <span class="margin-top-5">
                 <a href="show_post?postID=<?php echo $postID ?>&email=0">Show More</a>
 </span>
             <?php
@@ -802,7 +799,7 @@ if (mysql_num_rows($result) > 0) {
                 if ($approvals > 0) {
 
 
-                    echo '&nbsp;<span style = "color:red;font-weight:bold;font-size:16">' . $approvals . '</font>';
+                    echo '&nbsp;<span>' . $approvals . '</font>';
                 }
                 echo '</form>';
             } else {
@@ -815,7 +812,7 @@ if (mysql_num_rows($result) > 0) {
                 if ($approvals > 0) {
 
 
-                    echo '&nbsp;<span style = "color:red;font-weight:bold;font-size:16">' . $approvals . '</font>';
+                    echo '&nbsp;<span>' . $approvals . '</font>';
                 }
                 echo '</form>';
             }
@@ -837,20 +834,20 @@ if (mysql_num_rows($result) > 0) {
 
 
 
-        <div style="padding-top:10px;padding-bottom:10px;margin-top:10px;">
+        <div class="content-space">
             <form method="post" action="" enctype="multipart/form-data"
                   onsubmit="showCommentUploading('comment<?php echo $postID?>', this);">
 
                 <input type="text" class="form-control" name="postComment" id="postComment"
-                       placeholder="Write a comment" title='' style="border:1px solid black"/>
+                       placeholder="Write a comment" title='' class="border-1"/>
 
-                <h6 style="color:red">Attach A Photo/Video To Your Comment</h6>
+                <h6>Attach A Photo/Video To Your Comment</h6>
                 <input type="file" name="flPostMedia" id="flPostMedia" style="max-width:180px;"/>
 
                 <br/>
                 <div id="comment<?php echo $postID ?>" style="display:none;">
                     <div class="progress">
-                        <div class="progress-bar progress-bar-striped progress-bar-danger active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+                        <div class="progress-bar progress-bar-striped progress-bar-danger active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" >
                             <b>File uploading...please wait</b>
                         </div>
                     </div>

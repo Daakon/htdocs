@@ -8,7 +8,7 @@ $ID = $_SESSION['ID'];
 
 
 
-<body style="background: url('/images/office.jpg');opacity: 1">
+<body class="support">
 
 <?php
 
@@ -17,11 +17,11 @@ $ID = $_SESSION['ID'];
 <div class="container" >
 
 
-    <div class="col-xs-12 col-md-8 col-lg-8 col-md-offset-2" style="color:yellow;font-size:30px">
+    <div class="col-xs-12 col-md-8 col-lg-8 col-md-offset-2" class="support-font">
 
-        <div style="padding-top:10px">
+        <div class="padding-top-10">
         <?php if (empty($_SESSION['ID']) || !isset($_SESSION['ID'])) { ?>
-            <a href="../" ><h4><span style="color:white">Login or Sign Up</span></h4></a></h4>
+            <a href="../" ><h4><span class="white-text">Login or Sign Up</span></h4></a></h4>
             <?php } else { ?>
             <a href="javascript:history.go(-1)">Go Back</a>
         <?php } ?>
@@ -29,17 +29,17 @@ $ID = $_SESSION['ID'];
 
         <h4>
             Direct questions to:<br/>
-            <a href="mailto:info@rapportbook.com" style="color:red;font-weight: bold;font-size:20px;text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;">info@rapportbook.com</a>
+            <a href="mailto:info@rapportbook.com" class="support-email">info@rapportbook.com</a>
         </h4>
 
-        <span style="color:white;font-weight: bold;text-shadow: -1px 0 blue, 0 1px blue, 1px 0 blue, 0 -1px black;">Office Information:</span>
+        <span class="support-header">Office Information:</span>
         <br/>
-            <span style="font-weight:bold;color:deepskyblue;text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;">
-                <span style="font-size: 30px;color:red;">
+            <span class="support-header-2">
+                <span class="support-header-3">
                     Headquarters
                 </span>
             <br/>
-                <span style="font-size:25px">
+                <span class="support-header-4">
             911 Washington Ave
             <br/>
             Suite 501

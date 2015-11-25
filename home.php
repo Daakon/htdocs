@@ -667,7 +667,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
             <ul class="list-inline">
                 <a href="/<?php echo get_username($ID) ?>">
-                <img src="<?php echo get_users_photo_by_id($ID) ?>" style="height:50%;width:10%;display:inline;border:2px solid black"/>
+                <img src="<?php echo get_users_photo_by_id($ID) ?>" class="profile-image-nav"/>
                     My Profile
                 </a>
                 <li><?php require 'getNewMessageCount.php' ?></a></li>
@@ -739,7 +739,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
 
                                 <h5>Search By Area
-                                <a href="#" style="width:500px" data-toggle="popover" title="Select Another City In The Current State" data-content="To select another city in the state
+                                <a href="#" class="i-msg" data-toggle="popover" title="Select Another City In The Current State" data-content="To select another city in the state
                                             you are in now, you must select
                                             the state again."><span class="glyphicon glyphicon-info-sign" /></a>
                                 </h5>
@@ -770,7 +770,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                         <div id="divCity">
                         </div>
 
-                        <hr style = 'background-color:black; border-width:0; color:black; height:2px; lineheight:0; display: inline-block; text-align: left; width:100%;'/>
+                        <hr class="hr-line"/>
 
                     </div>
 
@@ -785,7 +785,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                     <strong>Attach A Photo or Video To Your Post</strong>
                     <input type="file" width="10px;" name="flPostMedia[]" id="flPostMedia" multiple/>
 
-                    <a href="#" style="width:500px" data-toggle="picMessage" title="Upload Multiple Files"
+                    <a href="#" class="i-msg" data-toggle="picMessage" title="Upload Multiple Files"
                        data-content="To upload multiple photos on desktop, hold down CTRL or SHIFT key while selecting.">
                         <span class="glyphicon glyphicon-info-sign" /></a>
                     </h5>
@@ -796,7 +796,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                     <br/>
                     <div id="progress" style="display:none;">
                         <div class="progress">
-                            <div class="progress-bar progress-bar-striped progress-bar-danger active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                            <div class="progress-bar progress-bar-striped progress-bar-danger active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" class="progress-bar">
                                 <b>File uploading...please wait</b>
                             </div>
                         </div>

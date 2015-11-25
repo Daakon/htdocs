@@ -56,7 +56,7 @@ if (!empty($_SESSION['ID'])) {
     }
 </style>
 
-<body style="background:white;">
+<body class="index">
 
 <div align="left" style="padding-left:10px;">
 
@@ -333,7 +333,7 @@ if (mysql_num_rows($rollCallResult) > 0) {
                  title="<?php echo $name ?>" /> &nbsp <span class="profileName-Feed"><?php echo $name ?></span>
         </a>
 
-        <div class="post" style="margin:0px;padding:0px;">
+        <div class="post">
             <?php
             if (strlen($post) > 700) {
                 $post500 = substr($post, 0, 700); ?>
@@ -418,7 +418,7 @@ if (mysql_num_rows($rollCallResult) > 0) {
                         echo '<input type ="hidden" class = "ID" id = "ID" value = "' . $ID . '" />';
                         echo '<input type ="button" class = "btnDisapprove"'. $readonly.' />';
                         if ($approvals > 0) {
-                        echo '&nbsp;<span style = "color:red;font-weight:bold;font-size:16">' . $approvals . '</font>';
+                        echo '&nbsp;<span>' . $approvals . '</font>';
             }
             echo '</form>';
                     } else {
@@ -427,7 +427,7 @@ if (mysql_num_rows($rollCallResult) > 0) {
                         echo '<input type ="hidden" class = "ID" id = "ID" value = "' . $ID . '" />';
                         echo '<input type ="button" class = "btnApprove"'. $readonly .' />';
                         if ($approvals > 0) {
-                        echo '&nbsp;<span style = "color:red;font-weight:bold;font-size:16">' . $approvals . '</font>';
+                        echo '&nbsp;<span>' . $approvals . '</font>';
             }
             echo '</form>';
                     }
@@ -515,7 +515,7 @@ if (mysql_num_rows($rollCallResult) > 0) {
             $commentID = $rows4['PostCommentID'];
             $commentOwnerID = $rows4['CommenterID'];
             echo '<div class="user-icon">';
-            echo '<img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" style = "border:1px solid black" class ="enlarge-onhover img-responsive" /><div class="user-name">' . $rows4['FirstName'] .' '. $rows4['LastName'] . '</div></div><div class="comment-content">' . nl2br($comment) . '</div>';
+            echo '<img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" class ="enlarge-onhover img-responsive border-1" /><div class="user-name">' . $rows4['FirstName'] .' '. $rows4['LastName'] . '</div></div><div class="comment-content">' . nl2br($comment) . '</div>';
             echo '</td></tr>';
         }
         echo '</div>';

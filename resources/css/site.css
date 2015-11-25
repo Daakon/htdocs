@@ -8,6 +8,7 @@ body {
     background: #e3e3e3;
 }
 
+
 h1, h2, h3, h4, h5, h6 {
     /* Make h tags responsive */
     word-wrap: break-word;
@@ -25,6 +26,131 @@ h1, h2, h3, h4, h5, h6 {
     padding: 10px;
     font-size: 20px;
     border:3px solid gray;
+}
+
+.index {
+    background: white;
+}
+
+.index-menu {
+    font-weight: bold;
+    font-size:20px;
+    margin-top:5%;
+}
+
+.i-msg {
+    width:500px;
+}
+
+.progress-bar {
+    width:100%;
+}
+
+.profile-image-nav {
+    height:50%;
+    width:10%;
+    display:inline;
+    border:2px solid black
+}
+
+
+.hr-line {
+    background-color:black;
+    border-width:0;
+    color:black;
+    height:2px;
+    lineheight:0;
+    display: inline-block;
+    text-align: left;
+    width:100%;
+}
+
+.support {
+    background: url('/images/office.jpg');
+    opacity: 1;
+}
+
+.support-font {
+    color:yellow;
+    font-size:30px;
+}
+
+.support-header {
+    color:white;
+    font-weight: bold;
+    text-shadow: -1px 0 blue, 0 1px blue, 1px 0 blue, 0 -1px black;
+}
+
+.support-header-2 {
+    font-weight:bold;
+    color:deepskyblue;
+    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+}
+
+.support-header-3 {
+    font-size: 30px;
+    color:red;
+}
+
+.support-header-4 {
+    font-size:25px;
+}
+
+.display-block {
+    display:block;
+}
+.support-email {
+    color:red;
+    font-weight: bold;
+    font-size:20px;
+    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+}
+
+.border-1 {
+    border:1px solid black;
+}
+
+.margin-top-5 {
+    margin-top:5px;
+}
+
+.content-space {
+    padding-top:10px;
+    padding-bottom:10px;
+    margin-top:10px;"
+}
+.padding-top-10 {
+    padding-top:10px;
+   }
+
+.white-text {
+    color:white
+}
+
+.media-bg {
+    background: black;
+}
+
+.media-body {
+    background:white;
+    margin-top:10px;
+    padding:10px;"
+}
+.new-message-count {
+    padding-left:30px;
+    width:150px;
+}
+
+.member-media {
+    margin-right:5px;
+    background-size:100% auto
+}
+
+.margin-bottom-20 {
+    margin-bottom: 20px;
+}
+.flPostMedia {
+    max-width: 180px;
 }
 
 .slogan {

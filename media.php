@@ -388,9 +388,9 @@ $profileMediaSrc = trim("/media/" . $profilePhoto);
 
 <?php include('media_sizes.html'); ?>
 
-<body style="background:black;">
+<body class="media-bg">
 
-<div class="container" style="background:white;margin-top:10px;padding:10px;">
+<div class="container media-body">
     <div class="row">
         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 ">
 
@@ -497,7 +497,7 @@ $profileMediaSrc = trim("/media/" . $profilePhoto);
                     if ($approvals > 0) {
                         //echo '<tr><td>';
 
-                        echo '&nbsp;<span style = "color:red;font-weight:bold;font-size:16px">' . $approvals . '</font>';
+                        echo '&nbsp;<span>' . $approvals . '</font>';
                     }
                     echo '</form>';
                 } else {
@@ -515,7 +515,7 @@ $profileMediaSrc = trim("/media/" . $profilePhoto);
                     if ($approvals > 0) {
 
 
-                        echo '&nbsp;<span style = "color:red;font-weight:bold;font-size:16px">' . $approvals . '</font>';
+                        echo '&nbsp;<span>' . $approvals . '</font>';
                     }
                     echo '</form>';
                 }
@@ -523,21 +523,21 @@ $profileMediaSrc = trim("/media/" . $profilePhoto);
                 echo '</td></tr></table>';
 ?>
 
-            <div style="padding-top:10px;padding-bottom:10px;margin-top:10px;">
+            <div class="content-space">
             <?php if (isset($ID)) { ?>
                 <form method="post" action="" enctype="multipart/form-data"
                       onsubmit="showCommentUploading('comment<?php echo $postID?>', this);">
 
                     <input type="text" class="form-control" name="mediaComment" id="mediaComment"
-                           placeholder="Write a comment" title='' style="border:1px solid black"/>
+                           placeholder="Write a comment" title='' class="border"/>
 
-                    <h6 style="color:red">Attach A Photo/Video To Your Comment</h6>
-                    <input type="file" name="flPostMedia" id="flPostMedia" style="max-width:180px;"/>
+                    <h6>Attach A Photo/Video To Your Comment</h6>
+                    <input type="file" name="flPostMedia" id="flPostMedia" class="flPostMedia"/>
 
                     <br/>
                     <div id="comment<?php echo $postID ?>" style="display:none;">
                         <div class="progress">
-                            <div class="progress-bar progress-bar-striped progress-bar-danger active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
+                            <div class="progress-bar progress-bar-striped progress-bar-danger active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" >
                                 <b>File uploading...please wait</b>
                             </div>
                         </div>

@@ -21,13 +21,13 @@ get_head_files();
 
         Our account rules are as follows:
     <ul>
-            <li style="display:block">1. You will not use Rapportbook if you are under 13.</li>
-            <li style="display:block">2. You will keep your contact information accurate and up-to-date.</li>
-            <li style="display:block">3. You will not share your password</li>
-            <li style="display:block">4. You will not transfer your account</li>
-            <li style="display:block">5. You will not create more than one personal account.</li>
-            <li style="display:block">6. You will not provide any false personal information on Rapportbook, or create an account for anyone other than yourself without permission.</li>
-            <li style="display:block">7. If your account is disabled, you will not create another one without our permission.</li>
+            <li class="display-block">1. You will not use Rapportbook if you are under 13.</li>
+            <li class="display-block">2. You will keep your contact information accurate and up-to-date.</li>
+            <li class="display-block">3. You will not share your password</li>
+            <li class="display-block">4. You will not transfer your account</li>
+            <li class="display-block">5. You will not create more than one personal account.</li>
+            <li class="display-block">6. You will not provide any false personal information on Rapportbook, or create an account for anyone other than yourself without permission.</li>
+            <li class="display-block">7. If your account is disabled, you will not create another one without our permission.</li>
     </ul>
     </p>
 
@@ -35,16 +35,16 @@ get_head_files();
         <h5>Respect To Others</h5>
         Our community must respect each other.
          <ul>
-            <li style="display:block">1. You will not post content or take any action on Rapportbook that infringes or violates someone else's rights or otherwise violates the law.</li>
-            <li style="display:block">2. We can remove any content or information you post on Rapportbook if we believe that it violates our policies as listed below:</li>
+            <li class="display-block">1. You will not post content or take any action on Rapportbook that infringes or violates someone else's rights or otherwise violates the law.</li>
+            <li class="display-block">2. We can remove any content or information you post on Rapportbook if we believe that it violates our policies as listed below:</li>
          </ul>
     <h5>What type of content can I not post?</h5>
     <small>
         Here is a list of content that is under no means tolerable:
         <ul>
-            <li style="display:block" class="list-group-item list-group-item-danger">Any content that depicts committing a crime</li>
-            <li style="display:block" class="list-group-item list-group-item-danger">Racist behaviour or bullying tactics </li>
-            <li style="display:block" class="list-group-item list-group-item-danger">Posting media content you do not have ownership rights to.</li>
+            <li class="list-group-item list-group-item-danger display-block">Any content that depicts committing a crime</li>
+            <li class="list-group-item list-group-item-danger display-block">Racist behaviour or bullying tactics </li>
+            <li class="list-group-item list-group-item-danger display-block">Posting media content you do not have ownership rights to.</li>
 
         </ul>
         Any of these offenses can result in account suspension and/or termination as well as contacting proper authorities.
@@ -61,8 +61,8 @@ get_head_files();
     <p>
         <h5>Term Updates</h5>
     <ul>
-            <li style="display:block">1. We’ll notify you before we make changes to these terms and give you the opportunity to review and comment on the revised terms before continuing to use our Services.</li>
-            <li style="display:block">2. Your continued use of Rapportbook constitutes your acceptance of our terms.</li>
+            <li class="display-block">1. We’ll notify you before we make changes to these terms and give you the opportunity to review and comment on the revised terms before continuing to use our Services.</li>
+            <li class="display-block">2. Your continued use of Rapportbook constitutes your acceptance of our terms.</li>
     </ul>
     </p>
 
