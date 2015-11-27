@@ -122,9 +122,20 @@ get_head_files();
     }
 </script>
 
+<style>
+a {
+    color:white;
+}
+</style>
+
 <?php require 'checkLogin.php'; ?>
 
-    <body class="index">
+    <body class="index"
+    style="background: url('/images/bg.jpg')no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;>
 
 <div class="container-fluid" >
 

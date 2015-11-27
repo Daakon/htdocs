@@ -54,45 +54,50 @@ if (!empty($_SESSION['ID'])) {
         width: 90%;
         max-width: 90%;
     }
+    
+    .input-lg {
+        max-width: 95%;
+    }
 </style>
 
 <body class="index">
 
-<div align="left" style="padding-left:10px;">
+<div align="left" >
 
-<div class="row" style="background: #E30022;color:white;">
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" >
+<div class="row" >
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" >
 
-            <h4>
+            <h4 class="padding-left-10">
                     <span class="bold">
                         <img src="/images/bullhorn.png" height="50" width="30" />
-                    </span> <span class="lead slogan" style="margin-left:-5px;">Promote</span> <span class="lead" style="font-weight: 500">Your Business.</span>
+                    </span> <span class="lead slogan" style="margin-left:-5px;">Promote</span> <span class="lead">Your Business.</span>
             </h4>
 
-            <h4>
+            <h4 class="padding-left-10">
                 <img src="/images/location.png" height="40" width="25" />
-                <span class="lead" style="font-weight: 500;margin-left:-3px;">Make Local or National</span> <span class="lead slogan">Connections</span>.
+                <span class="lead" style="margin-left:-3px;">Make Local or National</span> <span class="lead slogan">Connections</span>.
             </h4>
 
-            <h4>
+            <h4 class="padding-left-10">
                     <span class="bold">
-                        <img src="/images/share-people.gif" height="30" width="25" />
-                    </span><span class="lead" style="font-weight: 500">Meet People Who Need Your </span> <span class="lead slogan">Product.</span>
+                        <img src="/images/share-people.png" height="50" width="25" />
+                    </span><span class="lead" style="margin-left:-3px;">Meet People Who Need Your </span> <span class="lead slogan">Product.</span>
             </h4>
 
-
+<br/>
         </ul>
 
 
     </div>
 
 
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="margin-top:-20px;">
+        <img src="/images/business-networking.jpg" />
         </div>
 
 </div>
 
+    <div style="background:#E30022;color:white;padding-left:10px;padding-top:10px;">
 <h4>It's as easy as...</h4>
     <b>1. Signing up</b> <i>(Only 2 Fields)</i>.
     <br/>
@@ -107,8 +112,9 @@ if (!empty($_SESSION['ID'])) {
         <source src="/images/Rapportbook-How-It-Works-Lo-Res.mp4" />
         </video>
     <br/>
+    </div>
 
-    <div class="row" style="background:#e3e3e3;">
+    <div class="row" style="background:#e3e3e3;padding-left:10px;">
     <a id="signup"></a>
         <div style="padding-left:20px;">
             <h1 class="bold">Sign Up</h1>
@@ -187,17 +193,17 @@ if (!empty($_SESSION['ID'])) {
 
 
             <div class="row" >
-                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" >
 
-                    <h3>Testimonials</h3>
+                    <h3 style="padding-left:10px;">Testimonials</h3>
 
                     <!--Testimonial 1 -->
                     <div class="row">
-                        <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2" style="margin-right:-3%">
-                            <img src="/images/brian-slawin.jpg" style="border:1px solid black;height:50px;width:50px;"/>
+                        <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2" >
+                            <img src="/images/brian-slawin.jpg" class="testimony-img"/>
                         </div>
                         <div class="col-xs-12 col-sm-10 col-md-10 col-lg-10">
-                            <div style="font-style: italic">
+                            <div class="testimony-text" >
                                 "Rapportbook is a great platform for promoting your product on a local or national scale."  - <b>Brian Slawin</b>, <a href="http://busyevent.com" target="_blank">Co-Founder, Busy Event </a>
                             </div>
                         </div>
@@ -208,11 +214,11 @@ if (!empty($_SESSION['ID'])) {
 
                     <!--Testimonial 2 -->
                     <div class="row">
-                        <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2" style="margin-right:-3%">
-                            <img src="/images/angela-larocca.jpg" style="border:1px solid black;height:50px;width:50px;"/>
+                        <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2" >
+                            <img src="/images/angela-larocca.jpg" class="testimony-img" />
                         </div>
                         <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-                            <div style="font-style: italic">
+                            <div class="testimony-text">
                                 "Chris Weathers has a genuine passion for connecting people with similar interests, and Rapportbook  seamlessly allows you to interact with like-minded individuals." - <b>Angela LaRocca</b>, <a href="http://unidev.com" target="_blank">Brand Manager, Unidev</a>
                             </div>
                         </div>
@@ -222,25 +228,25 @@ if (!empty($_SESSION['ID'])) {
 
                     <br/>
 
-                    <h5>Rapportbook Communications Director Erin Thompson gives a talk about the company.</h5>
+                    <h5 class="padding-left-10">Rapportbook Communications Director Erin Thompson gives a talk about the company.</h5>
                     <a href="https://www.youtube.com/watch?v=jJMHsWxqF3M&t=27m45s" target="_blank" >
-                        <h4>
+                        <h4 class="padding-left-10">
                             Watch Video
                         </h4>
 
-                        <img src="/images/Erin-Thompson.jpg" width="90%" height="350">
+                        <img src="/images/Erin-Thompson.jpg" width="90%" height="350" class="padding-left-10">
                     </a>
 
                     <hr/>
 </div>
 
 
-                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="margin-top:20px;">
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 padding-left-10 margin-top-10" >
 
-                       <h5>
+                       <h5 class="padding-left-10">
                         Rapportbook Founder & CEO Chris Weathers speaks on why he became an entrepreneur.
                        </h5>
-                        <iframe max-width="400" height="315" src="https://www.youtube.com/embed/qiFa1-Mtj8c" frameborder="0" allowfullscreen></iframe>
+                        <iframe max-width="400" height="315" src="https://www.youtube.com/embed/qiFa1-Mtj8c" frameborder="0" allowfullscreen class="padding-left-10"></iframe>
 
                         <br/><br/>
 
@@ -251,7 +257,7 @@ if (!empty($_SESSION['ID'])) {
             <br/>
 
 
-            <h5>Checkout what people are sharing</h5>
+            <h5 class="padding-left-10">Checkout what people are sharing</h5>
 </div>
 
 

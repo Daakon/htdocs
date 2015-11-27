@@ -38,6 +38,22 @@ h1, h2, h3, h4, h5, h6 {
     margin-top:5%;
 }
 
+.testimony-text {
+    font-style: italic;
+    padding-left:10px;
+}
+
+.padding-left-10 {
+    padding-left:10px;
+}
+
+.testimony-img {
+    border:1px solid black;
+    height:50px;
+    width:50px;
+    margin-left:10px;
+}
+
 .i-msg {
     width:500px;
 }
@@ -66,25 +82,27 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .support {
-    background: url('/images/office.jpg');
+    background: url('/images/office.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;;
     opacity: 1;
 }
 
 .support-font {
-    color:yellow;
+    color:white;
     font-size:30px;
 }
 
 .support-header {
     color:white;
     font-weight: bold;
-    text-shadow: -1px 0 blue, 0 1px blue, 1px 0 blue, 0 -1px black;
 }
 
 .support-header-2 {
     font-weight:bold;
-    color:deepskyblue;
-    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+    color:white;
 }
 
 .support-header-3 {
@@ -118,6 +136,10 @@ h1, h2, h3, h4, h5, h6 {
     padding-top:10px;
     padding-bottom:10px;
     margin-top:10px;"
+}
+
+.padding-0 {
+    padding:0px;
 }
 .padding-top-10 {
     padding-top:10px;

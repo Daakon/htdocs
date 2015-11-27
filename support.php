@@ -8,7 +8,7 @@ $ID = $_SESSION['ID'];
 
 
 
-<body class="support">
+<body class="index">
 
 <?php
 
@@ -16,30 +16,22 @@ $ID = $_SESSION['ID'];
 
 <div class="container" >
 
+    <div class="row" style="background:#e3e3e3;padding:0px;">
 
-    <div class="col-xs-12 col-md-8 col-lg-8 col-md-offset-2" class="support-font">
+    <div class="col-xs-12 col-md-6 col-lg-6" class="support-font ">
+        <img src="/images/helpicon.png" width="50" height="50"/>
 
-        <div class="padding-top-10">
-        <?php if (empty($_SESSION['ID']) || !isset($_SESSION['ID'])) { ?>
-            <a href="../" ><h4><span class="white-text">Login or Sign Up</span></h4></a></h4>
-            <?php } else { ?>
-            <a href="javascript:history.go(-1)">Go Back</a>
-        <?php } ?>
-        </div>
+        <span class="lead bold">Support</span>
+        <br/>
 
         <h4>
-            Direct questions to:<br/>
-            <a href="mailto:info@rapportbook.com" class="support-email">info@rapportbook.com</a>
+            <span>Direct questions to:</span><br/>
+            <a href="mailto:info@rapportbook.com">info@rapportbook.com</a>
         </h4>
 
-        <span class="support-header">Office Information:</span>
-        <br/>
-            <span class="support-header-2">
-                <span class="support-header-3">
-                    Headquarters
-                </span>
+        <h3>Office Information:</h3>
+           Corporate Headquarters
             <br/>
-                <span class="support-header-4">
             911 Washington Ave
             <br/>
             Suite 501
@@ -47,8 +39,21 @@ $ID = $_SESSION['ID'];
             St.Louis,MO 63101
             <br>
             USA
-                    </span>
-</span>
+
+        <div class="padding-top-10">
+            <?php if (empty($_SESSION['ID']) || !isset($_SESSION['ID'])) { ?>
+                <a href="../" >Login or Sign Up</a>
+            <?php } else { ?>
+                <a href="javascript:history.go(-1)">Go Back</a>
+            <?php } ?>
+        </div>
+
+    </div>
+
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 padding-0">
+            <img src="/images/cust-service.jpg" style="height:100%;width:100%;"/>
+        </div>
+
 
     </div>
 </div>
