@@ -39,7 +39,7 @@ if (!isset($_SESSION['ID']) && empty($_SESSION['ID'])) { ?>
 <br/><br/>
 
 <?php if ($_SESSION['ID'] != $profileID) { ?>
-<ul class="list-inline profileMenu">
+<ul class="list-inline profileMenu" style="margin-top:-50px;">
     <li><a href="/home"><b>Home</b></a></li>
     <li><a href="/<?php echo $username ?>">Profile</a></li>
     <li><a href="/member_media/<?php echo $username ?>">Media</a></li>

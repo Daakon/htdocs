@@ -23,7 +23,7 @@ if ($profileID == $ID) {
     $result = mysql_query($sql) or die(mysql_error());
     $rows = mysql_fetch_assoc($result);
         if ($rows['Admin'] == 1) { ?>
-        <li><a href="/marketing_manager.php/<?php echo $username ?>">Marketing Manager</a></li>
+        <li><a href="/marketing_manager/<?php echo $username ?>">Marketing Manager</a></li>
         <?php }
 
     }

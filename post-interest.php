@@ -647,7 +647,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
 <body>
 
-<div class="container">
+<div class="container" style="margin-top:-50px;">
 <?php
 // ad demographics
 /*$age = getAge($ID);

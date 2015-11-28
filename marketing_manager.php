@@ -18,7 +18,7 @@ $ID = $_SESSION['ID'];
 
 ?>
 
-<div class="container" >
+<div class="container" style="margin-top:-50px;">
 
     <div class="col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8 ">
         <ul class="list-inline">

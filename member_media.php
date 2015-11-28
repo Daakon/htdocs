@@ -112,7 +112,7 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
     }
 </script>
 
-<div class="container">
+<div class="container" style="margin-top:-50px;">
 
     <div class="row row-padding" >
 
