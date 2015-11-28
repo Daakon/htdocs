@@ -12,7 +12,7 @@ get_header();
 
         <img src="/images/Rapportbook-Logo.png" height="50" width="50" />
         <span class="lead bold">Log in</span>
-        <br/>
+        <br/><br/>
 
         <form method="post" action="login.php" >
     <label class="sr-only" for="login_email">Email</label>

@@ -19,7 +19,6 @@ get_header();
                 <img src="/images/Rapportbook-Logo.png" height="50" width="50" />
                 <span class="lead bold">Reset Password</span>
                 <br/><br/>
-                <label for="email">Email</label>
                 <input type="text" class="form-control" id="email" name="email" placeholder="Email"/>
             </div>
 
