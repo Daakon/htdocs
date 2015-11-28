@@ -7,8 +7,7 @@ $ID = $_SESSION['ID'];
 
 
 
-
-<body class="index">
+<body class="index" style="font-family:Georgia, serif;">
 
 <?php
 
@@ -16,21 +15,37 @@ $ID = $_SESSION['ID'];
 
 <div class="container" >
 
-    <div class="row" style="background:#e3e3e3;padding:0px;">
+    <?php if (empty($_SESSION['ID']) || !isset($_SESSION['ID'])) { ?>
+        <div class="visible-lg visible-md">
+            <a href="../" >Login or Sign Up</a>
+        </div>
+        <div class="visible-sm visible-xs">
+            <a href="/login-mobile.php" >Login or Sign Up</a>
+        </div>
+    <?php } else { ?>
+        <a href="javascript:history.go(-1)">Go Back</a>
+    <?php } ?>
+</div>
 
-    <div class="col-xs-12 col-md-6 col-lg-6" class="support-font ">
-        <img src="/images/helpicon.png" width="50" height="50"/>
+    <div class="row" style="padding:0px;">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 padding-0">
+            <img src="/images/support-person.jpg" style="height:100%;width:100%;"/>
+        </div>
 
-        <span class="lead bold">Support</span>
-        <br/>
 
-        <h4>
-            <span>Direct questions to:</span><br/>
-            <a href="mailto:info@rapportbook.com">info@rapportbook.com</a>
-        </h4>
+        <div class="col-xs-12 col-md-6 col-lg-6" style="background:#f1f1f1;border:2px #e3e3e3 solid">
+            <img src="/images/helpicon.png" width="40" height="40"/>
 
-        <h3>Office Information:</h3>
-           Corporate Headquarters
+            <span class="lead bold">Support</span>
+            <br/>
+
+            <h4>
+                <span>Direct questions to:</span><br/>
+                <a href="mailto:info@rapportbook.com">info@rapportbook.com</a>
+            </h4>
+
+
+            <b>Corporate Headquarters</b>
             <br/>
             911 Washington Ave
             <br/>
@@ -39,21 +54,6 @@ $ID = $_SESSION['ID'];
             St.Louis,MO 63101
             <br>
             USA
-
-        <div class="padding-top-10">
-            <?php if (empty($_SESSION['ID']) || !isset($_SESSION['ID'])) { ?>
-                <a href="../" >Login or Sign Up</a>
-            <?php } else { ?>
-                <a href="javascript:history.go(-1)">Go Back</a>
-            <?php } ?>
-        </div>
-
-    </div>
-
-        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 padding-0">
-            <img src="/images/cust-service.jpg" style="height:100%;width:100%;"/>
-        </div>
-
 
     </div>
 </div>
