@@ -792,7 +792,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
                     <br/>
                 <textarea name="post" id="post" class="form-control textArea"
-                          placeholder="Make A Connection" ></textarea>
+                          placeholder="Make a connection." ></textarea>
                     <br/>
                     <div id="progress" style="display:none;">
                         <div class="progress">

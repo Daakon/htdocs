@@ -170,7 +170,7 @@ $postOwner = $memberID;
             <form method="post" action="" enctype="multipart/form-data"
                   onsubmit="showCommentUploading('comment<?php echo $postID?>', this);">
 
-                <input type="text" class="form-control border-1" name="postComment" id="postComment"
+                <input type="text" class="form-control" name="postComment" id="postComment"
                        placeholder="Write a comment" title='' />
 
                 <h6>Attach A Photo/Video To Your Comment</h6>
@@ -184,8 +184,7 @@ $postOwner = $memberID;
                         </div>
                     </div>
                 </div>
-                <input type="submit" name="btnComment" id="btnComment" Value="Comment"
-                       class="border-1"/>
+                <input type="submit" name="btnComment" id="btnComment" Value="Comment"/>
                 <input type="hidden" name="postID" id="postID" Value="<?php echo $postID ?>"/>
                 <input type="hidden" name="ID" id="ID" value="<?php echo $ID ?>"/>
                 <input type="hidden" name="ownerId" id="ownerId" value="<?php echo $MemberID ?>"/>

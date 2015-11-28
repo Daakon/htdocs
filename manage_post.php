@@ -390,14 +390,13 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
         }
         else { ?>
             <div class="row row-padding">
-                <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 "
-                     style="background:white;border-radius:10px;margin-top:20px;border:2px solid black;" align="left">
+                <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 roll-call" align="left">
                     <?php if ($ID == get_id_from_username($username)) { ?>
-                        <div style='font-weight:bold;'>You do not have anything posted.</div>
+                        <div>You do not have anything posted.</div>
                     <?php } else {
                         $firstName = get_user_firstName(get_id_from_username($username));
                         ?>
-                        <div style='font-weight:bold;'><?php echo $firstName ?> does not have anything posted.</div>
+                        <div><?php echo $firstName ?> does not have anything posted.</div>
                     <?php } ?>
                 </div>
             </div>
