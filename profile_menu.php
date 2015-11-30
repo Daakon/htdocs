@@ -7,12 +7,14 @@ if ($profileID == $ID) {
 
 ?>
 
+
 <ul class="list-inline profileMenu">
     <li><a href="/home">Home</a></li>
     <li><a href="/<?php echo $username ?>">Profile</a></li>
     <li><a href="/member_media/<?php echo $username ?>">Media</a></li>
     <li><a href="/manage_post/<?php echo $username ?>">Manage Posts</a></li>
     <li><a href="/messages/<?php echo $username ?>">Messages <?php require 'getNewMessageCount.php' ?></a></li>
+
 
     <?php
 
@@ -29,7 +31,13 @@ if ($profileID == $ID) {
     }
     else {
         require 'profile_menu_public.php';
-    }
+
+        }
+    ?>
+
+
+
+    <?php
     }
     ?>
 

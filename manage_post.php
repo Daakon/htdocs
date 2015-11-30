@@ -107,7 +107,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
 <body>
 
-<div class="container" style="margin-top:-50px;">
+<div class="container">
 
 
     <div class="row row-padding">
@@ -116,6 +116,26 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
             <ul class="list-inline">
         <?php require 'profile_menu.php'; ?>
             </ul>
+
+            <?php if ($username == get_username($ID)) { ?>
+                <style>
+                    .list-inline {
+                        margin-top:-30px;
+                    }
+                </style>
+                <?php
+            }
+            else { ?>
+                <style>
+                    .list-inline {
+                        margin-top:-80px;
+                        padding-top: 0px;
+                    }
+                </style>
+
+                <?php
+            }
+            ?>
 </div>
 
     <?php
@@ -251,9 +271,9 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                       onsubmit="showCommentUploading('comment<?php echo $postID?>', this);">
 
                     <input type="text" class="form-control" name="postComment" id="postComment"
-                           placeholder="Write a comment" title='' style="border:1px solid black"/>
+                           placeholder="Write a comment" title='' />
 
-                    <h6 style="color:red">Attach A Photo/Video To Your Comment</h6>
+                    <h6>Attach A Photo/Video To Your Comment</h6>
                     <input type="file" name="flPostMedia" id="flPostMedia" style="max-width:180px;"/>
 
                     <br/>
@@ -264,8 +284,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                             </div>
                         </div>
                     </div>
-                    <input type="submit" name="btnComment" id="btnComment" Value="Comment"
-                           style="border:1px solid black"/>
+                    <input type="submit" name="btnComment" id="btnComment" Value="Comment"/>
                     <input type="hidden" name="postID" id="postID" Value="<?php echo $postID ?>"/>
                     <input type="hidden" name="ID" id="ID" value="<?php echo $ID ?>"/>
                     <input type="hidden" name="ownerId" id="ownerId" value="<?php echo $MemberID ?>"/>

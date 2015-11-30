@@ -27,6 +27,27 @@ $ID = $_SESSION['ID'];
         </ul>
     </div>
 
+    <?php if ($username == get_username($ID)) { ?>
+        <style>
+            .list-inline {
+                margin-top:-20px;
+                padding-top: 20px;
+            }
+        </style>
+        <?php
+    }
+    else { ?>
+        <style>
+            .list-inline {
+                margin-top:-120px;
+                padding-top: 15px;
+            }
+        </style>
+
+        <?php
+    }
+    ?>
+
     <div class="col-xs-12 col-md-8 col-lg-8 col-md-offset-2 roll-call">
 
         <h2>Marketing Manager</h2>

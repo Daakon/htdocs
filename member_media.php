@@ -112,7 +112,8 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
     }
 </script>
 
-<div class="container" style="margin-top:-50px;">
+
+<div class="container">
 
     <div class="row row-padding" >
 
@@ -122,6 +123,26 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
                 <?php require 'profile_menu.php'; ?>
             </ul>
         </div>
+
+        <?php if ($username == get_username($ID)) { ?>
+            <style>
+                .list-inline {
+                    margin-top:-30px;
+                }
+            </style>
+        <?php
+            }
+        else { ?>
+        <style>
+            .list-inline {
+                margin-top:-100px;
+                padding-top: 30px;
+            }
+        </style>
+
+        <?php
+        }
+        ?>
 
         <div class="col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8 roll-call member-media" >
             <h2>Media</h2>

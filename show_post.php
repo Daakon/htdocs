@@ -508,7 +508,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
 <body>
 
-<div class="container" style="margin-top:-50px;">
+<div class="container flush-container">
 
 
     <div class="row row-padding">
@@ -641,7 +641,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                       onsubmit="showCommentUploading('comment<?php echo $postID?>', this);">
 
                     <input type="text" class="form-control" name="postComment" id="postComment"
-                           placeholder="Write a comment" title='' class="border-1"/>
+                           placeholder="Write a comment" title='' />
 
                     <h6>Attach A Photo/Video To Your Comment</h6>
                     <input type="file" name="flPostMedia" id="flPostMedia" class="flPostMedia"/>
@@ -655,8 +655,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                         </div>
                     </div>
 
-                    <input type="submit" name="btnComment" id="btnComment" Value="Comment"
-                           class="border-1"/>
+                    <input type="submit" name="btnComment" id="btnComment" Value="Comment"/>
                     <input type="hidden" name="postID" id="postID" Value="<?php echo $postID ?>"/>
                     <input type="hidden" name="ID" id="ID" value="<?php echo $ID ?>"/>
                     <input type="hidden" name="ownerId" id="ownerId" value="<?php echo $MemberID ?>"/>

@@ -224,7 +224,7 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
 
             $newImage .= '<br/><br/>' . $img;
         }
-        $message = $message . '<br/><br/>' . $newImage . '<br/>';
+        $message = $message . $newImage ;
 
 
 
@@ -289,7 +289,7 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
 <?php include('media_sizes.html'); ?>
 
 <body onload="window.scrollTo(0,document.body.scrollHeight);">
-    <div class="container" style="margin-top:-50px;">
+    <div class="container">
     <div class="row row-padding">
 
         <div class="col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8 roll-call ">
@@ -354,7 +354,6 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
 
                     echo "<div style='opacity:0.5'>".date('l F d Y g:i:s A',strtotime($date))."</div>";
                     echo "<hr/>";
-                    echo "<br/>";
                 }
             }
 
@@ -366,7 +365,12 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
 
                     <?php require 'profile_menu.php'; ?>
                 </ul>
-            
+
+            <style>
+                .list-inline {
+                    margin-top:-20px;
+                }
+            </style>
 
             <?php
             // reinitialize sender ID

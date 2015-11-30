@@ -23,6 +23,16 @@ $ID = $_SESSION['ID'];
         </ul>
             </div>
 
+        <?php if ($username == get_username($ID)) { ?>
+            <style>
+                .list-inline {
+                    margin-top:-20px;
+                    padding-top:20px;
+                }
+            </style>
+            <?php
+        }
+        ?>
 
         <div class="col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8 roll-call ">
 

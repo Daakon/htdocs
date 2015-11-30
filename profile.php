@@ -400,7 +400,7 @@ $bgPhoto = $row['ProfilePhoto'];
     ">
 
 
-<div class="container" style="margin-top:-70px;" >
+<div class="container" >
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script src = "jquery-1.8.3.min.js"></script>
@@ -416,6 +416,26 @@ $bgPhoto = $row['ProfilePhoto'];
             </ul>
         </div>
 
+        <?php if ($username == get_username($ID)) { ?>
+            <style>
+                .list-inline {
+                    margin-top:-60px;
+                    padding-top: 20px;
+                }
+            </style>
+            <?php
+        }
+        else { ?>
+            <style>
+                .list-inline {
+                    margin-top:-120px;
+                    padding-top: 20px;
+                }
+            </style>
+
+            <?php
+        }
+        ?>
 
         <div class="col-md-8  col-lg-8 col-md-offset-2 col-lg-offset-2 roll-call ">
 
