@@ -42,11 +42,11 @@ if (!isset($_SESSION['ID']) && empty($_SESSION['ID'])) { ?>
 <?php if ($_SESSION['ID'] != $profileID) { ?>
 <ul class="list-inline profileMenu">
     <li><a href="/home"><b>Home</b></a></li>
-    <li><a href="/<?php echo $username ?>">Profile</a></li>
-    <li><a href="/member_media/<?php echo $username ?>">Media</a></li>
+    <li><a href="/<?php echo $username ?>"><?php echo $firstName ?>'s Profile</a></li>
+    <li><a href="/member_media/<?php echo $username ?>"><?php echo $firstName ?>'s Media</a></li>
     <li><a href="/manage_post/<?php echo $username ?>"><?php echo $firstName ?>'s Posts</a></li>
     <li><a href="/messages/<?php echo get_username($ID) ?>">Messages</a></li>
-    <li><a href="/<?php echo get_username($ID)?>">My Profile</a></li>
+    <li><a href="/<?php echo get_username($ID)?>"><span style="color:black;font-weight: 900;">My Profile</a></a></li>
 </ul>
 
 <?php } else { require 'profile_menu.php'; } ?>
