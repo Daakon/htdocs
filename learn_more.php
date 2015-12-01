@@ -174,7 +174,7 @@ if (!empty($_SESSION['ID'])) {
                     <h4 style="font-weight: bold">Follow Us:</h4>
                     <a href="http://facebook.com/rapportbook" target="_blank"><img src="/images/facebook-logo-red.png" height="50" width="50"></a>
                     <a href="http://twitter.com/rapportbook" target="_blank"><img src="/images/twitter-logo-red.png" height="=50" width="50"></a>
-                    <a href="http://tumblr.com/blog/rapportbook" target="_blank"><img src="/images/tumblr-logo-red.png" height="40" width="40"/> </a>
+                    <a href="http://blog.rapportbook.com" target="_blank"><img src="/images/tumblr-logo-red.png" height="40" width="40"/> </a>
                     <a href="http://instagram.com/officialrapportbook" target="_blank"><img src="/images/instagram-logo-red.png" height="50" width="50"/></a> </a>
                     <a href="http://pintrest.com/rapportbook" target="_blank"><img src="/images/pintrest-logo-red.png" height="50" width="50" /> </a>
                     <a href="http://linkedin.com/company/rapportbook" target="_blank"><img src="/images/linkedin-logo-red.png" height="40" width="40" /></a> </a>
@@ -345,7 +345,7 @@ if (mysql_num_rows($rollCallResult) > 0) {
                 $post500 = substr($post, 0, 700); ?>
 
                 <div id="short<?php echo $postID ?>">
-                    <?php echo nl2br($post500) ?>...<a href="javascript:showPost('long<?php echo $postID ?>', 'short<?php echo $postID ?>');">Show More</a>
+                    <?php echo nl2br($post500) ?>...<a href="/learn_more#signup">Show More</a>
                 </div>
                 <?php
                 echo "<div id='long$postID' style='display:none;'>";
