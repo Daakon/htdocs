@@ -513,7 +513,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
     <div class="row row-padding">
 
-        <a href = "/home">Home</a>
+        <li><a href="javascript:history.back();">Back</a></li>
 
     <?php
     $postID = $_GET['postID'];
