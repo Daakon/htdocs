@@ -3,9 +3,8 @@ require 'imports.php';
 get_head_files();
 get_header();
 
-$url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 $ID = $_SESSION['ID'];
-
+$urlUsername = get_username_from_url();
 ?>
 
 
@@ -18,12 +17,25 @@ if (isset($_POST['photo']) && ($_POST['photo'] == "Upload Photo")) {
             echo '<script>alert("File is too large");</script>';
             exit;
         }
+
+
         // add unique id to image name to make it unique and add it to the file server
         $mediaName = $_FILES["flPostPhoto"]["name"];
         // remove ALL WHITESPACE from image name
         $mediaName = preg_replace('/\s+/', '', $mediaName);
         $mediaName = uniqid() . $mediaName;
         $mediaFile = $_FILES['flPostPhoto']['tmp_name'];
+
+        $checkImage = getimagesize($mediaFile);
+        $width = $checkImage[0];
+        $height = $checkImage[1];
+
+        if ($width < 180 || $height < 180) {
+            echo "<script>alert('$width');</script>";
+            echo '<script>alert("This image is too small");location = "/'.$urlUsername.'"</script>';
+            exit;
+        }
+
         $type = $_FILES["flPostPhoto"]["type"];
         require 'media_post_file_path.php';
         if ($type == "image/jpeg") {
