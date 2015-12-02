@@ -47,8 +47,9 @@ if (!empty($_SESSION['ID'])) {
 
 <style>
     video {
-        width:90%;
-        max-width: 90%;
+        width:70%;
+        height: auto;
+        object-fit: inherit;
     }
     iframe {
         width: 90%;
@@ -97,7 +98,7 @@ if (!empty($_SESSION['ID'])) {
 
 </div>
 
-    <div style="background:#E30022;color:white;padding-left:10px;padding-top:10px;">
+    <div align="center" style="background:#E30022;color:white;padding-left:10px;padding-top:10px;">
 <h4>It's as easy as...</h4>
     <b>1. Signing up</b> <i>(Only 2 Fields)</i>.
     <br/>

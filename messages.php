@@ -73,7 +73,7 @@ $ID = $_SESSION['ID'];
                     $row3 = mysql_fetch_assoc($result3);
 
                     echo "<a href = '/view_messages/$username'><img src = '$mediaPath$pic' class='profilePhoto-Feed' alt='' /> $name </a>";
-                    if (mysql_num_rows($result3) > 0) { echo "<span style='color:red;'>New</font>"; }
+                    if (mysql_num_rows($result3) > 0) { echo "<span style='color:#E30022;'>New</font>"; }
                     echo "<br/>";
                     echo "$subject";
                     echo "<hr/>";
