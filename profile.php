@@ -31,7 +31,6 @@ if (isset($_POST['photo']) && ($_POST['photo'] == "Upload Photo")) {
         $height = $checkImage[1];
 
         if ($width < 180 || $height < 180) {
-            echo "<script>alert('$width');</script>";
             echo '<script>alert("This image is too small");location = "/'.$urlUsername.'"</script>';
             exit;
         }
@@ -130,7 +129,7 @@ if (isset($_POST['video']) && ($_POST['video'] == "Upload Video")) {
             //where to save the image
             $poster = "$posterPath$posterName";
             //time to take screenshot at
-            $interval = 3;
+            //$interval = 3;
             //screenshot size
             //$size = '440x280'; -s $size -f
             //ffmpeg command
@@ -278,16 +277,10 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
         var firstName = document.getElementById('FirstName').value;
 
         if (firstName == "") {
-            alert('First Name cannot be empty');
+            alert('You must supply a first name or business name');
             return false;
         }
 
-        var lastName = document.getElementById('LastName').value;
-
-        if (lastName == "") {
-            alert('Last Name cannot be empty');
-            return false;
-        }
 
         // check state
         var ddState = document.getElementById('State');
@@ -568,8 +561,11 @@ $bgPhoto = $row['ProfilePhoto'];
 
             }
             else {
+                //*************************-----------------------------------------------------------------------
                 // render edit profile view
-            $sql = "SELECT DISTINCT
+                //************************** -----------------------------------------------------------------------
+
+                $sql = "SELECT DISTINCT
                         Members.ID As MemberID,
                         Members.FirstName As FirstName,
                         Members.LastName As LastName,
@@ -717,7 +713,7 @@ $bgPhoto = $row['ProfilePhoto'];
             <form id="ajax-form" method="post" action = "" onsubmit="return checkFields();">
 
                 <div class="form-group">
-                    <label for="FirstName">First Name</label>
+                    <label for="FirstName">First Name / Business Name</label>
                     <br/>
                     <input type ="text" class="form-control" id="FirstName" name="FirstName" value="<?php echo $firstName ?>" onblur="capFname()" />
                 </div>

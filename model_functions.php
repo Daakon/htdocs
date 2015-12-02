@@ -44,7 +44,16 @@ function get_users_name($user_id)
 
     $result = mysql_query($sql) or die(mysql_error());
     $rows = mysql_fetch_assoc($result);
-    return $rows['FirstName'] . ' ' . $rows['LastName'];
+    $name = null;
+    $lastName = $rows['LastName'];
+    if (strlen($lastName) > 0) {
+        $name = $rows['FirstName'] . ' ' . $rows['LastName'];
+    }
+    else {
+        $name = $rows['FirstName'];
+    }
+    if (strlen($rows['LastName']))
+    return $name;
 
 }
 
@@ -437,9 +446,11 @@ function text_notification($receiverID, $senderID)
 
 function alert_all_matching_interests($interest, $state)
 {
+    session_start();
+    $ID = $_SESSION['ID'];
     require 'class-Clockwork.php';
     $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-    $result = mysql_query("SELECT ID, Interest FROM Members WHERE Interest = '$interest'");
+    $result = mysql_query("SELECT ID, Interest FROM Members WHERE Interest = '$interest' And ID NOT IN ($ID)");
 
     if (mysql_num_rows($result) > 0) {
         // stuff all of the service providers into an array

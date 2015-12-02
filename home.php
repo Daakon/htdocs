@@ -188,7 +188,7 @@ if (isset($_POST['submit'])) {
                                     //where to save the image
                                     $poster = "$posterPath$posterName";
                                     //time to take screenshot at
-                                    $interval = 3;
+                                    //$interval = 3;
                                     //screenshot size
                                     //$size = '440x280'; -s $size
                                     //ffmpeg command
