@@ -36,6 +36,9 @@ if (isset($_POST['submit'])) {
                 
             foreach ($_FILES['flPostMedia']['tmp_name'] as $k => $v) {
                 $mediaName = $_FILES['flPostMedia']['name'][$k];
+                // remove ALL WHITESPACE from image name
+                $mediaName = preg_replace('/\s+/', '', $mediaName);
+                $mediaName = str_replace('&', '', $mediaName);
                 $type = $_FILES['flPostMedia']['type'][$k];
                 $tempName = $_FILES['flPostMedia']['tmp_name'][$k];
                 $size = $_FILES['flPostMedia']['size'][$k];
@@ -286,9 +289,13 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                 $photoFileTypes = array("image/jpg", "image/jpeg", "image/png", "image/tiff",
                     "image/gif", "image/raw");
                 $audioFileTypes = array("audio/wav", "audio/mp3");
-                // add unique id to image name to make it unique and add it to the file server
+
                 $mediaName = $_FILES["flPostMedia"]["name"];
+                // remove ALL WHITESPACE from image name
+                $mediaName = preg_replace('/\s+/', '', $mediaName);
+                $mediaName = str_replace('&', '', $mediaName);
                 $fileName = pathinfo($mediaName, PATHINFO_FILENAME);
+                // add unique id to image name to make it unique and add it to the file server
                 $mediaName = trim(uniqid() . $mediaName);
                 $mediaFile = $_FILES['flPostMedia']['tmp_name'];
                 $type = trim($_FILES["flPostMedia"]["type"]);
@@ -652,7 +659,6 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
     }
 </script>
-
 
 
 <?php //check_demographics($ID); ?>

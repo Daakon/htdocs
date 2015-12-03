@@ -84,18 +84,23 @@ $postOwner = $memberID;
 </a>
 
     <div class="post">
+
         <?php
+        if (preg_match('/^.{1,260}\b/s', $body, $match))
+        {
+            $line=$match[0];
+        }
+
         if (strlen($post) > 700) {
-            $post500 = substr($post, 0, 700); ?>
+            $post500 = substr($post, 0, strpos($post, ' ', 700)).'<br/>'; ?>
 
                 <?php echo nl2br($post500) ?>
-                <span class="margin-top-5">
-                <a href="show_post?postID=<?php echo $postID ?>&email=0">Show More</a>
-</span>
+                <br/>
+                <a style="display:block;" style="width:100%;" href="show_post?postID=<?php echo $postID ?>&email=0">
+                    <span style="color:black;font-weight: 800">Show More</span>
+                </a>
+
             <?php
-            echo "<div id='long$postID' style='display:none;'>";
-            echo nl2br($post);
-            echo "</div>";
         }
         else {
             echo nl2br($post);
@@ -104,7 +109,10 @@ $postOwner = $memberID;
 
     </div>
 
+
+
     <?php if (isset($ID)) { ?>
+
     <a href='/post-interest?interest=<?php echo urlencode($category) ?>' class='category'><h4>#<?php echo $category ?></h4></a>
 
 
@@ -114,6 +122,9 @@ $postOwner = $memberID;
             <?php if ($ID != $memberID) {?>
             <a href="/view_messages/<?php echo $username ?>">Message <?php echo $rows['FirstName'] ?> </a>
             <?php } ?>
+
+
+
         <br/>
 <?php } ?>
 
@@ -127,6 +138,8 @@ $postOwner = $memberID;
         else {
             $readonly = "";
         }
+
+
 
         //check if member has approved this post
         //----------------------------------------------------------------

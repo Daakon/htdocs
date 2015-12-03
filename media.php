@@ -247,7 +247,7 @@ $_SESSION['MediaMemberID'] = $memberID;
 
 $mediaFilePath = trim("media/" . $mediaName);
 
-
+echo "<script>alert('$mediaName');</script>";
 if (!empty($mediaFilePath)){
 if (file_exists($mediaFilePath)) {
 
