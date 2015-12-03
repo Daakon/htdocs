@@ -508,12 +508,24 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
 <body>
 
-<div class="container flush-container">
+<div class="container">
 
 
     <div class="row row-padding">
 
-        <li><a href="javascript:history.back();">Back</a></li>
+        <?php
+        $email = $_GET['email'];
+        if ($email == 1) {
+            ?>
+            <li><a href="/home">Home</a></li>
+        <?php }
+        else {
+            ?>
+            <li><a href="javascript:history.back();">Back</a></li>
+        <?php
+        }
+        ?>
+
 
     <?php
     $postID = $_GET['postID'];
