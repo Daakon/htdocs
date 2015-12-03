@@ -15,14 +15,8 @@ function get_head_files()
     <link rel=”apple-touch-icon” href=”/apple-touch-icon.png”/>
     <link rel=”apple-touch-icon-precomposed” href=”/apple-touch-icon.png”/>
     <link rel="stylesheet" type="text/css" href="/resources/css/addtohomescreen.css">
-    <script type="application/javascript" src="/resources/js/addtohomescreen.js"></script>
-    <script>
-        addToHomescreen();
-    </script>
 
-<script>
-addToHomescreen.removeSession();
-</script>
+
         <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
         <meta name="description" content="Promote your business. Make local or national connections. Find people who need your product.">
         <meta name="keywords" content="<?php echo $keywords ?>">
@@ -56,7 +50,41 @@ addToHomescreen.removeSession();
     <!--Local JS file-->
 <!--    <script type="text/javascript" src="/resources/js/site.js"></script>-->
 
-        <title>Rapportbook</title>
+        <?php
+        $pageName = $_SERVER['PHP_SELF'];
+
+        if (strstr($pageName, 'index')) {
+        $pageName = 'Rapportbook';
+        }
+            $pageName = str_replace('/',' ',$pageName);
+            $pageName = str_replace('_', ' ', $pageName);
+            $pageName = str_replace('.', ' ', $pageName);
+            $pageName = str_replace('php', ' ', $pageName);
+            $pageName = ucwords($pageName);
+
+        if (strstr($pageName, 'Profile')) {
+            $pageName = $_SERVER['REQUEST_URI'];
+            $pageName = str_replace('/', ' ', $pageName);
+        }
+
+        if (strstr($pageName, 'Messages')) {
+            $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+            preg_match("/[^\/]+$/", $url, $match);
+            $username = $match[0];
+
+            $sql = "SELECT ID FROM Members WHERE Username = '$username' ";
+            $result = mysql_query($sql) or die(mysql_error());
+            $row = mysql_fetch_assoc($result);
+            $id = $row['ID'];
+
+            $sql2 = "SELECT FirstName FROM Members where ID = $id";
+            $result2 = mysql_query($sql2) or die(mysql_error());
+            $rows2 = mysql_fetch_assoc($result2);
+            $firstName = $rows2['FirstName'];
+            $pageName = $firstName .' - Messages';
+        }
+        ?>
+        <title><?php echo $pageName ?></title>
     </head>
 
 <?php } ?>
