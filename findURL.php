@@ -48,11 +48,11 @@ function makeLinks($str)
             $favicon = '<img src="http://www.'.$host.'.com/favicon.ico" height="20" width="20" />';
 
             // add link
-            $titleLink = '<a href="' . $link . '">' . $favicon.' '.$title . '</a>';
+            $titleLink = '<a href="' . $link . '" target="_blank">' . $favicon.' '.$title . '</a>';
 
             // style the title & add webpage image to link
-            $titleLink = '<span style="background:#f6f7f8;border:1px solid black;padding:10px;margin-top:10px;">' . $titleLink . '</span><br/>
-            <a href="' . $link . '">' . $image. '</a><br/>';
+            $titleLink = '<span style="background:#f6f7f8;padding-right:5px;margin-top:10px;max-width:100%">' . $titleLink . '</span><br/>
+            <a href="' . $link . '" target="_blank">' . $image. '</a><br/>';
 
             // remove special characters
             $titleLink = mysql_real_escape_string($titleLink);

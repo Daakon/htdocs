@@ -520,8 +520,8 @@ $bgPhoto = $row['ProfilePhoto'];
                         <br/>
                     <?php } else { ?>
                     <!--Display Nothing -->
-                </div>
             <?php } ?>
+                </div>
 
                 <div class="content-block">
                     <h2>

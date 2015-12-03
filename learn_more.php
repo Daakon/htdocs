@@ -342,17 +342,27 @@ if (mysql_num_rows($rollCallResult) > 0) {
 
         <div class="post">
             <?php
-            if (strlen($post) > 700) {
-                $post500 = substr($post, 0, 700); ?>
 
-                <div id="short<?php echo $postID ?>">
-                    <?php echo nl2br($post500) ?>...<a href="/learn_more#signup">Show More</a>
-                </div>
-                <?php
-                echo "<div id='long$postID' style='display:none;'>";
-                echo nl2br($post);
+        if (preg_match('/^.{1,260}\b/s', $body, $match))
+        {
+            $line=$match[0];
+        }
 
-                ?>
+        if (strlen($post) > 700) {
+            $post500 = substr($post, 0, strpos($post, ' ', 700)).'<br/>';
+
+             echo nl2br($post500)
+
+            ?>
+
+            <br/>
+            <a style="display:block;" style="width:100%;" href="show_post?postID=<?php echo $postID ?>&email=0">
+                <span style="color:black;font-weight: 800">Show More</span>
+            </a>
+
+
+
+
 
                 <br/><br/>
 
@@ -374,7 +384,6 @@ if (mysql_num_rows($rollCallResult) > 0) {
 
                 <?php
 
-                echo "</div>";
             }
             else {
                 echo nl2br($post);
