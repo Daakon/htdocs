@@ -65,6 +65,7 @@ function get_head_files()
         if (strstr($pageName, 'Profile')) {
             $pageName = $_SERVER['REQUEST_URI'];
             $pageName = str_replace('/', ' ', $pageName);
+            $pageName = ucwords($pageName);
         }
 
         if (strstr($pageName, 'Messages')) {
