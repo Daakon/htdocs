@@ -262,14 +262,14 @@ function build_and_send_email($senderId, $toId, $notification, $postID, $pass)
             $link = "home.php";
         }
         else if (strstr($url, "dev")) {
-            $link = "http://dev.rapportbook.com/home.php?genre=$service";
+            $link = "http://dev.rapportbook.com/home?scrollx=630&scrolly=630";
         }
         else {
-            $link = "http://www.rapportbook.com/home.php?genre=$service";
+            $link = "http://www.rapportbook.com/home?scrollx=630&scrolly=630";
         }
 
         // a post status update related to your service has been posted
-        $subject = "Someone just shared a post related to your interest. <a href='".$link."'>Login</a> to see the post";
+        $subject = "Someone just shared a post related to your interest. <a href='".$link."'>Click here</a> to see the post";
     }
 
     // if we have a notification, then send the email.

@@ -40,7 +40,7 @@ $ID = $_SESSION['ID'];
             <hr/>
 
             <?php
-            $sql = "SELECT DISTINCT * FROM Messages WHERE ThreadOwner_ID = $ID AND (Receiver_ID = $ID Or Sender_ID = $ID) AND (InitialMessage = 1) AND (IsDeleted = 0) Order By ID DESC ";
+            $sql = "SELECT DISTINCT * FROM Messages WHERE ThreadOwner_ID = $ID AND (Receiver_ID = $ID Or Sender_ID = $ID) AND (InitialMessage = 1) AND (IsDeleted = 0) Order By New Desc, ID Desc";
             $result = mysql_query($sql) or die(mysql_error());
 
             if (mysql_num_rows($result) > 0) {
@@ -72,10 +72,13 @@ $ID = $_SESSION['ID'];
                     $result3 = mysql_query($sql3) or die(mysql_error());
                     $row3 = mysql_fetch_assoc($result3);
 
-                    echo "<a href = '/view_messages/$username'><img src = '$mediaPath$pic' class='profilePhoto-Feed' alt='' /> $name </a>";
-                    if (mysql_num_rows($result3) > 0) { echo "<span style='color:#E30022;'>New</font>"; }
-                    echo "<br/>";
-                    echo "$subject";
+
+                echo "<a href = '/view_messages/$username'><img src = '$mediaPath$pic' class='profilePhoto-Feed' alt='' /> $name </a>";
+                if (mysql_num_rows($result3) > 0) {
+                    echo "<span style='color:#E30022;'>". mysql_num_rows($result3)." New</font>";
+                }
+                echo "<br/>";
+                echo "$subject";
                     echo "<hr/>";
                     echo "<br/>";
                 }

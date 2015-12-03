@@ -401,7 +401,7 @@ function dynamicPost($interest) {
     return $dynamicText;
 }
 
-// text function to all service providers for related service post
+
 // text function for direct messages
 function text_notification($receiverID, $senderID)
 {
@@ -444,6 +444,7 @@ function text_notification($receiverID, $senderID)
     }
 }
 
+// text function to all service providers for related service post
 function alert_all_matching_interests($interest, $state)
 {
     session_start();
@@ -473,9 +474,9 @@ function alert_all_matching_interests($interest, $state)
                         $clockwork = new Clockwork($API_KEY);
                         $domain;
                         if (strstr($url, "dev")) {
-                            $domain = "http://dev.rapportbook.com/home.php";
+                            $domain = "http://dev.rapportbook.com/home?scrollx=630&scrolly=630";
                         } else {
-                            $domain = "http://rapportbook.com/home.php";
+                            $domain = "http://rapportbook.com/home?scrollx=630&scrolly=630";
                         }
                         // Setup and send a message
                         $text = "There is a new post that matches your interest on Rapportbook. $domain";
