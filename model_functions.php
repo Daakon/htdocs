@@ -439,7 +439,8 @@ function text_notification($receiverID, $senderID)
                 echo "<script>alert('Message failed - Error: $error');</script>";
             }
         } catch (ClockworkException $e) {
-            echo 'Exception sending SMS: ' . $e->getMessage();
+            // dont want to display failures in the browser
+            //echo 'Exception sending SMS: ' . $e->getMessage();
         }
     }
 }
@@ -491,7 +492,8 @@ function alert_all_matching_interests($interest, $state)
                             echo "<script>alert('Message failed - Error: $error');</script>";
                         }
                     } catch (ClockworkException $e) {
-                        echo 'Exception sending SMS: ' . $e->getMessage();
+                        // dont want to display failures in the browser
+                        //echo 'Exception sending SMS: ' . $e->getMessage();
                     }
                 }
             }
