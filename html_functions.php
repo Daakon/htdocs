@@ -82,6 +82,7 @@ function get_head_files()
             $result2 = mysql_query($sql2) or die(mysql_error());
             $rows2 = mysql_fetch_assoc($result2);
             $firstName = $rows2['FirstName'];
+            $firstName = ucwords($firstName);
             $pageName = $firstName .' - Messages';
         }
         ?>

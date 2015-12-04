@@ -246,7 +246,7 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
         }
     }
 //----------------------
-// if not comment photo
+// if no media
 //----------------------
 
     else {
@@ -271,7 +271,7 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
 
     // notify recipient of email
     build_and_send_email($ID, $receiverID,8, "","");
-    echo "<script>location = '/view_messages.php/$receiverUsername'</script>";
+    echo "<script>location = '/view_messages/$receiverUsername'</script>";
 }
 ?>
 
@@ -281,7 +281,7 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
     $receiverID = $_POST['receiverID'];
     $sql = "DELETE FROM Messages WHERE ThreadOwner_ID = $ID AND (Sender_ID = $receiverID Or Receiver_ID = $receiverID) ";
     mysql_query($sql) or die(mysql_error());
-    echo "<script>location = 'messages.php/$urlUsername'</script>";
+    echo "<script>location = '/messages/$urlUsername'</script>";
 }
 ?>
 
