@@ -19,24 +19,25 @@ function makeLinks($str)
         $str = preg_replace('$(www\.[a-z0-9_./?=&#-]+)(?![^<>]*>)$i', '<a target="_blank" href="http://$1"  target="_blank">$1</a> ', $str . " ");
 
         // if post contains a url, get the title
-        preg_match('/[a-zA-Z]+:\/\/[0-9a-zA-Z;.\/?:@=_#&%~,+$]+/', $str, $matches);
+        preg_match('/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i', $str, $matches);
         if (!empty($matches[0])) {
+            // get full URL
             $link = $matches[0];
+
             $string = $str;
-            preg_match('|<a.+?href\="(.+?)".*?>(.+?)</a>|i', $string, $match);
-            $url = $match[1];
-            $title = get_title($url);
+            $title = get_title($link);
 
+            // get domain.com
+            $hostFullName = get_domain($link);
 
-            // get only host name
-            $host = __extractName($link);
+            // get only host name 'domain'
+            $host = __extractHostName($link);
 
             // if no link, title will contain host name
             if (empty($link)) {
                 $title = $host;
             }
 
-            $imageLink = null;
             // check if web page has an image to add to the link
             $content=file_get_contents($link);
             if (preg_match("/<img.*src=\"(.*)\"/", $content, $images))
@@ -44,8 +45,27 @@ function makeLinks($str)
                 $image = $images[0];
             }
 
+            // extract the src for that image
+            $srcPattern = '/src="([^"]*)"/';
+            preg_match($srcPattern, $image, $Imatches);
+            $src = $Imatches[1];
+
+            // check if the image src has a fully qualified http path
+            preg_match('/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i', $Imatch, $srcPathArray);
+            $srcPath = $srcPathArray[0];
+
+            // if the image does not have a fully qualified path
+            // append the full host name to the image src we extracted
+            // rebuild the image tag with the new source
+            if (empty($srcPath)) {
+                $srcPath = $hostFullName.$src;
+                $image = '<img src = "http://'.$srcPath.'" />';
+            }
+
+
+
             // get favicon
-            $favicon = '<img src="http://www.'.$host.'.com/favicon.ico" height="20" width="20" />';
+            $favicon = '<img src="http://'.$hostFullName.'/favicon.ico" height="20" width="20" />';
 
             // add link
             $titleLink = '<a href="' . $link . '" target="_blank">' . $favicon.' '.$title . '</a>';
@@ -73,12 +93,25 @@ function get_title($url){
     }
 }
 
-function __extractName($url)
+function __extractHostName($url)
 {
+    // gets i.e google
     $domain = parse_url($url , PHP_URL_HOST);
     if (preg_match('/(?P<domain>[a-z0-9][a-z0-9\-]{1,63}\.[a-z\.]{2,6})$/i', $domain, $list)) {
         return substr($list['domain'], 0,strpos($list['domain'], "."));
     }
     return false;
 }
+
+function get_domain($url)
+{
+    // gets i.e google.com
+    $pieces = parse_url($url);
+    $domain = isset($pieces['host']) ? $pieces['host'] : '';
+    if (preg_match('/(?P<domain>[a-z0-9][a-z0-9\-]{1,63}\.[a-z\.]{2,6})$/i', $domain, $regs)) {
+        return $regs['domain'];
+    }
+    return false;
+}
+
 ?>
