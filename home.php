@@ -788,7 +788,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
                 <form method="post" enctype="multipart/form-data" action="" onsubmit="return showUploading()">
                     <img src="/images/image-icon.png" height="30px" width="30px" alt="Photos/Video"/>
-                    <strong>Attach A Photo or Video To Your Post</strong>
+                    <strong>Add Photos/Video</strong>
                     <input type="file" width="10px;" name="flPostMedia[]" id="flPostMedia" multiple/>
 
                     <a href="#" class="i-msg" data-toggle="picMessage" title="Upload Multiple Files"

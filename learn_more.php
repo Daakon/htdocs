@@ -479,7 +479,7 @@ if (mysql_num_rows($rollCallResult) > 0) {
                 $commentID = $rows3['PostCommentID'];
                 $commentOwnerID = $rows3['CommenterID'];
                 echo '<div class="comment-row">';
-                    echo '<div class="user-icon"><img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" style = "border:1px solid black" class ="enlarge-onhover img-responsive" /><div class="user-name">' . $rows3['FirstName'] . ' ' . $rows3['LastName'] . '</div></div><div class="comment-content">' . nl2br($comment) . '</div>';
+                    echo '<div class="user-icon"><img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" class ="enlarge-onhover img-responsive" /><div class="user-name">' . $rows3['FirstName'] . ' ' . $rows3['LastName'] . '</div></div><div class="comment-content">' . nl2br($comment) . '</div>';
                     echo '</div>';
                 if ($commentOwnerID == $ID) {
                 //<!--DELETE BUTTON ------------------>
@@ -531,7 +531,7 @@ if (mysql_num_rows($rollCallResult) > 0) {
             $commentID = $rows4['PostCommentID'];
             $commentOwnerID = $rows4['CommenterID'];
             echo '<div class="user-icon">';
-            echo '<img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" class ="enlarge-onhover img-responsive border-1" /><div class="user-name">' . $rows4['FirstName'] .' '. $rows4['LastName'] . '</div></div><div class="comment-content">' . nl2br($comment) . '</div>';
+            echo '<img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" class ="enlarge-onhover img-responsive" /><div class="user-name">' . $rows4['FirstName'] .' '. $rows4['LastName'] . '</div></div><div class="comment-content">' . nl2br($comment) . '</div>';
             echo '</td></tr>';
         }
         echo '</div>';

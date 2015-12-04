@@ -186,7 +186,7 @@ $postOwner = $memberID;
                 <input type="text" class="form-control" name="postComment" id="postComment"
                        placeholder="Write a comment" title='' />
 
-                <h6>Attach A Photo/Video To Your Comment</h6>
+                <h6>Add Photos/Video</h6>
                 <input type="file" name="flPostMedia" id="flPostMedia" class="flPostMedia"/>
 
                 <br/>
@@ -241,7 +241,7 @@ $postOwner = $memberID;
                     echo '<div class="comment-row">';
                     echo '<div class="user-icon">
                     <a href='.$commenterProfileUrl.'>
-                    <img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" class ="enlarge-onhover img-responsive border-1" />
+                    <img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" class ="enlarge-onhover img-responsive" />
                     <div class="user-name">' . $rows3['FirstName'] . ' ' . $rows3['LastName'] . '</div>
                      </a>
                     </div>
@@ -304,7 +304,7 @@ $postOwner = $memberID;
 
                     echo '<div class="user-icon">';
                     echo '<a href='.$commenterProfileUrl.'>';
-                    echo '<img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" class ="enlarge-onhover img-responsive border-1" />
+                    echo '<img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" class ="enlarge-onhover img-responsive" />
                     <div class="user-name">' . $rows4['FirstName'] .' '. $rows4['LastName'] .
                         '</div></div><div class="comment-content">' . nl2br($comment) .
                         '</div>
