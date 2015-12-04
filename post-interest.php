@@ -767,7 +767,7 @@ if (mysql_num_rows($result) > 0) {
             echo nl2br($post);
         }
                 echo '<div class="content-space"></div>';
-                echo '<b>'.$city .', '. $state.'</b>';
+                echo $city .', '. $state;
                 ?>
             </div>
 
