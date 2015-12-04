@@ -113,22 +113,18 @@ $postOwner = $memberID;
 
     <?php if (isset($ID)) { ?>
 
-    <a href='/post-interest?interest=<?php echo urlencode($category) ?>' class='category'><h4>#<?php echo $category ?></h4></a>
+    <a href='/post-interest?interest=<?php echo urlencode($category) ?>' class='category'><span class="engageText">#<?php echo $category ?></span></a>
 
 
-    <div class="content-space">
+    <div class="content-space" ></div>
 
-        <br/>
             <?php if ($ID != $memberID) {?>
-            <a href="/view_messages/<?php echo $username ?>">Message <?php echo $rows['FirstName'] ?> </a>
+            <a href="/view_messages/<?php echo $username ?>"><span class="engageText">Message <?php echo $rows['FirstName'] ?></span> </a>
             <?php } ?>
 
-
-
-        <br/>
 <?php } ?>
 
-        <br/><br/>
+    <div class="content-space" ></div>
 
         <?php
 

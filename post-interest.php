@@ -766,13 +766,18 @@ if (mysql_num_rows($result) > 0) {
         else {
             echo nl2br($post);
         }
-                echo '<br/><br/>';
+                echo '<div class="content-space"></div>';
                 echo '<b>'.$city .', '. $state.'</b>';
-                echo '<br/><br/>';
                 ?>
-
             </div>
 
+<div class="content-space"></div>
+
+                 <?php if ($ID != $memberID) {?>
+                    <a href="/view_messages.php/<?php echo $username ?>">Message <?php echo $rows['FirstName'] ?> </a>
+                <?php } ?>
+
+<div class="content-space"></div>
 
             <?php
 
@@ -829,12 +834,7 @@ if (mysql_num_rows($result) > 0) {
 
             ?>
 
-                <br/>
 
-                 <?php if ($ID != $memberID) {?>
-                    <a href="/view_messages.php/<?php echo $username ?>">Message <?php echo $rows['FirstName'] ?> </a>
-                <?php } ?>
-                <br/>
 
 
 

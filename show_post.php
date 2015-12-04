@@ -587,8 +587,21 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                 <?php echo nl2br($post); ?>
             </div>
 
+                <?php if (isset($ID)) { ?>
 
-            <a href='/post-interest?interest=<?php echo urlencode($category) ?>' class='category'><h5><?php echo $category ?></h5></a>
+                    <a href='/post-interest?interest=<?php echo urlencode($category) ?>' class='category'><span class="engageText">#<?php echo $category ?></span></a>
+
+
+                    <div class="content-space" ></div>
+
+
+                    <?php if ($ID != $memberID) {?>
+                        <a href="/view_messages/<?php echo $username ?>"><span class="engageText">Message <?php echo $rows['FirstName'] ?></span> </a>
+                    <?php } ?>
+
+                <?php } ?>
+
+                <div class="content-space" ></div>
 
             <?php
             if (!empty($ID)) {
@@ -621,7 +634,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                 if ($approvals > 0) {
 
 
-                    echo '&nbsp;<span>' . $approvals . '</font>';
+                    echo '&nbsp;' . $approvals;
                 }
                 echo '</form>';
             } else {
@@ -634,7 +647,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                 if ($approvals > 0) {
 
 
-                    echo '&nbsp;<span>' . $approvals . '</font>';
+                    echo '&nbsp;' . $approvals;
                 }
                 echo '</form>';
             }
@@ -678,10 +691,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
                 <br/>
 
-                <?php if ($memberID != $ID) { ?>
-                    <a href="/view_messages.php/<?php echo $username ?>">Direct Message <?php echo $rows['FirstName'] ?></a>
-                <?php } ?>
-                <br/>
+
                 <?php } ?>
 
                 <?php
