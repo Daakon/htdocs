@@ -13,7 +13,8 @@ $ID = $_SESSION['ID'];
 
 ?>
 
-<div class="container" >
+<div class="container" style="margin-top:-60px;
+            padding-top: 20px;">
 
     <?php if (empty($_SESSION['ID']) || !isset($_SESSION['ID'])) { ?>
         <div class="visible-lg visible-md">

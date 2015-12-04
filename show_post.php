@@ -508,7 +508,8 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
 <body>
 
-<div class="container">
+<div class="container" style="margin-top:-60px;
+            padding-top: 20px;">
 
 
     <div class="row row-padding">
