@@ -49,7 +49,7 @@ if (mysql_num_rows($rollCallResult) == 0) {
     ?>
     <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 roll-call"
           align="left">
-        <h3>Make The First <?php echo $genre ?> Connection in <?php echo $searchCity ?></h3>
+        Make The First <?php echo $genre ?> Connection in <?php echo $searchCity ?>
     </div>
 <?php }
 if (mysql_num_rows($rollCallResult) > 0) {
