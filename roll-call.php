@@ -124,7 +124,7 @@ $postOwner = $memberID;
 
 <?php } ?>
 
-    <div class="content-space" ></div>
+    <div class="content-space" />
 
         <?php
 
