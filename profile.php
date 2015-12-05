@@ -506,7 +506,7 @@ $bgPhoto = $row['ProfilePhoto'];
                 <hr/>
                 <br/>
 
-                <!--Profile video --------------------------------------------------------------------------------->
+                <!--Profile photo --------------------------------------------------------------------------------->
 
                 <div align ="center">
                     <img src = "<?php echo $mediaPath.$profilePhoto ?>" class="profilePhoto" alt="Profile Photo" />

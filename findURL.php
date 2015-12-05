@@ -38,46 +38,48 @@ function makeLinks($str)
                 $title = $host;
             }
 
-            // check if web page has an image to add to the link
-            $content=file_get_contents($link);
-            if (preg_match("/<img.*src=\"(.*)\"/", $content, $images))
-            {
-                $image = $images[0];
+            // if page has no title, don't build title link
+            if (strlen($title) > 1) {
+
+                // check if web page has an image to add to the link
+                $content = file_get_contents($link);
+                if (preg_match("/<img.*src=\"(.*)\"/", $content, $images)) {
+                    $image = $images[0];
+                }
+
+                // extract the src for that image
+                $srcPattern = '/src="([^"]*)"/';
+                preg_match($srcPattern, $image, $Imatches);
+                $src = $Imatches[1];
+
+                // check if the image src has a fully qualified http path
+                preg_match('/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i', $src, $srcPathArray);
+                $srcPath = $srcPathArray[0];
+
+                // if the image does not have a fully qualified path
+                // append the full host name to the image src we extracted
+                // rebuild the image tag with the new source
+                if (empty($srcPath)) {
+                    $srcPath = $hostFullName . $src;
+                    $image = '<img src = "http://' . $srcPath . '" />';
+                }
+
+
+                // get favicon
+                $favicon = '<img src="http://' . $hostFullName . '/favicon.ico" height="20" width="20" />';
+
+                // add link
+                $titleLink = '<a href="' . $link . '" target="_blank">' . $favicon . ' ' . $title . '</a>';
+
+                // style the title & add webpage image to link
+                $titleLink = '<span style="background:#f6f7f8;padding-right:5px;margin-top:10px;max-width:100%">' . $titleLink . '</span><br/>
+            <a href="' . $link . '" target="_blank">' . $image . '</a><br/>';
+
+                // remove special characters
+                $titleLink = mysql_real_escape_string($titleLink);
+
+                return $str . '<br/><br/>' . $titleLink . '<br/><br/>';
             }
-
-            // extract the src for that image
-            $srcPattern = '/src="([^"]*)"/';
-            preg_match($srcPattern, $image, $Imatches);
-            $src = $Imatches[1];
-
-            // check if the image src has a fully qualified http path
-            preg_match('/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i', $src, $srcPathArray);
-            $srcPath = $srcPathArray[0];
-
-            // if the image does not have a fully qualified path
-            // append the full host name to the image src we extracted
-            // rebuild the image tag with the new source
-            if (empty($srcPath)) {
-                $srcPath = $hostFullName.$src;
-                $image = '<img src = "http://'.$srcPath.'" />';
-            }
-
-
-
-            // get favicon
-            $favicon = '<img src="http://'.$hostFullName.'/favicon.ico" height="20" width="20" />';
-
-            // add link
-            $titleLink = '<a href="' . $link . '" target="_blank">' . $favicon.' '.$title . '</a>';
-
-            // style the title & add webpage image to link
-            $titleLink = '<span style="background:#f6f7f8;padding-right:5px;margin-top:10px;max-width:100%">' . $titleLink . '</span><br/>
-            <a href="' . $link . '" target="_blank">' . $image. '</a><br/>';
-
-            // remove special characters
-            $titleLink = mysql_real_escape_string($titleLink);
-
-            return $str . '<br/><br/>'. $titleLink.'<br/><br/>';
         }
 
         return $str . '<br/><br/>';

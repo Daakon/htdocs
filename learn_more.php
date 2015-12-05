@@ -109,7 +109,7 @@ if (!empty($_SESSION['ID'])) {
     <br/>
 
     <h4>Watch the video to learn more.</h4>
-    <video width="320" height="240" poster="/poster/how-it-works-poster.png" controls >
+    <video width="320" height="240" poster="/poster/how-it-works-poster.png" autoplay="autoplay" muted controls >
         <source src="/images/Rapportbook-How-It-Works-Lo-Res.mp4" />
         </video>
     <br/>

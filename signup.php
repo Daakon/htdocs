@@ -156,9 +156,6 @@ $sql = "INSERT INTO Profile (Member_ID, Poster,               ProfileVideo,     
 $result = mysql_query($sql) or die(mysql_error());
 
 
-// dynamic auto post
-$dynamicText = dynamicPost($interest);
-
 // insert default post
 $post = "Hey!, this is $fName. Just signed up and looking network. Comment on this post or send a direct message if you want to connect.";
 $post = mysql_real_escape_string($post);

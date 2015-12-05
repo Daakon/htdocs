@@ -13,8 +13,8 @@ $ID = $_SESSION['ID'];
 
 ?>
 
-<div class="container" style="margin-top:-60px;
-            padding-top: 20px;">
+<div class="container" style="margin-top:-40px;
+            padding-top: 0px;">
 
     <?php if (empty($_SESSION['ID']) || !isset($_SESSION['ID'])) { ?>
         <div class="visible-lg visible-md">
@@ -45,6 +45,10 @@ $ID = $_SESSION['ID'];
                 <a href="mailto:info@rapportbook.com">info@rapportbook.com</a>
             </h4>
 
+            <h4>Watch the video to learn more.</h4>
+            <video width="320" height="240" poster="/poster/how-it-works-poster.png" autoplay="autoplay" muted controls >
+                <source src="/images/Rapportbook-How-It-Works-Lo-Res.mp4" />
+            </video>
 
             <b>Corporate Headquarters</b>
             <br/>
