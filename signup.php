@@ -160,7 +160,7 @@ $result = mysql_query($sql) or die(mysql_error());
 $dynamicText = dynamicPost($interest);
 
 // insert default post
-$post = "Hey!, my name is $fName and my passion is $interest. Comment on my post or direct message if you want to connect.";
+$post = "Hey!, this is $fName. Just signed up and looking network. Comment on this post or send a direct message if you want to connect.";
 $post = mysql_real_escape_string($post);
 $sql = "INSERT INTO Posts (Post,    Category,  Member_ID,   PostDate) Values
                           ('$post', '$interest', '$ID',       CURDATE())";

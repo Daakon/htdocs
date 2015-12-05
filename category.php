@@ -3,7 +3,6 @@ function category()
 {
     echo '<option value = "Art">Art</option>';
     echo '<option value = "Automotive">Automotive</option>';
-    echo '<option value = "Books">Books</option>';
     echo '<option value = "Cleaning">Cleaning</option>';
     echo '<option value = "Community">Community</option>';
     echo '<option value = "Cosmetology">Cosmetology</option>';
@@ -15,6 +14,7 @@ function category()
     echo '<option value = "Finance">Finance</option>';
     echo '<option value = "Fitness">Fitness</option>';
     echo '<option value = "Gaming">Gaming</option>';
+    echo '<option value = "Literature">Literature</option>';
     echo '<option value = "Marketing">Marketing</option>';
     echo '<option value = "Media">Media</option>';
     echo '<option value = "Modeling">Modeling</option>';
