@@ -15,13 +15,13 @@ function build_and_send_email($senderId, $toId, $notification, $postID, $pass)
         $link;
 
         if (strstr($url, "local")) {
-            $link = "show_post.php?postID=$postID&email=1";
+            $link = "show_post?postID=$postID&email=1";
         }
         else if (strstr($url, "dev")) {
-            $link = "http://dev.rapportbook.com/show_post.php?postID=$postID&email=1";
+            $link = "http://dev.rapportbook.com/show_post?postID=$postID&email=1";
         }
         else {
-            $link = "http://www.rapportbook.com/show_post.php?postID=$postID&email=1";
+            $link = "http://www.rapportbook.com/show_post?postID=$postID&email=1";
         }
 
         if (function_exists(get_users_name_by_id)) {
@@ -38,7 +38,7 @@ function build_and_send_email($senderId, $toId, $notification, $postID, $pass)
         $text = "$name commented on a <a href='$link'>post</a> you're tagged in.";
 
         $subject = "
-                <div style='height:20px; padding:10px;'>
+                <div>
                 $text
 
                 </div>
@@ -51,13 +51,13 @@ function build_and_send_email($senderId, $toId, $notification, $postID, $pass)
         $link;
 
         if (strstr($url, "local")) {
-            $link = "show_post.php?postID=$postID&email=1";
+            $link = "show_post?postID=$postID&email=1";
         }
         else if (strstr($url, "dev")) {
-            $link = "http://dev.rapportbook.com/show_post.php?postID=$postID&email=1";
+            $link = "http://dev.rapportbook.com/show_post?postID=$postID&email=1";
         }
         else {
-            $link = "http://www.rapportbook.com/show_post.php?postID=$postID&email=1";
+            $link = "http://www.rapportbook.com/show_post?postID=$postID&email=1";
         }
 
         $name = get_users_name_by_id($senderId);
@@ -69,7 +69,7 @@ function build_and_send_email($senderId, $toId, $notification, $postID, $pass)
         $text = "$name approved a <a href='$link'>post</a> you're tagged in.";
 
         $subject = "
-                <div style='height:20px; padding:10px;'>
+                <div>
                 $text
 
                 </div>
@@ -154,13 +154,13 @@ function build_and_send_email($senderId, $toId, $notification, $postID, $pass)
         $link;
 
         if (strstr($url, "local")) {
-            $link = "show_post.php?postID=$postID&email=1";
+            $link = "show_post?postID=$postID&email=1";
         }
         else if (strstr($url, "dev")) {
-            $link = "http://dev.rapportbook.com/show_post.php?postID=$postID&email=1";
+            $link = "http://dev.rapportbook.com/show_post?postID=$postID&email=1";
         }
         else {
-            $link = "http://www.rapportbook.com/show_post.php?postID=$postID&email=1";
+            $link = "http://www.rapportbook.com/show_post?postID=$postID&email=1";
         }
 
         $name = get_users_name_by_id($senderId);
@@ -172,7 +172,7 @@ function build_and_send_email($senderId, $toId, $notification, $postID, $pass)
         $text = "$name commented with a photo on a <a href='$link'>post</a> you're tagged in.";
 
         $subject = "
-                <div style='height:20px; padding:10px;'>
+                <div>
                 $text
 
                 </div>
@@ -186,13 +186,13 @@ function build_and_send_email($senderId, $toId, $notification, $postID, $pass)
         $link;
 
         if (strstr($url, "local")) {
-            $link = "show_post.php?postID=$postID&email=1";
+            $link = "show_post?postID=$postID&email=1";
         }
         else if (strstr($url, "dev")) {
-            $link = "http://dev.rapportbook.com/show_post.php?postID=$postID&email=1";
+            $link = "http://dev.rapportbook.com/show_post?postID=$postID&email=1";
         }
         else {
-            $link = "http://www.rapportbook.com/show_post.php?postID=$postID&email=1";
+            $link = "http://www.rapportbook.com/show_post?postID=$postID&email=1";
         }
 
         $name = get_users_name_by_id($senderId);
@@ -204,7 +204,7 @@ function build_and_send_email($senderId, $toId, $notification, $postID, $pass)
         $text = "$name approved a <a href='$link'>photo</a> you're tagged in.";
 
         $subject = "
-                <div style='height:20px; padding:10px;'>
+                <div>
                 $text
 
                 </div>
@@ -218,7 +218,7 @@ function build_and_send_email($senderId, $toId, $notification, $postID, $pass)
         $link;
         $username = get_username($senderId);
         if (strstr($url, "local")) {
-            $link = "view_messages.php/$username";
+            $link = "view_messages/$username";
         }
         else if (strstr($url, "dev")) {
             $link = "http://dev.rapportbook.com/view_messages/$username";
@@ -294,17 +294,13 @@ function build_and_send_email($senderId, $toId, $notification, $postID, $pass)
         }
 
         $message = "<html><body>";
-        $message .= "<table style = 'background:red;border:2px solid black;'>";
+        $message .= "<table style = 'border:1px solid lightgray;background: #f6f7f8;'>";
         $message .= "<tr style = 'color:white;'>";
-        $message .= "<td><img src = '$profilePhoto' style = 'border:2px solid black;width:100%' /></td>";
-        $message .= "</tr>";
-        $message .= "<tr>";
-        $message .= "<td style = 'background:silver;padding:20px;border:2px solid black;'>$subject<br/><br/></td>";
-        $message .= "</tr>";
-        $message .= "<tr>";
-        $message .= "<td style = 'background-color:red;color:white'>If you received this email in error contact us at <mailto:info@rapportbook.com>info@rapportbook.com</a>";
-        $message .= "<br/>Rapportbook LLC, 911 Washington Ave, Suite 501, St.Louis,MO 63101 USA </td>";
-        $message .= "</tr>";
+        $message .= "<td><img src = 'http://rapportbook.com/images/Rapportbook-Logo.png' height='25' width='25' /><br/></td>";
+        $message .= "<tr><td><hr /><br/><img src = '$profilePhoto' height='100' width='100' /></td></tr>";
+        $message .= "<tr><td>$subject<br/></td></tr>";
+        $message .= "<tr><td><hr/>If you received this email in error contact us at <mailto:info@rapportbook.com>info@rapportbook.com</a>";
+        $message .= "<br/>Rapportbook LLC, 911 Washington Ave, Suite 501, St.Louis,MO 63101 USA </td></tr>";
         $message .= "</table></body></html>";
 
         $header = "From: Rapportbook <admin@rapportbook.com> \r\n";
