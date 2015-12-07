@@ -424,8 +424,7 @@ $bgPhoto = $row['ProfilePhoto'];
         <?php if ($username == get_username($ID)) { ?>
             <style>
                 .list-inline {
-                    margin-top:-60px;
-                    padding-top: 20px;
+                    margin-top:0%;
                 }
             </style>
             <?php
@@ -433,8 +432,7 @@ $bgPhoto = $row['ProfilePhoto'];
         else { ?>
             <style>
                 .list-inline {
-                    margin-top:-120px;
-                    padding-top: 20px;
+                    margin-top:0%;
                 }
             </style>
 
