@@ -83,7 +83,6 @@ $profileID = get_id_from_username($username);
                       Order By Interest ASC ";
                 $result2 = mysql_query($sql2);
 
-                        echo "<table><tr></tr>";
 
                 while ($rows2 = mysql_fetch_assoc($result2)) {
 
@@ -100,16 +99,16 @@ $profileID = get_id_from_username($username);
                     }
                     ?>
 
-                    <td>
+
                         <a href="<?php echo $profileUrl ?>">
                             <img src="<?php echo $mediaPath. $profilePhoto ?>" class="profilePhoto-Feed enlarge-onhover " alt=""
                              title="<?php echo $name ?>" /> &nbsp <span class="profileName-Feed"><?php echo $name ?></span>
                         </a>
                         <span style="font-style: italic">(<?php echo $interest ?>)</span>
-                    </td>
+                        <hr/>
+
                                 <?php
                 }
-                echo "</tr></table>";
             }
 
             ?>

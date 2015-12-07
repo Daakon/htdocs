@@ -83,7 +83,7 @@ else { ?>
                       Order By Interest ASC ";
             $result2 = mysql_query($sql2);
 
-            echo "<table><tr></tr>";
+
             while ($rows2 = mysql_fetch_assoc($result2)) {
 
                 $firstName = $rows2['FirstName'];
@@ -98,17 +98,17 @@ else { ?>
                 $name = checkNameLength($name,$firstName,$lastName);
                 }
 ?>
-        <td>
+
                 <a href="<?php echo $profileUrl ?>">
                     <img src="<?php echo $mediaPath. $profilePhoto ?>" class="profilePhoto-Feed enlarge-onhover " alt=""
                     title="<?php echo $name ?>" /> &nbsp <span class="profileName-Feed"><?php echo $name ?></span>
                 </a>
                 <span style="font-style: italic">(<?php echo $interest ?>)</span>
-        </td>
+               <?php if ($profileID == $ID && $rows['New'] == 1) { echo "<span style='color:red;'>New</span>"; } ?>
+                <hr/>
+
         <?php
-        if ($profileID == $ID && $rows['New'] == 1) { echo "<span style='color:red;'>New</span>"; }
             }
-            echo "</tr></table>";
         }
 
         ?>

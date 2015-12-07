@@ -39,8 +39,8 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
     $message = mysql_real_escape_string($message);
     $message = makeLinks($message);
 
-    // check if sender prior message thread exists
-    $sql="SELECT * FROM Messages WHERE ThreadOwner_ID = $ID And Receiver_ID = $receiverID Or Sender_ID = $receiverID And InitialMessage = 1 ";
+    // check if sender has prior message thread with receiver
+    $sql="SELECT * FROM Messages WHERE (ThreadOwner_ID = $ID) And (Receiver_ID = $receiverID Or Sender_ID = $receiverID) And (InitialMessage = 1) ";
     $result = mysql_query($sql) or die(mysql_error());
     $numRows = mysql_num_rows($result);
     $initialMessage;
@@ -51,6 +51,20 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
     else {
         $initialMessage = 1;
     }
+
+    $sql="SELECT * FROM Messages WHERE (ThreadOwner_ID = $receiverID) And (Receiver_ID = $ID Or Sender_ID = $ID) And (InitialMessage = 1) ";
+    $result = mysql_query($sql) or die(mysql_error());
+    $numRows = mysql_num_rows($result);
+    $rInitialMessage;
+
+    if ($numRows > 0) {
+        $rInitialMessage = 0;
+    }
+    else {
+        $rInitialMessage = 1;
+    }
+
+    // check if receiver has prior message thread with sender
 
 
 // if photo is provided
@@ -235,7 +249,7 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
 
         // create thread for receiver
         $sql = "INSERT INTO Messages (ThreadOwner_ID, Sender_ID, Receiver_ID,  Subject,    Message,   InitialMessage,             New, MessageDate   ) VALUES
-                                    ($receiverID,    $ID,        $receiverID, '$subject', '$message', '$initialMessage',  '1', CURRENT_TIMESTAMP ) ";
+                                    ($receiverID,    $ID,        $receiverID, '$subject', '$message', '$rInitialMessage',  '1', CURRENT_TIMESTAMP ) ";
         mysql_query($sql) or die(mysql_error());
 
         echo "<script>alert('Message Sent'); </script>";
@@ -281,7 +295,8 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
     $receiverID = $_POST['receiverID'];
     $sql = "DELETE FROM Messages WHERE ThreadOwner_ID = $ID AND (Sender_ID = $receiverID Or Receiver_ID = $receiverID) ";
     mysql_query($sql) or die(mysql_error());
-    echo "<script>location = '/messages/$urlUsername'</script>";
+    $username = get_username($ID);
+    echo "<script>location = '/messages/$username'</script>";
 }
 ?>
 

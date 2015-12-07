@@ -291,7 +291,7 @@ function build_and_send_email($senderId, $toId, $notification, $postID, $pass)
         }
 
         // a post status update related to your service has been posted
-        $subject = "$name just followed you. <a href='".$link."'>Click here</a> to see your followers.";
+        $subject = "$name is now following you. <a href='".$link."'>Click here</a> to see your followers.";
     }
 
     // if we have a notification, then send the email.
