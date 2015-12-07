@@ -158,7 +158,9 @@ if (isset($_POST['video']) && ($_POST['video'] == "Upload Video")) {
 // handle profile update
 if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
     $firstName = $_POST['FirstName'];
+    $firstName = mysql_real_escape_string($firstName);
     $lastName = $_POST['LastName'];
+    $lastName = mysql_real_escape_string($lastName);
 
     if (!empty($_POST['ddCity']) && isset($_POST['ddCity'])) {
         $city = $_POST['ddCity'];
@@ -371,6 +373,56 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
     }
 </script>
 
+<script>
+    // follow
+    $(document).ready(function() {
+        $("body").delegate(".btnFollow", "click", function() {
+            var parentDiv = $(this).closest("div[id^=followDiv]");
+            data={
+                memberID: $(this).closest('tr').find('.followedID').val(),
+                ID: $(this).closest('tr').find('.followerID').val()
+                //add other properties similarly
+            }
+
+            $.ajax({
+                type: "post",
+                url: "follow.php",
+                data: data,
+                success: function(data)
+                {
+                    parentDiv.html(data);
+                }
+
+            })
+        });
+    });
+</script>
+
+<script>
+    // unfollow
+    $(document).ready(function() {
+        $("body").delegate(".btnUnfollow", "click", function() {
+            var parentDiv = $(this).closest("div[id^=followDiv]");
+            data={
+                memberID: $(this).closest('tr').find('.followedID').val(),
+                ID: $(this).closest('tr').find('.followerID').val()
+                //add other properties similarly
+            }
+
+            $.ajax({
+                type: "post",
+                url: "unfollow.php",
+                data: data,
+                success: function(data)
+                {
+                    parentDiv.html(data);
+                }
+
+            })
+        });
+    });
+</script>
+
 <?php
 $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 preg_match("/[^\/]+$/",$url ,$match);
@@ -502,9 +554,40 @@ $bgPhoto = $row['ProfilePhoto'];
 
                 ?>
 
+                <div id="followDiv1">
+                    <table >
+                        <tr>
+                            <td >
+            <?php
+                $sqlFollow = "SELECT * FROM Follows WHERE Follower_ID = $ID And Followed_ID = $memberID ";
+                $resultFollow = mysql_query($sqlFollow);
 
-                <hr/>
-                <br/>
+                if (mysql_num_rows($resultFollow) == 0) {
+                    echo '<form>';
+                    echo '<input type = "hidden" class = "followerID" value = "'.$ID.'" />';
+                    echo '<input type = "hidden" class = "followedID" value = "'.$memberID.'">';
+                    echo '<input type = "button" class = "btnFollow" value = "Follow" />';
+                    echo '</form>';
+                }
+                else {
+                    echo '<form>';
+                    echo '<input type = "hidden" class = "followerID" value = "'.$ID.'" />';
+                    echo '<input type = "hidden" class = "followedID" value = "'.$memberID.'">';
+                    echo '<input type = "button" class = "btnUnfollow" value = "Unfollow" />';
+                    echo '</form>';
+                }
+?>
+                            </td>
+                            </tr>
+                        </table>
+
+                <?php
+                $sqlFollowCount = "SELECT * FROM Follows WHERE Followed_ID = $memberID ";
+                $sqlFollowCountResult = mysql_query($sqlFollowCount);
+                echo '<b>'.$count = mysql_num_rows($sqlFollowCountResult).'</b>';
+                ?>
+                </div>
+            <br/>
 
                 <!--Profile photo --------------------------------------------------------------------------------->
 

@@ -254,7 +254,7 @@ function build_and_send_email($senderId, $toId, $notification, $postID, $pass)
     }
 
     if ($notification == 11) {
-
+        // related post
         $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
         $link;
 
@@ -270,6 +270,28 @@ function build_and_send_email($senderId, $toId, $notification, $postID, $pass)
 
         // a post status update related to your service has been posted
         $subject = "Someone just shared a post related to your interest. <a href='".$link."'>Click here</a> to see the post";
+    }
+
+    if ($notification == 12) {
+        // follow
+        $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+        $link;
+
+        $username = get_username($toId);
+        $name = get_users_name($senderId);
+
+        if (strstr($url, "local")) {
+            $link = "home.php";
+        }
+        else if (strstr($url, "dev")) {
+            $link = "http://dev.rapportbook.com/member_follows/$username";
+        }
+        else {
+            $link = "http://www.rapportbook.com/member_folows/$username";
+        }
+
+        // a post status update related to your service has been posted
+        $subject = "$name just followed you. <a href='".$link."'>Click here</a> to see your followers.";
     }
 
     // if we have a notification, then send the email.

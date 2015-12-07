@@ -231,5 +231,5 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
 
     </div>
 </div>
-</body>
-</html>
+
+<?php get_footer_files(); ?>

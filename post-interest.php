@@ -774,7 +774,7 @@ if (mysql_num_rows($result) > 0) {
 <div class="content-space"></div>
 
                  <?php if ($ID != $memberID) {?>
-                    <a href="/view_messages.php/<?php echo $username ?>">Message <?php echo $rows['FirstName'] ?> </a>
+                    <a href="/view_messages/<?php echo $username ?>">Message <?php echo $rows['FirstName'] ?> </a>
                 <?php } ?>
 
 <div class="content-space"></div>

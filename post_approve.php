@@ -82,7 +82,7 @@ $approvals = mysql_numrows($result3);
 echo "<div id = 'approvals$postID'>";
 
 
-if (mysql_numrows($result2) > 0) {
+if (mysql_num_rows($result2) > 0) {
 
     echo '<form>';
 
