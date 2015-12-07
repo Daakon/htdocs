@@ -172,6 +172,7 @@ if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
     $about = $_POST['About'];
     $about = mysql_real_escape_string($about);
     $interest = $_POST['Interest'];
+    $rss = mysql_real_escape_string($_POST['RSS']);
     $dob = $_POST['DOB'];
     $emailStatus = $_POST['EmailStatus'];
     $smsStatus = $_POST['SmsStatus'];
@@ -214,7 +215,8 @@ if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
                 State = '$state',
                 Phone = '$phone',
                 Zip = '$zip',
-                About = '$about'
+                About = '$about',
+                RSS = '$rss'
              WHERE Member_ID = $ID ";
     mysql_query($sql) or die(mysql_error());
     echo "<script>alert('Update Successful');</script>";
@@ -333,13 +335,11 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
         }
 
         // check dob
-        var dob = document.getElementById('DOB').value;
+        /*var dob = document.getElementById('DOB').value;
         if (dob == '') {
             alert('You must provide your date of birth');
             return false;
-        }
-
-
+        }*/
 
 
         return true;
@@ -473,7 +473,8 @@ $bgPhoto = $row['ProfilePhoto'];
                         Profile.Poster As Poster,
                         Profile.City As City,
                         Profile.State As State,
-                        Profile.About As About
+                        Profile.About As About,
+                        Profile.RSS As RSS
                         FROM Members, Profile
                         WHERE Members.ID = $memberID
                         AND Profile.Member_ID = $memberID ";
@@ -482,7 +483,7 @@ $bgPhoto = $row['ProfilePhoto'];
 
                 if (mysql_num_rows($result) == 0) {
                     echo "<script>alert('Profile not found');</script>";
-                    header('Location:home.php');
+                    header('Location:home');
                 }
 
                 $rows = mysql_fetch_assoc($result);
@@ -496,6 +497,7 @@ $bgPhoto = $row['ProfilePhoto'];
                 $city = $rows["City"];
                 $state = $rows['State'];
                 $about = $rows['About'];
+                $rss = $rows['RSS'];
                 $email = $rows['Email'];
                 $password = $rows['Password'];
                 $age = $rows['Age'];
@@ -558,7 +560,15 @@ $bgPhoto = $row['ProfilePhoto'];
 
             } else { echo "<span class='red-font'>You must be logged in to message this person</span>"; }
 
+                 if (strlen($rss) > 0) {
+                    echo "<h3>$firstName's RSS Feed</h3>";
+                    require 'rss.php';
 
+                }
+            ?>
+
+
+            <?php
             }
             else {
                 //*************************-----------------------------------------------------------------------
@@ -582,7 +592,8 @@ $bgPhoto = $row['ProfilePhoto'];
                         Profile.State As State,
                         Profile.Zip As Zip,
                         Profile.Phone As Phone,
-                        Profile.About As About
+                        Profile.About As About,
+                        Profile.RSS As RSS
                         FROM Members, Profile
                         WHERE Members.ID = $ID
                         AND Profile.Member_ID = $ID
@@ -608,6 +619,7 @@ $bgPhoto = $row['ProfilePhoto'];
             $password = $rows['Password'];
             $dob = $rows['DOB'];
             $interest = $rows['Interest'];
+            $rss = $rows['RSS'];
             $emailStatus = $rows['EmailStatus'];
             $smsStatus = $rows['SmsStatus'];
             if (strlen($posterName) == 0) {
@@ -773,6 +785,12 @@ $bgPhoto = $row['ProfilePhoto'];
                 </div>
 
                 <div class="form-group">
+                    <label for="RSS">RSS</label>
+                    <br/>
+                    <input type ="text" class="form-control" id="RSS" name="RSS" value="<?php echo $rss ?>"  />
+                </div>
+
+                <div class="form-group">
                     <label for="DOB">Date Of Birth</label>
                     <input type="date" class="form-control" id="DOB" name="DOB" value="<?php echo $dob ?>" />
                 </div>
@@ -838,7 +856,12 @@ $bgPhoto = $row['ProfilePhoto'];
                 <input type = "submit" value = "Update" name = "updateProfile" id = "updateProfile" class="btn btn-default" />
             </form>
 
-            <?php } ?>
+                <br/>
+                <?php if (strlen($rss) > 0) {
+                    echo "<h3>Your RSS Feed</h3>";
+                    require 'rss.php';
+
+             } } ?>
             <!------------->
         </div>
 
