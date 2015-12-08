@@ -36,18 +36,21 @@ if (!isset($_SESSION['ID']) && empty($_SESSION['ID'])) { ?>
 <?php } ?>
 
 
-<br/><br/>
-
-
 <?php if ($_SESSION['ID'] != $profileID) { ?>
-<ul class="list-inline profileMenu">
-    <li><a href="/home"><b>Home</b></a></li>
-    <li><a href="/<?php echo $username ?>">Profile</a></li>
-    <li><a href="/member_media/<?php echo $username ?>">Media</a></li>
-    <li><a href="/manage_post/<?php echo $username ?>">Posts</a></li>
-    <li><a href="/member_follows/<?php echo $username ?>">Followers</a></li>
-    <li><a href="/messages/<?php echo get_username($ID) ?>">Messages</a></li>
-    <li><a href="/<?php echo get_username($ID)?>"><span style="color:black;font-weight: 900;">My Profile</a></a></li>
-</ul>
 
+    <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Profile Menu
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+            <li><a href="/home"><b>Home</b></a></li>
+            <li><a href="/<?php echo $username ?>">Profile</a></li>
+            <li><a href="/member_media/<?php echo $username ?>">Media</a></li>
+            <li><a href="/manage_post/<?php echo $username ?>">Posts</a></li>
+            <li><a href="/member_follows/<?php echo $username ?>">Followers</a></li>
+            <li><a href="/messages/<?php echo get_username($ID) ?>">Messages</a></li>
+            <li><a href="/<?php echo get_username($ID)?>"><span style="color:black;font-weight: 900;">My Profile</span></a></li>
+        </ul>
+    </div>
+    <br/><br/>
 <?php } else { require 'profile_menu.php'; } ?>

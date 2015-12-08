@@ -117,34 +117,10 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
 
     <div class="row row-padding" >
 
-        <div class="col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8 ">
-            <ul class="list-inline">
-
-                <?php require 'profile_menu.php'; ?>
-            </ul>
-        </div>
-
-        <?php if ($username == get_username($ID)) { ?>
-            <style>
-                .list-inline {
-                    margin-top:-30px;
-                }
-            </style>
-        <?php
-            }
-        else { ?>
-        <style>
-            .list-inline {
-                margin-top:-100px;
-                padding-top: 30px;
-            }
-        </style>
-
-        <?php
-        }
-        ?>
-
         <div class="col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8 roll-call member-media" >
+
+            <?php require 'profile_menu.php'; ?>
+
             <h2>Media</h2>
 
             <?php

@@ -466,33 +466,8 @@ $bgPhoto = $row['ProfilePhoto'];
 
     <div class="row row-padding">
 
-        <div class="col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8 ">
-            <ul class="list-inline">
-
-                <?php require 'profile_menu.php'; ?>
-            </ul>
-        </div>
-
-        <?php if ($username == get_username($ID)) { ?>
-            <style>
-                .list-inline {
-                    margin-top:0%;
-                }
-            </style>
-            <?php
-        }
-        else { ?>
-            <style>
-                .list-inline {
-                    margin-top:0%;
-                }
-            </style>
-
-            <?php
-        }
-        ?>
-
         <div class="col-md-8  col-lg-8 col-md-offset-2 col-lg-offset-2 roll-call ">
+            <?php require 'profile_menu.php'; ?>
 
             <?php
             $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];

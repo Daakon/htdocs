@@ -111,32 +111,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
 
     <div class="row row-padding">
-        <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 ">
 
-            <ul class="list-inline">
-        <?php require 'profile_menu.php'; ?>
-            </ul>
-
-            <?php if ($username == get_username($ID)) { ?>
-                <style>
-                    .list-inline {
-                        margin-top:-30px;
-                    }
-                </style>
-                <?php
-            }
-            else { ?>
-                <style>
-                    .list-inline {
-                        margin-top:-80px;
-                        padding-top: 0px;
-                    }
-                </style>
-
-                <?php
-            }
-            ?>
-</div>
 
     <?php
     $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
@@ -188,6 +163,10 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
             <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 roll-call"
                  align="left">
+
+                <?php require 'profile_menu.php'; ?>
+
+                <br/>
 
             <img src="<?php echo $mediaPath.$profilePhoto ?>" class="profilePhoto-Feed" alt=""
                  title="<?php echo $name ?>" class='enlarge-onhover img-responsive'/> &nbsp

@@ -12,28 +12,12 @@ $ID = $_SESSION['ID'];
 ?>
 
 
-<div class="container" style="margin-top:-50px;">
+<div class="container">
     <div class="row row-padding">
 
-        <div class="col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8 ">
-        <ul class="list-inline">
+        <div class="col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8 roll-call ">
 
             <?php require 'profile_menu.php'; ?>
-        </ul>
-            </div>
-
-        <?php if ($username == get_username($ID)) { ?>
-            <style>
-                .list-inline {
-                    margin-top:-20px;
-                    padding-top:20px;
-                }
-            </style>
-            <?php
-        }
-        ?>
-
-        <div class="col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8 roll-call ">
 
             <h2>Messages</h2>
             <hr/>
