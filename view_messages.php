@@ -52,6 +52,7 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
         $initialMessage = 1;
     }
 
+    // check if receiver has prior message thread with sender
     $sql="SELECT * FROM Messages WHERE (ThreadOwner_ID = $receiverID) And (Receiver_ID = $ID Or Sender_ID = $ID) And (InitialMessage = 1) ";
     $result = mysql_query($sql) or die(mysql_error());
     $numRows = mysql_num_rows($result);
@@ -64,17 +65,49 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
         $rInitialMessage = 1;
     }
 
-    // check if receiver has prior message thread with sender
-
 
 // if photo is provided
     if (strlen($_FILES['flPostMedia']['name'] > 0)) {
 
         foreach ($_FILES['flPostMedia']['tmp_name'] as $k => $v) {
             $mediaName = $_FILES['flPostMedia']['name'][$k];
+            $mediaName = preg_replace('/\s+/', '', $mediaName);
+            $mediaName = str_replace('&', '', $mediaName);
+            $fileName = pathinfo($mediaName, PATHINFO_FILENAME);
+            $mediaName = trim(uniqid() . $mediaName);
             $type = $_FILES['flPostMedia']['type'][$k];
             $tempName = $_FILES['flPostMedia']['tmp_name'][$k];
             $size = $_FILES['flPostMedia']['size'][$k];
+
+
+            // check if word doc
+            $ext = end(explode(".", $mediaName));
+
+            $docFileTypes = array("doc", "docx", "ppt", "pptx", "xsl", "xslx");
+
+            // if word
+            if ($ext == 'doc' || $ext == 'docx') {
+                $downloadText = "Download Word Document";
+            }
+
+            // if excel
+            if ($ext == 'xsl' || $ext == 'xslx') {
+                $downloadText = "Download Spreadsheet";
+            }
+
+            // if powerpoint
+            if ($ext == 'ppt' || $ext == 'pptx') {
+                $downloadText = "Download Power Point";
+            }
+
+            if (in_array($ext, $docFileTypes)) {
+                require 'media_post_file_path.php';
+                require 'mediapath.php';
+                move_uploaded_file($tempName, $docFilePath);
+                $img = '<a href="'.$docPath.$mediaName.'" download >'.$downloadText.'</a>';
+                $img = mysql_real_escape_string($img);
+                goto BuildMessage;
+            }
 
 // check file size
             if ($size > 500000000) {
@@ -95,8 +128,7 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
 
 
             // add unique id to image name to make it unique and add it to the file server
-            $fileName = pathinfo($mediaName, PATHINFO_FILENAME);
-            $mediaName = trim(uniqid() . $mediaName);
+
             $mediaFile = $tempName;
             $mediaFile2 = "";
             copy($tempName, $mediaFile2);
@@ -120,124 +152,124 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
                     exec("$ffmpeg -i $fileName -vcodec libtheora -acodec libvorbis $oggFileName");
                     // convert webm
                     exec("$ffmpeg -i $fileName -vcodec libvpx -acodec libvorbis -f webm $webmFileName");
-}
-                } else {
-                    if ($type == "image/jpg" || $type == "image/jpeg") {
-                        $src = imagecreatefromjpeg($mediaFile);
-                    } else if ($type == "image/png") {
-                        $src = imagecreatefrompng($mediaFile);
-                    } else if ($type == "image/gif") {
-                        $src = imagecreatefromgif($mediaFile);
-                    } else {
-                        /* echo "<script>alert('Invalid File Type');</script>";
-                         header('Location:home.php');
-                         exit;*/
-                    }
                 }
-
-                require 'media_post_file_path.php';
-
-                if (in_array($type, $videoFileTypes)) {
-                    // convert to mp4 if not already an mp4
-                    if ($type != "video/mp4") {
-                        $audioName = $fileName;
-                        $newFileName = $fileName . ".mp4";
-                        $oggFileName = $fileName . ".ogv";
-                        $webmFileName = $fileName . ".webm";
-
-
-                        // convert mp4
-                        exec("$ffmpeg -i $fileName $newFileName");
-                        $mediaName = $newFileName;
-
-                        // convert ogg
-                        exec("$ffmpeg -i $fileName  $oggFileName");
-                        // convert webm
-                        exec("$ffmpeg -i $fileName  $webmFileName");
-
-                    }
+            } else {
+                if ($type == "image/jpg" || $type == "image/jpeg") {
+                    $src = imagecreatefromjpeg($mediaFile);
+                } else if ($type == "image/png") {
+                    $src = imagecreatefrompng($mediaFile);
+                } else if ($type == "image/gif") {
+                    $src = imagecreatefromgif($mediaFile);
                 } else {
-                    if (in_array($type, $photoFileTypes)) {
-                        // read exif data
-                        $exif = @exif_read_data($mediaFile);
-                        if (!empty($exif['Orientation'])) {
-                            $ort = $exif['Orientation'];
-                            switch ($ort) {
-                                case 8:
-                                    $src = imagerotate($src, 90, 0);
-                                    break;
-                                case 3:
-                                    $src = imagerotate($src, 180, 0);
-                                    break;
-                                case 6:
-                                    $src = imagerotate($src, -90, 0);
-                                    break;
-                            }
+                    /* echo "<script>alert('Invalid File Type');</script>";
+                     header('Location:home.php');
+                     exit;*/
+                }
+            }
+
+            require 'media_post_file_path.php';
+
+            if (in_array($type, $videoFileTypes)) {
+                // convert to mp4 if not already an mp4
+                if ($type != "video/mp4") {
+                    $audioName = $fileName;
+                    $newFileName = $fileName . ".mp4";
+                    $oggFileName = $fileName . ".ogv";
+                    $webmFileName = $fileName . ".webm";
+
+
+                    // convert mp4
+                    exec("$ffmpeg -i $fileName $newFileName");
+                    $mediaName = $newFileName;
+
+                    // convert ogg
+                    exec("$ffmpeg -i $fileName  $oggFileName");
+                    // convert webm
+                    exec("$ffmpeg -i $fileName  $webmFileName");
+
+                }
+            } else {
+                if (in_array($type, $photoFileTypes)) {
+                    // read exif data
+                    $exif = @exif_read_data($mediaFile);
+                    if (!empty($exif['Orientation'])) {
+                        $ort = $exif['Orientation'];
+                        switch ($ort) {
+                            case 8:
+                                $src = imagerotate($src, 90, 0);
+                                break;
+                            case 3:
+                                $src = imagerotate($src, 180, 0);
+                                break;
+                            case 6:
+                                $src = imagerotate($src, -90, 0);
+                                break;
                         }
                     }
-                    // handle transparency
-                    imagesavealpha($src, true);
-                    if ($type == "image/jpg" || $type == "image/jpeg") {
-                        imagejpeg($src, $postMediaFilePath, 50);
-                    } else if ($type == "image/png") {
-                        imagepng($src, $postMediaFilePath, 0, NULL);
-                    } else if ($type == "image/gif") {
-                        imagegif($src, $postMediaFilePath, 50);
-                    } else {
-                        /*echo "<script>alert('Invalid File Type');</script>";
-                        header('Location:home.php');
-                        exit;*/
-                    }
                 }
+                // handle transparency
+                imagesavealpha($src, true);
+                if ($type == "image/jpg" || $type == "image/jpeg") {
+                    imagejpeg($src, $postMediaFilePath, 50);
+                } else if ($type == "image/png") {
+                    imagepng($src, $postMediaFilePath, 0, NULL);
+                } else if ($type == "image/gif") {
+                    imagegif($src, $postMediaFilePath, 50);
+                } else {
+                    /*echo "<script>alert('Invalid File Type');</script>";
+                    header('Location:home.php');
+                    exit;*/
+                }
+            }
 
-                require 'media_post_file_path.php';
+            require 'media_post_file_path.php';
 
 // save photo/video
-                if (in_array($type, $videoFileTypes) || in_array($type, $audioFileTypes)) {
-                    move_uploaded_file($mediaFile, $postMediaFilePath);
+            if (in_array($type, $videoFileTypes) || in_array($type, $audioFileTypes)) {
+                move_uploaded_file($mediaFile, $postMediaFilePath);
 
 
-                    //copy new mp4 file path to ogg file path
-                    copy($postMediaFilePath, $postOggFilePathTemp);
-                    // overwrite mp4 with real ogg file path
-                    copy($postOggFilePath, $postOggFilePathTemp);
-                    // copy new mp4 file path to webm file path
-                    copy($postMediaFilePath, $postWebmFilePathTemp);
-                    // overwrite mp4 with real webm file path
-                    copy($postWebmFilePath, $postWebmFilePathTemp);
-                }
+                //copy new mp4 file path to ogg file path
+                copy($postMediaFilePath, $postOggFilePathTemp);
+                // overwrite mp4 with real ogg file path
+                copy($postOggFilePath, $postOggFilePathTemp);
+                // copy new mp4 file path to webm file path
+                copy($postMediaFilePath, $postWebmFilePathTemp);
+                // overwrite mp4 with real webm file path
+                copy($postWebmFilePath, $postWebmFilePathTemp);
+            }
 
 
 // check if file type is a photo
-                if (in_array($type, $photoFileTypes)) {
-                    $img = '<img src = "' . $mediaPath . $mediaName . '" />';
-                    $img = '<a href = "media.php?id=' . $ID . '&mid=' . $mediaID . '&mediaName=' . $media . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '">' . $img . '</a>';
-                }
-                // check if file type is a video
-                if (in_array($type, $videoFileTypes)) {
+            if (in_array($type, $photoFileTypes)) {
+                $img = '<img src = "' . $mediaPath . $mediaName . '" />';
+            }
+            // check if file type is a video
+            if (in_array($type, $videoFileTypes)) {
 
-                    // poster file name
-                    $posterName = "poster" . uniqid() . ".jpg";
-                    //where to save the image
-                    $poster = "$posterPath$posterName";
-                    //time to take screenshot at
-                    //$interval = 5;
-                    //screenshot size
-                    //$size = '440x280'; -s $size
-                    //ffmpeg command
-                    $cmd = "$ffmpeg -i \"$postMediaFilePath\" -r 1 -ss 3 -t 1  -f image2 $poster 2>&1";
-                    exec($cmd);
+                // poster file name
+                $posterName = "poster" . uniqid() . ".jpg";
+                //where to save the image
+                $poster = "$posterPath$posterName";
+                //time to take screenshot at
+                //$interval = 5;
+                //screenshot size
+                //$size = '440x280'; -s $size
+                //ffmpeg command
+                $cmd = "$ffmpeg -i \"$postMediaFilePath\" -r 1 -ss 3 -t 1  -f image2 $poster 2>&1";
+                exec($cmd);
 
-                    $img = '<video poster="/poster/' . $posterName . '" preload="none" controls>
+                $img = '<video poster="/poster/' . $posterName . '" preload="none" controls>
                                 <source src = "' . $videoPath . $mediaName . '" type="video/mp4" />
                                 <source src = "' . $videoPath . $oggFileName . '" type = "video/ogg" />
                                 <source src = "' . $videoPath . $webmFileName . '" type = "video/webm" />
                                 Your browser does not seem to support the video tag
                                 </video>';
-                }
-
+            }
+            BuildMessage:
             $newImage .= '<br/><br/>' . $img;
         }
+
         $message = $message . $newImage ;
 
 
@@ -303,8 +335,8 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
 
 <?php include('media_sizes.html'); ?>
 
-<body onload="window.scrollTo(0,document.body.scrollHeight);">
-    <div class="container">
+    <body onload="window.scrollTo(0,document.body.scrollHeight);">
+<div class="container">
     <div class="row row-padding">
 
         <div class="col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8 roll-call ">
@@ -376,10 +408,10 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
 
 
 
-                <ul class="list-inline">
+            <ul class="list-inline">
 
-                    <?php require 'profile_menu.php'; ?>
-                </ul>
+                <?php require 'profile_menu.php'; ?>
+            </ul>
 
             <style>
                 .list-inline {

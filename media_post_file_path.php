@@ -6,4 +6,6 @@
 
     $postWebmFilePathTemp = trim("./media/$webmFileName");
     $postWebmFilePath = trim("./media/$webmFileName");
+
+    $docFilePath = trim("./doc/$mediaName");
 ?>
