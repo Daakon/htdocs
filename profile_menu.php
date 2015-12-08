@@ -7,6 +7,11 @@ if ($profileID == $ID) {
 
 ?>
 
+<style>
+    .dropdown {
+        background: transparent;
+    }
+</style>
 <div class="dropdown">
     <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Profile Menu
         <span class="caret"></span></button>

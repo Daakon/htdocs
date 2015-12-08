@@ -23,9 +23,6 @@ $profileID = get_id_from_username($username);
 
     <div class="row row-padding" >
 
-
-
-
     <div class="col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8 roll-call member-media" >
         <?php require 'profile_menu.php'; ?>
 

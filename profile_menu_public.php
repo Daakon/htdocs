@@ -38,6 +38,12 @@ if (!isset($_SESSION['ID']) && empty($_SESSION['ID'])) { ?>
 
 <?php if ($_SESSION['ID'] != $profileID) { ?>
 
+    <style>
+        .dropdown {
+            background: transparent;
+        }
+    </style>
+
     <div class="dropdown">
         <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Profile Menu
             <span class="caret"></span>
