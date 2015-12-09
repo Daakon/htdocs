@@ -21,7 +21,7 @@ if ($profileID == $ID) {
         <li><a href="/member_media/<?php echo $username ?>">Media</a></li>
         <li><a href="/manage_post/<?php echo $username ?>">Manage Posts</a></li>
         <li><a href="/messages/<?php echo $username ?>">Messages <?php require 'getNewMessageCount.php' ?></a></li>
-        <li><a href="/member_follows/<?php echo get_username($profileID)?>">Followers</a></li>
+        <li><a href="/member_follows/<?php echo get_username($profileID) ?>">Followers</a></li>
         <?php
 
         $username = get_username_from_url();

@@ -1,3 +1,4 @@
+
 <?php
 
 require 'imports.php';
@@ -112,19 +113,17 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
     <div class="row row-padding">
 
+        <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 roll-call"
+             align="left" style="min-height: 10px;">
+        <?php require 'profile_menu.php'; ?>
+            </div>
 
     <?php
     $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
     preg_match("/[^\/]+$/", $url, $match);
     $username = $match[0];
     $profileID = get_id_from_username($username);
-    // ad demographics
-    /*$age = getAge($ID);
-    $state =  getMemberState($ID);
-    $interests = getInterests($ID);
-    $interests = strtolower($interests);
-    $gender = getGender($ID);
-    $ads = getAds($genre, $age, $state, $interests, $gender);*/
+
     $sql = "SELECT DISTINCT
     Members.ID As MemberID,
     Members.FirstName As FirstName,
@@ -137,11 +136,11 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
     FROM Members,Posts,Profile
     WHERE
     Posts.Member_ID = $profileID
-    And Members.IsActive = 1
-    And Members.IsSuspended = 0
-    And Members.ID = Posts.Member_ID
-    And Members.ID = Profile.Member_ID
-    And Posts.IsDeleted = 0
+    And(Members.IsActive = 1)
+    And (Members.IsSuspended = 0)
+    And (Members.ID = Posts.Member_ID)
+    And (Members.ID = Profile.Member_ID)
+    And (Posts.IsDeleted = 0)
     Group By PostID
     Order By PostID DESC ";
 
@@ -164,7 +163,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
             <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 roll-call"
                  align="left">
 
-                <?php require 'profile_menu.php'; ?>
+
 
                 <br/>
 

@@ -40,12 +40,13 @@ function get_head_files()
 
 
 
-
+<script>jQuery.noConflict();</script>
  <!--JQuery CDN-->
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
     <!--Bootstrap Latest compiled and minified JavaScript-->
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
 
     <!--Local JS file-->
 <!--    <script type="text/javascript" src="/resources/js/site.js"></script>-->
