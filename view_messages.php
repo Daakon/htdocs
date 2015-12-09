@@ -7,7 +7,7 @@ get_header();
 require 'memory_settings.php';
 $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 $ID = $_SESSION['ID'];
-
+$ffmpeg = '/usr/local/bin/ffmpeg';
 ?>
 
 
@@ -83,7 +83,7 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
             // check if word doc
             $ext = end(explode(".", $mediaName));
 
-            $docFileTypes = array("doc", "docx", "ppt", "pptx", "xsl", "xslx");
+            $docFileTypes = array("doc", "docx", "ppt", "pptx", "xsl", "xslx", "pdf");
 
             // if word
             if ($ext == 'doc' || $ext == 'docx') {
@@ -98,6 +98,11 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
             // if powerpoint
             if ($ext == 'ppt' || $ext == 'pptx') {
                 $downloadText = "Download Power Point";
+            }
+
+            // if pdf
+            if ($ext == 'pdf') {
+                $downloadText = "Download PDF";
             }
 
             if (in_array($ext, $docFileTypes)) {
@@ -426,9 +431,13 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
 
 
             <form action="" method="post" enctype="multipart/form-data">
-                <img src="/images/image-icon.png" height="30px" width="30px" alt="Photos/Video"/>
-                <strong>Attach A Photo or Video To Your Message</strong>
+                Add Any Combination of:<br/>
+                <img src="/images/image-icon.png" height="30px" width="30px" alt="Photos/Video/Documents"/>
+                <strong>Photos/Videos/Documents</strong>
+
+
                 <input type="file" width="10px;" name="flPostMedia[]" id="flPostMedia" multiple />
+
                 <textarea name="message" id="message" class="form-control"></textarea>
                 <input type="hidden" id="subject" name="subject" value="<?php echo $subject ?>" />
                 <input type="hidden" id="receiverID" name="receiverID" value="<?php echo $senderID ?>" />
