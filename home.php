@@ -255,7 +255,7 @@ if (isset($_POST['submit'])) {
         alert_all_matching_interests($category, getMemberState($ID));
 
     }
-    echo "<script>location='/home.php?scrollx=$scrollx&scrolly=$scrolly'</script>";
+    echo "<script>location='/home.php?genre=$category&scrollx=$scrollx&scrolly=$scrolly'</script>";
 }
 ?>
 <?php
