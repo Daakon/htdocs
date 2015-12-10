@@ -58,7 +58,7 @@
         feedwind_show_widget_iframe(params);
     })();
 </script>
-<div style="font-size:10px; text-align:center; width:300px;">
+<!--<div style="font-size:10px; text-align:center; width:300px;">
     <a href="http://feed.mikle.com/" target="_blank" style="color:#CCCCCC;">RSS Feed Widget</a>
-    <!--Please display the above link in your web page according to Terms of Service.-->
-</div><!-- end feedwind code -->
+    <!--Please display the above link in your web page according to Terms of Service.
+</div> end feedwind code -->

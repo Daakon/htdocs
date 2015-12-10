@@ -458,11 +458,20 @@ $profileMediaSrc = trim("/media/" . $profilePhoto);
             <?php echo date("F j, Y", strtotime($mediaDate)) ?>
 
             <hr/>
-            <a href="javascript:history.go(- <?php echo $back ?>)">Back</a>
-            <br/><br/><br/>
-
             <?php
+            $history = $_GET['h'];
+            if ($history == 0) { ?>
 
+                <a href="/home">Home</a>
+                <br/><br/><br/>
+
+            <?php } else { ?>
+
+                <a href="javascript:history.go(- <?php echo $back ?>)">Back</a>
+                <br/><br/><br/>
+
+                <?php
+            }
 
 
             // check if user has approved this post

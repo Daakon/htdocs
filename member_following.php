@@ -56,6 +56,7 @@ $profileID = get_id_from_username($username);
                       FROM Members, Profile WHERE
                       Members.ID = $followedID
                       AND Profile.Member_ID = $followedID
+                      Group By Interest
                       Order By Interest ASC ";
                 $result2 = mysql_query($sql2);
 

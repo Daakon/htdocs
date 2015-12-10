@@ -340,6 +340,7 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
 
 <?php include('media_sizes.html'); ?>
 
+
     <body onload="window.scrollTo(0,document.body.scrollHeight);">
 <div class="container">
     <div class="row row-padding">

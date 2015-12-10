@@ -104,7 +104,7 @@ if (!empty($_SESSION['ID'])) {
     <br/>
     <b>2. Post What Your Product Offers</b>.
     <br/>
-    <b>3. Start Networking & Building Resources</b></h4>
+    <b>3. Start Networking With Other Entrepreneurs</b></h4>
 
     <br/>
 

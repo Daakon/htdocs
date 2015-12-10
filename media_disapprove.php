@@ -48,7 +48,7 @@ if (mysql_num_rows($result2) > 0) {
     if ($approvals > 0) {
         //echo '<tr><td>';
 
-        echo '&nbsp;<span style = "color:red;font-weight:bold;font-size:16px">' . $approvals . '</font>';
+        echo '&nbsp;<span>' . $approvals . '</font>';
     }
     echo '</form>';
 } else {
@@ -66,7 +66,7 @@ if (mysql_num_rows($result2) > 0) {
     if ($approvals > 0) {
         //echo '<tr><td>';
 
-        echo '&nbsp;<span style = "color:red;font-weight:bold;font-size:16px">' . $approvals . '</font>';
+        echo '&nbsp;<span>' . $approvals . '</font>';
     }
     echo '</form>';
 }

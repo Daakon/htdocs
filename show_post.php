@@ -606,6 +606,8 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
             <?php
             if (!empty($ID)) {
+                $readonly = 'readonly';
+            }
             //check if member has approved this post
             //----------------------------------------------------------------
             //require 'getSessionType.php';
@@ -630,7 +632,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
                 echo '<input type ="hidden" class = "postID" id = "postID" value = "' . $postID . '" />';
                 echo '<input type ="hidden" class = "ID" id = "ID" value = "' . $ID . '" />';
-                echo '<input type ="button" class = "btnDisapprove" />';
+                echo '<input type ="button" class = "btnDisapprove" $readonly />';
 
                 if ($approvals > 0) {
 
@@ -643,7 +645,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
                 echo '<input type ="hidden" class = "postID" id = "postID" value = "' . $postID . '" />';
                 echo '<input type ="hidden" class = "ID" id = "ID" value = "' . $ID . '" />';
-                echo '<input type ="button" class = "btnApprove" />';
+                echo '<input type ="button" class = "btnApprove" $readonly />';
 
                 if ($approvals > 0) {
 
@@ -658,18 +660,18 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
             //-------------------------------------------------------------
             // End of approvals
             //-----------------------------------------------------------
-            }
+
             ?>
 
             <div class="content-space">
-                <?php if (isset($ID)) { ?>
+
                 <form method="post" action="" enctype="multipart/form-data"
                       onsubmit="showCommentUploading('comment<?php echo $postID?>', this);">
 
                     <input type="text" class="form-control" name="postComment" id="postComment"
                            placeholder="Write a comment" title='' />
 
-                    <h6>Attach A Photo/Video To Your Comment</h6>
+                    <h6>Add Photo/Video</h6>
                     <input type="file" name="flPostMedia" id="flPostMedia" class="flPostMedia"/>
 
                     <br/>
@@ -681,7 +683,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                         </div>
                     </div>
 
-                    <input type="submit" name="btnComment" id="btnComment" Value="Comment"/>
+                    <input type="submit" name="btnComment" id="btnComment" Value="Comment" $readonly />
                     <input type="hidden" name="postID" id="postID" Value="<?php echo $postID ?>"/>
                     <input type="hidden" name="ID" id="ID" value="<?php echo $ID ?>"/>
                     <input type="hidden" name="ownerId" id="ownerId" value="<?php echo $MemberID ?>"/>
@@ -692,8 +694,6 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
                 <br/>
 
-
-                <?php } ?>
 
                 <?php
                 $sql3 = "SELECT DISTINCT
