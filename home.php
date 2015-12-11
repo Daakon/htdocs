@@ -18,6 +18,9 @@ $isServiceProvider = $_SESSION['IsServiceProvider'];
 // handle roll call post
 $post = mysql_real_escape_string($_POST['post']);
 $category = $_POST['category'];
+$city = $_SESSION['city'];
+$state = $_SESSION['state'];
+
 if (isset($_POST['submit'])) {
 
     $_SESSION['NewPostID'] = null;

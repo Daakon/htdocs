@@ -460,7 +460,7 @@ $profileMediaSrc = trim("/media/" . $profilePhoto);
             <hr/>
             <?php
             $history = $_GET['h'];
-            if ($history == 0) { ?>
+            if ($history=='0') { ?>
 
                 <a href="/home">Home</a>
                 <br/><br/><br/>

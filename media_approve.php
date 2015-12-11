@@ -46,7 +46,7 @@ foreach ($comment_ids as $item) {
     if (strlen($item) > 0) {
         if (checkActive($item)) {
             if (checkEmailActive($item)) {
-                build_and_send_email($user_id, $item, 2, $postID, '');
+                build_and_send_email($user_id, $item, 7, $mediaName, '');
             }
         }
     }
@@ -54,14 +54,14 @@ foreach ($comment_ids as $item) {
 
 
     //Notify the post creator
-    $ownerID = $_SESSION['MediaMemberID'];
-    $sql = "SELECT Member_ID FROM Media WHERE ID = '$ownerID';";
+    $sql = "SELECT Member_ID FROM Media WHERE MediaName = '$mediaName';";
 
     $result = mysql_query($sql) or die(mysql_error());
     $rows = mysql_fetch_assoc($result);
     $creatorID = $rows['Member_ID'];
 
-    if (checkEmailActive($ID)) {
+    if (checkEmailActive($creatorID)) {
+        echo "<script>alert('$creatorID');</script>";
         build_and_send_email($ID, $creatorID, 7, $mediaName, '');
     }
 }

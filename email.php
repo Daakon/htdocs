@@ -181,6 +181,7 @@ function build_and_send_email($senderId, $toId, $notification, $postID, $pass)
     }
 
     if ($notification == 7) {
+
 // photo approve
         // media id is the person's id who photo just got liked and is receiving this email
         $ID = $toId;
