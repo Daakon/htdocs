@@ -49,21 +49,24 @@ function makeLinks($str)
 
                 // extract the src for that image
                 $srcPattern = '/src="([^"]*)"/';
+
                 preg_match($srcPattern, $image, $Imatches);
                 $src = $Imatches[1];
 
-                // check if the image src has a fully qualified http path
-                preg_match('/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i', $src, $srcPathArray);
-                $srcPath = $srcPathArray[0];
-
-                // if the image does not have a fully qualified path
-                // append the full host name to the image src we extracted
-                // rebuild the image tag with the new source
-                if (empty($srcPath)) {
-                    $srcPath = $hostFullName . $src;
-                    $image = '<img src = "http://' . $srcPath . '" />';
+                // only if there is an image
+                if (strlen($src) > 0) {
+                    // check if the image src has a fully qualified http path
+                    preg_match('/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i', $src, $srcPathArray);
+                    $srcPath = $srcPathArray[0];
+                    echo "<script>alert('$srcPattern');</script>";
+                    // if the image does not have a fully qualified path
+                    // append the full host name to the image src we extracted
+                    // rebuild the image tag with the new source
+                    if (empty($srcPath)) {
+                        $srcPath = $hostFullName . $src;
+                        $image = '<img src = "http://' . $srcPath . '" />';
+                    }
                 }
-
 
                 // get favicon
                 $favicon = '<img src="http://' . $hostFullName . '/favicon.ico" height="20" width="20" />';

@@ -86,6 +86,12 @@ $postOwner = $memberID;
     <div class="post">
 
         <?php
+        // if post contains a url, get the title
+        preg_match('/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i', $post, $matches);
+        $urlCheck = $matches[0];
+
+        // check check post length if it has a url in it
+        if (strlen($urlCheck) == 0) {
         if (preg_match('/^.{1,260}\b/s', $body, $match))
         {
             $line=$match[0];
@@ -101,7 +107,7 @@ $postOwner = $memberID;
                 </a>
 
             <?php
-        }
+        } }
         else {
             echo nl2br($post);
         }

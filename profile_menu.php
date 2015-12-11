@@ -12,10 +12,25 @@ if ($profileID == $ID) {
         background: transparent;
     }
 </style>
-<div class="dropdown">
-    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Profile Menu
-        <span class="caret"></span></button>
-    <ul class="dropdown-menu">
+
+<?php
+if (strstr($url, "view_messages")) {
+    $class1 = "";
+    $class2 = "";
+    $style= "style='display:none'";
+}
+else {
+    $class1 = "dropdown";
+    $class2 = "dropdown-menu";
+    $style = "";
+}
+?>
+
+<div class="<?php echo $class1 ?>">
+    <button <?php echo $style ?> class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Profile Menu
+        <span class="caret"></span>
+    </button>
+    <ul class="<?php echo $class2 ?>">
         <li><a href="/home">Home</a></li>
         <li><a href="/<?php echo $username ?>">Profile</a></li>
         <li><a href="/member_media/<?php echo $username ?>">Media</a></li>
