@@ -50,7 +50,7 @@ $ID = $_SESSION['ID'];
                     $username = $rows2['Username'];
 
                     // get total exchanged messages from 2 people
-                    $sqlx = "SELECT ID FROM Messages WHERE ThreadOwner_ID = $ID And (Sender_ID = $otherID) AND (Receiver_ID = $ID) ";
+                    $sqlx = "SELECT ID FROM Messages WHERE ThreadOwner_ID = $ID And (Sender_ID = $otherID) Or (Receiver_ID = $otherID) ";
                     $resultx = mysql_query($sqlx);
                     if (mysql_num_rows($resultx) == 1) {
                         $query = "AND (InitialMessage = 1)";
@@ -62,7 +62,7 @@ $ID = $_SESSION['ID'];
 
                     // get new message
 
-                    $sql3 = "SELECT New FROM Messages WHERE ThreadOwner_ID = $ID And (Sender_ID = $otherID) AND (Receiver_ID = $ID) AND (New = 1) $query ";
+                    $sql3 = "SELECT ID FROM Messages WHERE ThreadOwner_ID = $ID And (Sender_ID = $otherID) AND (Receiver_ID = $ID) AND (New = 1) $query ";
                     $result3 = mysql_query($sql3) or die(mysql_error());
                     $row3 = mysql_fetch_assoc($result3);
 
