@@ -49,9 +49,20 @@ $ID = $_SESSION['ID'];
                     $name = $rows2['FirstName'].' '.$rows2['LastName'];
                     $username = $rows2['Username'];
 
+                    // get total exchanged messages from 2 people
+                    $sqlx = "SELECT ID FROM Messages WHERE ThreadOwner_ID = $ID And (Sender_ID = $otherID) AND (Receiver_ID = $ID) ";
+                    $resultx = mysql_query($sqlx);
+                    if (mysql_num_rows($resultx) == 1) {
+                        $query = "AND (InitialMessage = 1)";
+                    }
+                    else {
+                        // if more than one message, we no longer count the initial message
+                        $query = "AND (InitialMessage != 1)";
+                    }
+
                     // get new message
 
-                    $sql3 = "SELECT New FROM Messages WHERE ThreadOwner_ID = $ID And (Sender_ID = $otherID) AND (Receiver_ID = $ID) AND (New = 1)";
+                    $sql3 = "SELECT New FROM Messages WHERE ThreadOwner_ID = $ID And (Sender_ID = $otherID) AND (Receiver_ID = $ID) AND (New = 1) $query ";
                     $result3 = mysql_query($sql3) or die(mysql_error());
                     $row3 = mysql_fetch_assoc($result3);
 

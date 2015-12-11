@@ -320,6 +320,11 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
         }
     }
 
+    // update the initial message row so we know which messages to render first in messages.php
+    $sql = "UPDATE Messages SET New = 1
+            WHERE InitialMessage = 1 AND ThreadOwner_ID = $receiverID AND Sender_ID = $ID Or Receiver_ID = $ID";
+    mysql_query($sql);
+
     // notify recipient of email
     build_and_send_email($ID, $receiverID,8, "","");
     echo "<script>location = '/view_messages/$receiverUsername'</script>";
