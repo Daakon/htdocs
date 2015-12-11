@@ -58,13 +58,13 @@ function makeLinks($str)
                     // check if the image src has a fully qualified http path
                     preg_match('/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i', $src, $srcPathArray);
                     $srcPath = $srcPathArray[0];
-                    echo "<script>alert('$srcPattern');</script>";
-                    // if the image does not have a fully qualified path
-                    // append the full host name to the image src we extracted
-                    // rebuild the image tag with the new source
+
+                    // return nothing, cannot guess image path on someone else's server
+                    // too risky of returning a broken image.
                     if (empty($srcPath)) {
-                        $srcPath = $hostFullName . $src;
-                        $image = '<img src = "http://' . $srcPath . '" />';
+
+                        $srcPath = '';
+                        $image = '';
                     }
                 }
 

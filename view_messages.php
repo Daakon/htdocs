@@ -319,7 +319,7 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
             text_notification($receiverID, $ID);
         }
     }
-    
+
     // update the initial message row so we know which messages to render first in messages.php
     $sql = "UPDATE Messages SET New = 1
             WHERE ThreadOwner_ID = $receiverID And (InitialMessage = 1) And (Sender_ID = $ID) Or (Receiver_ID = $ID)";
