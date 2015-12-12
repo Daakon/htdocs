@@ -91,14 +91,12 @@ $postOwner = $memberID;
         $urlCheck = $matches[0];
 
         // check check post length if it has a url in it
-        if (strlen($urlCheck) == 0) {
-        if (preg_match('/^.{1,260}\b/s', $body, $match))
-        {
-            $line=$match[0];
-        }
+        if (strstr($post, "http://") || strstr($post, "https://")) {
+            echo nl2br($post);
 
-        if (strlen($post) > 700) {
-            $post500 = substr($post, 0, strpos($post, ' ', 700)).'<br/>'; ?>
+        }
+        else if (strlen($post) > 700) {
+                $post500 = substr($post, 0, strpos($post, ' ', 700)).'<br/>'; ?>
 
                 <?php echo nl2br($post500) ?>
                 <br/>
@@ -106,10 +104,10 @@ $postOwner = $memberID;
                     <span style="color:black;font-weight: 800">Show More</span>
                 </a>
 
-            <?php
-        } }
-        else {
-            echo nl2br($post);
+                <?php
+            }
+    else {
+        echo nl2br($post);
         }
         ?>
 

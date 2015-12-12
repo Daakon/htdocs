@@ -48,24 +48,24 @@ function makeLinks($str)
                 }
 
                 // extract the src for that image
+                // to make sure it has a full path
                 $srcPattern = '/src="([^"]*)"/';
 
                 preg_match($srcPattern, $image, $Imatches);
                 $src = $Imatches[1];
 
-                // only if there is an image
+                // if there is a full path image
                 if (strlen($src) > 0) {
-                    // check if the image src has a fully qualified http path
-                    preg_match('/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i', $src, $srcPathArray);
-                    $srcPath = $srcPathArray[0];
-
-                    // return nothing, cannot guess image path on someone else's server
-                    // too risky of returning a broken image.
-                    if (empty($srcPath)) {
-
-                        $srcPath = '';
+                   if (strstr($src, "http://") || strstr($src, "https://")) {
+                       // do nothing to the image variable
+                   }
+                    else {
+                        // return nothing, cannot guess image path on someone else's server
+                        // too risky of returning a broken image.
                         $image = '';
                     }
+
+
                 }
 
                 // get favicon
