@@ -258,7 +258,7 @@ if (isset($_POST['submit'])) {
         alert_all_matching_interests($category, getMemberState($ID));
 
     }
-    echo "<script>location='/home.php?genre=$category&scrollx=$scrollx&scrolly=$scrolly'</script>";
+    echo "<script>location='/home.php?genre=$category&scrollx=630&scrolly=630'</script>";
 }
 ?>
 <?php
@@ -788,9 +788,6 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
 
 
-
-
-<!--If NOT a service provider -->
 
                 <form method="post" enctype="multipart/form-data" action="" onsubmit="return showUploading()">
                     <img src="/images/image-icon.png" height="30px" width="30px" alt="Photos/Video"/>
