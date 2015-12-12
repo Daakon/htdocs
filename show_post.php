@@ -584,25 +584,30 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                  title="<?php echo $name ?>" class='enlarge-onhover'/> &nbsp
             <b><span class="profileName-Feed"><?php echo $name ?></span>
 
-            <div class="post">
+
+                <div class="post" <?php echo $postStyle ?>">
                 <?php echo nl2br($post); ?>
             </div>
 
+        <hr/>
+
                 <?php if (isset($ID)) { ?>
 
-                    <a href='/post-interest?interest=<?php echo urlencode($category) ?>' class='category'><span class="engageText">#<?php echo $category ?></span></a>
-
-
-                    <div class="content-space" ></div>
+                    <div class="content-space" <?php echo $style ?>>
+                        <a href='/post-interest?interest=<?php echo urlencode($category) ?>' class='category'><span class="engageText">#<?php echo $category ?></span></a>
+                    </div>
 
 
                     <?php if ($ID != $memberID) {?>
-                        <a href="/view_messages/<?php echo $username ?>"><span class="engageText">Message <?php echo $rows['FirstName'] ?></span> </a>
-                    <?php } ?>
+                        <div class="content-space">
+                            <a href="/view_messages/<?php echo $username ?>"><span class="engageText">Message <?php echo $rows['FirstName'] ?></span> </a>
+                        </div>
+                            <?php } ?>
 
                 <?php } ?>
 
-                <div class="content-space" ></div>
+
+<hr/>
 
             <?php
             if (!empty($ID)) {
@@ -611,7 +616,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
             //check if member has approved this post
             //----------------------------------------------------------------
             //require 'getSessionType.php';
-
+            echo "<div class='content-space'' >";
             $sql2 = "SELECT ID FROM PostApprovals WHERE Post_ID = '$postID' AND Member_ID = '$ID'";
             $result2 = mysql_query($sql2) or die(mysql_error());
             $rows2 = mysql_fetch_assoc($result2);
@@ -660,8 +665,9 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
             //-------------------------------------------------------------
             // End of approvals
             //-----------------------------------------------------------
-
+            echo "</div>";
             ?>
+
 
             <div class="content-space">
 

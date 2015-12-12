@@ -231,7 +231,7 @@ if (isset($_POST['submit'])) {
 
 
 
-            $post = $post . $newImage. '<br/>';
+            $post = $post . $newImage;
 
             $sql = "INSERT INTO Posts (Post,    Poster,	      Category,  Member_ID,   PostDate) Values
                                               ('$post', '$posterName', '$category', '$ID',       CURDATE())";

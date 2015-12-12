@@ -83,12 +83,11 @@ $postOwner = $memberID;
          title="<?php echo $name ?>" /> &nbsp <span class="profileName-Feed"><?php echo $name ?></span>
 </a>
 
-    <div class="post">
+
+
+    <div class="post" <?php echo $postStyle ?>>
 
         <?php
-        // if post contains a url, get the title
-        preg_match('/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i', $post, $matches);
-        $urlCheck = $matches[0];
 
         // check check post length if it has a url in it
         if (strstr($post, "http://") || strstr($post, "https://")) {
@@ -113,18 +112,20 @@ $postOwner = $memberID;
 
     </div>
 
-
+<hr/>
 
     <?php if (isset($ID)) { ?>
+        <div class="content-space" >
+            <a href='/post-interest?interest=<?php echo urlencode($category) ?>' class='category'><span class="engageText">#<?php echo $category ?></span></a>
+        </div>
 
-    <a href='/post-interest?interest=<?php echo urlencode($category) ?>' class='category'><span class="engageText">#<?php echo $category ?></span></a>
 
-
-    <div class="content-space" ></div>
 
             <?php if ($ID != $memberID) {?>
-            <a href="/view_messages/<?php echo $username ?>"><span class="engageText">Message <?php echo $rows['FirstName'] ?></span> </a>
-            <?php } ?>
+                <div class="content-space" >
+                    <a href="/view_messages/<?php echo $username ?>"><span class="engageText">Message <?php echo $rows['FirstName'] ?></span> </a>
+                </div>
+        <?php } ?>
 
 <?php } ?>
 
@@ -139,7 +140,7 @@ $postOwner = $memberID;
             $readonly = "";
         }
 
-
+echo "<hr/>";
 
         //check if member has approved this post
         //----------------------------------------------------------------

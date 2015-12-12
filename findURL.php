@@ -75,17 +75,17 @@ function makeLinks($str)
                 $titleLink = '<a href="' . $link . '" target="_blank">' . $favicon . ' ' . $title . '</a>';
 
                 // style the title & add webpage image to link
-                $titleLink = '<span style="background:#f6f7f8;padding-right:5px;margin-top:10px;max-width:100%">' . $titleLink . '</span><br/>
-            <a href="' . $link . '" target="_blank">' . $image . '</a><br/>';
+                $titleLink = '<span style="background:#f6f7f8;padding-right:5px;margin-top:10px;max-width:100%">' . $titleLink . '</span>
+                <a href="' . $link . '" target="_blank">' . $image . '</a>';
 
                 // remove special characters
                 $titleLink = mysql_real_escape_string($titleLink);
 
-                return $str . '<br/><br/>' . $titleLink . '<br/><br/>';
+                return $str . '<br/><br/>' . $titleLink;
             }
         }
 
-        return $str . '<br/><br/>';
+        return $str;
     }
 }
 

@@ -745,39 +745,43 @@ if (mysql_num_rows($result) > 0) {
             </a>
 
 
-            <div class="post">
+    <div class="post" >
                <?php
-        if (preg_match('/^.{1,260}\b/s', $body, $match))
-        {
-            $line=$match[0];
-        }
 
-        if (strlen($post) > 700) {
-            $post500 = substr($post, 0, strpos($post, ' ', 700)).'<br/>'; ?>
+                // check check post length if it has a url in it
+                if (strstr($post, "http://") || strstr($post, "https://")) {
+                    echo nl2br($post);
 
-                <?php echo nl2br($post500) ?>
-                <br/>
-                <a style="display:block;" style="width:100%;" href="show_post?postID=<?php echo $postID ?>&email=0">
-                    <span style="color:black;font-weight: 800">Show More</span>
-                </a>
+                }
+                else if (strlen($post) > 700) {
+                    $post500 = substr($post, 0, strpos($post, ' ', 700)).'<br/>'; ?>
 
-            <?php
-        }
-        else {
-            echo nl2br($post);
-        }
-                echo '<div class="content-space"></div>';
-                echo $city .', '. $state;
+                    <?php echo nl2br($post500) ?>
+                    <br/>
+                    <a style="display:block;" style="width:100%;" href="show_post?postID=<?php echo $postID ?>&email=0">
+                        <span style="color:black;font-weight: 800">Show More</span>
+                    </a>
+
+                    <?php
+                }
+                else {
+                    echo nl2br($post);
+                }
                 ?>
             </div>
 
-<div class="content-space"></div>
+            <hr/>
+             <?php echo $city .', '. $state; ?>
 
+
+            <div class="content-space">
                  <?php if ($ID != $memberID) {?>
                     <a href="/view_messages/<?php echo $username ?>">Message <?php echo $rows['FirstName'] ?> </a>
                 <?php } ?>
+            </div>
 
-<div class="content-space"></div>
+
+            <hr/>
 
             <?php
 
@@ -836,8 +840,6 @@ if (mysql_num_rows($result) > 0) {
 
 
 
-
-
         <div class="content-space">
             <form method="post" action="" enctype="multipart/form-data"
                   onsubmit="showCommentUploading('comment<?php echo $postID?>', this);">
@@ -865,11 +867,6 @@ if (mysql_num_rows($result) > 0) {
                 <input type="hidden" name="scrolly" id="scrolly" value="0"/>
             </form>
 
-            <br/>
-
-            <?php if ($memberID != $ID) { ?>
-                <a href="/view_messages?id=<?php echo $memberID ?>">Direct Message <?php echo $rows['FirstName'] ?></a>
-            <?php } ?>
             <br/>
 
 
