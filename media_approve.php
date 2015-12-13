@@ -61,7 +61,6 @@ foreach ($comment_ids as $item) {
     $creatorID = $rows['Member_ID'];
 
     if (checkEmailActive($creatorID)) {
-        echo "<script>alert('$creatorID');</script>";
         build_and_send_email($ID, $creatorID, 7, $mediaName, '');
     }
 }

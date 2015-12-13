@@ -69,7 +69,7 @@ $postOwner = $memberID;
 
 
 
-<div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 roll-call">
+<div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 col-sm-12 col-xs-12 roll-call">
 
     <?php
         $profileUrl = "/$username";
@@ -115,21 +115,17 @@ $postOwner = $memberID;
 <hr class="hr-line" />
 
     <?php if (isset($ID)) { ?>
-        <div class="content-space" >
             <a href='/post-interest?interest=<?php echo urlencode($category) ?>' class='category'><span class="engageText">#<?php echo $category ?></span></a>
-        </div>
 
 
 
             <?php if ($ID != $memberID) {?>
-                <div class="content-space" >
-                    <a href="/view_messages/<?php echo $username ?>"><span class="engageText">Message <?php echo $rows['FirstName'] ?></span> </a>
-                </div>
+                    | <a href="/view_messages/<?php echo $username ?>"><span class="engageText">Message </span> </a>
         <?php } ?>
 
 <?php } ?>
 
-    <div class="content-space" />
+    <div >
 
         <?php
 

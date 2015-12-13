@@ -771,15 +771,13 @@ if (mysql_num_rows($result) > 0) {
             </div>
 
             <hr class="hr-line"/>
-            
+
              <?php echo $city .', '. $state; ?>
 
 
-            <div class="content-space">
                  <?php if ($ID != $memberID) {?>
-                    <a href="/view_messages/<?php echo $username ?>">Message <?php echo $rows['FirstName'] ?> </a>
+                    | <a href="/view_messages/<?php echo $username ?>">Message </a>
                 <?php } ?>
-            </div>
 
 
             <hr class="hr-line" />

@@ -593,15 +593,11 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
                 <?php if (isset($ID)) { ?>
 
-                    <div class="content-space" <?php echo $style ?>>
                         <a href='/post-interest?interest=<?php echo urlencode($category) ?>' class='category'><span class="engageText">#<?php echo $category ?></span></a>
-                    </div>
 
 
                     <?php if ($ID != $memberID) {?>
-                        <div class="content-space">
-                            <a href="/view_messages/<?php echo $username ?>"><span class="engageText">Message <?php echo $rows['FirstName'] ?></span> </a>
-                        </div>
+                            | <a href="/view_messages/<?php echo $username ?>"><span class="engageText">Message </span> </a>
                             <?php } ?>
 
                 <?php } ?>
