@@ -112,7 +112,7 @@ $postOwner = $memberID;
 
     </div>
 
-<hr/>
+<hr class="hr-line" />
 
     <?php if (isset($ID)) { ?>
         <div class="content-space" >
@@ -140,7 +140,7 @@ $postOwner = $memberID;
             $readonly = "";
         }
 
-echo "<hr/>";
+echo "<hr class='hr-line'/>";
 
         //check if member has approved this post
         //----------------------------------------------------------------

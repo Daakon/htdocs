@@ -770,7 +770,8 @@ if (mysql_num_rows($result) > 0) {
                 ?>
             </div>
 
-            <hr/>
+            <hr class="hr-line"/>
+            
              <?php echo $city .', '. $state; ?>
 
 
@@ -781,7 +782,7 @@ if (mysql_num_rows($result) > 0) {
             </div>
 
 
-            <hr/>
+            <hr class="hr-line" />
 
             <?php
 

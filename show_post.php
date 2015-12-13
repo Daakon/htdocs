@@ -589,7 +589,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                 <?php echo nl2br($post); ?>
             </div>
 
-        <hr/>
+        <hr class="hr-line" />
 
                 <?php if (isset($ID)) { ?>
 
@@ -607,7 +607,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                 <?php } ?>
 
 
-<hr/>
+<hr class="hr-line" />
 
             <?php
             if (!empty($ID)) {
