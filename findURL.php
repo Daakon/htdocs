@@ -68,11 +68,8 @@ function makeLinks($str)
 
                 }
 
-                // get favicon
-                $favicon = '<img src="http://' . $hostFullName . '/favicon.ico" height="20" width="20" />';
-
                 // add link
-                $titleLink = '<a href="' . $link . '" target="_blank">' . $favicon . ' ' . $title . '</a>';
+                $titleLink = '<a href="' . $link . '" target="_blank">' . $title . '</a>';
 
                 // style the title & add webpage image to link
                 $titleLink = '<span style="background:#f6f7f8;padding-right:5px;margin-top:10px;max-width:100%">' . $titleLink . '</span>

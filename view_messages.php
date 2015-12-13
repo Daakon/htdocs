@@ -71,6 +71,7 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
 
         foreach ($_FILES['flPostMedia']['tmp_name'] as $k => $v) {
             $mediaName = $_FILES['flPostMedia']['name'][$k];
+            $orgName = $_FILES['flPostMedia']['name'][$k];
             $mediaName = preg_replace('/\s+/', '', $mediaName);
             $mediaName = str_replace('&', '', $mediaName);
             $fileName = pathinfo($mediaName, PATHINFO_FILENAME);
@@ -87,22 +88,22 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
 
             // if word
             if ($ext == 'doc' || $ext == 'docx') {
-                $downloadText = "Download Word Document";
+                $downloadText = mysql_real_escape_string("Download $orgName Word Document");
             }
 
             // if excel
             if ($ext == 'xsl' || $ext == 'xslx') {
-                $downloadText = "Download Spreadsheet";
+                $downloadText = mysql_real_escape_string("Download $orgName Spreadsheet");
             }
 
             // if powerpoint
             if ($ext == 'ppt' || $ext == 'pptx') {
-                $downloadText = "Download Power Point";
+                $downloadText = mysql_real_escape_string("Download $orgName Power Point");
             }
 
             // if pdf
             if ($ext == 'pdf') {
-                $downloadText = "Download PDF";
+                $downloadText = mysql_real_escape_string("Download $orgName PDF");
             }
 
             if (in_array($ext, $docFileTypes)) {
@@ -272,10 +273,18 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
                                 </video>';
             }
             BuildMessage:
-            $newImage .= '<br/><br/>' . $img;
-        }
 
-        $message = $message . $newImage ;
+            if (strlen($img) > 0) {
+                $br = "<br/><br/>";
+            }
+            $newImage .= $br . $img;
+
+        } // end loop
+
+        if (strlen($img) == 0) {
+            $br = "<br/>";
+        }
+        $message = $message . $newImage .'<br/>' ;
 
 
 
