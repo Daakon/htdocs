@@ -206,7 +206,6 @@ echo "<hr/>";
                 <input type="hidden" name="scrolly" id="scrolly" value="0"/>
             </form>
 
-            <br/>
 <?php } ?>
 
             <?php

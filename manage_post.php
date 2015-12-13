@@ -163,32 +163,56 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
             <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 roll-call"
                  align="left">
 
-
-
-                <br/>
-
             <img src="<?php echo $mediaPath.$profilePhoto ?>" class="profilePhoto-Feed" alt=""
                  title="<?php echo $name ?>" class='enlarge-onhover img-responsive'/> &nbsp
                 <span class="profileName-Feed"><?php echo $name ?></span>
 
-            <div class="post"><?php echo nl2br($post); ?></div>
+                <div class="post">
+                <?php
+                // check check post length if it has a url in it
+                if (strstr($post, "http://") || strstr($post, "https://")) {
+                echo nl2br($post);
 
-            <br/>
-            <a href='/post-interest.php?interest=<?php echo urlencode($category) ?>' class='category'><h5><?php echo $category ?></h5></a>
+                }
+                else if (strlen($post) > 700) {
+                $post500 = substr($post, 0, strpos($post, ' ', 700)).'<br/>'; ?>
 
-            <br/><br/>
+                <?php echo nl2br($post500) ?>
+                <br/>
+                <a style="display:block;" style="width:100%;" href="show_post?postID=<?php echo $postID ?>&email=0">
+                    <span style="color:black;font-weight: 800">Show More</span>
+                </a>
+
+                <?php
+                }
+                else {
+                    echo nl2br($post);
+                }
+                ?>
+                </div>
+
+                <hr/>
+
+                <div class="content-space">
+                    <a href='/post-interest.php?interest=<?php echo urlencode($category) ?>'><span class="engageText">#<?php echo $category ?></span></a>
+                </div>
+
 
             <?php if ($_SESSION['ID'] == get_id_from_username($username)) { ?>
-                <!--DELETE BUTTON ------------------>
-                <form action="" method="post" onsubmit="return confirm('Do you really want to delete this post?')">
-                    <input type="hidden" name="postID" id="postID" value="<?php echo $postID ?>"/>
-                    <input type="submit" name="Delete" id="Delete" value="Delete" class="deleteButton"/>
-                </form>
-                <br/><br/>
+                <div class="content-space">
+                    <!--DELETE BUTTON ------------------>
+                    <form action="" method="post" onsubmit="return confirm('Do you really want to delete this post?')">
+                        <input type="hidden" name="postID" id="postID" value="<?php echo $postID ?>"/>
+                        <input type="submit" name="Delete" id="Delete" value="Delete" class="deleteButton"/>
+                    </form>
+                </div>
                 <!------------------------------------->
 
                 <?php
             }
+
+            echo "<hr/>";
+
             //check if member has approved this post
             //----------------------------------------------------------------
             //require 'getSessionType.php';
