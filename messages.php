@@ -49,30 +49,27 @@ $ID = $_SESSION['ID'];
                     $name = $rows2['FirstName'].' '.$rows2['LastName'];
                     $username = $rows2['Username'];
 
-                    // get total exchanged messages from 2 people
-                    $sqlx = "SELECT ID FROM Messages WHERE ThreadOwner_ID = $ID And (Sender_ID = $otherID) Or (Receiver_ID = $otherID) ";
-                    $resultx = mysql_query($sqlx);
-                    if (mysql_num_rows($resultx) == 1) {
-                        $query = "AND (InitialMessage = 1)";
+                    // check if 2 people have new messages first
+                    $sqly = "SELECT ID FROM Messages WHERE ThreadOwner_ID = $ID And (Sender_ID = $ID) And (InitialMessage = 1) And (New = 1)";
+                    $resulty = mysql_query($sqly);
+
+                    $sqlz = "SELECT ID FROM Messages WHERE ThreadOwner_ID = $ID And (Receiver_ID = $ID) And (InitialMessage = 1) And (New = 1)";
+                    $resultz = mysql_query($sqlz);
+
+
+                    if (mysql_num_rows($resulty) > 0 || mysql_num_rows($resultz) > 0) {
+
+                        // get all new messages received
+
+                        $sql3 = "SELECT ID FROM Messages WHERE ThreadOwner_ID = $ID And (Sender_ID = $otherID) AND (Receiver_ID = $ID) AND (New = 1) ";
+                        $result3 = mysql_query($sql3) or die(mysql_error());
+                        $row3 = mysql_fetch_assoc($result3);
                     }
-                    else {
-                        // if more than one message, we no longer count the initial message
-                        $query = "AND (InitialMessage != 1)";
-                    }
-
-                    // get new message
-
-                    $sql3 = "SELECT ID FROM Messages WHERE ThreadOwner_ID = $ID And (Sender_ID = $otherID) AND (Receiver_ID = $ID) AND (New = 1) $query ";
-                    $result3 = mysql_query($sql3) or die(mysql_error());
-                    $row3 = mysql_fetch_assoc($result3);
-
 
                 echo "<a href = '/view_messages/$username'><img src = '$mediaPath$pic' class='profilePhoto-Feed' alt='' /> $name </a>";
                 if (mysql_num_rows($result3) > 0) {
                     echo "<span style='color:#E30022;'>". mysql_num_rows($result3)." New</font>";
                 }
-                echo "<br/>";
-                echo "$subject";
                     echo "<hr/>";
                     echo "<br/>";
                 }
