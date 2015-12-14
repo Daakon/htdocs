@@ -32,7 +32,7 @@ if (mysql_num_rows($result) == 0) {
 // handle message
 if (isset($_POST['send']) && $_POST['send'] == "Send") {
 
-    $receiverID = get_id_from_username($urlUsername);
+    $receiverID = $_POST['receiverID'];
     $receiverUsername = $_POST['username'];
     $subject = $_POST['subject'];
     $message = $_POST['message'];
@@ -73,6 +73,7 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
             $mediaName = $_FILES['flPostMedia']['name'][$k];
             $orgName = $_FILES['flPostMedia']['name'][$k];
             $orgName = pathinfo($orgName, PATHINFO_FILENAME);
+            $orgName = '<b>'.$orgName.'</b>';
             $mediaName = preg_replace('/\s+/', '', $mediaName);
             $mediaName = str_replace('&', '', $mediaName);
             $fileName = pathinfo($mediaName, PATHINFO_FILENAME);
@@ -330,19 +331,23 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
         }
     }
 
+    $receiverID = $_POST['receiverID'];
+
     // find the receiving member's initial message with the sender
-    $sql = "SELECT FROM Messages WHERE ThreadOwner_ID = $receiverID And (InitialMessage = 1) And (Receiver_ID = $receiverID)";
+    $sql = "SELECT * FROM Messages WHERE ThreadOwner_ID = $receiverID And (Sender_ID = $ID) And (Receiver_ID = $receiverID)  And (InitialMessage = 1) ";
     $result = mysql_query($sql);
+    $count = mysql_num_rows($result);
+
     if (mysql_num_rows($result) > 0) {
         // update the initial message row so we know which messages to render first in messages.php
         $sql2 = "UPDATE Messages SET New = 1
-            WHERE ThreadOwner_ID = $receiverID And (InitialMessage = 1) And (Receiver_ID = $receiverID)";
+            WHERE ThreadOwner_ID = $receiverID And Receiver_ID = $receiverID And Sender_ID = $ID And InitialMessage = 1 ";
         mysql_query($sql2);
     }
     else {
         // update the initial message row so we know which messages to render first in messages.php
         $sql2 = "UPDATE Messages SET New = 1
-            WHERE ThreadOwner_ID = $receiverID And (InitialMessage = 1) And (Sender_ID = $receiverID)";
+            WHERE ThreadOwner_ID = $receiverID And Receiver_ID = $ID And Sender_ID = $receiverID And InitialMessage = 1 And ";
         mysql_query($sql2);
     }
 

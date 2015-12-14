@@ -368,13 +368,16 @@ if (!empty($_SESSION['ID'])) {
                     <hr/>
 
                     <a href="#signup" >
+                        <span class='engageText'>#<?php echo $category ?></span>
+                       &nbsp;
                         <button >
-                            <span >Connect With <?php echo $firstName ?></span>
+                            <span >Connect </span>
                         </button>
                     </a>
+
             </div>
 
-            <h4 class='category'>#<?php echo $category ?></h4>
+
 
             <br/>
             <?php echo $city.', '. $state ?>

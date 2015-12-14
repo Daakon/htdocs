@@ -50,10 +50,10 @@ $ID = $_SESSION['ID'];
                     $username = $rows2['Username'];
 
                     // check if 2 people have new messages first
-                    $sqly = "SELECT ID FROM Messages WHERE ThreadOwner_ID = $ID And (Sender_ID = $ID) And (InitialMessage = 1) And (New = 1)";
+                    $sqly = "SELECT ID FROM Messages WHERE ThreadOwner_ID = $ID And Sender_ID = $ID And InitialMessage = 1 And New = 1";
                     $resulty = mysql_query($sqly);
 
-                    $sqlz = "SELECT ID FROM Messages WHERE ThreadOwner_ID = $ID And (Receiver_ID = $ID) And (InitialMessage = 1) And (New = 1)";
+                    $sqlz = "SELECT ID FROM Messages WHERE ThreadOwner_ID = $ID And Receiver_ID = $ID And InitialMessage = 1 And New = 1";
                     $resultz = mysql_query($sqlz);
 
 
