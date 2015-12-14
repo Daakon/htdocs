@@ -334,7 +334,7 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
     $receiverID = $_POST['receiverID'];
 
     // find the receiving member's initial message with the sender
-    $sql = "SELECT * FROM Messages WHERE ThreadOwner_ID = $receiverID And (Sender_ID = $ID) And (Receiver_ID = $receiverID)  And (InitialMessage = 1) ";
+    $sql = "SELECT * FROM Messages WHERE ThreadOwner_ID = $receiverID And (Receiver_ID = $receiverID) And (Sender_ID = $ID) And (InitialMessage = 1) ";
     $result = mysql_query($sql);
     $count = mysql_num_rows($result);
 
@@ -347,7 +347,7 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
     else {
         // update the initial message row so we know which messages to render first in messages.php
         $sql2 = "UPDATE Messages SET New = 1
-            WHERE ThreadOwner_ID = $receiverID And Receiver_ID = $ID And Sender_ID = $receiverID And InitialMessage = 1 And ";
+            WHERE ThreadOwner_ID = $receiverID And Receiver_ID = $ID And Sender_ID = $receiverID And InitialMessage = 1 ";
         mysql_query($sql2);
     }
 

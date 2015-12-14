@@ -64,11 +64,18 @@ $ID = $_SESSION['ID'];
                         $sql3 = "SELECT ID FROM Messages WHERE ThreadOwner_ID = $ID And (Sender_ID = $otherID) AND (Receiver_ID = $ID) AND (New = 1) ";
                         $result3 = mysql_query($sql3) or die(mysql_error());
                         $row3 = mysql_fetch_assoc($result3);
+
+                        // if there is more than one new message,
+                        // we are past the first message ever exchanged
+                        // so subtract the initialMessage row new field to get true count
+                        if (mysql_num_rows($result3) > 1) {
+                            $messageCount = mysql_num_rows($result3) -1;
+                        }
                     }
 
                 echo "<a href = '/view_messages/$username'><img src = '$mediaPath$pic' class='profilePhoto-Feed' alt='' /> $name </a>";
                 if (mysql_num_rows($result3) > 0) {
-                    echo "<span style='color:#E30022;'>". mysql_num_rows($result3)." New</font>";
+                    echo "<span style='color:#E30022;'>". $messageCount." New</font>";
                 }
                     echo "<hr/>";
                     echo "<br/>";
