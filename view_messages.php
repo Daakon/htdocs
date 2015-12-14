@@ -72,6 +72,7 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
         foreach ($_FILES['flPostMedia']['tmp_name'] as $k => $v) {
             $mediaName = $_FILES['flPostMedia']['name'][$k];
             $orgName = $_FILES['flPostMedia']['name'][$k];
+            $orgName = pathinfo($orgName, PATHINFO_FILENAME);
             $mediaName = preg_replace('/\s+/', '', $mediaName);
             $mediaName = str_replace('&', '', $mediaName);
             $fileName = pathinfo($mediaName, PATHINFO_FILENAME);
@@ -329,10 +330,23 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
         }
     }
 
-    // update the initial message row so we know which messages to render first in messages.php
-    $sql = "UPDATE Messages SET New = 1
-            WHERE ThreadOwner_ID = $receiverID And (InitialMessage = 1) And (Sender_ID = $ID) Or (Receiver_ID = $ID)";
-    mysql_query($sql);
+    // find the receiving member's initial message with the sender
+    $sql = "SELECT FROM Messages WHERE ThreadOwner_ID = $receiverID And (InitialMessage = 1) And (Receiver_ID = $receiverID)";
+    $result = mysql_query($sql);
+    if (mysql_num_rows($result) > 0) {
+        // update the initial message row so we know which messages to render first in messages.php
+        $sql2 = "UPDATE Messages SET New = 1
+            WHERE ThreadOwner_ID = $receiverID And (InitialMessage = 1) And (Receiver_ID = $receiverID)";
+        mysql_query($sql2);
+    }
+    else {
+        // update the initial message row so we know which messages to render first in messages.php
+        $sql2 = "UPDATE Messages SET New = 1
+            WHERE ThreadOwner_ID = $receiverID And (InitialMessage = 1) And (Sender_ID = $receiverID)";
+        mysql_query($sql2);
+    }
+
+
 
     // notify recipient of email
     build_and_send_email($ID, $receiverID,8, "","");

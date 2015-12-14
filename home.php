@@ -201,7 +201,7 @@ if (isset($_POST['submit'])) {
                                     $cmd = "$ffmpeg -i \"$postMediaFilePath\" -r 1 -ss 3 -t 1  -f image2 $poster 2>&1";
                                     exec($cmd);
 
-                                    $img = '<video poster="/poster/' . $posterName . '" preload="none" controls>
+                                    $img = '<video poster="/poster/' . $posterName . '" preload="none" autoplay="autoplay" muted controls>
                                 <source src = "' . $videoPath . $mediaName . '" type="video/mp4" />
                                 <source src = "' . $videoPath . $oggFileName . '" type = "video/ogg" />
                                 <source src = "' . $videoPath . $webmFileName . '" type = "video/webm" />
@@ -404,7 +404,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                         $cmd = "$ffmpeg -i \"$postMediaFilePath\" -r 1 -ss 3 -t 1  -f image2 $poster 2>&1";
                         exec($cmd);
 
-                        $img = '<video poster="/poster/'.$posterName.'" preload="none" controls>
+                        $img = '<video poster="/poster/'.$posterName.'" preload="none" autoplay="autoplay" muted controls>
                                 <source src = "' . $videoPath . $mediaName . '" type="video/mp4" />
                                 <source src = "' . $videoPath . $oggFileName . '" type = "video/ogg" />
                                 <source src = "' . $videoPath . $webmFileName . '" type = "video/webm" />
