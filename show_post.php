@@ -597,7 +597,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
 
                     <?php if ($ID != $memberID) {?>
-                            | <a href="/view_messages/<?php echo $username ?>"><span class="engageText">Message </span> </a>
+                            | <a href="/view_messages/<?php echo $username ?>"><span class="engageText"><img src = "/images/messages.png" height="20" width="20" /> Message </span> </a>
                             <?php } ?>
 
                 <?php } ?>

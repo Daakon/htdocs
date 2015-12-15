@@ -776,7 +776,7 @@ if (mysql_num_rows($result) > 0) {
 
 
                  <?php if ($ID != $memberID) {?>
-                    | <a href="/view_messages/<?php echo $username ?>">Message </a>
+                    | <a href="/view_messages/<?php echo $username ?>"><img src="/images/messages.png" height="20" width="20" /> Message </a>
                 <?php } ?>
 
 
