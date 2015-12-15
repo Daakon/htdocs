@@ -193,10 +193,11 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
                 <hr/>
 
-                <div class="content-space">
                     <a href='/post-interest.php?interest=<?php echo urlencode($category) ?>'><span class="engageText">#<?php echo $category ?></span></a>
-                </div>
 
+                <?php if ($memberID != $ID) { ?>
+                   | <a href="/view_messages.php/<?php echo $username ?>"><span class="engageText"><img src="/images/messages.png" height="20" width="20" /> Message </span></a>
+                <?php } ?>
 
             <?php if ($_SESSION['ID'] == get_id_from_username($username)) { ?>
                 <div class="content-space">
@@ -294,12 +295,6 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                     <input type="hidden" name="scrolly" id="scrolly" value="0"/>
                 </form>
 
-                <br/>
-
-                <?php if ($memberID != $ID) { ?>
-                    <a href="/view_messages.php/<?php echo $username ?>">Direct Message <?php echo $rows['FirstName'] ?></a>
-                <?php } ?>
-                <br/>
 
                 <?php
                 $sql3 = "SELECT DISTINCT
