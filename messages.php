@@ -59,18 +59,18 @@ $ID = $_SESSION['ID'];
 
                     if (mysql_num_rows($resulty) > 0 || mysql_num_rows($resultz) > 0) {
 
-                        // get all new messages received
-
-                        $sql3 = "SELECT ID FROM Messages WHERE ThreadOwner_ID = $ID And (Sender_ID = $otherID) AND (Receiver_ID = $ID) AND (New = 1) ";
+                        // get ALL new messages owned by current session against the other person
+                        $sql3 = "SELECT ID FROM Messages WHERE (ThreadOwner_ID = $ID And Sender_ID = $otherID And New =1) Or (ThreadOwner_ID = $ID And Receiver_ID = $otherID AND New = 1) ";
                         $result3 = mysql_query($sql3) or die(mysql_error());
                         $row3 = mysql_fetch_assoc($result3);
 
-                        // if there is more than one new message,
-                        // we are past the first message ever exchanged
-                        // so subtract the initialMessage row new field to get true count
-                        if (mysql_num_rows($result3) > 1) {
-                            $messageCount = mysql_num_rows($result3) -1;
+                       // if we are past the first message, subtract the initial message row
+                        $messageCount = mysql_num_rows($result3);
+                        $firstMessage = $rows['FirstMessage'];
+                        if ($firstMessage == 0) {
+                            $messageCount = $messageCount -1;
                         }
+
                     }
 
                 echo "<a href = '/view_messages/$username'><img src = '$mediaPath$pic' class='profilePhoto-Feed' alt='' /> $name </a>";

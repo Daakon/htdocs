@@ -45,24 +45,38 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
     $numRows = mysql_num_rows($result);
     $initialMessage;
 
+    /*  if the first message, rather overall or a person deleted their messages with this person
+        the thead would no longer exist at all
+        so this would be a first message regardless for the sender
+    */
     if ($numRows > 0) {
         $initialMessage = 0;
+        $firstMessage = 0;
     }
     else {
         $initialMessage = 1;
+        $firstMessage = 1;
     }
 
     // check if receiver has prior message thread with sender
-    $sql="SELECT * FROM Messages WHERE (ThreadOwner_ID = $receiverID) And (Receiver_ID = $ID Or Sender_ID = $ID) And (InitialMessage = 1) ";
-    $result = mysql_query($sql) or die(mysql_error());
-    $numRows = mysql_num_rows($result);
+    $sql2="SELECT * FROM Messages WHERE (ThreadOwner_ID = $receiverID) And (Receiver_ID = $ID Or Sender_ID = $ID) And (InitialMessage = 1) ";
+    $result2 = mysql_query($sql2) or die(mysql_error());
+    $numRows2 = mysql_num_rows($result2);
     $rInitialMessage;
 
-    if ($numRows > 0) {
+    /* if the receiver has a message thread with the sender,
+        even if the sender has deleted a thread,
+        this is not an initial message or a first message
+        as far as the receiver is concerned
+     */
+
+    if ($numRows2 > 0) {
         $rInitialMessage = 0;
+        $rFirstMessage = 0;
     }
     else {
         $rInitialMessage = 1;
+        $rFirstMessage = 1;
     }
 
 
@@ -291,13 +305,13 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
 
 
         // create thread for sender
-        $sql = "INSERT INTO Messages (ThreadOwner_ID, Sender_ID,  Receiver_ID,    Subject,    Message,  InitialMessage,       MessageDate) Values
-                                     ($ID,             $ID,       $receiverID, '$subject',  '$message', $initialMessage, CURRENT_TIMESTAMP ) ";
+        $sql = "INSERT INTO Messages (ThreadOwner_ID, Sender_ID,  Receiver_ID,    Subject,    Message,  InitialMessage, FirstMessage ,      MessageDate) Values
+                                     ($ID,             $ID,       $receiverID, '$subject',  '$message', $initialMessage, $firstMessage, CURRENT_TIMESTAMP ) ";
         mysql_query($sql) or die(mysql_error());
 
         // create thread for receiver
-        $sql = "INSERT INTO Messages (ThreadOwner_ID, Sender_ID, Receiver_ID,  Subject,    Message,   InitialMessage,             New, MessageDate   ) VALUES
-                                    ($receiverID,    $ID,        $receiverID, '$subject', '$message', '$rInitialMessage',  '1', CURRENT_TIMESTAMP ) ";
+        $sql = "INSERT INTO Messages (ThreadOwner_ID, Sender_ID, Receiver_ID,  Subject,    Message,   InitialMessage,     New, FirstMessage,   MessageDate   ) VALUES
+                                    ($receiverID,    $ID,        $receiverID, '$subject', '$message', '$rInitialMessage',  '1', $rFirstMessage, CURRENT_TIMESTAMP ) ";
         mysql_query($sql) or die(mysql_error());
 
         echo "<script>alert('Message Sent'); </script>";
@@ -338,14 +352,14 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
     $result = mysql_query($sql);
     $count = mysql_num_rows($result);
 
+    // update the initial message row so we know which messages to render first in messages.php
     if (mysql_num_rows($result) > 0) {
-        // update the initial message row so we know which messages to render first in messages.php
+
         $sql2 = "UPDATE Messages SET New = 1
             WHERE ThreadOwner_ID = $receiverID And Receiver_ID = $receiverID And Sender_ID = $ID And InitialMessage = 1 ";
         mysql_query($sql2);
     }
     else {
-        // update the initial message row so we know which messages to render first in messages.php
         $sql2 = "UPDATE Messages SET New = 1
             WHERE ThreadOwner_ID = $receiverID And Receiver_ID = $ID And Sender_ID = $receiverID And InitialMessage = 1 ";
         mysql_query($sql2);
@@ -416,6 +430,7 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
 
 
             if (mysql_num_rows($result) > 0) {
+                $rowCount = true;
                 while ($rows = mysql_fetch_assoc($result)) {
                     $senderID = $rows['Sender_ID'];
 
@@ -481,15 +496,24 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
 
             <br/><br/>
 
+            <?php if ($rowCount == true) { ?>
             <form action="" method="post" onsubmit = "return confirm('Do you really want to delete this message thread')" >
                 <input type="hidden" id="receiverID" name="receiverID" value="<?php echo $senderID ?>" />
                 <input type="submit" class="btn btn-default" style="background:red;color:white;" id="delete" name="delete" value="Delete Messages" />
             </form>
+            <?php } ?>
             <!-------------------------------------------------------------------->
         </div>
     </div>
 
 <?php
-$sql = "UPDATE Messages SET New = 0 WHERE ThreadOwner_ID = $ID AND (Sender_ID = $senderID Or Receiver_ID = $senderID) ";
+/* clear ALL new message bits for this thread owner with this particular person
+   if this was the first time checking the message thread with this sender
+   clear the first message bit.
+   we will never touch this first message bit again unless...
+   one person deletes their tread and starts another,
+   so it would be a first message again for the sender
+*/
+$sql = "UPDATE Messages SET New = 0, FirstMessage = 0 WHERE ThreadOwner_ID = $ID AND (Sender_ID = $senderID Or Receiver_ID = $senderID) ";
 mysql_query($sql) or die(mysql_error());
 ?>
