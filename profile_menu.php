@@ -13,30 +13,20 @@ if ($profileID == $ID) {
     }
 </style>
 
-<?php
-if (strstr($url, "view_messages")) {
-    $class1 = "";
-    $class2 = "";
-    $style= "style='display:none'";
-}
-else {
-    $class1 = "dropdown";
-    $class2 = "dropdown-menu";
-    $style = "";
-}
-?>
 
-<div class="<?php echo $class1 ?>">
-    <button <?php echo $style ?> class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Profile Menu
+<div class="dropdown">
+    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Profile Menu
         <span class="caret"></span>
     </button>
-    <ul class="<?php echo $class2 ?>">
-        <li><a href="/home">Home</a></li>
-        <li><a href="/<?php echo $username ?>">Profile</a></li>
-        <li><a href="/member_media/<?php echo $username ?>">Media</a></li>
-        <li><a href="/manage_post/<?php echo $username ?>">Manage Posts</a></li>
-        <li><a href="/messages/<?php echo $username ?>">Messages <?php require 'getNewMessageCount.php' ?></a></li>
-        <li><a href="/member_follows/<?php echo get_username($profileID) ?>">Followers</a></li>
+    <ul class="dropdown-menu">
+        <li><a href="/home"><img src="/images/home.png" height="20" width="20" /> Home</a></li>
+        <li><a href="/<?php echo $username ?>"><img src="/images/profile.png" height="20" width="20" /> Profile</a></li>
+        <li><a href="/member_media/<?php echo $username ?>"><img src="/images/media.png" height="20" width="20" /> Media</a></li>
+        <li><a href="/manage_post/<?php echo $username ?>"><img src="/images/post.png" height="20" width="20" /> Manage Posts</a></li>
+        <li><a href="/messages/<?php echo $username ?>"><img src = "/images/messages.png" height="20" width="20" /> Messages <?php require 'getNewMessageCount.php' ?></a></li>
+        <li><a href="/member_follows/<?php echo get_username($profileID) ?>"><img src = "/images/follows.png" height="20" width="20" /> Followers <?php require 'getNewFollowCount.php' ?></a></li>
+        <li><a href ="/support" class="visible-xs" ><img src = "/images/support.png" height="20" width="20" />Support</a></li>
+        <li><a href ="/logout" ><img src = "/images/logout.png" height="20" width="20" /> Log Out</a></li>
         <?php
 
         $username = get_username_from_url();
@@ -46,7 +36,7 @@ else {
         $result = mysql_query($sql) or die(mysql_error());
         $rows = mysql_fetch_assoc($result);
         if ($rows['Admin'] == 1) { ?>
-            <li><a href="/marketing_manager/<?php echo $username ?>">Marketing Manager</a></li>
+            <li><a href="/marketing_manager/<?php echo $username ?>"><img src = "/images/marketing-menu-glyph" height="20" width="20"/> Marketing Manager</a></li>
         <?php }
 
         echo "</ul>";

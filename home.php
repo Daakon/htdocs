@@ -677,12 +677,9 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
             <ul class="list-inline">
                 <a href="/<?php echo get_username($ID) ?>">
                 <img src="<?php echo get_users_photo_by_id($ID) ?>" class="profile-image-nav"/>
-                    My Profile
                 </a>
-                <li><?php require 'getNewMessageCount.php' ?></a></li>
-                <li><a href ="/logout" >Log Out</a></li>
-
-                <li><a href ="/support" class="visible-xs" >Support</a></li>
+                <li><a href="/messages/<?php echo get_username($ID) ?>"><img src = "/images/messages.png" height="20" width="20" /><?php require 'getNewMessageCount.php' ?></a></li>
+                <li><a href="/member_follows/<?php echo get_username($ID) ?>"><img src = "/images/follows.png" height="20" width="20" /><?php require 'getNewFollowCount.php' ?></a></li>
 
             </ul>
 

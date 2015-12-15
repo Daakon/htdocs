@@ -44,31 +44,20 @@ if (!isset($_SESSION['ID']) && empty($_SESSION['ID'])) { ?>
         }
     </style>
 
-<?php
-    if (strstr($url, "view_messages")) {
-        $class1 = "";
-        $class2 = "";
-        $style= "style='display:none'";
-    }
-    else {
-        $class1 = "dropdown";
-        $class2 = "dropdown-menu";
-        $style = "";
-    }
-    ?>
-
-    <div class="<?php echo $class1 ?>">
-        <button <?php echo $style ?> class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Profile Menu
+    <div class="dropdown">
+        <button  class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Profile Menu
             <span class="caret"></span>
         </button>
-        <ul class="<?php echo $class2 ?>">
-            <li><a href="/home"><b>Home</b></a></li>
-            <li><a href="/<?php echo $username ?>">Profile</a></li>
-            <li><a href="/member_media/<?php echo $username ?>">Media</a></li>
-            <li><a href="/manage_post/<?php echo $username ?>">Posts</a></li>
-            <li><a href="/member_follows/<?php echo $username ?>">Followers</a></li>
-            <li><a href="/messages/<?php echo get_username($ID) ?>">Messages</a></li>
+        <ul class="dropdown-menu">
+            <li><a href="/home"><img src="/images/home.png" height="20" width="20" />Home</b></a></li>
+            <li><a href="/<?php echo $username ?>"><img src="/images/profile.png" height="20" width="20" /> Profile</a></li>
+            <li><a href="/member_media/<?php echo $username ?>"><img src="/images/media.png" height="20" width="20" /> Media</a></li>
+            <li><a href="/manage_post/<?php echo $username ?>"><img src="/images/post.png" height="20" width="20" /> Posts</a></li>
+            <li><a href="/messages/<?php echo get_username($ID) ?>"><img src = "/images/messages.png" height="20" width="20" /> Messages</a></li>
+            <li><a href="/member_follows/<?php echo $username ?>"><img src = "/images/follows.png" height="20" width="20" /> Followers</a></li>
             <li><a href="/<?php echo get_username($ID)?>"><span style="color:black;font-weight: 900;">My Profile</span></a></li>
+            <li><a href ="/support" class="visible-xs" ><img src = "/images/support.png" height="20" width="20" /> Support</a></li>
+            <li><a href ="/logout" ><img src = "/images/logout.png" height="20" width="20" /> Log Out</a></li>
         </ul>
     </div>
     <br/><br/>
