@@ -610,7 +610,7 @@ $bgPhoto = $row['ProfilePhoto'];
             <?php if (isset($ID) && !empty($ID) && $memberID != $ID) { ?>
 
                 <div class="public-profile-label">Message Me</div>
-                <a href="/view_messages.php/<?php echo $username ?>"><?php echo $username ?></a>
+                <a href="/view_messages.php/<?php echo $username ?>"><img src="/images/messages.png" height="20" width="20" /></a>
             <?php } elseif ($memberID == $ID) { ?>
                 <?php echo "Sorry but you can't message yourself, that's kind of weird anyway";
 
