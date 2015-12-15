@@ -242,7 +242,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                 if ($approvals > 0) {
 
 
-                    echo '&nbsp;<span style = "color:red;font-weight:bold;font-size:16">' . $approvals . '</font>';
+                    echo '&nbsp;<span>' . $approvals . '</font>';
                 }
                 echo '</form>';
             } else {
@@ -255,7 +255,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                 if ($approvals > 0) {
 
 
-                    echo '&nbsp;<span style = "color:red;font-weight:bold;font-size:16">' . $approvals . '</font>';
+                    echo '&nbsp;<span>' . $approvals . '</font>';
                 }
                 echo '</form>';
             }
