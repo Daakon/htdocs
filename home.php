@@ -663,18 +663,25 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
     }
 </script>
 
+<style>
+    .roll-call {
+        min-height: 400px;
+    }
+</style>
+
+
 
 <?php //check_demographics($ID); ?>
 
 <div class="container" style="margin-top:-50px;">
     <?php
     ?>
-    <div class="row row-padding">
+    <div class="row row-padding" >
 
 <!--        <!--Middle Column -->
-        <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8">
+        <div id="menu"  class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8">
 
-            <ul class="list-inline">
+            <ul class="list-inline" >
                 <a href="/<?php echo get_username($ID) ?>">
                 <img src="<?php echo get_users_photo_by_id($ID) ?>" class="profile-image-nav"/>
                 </a>
@@ -684,6 +691,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
             </ul>
 
 </div>
+
             <?php
             $genre = $_GET['genre'];
             if (!empty($genre)) {
@@ -840,6 +848,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
 </div>
 
+<a href="#0" class="cd-top">Top</a>
 </body>
 </html>
 

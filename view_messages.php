@@ -339,13 +339,15 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
 
         echo "<script>alert('Message Sent'); </script>";
 
+        $receiverID = $_POST['receiverID'];
+
         // sent notification
         if (strlen(check_phone($receiverID)) > 0) {
             text_notification($receiverID, $ID);
         }
     }
 
-    $receiverID = $_POST['receiverID'];
+
 
     // find the receiving member's initial message with the sender
     $sql = "SELECT * FROM Messages WHERE ThreadOwner_ID = $receiverID And (Receiver_ID = $receiverID) And (Sender_ID = $ID) And (InitialMessage = 1) ";
@@ -368,6 +370,7 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
 
 
     // notify recipient of email
+    $receiverUsername = get_username($receiverID);
     build_and_send_email($ID, $receiverID,8, "","");
     echo "<script>location = '/view_messages/$receiverUsername'</script>";
 }

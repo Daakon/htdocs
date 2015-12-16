@@ -49,7 +49,7 @@ $ID = $_SESSION['ID'];
             <video width="320" height="240" poster="/poster/how-it-works-poster.png" autoplay="autoplay" muted controls >
                 <source src="/images/Rapportbook-How-It-Works-Lo-Res.mp4" />
             </video>
-
+<br/>
             <b>Corporate Headquarters</b>
             <br/>
             911 Washington Ave

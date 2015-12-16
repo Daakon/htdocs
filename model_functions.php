@@ -52,7 +52,7 @@ function get_users_name($user_id)
     else {
         $name = $rows['FirstName'];
     }
-    if (strlen($rows['LastName']))
+
     return $name;
 
 }
@@ -324,7 +324,7 @@ function text_notification($receiverID, $senderID)
             if (strstr($url, "dev")) {
                 $domain = "http://dev.rapportbook.com/view_messages/$username";
             } else {
-                $domain = "http://rapportbook.com/view_messages.php/$username";
+                $domain = "http://rapportbook.com/view_messages/$username";
             }
             // Setup and send a message
             $text = "$senderName sent you a new message on Rapportbook. $domain";
