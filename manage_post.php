@@ -152,6 +152,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
     while ($rows = mysql_fetch_assoc($result)) {
     $memberID = $rows['MemberID'];
     $name = $rows['FirstName'] . ' ' . $rows['LastName'];
+    $name = checkNameLength($name);
     $firstName = $rows['FirstName'];
     $username = $rows['Username'];
     $profilePhoto = $rows['ProfilePhoto'];

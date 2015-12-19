@@ -670,18 +670,17 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 </style>
 
 
-
 <?php //check_demographics($ID); ?>
 
 <div class="container" style="margin-top:-50px;">
     <?php
     ?>
-    <div class="row row-padding" >
+    <div class="row row-padding">
 
 <!--        <!--Middle Column -->
-        <div id="menu"  class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8">
+        <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8">
 
-            <ul class="list-inline" >
+            <ul id="menu"  class="list-inline">
                 <a href="/<?php echo get_username($ID) ?>">
                 <img src="<?php echo get_users_photo_by_id($ID) ?>" class="profile-image-nav"/>
                 </a>

@@ -565,6 +565,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
     $firstName = $rows['FirstName'];
     $lastName = $rows['LastName'];
     $name = $rows['FirstName'] . ' ' . $rows['LastName'];
+    $name = checkNameLength($name);
     $username = $rows['Username'];
     $profilePhoto = $rows['ProfilePhoto'];
     $category = $rows['Category'];

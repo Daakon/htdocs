@@ -718,6 +718,7 @@ if (mysql_num_rows($result) > 0) {
     while ($rows = mysql_fetch_assoc($result)) {
         $memberID = $rows['MemberID'];
         $name = $rows['FirstName']. ' '.$rows['LastName'];
+        $name = checkNameLength($name);
         $firstName = $rows['FirstName'];
         $lastName = $rows['LastName'];
         $username = $rows['Username'];
@@ -734,10 +735,6 @@ if (mysql_num_rows($result) > 0) {
 
         <?php
         $profileUrl = "/$username";
-
-        if (strlen($name) > 70) {
-            $name = checkNameLength($name,$firstName,$lastName);
-        }
         ?>
              <a href="<?php echo $profileUrl ?>">
                 <img src="<?php echo $mediaPath. $profilePhoto ?>" class="profilePhoto-Feed enlarge-onhover " alt=""

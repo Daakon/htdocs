@@ -316,6 +316,7 @@ if (!empty($_SESSION['ID'])) {
         $firstName = $rows['FirstName'];
         $lastName = $rows['LastName'];
         $name = $rows['FirstName'] . ' ' . $rows['LastName'];
+        $name = checkNameLength($name,$firstName,$lastName);
         $username = $rows['Username'];
         $profilePhoto = $rows['ProfilePhoto'];
         $category = $rows['Category'];
@@ -330,9 +331,6 @@ if (!empty($_SESSION['ID'])) {
 
             <?php
             $profileUrl = "#signup";
-            if (strlen($name) > 70) {
-                $name = checkNameLength($name,$firstName,$lastName);
-            }
             ?>
 
             <a href="<?php echo $profileUrl ?>">

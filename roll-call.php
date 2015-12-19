@@ -58,7 +58,8 @@ $memberID = $rows['MemberID'];
 $firstName = $rows['FirstName'];
 $lastName = $rows['LastName'];
 $name = $rows['FirstName'] . ' ' . $rows['LastName'];
-    $username = $rows['Username'];
+$name = checkNameLength($name);
+$username = $rows['Username'];
 $profilePhoto = $rows['ProfilePhoto'];
 $category = $rows['Category'];
 $post = $rows['Post'];
@@ -73,9 +74,6 @@ $postOwner = $memberID;
 
     <?php
         $profileUrl = "/$username";
-    if (strlen($name) > 70) {
-        $name = checkNameLength($name,$firstName,$lastName);
-    }
     ?>
 
     <a href="<?php echo $profileUrl ?>">
