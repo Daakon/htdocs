@@ -69,8 +69,8 @@ function get_user_firstName($user_id)
 }
 
 function checkNameLength($name) {
-    if (strlen($name) > 30) {
-        $name = substr($name, 0, 30).'...';
+    if (strlen($name) > 70) {
+        $name = substr($name, 0, 70).'...';
     }
     else {
         $name = $name;

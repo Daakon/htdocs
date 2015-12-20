@@ -718,7 +718,6 @@ if (mysql_num_rows($result) > 0) {
     while ($rows = mysql_fetch_assoc($result)) {
         $memberID = $rows['MemberID'];
         $name = $rows['FirstName']. ' '.$rows['LastName'];
-        $name = checkNameLength($name);
         $firstName = $rows['FirstName'];
         $lastName = $rows['LastName'];
         $username = $rows['Username'];
@@ -736,10 +735,22 @@ if (mysql_num_rows($result) > 0) {
         <?php
         $profileUrl = "/$username";
         ?>
-             <a href="<?php echo $profileUrl ?>">
-                <img src="<?php echo $mediaPath. $profilePhoto ?>" class="profilePhoto-Feed enlarge-onhover " alt=""
-                title="<?php echo $name ?>" /> &nbsp <span class="profileName-Feed"><?php echo $name ?></span>
-            </a>
+              <div class="hidden-xs">
+        <a href="<?php echo $profileUrl ?>">
+            <img src="<?php echo $mediaPath. $profilePhoto ?>" class="profilePhoto-Feed enlarge-onhover " alt=""
+                 title="<?php echo $name ?>" /> &nbsp <span class="profileName-Feed"><?php echo $name ?></span>
+        </a>
+    </div>
+
+    <div class="visible-xs">
+        <?php $checkName = checkNameLength($name); ?>
+        <a href="<?php echo $profileUrl ?>">
+            <img src="<?php echo $mediaPath. $profilePhoto ?>" class="profilePhoto-Feed enlarge-onhover " alt=""
+                 title="<?php echo $checkName ?>" /> &nbsp <span class="profileName-Feed"><?php echo $checkName ?></span>
+        </a>
+
+    </div>
+
 
 
     <div class="post" >

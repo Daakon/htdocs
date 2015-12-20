@@ -571,20 +571,25 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
     $category = $rows['Category'];
     $post = $rows['Post'];
     $postID = $rows['PostID'];
-
-    if (strlen($name) > 70) {
-        $name = checkNameLength($name,$firstName,$lastName);
-    }
     ?>
 
     <div class="row row-padding">
         <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 roll-call"
               align="left">
 
-            <img src="<?php echo $mediaPath.$profilePhoto ?>" class="profilePhoto-Feed" alt=""
-                 title="<?php echo $name ?>" class='enlarge-onhover'/> &nbsp
-            <b><span class="profileName-Feed"><?php echo $name ?></span>
+            <div class="hidden-xs">
+                <img src="<?php echo $mediaPath.$profilePhoto ?>" class="profilePhoto-Feed" alt=""
+                     title="<?php echo $name ?>" class='enlarge-onhover'/> &nbsp
+                <b><span class="profileName-Feed"><?php echo $name ?></span>
+            </div>
 
+            <div class="visible-xs">
+                <?php $checkName = checkNameLength($name); ?>
+                <img src="<?php echo $mediaPath.$profilePhoto ?>" class="profilePhoto-Feed" alt=""
+                     title="<?php echo $checkName ?>" class='enlarge-onhover'/> &nbsp
+                <b><span class="profileName-Feed"><?php echo $checkName ?></span>
+
+            </div>
 
                 <div class="post" <?php echo $postStyle ?>">
                 <?php echo nl2br($post); ?>

@@ -152,7 +152,6 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
     while ($rows = mysql_fetch_assoc($result)) {
     $memberID = $rows['MemberID'];
     $name = $rows['FirstName'] . ' ' . $rows['LastName'];
-    $name = checkNameLength($name);
     $firstName = $rows['FirstName'];
     $username = $rows['Username'];
     $profilePhoto = $rows['ProfilePhoto'];
@@ -164,10 +163,20 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
             <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 roll-call"
                  align="left">
 
-            <img src="<?php echo $mediaPath.$profilePhoto ?>" class="profilePhoto-Feed" alt=""
-                 title="<?php echo $name ?>" class='enlarge-onhover img-responsive'/> &nbsp
-                <span class="profileName-Feed"><?php echo $name ?></span>
 
+                <div class="hidden-xs">
+                    <img src="<?php echo $mediaPath.$profilePhoto ?>" class="profilePhoto-Feed" alt=""
+                         title="<?php echo $name ?>" class='enlarge-onhover'/> &nbsp
+                    <b><span class="profileName-Feed"><?php echo $name ?></span>
+                </div>
+
+                <div class="visible-xs">
+                    <?php $checkName = checkNameLength($name); ?>
+                    <img src="<?php echo $mediaPath.$profilePhoto ?>" class="profilePhoto-Feed" alt=""
+                         title="<?php echo $checkName ?>" class='enlarge-onhover'/> &nbsp
+                    <b><span class="profileName-Feed"><?php echo $checkName ?></span>
+
+                </div>
                 <div class="post">
                 <?php
                 // check check post length if it has a url in it

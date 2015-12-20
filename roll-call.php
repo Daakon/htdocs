@@ -58,7 +58,6 @@ $memberID = $rows['MemberID'];
 $firstName = $rows['FirstName'];
 $lastName = $rows['LastName'];
 $name = $rows['FirstName'] . ' ' . $rows['LastName'];
-$name = checkNameLength($name);
 $username = $rows['Username'];
 $profilePhoto = $rows['ProfilePhoto'];
 $category = $rows['Category'];
@@ -76,10 +75,21 @@ $postOwner = $memberID;
         $profileUrl = "/$username";
     ?>
 
-    <a href="<?php echo $profileUrl ?>">
-    <img src="<?php echo $mediaPath. $profilePhoto ?>" class="profilePhoto-Feed enlarge-onhover " alt=""
-         title="<?php echo $name ?>" /> &nbsp <span class="profileName-Feed"><?php echo $name ?></span>
-</a>
+    <div class="hidden-xs">
+        <a href="<?php echo $profileUrl ?>">
+            <img src="<?php echo $mediaPath. $profilePhoto ?>" class="profilePhoto-Feed enlarge-onhover " alt=""
+                 title="<?php echo $name ?>" /> &nbsp <span class="profileName-Feed"><?php echo $name ?></span>
+        </a>
+    </div>
+
+    <div class="visible-xs">
+        <?php $checkName = checkNameLength($name); ?>
+        <a href="<?php echo $profileUrl ?>">
+            <img src="<?php echo $mediaPath. $profilePhoto ?>" class="profilePhoto-Feed enlarge-onhover " alt=""
+                 title="<?php echo $checkName ?>" /> &nbsp <span class="profileName-Feed"><?php echo $checkName ?></span>
+        </a>
+
+    </div>
 
 
 

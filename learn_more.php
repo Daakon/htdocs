@@ -263,7 +263,7 @@ if (!empty($_SESSION['ID'])) {
 
 
     <!--FEED STARTS HERE -->
-    <div class="col-lg-12 col-md-12 col-xs-12" style="background-color: #e3e3e3;">
+    <div class="col-lg-12 col-md-12 col-xs-12" style="background-color: #e3e3e3;padding-left:0px;padding-right:0px;">
         <?php
 
 
@@ -316,7 +316,6 @@ if (!empty($_SESSION['ID'])) {
         $firstName = $rows['FirstName'];
         $lastName = $rows['LastName'];
         $name = $rows['FirstName'] . ' ' . $rows['LastName'];
-        $name = checkNameLength($name,$firstName,$lastName);
         $username = $rows['Username'];
         $profilePhoto = $rows['ProfilePhoto'];
         $category = $rows['Category'];
@@ -333,10 +332,21 @@ if (!empty($_SESSION['ID'])) {
             $profileUrl = "#signup";
             ?>
 
-            <a href="<?php echo $profileUrl ?>">
-                <img src="<?php echo $mediaPath. $profilePhoto ?>" class="profilePhoto-Feed enlarge-onhover " alt=""
-                     title="<?php echo $name ?>" /> &nbsp <span class="profileName-Feed"><?php echo $name ?></span>
-            </a>
+            <div class="visible-xs">
+                <?php $checkName = checkNameLength($name); ?>
+                <a href="<?php echo $profileUrl ?>">
+                    <img src="<?php echo $mediaPath. $profilePhoto ?>" class="profilePhoto-Feed enlarge-onhover " alt=""
+                         title="<?php echo $checkName ?>" /> &nbsp <span class="profileName-Feed"><?php echo $checkName ?></span>
+                </a>
+            </div>
+
+            <div class="hidden-xs">
+                <a href="<?php echo $profileUrl ?>">
+                    <img src="<?php echo $mediaPath. $profilePhoto ?>" class="profilePhoto-Feed enlarge-onhover " alt=""
+                         title="<?php echo $name ?>" /> &nbsp <span class="profileName-Feed"><?php echo $name ?></span>
+                </a>
+            </div>
+
 
             <div class="post">
 

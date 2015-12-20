@@ -672,6 +672,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
 <?php //check_demographics($ID); ?>
 
+<body>
 <div class="container" style="margin-top:-50px;">
     <?php
     ?>

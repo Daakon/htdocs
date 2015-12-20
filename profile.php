@@ -180,6 +180,8 @@ if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
     $smsStatus = $_POST['SmsStatus'];
     $password = $_POST['Password'];
     $username = $_POST['Username'];
+    $usernameStatus = $_POST['UsernameStatus'];
+
 //only if password has changed do we hash it
     if (check_password($ID, $password)==false) {
         $password = md5($password);
@@ -198,6 +200,17 @@ if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
     }
     $email = mysql_real_escape_string($email);
 
+    if ($usernameStatus == 0) {
+        if ($_SESSION['Username'] != trim($username)) {
+            $usernameUpdate = ", Username = '$username', IsUsernameUpdated = 1 ";
+            $_SESSION['Username'] = $username;
+            $username = $_SESSION['Username'];
+            $_SESSION['UsernameUpdated'] = 1;
+        }
+    }
+    else {
+        $usernameUpdate = '';
+    }
     // update Member table first
     $sql = "Update Members
           Set
@@ -209,6 +222,7 @@ if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
           SmsActive = '$smsStatus ',
           Interest = '$interest',
           Password = '$password'
+          $usernameUpdate
           WHERE ID = $ID ";
     $result = mysql_query($sql) or die(mysql_error());
     // update Profile table
@@ -221,54 +235,10 @@ if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
                 RSS = '$rss'
              WHERE Member_ID = $ID ";
     mysql_query($sql) or die(mysql_error());
-    echo "<script>alert('Update Successful');</script>";
-    $scrollx = $_REQUEST['scrollx'];
-    $scrolly = $_REQUEST['scrolly'];
+    echo "<script>alert('Update Successful');location='/$username'</script>";
 }
 ?>
 
-
-<?php
-// handle profile text
-require 'class-Clockwork.php';
-if (isset($_POST['text']) && $_POST['text'] == "Text") {
-    $result = mysql_query("SELECT Username FROM Members WHERE ID = $ID");
-    $row = mysql_fetch_assoc($result);
-    $username = $row['Username'];
-    $number = $_POST['number'];
-    $number = "1".$number;
-    $name = get_users_name($ID);
-    $API_KEY = '7344d6254838e6d2c917c4cb78305a3235ba951d';
-    try
-    {
-        // Create a Clockwork object using your API key
-        $clockwork = new Clockwork( $API_KEY );
-        $domain;
-        if (strstr($url, "dev")) {
-            $domain = "http://dev.rapportbook.com/profile_public.php/";
-        }
-        else {
-            $domain = "http://rapportbook.com/profile_public.php/";
-        }
-        // Setup and send a message
-        $text = "$name has shared their profile with you. $domain$username";
-        $message = array( 'to' => $number, 'message' => $text );
-        $result = $clockwork->send( $message );
-        // Check if the send was successful
-        if($result['success']) {
-            //echo 'Message sent - ID: ' . $result['id'];
-            echo "<script>alert('SMS Sent');</script>";
-        } else {
-            $error = $result['error_message'];
-            echo "<script>alert('Message failed - Error: $error');</script>";
-        }
-    }
-    catch (ClockworkException $e)
-    {
-        echo 'Exception sending SMS: ' . $e->getMessage();
-    }
-}
-?>
 
 <?php include('media_sizes.html'); ?>
 
@@ -423,10 +393,17 @@ if (isset($_POST['text']) && $_POST['text'] == "Text") {
     });
 </script>
 
+
 <?php
 $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 preg_match("/[^\/]+$/",$url ,$match);
-$username = $match[0];
+if ($_SESSION['UsernameUpdated'] == 1) {
+    $username = $_SESSION['Username'];
+}
+else {
+    $username = $match[0];
+}
+
 $_SESSION['Username'] = $username;
 $token = $match[1];
 $username = $_SESSION['Username'];
@@ -472,7 +449,13 @@ $bgPhoto = $row['ProfilePhoto'];
             <?php
             $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
             preg_match("/[^\/]+$/",$url ,$match);
-            $username = $match[0];
+            if ($_SESSION['UsernameUpdated'] == 1) {
+                $username = $_SESSION['Username'];
+            }
+            else {
+                $username = $match[0];
+            }
+
             $memberID = get_id_from_username($username);
 
             // get current member session username
@@ -641,6 +624,7 @@ $bgPhoto = $row['ProfilePhoto'];
                         Members.Interest As Interest,
                         Members.EmailActive As EmailStatus,
                         Members.SmsActive As SmsStatus,
+                        Members.IsUsernameUpdated As IsUsernameUpdated,
                         Profile.ProfilePhoto As ProfilePhoto,
                         Profile.ProfileVideo As ProfileVideo,
                         Profile.Poster As Poster,
@@ -659,6 +643,7 @@ $bgPhoto = $row['ProfilePhoto'];
                 echo "<script>alert('Profile not found');</script>";
                 header('Location:home.php');
             }
+
             $rows = mysql_fetch_assoc($result);
             //            $memberID = $rows['MemberID'];
             $profilePhoto = $rows['ProfilePhoto'];
@@ -678,6 +663,8 @@ $bgPhoto = $row['ProfilePhoto'];
             $rss = $rows['RSS'];
             $emailStatus = $rows['EmailStatus'];
             $smsStatus = $rows['SmsStatus'];
+            $usernameStatus = $rows['IsUsernameUpdated'];
+
             if (strlen($posterName) == 0) {
                 $posterName = "video-bg.jpg";
             }
@@ -904,10 +891,25 @@ $bgPhoto = $row['ProfilePhoto'];
                     <input type="password" class="form-control" id="Password" name="Password" value="<?php echo $password ?>"  />
                 </div>
 
+                <?php
+                if ($usernameStatus == 1) {
+                    $readonly = "readonly='readonly'";
+                    $style="display:none;";
+                }
+                else {
+                    $readonly = '';
+                    $style="display:block;";
+                }
+                ?>
+
+
                 <div class="form-group">
                     <label for="password">Username</label>
-                    <input type="text" class="form-control" id="Username" name="Username" value="<?php echo $username ?>" readonly="readonly" />
+                    <input type="text" class="form-control" id="Username" name="Username" value="<?php echo $username ?>" <?php echo $readonly ?> />
+                    <h6 style="color:red;<?php echo $style ?>">You can change your username one time.</h6>
+                    <input type="hidden" id="UsernameStatus" name="UsernameStatus" value="<?php echo $usernameStatus ?>" />
                 </div>
+
 
                 <input type = "submit" value = "Update" name = "updateProfile" id = "updateProfile" class="btn btn-default" />
             </form>
