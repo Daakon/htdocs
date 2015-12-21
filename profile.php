@@ -5,6 +5,7 @@ get_header();
 
 $ID = $_SESSION['ID'];
 $urlUsername = get_username_from_url();
+$_SESSION['Username'] = $urlUsername;
 ?>
 
 
@@ -404,7 +405,7 @@ else {
     $username = $match[0];
 }
 
-$_SESSION['Username'] = $username;
+
 $token = $match[1];
 $username = $_SESSION['Username'];
 $profileID = get_id_from_username($username);
