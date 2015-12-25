@@ -29,15 +29,34 @@ if (mysql_num_rows($result) == 0) {
 ?>
 
 <?php
+    if (isset($_POST['videoSend']) && $_POST['videoSend'] = "Start Video Chat") {
+        // build out appear.in link
+        $appearID = uniqid();
+        $appearLink = "<iframe src=\"https://appear.in/$appearID\" frameborder=\"0\" height=\"300\"></iframe>";
+        $message = $appearLink;
+        $hasVideo = true;
+        echo "<script>alert('As the sender, you must enter the video room first.');</script>";
+        goto VideoChat;
+    }
+?>
+
+<?php
 // handle message
 if (isset($_POST['send']) && $_POST['send'] == "Send") {
-
+    VideoChat:
     $receiverID = $_POST['receiverID'];
     $receiverUsername = $_POST['username'];
     $subject = $_POST['subject'];
     $message = $_POST['message'];
-    $message = mysql_real_escape_string($message);
-    $message = makeLinks($message);
+    if ($hasVideo == true) {
+        $message = $message . '<br/>'. $appearLink;
+    }
+    else {
+        $message = mysql_real_escape_string($message);
+        $message = makeLinks($message);
+    }
+
+    $hasVideo = false;
 
     // check if sender has prior message thread with receiver
     $sql="SELECT * FROM Messages WHERE (ThreadOwner_ID = $ID) And (Receiver_ID = $receiverID Or Sender_ID = $receiverID) And (InitialMessage = 1) ";
@@ -303,6 +322,8 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
         $message = $message . $newImage .'<br/>' ;
 
 
+        $message = closetags($message);
+
 
         // create thread for sender
         $sql = "INSERT INTO Messages (ThreadOwner_ID, Sender_ID,  Receiver_ID,    Subject,    Message,  InitialMessage, FirstMessage ,      MessageDate) Values
@@ -495,6 +516,8 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
                 <input type="hidden" id="receiverID" name="receiverID" value="<?php echo $senderID ?>" />
                 <input type="hidden" id="username" name="username" value="<?php echo $urlUsername ?>"/>
                 <input type="submit" class="btn btn-default" id="send" name="send" value="Send" />
+                <img src="/images/video-chat.png" height="50" width="50" style="border-left:1px solid black;"/>
+                <input type="submit" class="" id="videoSend" name="videoSend" value = "Start Video Chat" />
             </form>
 
             <br/><br/>

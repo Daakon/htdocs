@@ -347,6 +347,37 @@ function text_notification($receiverID, $senderID)
     }
 }
 
+// close opened html tags
+function closetags($html)
+{
+    #put all opened tags into an array
+    preg_match_all ( "#<([a-z]+)( .*)?(?!/)>#iU", $html, $result );
+    $openedtags = $result[1];
+    #put all closed tags into an array
+    preg_match_all ( "#</([a-z]+)>#iU", $html, $result );
+    $closedtags = $result[1];
+    $len_opened = count ( $openedtags );
+    # all tags are closed
+    if( count ( $closedtags ) == $len_opened )
+    {
+        return $html;
+    }
+    $openedtags = array_reverse ( $openedtags );
+    # close tags
+    for( $i = 0; $i < $len_opened; $i++ )
+    {
+        if ( !in_array ( $openedtags[$i], $closedtags ) )
+        {
+            $html .= "</" . $openedtags[$i] . ">";
+        }
+        else
+        {
+            unset ( $closedtags[array_search ( $openedtags[$i], $closedtags)] );
+        }
+    }
+    return $html;
+}
+
 // text function to all service providers for related service post
 function alert_all_matching_interests($interest, $state)
 {
@@ -357,7 +388,7 @@ function alert_all_matching_interests($interest, $state)
     $result = mysql_query("SELECT ID, Interest FROM Members WHERE Interest = '$interest' And ID NOT IN ($ID)");
 
     if (mysql_num_rows($result) > 0) {
-        // stuff all of the service providers into an array
+        // stuff all of the members into an array
         while ($rows = mysql_fetch_assoc($result)) {
             $interestID = $rows['ID'];
 
@@ -367,12 +398,12 @@ function alert_all_matching_interests($interest, $state)
             if (mysql_num_rows($interestResults) > 0) {
                 while ($interestRows = mysql_fetch_assoc($interestResults)) {
 
-                    $number = $interestRows['Phone'];
-                    $number = preg_replace('/\D+/', '', $number);
-                    $number = "1" . $number;
-                    $API_KEY = '7344d6254838e6d2c917c4cb78305a3235ba951d';
+                    //$number = $interestRows['Phone'];
+                    //$number = preg_replace('/\D+/', '', $number);
+                    //$number = "1" . $number;
+                    //$API_KEY = '7344d6254838e6d2c917c4cb78305a3235ba951d';
 
-                    try {
+                   /* try {
                         // Create a Clockwork object using your API key
                         $clockwork = new Clockwork($API_KEY);
                         $domain;
@@ -396,7 +427,7 @@ function alert_all_matching_interests($interest, $state)
                     } catch (ClockworkException $e) {
                         // dont want to display failures in the browser
                         //echo 'Exception sending SMS: ' . $e->getMessage();
-                    }
+                    } */
                 }
             }
             // send out an email after text
