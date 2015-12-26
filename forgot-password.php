@@ -11,6 +11,41 @@ get_header();
 
 <div class="container" >
 
+    <?php
+
+    if (isset($_POST['submit']) && ($_POST['submit'] == "Reset Password")) {
+
+        require 'connect.php';
+        $email = trim($_POST['email']);
+
+        $sql = "SELECT *  FROM Members WHERE (Email = '$email') ";
+
+
+        $result = mysql_query($sql) or die(mysql_error());
+        $rows = mysql_fetch_assoc($result);
+
+
+        $pass = $rows['Password'];
+
+
+        // query results
+        if (mysql_num_rows($result) == 0) {
+
+            echo "<script>alert('Your username or email was not found');</script>";
+            echo "<script>alert('test');</script>";
+        } // if email was found
+
+        else {
+            $toId = $rows['ID'];
+
+            if (build_and_send_email(1, $toId, 5, '', '')) {
+                echo "<script>alert('Your password reset has been sent to your email on file');</script>";
+            }
+
+        }
+    }
+
+    ?>
 
     <div class="col-xs-12 col-md-8 col-lg-8 col-md-offset-2">
 
@@ -36,42 +71,6 @@ get_header();
     </div>
 </div>
 
-<?php
 
-if (isset($_POST['submit']) && ($_POST['submit'] == "Reset Password")) {
-
-    require 'connect.php';
-    $email = trim($_POST['email']);
-
-    $sql = "SELECT * FROM Members WHERE (Email = '$email') ";
-
-
-    $result = mysql_query($sql) or die(mysql_error());
-    $rows = mysql_fetch_assoc($result);
-
-
-    $pass = $rows['Password'];
-
-
-    // query results
-    if (mysql_numrows($result) == 0) {
-
-        echo "<div align ='center' style='color:red;font-weight:bold;'>Your username or email was not found</div>";
-    } // if email was found
-
-    else {
-
-        require 'model_functions.php';
-        require 'email.php';
-
-        $toId = $rows['ID'];
-        if (build_and_send_email(1, $toId, 5, '')) {
-            echo "<script>alert('Your password reset has been sent to your email on file');</script>";
-        }
-
-    }
-}
-
-?>
 
 </body>
