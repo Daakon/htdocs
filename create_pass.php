@@ -29,6 +29,8 @@ if (empty($_SESSION['EMAIL']) && !isset($_SESSION['EMAIL'])) {
             <br/>
             <input type = "hidden" name = "email" id = "email" value = "<?php echo $_GET['email'] ?>" />
             <br/>
+            <input type = "hidden" name = "id" id = "id" value = "<?php echo $_GET['id'] ?>" />
+            <br/>
             <input type = "submit" name = "createPass" id = "createPass" value = "Create Password" />
         </form>
 
@@ -36,7 +38,18 @@ if (empty($_SESSION['EMAIL']) && !isset($_SESSION['EMAIL'])) {
         if (isset($_POST['createPass']) && $_POST['createPass'] == "Create Password" && strlen($_POST['createPass']) > 2) {
             require 'connect.php';
             $email = $_POST['email'];
+            $id = $_POST['id'];
             $pass = $_POST['newPass'];
+
+            // check email against id, must be a match
+            $sql1 = "SELECT Email FROM Members WHERE Email = '$email' AND ID = $id ";
+            $result1 = mysql_query($sql1);
+
+            if (mysql_num_rows($result1) == 0) {
+
+               echo "Something does not seem right, we could not update your password";
+               exit;
+           }
 
             if ($_SESSION['EMAIL'] == $email) {
 

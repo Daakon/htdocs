@@ -148,22 +148,33 @@ a {
             <div align="center" class="index-menu">
 
                     <ul class="list-inline">
-                        <li>
-                            <a href="/learn_more">
-                               About
-                            </a>
-                        </li>
-                        <li>
-                            <a class="visible-xs" href="/login-mobile">
-                                Login
-                            </a>
-                        </li>
 
-                        <li>
-                            <a href="/support">
-                                Support
+                            <a href="/learn_more">
+                               About &nbsp;&nbsp;&nbsp;
                             </a>
-                        </li>
+
+
+
+                            <a class="hidden-xs" href="/learn_more#signup">
+                               Sign Up &nbsp;&nbsp;&nbsp;
+                            </a>
+
+
+
+                            <a class="visible-xs" href="/login-mobile">
+                                Sign Up or Login &nbsp;&nbsp;&nbsp;
+                            </a>
+
+
+
+                            <a href="/support">
+                                Support &nbsp;&nbsp;&nbsp;
+                            </a>
+
+
+
+
+
                     </ul>
 
                 <img src="/images/Rapportbook-Logo.png" height="200" width="200" />

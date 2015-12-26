@@ -5,10 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="51867226-c8dd-43fb-9a46-7c8a9e9ab742" name="Default" comment="Added media page.&#10;&#10;">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/create_pass.php" afterPath="$PROJECT_DIR$/create_pass.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/email.php" afterPath="$PROJECT_DIR$/email.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/forgot-password.php" afterPath="$PROJECT_DIR$/forgot-password.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/imports.php" afterPath="$PROJECT_DIR$/imports.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.php" afterPath="$PROJECT_DIR$/index.php" />
     </list>
     <ignored path="htdocs.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -53,7 +53,6 @@
         <option value="$PROJECT_DIR$/getSession.php" />
         <option value="$PROJECT_DIR$/terms.php" />
         <option value="$PROJECT_DIR$/post_disapprove.php" />
-        <option value="$PROJECT_DIR$/index.php" />
         <option value="$PROJECT_DIR$/login-mobile.php" />
         <option value="$PROJECT_DIR$/test" />
         <option value="$PROJECT_DIR$/test.php" />
@@ -93,9 +92,10 @@
         <option value="$PROJECT_DIR$/../bin/php/php5.6.10/conf/php.ini" />
         <option value="$PROJECT_DIR$/view_messages.php" />
         <option value="$PROJECT_DIR$/imports.php" />
-        <option value="$PROJECT_DIR$/email.php" />
         <option value="$PROJECT_DIR$/forgot-password.php" />
+        <option value="$PROJECT_DIR$/email.php" />
         <option value="$PROJECT_DIR$/create_pass.php" />
+        <option value="$PROJECT_DIR$/index.php" />
       </list>
     </option>
   </component>
@@ -141,6 +141,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -194,7 +195,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -622,14 +622,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5418895">
-          <caret line="137" column="25" selection-start-line="137" selection-start-column="25" selection-end-line="137" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/login-mobile.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.13547237">
@@ -886,40 +878,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/model_functions.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.05892857">
-          <caret line="350" column="18" selection-start-line="350" selection-start-column="18" selection-end-line="350" selection-end-column="18" />
-          <folding>
-            <marker date="1451060217000" expanded="true" signature="53:93" placeholder="SELECT IsAct... Members" />
-            <marker date="1451060217000" expanded="true" signature="349:392" placeholder="SELECT Email... Members" />
-            <marker date="1451060217000" expanded="true" signature="649:690" placeholder="SELECT SMSAc... Members" />
-            <marker date="1451060217000" expanded="true" signature="946:997" placeholder="SELECT First... Members" />
-            <marker date="1451060217000" expanded="true" signature="1387:1428" placeholder="SELECT First... Members" />
-            <marker date="1451060217000" expanded="true" signature="1796:1836" placeholder="SELECT Usern... Members" />
-            <marker date="1451060217000" expanded="true" signature="2032:2083" placeholder="SELECT First... Members" />
-            <marker date="1451060217000" expanded="true" signature="2325:2412" placeholder="SELECT DISTI... Profile" />
-            <marker date="1451060217000" expanded="true" signature="3001:3049" placeholder="SELECT DISTI... Members" />
-            <marker date="1451060217000" expanded="true" signature="3319:3367" placeholder="SELECT DISTI... Media" />
-            <marker date="1451060217000" expanded="true" signature="3572:3631" placeholder="SELECT DISTI... Members" />
-            <marker date="1451060217000" expanded="true" signature="3813:3850" placeholder="SELECT Email... Members" />
-            <marker date="1451060217000" expanded="true" signature="4035:4080" placeholder="SELECT ID FR... Members" />
-            <marker date="1451060217000" expanded="true" signature="4273:4311" placeholder="SELECT Gende... Members" />
-            <marker date="1451060217000" expanded="true" signature="4528:4563" placeholder="SELECT DOB F... Members" />
-            <marker date="1451060217000" expanded="true" signature="4915:4959" placeholder="SELECT State... Profile" />
-            <marker date="1451060217000" expanded="true" signature="5180:5223" placeholder="SELECT City Profile" />
-            <marker date="1451060217000" expanded="true" signature="5454:5505" placeholder="SELECT ID FR... Members" />
-            <marker date="1451060217000" expanded="true" signature="5920:5960" placeholder="SELECT Inter... Members" />
-            <marker date="1451060217000" expanded="true" signature="6160:6204" placeholder="SELECT Phone... Profile" />
-            <marker date="1451060217000" expanded="true" signature="6554:6613" placeholder="SELECT Email... Members" />
-            <marker date="1451060217000" expanded="true" signature="6871:6911" placeholder="SELECT * FRO... Profile" />
-            <marker date="1451060217000" expanded="true" signature="8215:8259" placeholder="SELECT Phone... Profile" />
-            <marker date="1451060217000" expanded="true" signature="11011:11092" placeholder="SELECT ID, I... Members" />
-            <marker date="1451060217000" expanded="true" signature="11392:11468" placeholder="SELECT Phone... Profile" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/view_messages.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-10.078571">
@@ -960,22 +918,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/email.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.4982142">
-          <caret line="151" column="1" selection-start-line="151" selection-start-column="1" selection-end-line="151" selection-end-column="1" />
-          <folding>
-            <marker date="1451098004000" expanded="true" signature="1057:1103" placeholder="..." />
-            <marker date="1451098004000" expanded="true" signature="1866:1912" placeholder="..." />
-            <marker date="1451098004000" expanded="true" signature="5008:5054" placeholder="..." />
-            <marker date="1451098004000" expanded="true" signature="5291:5338" placeholder="SELECT * FRO... Media" />
-            <marker date="1451098004000" expanded="true" signature="6436:6482" placeholder="..." />
-            <marker date="1451098004000" expanded="true" signature="9828:9875" placeholder="..." />
-            <marker date="1451098004000" expanded="true" signature="9914:9926" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/imports.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.88035715">
@@ -996,12 +938,72 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/create_pass.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.15178572">
-          <caret line="5" column="57" selection-start-line="5" selection-start-column="57" selection-end-line="5" selection-end-column="57" />
+        <state vertical-scroll-proportion="0.95">
+          <caret line="64" column="9" selection-start-line="64" selection-start-column="9" selection-end-line="64" selection-end-column="9" />
           <folding>
-            <marker date="1451101376000" expanded="true" signature="1261:1334" placeholder="UPDATE Membe... " />
-            <marker date="1451101376000" expanded="true" signature="1511:1600" placeholder="..." />
-            <marker date="1451101376000" expanded="true" signature="1645:1720" placeholder="..." />
+            <marker date="1451143018000" expanded="true" signature="1765:1838" placeholder="UPDATE Membe... " />
+            <marker date="1451143018000" expanded="true" signature="2015:2104" placeholder="..." />
+            <marker date="1451143018000" expanded="true" signature="2149:2224" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model_functions.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="5.8964286">
+          <caret line="350" column="18" selection-start-line="350" selection-start-column="18" selection-end-line="350" selection-end-column="18" />
+          <folding>
+            <marker date="1451060217000" expanded="true" signature="53:93" placeholder="SELECT IsAct... Members" />
+            <marker date="1451060217000" expanded="true" signature="349:392" placeholder="SELECT Email... Members" />
+            <marker date="1451060217000" expanded="true" signature="649:690" placeholder="SELECT SMSAc... Members" />
+            <marker date="1451060217000" expanded="true" signature="946:997" placeholder="SELECT First... Members" />
+            <marker date="1451060217000" expanded="true" signature="1387:1428" placeholder="SELECT First... Members" />
+            <marker date="1451060217000" expanded="true" signature="1796:1836" placeholder="SELECT Usern... Members" />
+            <marker date="1451060217000" expanded="true" signature="2032:2083" placeholder="SELECT First... Members" />
+            <marker date="1451060217000" expanded="true" signature="2325:2412" placeholder="SELECT DISTI... Profile" />
+            <marker date="1451060217000" expanded="true" signature="3001:3049" placeholder="SELECT DISTI... Members" />
+            <marker date="1451060217000" expanded="true" signature="3319:3367" placeholder="SELECT DISTI... Media" />
+            <marker date="1451060217000" expanded="true" signature="3572:3631" placeholder="SELECT DISTI... Members" />
+            <marker date="1451060217000" expanded="true" signature="3813:3850" placeholder="SELECT Email... Members" />
+            <marker date="1451060217000" expanded="true" signature="4035:4080" placeholder="SELECT ID FR... Members" />
+            <marker date="1451060217000" expanded="true" signature="4273:4311" placeholder="SELECT Gende... Members" />
+            <marker date="1451060217000" expanded="true" signature="4528:4563" placeholder="SELECT DOB F... Members" />
+            <marker date="1451060217000" expanded="true" signature="4915:4959" placeholder="SELECT State... Profile" />
+            <marker date="1451060217000" expanded="true" signature="5180:5223" placeholder="SELECT City Profile" />
+            <marker date="1451060217000" expanded="true" signature="5454:5505" placeholder="SELECT ID FR... Members" />
+            <marker date="1451060217000" expanded="true" signature="5920:5960" placeholder="SELECT Inter... Members" />
+            <marker date="1451060217000" expanded="true" signature="6160:6204" placeholder="SELECT Phone... Profile" />
+            <marker date="1451060217000" expanded="true" signature="6554:6613" placeholder="SELECT Email... Members" />
+            <marker date="1451060217000" expanded="true" signature="6871:6911" placeholder="SELECT * FRO... Profile" />
+            <marker date="1451060217000" expanded="true" signature="8215:8259" placeholder="SELECT Phone... Profile" />
+            <marker date="1451060217000" expanded="true" signature="11011:11092" placeholder="SELECT ID, I... Members" />
+            <marker date="1451060217000" expanded="true" signature="11392:11468" placeholder="SELECT Phone... Profile" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/email.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.2857143">
+          <caret line="138" column="76" selection-start-line="138" selection-start-column="76" selection-end-line="138" selection-end-column="76" />
+          <folding>
+            <marker date="1451141740000" expanded="true" signature="1057:1103" placeholder="..." />
+            <marker date="1451141740000" expanded="true" signature="1866:1912" placeholder="..." />
+            <marker date="1451141740000" expanded="true" signature="5061:5107" placeholder="..." />
+            <marker date="1451141740000" expanded="true" signature="5344:5391" placeholder="SELECT * FRO... Media" />
+            <marker date="1451141740000" expanded="true" signature="6489:6535" placeholder="..." />
+            <marker date="1451141740000" expanded="true" signature="9881:9928" placeholder="..." />
+            <marker date="1451141740000" expanded="true" signature="9967:9979" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.62857145">
+          <caret line="164" column="43" selection-start-line="164" selection-start-column="43" selection-end-line="164" selection-end-column="43" />
+          <folding>
+            <element signature="e#3504#3709#0#HTML" expanded="true" />
           </folding>
         </state>
       </provider>

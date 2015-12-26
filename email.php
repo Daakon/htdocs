@@ -130,15 +130,16 @@ function build_and_send_email($senderId, $toId, $notification, $postID, $pass)
         $link;
 
         $email = get_email_by_id($toId);
+        $id = get_id_by_email($email);
 
         if (strstr($url, "local")) {
             $link = "create_pass.php?email=$email";
         }
         else if (strstr($url, "dev")) {
-            $link = "http://dev.rapportbook.com/create_pass?email=$email";
+            $link = "http://dev.rapportbook.com/create_pass?email=$email&id=$id";
         }
         else {
-            $link = "http://www.rapportbook.com/create_pass?email=$email";
+            $link = "http://www.rapportbook.com/create_pass?email=$email&id=$id";
         }
         $email = get_email_by_id($toId);
 
