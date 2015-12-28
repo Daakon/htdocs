@@ -123,6 +123,7 @@ if (mysql_num_rows($result) == 0) {
     $result2 = mysql_query($sql2) or die(mysql_error());
     $stateRow = mysql_fetch_assoc($result2);
     $stateID = $stateRow['ID'];
+
     // insert new city with state key
     $sql3 = "INSERT INTO City (State_ID, City) Values ($stateID, '$city')";
     mysql_query($sql3) or die(mysql_error());

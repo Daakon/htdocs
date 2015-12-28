@@ -31,7 +31,7 @@ if (mysql_num_rows($result) == 0) {
 <?php
     if (isset($_POST['videoSend']) && $_POST['videoSend'] = "Start Video Chat") {
         // build out appear.in link
-        $appearID = uniqid();
+        $appearID = 'Rapportbook'.uniqid();
         $appearLink = "<iframe src=\"https://appear.in/$appearID\" frameborder=\"0\" height=\"300\"></iframe>";
         $message = $appearLink;
         $hasVideo = true;

@@ -75,25 +75,24 @@ $postOwner = $memberID;
         $profileUrl = "/$username";
     ?>
 
-    <div class="hidden-xs">
+    <div style="float:left;width:50px;">
         <a href="<?php echo $profileUrl ?>">
             <img src="<?php echo $mediaPath. $profilePhoto ?>" class="profilePhoto-Feed enlarge-onhover " alt=""
-                 title="<?php echo $name ?>" /> &nbsp <span class="profileName-Feed"><?php echo $name ?></span>
+                 title="<?php echo $name ?>" />
         </a>
     </div>
 
-    <div class="visible-xs">
-        <?php $checkName = checkNameLength($name); ?>
+    <div style="float:left;padding-left:10px;padding-top:10px;width:75%;">
         <a href="<?php echo $profileUrl ?>">
-            <img src="<?php echo $mediaPath. $profilePhoto ?>" class="profilePhoto-Feed enlarge-onhover " alt=""
-                 title="<?php echo $checkName ?>" /> &nbsp <span class="profileName-Feed"><?php echo $checkName ?></span>
+            <div class="profileName-Feed"><?php echo $name ?></div>
         </a>
-
     </div>
 
 
 
-    <div class="post" <?php echo $postStyle ?>>
+
+
+    <div class="post" <?php echo $postStyle ?> style="clear:both;">
 
         <?php
 

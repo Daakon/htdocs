@@ -163,21 +163,20 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
             <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 roll-call"
                  align="left">
 
-
-                <div class="hidden-xs">
-                    <img src="<?php echo $mediaPath.$profilePhoto ?>" class="profilePhoto-Feed" alt=""
-                         title="<?php echo $name ?>" class='enlarge-onhover'/> &nbsp
-                    <b><span class="profileName-Feed"><?php echo $name ?></span>
+                <div style="float:left;width:50px;">
+                    <a href="<?php echo $profileUrl ?>">
+                        <img src="<?php echo $mediaPath. $profilePhoto ?>" class="profilePhoto-Feed enlarge-onhover " alt=""
+                             title="<?php echo $name ?>" />
+                    </a>
                 </div>
 
-                <div class="visible-xs">
-                    <?php $checkName = checkNameLength($name); ?>
-                    <img src="<?php echo $mediaPath.$profilePhoto ?>" class="profilePhoto-Feed" alt=""
-                         title="<?php echo $checkName ?>" class='enlarge-onhover'/> &nbsp
-                    <b><span class="profileName-Feed"><?php echo $checkName ?></span>
-
+                <div style="float:left;padding-left:10px;padding-top:10px;width:75%;">
+                    <a href="<?php echo $profileUrl ?>">
+                        <div class="profileName-Feed"><?php echo $name ?></div>
+                    </a>
                 </div>
-                <div class="post">
+
+                <div class="post" style="clear:both;">
                 <?php
                 // check check post length if it has a url in it
                 if (strstr($post, "http://") || strstr($post, "https://")) {
