@@ -157,7 +157,8 @@ if (isset($_POST['submit'])) {
 
                                 // if photo didn't get uploaded, notify the user
                                 if (!file_exists($postMediaFilePath)) {
-                                    echo "<script>alert('File could not be uploaded, try uploading a different file type.');location='home.php'</script>";
+                                    echo "<script>alert('File could not be uploaded, try uploading a different file type.');location='/home.php'</script>";
+                                    exit;
                                 } else {
                                     // store media pointer
                                     $sql = "INSERT INTO Media (Member_ID,  MediaName,    MediaOgg,     MediaWebm,      MediaType,  MediaDate,  AudioName    ) Values

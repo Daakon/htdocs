@@ -88,15 +88,23 @@ if (isset($_POST['photo']) && ($_POST['photo'] == "Upload Photo")) {
         } else {
             imagegif($src, $postMediaFilePath, 50);
         }
-        // write photo to media table
-        $sql2 = "INSERT INTO Media (Member_ID, MediaName,     MediaType,  wasProfilePhoto, MediaDate) Values
+
+        // check if the photo was saved
+        if (file_exists($postMediaFilePath)) {
+
+            // write photo to media table
+            $sql2 = "INSERT INTO Media (Member_ID, MediaName,     MediaType,  wasProfilePhoto, MediaDate) Values
                                ('$ID',     '$mediaName',  '$type',       1,            CURDATE())";
-        mysql_query($sql2) or die(mysql_error());
-        // update photo pointer in database
-        $sql = "UPDATE Profile Set ProfilePhoto = '$mediaName' WHERE Member_ID = '$ID'";
-        mysql_query($sql) or die(mysql_error());
-        // alert everything is good
-        echo "<script>alert('Update Successful');</script>";
+            mysql_query($sql2) or die(mysql_error());
+            // update photo pointer in database
+            $sql = "UPDATE Profile Set ProfilePhoto = '$mediaName' WHERE Member_ID = $ID";
+            mysql_query($sql) or die(mysql_error());
+            // alert everything is good
+            echo "<script>alert('Update Successful');</script>";
+        }
+        else {
+            echo "<script>alert('There was an issue uploading this photo. Please try another photo');</script>";
+        }
     }
 }
 ?>
