@@ -73,11 +73,29 @@ $ID = $_SESSION['ID'];
 
                     }
 
-                echo "<a href = '/view_messages/$username'><img src = '$mediaPath$pic' class='profilePhoto-Feed' alt='' /> $name </a>";
-                if (mysql_num_rows($result3) > 0) {
-                    echo "<span style='color:#E30022;'>". $messageCount." New</font>";
+                echo "
+                <div style=\"float:left;width:50px;\">
+                <a href = '/view_messages/$username'>
+                <img src = '$mediaPath$pic' class='profilePhoto-Feed' alt='' />
+                </a>
+                </div>
+
+                <div style=\"float:left;padding-left:10px;padding-top:10px;width:75%;\">
+                <a href = '/view_messages/$username'>
+                 <div class=\"profileName-Feed\" style='font-weight:normal'>$name
+
+                ";
+
+
+                    if (mysql_num_rows($result3) > 0) {
+                    echo "<span style='color:#E30022;font-weight: bold'>". $messageCount." New</font>";
                 }
-                    echo "<hr/>";
+                    echo "
+                    </div>
+                    </a>
+                    </div>";
+
+                    echo "<hr class='hr-line' style='clear:both'/>";
                     echo "<br/>";
                 }
             }

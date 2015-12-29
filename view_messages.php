@@ -473,9 +473,21 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
                     $name = $rows2['FirstName'] .' '.$rows2['LastName'];
                     $username = $rows2['Username'];
 
-                    echo "<a href='/$username'><img src = '$mediaPath$pic' class='profilePhoto-Feed' alt='' /> $name</a>";
+                    echo "
+                    <div style=\"float:left;width:50px;\">
+                    <a href='/$username'>
+                    <img src = '$mediaPath$pic' class='profilePhoto-Feed' alt='' />
+                    </a>
+                    </div>
 
-                    echo "<div class='post'>".nl2br($message)."</div>";
+                    <div style=\"float:left;padding-left:10px;padding-top:10px;width:75%;\">
+                    <a href='/$username'>
+                    <div class=\"profileName-Feed\">$name</div>
+                    </a>
+                    </div>
+                    ";
+
+                    echo "<div class='post' style='clear:both'>".nl2br($message)."</div>";
 
                     echo "<div style='opacity:0.5'>".date('l F d Y g:i:s A',strtotime($date))."</div>";
                     echo "<hr/>";
