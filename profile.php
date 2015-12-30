@@ -787,13 +787,13 @@ $bgPhoto = $row['ProfilePhoto'];
             <form id="ajax-form" method="post" action = "" onsubmit="return checkFields();">
 
                 <div class="form-group">
-                    <label for="FirstName">First Name / Business Name</label>
+                    <label for="FirstName">First Name or Business Name</label>
                     <br/>
                     <input type ="text" class="form-control" id="FirstName" name="FirstName" value="<?php echo $firstName ?>" onblur="capFname()" />
                 </div>
 
                 <div class="form-group">
-                    <label for="LastName">Last Name</label>
+                    <label for="LastName">Last Name </label><span style="font-style: italic;padding-left:5px;font-size:12px;">(Not required if using a business name)</span>
                     <input type="text" class="form-control" id="LastName" name="LastName" value="<?php echo $lastName ?>" onblur="capLname()" />
                 </div>
 
