@@ -303,6 +303,31 @@ function check_demographics($ID) {
 
 }
 
+function isProfilePhoto($imagePath) {
+    $sql = "Select ProfilePhoto From Profile Where ProfilePhoto = '$imagePath' ";
+    $result = mysql_query($sql) or die(mysql_error());
+    $row = mysql_fetch_assoc($result);
+
+    if (mysql_num_rows($result) > 0) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+function isProfileVideo($videoPath) {
+    $sql = "Select ProfileVideo From Profile Where ProfileVideo = '$videoPath' ";
+    $result = mysql_query($sql) or die(mysql_error());
+    $row = mysql_fetch_assoc($result);
+
+    if (mysql_num_rows($result) > 0) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
 
 // text function for direct messages
 function text_notification($receiverID, $senderID)

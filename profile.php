@@ -316,12 +316,22 @@ if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
         }
 
         // check dob
-        /*var dob = document.getElementById('DOB').value;
-        if (dob == '') {
-            alert('You must provide your date of birth');
-            return false;
-        }*/
+        var dob = document.getElementById('DOB').value;
+        var userDate = new Date(dob);
+        var today = new Date();
 
+
+        if (userDate.getFullYear() <= 1900) {
+            alert('Your birth date must be greater than 1900');
+            return false;
+        }
+
+            var age = today.getFullYear() - userDate.getFullYear();
+
+            if(age <= 13) {
+                alert("You have to be at least 13 years old!");
+                return false;
+            }
 
         return true;
     }

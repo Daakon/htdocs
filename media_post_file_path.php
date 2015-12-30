@@ -1,4 +1,5 @@
 <?php
+    // this file has to be called close to its instantiation
     $postMediaFilePath = trim("./media/$mediaName");
 
     $postOggFilePathTemp = trim("./media/$oggFileName");

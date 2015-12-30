@@ -465,7 +465,18 @@ $profileMediaSrc = trim("/media/" . $profilePhoto);
                 <a href="/home">Home</a>
                 <br/><br/><br/>
 
-            <?php } else { ?>
+            <?php } else {
+
+                $isPhotoAlbumOpen = $_GET['photoOpen'];
+                if ($isPhotoAlbumOpen == 'true') {
+                    $_SESSION['PhotoAlbumOpen'] = true;
+                }
+
+                $isVideoAlbumOpen = $_GET['videoOpen'];
+                if ($isVideoAlbumOpen == 'true') {
+                    $_SESSION['VideoAlbumOpen'] = true;
+                }
+                ?>
 
                 <a href="javascript:history.go(- <?php echo $back ?>)">Back</a>
                 <br/><br/><br/>
