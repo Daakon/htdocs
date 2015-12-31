@@ -523,7 +523,7 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
 
                 <input type="file" width="10px;" name="flPostMedia[]" id="flPostMedia" multiple />
 
-                <textarea name="message" id="message" class="form-control"></textarea>
+                <textarea name="message" id="message" class="form-control" placeholder="Type your message here"></textarea>
                 <input type="hidden" id="subject" name="subject" value="<?php echo $subject ?>" />
                 <input type="hidden" id="receiverID" name="receiverID" value="<?php echo $senderID ?>" />
                 <input type="hidden" id="username" name="username" value="<?php echo $urlUsername ?>"/>

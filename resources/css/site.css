@@ -1,6 +1,7 @@
 body {
     /*background-color: #dedede;*/
-    font-family: 'proxima-nova', 'Proxima Nova', sans-serif;
+    /*font-family: 'proxima-nova', 'Proxima Nova', sans-serif;*/
+    font-family: "Georgia";
     /*background-image:url('/images/silk-bg.jpg');*/
     background-repeat:no-repeat;
     background-size:100% 100%;
@@ -346,6 +347,10 @@ img[src='Error.src']{
 
 }
 
+.profileFont {
+    font-size:20px;
+}
+
 .defaultProfileVideo {
     height: 100px;
     width: 200px;
@@ -617,10 +622,16 @@ a {
 .btnFollow {
     background:red;
     color: white;
+    height: 30px;
+    width: 100px;
+    font-size: 20px;
 }
 
 .btnUnfollow {
     background: white;
     color: black;
+    height: 30px;
+    width: 120px;
+    font-size: 20px;
 }
 

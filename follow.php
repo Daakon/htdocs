@@ -47,6 +47,6 @@ if (checkActive($memberID)) {
     <?php
     $sqlFollowCount = "SELECT * FROM Follows WHERE Followed_ID = $memberID ";
     $sqlFollowCountResult = mysql_query($sqlFollowCount);
-    echo '<b>'.$count = mysql_num_rows($sqlFollowCountResult).'</b>';
+    echo '<span class ="profileFont">'.$count = mysql_num_rows($sqlFollowCountResult).'</span>';
     ?>
 

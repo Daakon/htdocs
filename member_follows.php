@@ -74,14 +74,27 @@ $profileID = get_id_from_username($username);
                 }
 ?>
 
-                <a href="<?php echo $profileUrl ?>">
-                    <img src="<?php echo $mediaPath. $profilePhoto ?>" class="profilePhoto-Feed enlarge-onhover " alt=""
-                    title="<?php echo $name ?>" /> &nbsp <span class="profileName-Feed"><?php echo $name ?></span>
-                </a>
-                <span style="font-style: italic">(<?php echo $interest ?>)</span>
-               <?php if ($profileID == $ID && $rows['New'] == 1) { echo "<span style='color:red;'>New</span>"; } ?>
-                <hr/>
+                <div style="float:left;width:50px;">
+                    <a href="<?php echo $profileUrl ?>">
+                        <img src="<?php echo $mediaPath. $profilePhoto ?>" class="profilePhoto-Feed enlarge-onhover " alt=""
+                             title="<?php echo $name ?>" />
+                    </a>
+                </div>
 
+                <div style="float:left;padding-left:10px;padding-top:10px;width:75%;">
+                    <a href="<?php echo $profileUrl ?>">
+                        <div class="profileName-Feed">
+                            <?php echo $name ?>
+                            <span style="font-style: italic;font-weight: normal">
+                                    (<?php echo $interest ?>)
+                                </span>
+                        </div>
+                    </a>
+
+                </div>
+
+
+                <hr style="clear: both;"/>
         <?php
             }
         }

@@ -531,6 +531,8 @@ $bgPhoto = $row['ProfilePhoto'];
 
                 ?>
 
+                <div align ="center">
+
                 <div id="followDiv1">
                     <table >
                         <tr>
@@ -561,58 +563,52 @@ $bgPhoto = $row['ProfilePhoto'];
                 <?php
                 $sqlFollowCount = "SELECT * FROM Follows WHERE Followed_ID = $memberID ";
                 $sqlFollowCountResult = mysql_query($sqlFollowCount);
-                echo '<b>'.$count = mysql_num_rows($sqlFollowCountResult).'</b>';
+                echo '<span class ="profileFont">'.$count = mysql_num_rows($sqlFollowCountResult).'</span>';
                 ?>
                 </div>
             <br/>
 
                 <!--Profile photo --------------------------------------------------------------------------------->
 
-                <div align ="center">
+
                     <img src = "<?php echo $mediaPath.$profilePhoto ?>" class="profilePhoto" alt="Profile Photo" />
-                </div>
+
 
 
                 <!--Profile video --------------------------------------------------------------------------------->
-                <div align ="center">
+
                     <?php if ($profileVideo != "default_video.png") { ?>
                         <video src = " <?php echo $videoPath . $profileVideo ?>" poster="/poster/<?php echo $posterName ?>"  preload="auto" controls />
                         <br/>
                     <?php } else { ?>
                     <!--Display Nothing -->
             <?php } ?>
-                </div>
 
-                <div class="content-block">
-                    <h2>
-                        <?php echo $firstName .' '. $lastName ?>
-                    </h2>
-                </div>
+
+
+                    <h3>
+                        <?php echo "<div class=\"public-profile-label profileFont\">$firstName $lastName </div>" ?>
+                    </h3>
+
 
                 <!--Profile ---------------------------------------------------------------------------------------->
 
 
                 <br/>
 
-                <div class="public-profile-label">City</div>
-            <?php echo $city ?>
+            <?php echo "<span class='profileFont'>$city, $state </span>"; ?>
 
                 <br/><br/>
 
-                <div class="public-profile-label">State</div>
-            <?php echo $state ?>
 
-                <br/><br/>
-
-                <div class="public-profile-label">About</div>
-            <?php echo $about ?>
+            <?php echo "<span class='profileFont'>$about</span>"; ?>
 
                 <br/><br/>
 
             <?php if (isset($ID) && !empty($ID) && $memberID != $ID) { ?>
 
-                <div class="public-profile-label">Message Me</div>
-                <a href="/view_messages.php/<?php echo $username ?>"><img src="/images/messages.png" height="20" width="20" /></a>
+
+                <a href="/view_messages.php/<?php echo $username ?>"><img src="/images/messages.png" height="70" width="80" /></a>
             <?php } elseif ($memberID == $ID) { ?>
                 <?php echo "Sorry but you can't message yourself, that's kind of weird anyway";
 
@@ -625,7 +621,7 @@ $bgPhoto = $row['ProfilePhoto'];
                 }
             ?>
 
-
+</div>
             <?php
             }
             else {
