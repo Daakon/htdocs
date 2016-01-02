@@ -506,6 +506,14 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
 </script>
 
+<script>
+    function myFunction() {
+        var page = readCookie('Page');
+        var scrolly = readCookie('Scrolly');
+        window.location=page+"?scrolly="+scrolly;
+    }
+</script>
+
 <body>
 
 <div class="container" style="margin-top:-60px;
@@ -522,7 +530,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
         <?php }
         else {
             ?>
-            <li><a href="javascript:history.back();">Back</a></li>
+            <li><button onclick="myFunction()">Go Back</button></li>
         <?php
         }
         ?>
@@ -728,7 +736,21 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                         $commentID = $rows3['PostCommentID'];
                         $commentOwnerID = $rows3['CommenterID'];
                         echo '<div class="comment-row">';
-                        echo '<div class="user-icon"><img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" class ="enlarge-onhover img-responsive border-1" /><div class="user-name">' . $rows3['FirstName'] . ' ' . $rows3['LastName'] . '</div></div><div class="comment-content">' . nl2br($comment) . '</div>';
+                        echo '<div class="profileImageWrapper-Feed">
+                        <a href='.$commenterProfileUrl.'>
+                        <img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" class ="enlarge-onhover img-responsive" />
+                        </a>
+                        </div>
+
+                         <div class="profileNameWrapper-Feed">
+                          <a href='.$commenterProfileUrl.'>
+                            <div class="profileName-Feed"><?php echo $name ?> ' .
+                                $rows3['FirstName'] . ' ' . $rows3['LastName'] .
+                                '</div>
+                         </a>
+                        </div>
+
+                    <div class="comment-content" style="clear:both">' . nl2br($comment) . '</div>';
                         echo '</div>';
 
                         if ($commentOwnerID == $ID) {
@@ -782,7 +804,18 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                         $commentID = $rows4['PostCommentID'];
                         $commentOwnerID = $rows4['CommenterID'];
                         echo '<div class="user-icon">';
-                        echo '<img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" class ="enlarge-onhover img-responsive border-1" /><div class="user-name">' . $rows4['FirstName'] .' '. $rows4['LastName'] . '</div></div><div class="comment-content">' . nl2br($comment) . '</div>';
+                        echo '<a href='.$commenterProfileUrl.'>';
+                        echo '<div class="profileImageWrapper-Feed">';
+                        echo '<img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" class ="enlarge-onhover img-responsive" />
+                            </a></div>
+
+                            <div class="profileNameWrapper-Feed">
+                            <a href='.$commenterProfileUrl.'>
+                            <div class="profileName-Feed">' . $rows4['FirstName'] .' '. $rows4['LastName'] .
+                                    '</div></div><div class="comment-content" style="clear:both"></a>' . nl2br($comment) .
+                                    '</div>
+
+                            </div>';
                         echo '</td></tr>';
                     }
                     echo '</div>';

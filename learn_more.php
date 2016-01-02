@@ -459,9 +459,25 @@ if (!empty($_SESSION['ID'])) {
                     $profilePhoto = $rows3['ProfilePhoto'];
                     $commentID = $rows3['PostCommentID'];
                     $commentOwnerID = $rows3['CommenterID'];
+
                     echo '<div class="comment-row">';
-                    echo '<div class="user-icon"><img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" class ="enlarge-onhover img-responsive" /><div class="user-name">' . $rows3['FirstName'] . ' ' . $rows3['LastName'] . '</div></div><div class="comment-content">' . nl2br($comment) . '</div>';
+                    echo '<div class="profileImageWrapper-Feed">
+                    <a href='.$commenterProfileUrl.'>
+                    <img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" class ="enlarge-onhover img-responsive" />
+                    </a>
+                    </div>
+
+                     <div class="profileNameWrapper-Feed">
+                      <a href='.$commenterProfileUrl.'>
+                        <div class="profileName-Feed"><?php echo $name ?> ' .
+                        $rows3['FirstName'] . ' ' . $rows3['LastName'] .
+                        '</div>
+                     </a>
+                    </div>
+
+                    <div class="comment-content" style="clear:both">' . nl2br($comment) . '</div>';
                     echo '</div>';
+
                     if ($commentOwnerID == $ID) {
                         //<!--DELETE BUTTON ------------------>
                         echo '<div class="comment-delete">';
@@ -511,8 +527,20 @@ if (!empty($_SESSION['ID'])) {
                     $profilePhoto = $rows4['ProfilePhoto'];
                     $commentID = $rows4['PostCommentID'];
                     $commentOwnerID = $rows4['CommenterID'];
+
                     echo '<div class="user-icon">';
-                    echo '<img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" class ="enlarge-onhover img-responsive" /><div class="user-name">' . $rows4['FirstName'] .' '. $rows4['LastName'] . '</div></div><div class="comment-content">' . nl2br($comment) . '</div>';
+                    echo '<a href='.$commenterProfileUrl.'>';
+                    echo '<div class="profileImageWrapper-Feed">';
+                    echo '<img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" class ="enlarge-onhover img-responsive" />
+                    </a></div>
+
+                    <div class="profileNameWrapper-Feed">
+                    <a href='.$commenterProfileUrl.'>
+                    <div class="profileName-Feed">' . $rows4['FirstName'] .' '. $rows4['LastName'] .
+                        '</div></div><div class="comment-content" style="clear:both"></a>' . nl2br($comment) .
+                        '</div>
+
+                    </div>';
                     echo '</td></tr>';
                 }
                 echo '</div>';

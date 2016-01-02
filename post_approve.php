@@ -111,8 +111,11 @@ if (mysql_num_rows($result2) > 0) {
     echo '</form>';
 }
 
+$_SESSION['PostID'] = $postID;
+$_SESSION['Approvals'] = $approvals;
 //-------------------------------------------------------------
 // End of approvals
 //-----------------------------------------------------------
-
 ?>
+
+

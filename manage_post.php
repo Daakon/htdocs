@@ -33,9 +33,6 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 }
 ?>
 
-<style>
-
-</style>
 
 <script type="text/javascript">
     function saveScrollPositions(theForm) {
@@ -119,9 +116,9 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
             </div>
 
     <?php
-    $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-    preg_match("/[^\/]+$/", $url, $match);
-    $username = $match[0];
+    $username = get_username_from_url();
+    $username = explode("?", $username);
+    $username = $username[0];
     $profileID = get_id_from_username($username);
 
     $sql = "SELECT DISTINCT
@@ -202,14 +199,15 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
                 <hr/>
 
-                    <a href='/post-interest.php?interest=<?php echo urlencode($category) ?>'><span class="engageText">#<?php echo $category ?></span></a>
+                    <a href='/post-interest.php?interest=<?php echo urlencode($category) ?>' onclick="saveScrollPositionOnLinkClick('/manage_post/<?php echo $username ?>')"><span class="engageText">#<?php echo $category ?></span></a>
 
                 <?php if ($memberID != $ID) { ?>
                    | <a href="/view_messages.php/<?php echo $username ?>"><span class="engageText"><img src="/images/messages.png" height="20" width="20" /> Message </span></a>
                 <?php } ?>
 
             <?php if ($_SESSION['ID'] == get_id_from_username($username)) { ?>
-                <div class="content-space">
+
+                <div class="content-space" style="padding-top:20px;">
                     <!--DELETE BUTTON ------------------>
                     <form action="" method="post" onsubmit="return confirm('Do you really want to delete this post?')">
                         <input type="hidden" name="postID" id="postID" value="<?php echo $postID ?>"/>
@@ -331,8 +329,23 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                         $commentID = $rows3['PostCommentID'];
                         $commentOwnerID = $rows3['CommenterID'];
                         echo '<div class="comment-row">';
-                        echo '<div class="user-icon"><img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" style = "border:1px solid black" class ="enlarge-onhover img-responsive" /><div class="user-name">' . $rows3['FirstName'] . ' ' . $rows3['LastName'] . '</div></div><div class="comment-content">' . nl2br($comment) . '</div>';
+                        echo '<div class="profileImageWrapper-Feed">
+                        <a href='.$commenterProfileUrl.'>
+                        <img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" class ="enlarge-onhover img-responsive" />
+                        </a>
+                        </div>
+
+                         <div class="profileNameWrapper-Feed">
+                          <a href='.$commenterProfileUrl.'>
+                            <div class="profileName-Feed"><?php echo $name ?> ' .
+                                $rows3['FirstName'] . ' ' . $rows3['LastName'] .
+                                '</div>
+                         </a>
+                        </div>
+
+                    <div class="comment-content" style="clear:both">' . nl2br($comment) . '</div>';
                         echo '</div>';
+
                         if ($commentOwnerID == $ID) {
                             //<!--DELETE BUTTON ------------------>
                             echo '<div class="comment-delete">';
@@ -384,10 +397,23 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                         $commentID = $rows4['PostCommentID'];
                         $commentOwnerID = $rows4['CommenterID'];
                         echo '<div class="user-icon">';
-                        echo '<img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" style = "border:1px solid black" class ="enlarge-onhover img-responsive" /><div class="user-name">' . $rows4['FirstName'] .' '. $rows4['LastName'] . '</div></div><div class="comment-content">' . nl2br($comment) . '</div>';
+                        echo '<a href='.$commenterProfileUrl.'>';
+                        echo '<div class="profileImageWrapper-Feed">';
+                        echo '<img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" class ="enlarge-onhover img-responsive" />
+                        </a></div>
+
+                        <div class="profileNameWrapper-Feed">
+                        <a href='.$commenterProfileUrl.'>
+                        <div class="profileName-Feed">' . $rows4['FirstName'] .' '. $rows4['LastName'] .
+                                '</div></div><div class="comment-content" style="clear:both"></a>' . nl2br($comment) .
+                                '</div>
+
+                        </div>';
                         echo '</td></tr>';
                     }
                     echo '</div>';
+
+
                     if ($commentOwnerID == $ID) {
                         //<!--DELETE BUTTON ------------------>
                         echo '<div class="comment-delete">';

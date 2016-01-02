@@ -351,6 +351,18 @@ img[src='Error.src']{
     font-size:20px;
 }
 
+.profileImageWrapper-Feed {
+    float:left;
+    width:50px;
+}
+
+.profileNameWrapper-Feed {
+    float:left;
+    padding-left:10px;
+    padding-top:10px;
+    width:75%;
+}
+
 .defaultProfileVideo {
     height: 100px;
     width: 200px;
@@ -426,6 +438,7 @@ li {
 .comment-content{
     padding:10px;
     padding-top:10px;
+    padding-left:0px;
     font-weight: normal;
 }
 

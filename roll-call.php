@@ -1,4 +1,3 @@
-
 <?php
 // pre-load Roll Call
 // get genre selection
@@ -48,7 +47,7 @@ $rollCallResult = mysql_query($sqlRollCall) or die(mysql_error());
 if (mysql_num_rows($rollCallResult) == 0) {
     ?>
     <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 roll-call"
-          align="left">
+         align="left">
         Make The First <?php echo $genre ?> Connection in <?php echo $searchCity ?>
     </div>
 <?php }
@@ -72,17 +71,17 @@ $postOwner = $memberID;
 <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 col-sm-12 col-xs-12 roll-call">
 
     <?php
-        $profileUrl = "/$username";
+    $profileUrl = "/$username";
     ?>
 
-    <div style="float:left;width:50px;">
+    <div class="profileImageWrapper-Feed">
         <a href="<?php echo $profileUrl ?>">
             <img src="<?php echo $mediaPath. $profilePhoto ?>" class="profilePhoto-Feed enlarge-onhover " alt=""
                  title="<?php echo $name ?>" />
         </a>
     </div>
 
-    <div style="float:left;padding-left:10px;padding-top:10px;width:75%;">
+    <div class="profileNameWrapper-Feed">
         <a href="<?php echo $profileUrl ?>">
             <div class="profileName-Feed"><?php echo $name ?></div>
         </a>
@@ -102,35 +101,35 @@ $postOwner = $memberID;
 
         }
         else if (strlen($post) > 700) {
-                $post500 = substr($post, 0, strpos($post, ' ', 700)).'<br/>'; ?>
+            $post500 = substr($post, 0, strpos($post, ' ', 700)).'<br/>'; ?>
 
-                <?php echo nl2br($post500) ?>
-                <br/>
-                <a style="display:block;" style="width:100%;" href="show_post?postID=<?php echo $postID ?>&email=0">
-                    <span style="color:black;font-weight: 800">Show More</span>
-                </a>
+            <?php echo nl2br($post500) ?>
+            <br/>
+            <a style="display:block;" style="width:100%;" href="show_post?postID=<?php echo $postID ?>&email=0">
+                <span style="color:black;font-weight: 800">Show More</span>
+            </a>
 
-                <?php
-            }
-    else {
-        echo nl2br($post);
+            <?php
+        }
+        else {
+            echo nl2br($post);
         }
         ?>
 
     </div>
 
-<hr class="hr-line" />
+    <hr class="hr-line" />
 
     <?php if (isset($ID)) { ?>
-            <a href='/post-interest?interest=<?php echo urlencode($category) ?>' class='category'><span class="engageText">#<?php echo $category ?></span></a>
+        <a href='/post-interest?interest=<?php echo urlencode($category) ?>' onclick="saveScrollPositionOnLinkClick('/home')" class='category'><span class="engageText">#<?php echo $category ?></span></a>
 
 
 
-            <?php if ($ID != $memberID) {?>
-                    | <a href="/view_messages/<?php echo $username ?>"><span class="engageText"><img src = "/images/messages.png" height="20" width="20" /> Message </span> </a>
+        <?php if ($ID != $memberID) {?>
+            | <a href="/view_messages/<?php echo $username ?>"><span class="engageText"><img src = "/images/messages.png" height="20" width="20" /> Message </span> </a>
         <?php } ?>
 
-<?php } ?>
+    <?php } ?>
 
     <div >
 
@@ -143,7 +142,7 @@ $postOwner = $memberID;
             $readonly = "";
         }
 
-echo "<hr class='hr-line'/>";
+        echo "<hr class='hr-line'/>";
 
         //check if member has approved this post
         //----------------------------------------------------------------
@@ -152,7 +151,7 @@ echo "<hr class='hr-line'/>";
         $result2 = mysql_query($sql2) or die(mysql_error());
         $rows2 = mysql_fetch_assoc($result2);
         // get approvals for each post
-        $approvals = mysql_num_rows(mysql_query("SELECT * FROM PostApprovals WHERE Post_ID = '$postID'"));
+            $approvals = mysql_num_rows(mysql_query("SELECT * FROM PostApprovals WHERE Post_ID = '$postID'"));
         // show disapprove if members has approved the post
         echo '<div class="post-approvals">';
         echo "<div id = 'approvals$postID'>";
@@ -184,32 +183,32 @@ echo "<hr class='hr-line'/>";
 
         <div class="content-space">
             <?php if (isset($ID)) { ?>
-            <form method="post" action="" enctype="multipart/form-data"
-                  onsubmit="showCommentUploading('comment<?php echo $postID?>', this);">
+                <form method="post" action="" enctype="multipart/form-data"
+                      onsubmit="showCommentUploading('comment<?php echo $postID?>', this);">
 
-                <input type="text" class="form-control" name="postComment" id="postComment"
-                       placeholder="Write a comment" title='' />
+                    <input type="text" class="form-control" name="postComment" id="postComment"
+                           placeholder="Write a comment" title='' />
 
-                <h6>Add Photos/Video</h6>
-                <input type="file" name="flPostMedia" id="flPostMedia" class="flPostMedia"/>
+                    <h6>Add Photos/Video</h6>
+                    <input type="file" name="flPostMedia" id="flPostMedia" class="flPostMedia"/>
 
-                <br/>
-                <div id="comment<?php echo $postID ?>" style="display:none;">
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-striped progress-bar-danger active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" >
-                            <b>File uploading...please wait</b>
+                    <br/>
+                    <div id="comment<?php echo $postID ?>" style="display:none;">
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped progress-bar-danger active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" >
+                                <b>File uploading...please wait</b>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <input type="submit" name="btnComment" id="btnComment" Value="Comment"/>
-                <input type="hidden" name="postID" id="postID" Value="<?php echo $postID ?>"/>
-                <input type="hidden" name="ID" id="ID" value="<?php echo $ID ?>"/>
-                <input type="hidden" name="ownerId" id="ownerId" value="<?php echo $MemberID ?>"/>
-                <input type="hidden" name="scrollx" id="scrollx" value="0"/>
-                <input type="hidden" name="scrolly" id="scrolly" value="0"/>
-            </form>
+                    <input type="submit" name="btnComment" id="btnComment" Value="Comment"/>
+                    <input type="hidden" name="postID" id="postID" Value="<?php echo $postID ?>"/>
+                    <input type="hidden" name="ID" id="ID" value="<?php echo $ID ?>"/>
+                    <input type="hidden" name="ownerId" id="ownerId" value="<?php echo $MemberID ?>"/>
+                    <input type="hidden" name="scrollx" id="scrollx" value="0"/>
+                    <input type="hidden" name="scrolly" id="scrolly" value="0"/>
+                </form>
 
-<?php } ?>
+            <?php } ?>
 
             <?php
             $sql3 = "SELECT DISTINCT
@@ -242,14 +241,21 @@ echo "<hr class='hr-line'/>";
                     $commenterProfileUrl = "/$commenterUsername";
 
                     echo '<div class="comment-row">';
-                    echo '<div class="user-icon">
+                    echo '<div class="profileImageWrapper-Feed">
                     <a href='.$commenterProfileUrl.'>
                     <img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" class ="enlarge-onhover img-responsive" />
-                    <div class="user-name">' . $rows3['FirstName'] . ' ' . $rows3['LastName'] . '</div>
+                    </a>
+                    </div>
+
+                     <div class="profileNameWrapper-Feed">
+                      <a href='.$commenterProfileUrl.'>
+                        <div class="profileName-Feed"><?php echo $name ?> ' .
+                        $rows3['FirstName'] . ' ' . $rows3['LastName'] .
+                        '</div>
                      </a>
                     </div>
-                    <div class="comment-content">' . nl2br($comment) . '</div>
-                    </a>';
+
+                    <div class="comment-content" style="clear:both">' . nl2br($comment) . '</div>';
                     echo '</div>';
                     if ($commentOwnerID == $ID) {
                         //<!--DELETE BUTTON ------------------>
@@ -307,11 +313,17 @@ echo "<hr class='hr-line'/>";
 
                     echo '<div class="user-icon">';
                     echo '<a href='.$commenterProfileUrl.'>';
+                    echo '<div class="profileImageWrapper-Feed">';
                     echo '<img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" class ="enlarge-onhover img-responsive" />
-                    <div class="user-name">' . $rows4['FirstName'] .' '. $rows4['LastName'] .
-                        '</div></div><div class="comment-content">' . nl2br($comment) .
+                    </a></div>
+
+                    <div class="profileNameWrapper-Feed">
+                    <a href='.$commenterProfileUrl.'>
+                    <div class="profileName-Feed">' . $rows4['FirstName'] .' '. $rows4['LastName'] .
+                        '</div></div><div class="comment-content" style="clear:both"></a>' . nl2br($comment) .
                         '</div>
-                    </a>';
+
+                    </div>';
                     echo '</td></tr>';
                 }
                 echo '</div>';
@@ -335,12 +347,12 @@ echo "<hr class='hr-line'/>";
                               End of comments div
                               ----------------------------------------------------->
 
+        </div>
     </div>
-</div>
     <?php
     }
     }
     ?>
 
 
-<!--Right Column -->
+    <!--Right Column -->

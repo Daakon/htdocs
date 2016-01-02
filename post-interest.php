@@ -657,11 +657,21 @@ $interests = strtolower($interests);
 $gender = getGender($ID);*/
 ?>
 
+<script>
+function myFunction() {
+    var page = readCookie('Page');
+    var scrolly = readCookie('Scrolly');
+    window.location=page+"?scrolly="+scrolly;
+}
+</script>
+
     <div class="row row-padding">
 <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 " align="left">
 
         <ul class="list-inline">
-            <li><a href="javascript:history.back();">Back</a></li>
+            <li>
+                <button onclick="myFunction()">Go Back</button>
+            </li>
             <li><a href="/<?php echo get_username($ID) ?>">Go To Your Profile <?php require 'getNewMessageCount.php' ?></a></li>
         </ul>
 </div>
@@ -899,8 +909,23 @@ if (mysql_num_rows($result) > 0) {
                     $commentID = $rows3['PostCommentID'];
                     $commentOwnerID = $rows3['CommenterID'];
                     echo '<div class="comment-row">';
-                    echo '<div class="user-icon"><img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" style = "border:1px solid black" class ="enlarge-onhover img-responsive" /><div class="user-name">' . $rows3['FirstName'] . ' ' . $rows3['LastName'] . '</div></div><div class="comment-content">' . nl2br($comment) . '</div>';
-                    echo '</div>';
+                        echo '<div class="profileImageWrapper-Feed">
+                        <a href='.$commenterProfileUrl.'>
+                        <img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" class ="enlarge-onhover img-responsive" />
+                        </a>
+                        </div>
+
+                         <div class="profileNameWrapper-Feed">
+                          <a href='.$commenterProfileUrl.'>
+                            <div class="profileName-Feed"><?php echo $name ?> ' .
+                                $rows3['FirstName'] . ' ' . $rows3['LastName'] .
+                                '</div>
+                         </a>
+                        </div>
+
+                    <div class="comment-content" style="clear:both">' . nl2br($comment) . '</div>';
+                        echo '</div>';
+
                     if ($commentOwnerID == $ID) {
                         //<!--DELETE BUTTON ------------------>
                         echo '<div class="comment-delete">';
@@ -952,7 +977,18 @@ if (mysql_num_rows($result) > 0) {
                     $commentID = $rows4['PostCommentID'];
                     $commentOwnerID = $rows4['CommenterID'];
                     echo '<div class="user-icon">';
-                    echo '<img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" style = "border:1px solid black" class ="enlarge-onhover img-responsive" /><div class="user-name">' . $rows4['FirstName'] .' '. $rows4['LastName'] . '</div></div><div class="comment-content">' . nl2br($comment) . '</div>';
+                    echo '<a href='.$commenterProfileUrl.'>';
+                    echo '<div class="profileImageWrapper-Feed">';
+                    echo '<img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" class ="enlarge-onhover img-responsive" />
+                    </a></div>
+
+                    <div class="profileNameWrapper-Feed">
+                    <a href='.$commenterProfileUrl.'>
+                    <div class="profileName-Feed">' . $rows4['FirstName'] .' '. $rows4['LastName'] .
+                        '</div></div><div class="comment-content" style="clear:both"></a>' . nl2br($comment) .
+                        '</div>
+
+                    </div>';
                     echo '</td></tr>';
                 }
                 echo '</div>';

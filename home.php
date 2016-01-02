@@ -531,7 +531,6 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
 
 
-
 <script type="text/javascript">
     function saveScrollPositions(theForm) {
         if(theForm) {
@@ -542,6 +541,8 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
         }
     }
 </script>
+
+
 <script>
     $(document).ready(function () {
         $("body").delegate(".btnApprove", "click", function () {
@@ -555,6 +556,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                 type: "post",
                 url: "/post_approve.php",
                 data: data,
+                cache: true,
                 success: function (data) {
                     parentDiv.html(data);
                 }
@@ -575,12 +577,14 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                 type: "post",
                 url: "/post_disapprove.php",
                 data: data,
+                cache: true,
                 success: function (data) {
                     parentDiv.html(data);
                 }
             })
         });
     });
+
 </script>
 <script type="text/javascript">
     function showPost(long,short) {
@@ -670,10 +674,18 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
     }
 </style>
 
+<script language=" JavaScript" >
+    <!--
+    function LoadOnce()
+    {
+        window.location.reload();
+    }
+    //-->
+</script>
 
 <?php //check_demographics($ID); ?>
 
-<body>
+<body onload="document.refresh()">
 <div class="container" style="margin-top:-50px;">
     <?php
     ?>
