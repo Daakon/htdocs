@@ -10,12 +10,6 @@ function get_head_files()
     <html xmlns="http://www.w3.org/1999/xhtml">
     <head lang="<?php echo $str_language; ?>" xml:lang="<?php echo $str_language; ?>">
 
-    <!--Allow users to download web app -->
-    <!--Link so Android devices can see the icon -->
-    <link rel=”apple-touch-icon” href=”/apple-touch-icon.png”/>
-    <link rel=”apple-touch-icon-precomposed” href=”/apple-touch-icon.png”/>
-    <link rel="stylesheet" type="text/css" href="/resources/css/addtohomescreen.css">
-
 
         <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
         <meta name="description" content="Promote your business. Make local or national connections. Find people who need your product.">
@@ -175,7 +169,6 @@ if (strstr($url, "home")) { ?>
 
 <?php function get_footer_files()
 {
-    $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
     ?>
 
 

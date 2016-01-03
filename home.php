@@ -5,7 +5,6 @@ IT WILL INCREASE THE RENDERING TIME OF HTML ELEMENTS
 <?php
 require 'imports.php';
 $ffmpeg = '/usr/local/bin/ffmpeg';
-
 //require 'ads.php';
 
 get_head_files();

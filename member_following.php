@@ -70,6 +70,7 @@ $profileID = get_id_from_username($username);
                     $profilePhoto = $rows2['ProfilePhoto'];
                     $interest = $rows2['Interest'];
 
+                    $profileUrl = "/$username";
                     ?>
 
 
@@ -93,7 +94,7 @@ $profileID = get_id_from_username($username);
                     </div>
 
 
-                        <hr style="clear: both;"/>
+                        <hr class="hr-line" style="clear: both;"/>
 
             <?php
                 }

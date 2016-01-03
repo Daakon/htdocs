@@ -12,7 +12,7 @@ if (strstr($url, "forgot-password") || strstr($url, "learn_more")
     || strstr($url, "login") || strstr($url, "signup")
     || strstr($url, "terms") || strstr($url, "show_post")
     || strstr($url, "support") || strstr($url, "homepage")
-    || strstr($url, "create_pass")
+    || strstr($url, "create_pass") || strstr($url, "something_happened")
 ) {
     // dont check session
 }
@@ -30,4 +30,5 @@ require 'memory_settings.php';
 if (strstr($url, "login-mobile.php")) {
     require 'checkLogin.php';
 }
+
 ?>

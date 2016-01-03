@@ -6,6 +6,7 @@ get_header();
 $ID = $_SESSION['ID'];
 $urlUsername = get_username_from_url();
 $_SESSION['Username'] = $urlUsername;
+
 ?>
 
 
@@ -146,7 +147,7 @@ if (isset($_POST['video']) && ($_POST['video'] == "Upload Video")) {
             exec($cmd);
         }
         else {
-            echo "<script>alet('Invalid File Type');</script>";
+            echo "<script>alert('Invalid File Type');</script>";
             exit;
         }
         // write photo to media table
@@ -428,7 +429,7 @@ $token = $match[1];
 $username = $_SESSION['Username'];
 $profileID = get_id_from_username($username);
 $sql = "SELECT ProfilePhoto FROM Profile WHERE Member_ID = $profileID";
-$result = mysql_query($sql) or die(mysql_error());
+$result = mysql_query($sql) or (logError(mysql_error(), $url, 'Getting Profile Photo'));
 $row = mysql_fetch_assoc($result);
 $bgPhoto = $row['ProfilePhoto'];
 ?>
@@ -479,7 +480,7 @@ $bgPhoto = $row['ProfilePhoto'];
 
             // get current member session username
             $sql = "SELECT Username FROM Members WHERE ID = $ID ";
-            $result = mysql_query($sql) or die(mysql_error());
+            $result = mysql_query($sql) or die(logError(mysql_error(), $url, "Getting username from session ID"));
             $rows = mysql_fetch_assoc($result);
 
             // if profile is not the current member session ID
@@ -506,7 +507,7 @@ $bgPhoto = $row['ProfilePhoto'];
                         WHERE Members.ID = $memberID
                         AND Profile.Member_ID = $memberID ";
 
-                $result = mysql_query($sql) or die(mysql_error());
+                $result = mysql_query($sql) or die(logError(mysql_error(), $url, 'Getting public profile'));
 
                 if (mysql_num_rows($result) == 0) {
                     echo "<script>alert('Profile not found');</script>";
@@ -539,7 +540,7 @@ $bgPhoto = $row['ProfilePhoto'];
                             <td >
             <?php
                 $sqlFollow = "SELECT * FROM Follows WHERE Follower_ID = $ID And Followed_ID = $memberID ";
-                $resultFollow = mysql_query($sqlFollow);
+                $resultFollow = mysql_query($sqlFollow) or die (logError(mysql_error(), $url, "Getting Follows"));
 
                 if (mysql_num_rows($resultFollow) == 0) {
                     echo '<form>';
@@ -562,7 +563,7 @@ $bgPhoto = $row['ProfilePhoto'];
 
                 <?php
                 $sqlFollowCount = "SELECT * FROM Follows WHERE Followed_ID = $memberID ";
-                $sqlFollowCountResult = mysql_query($sqlFollowCount);
+                $sqlFollowCountResult = mysql_query($sqlFollowCount) or die(logError(mysql_error(), $url, "Getting Follow Count"));
                 echo '<span class ="profileFont">'.$count = mysql_num_rows($sqlFollowCountResult).'</span>';
                 ?>
                 </div>
@@ -653,7 +654,7 @@ $bgPhoto = $row['ProfilePhoto'];
                         WHERE Members.ID = $ID
                         AND Profile.Member_ID = $ID
                         Order By MemberID ";
-            $result = mysql_query($sql) or die(mysql_error());
+            $result = mysql_query($sql) or die (logError(mysql_error(), $url, "Getting private profile data"));
             if (mysql_num_rows($result) == 0) {
                 echo "<script>alert('Profile not found');</script>";
                 header('Location:home.php');

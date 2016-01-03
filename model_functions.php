@@ -403,6 +403,15 @@ function closetags($html)
     return $html;
 }
 
+
+// log errors
+function logError($error, $page, $object) {
+    $sql = "INSERT INTO Log (Error, Page, Object) Values ('$error', '$page', '$object') ";
+    mysql_query($sql) or die(mysql_error());
+    echo "<script>location='/something_happened'</script>";
+    exit;
+}
+
 // text function to all service providers for related service post
 function alert_all_matching_interests($interest, $state)
 {

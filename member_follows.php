@@ -69,9 +69,6 @@ $profileID = get_id_from_username($username);
                 $interest = $rows2['Interest'];
 
                 $profileUrl = "/$username";
-                if (strlen($name) > 70) {
-                $name = checkNameLength($name,$firstName,$lastName);
-                }
 ?>
 
                 <div style="float:left;width:50px;">
@@ -94,7 +91,7 @@ $profileID = get_id_from_username($username);
                 </div>
 
 
-                <hr style="clear: both;"/>
+                <hr class="hr-line" style="clear: both;"/>
         <?php
             }
         }
