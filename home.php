@@ -861,7 +861,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
 </div>
 
-<a href="#0" class="cd-top">Top</a>
+
 </body>
 </html>
 

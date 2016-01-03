@@ -331,14 +331,13 @@ if (!empty($_SESSION['ID'])) {
             <?php
             $profileUrl = "#signup";
             ?>
-            <div style="float:left;width:50px;">
+            <div class="profileImageWrapper-Feed">
                 <a href="<?php echo $profileUrl ?>">
                     <img src="<?php echo $mediaPath. $profilePhoto ?>" class="profilePhoto-Feed enlarge-onhover " alt=""
                          title="<?php echo $name ?>" />
                 </a>
             </div>
-
-            <div style="float:left;padding-left:10px;padding-top:10px;width:75%;">
+            <div class="profileNameWrapper-Feed">
                 <a href="<?php echo $profileUrl ?>">
                     <div class="profileName-Feed"><?php echo $name ?></div>
                 </a>

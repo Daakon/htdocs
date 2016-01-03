@@ -670,7 +670,7 @@ function myFunction() {
 
         <ul class="list-inline">
             <li>
-                <button onclick="myFunction()">Go Back</button>
+                <button style="margin-top:20px;" onclick="myFunction()">Go Back</button>
             </li>
             <li><a href="/<?php echo get_username($ID) ?>">Go To Your Profile <?php require 'getNewMessageCount.php' ?></a></li>
         </ul>
