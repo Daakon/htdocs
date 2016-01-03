@@ -212,6 +212,8 @@ if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
 
     if ($usernameStatus == 0) {
         if ($_SESSION['Username'] != trim($username)) {
+            // remove white spaces
+            $username = preg_replace('/\s+/', '', $username);
             $usernameUpdate = ", Username = '$username', IsUsernameUpdated = 1 ";
             $_SESSION['Username'] = $username;
             $username = $_SESSION['Username'];

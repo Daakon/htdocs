@@ -40,6 +40,7 @@ if (isset($_POST['submit'])) {
                 $mediaName = $_FILES['flPostMedia']['name'][$k];
                 // remove ALL WHITESPACE from image name
                 $mediaName = preg_replace('/\s+/', '', $mediaName);
+                // remove & (ampersand) so url will cleanly handle parameters
                 $mediaName = str_replace('&', '', $mediaName);
                 $type = $_FILES['flPostMedia']['type'][$k];
                 $tempName = $_FILES['flPostMedia']['tmp_name'][$k];
