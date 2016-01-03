@@ -5,7 +5,7 @@
  * Date: 1/2/16
  * Time: 5:37 PM
  */
-require 'imports.php';
+//require 'imports.php';
 ?>
 
 <img src="/images/oops.jpg" height="100" width="100"/>
