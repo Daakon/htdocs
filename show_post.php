@@ -514,6 +514,12 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
     }
 </script>
 
+<style>
+    .row {
+        margin-top:30px;
+    }
+</style>
+
 <body>
 
 <div class="container" style="margin-top:-60px;
@@ -526,13 +532,16 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
         $email = $_GET['email'];
         if ($email == 1) {
             ?>
-            <li><a href="/home">Home</a></li>
+            <li><a href="/home" style="margin-left:10px;">Home/a></li>
         <?php }
-        else {
+        else if (isset($_SESSION['ID'])) {
             ?>
-            <li><button onclick="myFunction()">Go Back</button></li>
+            <li><button onclick="myFunction()" style="margin-left:10px;">Go Back</button></li>
         <?php
         }
+        else { ?>
+            <li><a href="javascript:history.back()" style="margin-left:10px;">Go Back</a></li>
+        <?php }
         ?>
 
 
@@ -585,14 +594,14 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
         <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 roll-call"
               align="left">
 
-            <div style="float:left;width:50px;">
+            <div class="profileImageWrapper-Feed">
                 <a href="<?php echo $profileUrl ?>">
                     <img src="<?php echo $mediaPath. $profilePhoto ?>" class="profilePhoto-Feed enlarge-onhover " alt=""
                          title="<?php echo $name ?>" />
                 </a>
             </div>
 
-            <div style="float:left;padding-left:10px;padding-top:10px;width:75%;">
+            <div class="profileNameWrapper-Feed">
                 <a href="<?php echo $profileUrl ?>">
                     <div class="profileName-Feed"><?php echo $name ?></div>
                 </a>

@@ -99,7 +99,7 @@ if (isset($_POST['photo']) && ($_POST['photo'] == "Upload Photo")) {
             mysql_query($sql2) or die(mysql_error());
             // update photo pointer in database
             $sql = "UPDATE Profile Set ProfilePhoto = '$mediaName' WHERE Member_ID = $ID";
-            mysql_query($sql) or die(mysql_error());
+            mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting Profile Photo"));
             // alert everything is good
             echo "<script>alert('Update Successful');</script>";
         }
@@ -156,7 +156,7 @@ if (isset($_POST['video']) && ($_POST['video'] == "Upload Video")) {
         mysql_query($sql2) or die(mysql_error());
         // update photo pointer in database
         $sql = "UPDATE Profile Set ProfileVideo = '$mediaName', Poster = '$posterName' WHERE Member_ID = '$ID'";
-        mysql_query($sql) or die(mysql_error());
+        mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting Profile Video"));
         // alert everything is good
         echo "<script>alert('Update Successful');</script>";
     }
@@ -246,7 +246,7 @@ if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
                 About = '$about',
                 RSS = '$rss'
              WHERE Member_ID = $ID ";
-    mysql_query($sql) or die(mysql_error());
+    mysql_query($sql) or die(logError(mysql_error(), $url, "Updating Profile"));
     echo "<script>alert('Update Successful');location='/$username'</script>";
 }
 ?>

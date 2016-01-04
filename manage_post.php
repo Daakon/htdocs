@@ -160,14 +160,14 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
             <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 roll-call"
                  align="left">
 
-                <div style="float:left;width:50px;">
+                <div class="profileImageWrapper-Feed">
                     <a href="<?php echo $profileUrl ?>">
                         <img src="<?php echo $mediaPath. $profilePhoto ?>" class="profilePhoto-Feed enlarge-onhover " alt=""
                              title="<?php echo $name ?>" />
                     </a>
                 </div>
 
-                <div style="float:left;padding-left:10px;padding-top:10px;width:75%;">
+                <div class="profileNameWrapper-Feed">
                     <a href="<?php echo $profileUrl ?>">
                         <div class="profileName-Feed"><?php echo $name ?></div>
                     </a>

@@ -12,13 +12,12 @@ get_header();
 require 'memory_settings.php';
 
 $ID = $_SESSION['ID'];
-$isServiceProvider = $_SESSION['IsServiceProvider'];
 
-// handle roll call post
+// handle connection feed post
 $post = mysql_real_escape_string($_POST['post']);
 $category = $_POST['category'];
-$city = $_SESSION['city'];
-$state = $_SESSION['state'];
+$city = $_SESSION['City'];
+$state = $_SESSION['State'];
 
 if (isset($_POST['submit'])) {
 
@@ -723,12 +722,12 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
             <?php
             $searchState = $_GET['state'];
             if (!empty($searchState)) {
-            $_SESSION['state'] = $searchState;
-            $searchState = $_SESSION['state'];
+            $_SESSION['State'] = $searchState;
+            $searchState = $_SESSION['State'];
             }
             else {
-            if (!empty($_SESSION['state'])) {
-            $searchState = $_SESSION['state'];
+            if (!empty($_SESSION['State'])) {
+            $searchState = $_SESSION['State'];
             } else {
             $searchState = getMemberState($ID);
             }
@@ -738,12 +737,12 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
             <?php
             $searchCity = $_GET['city'];
             if (!empty($searchCity)) {
-                $_SESSION['city'] = $searchCity;
-                $searchCity = $_SESSION['city'];
+                $_SESSION['City'] = $searchCity;
+                $searchCity = $_SESSION['City'];
             }
             else {
-                if (!empty($_SESSION['city']) && isset($_SESSION['city'])) {
-                    $searchCity = $_SESSION['city'];
+                if (!empty($_SESSION['City']) && isset($_SESSION['City'])) {
+                    $searchCity = $_SESSION['City'];
                 } else {
                     $searchCity = getMemberCity($ID);
                 }

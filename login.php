@@ -8,7 +8,7 @@ $pass = $_POST['login_password'];
 
 $sql = "SELECT * FROM Members WHERE Email = '$email' And Password = '".md5($pass)."' ";
 
-$result = mysql_query($sql) or die(mysql_error());
+$result = mysql_query($sql) or die(logError(mysql_error(), $url, "Check existing member email"));
 
 
 if (mysql_num_rows($result) > 0) {
@@ -27,14 +27,11 @@ if (mysql_num_rows($result) > 0) {
 
     setcookie("ID", $rows['ID'], time() + (10 * 365 * 24 * 60 * 60)); // set cookie for 10 years
 
-    $_SESSION['IsServiceProvider'] = $rows['IsServiceProvider'];
-    setcookie("IsServiceProvider", $rows['IsServiceProvider'], time() + (10 * 365 * 24 * 60 * 60)); // set cookie for 10 years
-
     //update last login
     $id = $rows['ID'];
     $date = date('Y-m-d H:i:s');
     $sql2 = "UPDATE Members SET LastLogin = '$date' WHERE ID = '$id' ";
-    mysql_query($sql2) or die(mysql_error());
+    mysql_query($sql2) or die(logError(mysql_error(), $url, "Updating last login"));
 
     if ($rows['IsActive'] == 0) {
         $sql = "UPDATE Members SET IsActive = 1 WHERE ID = $id";

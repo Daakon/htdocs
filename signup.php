@@ -93,7 +93,7 @@ else {
 
 // check if email exists
 $sql = "SELECT * FROM Members WHERE Email = '$email'";
-$result = mysql_query($sql) or die(mysql_error());
+$result = mysql_query($sql) or die(logError(mysql_error(), $url, "Checking if email exists"));
 
 if (mysql_num_rows($result) > 0) {
 
@@ -105,7 +105,7 @@ $unique = 1;
 a:
 // check if username exists
 $sql = "SELECT * FROM Members WHERE Username = '$username'";
-$result = mysql_query($sql) or die(mysql_error());
+$result = mysql_query($sql) or die(logError(mysql_error(), $url, "Checking if username exists"));
 
 if (mysql_num_rows($result) > 0) {
     $username = $username . $unique;
@@ -116,28 +116,28 @@ if (mysql_num_rows($result) > 0) {
 
 // check if we have this city
 $sql = "SELECT City FROM City WHERE City = '$city'";
-$result = mysql_query($sql) or die(mysql_error());
+$result = mysql_query($sql) or die(logError(mysql_error(), $url, "Checking if city exists in database"));
 if (mysql_num_rows($result) == 0) {
     // get state key
     $sql2 = "SELECT ID FROM State WHERE State = '$state'";
-    $result2 = mysql_query($sql2) or die(mysql_error());
+    $result2 = mysql_query($sql2) or die(logError(mysql_error(), $url, "Getting State key"));
     $stateRow = mysql_fetch_assoc($result2);
     $stateID = $stateRow['ID'];
 
     // insert new city with state key
     $sql3 = "INSERT INTO City (State_ID, City) Values ($stateID, '$city')";
-    mysql_query($sql3) or die(mysql_error());
+    mysql_query($sql3) or die(logError(mysql_error(), $url, "Inserting new city with state key"));
 }
 
 
 $sql = "INSERT INTO Members (FirstName, LastName, Email,    Username,      Password,         Interest,     SignupDate,   IsSuspended, EmailActive, LastLogin     )
 Values 			            ('$fName', '$lName', '$email', '$username',  '".md5($pass)."',  '$interest',   CURRENT_DATE(),   0,           1,       CURRENT_DATE() )";
-$result = mysql_query($sql) or die(mysql_error());
+$result = mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting new member account"));
 
 $ID = mysql_insert_id();
 
 $sql = "SELECT * FROM Members WHERE ID = $ID ";
-$result = mysql_query($sql) or die(mysql_error());
+$result = mysql_query($sql) or die(logError(mysql_error(), $url, "Get profile from brand new member ID"));
 $rows = mysql_fetch_assoc($result);
 
 /*Set two session variable which will be needed throughout the program */
@@ -149,12 +149,12 @@ setcookie("ID", $rows['ID'], time() + (10 * 365 * 24 * 60 * 60)); // set cookie 
 
 $date = date('Y-m-d H:i:s');
 $sql = "UPDATE Members SET SignupDate = '$date' WHERE ID = '$ID' ";
-$result = mysql_query($sql) or die(mysql_error());
+$result = mysql_query($sql) or die(logError(mysql_error(), $url, "Getting sign up date"));
 
 // insert default profile pic into profile table
 $sql = "INSERT INTO Profile (Member_ID, Poster,               ProfileVideo,        State,    City,      Zip,    Phone) Values
                             ('$ID',     'default_photo.png', 'default_video.png', '$state',   '$city', '$zip', '$phone')    ";
-$result = mysql_query($sql) or die(mysql_error());
+$result = mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting default photo"));
 
 
 // insert default post
@@ -162,7 +162,7 @@ $post = "Hey!, this is $fName. Just signed up and looking to network. Comment on
 $post = mysql_real_escape_string($post);
 $sql = "INSERT INTO Posts (Post,    Category,  Member_ID,   PostDate) Values
                           ('$post', '$interest', '$ID',       CURDATE())";
-mysql_query($sql) or die(mysql_error());
+mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting default post"));
 
 
 // Send out sign up email
