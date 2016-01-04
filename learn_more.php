@@ -71,18 +71,18 @@ if (!empty($_SESSION['ID'])) {
                 <h4 class="padding-left-10">
                     <span class="bold">
                         <img src="/images/bullhorn.png" height="50" width="30" />
-                    </span> <span class="lead slogan" style="margin-left:-5px;">Promote</span> <span class="lead">Your Business.</span>
-                </h4>
-
-                <h4 class="padding-left-10">
-                    <img src="/images/location.png" height="40" width="25" />
-                    <span class="lead" style="margin-left:-3px;">Make Local or National</span> <span class="lead slogan">Connections</span>.
+                    </span> <span class="lead" style="margin-left:-5px;">Network & Promote Your Business.</span>
                 </h4>
 
                 <h4 class="padding-left-10">
                     <span class="bold">
                         <img src="/images/share-people.png" height="50" width="25" />
-                    </span><span class="lead" style="margin-left:-3px;">Meet People Who Need Your </span> <span class="lead slogan">Product.</span>
+                    </span><span class="lead" style="margin-left:-3px;">Find the Product or Service You Need</span>.
+                </h4>
+
+                <h4 class="padding-left-10">
+                    <img src="/images/location.png" height="40" width="25" />
+                    <span class="lead" style="margin-left:-3px;">Engage on a Local or National Basis.</span>
                 </h4>
 
                 <br/>
@@ -99,15 +99,6 @@ if (!empty($_SESSION['ID'])) {
         </div>
 
         <div align="center" style="background:#E30022;color:white;padding-left:10px;padding-top:10px;">
-            <h4>It's as easy as...</h4>
-            <b>1. Signing up</b> <i>(Only 2 Fields)</i>.
-            <br/>
-            <b>2. Post What Your Product Offers</b>.
-            <br/>
-            <b>3. Start Networking With Other Entrepreneurs</b></h4>
-
-            <br/>
-
             <h4>Watch the video to learn more.</h4>
             <video width="320" height="240" poster="/poster/how-it-works-poster.png" autoplay="autoplay" muted controls >
                 <source src="/images/Rapportbook-How-It-Works-Lo-Res.mp4" />
@@ -141,7 +132,7 @@ if (!empty($_SESSION['ID'])) {
                     </div>
 
                     <select class="form-control input-lg" id="interest" name="interest">
-                        <option value="">Select Your Business Type</option>
+                        <option value="">Select Your Profile Type</option>
                         <?php echo category() ?>
                     </select>
                     <br/>
