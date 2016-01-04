@@ -514,11 +514,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
     }
 </script>
 
-<style>
-    .row {
-        margin-top:30px;
-    }
-</style>
+
 
 <body>
 
