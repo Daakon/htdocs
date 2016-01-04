@@ -1,6 +1,6 @@
 <?php
 
-require 'imports.php';
+
 $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 
 // variables that get sent in post must have identical names every where they exist
@@ -8,7 +8,7 @@ $state = $_POST['state'];
 $page = $_POST['page'];
 
 $sql = "SELECT ID FROM State WHERE State = '$state'";
-$result = mysql_query($sql) or die(mysql_error());
+$result = mysql_query($sql) or die(logError(mysql_error(), $url, "Getting State ID"));
 $rows = mysql_fetch_assoc($result);
 $stateID = $rows['ID'];
 

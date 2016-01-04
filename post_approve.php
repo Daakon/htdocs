@@ -22,7 +22,7 @@ mysql_query($sql) or die(mysql_error());
 //Get the ids of all the people connected with a post comment
 $sql = "SELECT Member_ID FROM PostComments WHERE Post_ID = $postID ";
 
-$result = mysql_query($sql) or die(mysql_error());
+$result = mysql_query($sql) or die(logError(mysql_error(), $url, "Getting IDs for all post commentors"));
 
 $comment_ids = array();
 
@@ -52,7 +52,7 @@ foreach ($comment_ids as $item) {
 
     $sql = "SELECT Member_ID FROM Posts WHERE ID = '$postID';";
 
-    $result = mysql_query($sql) or die(mysql_error());
+    $result = mysql_query($sql) or die(logError(mysql_error(), $url, "Getting Post owner ID"));
     $rows = mysql_fetch_assoc($result);
     $creatorID = $rows['Member_ID'];
 
@@ -70,11 +70,11 @@ foreach ($comment_ids as $item) {
 
 
 $sql2 = "SELECT ID FROM PostApprovals WHERE Post_ID = '$postID' AND Member_ID = '$ID' ";
-$result2 = mysql_query($sql2) or die(mysql_error());
+$result2 = mysql_query($sql2) or die(logError(mysql_error(), $url, "Checking user ID for post approval"));
 
 // get approvals for each post
 $sql3 = "SELECT ID FROM PostApprovals WHERE Post_ID = '$postID' ";
-$result3 = mysql_query($sql3) or die(mysql_error());
+$result3 = mysql_query($sql3) or die(logError(mysql_error(), $url, "Getting all IDs for post approval"));
 $rows3 = mysql_fetch_assoc($result3);
 $approvals = mysql_numrows($result3);
 

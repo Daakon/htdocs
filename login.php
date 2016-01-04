@@ -35,7 +35,7 @@ if (mysql_num_rows($result) > 0) {
 
     if ($rows['IsActive'] == 0) {
         $sql = "UPDATE Members SET IsActive = 1 WHERE ID = $id";
-        mysql_query($sql) or die(mysql_error());
+        mysql_query($sql) or die(logError(mysql_error(), $url, "Updating IsActive"));
         echo "<script>alert('You are now reactivating your account.'); location='/home.php'</script>";
     }
 

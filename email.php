@@ -301,7 +301,7 @@ function build_and_send_email($senderId, $toId, $notification, $postID, $pass)
             $link = "http://dev.rapportbook.com/member_follows/$username";
         }
         else {
-            $link = "http://www.rapportbook.com/member_folows/$username";
+            $link = "http://www.rapportbook.com/member_follows/$username";
         }
 
         // a post status update related to your service has been posted

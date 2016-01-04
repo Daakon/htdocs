@@ -532,7 +532,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
         $email = $_GET['email'];
         if ($email == 1) {
             ?>
-            <li><a href="/home" style="margin-left:10px;">Home/a></li>
+            <li><a href="/home" style="margin-left:10px;">Home</a></li>
         <?php }
         else if (isset($_SESSION['ID'])) {
             ?>

@@ -74,15 +74,15 @@ $ID = $_SESSION['ID'];
                     }
 
                 echo "
-                <div style=\"float:left;width:50px;\">
+                <div class='profileImageWrapper-Feed'>
                 <a href = '/view_messages/$username'>
                 <img src = '$mediaPath$pic' class='profilePhoto-Feed' alt='' />
                 </a>
                 </div>
 
-                <div style=\"float:left;padding-left:10px;padding-top:10px;width:75%;\">
+                <div class='profileNameWrapper-Feed'>
                 <a href = '/view_messages/$username'>
-                 <div class=\"profileName-Feed\" style='font-weight:normal'>$name
+                 <div class=\"profileName-Feed\" >$name
 
                 ";
 

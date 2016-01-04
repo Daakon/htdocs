@@ -13,7 +13,7 @@ $ID = $_POST['ID'];
 
 
 $sql = "DELETE FROM MediaApprovals WHERE Media_ID = $mediaID AND  Member_ID = $ID";
-mysql_query($sql) or die(mysql_error());
+mysql_query($sql) or die(logError(mysql_error(), $url, "Deleting from MediaApprovals"));
 
 
 //=========================================================================================================================//
@@ -22,12 +22,12 @@ mysql_query($sql) or die(mysql_error());
 // check if user has approved this post
 
 $sql2 = "SELECT * FROM MediaApprovals WHERE Media_ID = '$mediaID' AND Member_ID = '$ID' ";
-$result2 = mysql_query($sql2) or die(mysql_error());
+$result2 = mysql_query($sql2) or die(logError(mysql_error(), $url, "Checking user ID for media approval"));
 $rows2 = mysql_fetch_assoc($result2);
 
 // get approvals for each bulletin
 $sql3 = "SELECT * FROM MediaApprovals WHERE Media_ID = '$mediaID' ";
-$result3 = mysql_query($sql3) or die(mysql_error());
+$result3 = mysql_query($sql3) or die(logError(mysql_error(), $url, "Getting all approvals for media"));
 $rows3 = mysql_fetch_assoc($result3);
 $approvals = mysql_num_rows($result3);
 

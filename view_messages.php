@@ -474,13 +474,13 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
                     $username = $rows2['Username'];
 
                     echo "
-                    <div style=\"float:left;width:50px;\">
+                    <div class='profileImageWrapper-Feed'>
                     <a href='/$username'>
                     <img src = '$mediaPath$pic' class='profilePhoto-Feed' alt='' />
                     </a>
                     </div>
 
-                    <div style=\"float:left;padding-left:10px;padding-top:10px;width:75%;\">
+                    <div class='profileNameWrapper-Feed'>
                     <a href='/$username'>
                     <div class=\"profileName-Feed\">$name</div>
                     </a>

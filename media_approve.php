@@ -15,7 +15,7 @@ if (!empty($_POST['ID'])) {
 
 $sql = "INSERT INTO MediaApprovals (Media_ID,  Member_ID) Values
                                   ('$mediaID', '$ID')";
-mysql_query($sql) or die(mysql_error());
+mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting media approval"));
 //An approval just popped so we should set the notifications
 //A comment was just made, we need to send out some notifications.
 //The first thing is to identify all of the id's connected with this bulletin
@@ -23,10 +23,10 @@ $user_id = $ID;
 
 
 
-//Get the ids of all the consumers connected with a bulletin comment
+//Get the ids of all the consumers connected with a media comment
 $sql = "SELECT Member_ID FROM MediaComments WHERE Media_ID = $mediaID ";
 
-$result = mysql_query($sql) or die(mysql_error());
+$result = mysql_query($sql) or die(logError(mysql_error(), $url, "Getting all IDs connected with media comments"));
 
 $comment_ids = array();
 
@@ -56,7 +56,7 @@ foreach ($comment_ids as $item) {
     //Notify the post creator
     $sql = "SELECT Member_ID FROM Media WHERE MediaName = '$mediaName';";
 
-    $result = mysql_query($sql) or die(mysql_error());
+    $result = mysql_query($sql) or die(logError(mysql_error(), $url, "Getting ID of media owner"));
     $rows = mysql_fetch_assoc($result);
     $creatorID = $rows['Member_ID'];
 
@@ -71,12 +71,12 @@ foreach ($comment_ids as $item) {
 // check if user has approved this post
 
 $sql2 = "SELECT * FROM MediaApprovals WHERE Media_ID = '$mediaID' AND Member_ID = '$ID' ";
-$result2 = mysql_query($sql2) or die(mysql_error());
+$result2 = mysql_query($sql2) or die(logError(mysql_error(), $url, "Checking user ID for media approval"));
 $rows2 = mysql_fetch_assoc($result2);
 
-// get approvals for each bulletin
+// get approvals for media
 $sql3 = "SELECT * FROM MediaApprovals WHERE Media_ID = '$mediaID' ";
-$result3 = mysql_query($sql3) or die(mysql_error());
+$result3 = mysql_query($sql3) or die(logError(mysql_error(), $url, "Getting ALL approvals for media"));
 $rows3 = mysql_fetch_assoc($result3);
 $approvals = mysql_num_rows($result3);
 
