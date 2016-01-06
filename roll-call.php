@@ -247,7 +247,7 @@ $postOwner = $memberID;
                     </a>
                     </div>
 
-                     <div class="profileNameWrapper-Feed">
+                     <div class="commentNameWrapper-Feed">
                       <a href='.$commenterProfileUrl.'>
                         <div class="profileName-Feed"><?php echo $name ?> ' .
                         $rows3['FirstName'] . ' ' . $rows3['LastName'] .
@@ -317,7 +317,7 @@ $postOwner = $memberID;
                     echo '<img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" class ="enlarge-onhover img-responsive" />
                     </a></div>
 
-                    <div class="profileNameWrapper-Feed">
+                    <div class="commentNameWrapper-Feed">
                     <a href='.$commenterProfileUrl.'>
                     <div class="profileName-Feed">' . $rows4['FirstName'] .' '. $rows4['LastName'] .
                         '</div></div><div class="comment-content" style="clear:both"></a>' . nl2br($comment) .

@@ -457,7 +457,7 @@ if (!empty($_SESSION['ID'])) {
                     </a>
                     </div>
 
-                     <div class="profileNameWrapper-Feed">
+                     <div class="commentNameWrapper-Feed">
                       <a href='.$commenterProfileUrl.'>
                         <div class="profileName-Feed"><?php echo $name ?> ' .
                         $rows3['FirstName'] . ' ' . $rows3['LastName'] .
@@ -518,13 +518,13 @@ if (!empty($_SESSION['ID'])) {
                     $commentID = $rows4['PostCommentID'];
                     $commentOwnerID = $rows4['CommenterID'];
 
-                    echo '<div class="user-icon">';
+                    echo '<div class="comment-row">';
                     echo '<a href='.$commenterProfileUrl.'>';
                     echo '<div class="profileImageWrapper-Feed">';
                     echo '<img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" class ="enlarge-onhover img-responsive" />
                     </a></div>
 
-                    <div class="profileNameWrapper-Feed">
+                    <div class="commentNameWrapper-Feed">
                     <a href='.$commenterProfileUrl.'>
                     <div class="profileName-Feed">' . $rows4['FirstName'] .' '. $rows4['LastName'] .
                         '</div></div><div class="comment-content" style="clear:both"></a>' . nl2br($comment) .

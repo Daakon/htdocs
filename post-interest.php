@@ -752,7 +752,7 @@ if (mysql_num_rows($result) > 0) {
         </a>
     </div>
 
-    <div class="profileNameWrapper-Feed">
+    <div class="profileNameWrapper-Feed" style="padding-left:10px;">
         <a href="<?php echo $profileUrl ?>">
             <div class="profileName-Feed"><?php echo $name ?></div>
         </a>
@@ -915,7 +915,7 @@ if (mysql_num_rows($result) > 0) {
                         </a>
                         </div>
 
-                         <div class="profileNameWrapper-Feed">
+                         <div class="commentNameWrapper-Feed" style="padding-left:10px">
                           <a href='.$commenterProfileUrl.'>
                             <div class="profileName-Feed"><?php echo $name ?> ' .
                                 $rows3['FirstName'] . ' ' . $rows3['LastName'] .
@@ -982,7 +982,7 @@ if (mysql_num_rows($result) > 0) {
                     echo '<img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" class ="enlarge-onhover img-responsive" />
                     </a></div>
 
-                    <div class="profileNameWrapper-Feed">
+                    <div class="commentNameWrapper-Feed" style="padding-left:10px">
                     <a href='.$commenterProfileUrl.'>
                     <div class="profileName-Feed">' . $rows4['FirstName'] .' '. $rows4['LastName'] .
                         '</div></div><div class="comment-content" style="clear:both"></a>' . nl2br($comment) .

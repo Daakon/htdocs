@@ -1,4 +1,3 @@
-
 <?php
 
 require 'imports.php';
@@ -112,16 +111,16 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
         <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 roll-call"
              align="left" style="min-height: 10px;">
-        <?php require 'profile_menu.php'; ?>
-            </div>
+            <?php require 'profile_menu.php'; ?>
+        </div>
 
-    <?php
-    $username = get_username_from_url();
-    $username = explode("?", $username);
-    $username = $username[0];
-    $profileID = get_id_from_username($username);
+        <?php
+        $username = get_username_from_url();
+        $username = explode("?", $username);
+        $username = $username[0];
+        $profileID = get_id_from_username($username);
 
-    $sql = "SELECT DISTINCT
+        $sql = "SELECT DISTINCT
     Members.ID As MemberID,
     Members.FirstName As FirstName,
     Members.LastName As LastName,
@@ -142,68 +141,68 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
     Order By PostID DESC ";
 
 
-    $result = mysql_query($sql) or die(mysql_error());
+        $result = mysql_query($sql) or die(mysql_error());
 
 
-    if (mysql_num_rows($result) > 0) {
-    while ($rows = mysql_fetch_assoc($result)) {
-    $memberID = $rows['MemberID'];
-    $name = $rows['FirstName'] . ' ' . $rows['LastName'];
-    $firstName = $rows['FirstName'];
-    $username = $rows['Username'];
-    $profilePhoto = $rows['ProfilePhoto'];
-    $category = $rows['Category'];
-    $post = $rows['Post'];
-    $postID = $rows['PostID']
-    ?>
+        if (mysql_num_rows($result) > 0) {
+        while ($rows = mysql_fetch_assoc($result)) {
+        $memberID = $rows['MemberID'];
+        $name = $rows['FirstName'] . ' ' . $rows['LastName'];
+        $firstName = $rows['FirstName'];
+        $username = $rows['Username'];
+        $profilePhoto = $rows['ProfilePhoto'];
+        $category = $rows['Category'];
+        $post = $rows['Post'];
+        $postID = $rows['PostID']
+        ?>
 
-            <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 roll-call"
-                 align="left">
+        <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 roll-call"
+             align="left">
 
-                <div class="profileImageWrapper-Feed">
-                    <a href="<?php echo $profileUrl ?>">
-                        <img src="<?php echo $mediaPath. $profilePhoto ?>" class="profilePhoto-Feed enlarge-onhover " alt=""
-                             title="<?php echo $name ?>" />
-                    </a>
-                </div>
+            <div class="profileImageWrapper-Feed">
+                <a href="<?php echo $profileUrl ?>">
+                    <img src="<?php echo $mediaPath. $profilePhoto ?>" class="profilePhoto-Feed " alt=""
+                         title="<?php echo $name ?>" />
+                </a>
+            </div>
 
-                <div class="profileNameWrapper-Feed">
-                    <a href="<?php echo $profileUrl ?>">
-                        <div class="profileName-Feed"><?php echo $name ?></div>
-                    </a>
-                </div>
+            <div class="profileNameWrapper-Feed" >
+                <a href="<?php echo $profileUrl ?>">
+                    <div class="profileName-Feed"><?php echo $name ?></div>
+                </a>
+            </div>
 
-                <div class="post" style="clear:both;">
+            <div class="post" style="clear:both;">
                 <?php
                 // check check post length if it has a url in it
                 if (strstr($post, "http://") || strstr($post, "https://")) {
-                echo nl2br($post);
+                    echo nl2br($post);
 
                 }
                 else if (strlen($post) > 700) {
-                $post500 = substr($post, 0, strpos($post, ' ', 700)).'<br/>'; ?>
+                    $post500 = substr($post, 0, strpos($post, ' ', 700)).'<br/>'; ?>
 
-                <?php echo nl2br($post500) ?>
-                <br/>
-                <a style="display:block;" style="width:100%;" href="show_post?postID=<?php echo $postID ?>&email=0">
-                    <span style="color:black;font-weight: 800">Show More</span>
-                </a>
+                    <?php echo nl2br($post500) ?>
+                    <br/>
+                    <a style="display:block;" style="width:100%;" href="show_post?postID=<?php echo $postID ?>&email=0">
+                        <span style="color:black;font-weight: 800">Show More</span>
+                    </a>
 
-                <?php
+                    <?php
                 }
                 else {
                     echo nl2br($post);
                 }
                 ?>
-                </div>
+            </div>
 
-                <hr/>
+            <hr/>
 
-                    <a href='/post-interest.php?interest=<?php echo urlencode($category) ?>' onclick="saveScrollPositionOnLinkClick('/manage_post/<?php echo $username ?>')"><span class="engageText">#<?php echo $category ?></span></a>
+            <a href='/post-interest.php?interest=<?php echo urlencode($category) ?>' onclick="saveScrollPositionOnLinkClick('/manage_post/<?php echo $username ?>')"><span class="engageText">#<?php echo $category ?></span></a>
 
-                <?php if ($memberID != $ID) { ?>
-                   | <a href="/view_messages.php/<?php echo $username ?>"><span class="engageText"><img src="/images/messages.png" height="20" width="20" /> Message </span></a>
-                <?php } ?>
+            <?php if ($memberID != $ID) { ?>
+                | <a href="/view_messages.php/<?php echo $username ?>"><span class="engageText"><img src="/images/messages.png" height="20" width="20" /> Message </span></a>
+            <?php } ?>
 
             <?php if ($_SESSION['ID'] == get_id_from_username($username)) { ?>
 
@@ -331,15 +330,15 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                         echo '<div class="comment-row">';
                         echo '<div class="profileImageWrapper-Feed">
                         <a href='.$commenterProfileUrl.'>
-                        <img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" class ="enlarge-onhover img-responsive" />
+                        <img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" class ="img-responsive" />
                         </a>
                         </div>
 
-                         <div class="profileNameWrapper-Feed">
+                         <div class="commentNameWrapper-Feed" style="padding-left:10px">
                           <a href='.$commenterProfileUrl.'>
                             <div class="profileName-Feed"><?php echo $name ?> ' .
-                                $rows3['FirstName'] . ' ' . $rows3['LastName'] .
-                                '</div>
+                            $rows3['FirstName'] . ' ' . $rows3['LastName'] .
+                            '</div>
                          </a>
                         </div>
 
@@ -399,14 +398,14 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                         echo '<div class="user-icon">';
                         echo '<a href='.$commenterProfileUrl.'>';
                         echo '<div class="profileImageWrapper-Feed">';
-                        echo '<img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" class ="enlarge-onhover img-responsive" />
+                        echo '<img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" class ="img-responsive" />
                         </a></div>
 
-                        <div class="profileNameWrapper-Feed">
+                        <div class="commentNameWrapper-Feed">
                         <a href='.$commenterProfileUrl.'>
                         <div class="profileName-Feed">' . $rows4['FirstName'] .' '. $rows4['LastName'] .
-                                '</div></div><div class="comment-content" style="clear:both"></a>' . nl2br($comment) .
-                                '</div>
+                            '</div></div><div class="comment-content" style="clear:both"></a>' . nl2br($comment) .
+                            '</div>
 
                         </div>';
                         echo '</td></tr>';
@@ -436,24 +435,24 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
 
             </div>
-        <?php
+            <?php
             }
-        }
-        else { ?>
-            <div class="row row-padding">
-                <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 roll-call" align="left">
-                    <?php if ($ID == get_id_from_username($username)) { ?>
-                        <div>You do not have anything posted.</div>
-                    <?php } else {
-                        $firstName = get_user_firstName(get_id_from_username($username));
-                        ?>
-                        <div><?php echo $firstName ?> does not have anything posted.</div>
-                    <?php } ?>
+            }
+            else { ?>
+                <div class="row row-padding">
+                    <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 roll-call" align="left">
+                        <?php if ($ID == get_id_from_username($username)) { ?>
+                            <div>You do not have anything posted.</div>
+                        <?php } else {
+                            $firstName = get_user_firstName(get_id_from_username($username));
+                            ?>
+                            <div><?php echo $firstName ?> does not have anything posted.</div>
+                        <?php } ?>
+                    </div>
                 </div>
-            </div>
             <?php }
-        ?>
-    </div>
+            ?>
+        </div>
         <!--Right Column -->
 
 
