@@ -510,12 +510,15 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                 }
             }
 //Notify the post creator
+
             $sql = "SELECT Member_ID FROM Posts WHERE ID = '$postID';";
             $result = mysql_query($sql) or die(mysql_error());
             $rows = mysql_fetch_assoc($result);
             $creatorID = $rows['Member_ID'];
-            if (checkEmailActive($ID)) {
-                build_and_send_email($ID, $creatorID, 1, $postID, '');
+            if ($ID != $creatorID) {
+                if (checkEmailActive($ID)) {
+                    build_and_send_email($ID, $creatorID, 1, $postID, '');
+                }
             }
 //------------------
 //=========================================================================================================================//
