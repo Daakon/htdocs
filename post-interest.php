@@ -490,7 +490,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
 
 //Get the ids of all the members connected with a post comment
-            $sql = "SELECT Member_ID FROM PostComments WHERE Post_ID = $postID ";
+            $sql = "SELECT Member_ID FROM PostComments WHERE Post_ID = $postID And Member_ID != $ID ";
 
             $result = mysql_query($sql) or die(mysql_error());
 
@@ -520,7 +520,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
 //Notify the post creator
 
-            $sql = "SELECT Member_ID FROM Posts WHERE ID = '$postID';";
+            $sql = "SELECT Member_ID FROM Posts WHERE ID = $postID And Member_ID != $ID ";
 
             $result = mysql_query($sql) or die(mysql_error());
             $rows = mysql_fetch_assoc($result);

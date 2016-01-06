@@ -181,7 +181,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 //The first thing is to identify all of the id's connected with this post
             $user_id = $_SESSION['ID'];
 //Get the ids of all the members connected with a post comment
-            $sql = "SELECT Member_ID FROM MediaComments WHERE Media_ID = $mediaID ";
+            $sql = "SELECT Member_ID FROM MediaComments WHERE Media_ID = $mediaID And Member_ID != $ID ";
             $result = mysql_query($sql) or die(mysql_error());
             $comment_ids = array();
 //Iterate over the results
@@ -196,19 +196,20 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                     // only send email if account & email active
                     if (checkActive($item)) {
                         if (checkEmailActive($item)) {
-                            build_and_send_email($user_id, $item, 1, $mediaID);
+                                build_and_send_email($user_id, $item, 1, $mediaID);
                         }
                     }
                 }
             }
 //Notify the post creator
-            $sql = "SELECT Member_ID FROM Media WHERE Member_ID = '$ownerID';";
+            $sql = "SELECT Member_ID FROM Media WHERE Member_ID = '$ownerID' And Member_ID != $ID ;";
             $result = mysql_query($sql) or die(mysql_error());
             $rows = mysql_fetch_assoc($result);
             $creatorID = $rows['Member_ID'];
-            if (checkEmailActive($ID)) {
-                build_and_send_email($ID, $creatorID, 1, $postID, '');
-            }
+                if (checkEmailActive($ID)) {
+                    build_and_send_email($ID, $creatorID, 1, $postID, '');
+                }
+
 //------------------
 //=========================================================================================================================//
 //BELOW IS END OF POST COMMENT HANDLING CODE ==========================================================================//
