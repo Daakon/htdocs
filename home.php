@@ -100,7 +100,9 @@ if (isset($_POST['submit'])) {
                                     } else if ($type == "image/png") {
                                         $src = imagecreatefrompng($mediaFile);
                                     } else if ($type == "image/gif") {
-                                        $src = imagecreatefromgif($mediaFile);
+                                        // must save gifs as jpeg
+                                        $src = imagecreatefromjpeg($mediaFile);
+                                        echo "<script>alert('$src');</script>";
                                     } else {
                                         /* echo "<script>alert('Invalid File Type');</script>";
                                          header('Location:home.php');
@@ -321,7 +323,8 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                     } else if ($type == "image/png") {
                         $src = imagecreatefrompng($mediaFile);
                     } else if ($type == "image/gif") {
-                        $src = imagecreatefromgif($mediaFile);
+                        // must save gifs as jpeg
+                        $src = imagecreatefromjpeg($mediaFile);
                     } else {
                         /*echo "<script>alert('Invalid File Type');</script>";
                         header('Location:home.php');

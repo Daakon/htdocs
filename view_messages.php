@@ -200,7 +200,8 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
                 } else if ($type == "image/png") {
                     $src = imagecreatefrompng($mediaFile);
                 } else if ($type == "image/gif") {
-                    $src = imagecreatefromgif($mediaFile);
+                    // must save gif as jpeg
+                    $src = imagecreatefromjpeg($mediaFile);
                 } else {
                     /* echo "<script>alert('Invalid File Type');</script>";
                      header('Location:home.php');

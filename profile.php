@@ -44,7 +44,8 @@ if (isset($_POST['photo']) && ($_POST['photo'] == "Upload Photo")) {
         } else if ($type == "image/png") {
             $src = imagecreatefrompng($mediaFile);
         } else if ($type == "image/gif") {
-            $src = imagecreatefromgif($mediaFile);
+            // must save gif as jpeg
+            $src = imagecreatefromjpeg($mediaFile);
         } else {
             echo "<script>alert('Invalid File Type');</script>";
             exit;
