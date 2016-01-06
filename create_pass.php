@@ -43,7 +43,7 @@ if (empty($_SESSION['EMAIL']) && !isset($_SESSION['EMAIL'])) {
 
             // check email against id, must be a match
             $sql1 = "SELECT Email FROM Members WHERE Email = '$email' AND ID = $id ";
-            $result1 = mysql_query($sql1);
+            $result1 = mysql_query($sql1) or die(logError(mysql_error(), $url, "Getting Email from Members"));
 
             if (mysql_num_rows($result1) == 0) {
 
@@ -54,7 +54,7 @@ if (empty($_SESSION['EMAIL']) && !isset($_SESSION['EMAIL'])) {
             if ($_SESSION['EMAIL'] == $email) {
 
                 $sql = "UPDATE Members SET password = '" . md5($pass) . "' WHERE email = '$email' ";
-                mysql_query($sql) or die(mysql_error());
+                mysql_query($sql) or die(logError(mysql_error(), $url, "Updating Password in Members"));
                 echo '
 
                 Your password has been updated <br/>

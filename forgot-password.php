@@ -18,10 +18,10 @@ get_header();
         require 'connect.php';
         $email = trim($_POST['email']);
 
-        $sql = "SELECT *  FROM Members WHERE (Email = '$email') ";
+        $sql = "SELECT Email FROM Members WHERE (Email = '$email') ";
 
 
-        $result = mysql_query($sql) or die(mysql_error());
+        $result = mysql_query($sql) or die(logError(mysql_error(), $url, "Getting Email from Members"));
         $rows = mysql_fetch_assoc($result);
 
 

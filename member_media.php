@@ -156,9 +156,10 @@ if (isset($_POST['MakeProfileVideo']) && $_POST['MakeProfileVideo'] == "Make Pro
                 if (in_array($mediaType, $photoFileTypes)) {
                     $text = "photo";
                     $img = '<a href = "/media.php?id=' . $profileID . '&mediaName=' . $mediaName . '&mid=' . $mediaID . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '&photoOpen=true" ><br/><img src = "' . $mediaPath . $mediaName . '" class="img-responsive"/></a>';
+                    echo "<hr class=\"hr-line\"/>";
                     echo "<div>$img</div>";
 
-                    if (!isProfilePhoto($mediaName)) { ?>
+                    if (!isProfilePhoto($mediaName) && $ID == $profileID) { ?>
 
                         <br/>
                         <form method="post" enctype="multipart/form-data" action="" >
@@ -170,7 +171,7 @@ if (isset($_POST['MakeProfileVideo']) && $_POST['MakeProfileVideo'] == "Make Pro
                     }
                     ?>
 
-                    <hr class="hr-line"/>
+
 
                     <?php
                 }
@@ -239,9 +240,10 @@ if (isset($_POST['MakeProfileVideo']) && $_POST['MakeProfileVideo'] == "Make Pro
                     $text = "video";
                     $img = '<a href = "' . $videoPath . $mediaName . '"><video src = "' . $videoPath . $mediaName . '" poster="/poster/'.$posterName.'" preload="auto" controls /></a>
                         <a href = "/media.php?id=' . $profileID . '&mediaName=' . $mediaName . '&mid=' . $mediaID . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '&videoOpen=true" ><br/>More</a><br/><br/>';
+                    echo "<hr class=\"hr-line\"/>";
                     echo "<div>$img</div>";
 
-                    if (!isProfileVideo($mediaName)) { ?>
+                    if (!isProfileVideo($mediaName) && $ID == $profileID) { ?>
 
                         <br/>
                         <form method="post" enctype="multipart/form-data" action="" >

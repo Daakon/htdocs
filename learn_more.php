@@ -82,7 +82,7 @@ if (!empty($_SESSION['ID'])) {
 
                 <h4 class="padding-left-10">
                     <img src="/images/location.png" height="40" width="25" />
-                    <span class="lead" style="margin-left:-3px;">Engage on a Local or National Basis.</span>
+                    <span class="lead" style="margin-left:-3px;">Support Your Local Community.</span>
                 </h4>
 
                 <br/>
