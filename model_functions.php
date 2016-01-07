@@ -406,7 +406,7 @@ function closetags($html)
 
 // log errors
 function logError($error, $page, $object) {
-    $sql = "INSERT INTO Log (Error, Page, Object) Values ('$error', '$page', '$object') ";
+    $sql = "INSERT INTO Log (Error, Page, Object, LogDate) Values ('$error', '$page', '$object', CURDATE) ";
     mysql_query($sql) or die(mysql_error());
     echo "<script>location='/something_happened'</script>";
     exit;

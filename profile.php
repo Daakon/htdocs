@@ -25,6 +25,8 @@ if (isset($_POST['photo']) && ($_POST['photo'] == "Upload Photo")) {
         $mediaName = $_FILES["flPostPhoto"]["name"];
         // remove ALL WHITESPACE from image name
         $mediaName = preg_replace('/\s+/', '', $mediaName);
+        // remove ALL SPECIAL CHARACTERS, Images paths are extremely sensitive
+        $mediaName = str_replace('/[^A-Za-z0-9\-]/', '', $mediaName);
         $mediaName = uniqid() . $mediaName;
         $mediaFile = $_FILES['flPostPhoto']['tmp_name'];
 

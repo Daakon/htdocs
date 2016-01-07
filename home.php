@@ -39,8 +39,8 @@ if (isset($_POST['submit'])) {
                 $mediaName = $_FILES['flPostMedia']['name'][$k];
                 // remove ALL WHITESPACE from image name
                 $mediaName = preg_replace('/\s+/', '', $mediaName);
-                // remove & (ampersand) so url will cleanly handle parameters
-                $mediaName = str_replace('&', '', $mediaName);
+                // remove ALL SPECIAL CHARACTERS, Images paths are extremely sensitive
+                $mediaName = str_replace('/[^A-Za-z0-9\-]/', '', $mediaName);
                 $type = $_FILES['flPostMedia']['type'][$k];
                 $tempName = $_FILES['flPostMedia']['tmp_name'][$k];
                 $size = $_FILES['flPostMedia']['size'][$k];
@@ -298,7 +298,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                 $mediaName = $_FILES["flPostMedia"]["name"];
                 // remove ALL WHITESPACE from image name
                 $mediaName = preg_replace('/\s+/', '', $mediaName);
-                $mediaName = str_replace('&', '', $mediaName);
+                $mediaName = str_replace('/[^A-Za-z0-9\-]/', '', $mediaName);
                 $fileName = pathinfo($mediaName, PATHINFO_FILENAME);
                 // add unique id to image name to make it unique and add it to the file server
                 $mediaName = trim(uniqid() . $mediaName);

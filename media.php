@@ -248,10 +248,13 @@ $_SESSION['MediaMemberID'] = $memberID;
 
 $mediaFilePath = trim("media/" . $mediaName);
 
+if (!file_exists($mediaFilePath)) {
+    echo "<script>alert('This media was not found'); history.back()</script>";
+    exit;
+}
 
 if (!empty($mediaFilePath)){
 if (file_exists($mediaFilePath)) {
-
 // check if file type is a video
 $videoFileTypes = array("video/mpeg", "video/mpg", "video/ogg", "video/mp4",
     "video/quicktime", "video/webm", "video/x - matroska",

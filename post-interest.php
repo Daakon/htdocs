@@ -301,6 +301,8 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
                 // add unique id to image name to make it unique and add it to the file server
                 $mediaName = $_FILES["flPostMedia"]["name"];
+                // remove ALL SPECIAL CHARACTERS, Images paths are extremely sensitive
+                $mediaName = str_replace('/[^A-Za-z0-9\-]/', '', $mediaName);
                 $mediaName = trim(uniqid() . $mediaName);
                 $mediaFile = $_FILES['flPostMedia']['tmp_name'];
                 $type = trim($_FILES["flPostMedia"]["type"]);
