@@ -196,7 +196,7 @@ if (!empty($_SESSION['ID'])) {
                     </div>
                     <div class="col-xs-12 col-sm-10 col-md-10 col-lg-10">
                         <div class="testimony-text" >
-                            "Rapportbook is a great platform for promoting your product on a local or national scale."  - <b>Brian Slawin</b>, <a href="http://busyevent.com" target="_blank">Co-Founder, Busy Event </a>
+                            "Rapportbook gives businesses more visibility with the local community than any other social network."  - <b>Brian Slawin</b>, <a href="http://busyevent.com" target="_blank">Co-Founder, Busy Event </a>
                         </div>
                     </div>
                 </div>
@@ -211,7 +211,7 @@ if (!empty($_SESSION['ID'])) {
                     </div>
                     <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
                         <div class="testimony-text">
-                            "Chris Weathers has a genuine passion for connecting people with similar interests, and Rapportbook  seamlessly allows you to interact with like-minded individuals." - <b>Angela LaRocca</b>, <a href="http://unidev.com" target="_blank">Brand Manager, Unidev</a>
+                            "You'll be amazed at how seamlessly Rapportbook allows you to interact with the businesses and consumers nearby." - <b>Angela LaRocca</b>, <a href="http://unidev.com" target="_blank">Brand Manager, Unidev</a>
                         </div>
                     </div>
                 </div>
