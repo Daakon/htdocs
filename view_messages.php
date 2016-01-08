@@ -450,7 +450,7 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
                     WHERE ThreadOwner_ID = $ID
                     AND (Sender_ID = $senderID Or Receiver_ID = $senderID)
                     AND (IsDeleted = 0)
-                    Order By ID ASC";
+                    Order By ID ASC LIMIT 0, 50";
             $result = mysql_query($sql) or die(mysql_error());
 
 
