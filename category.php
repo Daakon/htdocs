@@ -4,7 +4,7 @@ function category()
 $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 
     if (strstr($url, "learn_more")) {
-        echo '<option value = "Individual">Individual</option>';
+        echo '<option value = "Consumer">Consumer</option>';
     }
     echo '<option value = "Art">Art</option>';
     echo '<option value = "Automotive">Automotive</option>';

@@ -65,35 +65,19 @@ if (!empty($_SESSION['ID'])) {
 
     <div align="left" >
 
-        <div class="row" style="margin-top:-20px;" >
+        <div class="row" style="margin-top:-20px;">
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" >
 
-                <h4 class="padding-left-10">
-                    <span class="bold">
-                        <img src="/images/bullhorn.png" height="50" width="30" />
-                    </span> <span class="lead" style="margin-left:-5px;">Network & Promote Your Business.</span>
-                </h4>
-
-                <h4 class="padding-left-10">
-                    <span class="bold">
-                        <img src="/images/share-people.png" height="50" width="25" />
-                    </span><span class="lead" style="margin-left:-3px;">Find the Product or Service You Need</span>.
-                </h4>
-
-                <h4 class="padding-left-10">
-                    <img src="/images/location.png" height="40" width="25" />
-                    <span class="lead" style="margin-left:-3px;">Support Your Local Community.</span>
-                </h4>
-
-                <br/>
-                </ul>
-
+                <p class="lead" style="padding-left:10px;padding-top:10px;">
+                 Rapportbook is a <b>Social Yellow Pages</b>,
+                 a community directory with real time content.
+                </p>
 
             </div>
 
 
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="margin-top:-20px;">
-                <img src="/images/business-networking.jpg" />
+                <img src="/images/using-phone.jpg" />
             </div>
 
         </div>
