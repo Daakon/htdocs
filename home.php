@@ -6,24 +6,18 @@ IT WILL INCREASE THE RENDERING TIME OF HTML ELEMENTS
 require 'imports.php';
 $ffmpeg = '/usr/local/bin/ffmpeg';
 //require 'ads.php';
-
 get_head_files();
 get_header();
 require 'memory_settings.php';
-
 $ID = $_SESSION['ID'];
-
 // handle connection feed post
 $post = mysql_real_escape_string($_POST['post']);
 $category = $_POST['category'];
 $city = $_SESSION['City'];
 $state = $_SESSION['State'];
-
 if (isset($_POST['submit'])) {
-
     $_SESSION['NewPostID'] = null;
     $newPostID = null;
-
     if ($_SESSION['Post'] == $_POST['post']) {
         echo "<script>alert('Your post appears to be empty');</script>";
     } else if ($category == "") {
@@ -31,10 +25,8 @@ if (isset($_POST['submit'])) {
     } else {
         if (strlen($post) > 0) {
             $post = makeLinks($post);
-
             // Loop through each image uploaded.
             if (strlen($_FILES['flPostMedia']['name'] > 0)) {
-
                 foreach ($_FILES['flPostMedia']['tmp_name'] as $k => $v) {
                     $mediaName = $_FILES['flPostMedia']['name'][$k];
                     // remove ALL WHITESPACE from image name
@@ -46,27 +38,20 @@ if (isset($_POST['submit'])) {
                     $type = $_FILES['flPostMedia']['type'][$k];
                     $tempName = $_FILES['flPostMedia']['tmp_name'][$k];
                     $size = $_FILES['flPostMedia']['size'][$k];
-
                     if (strlen($mediaName) > 0) {
-
 // check file size
                         if ($size > 5000000000) {
                             echo '<script>alert("File is too large. The maximum file size is 500MB.");</script>';
                             exit();
                         }
-
-
                         // create media type arrays
                         $videoFileTypes = array("video/mpeg", "video/mpg", "video/ogg", "video/mp4",
                             "video/quicktime", "video/webm", "video/x-matroska",
                             "video/x-ms-wmw");
-
                         // photo file types
                         $photoFileTypes = array("image/jpg", "image/jpeg", "image/png", "image/tiff",
                             "image/gif", "image/raw");
-
                         $audioFileTypes = array("audio/wav", "audio/mp3", "audio/x-m4a");
-
                         // add unique id to image name to make it unique and add it to the file server
                         $fileName = pathinfo($mediaName, PATHINFO_FILENAME);
                         $mediaName = trim(uniqid() . $mediaName);
@@ -75,7 +60,6 @@ if (isset($_POST['submit'])) {
                         copy($tempName, $mediaFile2);
                         $mediaFile3 = "";
                         copy($tempName, $mediaFile3);
-
                         require 'media_post_file_path.php';
                         if (in_array($type, $audioFileTypes) || in_array($type, $videoFileTypes)) {
                             $audioName = $fileName;
@@ -87,7 +71,6 @@ if (isset($_POST['submit'])) {
                                 $newFileName = $fileName . ".mp4";
                                 $oggFileName = $fileName . ".ogv";
                                 $webmFileName = $fileName . ".webm";
-
                                 // convert mp4
                                 exec("$ffmpeg -i $fileName -vcodec h264 $newFileName");
                                 $mediaName = $newFileName;
@@ -112,7 +95,6 @@ if (isset($_POST['submit'])) {
                             }
                         }
                         require 'media_post_file_path.php';
-
 // save photo/video
                         if (in_array($type, $videoFileTypes) || in_array($type, $audioFileTypes)) {
                             move_uploaded_file($mediaFile, $postMediaFilePath);
@@ -157,7 +139,6 @@ if (isset($_POST['submit'])) {
                                 exit;*/
                             }
                         }
-
                         // if photo didn't get uploaded, notify the user
                         if (!file_exists($postMediaFilePath)) {
                             echo "<script>alert('File could not be uploaded, try uploading a different file type.');location='/home.php'</script>";
@@ -177,7 +158,6 @@ if (isset($_POST['submit'])) {
                             $mediaType = $mediaRow['MediaType'];
                             $mediaDate = $mediaRow['MediaDate'];
                         }
-
                         // build post links based on media type
                         if (in_array($type, $audioFileTypes)) {
                             $img = '<b>' . $audioName . '</b><br/><audio controls>
@@ -204,63 +184,44 @@ if (isset($_POST['submit'])) {
                             //ffmpeg command
                             $cmd = "$ffmpeg -i \"$postMediaFilePath\" -r 1 -ss 3 -t 1  -f image2 $poster 2>&1";
                             exec($cmd);
-
                             $img = '<video poster="/poster/' . $posterName . '" preload="none" autoplay="autoplay" muted controls>
                                 <source src = "' . $videoPath . $mediaName . '" type="video/mp4" />
                                 <source src = "' . $videoPath . $oggFileName . '" type = "video/ogg" />
                                 <source src = "' . $videoPath . $webmFileName . '" type = "video/webm" />
                                 </video>';
-
                         }
                         $newImage .= '<br/><br/>'.$img;
                     }
-
                     // predict next post ID so when can reference each image to the new post
                     $sql = "SELECT ID FROM Posts Order by ID DESC LIMIT 1";
                     $result = mysql_query($sql);
                     $row = mysql_fetch_assoc($result);
                     $lastPostID = $row['ID'];
                     $lastPostID = $lastPostID +1;
-
                     $newPostID = $_SESSION['NewPostID'];
                     // update Media table with new post id
                     $sqlUpdateMedia = "UPDATE Media SET PostID = $lastPostID, Poster='$posterName' WHERE ID = '$mediaID' ";
                     mysql_query($sqlUpdateMedia) or die(logError(mysql_error(), $url, "Fetching next post ID to reference images to"));
-
-
                 } // end of loop -----------------------------------
-
             }
-
-
-
-
             $post = $post . $newImage;
-
             $sql = "INSERT INTO Posts (Post,    Poster,	      Category,  Member_ID,   PostDate) Values
                                               ('$post', '$posterName', '$category', '$ID',       CURDATE())";
             mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting post with media"));
             $newPostID = mysql_insert_id();
-
-
             // update Media table with new post id
             $sqlUpdateMedia = "UPDATE Media SET Post_ID = $newPostID, PostID = $newPostID, Poster='$posterName' WHERE ID = '$mediaID' ";
             mysql_query($sqlUpdateMedia) or die(logError(mysql_error(), $url, "Updating Media table with new post ID"));
-
             if ($newPostID != null) {
                 $_SESSION['NewPostID'] = $newPostID;
             }
-
         } // if no media
         else {
             $sql = "INSERT INTO Posts (Post,       Category,    Member_ID,   PostDate) Values
                                           ('$post',   '$category',   '$ID',      CURDATE())";
             mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting post without media"));
         }
-
-
         alert_all_matching_interests($category, getMemberState($ID));
-
     }
     echo "<script>location='/home.php?genre=$category&scrollx=630&scrolly=630'</script>";
 }
@@ -296,7 +257,6 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                 $photoFileTypes = array("image/jpg", "image/jpeg", "image/png", "image/tiff",
                     "image/gif", "image/raw");
                 $audioFileTypes = array("audio/wav", "audio/mp3");
-
                 $mediaName = $_FILES["flPostMedia"]["name"];
                 // remove ALL WHITESPACE from image name
                 $mediaName = preg_replace('/\s+/', '', $mediaName);
@@ -411,13 +371,11 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                         //ffmpeg command
                         $cmd = "$ffmpeg -i \"$postMediaFilePath\" -r 1 -ss 3 -t 1  -f image2 $poster 2>&1";
                         exec($cmd);
-
                         $img = '<video poster="/poster/'.$posterName.'" preload="none" autoplay="autoplay" muted controls>
                                 <source src = "' . $videoPath . $mediaName . '" type="video/mp4" />
                                 <source src = "' . $videoPath . $oggFileName . '" type = "video/ogg" />
                                 <source src = "' . $videoPath . $webmFileName . '" type = "video/webm" />
                                 </video>';
-
                     } else {
                         // if invalid file type
                         /*echo '<script>alert("Invalid File Type!");</script>';
@@ -425,9 +383,6 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                         exit; */
                     }
                     $comment = $comment . '<br/><br/>' . $img . '<br/>';
-
-
-
                     $sql = "INSERT INTO PostComments (Post_ID,     Member_ID,   Comment  ) Values
                                                       ('$postID', '$ID',      '$comment')";
                     mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting post comment"));
@@ -468,7 +423,6 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                     $orgPostResult = mysql_query($orgPostSql);
                     $orgPostRow = mysql_fetch_assoc($orgPostResult);
                     $orgInterest = $orgPostRow['Category'];
-
                     $post = "$nameLink posted a new $mediaString comment on $noun $orgPost.<br/><br/>$img<br/>";
                     $post = mysql_real_escape_string($post);
                     $sqlInsertPost = "INSERT INTO Posts (Post,     Member_ID,   Category,         PostDate  ) Values
@@ -515,14 +469,15 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                 }
             }
 //Notify the post creator
-
             $sql = "SELECT Member_ID FROM Posts WHERE ID = $postID And Member_ID != $ID ";
             $result = mysql_query($sql) or die(logError(mysql_error(), $url, "Getting post owner ID to notify of post comment"));
             $rows = mysql_fetch_assoc($result);
-            $creatorID = $rows['Member_ID'];
-            if ($ID != $creatorID) {
-                if (checkEmailActive($ID)) {
-                    build_and_send_email($ID, $creatorID, 1, $postID, '');
+            if (mysql_num_rows($result) > 0) {
+                $creatorID = $rows['Member_ID'];
+                if ($ID != $creatorID) {
+                    if (checkEmailActive($ID)) {
+                        build_and_send_email($ID, $creatorID, 1, $postID, '');
+                    }
                 }
             }
 //------------------
@@ -538,9 +493,6 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
     mysql_query($sql) or die (mysql_error());
 }
 ?>
-
-
-
 <script type="text/javascript">
     function saveScrollPositions(theForm) {
         if(theForm) {
@@ -551,8 +503,6 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
         }
     }
 </script>
-
-
 <script>
     $(document).ready(function () {
         $("body").delegate(".btnApprove", "click", function () {
@@ -594,7 +544,6 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
             })
         });
     });
-
 </script>
 <script type="text/javascript">
     function showPost(long,short) {
@@ -638,7 +587,6 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
         saveScrollPositions(theForm);
     }
 </script>
-
 <script type = "text/javascript">
     function updateFeed() {
         var selection = document.getElementById('genre');
@@ -654,36 +602,29 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
             var city = citySelection.options[citySelection.selectedIndex].value;
         }
         window.location = "/home?genre="+encodeURIComponent(genre)+"&state="+encodeURIComponent(state)+"&city="+city;
-
     }
 </script>
-
 <script>
     function getCity(sel) {
         var state = sel.options[sel.selectedIndex].value;
-
         $.ajax({
             type: "POST",
             url: "/getCity.php",
             data: "state="+state+"&page=home",
             cache: false,
             beforeSend: function () {
-
             },
             success: function(html) {
                 $("#divCity").html(html);
             }
         });
-
     }
 </script>
-
 <style>
     .roll-call {
         min-height: 400px;
     }
 </style>
-
 <script language=" JavaScript" >
     <!--
     function LoadOnce()

@@ -42,7 +42,7 @@ $sqlRollCall = " SELECT DISTINCT
     $stateCondition
     Group By PostID
     Order By PostID DESC LIMIT $limit ";
-$rollCallResult = mysql_query($sqlRollCall) or die(mysql_error());
+$rollCallResult = mysql_query($sqlRollCall) or die(logError(mysql_error(), $url, "Getting Connection Feed data"));
 // if no results
 if (mysql_num_rows($rollCallResult) == 0) {
     ?>
@@ -148,10 +148,11 @@ $postOwner = $memberID;
         //----------------------------------------------------------------
         //require 'getSessionType.php';
         $sql2 = "SELECT ID FROM PostApprovals WHERE Post_ID = '$postID' AND Member_ID = '$ID'";
-        $result2 = mysql_query($sql2) or die(mysql_error());
+        $result2 = mysql_query($sql2) or die(logError(mysql_error(), $url, "Getting member approval"));
         $rows2 = mysql_fetch_assoc($result2);
         // get approvals for each post
-            $approvals = mysql_num_rows(mysql_query("SELECT * FROM PostApprovals WHERE Post_ID = '$postID'"));
+            $approvals = mysql_num_rows(mysql_query("SELECT * FROM PostApprovals WHERE Post_ID = '$postID'")
+            or die(logError(mysql_error(), $url, "Getting all post approvals")));
         // show disapprove if members has approved the post
         echo '<div class="post-approvals">';
         echo "<div id = 'approvals$postID'>";
@@ -228,7 +229,7 @@ $postOwner = $memberID;
                         Group By PostComments.ID
                         Order By PostComments.ID DESC LIMIT 3 ";
 
-            $result3 = mysql_query($sql3) or die(mysql_error());
+            $result3 = mysql_query($sql3) or die(logError(mysql_error(), $url, "Gettig first 3 Connection Feed comments"));
             echo '<br/>';
             if (mysql_num_rows($result3) > 0) {
                 echo '<div class="comment-style">';
@@ -257,7 +258,7 @@ $postOwner = $memberID;
 
                     <div class="comment-content" style="clear:both">' . nl2br($comment) . '</div>';
                     echo '</div>';
-                    if ($commentOwnerID == $ID) {
+                    if ($commentOwnerID == $ID || $memberID == $ID) {
                         //<!--DELETE BUTTON ------------------>
                         echo '<div class="comment-delete">';
                         echo '<form action="" method="post" onsubmit="return confirm(\'Do you really want to delete this comment?\')">';
@@ -290,7 +291,7 @@ $postOwner = $memberID;
                         And Members.ID = Profile.Member_ID
                         Group By PostComments.ID
                         Order By PostComments.ID DESC LIMIT 3, 100 ";
-            $result4 = mysql_query($sql4) or die(mysql_error());
+            $result4 = mysql_query($sql4) or die(logError(mysql_error(), $url, "Getting 3-100 Connection Feed comments"));
             if (mysql_num_rows($result4) > 0) {
             $moreComments = "moreComments$postID";
             ?>
@@ -327,7 +328,7 @@ $postOwner = $memberID;
                     echo '</td></tr>';
                 }
                 echo '</div>';
-                if ($commentOwnerID == $ID) {
+                if ($commentOwnerID == $ID || $memberID == $ID) {
                     //<!--DELETE BUTTON ------------------>
                     echo '<div class="comment-delete">';
                     echo '<form action="" method="post" onsubmit="return confirm(\'Do you really want to delete this comment?\')">';

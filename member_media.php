@@ -22,7 +22,7 @@ WHERE
 Members.ID = '$profileID'
 And Members.IsActive = 1 ";
 
-$result = mysql_query($sql) or die(mysql_error());
+$result = mysql_query($sql) or die(logError(mysql_error(), $url, "Getting profile from get_ID returned from_from_username"));
 $rows = mysql_fetch_assoc($result);
 $fName = $rows['FirstName'];
 $lName = $rows['LastName'];
@@ -38,7 +38,7 @@ if (mysql_num_rows($result) == 0) {
 if (isset($_POST['MakeProfilePhoto']) && $_POST['MakeProfilePhoto'] == "Make Profile Photo") {
     $newProfilePhoto = $_POST['newProfilePhoto'];
     $sql = "Update Profile Set ProfilePhoto = '$newProfilePhoto' Where Member_ID = $ID ";
-    mysql_query($sql);
+    mysql_query($sql) or die(logError(mysql_error(), $url, "Updating profile photo from photo in media library"));
     echo "<script>alert('Profile Photo Updated Successfully');location='/member_media/$username'</script>";
 }
 
@@ -46,7 +46,7 @@ if (isset($_POST['MakeProfilePhoto']) && $_POST['MakeProfilePhoto'] == "Make Pro
 if (isset($_POST['MakeProfileVideo']) && $_POST['MakeProfileVideo'] == "Make Profile Video") {
     $mediaName = $_POST['newProfileVideo'];
     $sql = "Update Profile Set ProfileVideo = '$mediaName' Where Member_ID = $ID ";
-    mysql_query($sql);
+    mysql_query($sql) or die(logError(mysql_error(), $url, "Updating profile video from photo in media library"));;
 
     require 'media_post_file_path.php';
     // poster file name
@@ -64,7 +64,7 @@ if (isset($_POST['MakeProfileVideo']) && $_POST['MakeProfileVideo'] == "Make Pro
     exec($cmd);
 
     $sql = "Update Profile Set Poster = '$posterName' Where Member_ID = $ID ";
-    mysql_query($sql) or die(mysql_error());
+    mysql_query($sql) or die(logError(mysql_error(), $url, "Updating Poster path in Profile table triggered by updating profile video from media library"));
 
     echo "<script>alert('Profile Video Updated Successfully');location='/member_media/$username'</script>";
 }
@@ -105,7 +105,7 @@ if (isset($_POST['MakeProfileVideo']) && $_POST['MakeProfileVideo'] == "Make Pro
             $sql = "SELECT * FROM Media WHERE Member_ID = $profileID And (IsDeleted IS NULL Or IsDeleted = 0)
             Order By ID DESC ";
 
-            $result = mysql_query($sql) or die(mysql_error());
+            $result = mysql_query($sql) or die(logError(mysql_error(), $url, "Selecting all member media"));
             $count = mysql_num_rows($result);
             ?>
 
@@ -213,7 +213,7 @@ if (isset($_POST['MakeProfileVideo']) && $_POST['MakeProfileVideo'] == "Make Pro
             $sql = "SELECT * FROM Media WHERE Member_ID = $profileID And (IsDeleted IS NULL Or IsDeleted = 0)
                         Order By ID DESC ";
 
-            $result = mysql_query($sql) or die(mysql_error());
+            $result = mysql_query($sql) or die(logError(mysql_error(), $url, "Getting all member media"));
             $count = mysql_num_rows($result);
 
             while ($rows = mysql_fetch_array($result)) {

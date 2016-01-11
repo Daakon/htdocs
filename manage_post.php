@@ -124,7 +124,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                     // store media pointer
                     $sql = "INSERT INTO Media (Member_ID,  MediaName,  MediaType,  MediaDate,     AudioName    ) Values
                                               ('$ID',    '$mediaName', '$type',   CURRENT_DATE(), '$audioName')";
-                    mysql_query($sql) or die(mysql_error());
+                    mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting media into media table"));
                     // get media ID
                     $sqlGetMedia = "SELECT * FROM Media WHERE MediaName = '$mediaName'";
                     $mediaResult = mysql_query($sqlGetMedia) or die(mysql_error());
@@ -178,19 +178,19 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
                     $sql = "INSERT INTO PostComments (Post_ID,     Member_ID,   Comment  ) Values
                                                       ('$postID', '$ID',      '$comment')";
-                    mysql_query($sql) or die(mysql_error());
+                    mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting comment"));
 // create post
                     // get poster data
                     $sqlPoster = "SELECT ID, FirstName, LastName, Gender FROM Members WHERE ID = '$ID' ";
-                    $resultPoster = mysql_query($sqlPoster) or die(mysql_error());
+                    $resultPoster = mysql_query($sqlPoster) or die(logError(mysql_error(), $url, "Getting comment poster data"));
                     $rowsPoster = mysql_fetch_assoc($resultPoster);
                     $name = $rowsPoster['FirstName'] . ' ' . $rowsPoster['LastName'];
                     $posterId = $rowsPoster['ID'];
                     $gender = $rowsPoster['Gender'];
                     $nameLink = $name;
-// get photo owner data
+// get post owner ID
                     $sql = "SELECT Member_ID FROM Posts WHERE ID = $postID";
-                    $result = mysql_query($sql) or die(mysql_error());
+                    $result = mysql_query($sql) or die(logError(mysql_error(), $url, "Getting post owner ID"));
                     $rows = mysql_fetch_assoc($result);
                     $ownerId = $rows['Member_ID'];
                     $sqlOwner = "SELECT ID, FirstName, LastName FROM Members WHERE ID = '$ownerId' ";
@@ -200,24 +200,24 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                     $name2 = $name2."'s";
                     $ownerId = $rowsOwner['ID'];
                     $name2Link = $name2;
-                    // determine noun if profile owner commented on their own post and write bulletin
-                    if ($ownerId == $ID) {
-                        if ($gender == 1) {
-                            $noun = 'his';
-                        } else {
-                            $noun = 'her';
-                        }
-                    }
-                    else {
-                        $noun = $name2;
-                    }
-                    $orgPost = "<a href='/show_post.php?postID=$postID'>post</a>";
+
+
+                    $orgPost = "<a href='/show_post.php?postID=$postID'>status</a>";
                     $orgPostSql = "SELECT Category FROM Posts WHERE ID = $postID ";
-                    $orgPostResult = mysql_query($orgPostSql);
+                    $orgPostResult = mysql_query($orgPostSql) or die(logError(mysql_error(), $url, "Getting original post commented on"));
                     $orgPostRow = mysql_fetch_assoc($orgPostResult);
                     $orgInterest = $orgPostRow['Category'];
 
-                    $post = "$nameLink posted a new $mediaString comment on $noun $orgPost.<br/><br/>$img<br/>";
+                    // determine noun if profile owner commented on their own post and write bulletin
+                    if ($ownerId == $ID) {
+                        $noun = "a $orgPost they posted.";
+                    }
+                    else {
+
+                        $noun = $name2 . ' post.';
+                    }
+
+                    $post = "$nameLink posted a new $mediaString comment on $noun<br/><br/>$img<br/>";
                     $post = mysql_real_escape_string($post);
                     $sqlInsertPost = "INSERT INTO Posts (Post,     Member_ID,   Category,         PostDate  ) Values
                                                         ('$post', '$ID',      '$orgInterest',    CURDATE() ) ";
@@ -234,7 +234,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
             else {
                 $sql = "INSERT INTO PostComments (Post_ID,  Member_ID,    Comment ) Values
                                         ('$postID', '$ID',      '$comment')";
-                mysql_query($sql) or die(mysql_error());
+                mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting post comment without media"));
             }
             $scrollx = $_REQUEST['scrollx'];
             $scrolly = $_REQUEST['scrolly'];
@@ -243,7 +243,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
             $user_id = $_SESSION['ID'];
 //Get the ids of all the members connected with a post comment
             $sql = "SELECT Member_ID FROM PostComments WHERE Post_ID = $postID And Member_ID != $ID";
-            $result = mysql_query($sql) or die(mysql_error());
+            $result = mysql_query($sql) or die(logError(mysql_error(), $url, "Getting all ID of members who commented on post"));
             $comment_ids = array();
 //Iterate over the results
             while ($rows = mysql_fetch_assoc($result)) {
@@ -265,12 +265,14 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 //Notify the post creator
 
             $sql = "SELECT Member_ID FROM Posts WHERE ID = '$postID' And Member_ID != $ID;";
-            $result = mysql_query($sql) or die(mysql_error());
+            $result = mysql_query($sql) or die(logError(mysql_error(), $url, "Getting post owner ID"));
             $rows = mysql_fetch_assoc($result);
-            $creatorID = $rows['Member_ID'];
-            if ($ID != $creatorID) {
-                if (checkEmailActive($ID)) {
-                    build_and_send_email($ID, $creatorID, 1, $postID, '');
+            if (mysql_num_rows($result) > 0) {
+                $creatorID = $rows['Member_ID'];
+                if ($ID != $creatorID) {
+                    if (checkEmailActive($ID)) {
+                        build_and_send_email($ID, $creatorID, 1, $postID, '');
+                    }
                 }
             }
 //------------------
@@ -291,14 +293,16 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 if (isset($_POST['Delete']) && $_POST['Delete'] == "Delete") {
     $postID = $_POST['postID'];
     $sql = "Update Posts SET IsDeleted = '1' WHERE ID = $postID And Member_ID = $ID ";
-    mysql_query($sql) or die (mysql_error());
+    mysql_query($sql) or die (logError(mysql_error(), $url, "Deleting Post"));
 
 }
+
+// delete comment
 if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
     $commentID = $_POST['commentID'];
     $sql = "Update PostComments SET IsDeleted = '1' WHERE ID = $commentID";
-    mysql_query($sql) or die (mysql_error());
-
+    mysql_query($sql) or die (logError(mysql_error(), $url, "Deleting comment"));
+    echo "<script>location='/manage_posts/$username?scrollx=$scrollx&scrolly=$scrolly'</script>";
 }
 ?>
 
@@ -419,7 +423,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
     Order By PostID DESC ";
 
 
-        $result = mysql_query($sql) or die(mysql_error());
+        $result = mysql_query($sql) or die(logError(mysql_error(), $url, "Getting all member posts"));
 
 
         if (mysql_num_rows($result) > 0) {
@@ -503,12 +507,13 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
             //require 'getSessionType.php';
 
             $sql2 = "SELECT ID FROM PostApprovals WHERE Post_ID = '$postID' AND Member_ID = '$ID'";
-            $result2 = mysql_query($sql2) or die(mysql_error());
+            $result2 = mysql_query($sql2) or die(logError(mysql_error(), $url, "Getting member approval"));
             $rows2 = mysql_fetch_assoc($result2);
 
 
             // get approvals for each post
-            $approvals = mysql_num_rows(mysql_query("SELECT * FROM PostApprovals WHERE Post_ID = '$postID'"));
+            $approvals = mysql_num_rows(mysql_query("SELECT * FROM PostApprovals WHERE Post_ID = '$postID'")
+            or die(logError(mysql_error(), $url, "Gett all post approvals")));
 
             // show disapprove if members has approved the post
             echo '<table>';
@@ -596,7 +601,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                         And PostComments.IsDeleted = 0
                         Group By PostComments.ID
                         Order By PostComments.ID DESC LIMIT 3 ";
-                $result3 = mysql_query($sql3) or die(mysql_error());
+                $result3 = mysql_query($sql3) or die(logError(mysql_error(), $url, "Getting first 3 post comments"));
                 echo '<br/>';
                 if (mysql_num_rows($result3) > 0) {
                     echo '<div class="comment-style">';
@@ -623,7 +628,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                     <div class="comment-content" style="clear:both">' . nl2br($comment) . '</div>';
                         echo '</div>';
 
-                        if ($commentOwnerID == $ID) {
+                        if ($commentOwnerID == $ID || $ID == $memberID) {
                             //<!--DELETE BUTTON ------------------>
                             echo '<div class="comment-delete">';
                             echo '<form action="" method="post" onsubmit="return confirm(\'Do you really want to delete this comment?\')">';
@@ -655,7 +660,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                         And Members.ID = Profile.Member_ID
                         Group By PostComments.ID
                         Order By PostComments.ID DESC LIMIT 3, 100 ";
-                $result4 = mysql_query($sql4) or die(mysql_error());
+                $result4 = mysql_query($sql4) or die(logError(mysql_error(), $url, "Getting 0-100 post comments"));
                 if (mysql_num_rows($result4) > 0) {
                 $moreComments = "moreComments$postID";
                 ?>

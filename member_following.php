@@ -40,7 +40,7 @@ $profileID = get_id_from_username($username);
             <?php
             $memberID = get_id_from_username($username);
             $sql = "SELECT * FROM Follows WHERE Follows.Follower_ID = $memberID";
-            $result = mysql_query($sql);
+            $result = mysql_query($sql) or die(logError(mysql_error(), $url, "Getting member follows"));
 
             while ($rows = mysql_fetch_assoc($result)) {
 
@@ -58,7 +58,7 @@ $profileID = get_id_from_username($username);
                       AND Profile.Member_ID = $followedID
                       Group By Interest
                       Order By Interest ASC ";
-                $result2 = mysql_query($sql2);
+                $result2 = mysql_query($sql2) or die(logError(mysql_error(), $url, "Getting profile photos and names of who user is following"));
 
 
                 while ($rows2 = mysql_fetch_assoc($result2)) {
