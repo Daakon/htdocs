@@ -41,6 +41,8 @@ if (isset($_POST['submit'])) {
                     $mediaName = preg_replace('/\s+/', '', $mediaName);
                     // remove ALL SPECIAL CHARACTERS, Images paths are extremely sensitive
                     $mediaName = str_replace('/[^A-Za-z0-9\-]/', '', $mediaName);
+                    // remove ampersand
+                    $mediaName = str_replace('&', '', $mediaName);
                     $type = $_FILES['flPostMedia']['type'][$k];
                     $tempName = $_FILES['flPostMedia']['tmp_name'][$k];
                     $size = $_FILES['flPostMedia']['size'][$k];
@@ -164,11 +166,11 @@ if (isset($_POST['submit'])) {
                             // store media pointer
                             $sql = "INSERT INTO Media (Member_ID,  MediaName,    MediaOgg,     MediaWebm,      MediaType,  MediaDate,  AudioName    ) Values
                                               ('$ID',    '$mediaName', '$oggFileName', '$webmFileName',  '$type',   CURRENT_DATE(), '$audioName'  )";
-                            mysql_query($sql) or die(mysql_error());
+                            mysql_query($sql) or die(logError(mysql_error(), $url, "Storing Photo name from post into Media table"));
                             $mediaID = mysql_insert_id();
                             // get media ID
                             $sqlGetMedia = "SELECT * FROM Media WHERE MediaName = '$mediaName'";
-                            $mediaResult = mysql_query($sqlGetMedia) or die(mysql_error());
+                            $mediaResult = mysql_query($sqlGetMedia) or die(logError(mysql_error(), $url, "Inserting uploaded media name into media table"));
                             $mediaRow = mysql_fetch_assoc($mediaResult);
                             //$mediaID = $mediaRow['ID'];
                             $media = $mediaRow['MediaName'];
@@ -223,7 +225,7 @@ if (isset($_POST['submit'])) {
                     $newPostID = $_SESSION['NewPostID'];
                     // update Media table with new post id
                     $sqlUpdateMedia = "UPDATE Media SET PostID = $lastPostID, Poster='$posterName' WHERE ID = '$mediaID' ";
-                    mysql_query($sqlUpdateMedia) or die(mysql_error());
+                    mysql_query($sqlUpdateMedia) or die(logError(mysql_error(), $url, "Fetching next post ID to reference images to"));
 
 
                 } // end of loop -----------------------------------
@@ -237,13 +239,13 @@ if (isset($_POST['submit'])) {
 
             $sql = "INSERT INTO Posts (Post,    Poster,	      Category,  Member_ID,   PostDate) Values
                                               ('$post', '$posterName', '$category', '$ID',       CURDATE())";
-            mysql_query($sql) or die(mysql_error());
+            mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting post with media"));
             $newPostID = mysql_insert_id();
 
 
             // update Media table with new post id
             $sqlUpdateMedia = "UPDATE Media SET Post_ID = $newPostID, PostID = $newPostID, Poster='$posterName' WHERE ID = '$mediaID' ";
-            mysql_query($sqlUpdateMedia) or die(mysql_error());
+            mysql_query($sqlUpdateMedia) or die(logError(mysql_error(), $url, "Updating Media table with new post ID"));
 
             if ($newPostID != null) {
                 $_SESSION['NewPostID'] = $newPostID;
@@ -253,7 +255,7 @@ if (isset($_POST['submit'])) {
         else {
             $sql = "INSERT INTO Posts (Post,       Category,    Member_ID,   PostDate) Values
                                           ('$post',   '$category',   '$ID',      CURDATE())";
-            mysql_query($sql) or die(mysql_error());
+            mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting post without media"));
         }
 
 
@@ -298,7 +300,10 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                 $mediaName = $_FILES["flPostMedia"]["name"];
                 // remove ALL WHITESPACE from image name
                 $mediaName = preg_replace('/\s+/', '', $mediaName);
+                // remove ALL special characters
                 $mediaName = str_replace('/[^A-Za-z0-9\-]/', '', $mediaName);
+                // remove ampersand
+                $mediaName = str_replace('&', '', $mediaName);
                 $fileName = pathinfo($mediaName, PATHINFO_FILENAME);
                 // add unique id to image name to make it unique and add it to the file server
                 $mediaName = trim(uniqid() . $mediaName);
@@ -371,7 +376,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                     // store media pointer
                     $sql = "INSERT INTO Media (Member_ID,  MediaName,  MediaType,  MediaDate,     AudioName    ) Values
                                               ('$ID',    '$mediaName', '$type',   CURRENT_DATE(), '$audioName')";
-                    mysql_query($sql) or die(mysql_error());
+                    mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting media name from post into Media table"));
                     // get media ID
                     $sqlGetMedia = "SELECT * FROM Media WHERE MediaName = '$mediaName'";
                     $mediaResult = mysql_query($sqlGetMedia) or die(mysql_error());
@@ -425,7 +430,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
                     $sql = "INSERT INTO PostComments (Post_ID,     Member_ID,   Comment  ) Values
                                                       ('$postID', '$ID',      '$comment')";
-                    mysql_query($sql) or die(mysql_error());
+                    mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting post comment"));
 // create post
                     // get poster data
                     $sqlPoster = "SELECT ID, FirstName, LastName, Gender FROM Members WHERE ID = '$ID' ";
@@ -441,7 +446,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                     $rows = mysql_fetch_assoc($result);
                     $ownerId = $rows['Member_ID'];
                     $sqlOwner = "SELECT ID, FirstName, LastName FROM Members WHERE ID = '$ownerId' ";
-                    $resultOwner = mysql_query($sqlOwner) or die(mysql_error());
+                    $resultOwner = mysql_query($sqlOwner) or die(logError(mysql_error(), $url, "Getting post owner name to create string to say which member post was commented on"));
                     $rowsOwner = mysql_fetch_assoc($resultOwner);
                     $name2 = $rowsOwner['FirstName'] . ' ' . $rowsOwner['LastName'];
                     $name2 = $name2."'s";
@@ -468,11 +473,11 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                     $post = mysql_real_escape_string($post);
                     $sqlInsertPost = "INSERT INTO Posts (Post,     Member_ID,   Category,         PostDate  ) Values
                                                         ('$post', '$ID',      '$orgInterest',    CURDATE() ) ";
-                    mysql_query($sqlInsertPost) or die(mysql_error());
+                    mysql_query($sqlInsertPost) or die(logError(mysql_error(), $url, "Inserting post that states a member posted a media comment on another member post"));
                     $newPostID = mysql_insert_id();
-// update new photo with bulletin id for commenting later
+// update new photo with post id for commenting later
                     $sql = "UPDATE Media SET Post_ID = '$newPostID' WHERE MediaName = '$mediaName' ";
-                    mysql_query($sql) or die(mysql_error());
+                    mysql_query($sql) or die(logError(mysql_error(), $url, "Updating Media with new post ID which was triggered from post comment with media"));
                 }
             }
 //----------------------
@@ -481,7 +486,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
             else {
                 $sql = "INSERT INTO PostComments (Post_ID,  Member_ID,    Comment ) Values
                                         ('$postID', '$ID',      '$comment')";
-                mysql_query($sql) or die(mysql_error());
+                mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting comment without media"));
             }
             $scrollx = $_REQUEST['scrollx'];
             $scrolly = $_REQUEST['scrolly'];
@@ -490,7 +495,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
             $user_id = $_SESSION['ID'];
 //Get the ids of all the members connected with a post comment
             $sql = "SELECT Member_ID FROM PostComments WHERE Post_ID = $postID And Member_ID != $ID ";
-            $result = mysql_query($sql) or die(mysql_error());
+            $result = mysql_query($sql) or die(logError(mysql_error(), $url, "Getting all IDs of members who commented on a post"));
             $comment_ids = array();
 //Iterate over the results
             while ($rows = mysql_fetch_assoc($result)) {
@@ -512,7 +517,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 //Notify the post creator
 
             $sql = "SELECT Member_ID FROM Posts WHERE ID = $postID And Member_ID != $ID ";
-            $result = mysql_query($sql) or die(mysql_error());
+            $result = mysql_query($sql) or die(logError(mysql_error(), $url, "Getting post owner ID to notify of post comment"));
             $rows = mysql_fetch_assoc($result);
             $creatorID = $rows['Member_ID'];
             if ($ID != $creatorID) {

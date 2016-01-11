@@ -303,6 +303,10 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                 $mediaName = $_FILES["flPostMedia"]["name"];
                 // remove ALL SPECIAL CHARACTERS, Images paths are extremely sensitive
                 $mediaName = str_replace('/[^A-Za-z0-9\-]/', '', $mediaName);
+                 // remove ALL WHITESPACE from image name
+                $mediaName = preg_replace('/\s+/', '', $mediaName);
+                // remove ampersand
+                $mediaName = str_replace('&', '', $mediaName);
                 $mediaName = trim(uniqid() . $mediaName);
                 $mediaFile = $_FILES['flPostMedia']['tmp_name'];
                 $type = trim($_FILES["flPostMedia"]["type"]);
