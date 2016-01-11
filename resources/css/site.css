@@ -1,8 +1,9 @@
 body {
     /*background-color: #dedede;*/
     /*font-family: 'proxima-nova', 'Proxima Nova', sans-serif;*/
-    font-family: "Georgia";
-    /*background-image:url('/images/silk-bg.jpg');*/
+    font-family: 'Helvetica Neue', Helvetica, 'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic Pro', メイリオ, Meiryo, 'ＭＳ Ｐゴシック', arial, sans-serif;
+    color: rgb(33, 25, 34);
+    font-size: 12px;
     background-repeat:no-repeat;
     background-size:100% 100%;
     background-position:inherit;
@@ -613,6 +614,10 @@ script {
 
 a {
     word-wrap:break-word
+}
+
+a:hover {
+    text-decoration: none !important;
 }
 
 .btnApprove {

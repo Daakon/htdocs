@@ -5,175 +5,6 @@ get_head_files();
 get_header();
 $ID = $_SESSION['ID'];
 
-// handle roll call post
-
-$post = mysql_real_escape_string($_POST['post']);
-$category = "";
-
-if (isset($_POST['submit'])) {
-
-    if (strlen($post) > 0) {
-
-
-        makeLinks($post);
-
-        // if photo is provided
-        if (strlen($_FILES['flPostMedia']['name']) > 0) {
-
-            // check file size
-            if ($_FILES['flPostMedia']['size'] > 500000000) {
-
-                exit();
-            }
-
-            // create media type arrays
-            $videoFileTypes = array("video/mpeg", "video/mpg", "video/ogg", "video/mp4",
-                "video/quicktime", "video/webm", "video/x-matroska",
-                "video/x-ms-wmw");
-
-
-            // add unique id to image name to make it unique and add it to the file server
-            $mediaName = $_FILES["flPostMedia"]["name"];
-            $mediaName = trim(uniqid() . $mediaName);
-            $mediaFile = $_FILES['flPostMedia']['tmp_name'];
-            $type = $_FILES['flPostMedia']['type'];
-
-            require 'media_post_file_path.php';
-
-            if (in_array($type, $videoFileTypes)) {
-                // do nothing
-
-            } else {
-                    echo "<script>alert('Invalid File Type'); location = '$url'";
-                    exit;
-                }
-
-            // read exif data
-            $exif = exif_read_data($_FILES['flPostMedia']['tmp_name']);
-
-            if (!empty($exif['Orientation'])) {
-
-                $ort = $exif['Orientation'];
-
-                switch ($ort) {
-                    case 8:
-                        if (strstr($url, 'localhost:8888')) {
-                            // local php imagerotate doesn't work
-                        } else {
-                            $src = imagerotate($src, 90, 0);
-                        }
-                        break;
-                    case 3:
-                        if (strstr($url, 'localhost:8888')) {
-                            // local php imagerotate doesn't work
-                        } else {
-                            $src = imagerotate($src, 180, 0);
-                        }
-                        break;
-                    case 6:
-                        if (strstr($url, 'localhost:8888')) {
-                            // local php imagerotate doesn't work
-                        } else {
-                            $src = imagerotate($src, -90, 0);
-                        }
-
-                        break;
-                }
-            }
-            require 'media_post_file_path.php';
-
-// save photo/video
-            if (in_array($type, $videoFileTypes)) {
-                $cmd = "ffmpeg -i $mediaFile -vf 'transpose=1' $mediaFile";
-                exec($cmd);
-                move_uploaded_file($mediaFile, $postMediaFilePath);
-
-            } else {
-
-                if (in_array($type, $photoFileTypes)) {
-
-                    if ($type == "image/jpg" || $type == "image/jpeg") {
-                        imagejpeg($src, $postMediaFilePath, 100);
-                    } else if ($type == "image/png") {
-
-                        imagepng($src, $postMediaFilePath, 0, NULL);
-
-
-                    } else if ($type == "image/gif") {
-                        imagegif($src, $postMediaFilePath, 100);
-
-                    } else {
-                        echo "<script>alert('Invalid File Type'); location = 'home.php'</script>";
-                        exit;
-                    }
-                }
-            }
-            // if photo didn't get uploaded, notify the user
-            if (!file_exists($postMediaFilePath)) {
-                echo "<script>alert('File could not be uploaded, try uploading a different file type.'); location= 'home.php'</script>";
-            }
-
-            imagedestroy($src);
-
-            // store media pointer
-            $sql = "INSERT INTO Media (Member_ID,  MediaName,  MediaType,  MediaDate    ) Values
-                                          ('$ID',    '$mediaName', '$type',   CURRENT_DATE())";
-            mysql_query($sql) or die(mysql_error());
-
-            // get media ID
-            $sqlGetMedia = "SELECT * FROM Media WHERE MediaName = '$mediaName'";
-            $mediaResult = mysql_query($sqlGetMedia) or die(mysql_error());
-            $mediaRow = mysql_fetch_assoc($mediaResult);
-            $mediaID = $mediaRow['ID'];
-            $media = $mediaRow['MediaName'];
-            $mediaType = $mediaRow['MediaType'];
-            $mediaDate = $mediaRow['MediaDate'];
-
-
-            // build post links based on media type
-            if (in_array($type, $photoFileTypes)) {
-
-                $img = '<img src = "' . $postMediaFilePath . '" />';
-                $img = '<a href = "media.php?id=' . $ID . '&mid=' . $mediaID . '&media=' . $media . '&type=' . $mediaType . '&mediaDate=' . $mediaDate . '">' . $img . '</a>';
-            } // check if file type is a video
-            elseif (in_array($type, $videoFileTypes)) {
-
-                $img = '<video src = "' . $postMediaFilePath . '" class="profileVideo" frameborder = "1" controls preload="none" SCALE="ToFit"></video>';
-                $img = '<a href = "media.php?id=' . $ID . '&mid=' . $mediaID . '&media=' . $media . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '">' . $img . '</a>';
-            } else {
-                // if invalid file type
-                echo '<script>alert("Invalid File Type!");</script>';
-                echo "<script>location= 'home.php'</script>";
-                exit;
-            }
-
-            $post = $post . '<br/><br/>' . $img . '<br/>';
-
-            $sql = "INSERT INTO Posts (Post,    Category,  Member_ID,   PostDate) Values
-                                      ('$post', '$category', '$ID',       CURDATE())";
-            mysql_query($sql) or die(mysql_error());
-            $newPostID = mysql_insert_id();
-
-            // update Media table with new post id
-            if (isset($_SESSION['ID'])) {
-                $sqlUpdateMedia = "UPDATE Media SET Post_ID = '$newPostID' WHERE MediaName = '$mediaName' ";
-                mysql_query($sqlUpdateMedia) or die(mysql_error());
-            }
-
-        } // if no media
-        else {
-
-            $sql = "INSERT INTO Posts (Post,       Category,    Member_ID,   PostDate) Values
-                                  ('$post',   '$category',   '$ID',      CURDATE())";
-            mysql_query($sql) or die(mysql_error());
-
-        }
-    }
-}
-?>
-
-
-<?php
 
 //-------------------------------------------------
 // handle post comments
@@ -333,7 +164,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
             $comment = $comment . '<br/><br/>' . $img . '<br/>';
 
             $sql = "INSERT INTO PostComments (Post_ID,     Member_ID,   Comment  ) Values
-                                             ('$postID', '$ID',      '$comment')";
+                                             ('$postID',  $ID',      '$comment')";
 
             mysql_query($sql) or die(mysql_error());
 
@@ -380,15 +211,16 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
             $sql = "UPDATE Media SET Post_ID = '$newPostID' WHERE MediaName = '$mediaName' ";
             mysql_query($sql) or die(mysql_error());
-
         }
 //----------------------
 // if not comment photo
 //----------------------
 
         else {
-            $sql = "INSERT INTO PostComments (Post_ID,  Member_ID,    Comment ) Values
-                                        ('$postID', '$ID',      '$comment')";
+            $ID = $_SESSION['ID'];
+            echo "<script>alert('$ID');</script>";
+            $sql = "INSERT INTO PostComments (Post_ID,  Member_ID,  Comment,  PostDate ) Values
+                                              ($postID, $ID,       '$comment', CURDATE)";
 
             mysql_query($sql) or die(mysql_error());
         }
@@ -520,8 +352,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
 <body>
 
-<div class="container" style="margin-top:-60px;
-            padding-top: 20px;">
+<div class="container" style="padding-top: 20px;">
 
 
     <div class="row row-padding">
@@ -626,7 +457,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 <hr class="hr-line" />
 
             <?php
-            if (!empty($ID)) {
+            if (!empty($ID) || !isset($ID)) {
                 $readonly = 'readonly';
             }
             //check if member has approved this post
@@ -691,7 +522,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                       onsubmit="showCommentUploading('comment<?php echo $postID?>', this);">
 
                     <input type="text" class="form-control" name="postComment" id="postComment"
-                           placeholder="Write a comment" title='' />
+                           placeholder="Write a comment" title='' readonly="<?php echo $readonly ?>" />
 
                     <h6>Add Photo/Video</h6>
                     <input type="file" name="flPostMedia" id="flPostMedia" class="flPostMedia"/>
@@ -705,7 +536,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                         </div>
                     </div>
 
-                    <input type="submit" name="btnComment" id="btnComment" Value="Comment" $readonly />
+                    <input type="submit" name="btnComment" id="btnComment" Value="Comment" readonly="<?php echo $readonly ?>" />
                     <input type="hidden" name="postID" id="postID" Value="<?php echo $postID ?>"/>
                     <input type="hidden" name="ID" id="ID" value="<?php echo $ID ?>"/>
                     <input type="hidden" name="ownerId" id="ownerId" value="<?php echo $MemberID ?>"/>
