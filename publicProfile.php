@@ -98,6 +98,15 @@ $age = $rows['Age'];
 
     <br/>
 
+<?php if (empty($_SESSION['ID']) && !isset($_SESSION['ID'])) {
+
+if (trim($profileVideo) != "default_video.png") { ?>
+
+    <h3>
+        <?php echo "<div class=\"public-profile-label profileFont\">$firstName $lastName </div>" ?>
+    </h3>
+<?php } } ?>
+
     <!--Profile photo --------------------------------------------------------------------------------->
 
 
@@ -110,7 +119,6 @@ $age = $rows['Age'];
 
     <?php if ($profileVideo != "default_video.png") { ?>
         <video src = " <?php echo $videoPath . $profileVideo ?>" poster="/poster/<?php echo $posterName ?>"  preload="auto" controls />
-        <br/>
     <?php } ?>
 
 
