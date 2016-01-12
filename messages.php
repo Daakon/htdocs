@@ -24,7 +24,7 @@ $ID = $_SESSION['ID'];
 
             <?php
             $sql = "SELECT DISTINCT * FROM Messages WHERE ThreadOwner_ID = $ID AND (Receiver_ID = $ID Or Sender_ID = $ID) AND (InitialMessage = 1) AND (IsDeleted = 0) Order By New Desc, ID Desc";
-            $result = mysql_query($sql) or die(mysql_error());
+            $result = mysql_query($sql) or die(logError(mysql_error(), $url, "Getting initial message"));
 
             if (mysql_num_rows($result) > 0) {
                 while ($rows = mysql_fetch_assoc($result)) {
@@ -51,17 +51,17 @@ $ID = $_SESSION['ID'];
 
                     // check if 2 people have new messages first
                     $sqly = "SELECT ID FROM Messages WHERE ThreadOwner_ID = $ID And Sender_ID = $ID And InitialMessage = 1 And New = 1";
-                    $resulty = mysql_query($sqly);
+                    $resulty = mysql_query($sqly) or die(logError(mysql_error(), $url, "SqlY Checking if 2 people have an initial message"));
 
                     $sqlz = "SELECT ID FROM Messages WHERE ThreadOwner_ID = $ID And Receiver_ID = $ID And InitialMessage = 1 And New = 1";
-                    $resultz = mysql_query($sqlz);
+                    $resultz = mysql_query($sqlz) or die(logError(mysql_error(), $url, "SqlZ checking if 2 people have an initial message"));
 
 
                     if (mysql_num_rows($resulty) > 0 || mysql_num_rows($resultz) > 0) {
 
                         // get ALL new messages owned by current session against the other person
                         $sql3 = "SELECT ID FROM Messages WHERE (ThreadOwner_ID = $ID And Sender_ID = $otherID And New =1) Or (ThreadOwner_ID = $ID And Receiver_ID = $otherID AND New = 1) ";
-                        $result3 = mysql_query($sql3) or die(mysql_error());
+                        $result3 = mysql_query($sql3) or die(logError(mysql_error(), $url, "Getting all new messages owned by current session against other person"));
                         $row3 = mysql_fetch_assoc($result3);
 
                        // if we are past the first message, subtract the initial message row

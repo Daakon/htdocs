@@ -4,7 +4,7 @@
 function checkActive($user_id)
 {
     $sql = "SELECT IsActive FROM Members where ID = $user_id ";
-    $result = mysql_query($sql) or die(mysql_error());
+    $result = mysql_query($sql) or die(logError(mysql_error(), "model_functions", "checkActive() failed"));
     $rows = mysql_fetch_assoc($result);
     if ($rows['IsActive'] == 1) {
         return true;
@@ -16,7 +16,7 @@ function checkActive($user_id)
 function checkEmailActive($user_id)
 {
     $sql = "SELECT EmailActive FROM Members where ID = $user_id ";
-    $result = mysql_query($sql) or die(mysql_error());
+    $result = mysql_query($sql) or die(logError(mysql_error(), "model_functions", "checkEmailActive() failed"));
     $rows = mysql_fetch_assoc($result);
     if ($rows['EmailActive'] == 1) {
         return true;
@@ -28,7 +28,7 @@ function checkEmailActive($user_id)
 function checkSMSActive($user_id)
 {
     $sql = "SELECT SMSActive FROM Members where ID = $user_id ";
-    $result = mysql_query($sql) or die(mysql_error());
+    $result = mysql_query($sql) or die(logError(mysql_error(), "model_functions", "checkSMSActive() failed"));
     $rows = mysql_fetch_assoc($result);
     if ($rows['SMSActive'] == 1) {
         return true;
@@ -42,7 +42,7 @@ function get_users_name($user_id)
 
     $sql = "SELECT FirstName, LastName FROM Members where ID = $user_id";
 
-    $result = mysql_query($sql) or die(mysql_error());
+    $result = mysql_query($sql) or die(logError(mysql_error(), "model_functions", "get_users_name() failed"));
     $rows = mysql_fetch_assoc($result);
     $name = null;
     $lastName = $rows['LastName'];
@@ -62,7 +62,7 @@ function get_user_firstName($user_id)
 
     $sql = "SELECT FirstName FROM Members where ID = $user_id";
 
-    $result = mysql_query($sql) or die(mysql_error());
+    $result = mysql_query($sql) or die(logError(mysql_error(), "model_functions", "get_user_firstName() failed"));
     $rows = mysql_fetch_assoc($result);
     return $rows['FirstName'];
 
@@ -83,7 +83,7 @@ function get_username($user_id)
 
     $sql = "SELECT Username FROM Members where ID = $user_id";
 
-    $result = mysql_query($sql) or die(mysql_error());
+    $result = mysql_query($sql) or die(logError(mysql_error(), "model_functions", "get_username() failed"));
     $rows = mysql_fetch_assoc($result);
     return $rows['Username'];
 
@@ -94,7 +94,7 @@ function get_users_name_by_id($user_id)
 
     $sql = "SELECT FirstName, LastName FROM Members where ID = $user_id";
 
-    $result = mysql_query($sql) or die(mysql_error());
+    $result = mysql_query($sql) or die(logError(mysql_error(), "model_functions", "get_users_name_by_id() failed"));
     while ($rows = mysql_fetch_assoc($result)) {
         return $rows['FirstName'] . ' ' . $rows['LastName'];
     }
@@ -104,7 +104,7 @@ function get_users_photo_by_id($user_id)
 {
 
     $sql = "SELECT DISTINCT ProfilePhoto FROM Profile WHERE Member_ID = $user_id Order By Member_ID ";
-    $result = mysql_query($sql) or die(mysql_error());
+    $result = mysql_query($sql) or die(logError(mysql_error(), "model_functions", "get_users_photo_by_id() failed"));
     $rows = mysql_fetch_assoc($result);
 
     $photo = $rows['ProfilePhoto'];
@@ -127,7 +127,7 @@ function check_password($user_id, $pass)
 {
 
     $sql = "SELECT DISTINCT Password FROM Members WHERE ID =$user_id";
-    $result = mysql_query($sql) or die(mysql_error());
+    $result = mysql_query($sql) or die(logError(mysql_error(), "model_functions", "check_password() failed"));
     $rows = mysql_fetch_assoc($result);
     if ($pass == $rows['Password']) {
         return true;
@@ -141,7 +141,7 @@ function get_users_photo_by_id_raw($user_id)
 {
 
     $sql = "SELECT DISTINCT MediaName FROM Media WHERE ID = $user_id";
-    $result = mysql_query($sql) or die(mysql_error());
+    $result = mysql_query($sql) or die(logError(mysql_error(), "model_functions", "get_users_photo_by_id_raw() failed"));
     while ($rows = mysql_fetch_assoc($result)) {
         return $rows['MediaName'];
     }
@@ -150,7 +150,7 @@ function get_users_photo_by_id_raw($user_id)
 function get_password($user_id)
 {
     $sql = "SELECT DISTINCT Password FROM Members WHERE ID = '$user_id' ";
-    $result = mysql_query($sql) or die(mysql_error());
+    $result = mysql_query($sql) or die(logError(mysql_error(), "model_functions", "get_password()"));
     $rows = mysql_fetch_assoc($result);
     return $rows['Password'];
 }
@@ -159,7 +159,7 @@ function get_email_by_id($user_id)
 {
 
     $sql = "SELECT Email from Members where ID = $user_id";
-    $result = mysql_query($sql) or die(mysql_error());
+    $result = mysql_query($sql) or die(logError(mysql_error(), "model_functions", "get_email_by_Id() failed"));
     $rows = mysql_fetch_assoc($result);
     return $rows['Email'];
 
@@ -169,7 +169,7 @@ function get_id_by_email($email)
 {
 
     $sql = "SELECT ID FROM Members WHERE Email = '$email' ";
-    $result = mysql_query($sql) or die(mysql_error());
+    $result = mysql_query($sql) or die(logError(mysql_error(), "model_functions", "get_id_by_email() failed"));
     $rows = mysql_fetch_assoc($result);
     return $rows['ID'];
 }
@@ -178,7 +178,7 @@ function get_id_by_email($email)
 function getGender($ID) {
     // return member gender
     $sql = "SELECT Gender FROM Members WHERE ID = $ID ";
-    $result = mysql_query($sql) or die(mysql_error());
+    $result = mysql_query($sql) or die(logError(mysql_error(), "model_functions", "getGender() failed"));
     $row = mysql_fetch_assoc($result);
     $gender = $row['Gender'];
     return $gender;
@@ -189,7 +189,7 @@ function getGender($ID) {
 function getAge($ID) {
     // returns member age
     $sql = "SELECT DOB FROM Members WHERE ID = $ID ";
-    $result = mysql_query($sql) or die(mysql_error());
+    $result = mysql_query($sql) or die(logError(mysql_error(), "model_functions", "getAge() failed"));
     $row = mysql_fetch_assoc($result);
     $birthDate = $row['DOB'];
 
@@ -203,7 +203,7 @@ function getAge($ID) {
 function getMemberState($ID) {
     // returns member state
     $sql = "SELECT State FROM Profile WHERE Member_ID = $ID ";
-    $result = mysql_query($sql) or die(mysql_error());
+    $result = mysql_query($sql) or die(logError(mysql_error(), "model_functions", "getMemberState() failed"));
     $row = mysql_fetch_assoc($result);
     $state = $row['State'];
     return $state;
@@ -212,7 +212,7 @@ function getMemberState($ID) {
 function getMemberCity($ID) {
     // returns member state
     $sql = "SELECT City FROM Profile WHERE Member_ID = $ID ";
-    $result = mysql_query($sql) or die(mysql_error());
+    $result = mysql_query($sql) or die(logError(mysql_error(), "model_functions", "getMemberCity() failed"));
     $row = mysql_fetch_assoc($result);
     $city = $row['City'];
     return $city;
@@ -221,7 +221,7 @@ function getMemberCity($ID) {
 function get_id_from_username($username) {
     // returns member state
     $sql = "SELECT ID FROM Members WHERE Username = '$username' ";
-    $result = mysql_query($sql) or die(mysql_error());
+    $result = mysql_query($sql) or die(logError(mysql_error(), "model_functions", "get_id_from_username() failed"));
     $row = mysql_fetch_assoc($result);
     $id = $row['ID'];
     return $id;
@@ -237,7 +237,7 @@ function get_username_from_url() {
 function get_interest($ID) {
     // returns business category
     $sql = "SELECT Interest FROM Members WHERE ID = $ID ";
-    $result = mysql_query($sql) or die(mysql_error());
+    $result = mysql_query($sql) or die(logError(mysql_error(), "model_functions", "get_interest() failed"));
     $row = mysql_fetch_assoc($result);
     $interest = $row['Interest'];
     return $interest;
@@ -245,7 +245,7 @@ function get_interest($ID) {
 
 function check_phone($ID) {
     $sql = "SELECT Phone FROM Profile WHERE Member_ID = $ID ";
-    $result = mysql_query($sql) or die(mysql_error());
+    $result = mysql_query($sql) or die(logError(mysql_error(), "model_functions", "check_phone() failed"));
     $rows = mysql_fetch_assoc($result);
     return $rows['Phone'];
 }
@@ -261,7 +261,7 @@ function check_email($email) {
 
 function is_existing_email($email, $ID) {
     $sql = "SELECT Email FROM Members WHERE Email = '$email' AND ID != $ID  ";
-    $result = mysql_query($sql) or die(mysql_error());
+    $result = mysql_query($sql) or die(logError(mysql_error(), "model_functions", "is_existing_email() failed"));
     $rows = mysql_fetch_assoc($result);
     if (mysql_num_rows($result) > 0) {
         return true;
@@ -273,7 +273,7 @@ function is_existing_email($email, $ID) {
 
 function check_demographics($ID) {
     $sql = "SELECT * FROM Profile WHERE Member_ID = $ID ";
-    $result = mysql_query($sql) or die(mysql_error());
+    $result = mysql_query($sql) or die(logError(mysql_error(), "model_functions", "check_demographics() failed"));
     $rows = mysql_fetch_assoc($result);
     $about = $rows['About'];
     $city = $rows['City'];
@@ -305,7 +305,7 @@ function check_demographics($ID) {
 
 function isProfilePhoto($imagePath) {
     $sql = "Select ProfilePhoto From Profile Where ProfilePhoto = '$imagePath' ";
-    $result = mysql_query($sql) or die(mysql_error());
+    $result = mysql_query($sql) or die(logError(mysql_error(), "model_functions", "isProfilePhoto() failed"));
     $row = mysql_fetch_assoc($result);
 
     if (mysql_num_rows($result) > 0) {
@@ -318,7 +318,7 @@ function isProfilePhoto($imagePath) {
 
 function isProfileVideo($videoPath) {
     $sql = "Select ProfileVideo From Profile Where ProfileVideo = '$videoPath' ";
-    $result = mysql_query($sql) or die(mysql_error());
+    $result = mysql_query($sql) or die(logError(mysql_error(), "model_functions", "isProfilePhoto() failed"));
     $row = mysql_fetch_assoc($result);
 
     if (mysql_num_rows($result) > 0) {
@@ -335,7 +335,7 @@ function text_notification($receiverID, $senderID)
     if (checkSMSActive($receiverID)) {
         require 'class-Clockwork.php';
         $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-        $result = mysql_query("SELECT Phone FROM Profile WHERE Member_ID = $receiverID");
+        $result = mysql_query("SELECT Phone FROM Profile WHERE Member_ID = $receiverID") or die(logError(mysql_error(), "model_functions", "checkSMSActive() failed"));
         $row = mysql_fetch_assoc($result);
         $number = $row['Phone'];
         $number = preg_replace('/\D+/', '', $number);

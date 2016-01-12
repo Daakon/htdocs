@@ -273,9 +273,9 @@ if (in_array($mediaType, $videoFileTypes)) {
 <?php
 
 $sql = "SELECT * FROM Members,Profile
-WHERE Members.ID = '$memberID'
-And Profile.Member_ID = '$memberID' ";
-$result = mysql_query($sql) or die(mysql_error());
+WHERE Members.ID = $memberID
+And Profile.Member_ID = $memberID ";
+$result = mysql_query($sql) or die(logError(mysql_error(), $url, "Getting profile data from media query string"));
 $pRows = mysql_fetch_assoc($result);
 $profilePhoto = $pRows['ProfilePhoto'];
 $name = $pRows['FirstName'] . ' ' . $pRows['LastName'];
@@ -410,7 +410,7 @@ $profileMediaSrc = trim("/media/" . $profilePhoto);
 
             // get post ID from NON key PostID field
             $sqlGetPostID = "SELECT PostID FROM Media WHERE ID = '$mediaID' ";
-            $resultGetPostID = mysql_query($sqlGetPostID) or die(mysql_error());
+            $resultGetPostID = mysql_query($sqlGetPostID) or die(logError(mysql_error(), $url, "Getting PostID from non foreign key PostID field"));
             $rowPostID = mysql_fetch_assoc($resultGetPostID);
             $postID = $rowPostID['PostID'];
 
@@ -427,7 +427,7 @@ $profileMediaSrc = trim("/media/" . $profilePhoto);
             // if the
 
                 $sqlPost = "SELECT MediaName, MediaType, Poster, AudioName FROM Media WHERE MediaName = '$mediaName' ";
-                $resultPost = mysql_query($sqlPost) or die(mysql_error());
+                $resultPost = mysql_query($sqlPost) or die(logError(mysql_error(), $url, "Getting all media data from query string"));
                 $rowPost = mysql_fetch_assoc($resultPost);
                 $mediaName = $rowPost['MediaName'];
                 $mediaType = $rowPost['MediaType'];
@@ -494,12 +494,12 @@ $profileMediaSrc = trim("/media/" . $profilePhoto);
             if ($isPost == true) {
 
                 $sql2 = "SELECT * FROM MediaApprovals WHERE Media_ID = '$mediaID' AND Member_ID = '$ID' ";
-                $result2 = mysql_query($sql2) or die(mysql_error());
+                $result2 = mysql_query($sql2) or die(logError(mysql_error(), $url, "Getting member media approvals"));
                 $rows2 = mysql_fetch_assoc($result2);
 
                 // get approvals for each bulletin
                 $sql3 = "SELECT * FROM MediaApprovals WHERE Media_ID = '$mediaID' ";
-                $result3 = mysql_query($sql3) or die(mysql_error());
+                $result3 = mysql_query($sql3) or die(logError(mysql_error(), $url, "Getting all members media approvals"));
                 $rows3 = mysql_fetch_assoc($result3);
                 $approvals = mysql_num_rows($result3);
 
@@ -594,7 +594,7 @@ $profileMediaSrc = trim("/media/" . $profilePhoto);
                         And MediaComments.IsDeleted = 0
                         Group By MediaComments.ID
                         Order By MediaComments.ID DESC LIMIT 3 ";
-            $result3 = mysql_query($sql3) or die(mysql_error());
+            $result3 = mysql_query($sql3) or die(logError(mysql_error(), $url, "Getting media comments 0-3"));
             echo '<br/>';
             if (mysql_num_rows($result3) > 0) {
                 echo '<div class="comment-style">';
@@ -638,7 +638,7 @@ $profileMediaSrc = trim("/media/" . $profilePhoto);
                         And Members.ID = Profile.Member_ID
                         Group By MediaComments.ID
                         Order By MediaComments.ID DESC LIMIT 3, 100 ";
-            $result4 = mysql_query($sql4) or die(mysql_error());
+            $result4 = mysql_query($sql4) or die(logError(mysql_error(), $url, "Getting media comments 3-100"));
             if (mysql_num_rows($result4) > 0) {
             $moreComments = "moreComments$postID";
             ?>

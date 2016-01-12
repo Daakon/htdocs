@@ -7,7 +7,7 @@ $memberID = $_POST['memberID'];
 $ID = $_POST['ID'];
 
 $sql = "INSERT INTO Follows (Followed_ID, Follower_ID, New) Values ($memberID, $ID, 1)";
-mysql_query($sql);
+mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting new follower"));
 
 // only send email if account & email active
 if (checkActive($memberID)) {
@@ -46,7 +46,7 @@ if (checkActive($memberID)) {
 
     <?php
     $sqlFollowCount = "SELECT * FROM Follows WHERE Followed_ID = $memberID ";
-    $sqlFollowCountResult = mysql_query($sqlFollowCount);
+    $sqlFollowCountResult = mysql_query($sqlFollowCount) or die(logError(mysql_error(), $url, "Getting user followers"));
     echo '<span class ="profileFont">'.$count = mysql_num_rows($sqlFollowCountResult).'</span>';
     ?>
 

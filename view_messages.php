@@ -1,7 +1,5 @@
 <?php
-
 require 'imports.php';
-
 get_head_files();
 get_header();
 require 'memory_settings.php';
@@ -19,7 +17,6 @@ if ($urlUsername == get_username($ID)) {
     echo "<script>alert('Error');location='/messages/$urlUsername'</script>";
 }
 $senderID = get_id_from_username($urlUsername);
-
 $sql = "SELECT ID FROM Members WHERE ID = $senderID ";
 $result = mysql_query($sql) or die(mysql_error());
 $row = mysql_fetch_assoc($result);
@@ -29,15 +26,15 @@ if (mysql_num_rows($result) == 0) {
 ?>
 
 <?php
-    if (isset($_POST['videoSend']) && $_POST['videoSend'] = "Start Video Chat") {
-        // build out appear.in link
-        $appearID = 'Rapportbook'.uniqid();
-        $appearLink = "<iframe src=\"https://appear.in/$appearID\" frameborder=\"0\" height=\"300\"></iframe>";
-        $message = $appearLink;
-        $hasVideo = true;
-        echo "<script>alert('As the sender, you must enter the video room first.');</script>";
-        goto VideoChat;
-    }
+if (isset($_POST['videoSend']) && $_POST['videoSend'] = "Start Video Chat") {
+    // build out appear.in link
+    $appearID = 'Rapportbook'.uniqid();
+    $appearLink = "<iframe src=\"https://appear.in/$appearID\" frameborder=\"0\" height=\"300\"></iframe>";
+    $message = $appearLink;
+    $hasVideo = true;
+    echo "<script>alert('As the sender, you must enter the video room first.');</script>";
+    goto VideoChat;
+}
 ?>
 
 <?php
@@ -55,15 +52,12 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
         $message = mysql_real_escape_string($message);
         $message = makeLinks($message);
     }
-
     $hasVideo = false;
-
     // check if sender has prior message thread with receiver
     $sql="SELECT * FROM Messages WHERE (ThreadOwner_ID = $ID) And (Receiver_ID = $receiverID Or Sender_ID = $receiverID) And (InitialMessage = 1) ";
-    $result = mysql_query($sql) or die(mysql_error());
+    $result = mysql_query($sql) or die(logError(mysql_error(), $url, "Checking if sender has prior message thread with receiver"));
     $numRows = mysql_num_rows($result);
     $initialMessage;
-
     /*  if the first message, rather overall or a person deleted their messages with this person
         the thead would no longer exist at all
         so this would be a first message regardless for the sender
@@ -76,19 +70,16 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
         $initialMessage = 1;
         $firstMessage = 1;
     }
-
     // check if receiver has prior message thread with sender
     $sql2="SELECT * FROM Messages WHERE (ThreadOwner_ID = $receiverID) And (Receiver_ID = $ID Or Sender_ID = $ID) And (InitialMessage = 1) ";
-    $result2 = mysql_query($sql2) or die(mysql_error());
+    $result2 = mysql_query($sql2) or die(logError(mysql_error(), $url, "Checking if receiver has prior message thread with sender"));
     $numRows2 = mysql_num_rows($result2);
     $rInitialMessage;
-
     /* if the receiver has a message thread with the sender,
         even if the sender has deleted a thread,
         this is not an initial message or a first message
         as far as the receiver is concerned
      */
-
     if ($numRows2 > 0) {
         $rInitialMessage = 0;
         $rFirstMessage = 0;
@@ -97,11 +88,8 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
         $rInitialMessage = 1;
         $rFirstMessage = 1;
     }
-
-
 // if photo is provided
     if (strlen($_FILES['flPostMedia']['name'] > 0)) {
-
         foreach ($_FILES['flPostMedia']['tmp_name'] as $k => $v) {
             $mediaName = $_FILES['flPostMedia']['name'][$k];
             $orgName = $_FILES['flPostMedia']['name'][$k];
@@ -114,33 +102,25 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
             $type = $_FILES['flPostMedia']['type'][$k];
             $tempName = $_FILES['flPostMedia']['tmp_name'][$k];
             $size = $_FILES['flPostMedia']['size'][$k];
-
-
             // check if word doc
             $ext = end(explode(".", $mediaName));
-
             $docFileTypes = array("doc", "docx", "ppt", "pptx", "xsl", "xslx", "pdf");
-
             // if word
             if ($ext == 'doc' || $ext == 'docx') {
                 $downloadText = mysql_real_escape_string("Download $orgName Word Document");
             }
-
             // if excel
             if ($ext == 'xsl' || $ext == 'xslx') {
                 $downloadText = mysql_real_escape_string("Download $orgName Spreadsheet");
             }
-
             // if powerpoint
             if ($ext == 'ppt' || $ext == 'pptx') {
                 $downloadText = mysql_real_escape_string("Download $orgName Power Point");
             }
-
             // if pdf
             if ($ext == 'pdf') {
                 $downloadText = mysql_real_escape_string("Download $orgName PDF");
             }
-
             if (in_array($ext, $docFileTypes)) {
                 require 'media_post_file_path.php';
                 require 'mediapath.php';
@@ -149,35 +129,26 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
                 $img = mysql_real_escape_string($img);
                 goto BuildMessage;
             }
-
 // check file size
             if ($size > 500000000) {
                 echo '<script>alert("File is too large. The maximum file size is 500MB.");</script>';
                 exit;
             }
-
             // photo file types
             $photoFileTypes = array("image/jpg", "image/jpeg", "image/png", "image/tiff",
                 "image/gif", "image/raw");
-
             $audioFileTypes = array("audio/wav", "audio/mp3", "audio/x-m4a");
-
 // check if file type is a video
             $videoFileTypes = array("video/mpeg", "video/mpg", "video/ogg", "video/mp4",
                 "video/quicktime", "video/webm", "video/x-matroska",
                 "video/x-ms-wmw");
-
-
             // add unique id to image name to make it unique and add it to the file server
-
             $mediaFile = $tempName;
             $mediaFile2 = "";
             copy($tempName, $mediaFile2);
             $mediaFile3 = "";
             copy($tempName, $mediaFile3);
-
             require 'media_post_file_path.php';
-
             if (in_array($type, $videoFileTypes)) {
                 // convert to mp4 if not already an mp4
                 if ($type != "video/mp4") {
@@ -185,7 +156,6 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
                     $newFileName = $fileName . ".mp4";
                     $oggFileName = $fileName . ".ogv";
                     $webmFileName = $fileName . ".webm";
-
                     // convert mp4
                     exec("$ffmpeg -i $fileName -vcodec h264 $newFileName");
                     $mediaName = $newFileName;
@@ -208,9 +178,7 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
                      exit;*/
                 }
             }
-
             require 'media_post_file_path.php';
-
             if (in_array($type, $videoFileTypes)) {
                 // convert to mp4 if not already an mp4
                 if ($type != "video/mp4") {
@@ -218,17 +186,13 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
                     $newFileName = $fileName . ".mp4";
                     $oggFileName = $fileName . ".ogv";
                     $webmFileName = $fileName . ".webm";
-
-
                     // convert mp4
                     exec("$ffmpeg -i $fileName $newFileName");
                     $mediaName = $newFileName;
-
                     // convert ogg
                     exec("$ffmpeg -i $fileName  $oggFileName");
                     // convert webm
                     exec("$ffmpeg -i $fileName  $webmFileName");
-
                 }
             } else {
                 if (in_array($type, $photoFileTypes)) {
@@ -263,14 +227,10 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
                     exit;*/
                 }
             }
-
             require 'media_post_file_path.php';
-
 // save photo/video
             if (in_array($type, $videoFileTypes) || in_array($type, $audioFileTypes)) {
                 move_uploaded_file($mediaFile, $postMediaFilePath);
-
-
                 //copy new mp4 file path to ogg file path
                 copy($postMediaFilePath, $postOggFilePathTemp);
                 // overwrite mp4 with real ogg file path
@@ -280,15 +240,12 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
                 // overwrite mp4 with real webm file path
                 copy($postWebmFilePath, $postWebmFilePathTemp);
             }
-
-
 // check if file type is a photo
             if (in_array($type, $photoFileTypes)) {
                 $img = '<img src = "' . $mediaPath . $mediaName . '" />';
             }
             // check if file type is a video
             if (in_array($type, $videoFileTypes)) {
-
                 // poster file name
                 $posterName = "poster" . uniqid() . ".jpg";
                 //where to save the image
@@ -300,7 +257,6 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
                 //ffmpeg command
                 $cmd = "$ffmpeg -i \"$postMediaFilePath\" -r 1 -ss 3 -t 1  -f image2 $poster 2>&1";
                 exec($cmd);
-
                 $img = '<video poster="/poster/' . $posterName . '" preload="none" controls>
                                 <source src = "' . $videoPath . $mediaName . '" type="video/mp4" />
                                 <source src = "' . $videoPath . $oggFileName . '" type = "video/ogg" />
@@ -309,35 +265,25 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
                                 </video>';
             }
             BuildMessage:
-
             if (strlen($img) > 0) {
                 $br = "<br/><br/>";
             }
             $newImage .= $br . $img;
-
         } // end loop
-
         if (strlen($img) == 0) {
             $br = "<br/>";
         }
         $message = $message . $newImage .'<br/>' ;
-
-
         $message = closetags($message);
-
-
         // create thread for sender
         $sql = "INSERT INTO Messages (ThreadOwner_ID, Sender_ID,  Receiver_ID,    Subject,    Message,  InitialMessage, FirstMessage ,      MessageDate) Values
                                      ($ID,             $ID,       $receiverID, '$subject',  '$message', $initialMessage, $firstMessage, CURRENT_TIMESTAMP ) ";
-        mysql_query($sql) or die(mysql_error());
-
+        mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting message with media for sender"));
         // create thread for receiver
         $sql = "INSERT INTO Messages (ThreadOwner_ID, Sender_ID, Receiver_ID,  Subject,    Message,   InitialMessage,     New, FirstMessage,   MessageDate   ) VALUES
                                     ($receiverID,    $ID,        $receiverID, '$subject', '$message', '$rInitialMessage',  '1', $rFirstMessage, CURRENT_TIMESTAMP ) ";
-        mysql_query($sql) or die(mysql_error());
-
+        mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting message with media for receiver"));
         echo "<script>alert('Message Sent'); </script>";
-
         // sent notification
         if (strlen(check_phone($receiverID)) > 0) {
             text_notification($receiverID, $ID);
@@ -346,51 +292,38 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
 //----------------------
 // if no media
 //----------------------
-
     else {
         $receiverID = get_id_from_username($urlUsername);
         // create thread for sender
         $sql = "INSERT INTO Messages (ThreadOwner_ID, Sender_ID,  Receiver_ID,    Subject,    Message,      InitialMessage,    MessageDate     ) Values
                                       ($ID,             $ID,       $receiverID, '$subject',  '$message',    '$initialMessage', CURRENT_TIMESTAMP ) ";
-        mysql_query($sql) or die(mysql_error());
-
+        mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting message withoutmedia for sender"));
         // create thread for receiver
         $sql = "INSERT INTO Messages (ThreadOwner_ID, Sender_ID, Receiver_ID,  Subject,    Message,   InitialMessage,    New,  MessageDate     ) VALUES
                                     ($receiverID,    $ID,        $receiverID, '$subject', '$message',  '$initialMessage', '1',    CURRENT_TIMESTAMP ) ";
-        mysql_query($sql) or die(mysql_error());
-
+        mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting message without media for receiver"));
         echo "<script>alert('Message Sent'); </script>";
-
         $receiverID = $_POST['receiverID'];
-
         // sent notification
         if (strlen(check_phone($receiverID)) > 0) {
             text_notification($receiverID, $ID);
         }
     }
-
-
-
     // find the receiving member's initial message with the sender
     $sql = "SELECT * FROM Messages WHERE ThreadOwner_ID = $receiverID And (Receiver_ID = $receiverID) And (Sender_ID = $ID) And (InitialMessage = 1) ";
     $result = mysql_query($sql);
     $count = mysql_num_rows($result);
-
     // update the initial message row so we know which messages to render first in messages.php
     if (mysql_num_rows($result) > 0) {
-
         $sql2 = "UPDATE Messages SET New = 1
             WHERE ThreadOwner_ID = $receiverID And Receiver_ID = $receiverID And Sender_ID = $ID And InitialMessage = 1 ";
-        mysql_query($sql2);
+        mysql_query($sql2) or die(logError(mysql_error(), $url, "Updating initial message where receiver_ID = receiver_ID"));
     }
     else {
         $sql2 = "UPDATE Messages SET New = 1
             WHERE ThreadOwner_ID = $receiverID And Receiver_ID = $ID And Sender_ID = $receiverID And InitialMessage = 1 ";
-        mysql_query($sql2);
+        mysql_query($sql2) or die(logError(mysql_error(), $url, "Updating initial message where receiver ID = session ID "));
     }
-
-
-
     // notify recipient of email
     $receiverUsername = get_username($receiverID);
     build_and_send_email($ID, $receiverID,8, "","");
@@ -436,7 +369,7 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
                     WHERE ThreadOwner_ID = $ID
                     AND (Receiver_ID = $senderID)
                     AND (IsDeleted = 0) LIMIT 1 ";
-            $result = mysql_query($sql) or die(mysql_error());
+            $result = mysql_query($sql) or die(logError(mysql_error(), $url, "Getting message subject"));
             $row = mysql_fetch_assoc($result);
             $subject = $row['Subject'];
             ?>
@@ -445,56 +378,45 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
             <br/>
 
             <?php
-
-            $sql = "SELECT * FROM Messages
+            $sql = "SELECT * FROM (SELECT * FROM Messages
                     WHERE ThreadOwner_ID = $ID
                     AND (Sender_ID = $senderID Or Receiver_ID = $senderID)
                     AND (IsDeleted = 0)
-                    Order By ID ASC LIMIT 0, 50";
-            $result = mysql_query($sql) or die(mysql_error());
-
-
+                    Order By ID DESC LIMIT 25) as ROWS Order By ID ASC ";
+            $result = mysql_query($sql);
             if (mysql_num_rows($result) > 0) {
                 $rowCount = true;
                 while ($rows = mysql_fetch_assoc($result)) {
                     $senderID = $rows['Sender_ID'];
-
                     $message = $rows['Message'];
                     $date = $rows['MessageDate'];
-
                     // get receiver name
                     $sql2 = "SELECT FirstName,LastName, ProfilePhoto,Username
                     FROM Members, Profile
                     WHERE Profile.Member_ID = $senderID
                     AND Members.ID = $senderID ";
-
                     $result2 = mysql_query($sql2) or die(mysql_error());
                     $rows2 = mysql_fetch_assoc($result2);
                     $pic = $rows2['ProfilePhoto'];
                     $name = $rows2['FirstName'] .' '.$rows2['LastName'];
                     $username = $rows2['Username'];
-
                     echo "
                     <div class='profileImageWrapper-Feed'>
                     <a href='/$username'>
                     <img src = '$mediaPath$pic' class='profilePhoto-Feed' alt='' />
                     </a>
                     </div>
-
                     <div class='profileNameWrapper-Feed'>
                     <a href='/$username'>
                     <div class=\"profileName-Feed\">$name</div>
                     </a>
                     </div>
                     ";
-
                     echo "<div class='post' style='clear:both'>".nl2br($message)."</div>";
-
                     echo "<div style='opacity:0.5'>".date('l F d Y g:i:s A',strtotime($date))."</div>";
                     echo "<hr/>";
                 }
             }
-
             ?>
 
 
@@ -536,10 +458,10 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
             <br/><br/>
 
             <?php if ($rowCount == true) { ?>
-            <form action="" method="post" onsubmit = "return confirm('Do you really want to delete this message thread')" >
-                <input type="hidden" id="receiverID" name="receiverID" value="<?php echo $senderID ?>" />
-                <input type="submit" class="btn btn-default" style="background:red;color:white;" id="delete" name="delete" value="Delete Messages" />
-            </form>
+                <form action="" method="post" onsubmit = "return confirm('Do you really want to delete this message thread')" >
+                    <input type="hidden" id="receiverID" name="receiverID" value="<?php echo $senderID ?>" />
+                    <input type="submit" class="btn btn-default" style="background:red;color:white;" id="delete" name="delete" value="Delete Messages" />
+                </form>
             <?php } ?>
             <!-------------------------------------------------------------------->
         </div>
@@ -554,5 +476,5 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
    so it would be a first message again for the sender
 */
 $sql = "UPDATE Messages SET New = 0, FirstMessage = 0 WHERE ThreadOwner_ID = $ID AND (Sender_ID = $senderID Or Receiver_ID = $senderID) ";
-mysql_query($sql) or die(mysql_error());
+mysql_query($sql) or die(logError(mysql_error(), $url, "Updating new message bits to 0 after read"));
 ?>

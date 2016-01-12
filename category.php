@@ -1,6 +1,7 @@
 <?php
 function category()
 {
+    session_start();
 $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 
     if (strstr($url, "learn_more")) {
