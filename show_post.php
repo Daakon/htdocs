@@ -167,8 +167,8 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
             $comment = $comment . '<br/><br/>' . $img . '<br/>';
 
-            $sql = "INSERT INTO PostComments (Post_ID,     Member_ID,   Comment  ) Values
-                                             ('$postID',  $ID',      '$comment')";
+            $sql = "INSERT INTO PostComments (Post_ID,     Member_ID,   Comment  CommentDate ) Values
+                                             ('$postID',   $ID',      '$comment', CURDATE() )";
 
             mysql_query($sql) or die(mysql_error());
 
@@ -224,8 +224,8 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
         else {
             $ID = $_SESSION['ID'];
             echo "<script>alert('$ID');</script>";
-            $sql = "INSERT INTO PostComments (Post_ID,  Member_ID,  Comment,  PostDate ) Values
-                                              ($postID, $ID,       '$comment', CURDATE)";
+            $sql = "INSERT INTO PostComments (Post_ID,  Member_ID,  Comment,  CommentDate ) Values
+                                              ($postID, $ID,       '$comment', CURDATE())";
 
             mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting post comment with no media"));
         }

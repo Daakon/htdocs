@@ -415,8 +415,8 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
                     $comment = $comment . '<br/><br/>' . $img . '<br/>';
 
-                    $sql = "INSERT INTO PostComments (Post_ID,     Member_ID,   Comment  ) Values
-                                                      ('$postID', '$ID',      '$comment')";
+                    $sql = "INSERT INTO PostComments (Post_ID,     Member_ID,   Comment, CommentDate  ) Values
+                                                      ('$postID', '$ID',      '$comment', CURDATE())";
 
                     mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting post comment"));
 
@@ -465,7 +465,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                     $post = mysql_real_escape_string($post);
 
                     $sqlInsertPost = "INSERT INTO Posts (Post,     Member_ID,    PostDate  ) Values
-                                                ('$post', '$ID',        CURDATE() ) ";
+                                                        ('$post', '$ID',        CURDATE() ) ";
                     mysql_query($sqlInsertPost) or die(logError(mysql_error(), $url, "Inserting comment with media"));
                     $newPostID = mysql_insert_id();
 
@@ -481,8 +481,8 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 //----------------------
 
             else {
-                $sql = "INSERT INTO PostComments (Post_ID,  Member_ID,    Comment ) Values
-                                        ('$postID', '$ID',      '$comment')";
+                $sql = "INSERT INTO PostComments (Post_ID,  Member_ID,    Comment,  CommentDate ) Values
+                                                 ('$postID', '$ID',      '$comment', CURDATE())";
 
                 mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting comment without media"));
             }

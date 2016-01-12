@@ -383,8 +383,8 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                         exit; */
                     }
                     $comment = $comment . '<br/><br/>' . $img . '<br/>';
-                    $sql = "INSERT INTO PostComments (Post_ID,     Member_ID,   Comment  ) Values
-                                                      ('$postID', '$ID',      '$comment')";
+                    $sql = "INSERT INTO PostComments (Post_ID,     Member_ID,   Comment, CommentDate  ) Values
+                                                      ('$postID', '$ID',      '$comment', CURDATE())";
                     mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting post comment"));
 // create post
                     // get poster data
@@ -438,8 +438,8 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 // if not comment photo
 //----------------------
             else {
-                $sql = "INSERT INTO PostComments (Post_ID,  Member_ID,    Comment ) Values
-                                        ('$postID', '$ID',      '$comment')";
+                $sql = "INSERT INTO PostComments (Post_ID,  Member_ID,    Comment, CommentDate ) Values
+                                                 ('$postID', '$ID',      '$comment', CURDATE())";
                 mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting comment without media"));
             }
             $scrollx = $_REQUEST['scrollx'];
