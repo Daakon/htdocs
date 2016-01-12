@@ -446,10 +446,11 @@ if (!empty($_SESSION['ID'])) {
                         <div class="profileName-Feed"><?php echo $name ?> ' .
                         $rows3['FirstName'] . ' ' . $rows3['LastName'] .
                         '</div>
-                     </a>
+                     </a>' .nl2br($comment).'
+
                     </div>
 
-                    <div class="comment-content" style="clear:both">' . nl2br($comment) . '</div>';
+                    <div class="comment-content" style="clear:both"></div>';
                     echo '</div>';
 
                     if ($commentOwnerID == $ID) {
@@ -511,9 +512,10 @@ if (!empty($_SESSION['ID'])) {
                     <div class="commentNameWrapper-Feed">
                     <a href='.$commenterProfileUrl.'>
                     <div class="profileName-Feed">' . $rows4['FirstName'] .' '. $rows4['LastName'] .
-                        '</div></div><div class="comment-content" style="clear:both"></a>' . nl2br($comment) .
                         '</div>
-
+                        </a>' . nl2br($comment) .
+                        '</div>
+                        </div><div class="comment-content" style="clear:both">
                     </div>';
                     echo '</td></tr>';
                 }

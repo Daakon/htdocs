@@ -623,9 +623,10 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                             $rows3['FirstName'] . ' ' . $rows3['LastName'] .
                             '</div>
                          </a>
+                         ' . nl2br($comment) . '
                         </div>
 
-                    <div class="comment-content" style="clear:both">' . nl2br($comment) . '</div>';
+                    <div class="comment-content" style="clear:both"></div>';
                         echo '</div>';
 
                         if ($commentOwnerID == $ID || $ID == $memberID) {
@@ -686,11 +687,13 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
                         <div class="commentNameWrapper-Feed">
                         <a href='.$commenterProfileUrl.'>
-                        <div class="profileName-Feed">' . $rows4['FirstName'] .' '. $rows4['LastName'] .
-                            '</div></div><div class="comment-content" style="clear:both"></a>' . nl2br($comment) .
+                        <div class="profileName-Feed">&nbsp;&nbsp;' .
+                            $rows4['FirstName'] .' '. $rows4['LastName'] .
+                            '</div>
+                            </a>&nbsp;&nbsp;'. nl2br($comment) .
                             '</div>
 
-                        </div>';
+                        <div class="comment-content" style="clear:both"></div>';
                         echo '</td></tr>';
                     }
                     echo '</div>';

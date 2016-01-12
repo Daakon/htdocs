@@ -11,15 +11,15 @@ $profileID = $row['ID'];
 
 // file paths
 if (strstr($url, "local")) {
-    $howItWorks = "/learn_more.php";
-    $login = "/index.php";
+    $howItWorks = "/learn_more";
+    $login = "../";
 }
 elseif (strstr($url, "dev")) {
-    $howItWorks = "http://dev.rapportbook.com/learn_more.php";
+    $howItWorks = "http://dev.rapportbook.com/learn_more";
     $login = "http://dev.rapportbook.com/";
 }
 else {
-    $howItWorks = "http://rapportbook.com/learn_more.php/";
+    $howItWorks = "http://rapportbook.com/learn_more";
     $login = "http://rapportbook.com/";
 }
 ?>

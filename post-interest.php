@@ -931,9 +931,10 @@ if (mysql_num_rows($result) > 0) {
                                 $rows3['FirstName'] . ' ' . $rows3['LastName'] .
                                 '</div>
                          </a>
+                         ' . nl2br($comment) . '
                         </div>
 
-                    <div class="comment-content" style="clear:both">' . nl2br($comment) . '</div>';
+                    <div class="comment-content" style="clear:both"></div>';
                         echo '</div>';
 
                     if ($commentOwnerID == $ID) {
@@ -994,11 +995,12 @@ if (mysql_num_rows($result) > 0) {
 
                     <div class="commentNameWrapper-Feed" style="padding-left:10px">
                     <a href='.$commenterProfileUrl.'>
-                    <div class="profileName-Feed">' . $rows4['FirstName'] .' '. $rows4['LastName'] .
-                        '</div></div><div class="comment-content" style="clear:both"></a>' . nl2br($comment) .
+                    <div class="profileName-Feed">'
+                    . $rows4['FirstName'] .' '. $rows4['LastName'] .
                         '</div>
-
-                    </div>';
+                         </a>' . nl2br($comment) .
+                        '</div>
+                        <div class="comment-content" style="clear:both"></div>';
                     echo '</td></tr>';
                 }
                 echo '</div>';

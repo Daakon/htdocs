@@ -254,9 +254,10 @@ $postOwner = $memberID;
                         $rows3['FirstName'] . ' ' . $rows3['LastName'] .
                         '</div>
                      </a>
+                     ' . nl2br($comment) . '
                     </div>
 
-                    <div class="comment-content" style="clear:both">' . nl2br($comment) . '</div>';
+                    <div class="comment-content" style="clear:both"></div>';
                     echo '</div>';
                     if ($commentOwnerID == $ID || $memberID == $ID) {
                         //<!--DELETE BUTTON ------------------>
@@ -320,11 +321,13 @@ $postOwner = $memberID;
 
                     <div class="commentNameWrapper-Feed">
                     <a href='.$commenterProfileUrl.'>
-                    <div class="profileName-Feed">' . $rows4['FirstName'] .' '. $rows4['LastName'] .
-                        '</div></div><div class="comment-content" style="clear:both"></a>' . nl2br($comment) .
+                    <div class="profileName-Feed">' .
+                        $rows4['FirstName'] .' '. $rows4['LastName'] .
+                        '</div>
+                        </a>' . nl2br($comment) .
                         '</div>
 
-                    </div>';
+                    <div class="comment-content" style="clear:both"></div>';
                     echo '</td></tr>';
                 }
                 echo '</div>';
