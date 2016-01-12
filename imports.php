@@ -16,6 +16,9 @@ if (strstr($url, "forgot-password") || strstr($url, "learn_more")
 ) {
     // dont check session
 }
+else if ($_SESSION['IsProfilePage'] == true) {
+    // allow access to public profile page
+}
 else {
     require 'getSession.php';
 }

@@ -1,4 +1,12 @@
 <?php
+session_start();
+if (!isset($_SESSION['ID']) && empty($_SESSION['ID'])) {
+    $_SESSION['IsProfilePage'] = true;
+}
+else {
+    $_SESSION['IsProfilePage'] = false;
+}
+
 require 'imports.php';
 get_head_files();
 get_header();
@@ -469,19 +477,14 @@ $bgPhoto = $row['ProfilePhoto'];
     <div class="row row-padding">
 
         <div class="col-md-8  col-lg-8 col-md-offset-2 col-lg-offset-2 roll-call ">
-            <?php require 'profile_menu.php'; ?>
 
             <?php
-            $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-            preg_match("/[^\/]+$/",$url ,$match);
-            if ($_SESSION['UsernameUpdated'] == 1) {
-                $username = $_SESSION['Username'];
-            }
-            else {
-                $username = $match[0];
-            }
+                require 'profile_menu.php';
+            ?>
 
-            $memberID = get_id_from_username($username);
+            <?php
+
+
 
             // get current member session username
             $sql = "SELECT Username FROM Members WHERE ID = $ID ";
@@ -491,144 +494,8 @@ $bgPhoto = $row['ProfilePhoto'];
             // if profile is not the current member session ID
             // serve the public profile
             if ($rows['Username'] != $username) {
-                // render profile public view
 
-
-                $sql = "SELECT
-                        Members.ID As MemberID,
-                        Members.FirstName As FirstName,
-                        Members.LastName As LastName,
-                        Members.Email As Email,
-                        Members.Password As Password,
-                        TIMESTAMPDIFF(YEAR, Members.DOB, CURDATE()) AS Age,
-                        Profile.ProfilePhoto As ProfilePhoto,
-                        Profile.ProfileVideo As ProfileVideo,
-                        Profile.Poster As Poster,
-                        Profile.City As City,
-                        Profile.State As State,
-                        Profile.About As About,
-                        Profile.RSS As RSS
-                        FROM Members, Profile
-                        WHERE Members.ID = $memberID
-                        AND Profile.Member_ID = $memberID ";
-
-                $result = mysql_query($sql) or die(logError(mysql_error(), $url, 'Getting public profile'));
-
-                if (mysql_num_rows($result) == 0) {
-                    echo "<script>alert('Profile not found');</script>";
-                    header('Location:home');
-                }
-
-                $rows = mysql_fetch_assoc($result);
-
-                $memberID = $rows['MemberID'];
-                $profilePhoto = $rows['ProfilePhoto'];
-                $profileVideo = $rows['ProfileVideo'];
-                $posterName = $rows['Poster'];
-                $firstName = $rows['FirstName'];
-                $lastName = $rows['LastName'];
-                $city = $rows["City"];
-                $state = $rows['State'];
-                $about = $rows['About'];
-                $rss = $rows['RSS'];
-                $email = $rows['Email'];
-                $password = $rows['Password'];
-                $age = $rows['Age'];
-
-                ?>
-
-                <div align ="center">
-
-                <div id="followDiv1">
-                    <table >
-                        <tr>
-                            <td >
-            <?php
-                $sqlFollow = "SELECT * FROM Follows WHERE Follower_ID = $ID And Followed_ID = $memberID ";
-                $resultFollow = mysql_query($sqlFollow) or die (logError(mysql_error(), $url, "Getting Follows"));
-
-                if (mysql_num_rows($resultFollow) == 0) {
-                    echo '<form>';
-                    echo '<input type = "hidden" class = "followerID" value = "'.$ID.'" />';
-                    echo '<input type = "hidden" class = "followedID" value = "'.$memberID.'">';
-                    echo '<input type = "button" class = "btnFollow" value = "Follow" />';
-                    echo '</form>';
-                }
-                else {
-                    echo '<form>';
-                    echo '<input type = "hidden" class = "followerID" value = "'.$ID.'" />';
-                    echo '<input type = "hidden" class = "followedID" value = "'.$memberID.'">';
-                    echo '<input type = "button" class = "btnUnfollow" value = "Unfollow" />';
-                    echo '</form>';
-                }
-?>
-                            </td>
-                            </tr>
-                        </table>
-
-                <?php
-                $sqlFollowCount = "SELECT * FROM Follows WHERE Followed_ID = $memberID ";
-                $sqlFollowCountResult = mysql_query($sqlFollowCount) or die(logError(mysql_error(), $url, "Getting Follow Count"));
-                echo '<span class ="profileFont">'.$count = mysql_num_rows($sqlFollowCountResult).'</span>';
-                ?>
-                </div>
-            <br/>
-
-                <!--Profile photo --------------------------------------------------------------------------------->
-
-
-                    <img src = "<?php echo $mediaPath.$profilePhoto ?>" class="profilePhoto" alt="Profile Photo" />
-
-
-
-                <!--Profile video --------------------------------------------------------------------------------->
-
-                    <?php if ($profileVideo != "default_video.png") { ?>
-                        <video src = " <?php echo $videoPath . $profileVideo ?>" poster="/poster/<?php echo $posterName ?>"  preload="auto" controls />
-                        <br/>
-                    <?php } else { ?>
-                    <!--Display Nothing -->
-            <?php } ?>
-
-
-
-                    <h3>
-                        <?php echo "<div class=\"public-profile-label profileFont\">$firstName $lastName </div>" ?>
-                    </h3>
-
-
-                <!--Profile ---------------------------------------------------------------------------------------->
-
-
-                <br/>
-
-            <?php echo "<span class='profileFont'>$city, $state </span>"; ?>
-
-                <br/><br/>
-
-
-            <?php echo "<span class='profileFont'>$about</span>"; ?>
-
-                <br/><br/>
-
-            <?php if (isset($ID) && !empty($ID) && $memberID != $ID) { ?>
-
-
-                <a href="/view_messages.php/<?php echo $username ?>"><img src="/images/messages.png" height="70" width="80" /></a>
-            <?php } elseif ($memberID == $ID) { ?>
-                <?php echo "Sorry but you can't message yourself, that's kind of weird anyway";
-
-            } else { echo "<span class='red-font'>You must be logged in to message this person</span>"; }
-
-                 if (strlen($rss) > 0) {
-                    echo "<h3>$firstName's RSS Feed</h3>";
-                    require 'rss.php';
-
-                }
-            ?>
-
-</div>
-            <?php
+            require 'publicProfile.php';
             }
             else {
                 //*************************-----------------------------------------------------------------------
@@ -942,6 +809,7 @@ $bgPhoto = $row['ProfilePhoto'];
 
              } } ?>
             <!------------->
+
         </div>
 
         <div >

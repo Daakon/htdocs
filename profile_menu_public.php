@@ -33,10 +33,24 @@ if (!isset($_SESSION['ID']) && empty($_SESSION['ID'])) { ?>
     <a href="<?php echo $howItWorks ?>"><b>New To Rapportbook?...Click here to find out more</b></a>
     Or  <a href="/index"><b>Login</b></a>
     </div>
-<?php } ?>
+
+<?php
+if ($_SESSION['IsProfilePage'] == true) {
+
+        require 'publicProfile.php';
 
 
-<?php if ($_SESSION['ID'] != $profileID) { ?>
+    }
+}
+
+
+?>
+
+
+
+<?php
+
+if ($_SESSION['ID'] != $profileID) { ?>
 
     <style>
         .dropdown {
@@ -45,7 +59,7 @@ if (!isset($_SESSION['ID']) && empty($_SESSION['ID'])) { ?>
     </style>
 
     <div class="dropdown">
-        <button  class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Profile Menu
+        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Profile Menu
             <span class="caret"></span>
         </button>
         <ul class="dropdown-menu">
@@ -60,5 +74,11 @@ if (!isset($_SESSION['ID']) && empty($_SESSION['ID'])) { ?>
             <li><a href ="/logout" ><img src = "/images/logout.png" height="20" width="20" /> Log Out</a></li>
         </ul>
     </div>
+
     <br/><br/>
-<?php } else { require 'profile_menu.php'; } ?>
+
+    <?php
+
+}
+
+else { require 'profile_menu.php'; } ?>

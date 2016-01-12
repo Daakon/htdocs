@@ -44,6 +44,7 @@ $profileID = get_id_from_username($username);
         while ($rows = mysql_fetch_assoc($result)) {
 
             $followerID = $rows['Follower_ID'];
+            $new = $rows['New'];
 
             $sql2 = "SELECT
                       Members.ID As MemberID,
@@ -85,6 +86,11 @@ $profileID = get_id_from_username($username);
                             <span style="font-style: italic;font-weight: normal">
                                     (<?php echo $interest ?>)
                                 </span>
+                            <?php
+                            if ($ID == $profileID  && $new == 1) {
+                                echo "<span style='color:red;'>New</span>";
+                            }
+                            ?>
                         </div>
                     </a>
 
