@@ -346,6 +346,7 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
 <?php include('media_sizes.html'); ?>
 
 
+
     <body onload="window.scrollTo(0,document.body.scrollHeight);">
 <div class="container">
     <div class="row row-padding">
@@ -376,6 +377,8 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
 
             <h4 style="color:red;font-weight:bold;"><?php echo $subject ?></h4>
             <br/>
+
+            <div id="moreMessages"></div>
 
             <?php
             $sql = "SELECT * FROM (SELECT * FROM Messages
@@ -478,3 +481,47 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
 $sql = "UPDATE Messages SET New = 0, FirstMessage = 0 WHERE ThreadOwner_ID = $ID AND (Sender_ID = $senderID Or Receiver_ID = $senderID) ";
 mysql_query($sql) or die(logError(mysql_error(), $url, "Updating new message bits to 0 after read"));
 ?>
+
+    <script type="text/javascript">
+
+            $(function(){
+                //Keep track of last scroll
+                // 25 messages equals about 3500px
+                var initialPos = 3500;
+                $(window).scroll(function(event){
+                    //Sets the current scroll position
+                    var scrollingPos = $(this).scrollTop();
+                    //Determines up-or-down scrolling
+                    if (scrollingPos > initialPos){
+                        //Replace this with your function call for downward-scrolling
+                        //alert("DOWN");
+                    }
+                    else {
+                        //Replace this with your function call for upward-scrolling
+                        loadmore();
+                    }
+                    //Updates scroll position
+                    lastScroll = st;
+                });
+            });
+
+
+        function loadmore()
+        {
+            var val = document.getElementById("moreMessages").value;
+            $.ajax({
+                type: 'post',
+                url: '/loadMessages.php',
+                data: {
+                    senderID: <?php echo $senderID ?>
+                },
+                success: function (response) {
+                    var content = document.getElementById("moreMessages");
+                    content.innerHTML = content.innerHTML+response;
+
+                    // We increase the value by 10 because we limit the results by 10
+                    //document.getElementById("row_no").value = Number(val)+10;
+                }
+            });
+        }
+    </script>
