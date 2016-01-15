@@ -9,16 +9,17 @@ $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
     }
     echo '<option value = "Art">Art</option>';
     echo '<option value = "Automotive">Automotive</option>';
-    echo '<option value = "Cleaning">Cleaning</option>';
     echo '<option value = "Community">Community</option>';
     echo '<option value = "Cosmetology">Cosmetology</option>';
     echo '<option value = "Design">Design</option>';
     echo '<option value = "Education">Education</option>';
     echo '<option value = "Employment">Employment</option>';
+    echo '<option value = "Entertainment">Entertainment</option>';
     echo '<option value = "Fashion">Fashion</option>';
     echo '<option value = "Finance">Finance</option>';
     echo '<option value = "Fitness">Fitness</option>';
     echo '<option value = "Gaming">Gaming</option>';
+    echo '<option value = "Household">Household</option>';
     echo '<option value = "Legal">Legal</option>';
     echo '<option value = "Literature">Literature</option>';
     echo '<option value = "Marketing">Marketing</option>';
@@ -32,7 +33,6 @@ $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
     echo '<option value = "Retail">Retail</option>';
     echo '<option value = "Sports">Sports</option>';
     echo '<option value = "Technology">Technology</option>';
-    echo '<option value = "Theatre">Theatre</option>';
 
 }
 
