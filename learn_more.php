@@ -379,7 +379,7 @@ if (!empty($_SESSION['ID'])) {
             $result2 = mysql_query($sql2) or die(logError(mysql_error(), $url, "Getting member approval"));
             $rows2 = mysql_fetch_assoc($result2);
             // get approvals for each post
-            $approvals = mysql_num_rows(mysql_query("SELECT * FROM PostApprovals WHERE Post_ID = '$postID'") or die(logError(mysql_error(), $url, "Getting all post approvals")));
+            $approvals = mysql_num_rows(mysql_query("SELECT * FROM PostApprovals WHERE Post_ID = '$postID'"));
             // show disapprove if members has approved the post
             echo '<div class="post-approvals">';
             echo "<div id = 'approvals$postID'>";

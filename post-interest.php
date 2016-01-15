@@ -817,8 +817,7 @@ if (mysql_num_rows($result) > 0) {
 
 
             // get approvals for each post
-            $approvals = mysql_num_rows(mysql_query("SELECT * FROM PostApprovals WHERE Post_ID = '$postID'")
-            or die(logError(mysql_error(), $url, "Getting all post approvals")));
+            $approvals = mysql_num_rows(mysql_query("SELECT * FROM PostApprovals WHERE Post_ID = '$postID'"));
 
             // show disapprove if members has approved the post
             echo '<div class="post-approvals">';

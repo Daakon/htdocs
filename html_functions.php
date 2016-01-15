@@ -64,6 +64,11 @@ function get_head_files()
             $pageName = ucwords($pageName);
         }
 
+        $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+        if (strstr($url, "groupchat")) {
+
+        }
+        else {
         if (strstr($pageName, 'Messages')) {
             $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
             preg_match("/[^\/]+$/", $url, $match);
@@ -80,6 +85,7 @@ function get_head_files()
             $firstName = $rows2['FirstName'];
             $firstName = ucwords($firstName);
             $pageName = $firstName .' - Messages';
+        }
         }
         ?>
         <title><?php echo $pageName ?></title>
