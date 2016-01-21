@@ -76,6 +76,7 @@ function get_head_files()
 
             $sql = "SELECT ID FROM Members WHERE Username = '$username' ";
             $result = mysql_query($sql) or die(mysql_error());
+            if (mysql_num_rows($result) > 0) {
             $row = mysql_fetch_assoc($result);
             $id = $row['ID'];
 
@@ -86,6 +87,10 @@ function get_head_files()
             $firstName = ucwords($firstName);
             $pageName = $firstName .' - Messages';
         }
+        }
+        else { // get group name
+
+         }
         }
         ?>
         <title><?php echo $pageName ?></title>

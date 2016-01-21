@@ -1,5 +1,5 @@
 <?php
-function build_and_send_email($senderId, $toId, $notification, $postID, $pass)
+function build_and_send_email($senderId, $toId, $notification, $postID, $pass, $groupID)
 {
     $toEmail = get_email_by_id($toId);
     $subject = '';
@@ -179,6 +179,19 @@ function build_and_send_email($senderId, $toId, $notification, $postID, $pass)
         $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
         $link;
         $username = get_username($senderId);
+
+        $groupText = '';
+        if (strlen($groupID) > 0) {
+            $groupText = "group";
+            $username = $groupID;
+        }
+
+
+        /*if (strlen($groupID) > 1) {
+            $username = $groupID;
+            $groupText = "group ";
+        }*/
+
         if (strstr($url, "local")) {
             $link = "view_messages/$username";
         }
@@ -188,9 +201,9 @@ function build_and_send_email($senderId, $toId, $notification, $postID, $pass)
         else {
             $link = "http://www.rapportbook.com/view_messages/$username";
         }
+
         $senderName = get_users_name_by_id($senderId);
-        $type = "id";
-        $subject = "$senderName has sent you a new <a href='$link'>message</a>";
+        $subject = "$senderName has sent you a new $groupText <a href='$link'>message</a>";
     }
     if ($notification == 9) {
         // no posts

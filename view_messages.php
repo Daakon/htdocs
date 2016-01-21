@@ -3,26 +3,56 @@ require 'imports.php';
 get_head_files();
 get_header();
 require 'memory_settings.php';
+
 $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 $ID = $_SESSION['ID'];
 $ffmpeg = '/usr/local/bin/ffmpeg';
 ?>
 
+<?php
+$isGroupChat = false;
+$groupCheck = '';
+$groupChatExist = false;
+
+/*if (!empty($_GET['groupchat'])) {
+    goto GroupChat;
+}*/
+?>
 
 <?php
-// check if member exists for messaging
+
+// check if member is messaging themselves
 $urlUsername = get_username_from_url();
-if ($urlUsername == get_username($ID)) {
-    $username = get_username($ID);
-    echo "<script>alert('Error');location='/messages/$urlUsername'</script>";
+if (strstr($urlUsername, "?")) {
+// do nothing
 }
-$senderID = get_id_from_username($urlUsername);
-$sql = "SELECT ID FROM Members WHERE ID = $senderID ";
-$result = mysql_query($sql) or die(mysql_error());
-$row = mysql_fetch_assoc($result);
-if (mysql_num_rows($result) == 0) {
-    echo "<script>alert('Member does not exist'); location='/home.php' </script>";
+else if ($urlUsername == get_username($ID)) {
+            $username = get_username($ID);
+            echo "<script>alert('Error');location='/messages/$urlUsername'</script>";
+        }
+
+$recipientID = get_id_from_username($urlUsername);
+if (strstr($urlUsername, "?")) {
+    // do nothing
 }
+else if (isset($recipientID) && !empty($recipientID)) {
+    $sql = "SELECT ID FROM Members WHERE ID = $recipientID ";
+    $result = mysql_query($sql) or die(mysql_error());
+    $row = mysql_fetch_assoc($result);
+}
+else {
+    $groupCheck = " AND (GroupID = '$urlUsername') ";
+    $sql = "SELECT GroupID FROM Messages WHERE GroupID = '$urlUsername' ";
+    $result = mysql_query($sql) or die(mysql_error());
+    $row = mysql_fetch_assoc($result);
+    if (mysql_num_rows($result) > 0) {
+        $groupChatExist = true;
+    }
+    else {
+        echo "<script>alert('Member does not exist'); location='/home.php' </script>";
+    }
+}
+
 ?>
 
 <?php
@@ -33,300 +63,469 @@ if (isset($_POST['videoSend']) && $_POST['videoSend'] = "Start Video Chat") {
     $message = $appearLink;
     $hasVideo = true;
     echo "<script>alert('As the sender, you must enter the video room first.');</script>";
-    goto VideoChat;
+    goto StartSend;
 }
 ?>
 
 <?php
 // handle message
 if (isset($_POST['send']) && $_POST['send'] == "Send") {
-    VideoChat:
-    $receiverID = $_POST['receiverID'];
-    $receiverUsername = $_POST['username'];
-    $subject = $_POST['subject'];
+    StartSend:
+    $uniqueID = uniqid();
+
     $message = $_POST['message'];
-    if ($hasVideo == true) {
-        $message = $message . '<br/>'. $appearLink;
-    }
-    else {
-        $message = mysql_real_escape_string($message);
-        $message = makeLinks($message);
-    }
-    $hasVideo = false;
-    // check if sender has prior message thread with receiver
-    $sql="SELECT * FROM Messages WHERE (ThreadOwner_ID = $ID) And (Receiver_ID = $receiverID Or Sender_ID = $receiverID) And (InitialMessage = 1) ";
-    $result = mysql_query($sql) or die(logError(mysql_error(), $url, "Checking if sender has prior message thread with receiver"));
-    $numRows = mysql_num_rows($result);
-    $initialMessage;
-    /*  if the first message, rather overall or a person deleted their messages with this person
-        the thead would no longer exist at all
-        so this would be a first message regardless for the sender
-    */
-    if ($numRows > 0) {
-        $initialMessage = 0;
-        $firstMessage = 0;
-    }
-    else {
-        $initialMessage = 1;
-        $firstMessage = 1;
-    }
-    // check if receiver has prior message thread with sender
-    $sql2="SELECT * FROM Messages WHERE (ThreadOwner_ID = $receiverID) And (Receiver_ID = $ID Or Sender_ID = $ID) And (InitialMessage = 1) ";
-    $result2 = mysql_query($sql2) or die(logError(mysql_error(), $url, "Checking if receiver has prior message thread with sender"));
-    $numRows2 = mysql_num_rows($result2);
-    $rInitialMessage;
-    /* if the receiver has a message thread with the sender,
-        even if the sender has deleted a thread,
-        this is not an initial message or a first message
-        as far as the receiver is concerned
-     */
-    if ($numRows2 > 0) {
-        $rInitialMessage = 0;
-        $rFirstMessage = 0;
-    }
-    else {
-        $rInitialMessage = 1;
-        $rFirstMessage = 1;
-    }
-// if photo is provided
-    if (strlen($_FILES['flPostMedia']['name'] > 0)) {
-        foreach ($_FILES['flPostMedia']['tmp_name'] as $k => $v) {
-            $mediaName = $_FILES['flPostMedia']['name'][$k];
-            $orgName = $_FILES['flPostMedia']['name'][$k];
-            $orgName = pathinfo($orgName, PATHINFO_FILENAME);
-            $orgName = '<b>'.$orgName.'</b>';
-            $mediaName = preg_replace('/\s+/', '', $mediaName);
-            $mediaName = str_replace('&', '', $mediaName);
-            $fileName = pathinfo($mediaName, PATHINFO_FILENAME);
-            $mediaName = trim(uniqid() . $mediaName);
-            $type = $_FILES['flPostMedia']['type'][$k];
-            $tempName = $_FILES['flPostMedia']['tmp_name'][$k];
-            $size = $_FILES['flPostMedia']['size'][$k];
-            // check if word doc
-            $ext = end(explode(".", $mediaName));
-            $docFileTypes = array("doc", "docx", "ppt", "pptx", "xsl", "xslx", "pdf");
-            // if word
-            if ($ext == 'doc' || $ext == 'docx') {
-                $downloadText = mysql_real_escape_string("Download $orgName Word Document");
-            }
-            // if excel
-            if ($ext == 'xsl' || $ext == 'xslx') {
-                $downloadText = mysql_real_escape_string("Download $orgName Spreadsheet");
-            }
-            // if powerpoint
-            if ($ext == 'ppt' || $ext == 'pptx') {
-                $downloadText = mysql_real_escape_string("Download $orgName Power Point");
-            }
-            // if pdf
-            if ($ext == 'pdf') {
-                $downloadText = mysql_real_escape_string("Download $orgName PDF");
-            }
-            if (in_array($ext, $docFileTypes)) {
-                require 'media_post_file_path.php';
-                require 'mediapath.php';
-                move_uploaded_file($tempName, $docFilePath);
-                $img = '<a href="'.$docPath.$mediaName.'" download >'.$downloadText.'</a>';
-                $img = mysql_real_escape_string($img);
-                goto BuildMessage;
-            }
-// check file size
-            if ($size > 500000000) {
-                echo '<script>alert("File is too large. The maximum file size is 500MB.");</script>';
+    $isGroupChat = $_POST['isGroupChat'];
+    $groupName = $_POST['groupName'];
+    $groupID = $_POST['groupID'];
+
+    // if this is a new message, sender must include at least 2 people
+    if ($isGroupChat) {
+        if (strlen($groupID == 0)) {
+            if (strlen($groupName) == 0) {
+                echo "<script>alert('You must assign at least 2 people to this group');</script>";
                 exit;
             }
-            // photo file types
-            $photoFileTypes = array("image/jpg", "image/jpeg", "image/png", "image/tiff",
-                "image/gif", "image/raw");
-            $audioFileTypes = array("audio/wav", "audio/mp3", "audio/x-m4a");
-// check if file type is a video
-            $videoFileTypes = array("video/mpeg", "video/mpg", "video/ogg", "video/mp4",
-                "video/quicktime", "video/webm", "video/x-matroska",
-                "video/x-ms-wmw");
-            // add unique id to image name to make it unique and add it to the file server
-            $mediaFile = $tempName;
-            $mediaFile2 = "";
-            copy($tempName, $mediaFile2);
-            $mediaFile3 = "";
-            copy($tempName, $mediaFile3);
-            require 'media_post_file_path.php';
-            if (in_array($type, $videoFileTypes)) {
-                // convert to mp4 if not already an mp4
-                if ($type != "video/mp4") {
-                    $audioName = $fileName;
-                    $newFileName = $fileName . ".mp4";
-                    $oggFileName = $fileName . ".ogv";
-                    $webmFileName = $fileName . ".webm";
-                    // convert mp4
-                    exec("$ffmpeg -i $fileName -vcodec h264 $newFileName");
-                    $mediaName = $newFileName;
-                    // convert ogg
-                    exec("$ffmpeg -i $fileName -vcodec libtheora -acodec libvorbis $oggFileName");
-                    // convert webm
-                    exec("$ffmpeg -i $fileName -vcodec libvpx -acodec libvorbis -f webm $webmFileName");
-                }
+        }
+    }
+
+    foreach ($_POST['receiverID'] as $key => $receiverID) {
+
+        $receiverUsername = $_POST['username'];
+        $subject = $_POST['subject'];
+        $message = $_POST['message'];
+        $isGroupChat = $_POST['isGroupChat'];
+        $groupID = $_POST['groupID'];
+        $groupName = $_POST['groupName'];
+        $groupChatExist = $_POST['groupChatExist'];
+
+
+        // check for new group message
+        if (!$isGroupChat) {
+            $groupID = '';
+            $groupName = '';
+        }
+
+        if (!$groupChatExist && strlen($groupID) > 0) {
+            $groupID = '';
+        }
+
+        if ($hasVideo == true) {
+            $message = $message . '<br/>' . $appearLink;
+        } else {
+            $message = mysql_real_escape_string($message);
+            $message = makeLinks($message);
+        }
+        $hasVideo = false;
+
+        $groupCheck = "";
+        if (strlen($groupID) > 1) {
+            $groupCheck = " (AND GroupID = '$groupID')";
+        }
+
+
+        if ($isGroupChat == false) {
+            // check if sender has prior message thread with receiver
+            $sql = "SELECT * FROM Messages WHERE (ThreadOwner_ID = $ID) And (Receiver_ID = $receiverID Or Sender_ID = $receiverID) And (InitialMessage = 1) ";
+            $result = mysql_query($sql) or die();
+            $numRows = mysql_num_rows($result);
+            $initialMessage;
+            /*  if the sender deleted their messages with the receiver
+                the thread would no longer exist at all
+                so this would be a first message regardless for the sender
+            */
+
+            if ($numRows > 0) {
+                $initialMessage = 0;
+                $firstMessage = 0;
             } else {
-                if ($type == "image/jpg" || $type == "image/jpeg") {
-                    $src = imagecreatefromjpeg($mediaFile);
-                } else if ($type == "image/png") {
-                    $src = imagecreatefrompng($mediaFile);
-                } else if ($type == "image/gif") {
-                    // must save gif as jpeg
-                    $src = imagecreatefromjpeg($mediaFile);
-                } else {
-                    /* echo "<script>alert('Invalid File Type');</script>";
-                     header('Location:home.php');
-                     exit;*/
-                }
+                $initialMessage = 1;
+                $firstMessage = 1;
             }
-            require 'media_post_file_path.php';
-            if (in_array($type, $videoFileTypes)) {
-                // convert to mp4 if not already an mp4
-                if ($type != "video/mp4") {
-                    $audioName = $fileName;
-                    $newFileName = $fileName . ".mp4";
-                    $oggFileName = $fileName . ".ogv";
-                    $webmFileName = $fileName . ".webm";
-                    // convert mp4
-                    exec("$ffmpeg -i $fileName $newFileName");
-                    $mediaName = $newFileName;
-                    // convert ogg
-                    exec("$ffmpeg -i $fileName  $oggFileName");
-                    // convert webm
-                    exec("$ffmpeg -i $fileName  $webmFileName");
-                }
+
+            // check if sender has prior message thread with receiver
+            $sql = "SELECT * FROM Messages WHERE (ThreadOwner_ID = $receiverID) And (Receiver_ID = $ID Or Sender_ID = $ID) And (InitialMessage = 1) ";
+            $result = mysql_query($sql) or die();
+            $numRows = mysql_num_rows($result);
+            $initialMessage;
+            /*  if the sender deleted their messages with the receiver
+                the thread would no longer exist at all
+                so this would be a first message regardless for the sender
+            */
+
+            if ($numRows > 0) {
+                $rInitialMessage = 0;
+                $rFirstMessage = 0;
             } else {
-                if (in_array($type, $photoFileTypes)) {
-                    // read exif data
-                    $exif = @exif_read_data($mediaFile);
-                    if (!empty($exif['Orientation'])) {
-                        $ort = $exif['Orientation'];
-                        switch ($ort) {
-                            case 8:
-                                $src = imagerotate($src, 90, 0);
-                                break;
-                            case 3:
-                                $src = imagerotate($src, 180, 0);
-                                break;
-                            case 6:
-                                $src = imagerotate($src, -90, 0);
-                                break;
-                        }
+                $rInitialMessage = 1;
+                $rFirstMessage = 1;
+            }
+        }
+
+        //--------------------------------------------------------------------
+        if ($groupChatExist) {
+            $rInitialMessage = 0;
+            $initialMessage = 0;
+            $firstMessage = 0;
+            $rFirstMessage = 0;
+        }
+
+
+        // ----------------------------------------------------------
+
+        if ($isGroupChat && !$groupChatExist) {
+
+                $rInitialMessage = 1;
+                $initialMessage = 1;
+                $firstMessage = 1;
+                $rFirstMessage = 1;
+            }
+
+
+    } // end initial message checks
+
+    // group messages dont condition to else statement without media
+// if photo is provided
+        if (strlen($_FILES['flPostMedia']['name'] > 0)) {
+
+            foreach ($_FILES['flPostMedia']['tmp_name'] as $k => $v) {
+                $mediaName = $_FILES['flPostMedia']['name'][$k];
+                $orgName = $_FILES['flPostMedia']['name'][$k];
+                $orgName = pathinfo($orgName, PATHINFO_FILENAME);
+                $orgName = '<b>' . $orgName . '</b>';
+                $mediaName = preg_replace('/\s+/', '', $mediaName);
+                $mediaName = str_replace('&', '', $mediaName);
+                $fileName = pathinfo($mediaName, PATHINFO_FILENAME);
+                $mediaName = trim(uniqid() . $mediaName);
+                $type = $_FILES['flPostMedia']['type'][$k];
+                $tempName = $_FILES['flPostMedia']['tmp_name'][$k];
+                $size = $_FILES['flPostMedia']['size'][$k];
+                // check if word doc
+                $ext = end(explode(".", $mediaName));
+                $docFileTypes = array("doc", "docx", "ppt", "pptx", "xsl", "xslx", "pdf");
+                // if word
+                if ($ext == 'doc' || $ext == 'docx') {
+                    $downloadText = mysql_real_escape_string("Download $orgName Word Document");
+                }
+                // if excel
+                if ($ext == 'xsl' || $ext == 'xslx') {
+                    $downloadText = mysql_real_escape_string("Download $orgName Spreadsheet");
+                }
+                // if powerpoint
+                if ($ext == 'ppt' || $ext == 'pptx') {
+                    $downloadText = mysql_real_escape_string("Download $orgName Power Point");
+                }
+                // if pdf
+                if ($ext == 'pdf') {
+                    $downloadText = mysql_real_escape_string("Download $orgName PDF");
+                }
+                if (in_array($ext, $docFileTypes)) {
+                    require 'media_post_file_path.php';
+                    require 'mediapath.php';
+                    move_uploaded_file($tempName, $docFilePath);
+                    $img = '<a href="' . $docPath . $mediaName . '" download >' . $downloadText . '</a>';
+                    $img = mysql_real_escape_string($img);
+                    goto BuildMessage;
+                }
+// check file size
+                if ($size > 500000000) {
+                    echo '<script>alert("File is too large. The maximum file size is 500MB.");</script>';
+                    exit;
+                }
+                // photo file types
+                $photoFileTypes = array("image/jpg", "image/jpeg", "image/png", "image/tiff",
+                    "image/gif", "image/raw");
+                $audioFileTypes = array("audio/wav", "audio/mp3", "audio/x-m4a");
+// check if file type is a video
+                $videoFileTypes = array("video/mpeg", "video/mpg", "video/ogg", "video/mp4",
+                    "video/quicktime", "video/webm", "video/x-matroska",
+                    "video/x-ms-wmw");
+                // add unique id to image name to make it unique and add it to the file server
+                $mediaFile = $tempName;
+                $mediaFile2 = "";
+                copy($tempName, $mediaFile2);
+                $mediaFile3 = "";
+                copy($tempName, $mediaFile3);
+                require 'media_post_file_path.php';
+                if (in_array($type, $videoFileTypes)) {
+                    // convert to mp4 if not already an mp4
+                    if ($type != "video/mp4") {
+                        $audioName = $fileName;
+                        $newFileName = $fileName . ".mp4";
+                        $oggFileName = $fileName . ".ogv";
+                        $webmFileName = $fileName . ".webm";
+                        // convert mp4
+                        exec("$ffmpeg -i $fileName -vcodec h264 $newFileName");
+                        $mediaName = $newFileName;
+                        // convert ogg
+                        exec("$ffmpeg -i $fileName -vcodec libtheora -acodec libvorbis $oggFileName");
+                        // convert webm
+                        exec("$ffmpeg -i $fileName -vcodec libvpx -acodec libvorbis -f webm $webmFileName");
+                    }
+                } else {
+                    if ($type == "image/jpg" || $type == "image/jpeg") {
+                        $src = imagecreatefromjpeg($mediaFile);
+                    } else if ($type == "image/png") {
+                        $src = imagecreatefrompng($mediaFile);
+                    } else if ($type == "image/gif") {
+                        // must save gif as jpeg
+                        $src = imagecreatefromjpeg($mediaFile);
+                    } else {
+                        /* echo "<script>alert('Invalid File Type');</script>";
+                         header('Location:home.php');
+                         exit;*/
                     }
                 }
-                // handle transparency
-                imagesavealpha($src, true);
-                if ($type == "image/jpg" || $type == "image/jpeg") {
-                    imagejpeg($src, $postMediaFilePath, 50);
-                } else if ($type == "image/png") {
-                    imagepng($src, $postMediaFilePath, 0, NULL);
-                } else if ($type == "image/gif") {
-                    imagegif($src, $postMediaFilePath, 50);
+                require 'media_post_file_path.php';
+                if (in_array($type, $videoFileTypes)) {
+                    // convert to mp4 if not already an mp4
+                    if ($type != "video/mp4") {
+                        $audioName = $fileName;
+                        $newFileName = $fileName . ".mp4";
+                        $oggFileName = $fileName . ".ogv";
+                        $webmFileName = $fileName . ".webm";
+                        // convert mp4
+                        exec("$ffmpeg -i $fileName $newFileName");
+                        $mediaName = $newFileName;
+                        // convert ogg
+                        exec("$ffmpeg -i $fileName  $oggFileName");
+                        // convert webm
+                        exec("$ffmpeg -i $fileName  $webmFileName");
+                    }
                 } else {
-                    /*echo "<script>alert('Invalid File Type');</script>";
-                    header('Location:home.php');
-                    exit;*/
+                    if (in_array($type, $photoFileTypes)) {
+                        // read exif data
+                        $exif = @exif_read_data($mediaFile);
+                        if (!empty($exif['Orientation'])) {
+                            $ort = $exif['Orientation'];
+                            switch ($ort) {
+                                case 8:
+                                    $src = imagerotate($src, 90, 0);
+                                    break;
+                                case 3:
+                                    $src = imagerotate($src, 180, 0);
+                                    break;
+                                case 6:
+                                    $src = imagerotate($src, -90, 0);
+                                    break;
+                            }
+                        }
+                    }
+                    // handle transparency
+                    imagesavealpha($src, true);
+                    if ($type == "image/jpg" || $type == "image/jpeg") {
+                        imagejpeg($src, $postMediaFilePath, 50);
+                    } else if ($type == "image/png") {
+                        imagepng($src, $postMediaFilePath, 0, NULL);
+                    } else if ($type == "image/gif") {
+                        imagegif($src, $postMediaFilePath, 50);
+                    } else {
+                        /*echo "<script>alert('Invalid File Type');</script>";
+                        header('Location:home.php');
+                        exit;*/
+                    }
                 }
-            }
-            require 'media_post_file_path.php';
+                require 'media_post_file_path.php';
 // save photo/video
-            if (in_array($type, $videoFileTypes) || in_array($type, $audioFileTypes)) {
-                move_uploaded_file($mediaFile, $postMediaFilePath);
-                //copy new mp4 file path to ogg file path
-                copy($postMediaFilePath, $postOggFilePathTemp);
-                // overwrite mp4 with real ogg file path
-                copy($postOggFilePath, $postOggFilePathTemp);
-                // copy new mp4 file path to webm file path
-                copy($postMediaFilePath, $postWebmFilePathTemp);
-                // overwrite mp4 with real webm file path
-                copy($postWebmFilePath, $postWebmFilePathTemp);
-            }
+                if (in_array($type, $videoFileTypes) || in_array($type, $audioFileTypes)) {
+                    move_uploaded_file($mediaFile, $postMediaFilePath);
+                    //copy new mp4 file path to ogg file path
+                    copy($postMediaFilePath, $postOggFilePathTemp);
+                    // overwrite mp4 with real ogg file path
+                    copy($postOggFilePath, $postOggFilePathTemp);
+                    // copy new mp4 file path to webm file path
+                    copy($postMediaFilePath, $postWebmFilePathTemp);
+                    // overwrite mp4 with real webm file path
+                    copy($postWebmFilePath, $postWebmFilePathTemp);
+                }
 // check if file type is a photo
-            if (in_array($type, $photoFileTypes)) {
-                $img = '<img src = "' . $mediaPath . $mediaName . '" />';
-            }
-            // check if file type is a video
-            if (in_array($type, $videoFileTypes)) {
-                // poster file name
-                $posterName = "poster" . uniqid() . ".jpg";
-                //where to save the image
-                $poster = "$posterPath$posterName";
-                //time to take screenshot at
-                //$interval = 5;
-                //screenshot size
-                //$size = '440x280'; -s $size
-                //ffmpeg command
-                $cmd = "$ffmpeg -i \"$postMediaFilePath\" -r 1 -ss 3 -t 1  -f image2 $poster 2>&1";
-                exec($cmd);
-                $img = '<video poster="/poster/' . $posterName . '" preload="none" controls>
+                if (in_array($type, $photoFileTypes)) {
+                    $img = '<img src = "' . $mediaPath . $mediaName . '" />';
+                }
+                // check if file type is a video
+                if (in_array($type, $videoFileTypes)) {
+                    // poster file name
+                    $posterName = "poster" . uniqid() . ".jpg";
+                    //where to save the image
+                    $poster = "$posterPath$posterName";
+                    //time to take screenshot at
+                    //$interval = 5;
+                    //screenshot size
+                    //$size = '440x280'; -s $size
+                    //ffmpeg command
+                    $cmd = "$ffmpeg -i \"$postMediaFilePath\" -r 1 -ss 3 -t 1  -f image2 $poster 2>&1";
+                    exec($cmd);
+                    $img = '<video poster="/poster/' . $posterName . '" preload="none" controls>
                                 <source src = "' . $videoPath . $mediaName . '" type="video/mp4" />
                                 <source src = "' . $videoPath . $oggFileName . '" type = "video/ogg" />
                                 <source src = "' . $videoPath . $webmFileName . '" type = "video/webm" />
                                 Your browser does not seem to support the video tag
                                 </video>';
+                }
+                BuildMessage:
+                if (strlen($img) > 0) {
+                    $br = "<br/><br/>";
+                }
+                $newImage .= $br . $img;
+            } // end loop
+            if (strlen($img) == 0) {
+                $br = "<br/>";
             }
-            BuildMessage:
-            if (strlen($img) > 0) {
-                $br = "<br/><br/>";
-            }
-            $newImage .= $br . $img;
-        } // end loop
-        if (strlen($img) == 0) {
-            $br = "<br/>";
-        }
-        $message = $message . $newImage .'<br/>' ;
-        $message = closetags($message);
-        // create thread for sender
-        $sql = "INSERT INTO Messages (ThreadOwner_ID, Sender_ID,  Receiver_ID,    Subject,    Message,  InitialMessage, FirstMessage ,      MessageDate) Values
+            $message = $message . $newImage . '<br/>';
+            $message = closetags($message);
+
+
+
+                // if not a group chat ----------------------------------------
+               if ($isGroupChat == false) {
+
+                   // create thread for sender
+                   $sql = "INSERT INTO Messages (ThreadOwner_ID, Sender_ID,  Receiver_ID,    Subject,    Message,  InitialMessage, FirstMessage ,      MessageDate) Values
                                      ($ID,             $ID,       $receiverID, '$subject',  '$message', $initialMessage, $firstMessage, CURRENT_TIMESTAMP ) ";
-        mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting message with media for sender"));
-        // create thread for receiver
-        $sql = "INSERT INTO Messages (ThreadOwner_ID, Sender_ID, Receiver_ID,  Subject,    Message,   InitialMessage,     New, FirstMessage,   MessageDate   ) VALUES
-                                    ($receiverID,    $ID,        $receiverID, '$subject', '$message', '$rInitialMessage',  '1', $rFirstMessage, CURRENT_TIMESTAMP ) ";
-        mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting message with media for receiver"));
-        echo "<script>alert('Message Sent'); </script>";
-        // sent notification
-        if (strlen(check_phone($receiverID)) > 0) {
-            text_notification($receiverID, $ID);
+                   mysql_query($sql) or die(mysql_error());
+
+                   // create thread for receiver
+                   $sql = "INSERT INTO Messages  (ThreadOwner_ID, Sender_ID,  Receiver_ID,  Subject,    Message,         InitialMessage,      New,        FirstMessage,       MessageDate   ) VALUES
+                                                 ($receiverID,    $ID,        $receiverID, '$subject', '$message',     '$rInitialMessage',    '1',        $rFirstMessage,     CURRENT_TIMESTAMP ) ";
+                   mysql_query($sql) or die(mysql_error());
+
+                   build_and_send_email($ID, $receiverID, 8, "", "");
+               }
+
+
+
+
+            // if an existing group chat ---------------------------------------
+            if ($groupChatExist) {
+
+                // loop for receivers in group message
+                $sqlRecipients = "SELECT ThreadOwner_ID FROM Messages Where GroupID = '$groupID' ";
+                $resultRecipients = mysql_query($sqlRecipients);
+                $recipient_ids = array();
+//Iterate over the results
+                while ($rows = mysql_fetch_assoc($resultRecipients)) {
+                    array_push($recipient_ids, $rows['ThreadOwner_ID']);
+                }
+
+                $recipient_ids = array_unique($recipient_ids);
+                foreach ($recipient_ids as $item) {
+
+                    // create thread for receiver
+                    $sql = "INSERT INTO Messages (ThreadOwner_ID, Sender_ID,    Receiver_ID,   Subject,    Message,   InitialMessage,     New, FirstMessage,   MessageDate,     GroupID , GroupName  ) VALUES
+                                                 ($item,            $ID,          $item,    '$subject', '$message', '$rInitialMessage',  '', $rFirstMessage, CURRENT_TIMESTAMP,  '$groupID',   '$groupName' ) ";
+                    mysql_query($sql) or die(mysql_error());
+
+                    $sql2 = "UPDATE Messages SET New =1
+                    WHERE ThreadOwner_ID = $item AND GroupID = '$groupID' ";
+                    mysql_query($sql2) or die(mysql_error());
+
+                    // and groupID param
+                    build_and_send_email($ID, $item, 8, "", "", $groupID);
+                }
+            }
+
+            // if a new group chat-----------------------------------------------------
+            else if ($isGroupChat && !$groupChatExist) {
+
+                if ($isGroupChat) {
+                    $groupID = $uniqueID;
+                }
+
+                // create thread for group sender
+                $sql = "INSERT INTO Messages (ThreadOwner_ID, Sender_ID,      Receiver_ID,    Subject,    Message,  InitialMessage, FirstMessage ,      MessageDate,       GroupID, GroupName) Values
+                                                ($ID,             $ID,         $receiverID, '$subject',  '$message', $initialMessage, $firstMessage, CURRENT_TIMESTAMP,   '$groupID', '$groupName' ) ";
+                mysql_query($sql) or die(mysql_error());
+
+                // loop for receivers in NEW group message
+
+                foreach ($_POST['receiverID'] as $key => $receiverID) {
+
+                    if ($isGroupChat == false) {
+                        $groupID = '';
+                        $groupName = '';
+                    }
+                    // if group ID, this means a group ID exists
+
+
+                    // create thread for receiver
+                    $sql = "INSERT INTO Messages (ThreadOwner_ID, Sender_ID,   Receiver_ID,     Subject,    Message,   InitialMessage,     New,  FirstMessage,   MessageDate,        GroupID ,      GroupName  ) VALUES
+                                                 ('$receiverID',    $ID,      $receiverID,     '$subject', '$message', '$rInitialMessage',  '', $rFirstMessage, CURRENT_TIMESTAMP,  '$groupID',   '$groupName' ) ";
+                    mysql_query($sql) or die(mysql_error());
+
+                    // add groupID param
+                    build_and_send_email($ID, $receiverID, 8, "", "", $groupID);
+
+                    // sent notification
+                    if (strlen(check_phone($receiverID)) > 0) {
+                        text_notification($receiverID, $ID);
+                    }
+                }
+            }
+
+                echo "<script>alert('Message Sent'); </script>";
+
+
         }
-    }
+
 //----------------------
 // if no media
 //----------------------
-    else {
-        $receiverID = get_id_from_username($urlUsername);
-        // create thread for sender
-        $sql = "INSERT INTO Messages (ThreadOwner_ID, Sender_ID,  Receiver_ID,    Subject,    Message,      InitialMessage,    MessageDate     ) Values
-                                      ($ID,             $ID,       $receiverID, '$subject',  '$message',    '$initialMessage', CURRENT_TIMESTAMP ) ";
-        mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting message withoutmedia for sender"));
-        // create thread for receiver
-        $sql = "INSERT INTO Messages (ThreadOwner_ID, Sender_ID, Receiver_ID,  Subject,    Message,   InitialMessage,    New,  MessageDate     ) VALUES
-                                    ($receiverID,    $ID,        $receiverID, '$subject', '$message',  '$initialMessage', '1',    CURRENT_TIMESTAMP ) ";
-        mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting message without media for receiver"));
-        echo "<script>alert('Message Sent'); </script>";
-        $receiverID = $_POST['receiverID'];
-        // sent notification
-        if (strlen(check_phone($receiverID)) > 0) {
-            text_notification($receiverID, $ID);
+        else {
+            foreach ($_POST['receiverID'] as $key => $receiverID) {
+
+                // create thread for sender
+                $sql = "INSERT INTO Messages (ThreadOwner_ID, Sender_ID,  Receiver_ID,    Subject,    Message,      InitialMessage,    MessageDate ,          GroupID ,      GroupName ) Values
+                                              ($ID,             $ID,       $receiverID, '$subject',  '$message',    '$initialMessage', CURRENT_TIMESTAMP,    '$groupID',    '$groupName' ) ";
+                mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting message withoutmedia for sender"));
+                // create thread for receiver
+                $sql = "INSERT INTO Messages (ThreadOwner_ID, Sender_ID, Receiver_ID,  Subject,    Message,   InitialMessage,    New,       MessageDate ,       GroupID ,      GroupName   ) VALUES
+                                             ($receiverID,    $ID,        $receiverID, '$subject', '$message',  '$initialMessage', '1',    CURRENT_TIMESTAMP,    '$groupID',   '$groupName' ) ";
+                mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting message without media for receiver"));
+                echo "<script>alert('Message Sent'); </script>";
+                $receiverID = $_POST['receiverID'];
+                // sent notification
+                if (strlen(check_phone($receiverID)) > 0) {
+                    text_notification($receiverID, $ID);
+                }
+            }
         }
+
+// notify everyone
+foreach ($_POST['receiverID'] as $key => $receiverID) {
+    $groupCheck = "";
+    if (strlen($groupID) > 0) {
+        $groupCheck = " AND (GroupID = '$groupID')";
     }
+
     // find the receiving member's initial message with the sender
-    $sql = "SELECT * FROM Messages WHERE ThreadOwner_ID = $receiverID And (Receiver_ID = $receiverID) And (Sender_ID = $ID) And (InitialMessage = 1) ";
+    $sql = "SELECT * FROM Messages WHERE ThreadOwner_ID = $receiverID And (Receiver_ID = $receiverID) And (Sender_ID = $ID) And (InitialMessage = 1) $groupCheck";
     $result = mysql_query($sql);
     $count = mysql_num_rows($result);
+
     // update the initial message row so we know which messages to render first in messages.php
-    if (mysql_num_rows($result) > 0) {
-        $sql2 = "UPDATE Messages SET New = 1
-            WHERE ThreadOwner_ID = $receiverID And Receiver_ID = $receiverID And Sender_ID = $ID And InitialMessage = 1 ";
-        mysql_query($sql2) or die(logError(mysql_error(), $url, "Updating initial message where receiver_ID = receiver_ID"));
+    if ($groupChatExist) {
+
     }
     else {
-        $sql2 = "UPDATE Messages SET New = 1
-            WHERE ThreadOwner_ID = $receiverID And Receiver_ID = $ID And Sender_ID = $receiverID And InitialMessage = 1 ";
-        mysql_query($sql2) or die(logError(mysql_error(), $url, "Updating initial message where receiver ID = session ID "));
+        if (mysql_num_rows($result) > 0) {
+            $sql2 = "UPDATE Messages SET New = 1
+            WHERE ThreadOwner_ID = $receiverID And Receiver_ID = $receiverID And Sender_ID = $ID And InitialMessage = 1 $groupCheck";
+            mysql_query($sql2) or die(logError(mysql_error(), $url, "Updating initial message where receiver_ID = receiver_ID"));
+        } else {
+
+            $sql2 = "UPDATE Messages SET New = 1
+            WHERE ThreadOwner_ID = $receiverID And Receiver_ID = $ID And Sender_ID = $receiverID And InitialMessage = 1 $groupCheck";
+            mysql_query($sql2) or die(logError(mysql_error(), $url, "Updating initial message where receiver ID = session ID "));
+        }
     }
-    // notify recipient of email
-    $receiverUsername = get_username($receiverID);
-    build_and_send_email($ID, $receiverID,8, "","");
+
+}
+    if ($isGroupChat) {
+        $receiverUsername = $groupID;
+    }
+    else {
+        $receiverUsername = get_username($receiverID);
+    }
+
     echo "<script>location = '/view_messages/$receiverUsername'</script>";
 }
 ?>
@@ -342,12 +541,35 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
 }
 ?>
 
+<script type="text/javascript">
+
+    function loadmore()
+    {
+        var val = document.getElementById("moreMessages").value;
+        $.ajax({
+            type: 'post',
+            url: '/loadMessages.php',
+            data: {
+                senderID: <?php echo $recipientID ?>
+            },
+            success: function (response) {
+                var content = document.getElementById("moreMessages");
+                content.innerHTML = content.innerHTML+response;
+
+                // We increase the value by 10 because we limit the results by 10
+                //document.getElementById("row_no").value = Number(val)+10;
+            }
+        });
+    }
+</script>
+
 
 <?php include('media_sizes.html'); ?>
 
 
 
-    <body onload="window.scrollTo(0,document.body.scrollHeight);">
+    <body onload='location.href="#pageStart"'>
+
 <div class="container">
     <div class="row row-padding">
 
@@ -356,54 +578,153 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
             <h2>View Messages</h2>
             <hr/>
 
-            <?php $senderID = get_id_from_username($urlUsername);
-            $sql = "SELECT FirstName, Username FROM Members WHERE ID = $senderID";
-            $result = mysql_query($sql) or die(mysql_error());
-            $row = mysql_fetch_assoc($result);
-            $username = $row['Username'];
-            $firstName = $row['FirstName'];
-            ?>
-            <h5><span class="viewMessage"><a href="/<?php echo $username ?>">Visit <?php echo $firstName ?>'s Profile</a></span></h5>
+            <script type="text/javascript" src="jquery-1.8.0.min.js"></script>
+            <script type="text/javascript">
+                $(function(){
+                    $(".search").keyup(function()
+                    {
+                        var searchid = $(this).val();
+                        var dataString = 'search='+ searchid;
+                        if(searchid!='')
+                        {
+                            $.ajax({
+                                type: "POST",
+                                url: "getRecipients.php",
+                                data: dataString,
+                                cache: false,
+                                success: function(html)
+                                {
+                                    $("#result").html(html).show();
+                                }
+                            });
+                        }return false;
+                    });
+
+                    jQuery("#result").live("click",function(e){
+                        var $clicked = $(e.target);
+                        var $name = $clicked.find('.name').html();
+                        var decoded = $("<div/>").html($name).text();
+                        $('#searchID').val(decoded);
+                    });
+                    jQuery(document).live("click", function(e) {
+                        var $clicked = $(e.target);
+                        if (! $clicked.hasClass("search")){
+                            jQuery("#result").fadeOut();
+                        }
+                    });
+                    $('#searchID').click(function(){
+                        jQuery("#result").fadeIn();
+                    });
+                });
+            </script>
+
+
+
             <?php
-            // get subject
-            $sql = "SELECT * FROM Messages
+            $recipientID = get_id_from_username($urlUsername);
+            if (strstr($urlUsername, "?")) {
+            }
+            else if (isset($recipientID) && !empty($recipientID)) {
+                $sql = "SELECT FirstName, Username FROM Members WHERE ID = $recipientID";
+                $result = mysql_query($sql) or die(mysql_error());
+                $row = mysql_fetch_assoc($result);
+                $username = $row['Username'];
+                $firstName = $row['FirstName'];
+            }
+
+                ?>
+
+                <?php if (!empty($_GET['groupchat']) || (!isset($recipientID) && empty($recipientID))) {
+                    $isGroupChat = true;
+                    ?>
+                    <h5>Group Chat
+                        &nbsp;&nbsp;<input type="text" class="search" id="searchID" value="<?php $final_name ?>"
+                                           placeholder="Search for people"/>
+                        <br/>
+                        <div id="result"></div>
+                        <div id="previewNames"></div>
+                    </h5>
+                    <hr class="hr-class" />
+
+                <?php } elseif ($isGroupChat == false) { ?>
+
+                    <h5><span class="viewMessage"><a href="/<?php echo $username ?>">Visit <?php echo $firstName ?>'s
+                                Profile</a></span></h5>
+                <?php } ?>
+
+                <?php
+
+                    if (strstr($urlUsername, "?")) {
+                        // do nothing
+                    }
+                    else if (isset($recipientID) && !empty($recipientID)) {
+                        // get subject
+                        $sql = "SELECT * FROM Messages
                     WHERE ThreadOwner_ID = $ID
-                    AND (Receiver_ID = $senderID)
+                    AND (Receiver_ID = $recipientID)
+                    $groupCheck
                     AND (IsDeleted = 0) LIMIT 1 ";
-            $result = mysql_query($sql) or die(logError(mysql_error(), $url, "Getting message subject"));
-            $row = mysql_fetch_assoc($result);
-            $subject = $row['Subject'];
+                        $result = mysql_query($sql) or die(logError(mysql_error(), $url, "Getting message subject"));
+                        $row = mysql_fetch_assoc($result);
+                        $subject = $row['Subject'];
+
+                }
+
+                ?>
+
+                <h4 style="color:red;font-weight:bold;"><?php echo $subject ?></h4>
+                <br/>
+
+                <?php
+
+                if (strstr($urlUsername, "?")) {
+
+                } else {
+                    // check if group message
+                    if ($groupChatExist) {
+                        $sql = "SELECT * FROM (SELECT * FROM Messages
+                    WHERE ThreadOwner_ID = $ID
+                    AND (GroupID = '$urlUsername')
+                    Order By ID DESC LIMIT 25) as ROWS Order By ID ASC ";
+                        $result = mysql_query($sql);
+                        $count = mysql_num_rows($result);
+                    } else {
+                        $sql = "SELECT * FROM (SELECT * FROM Messages
+                    WHERE ThreadOwner_ID = $ID
+                    AND (Sender_ID = $recipientID Or Receiver_ID = $recipientID)
+                    AND (IsDeleted = 0) And (GroupID = '')
+                    Order By ID DESC LIMIT 25) as ROWS Order By ID ASC ";
+                        $result = mysql_query($sql);
+                    }
+                }
             ?>
 
-            <h4 style="color:red;font-weight:bold;"><?php echo $subject ?></h4>
-            <br/>
+           <?php if (mysql_num_rows($result) > 24) { ?>
+            <div id="moreButton"><button onclick="loadmore()" style="margin-bottom:20px;">Show More Messages</button></div>
+            <?php } ?>
 
             <div id="moreMessages"></div>
 
             <?php
-            $sql = "SELECT * FROM (SELECT * FROM Messages
-                    WHERE ThreadOwner_ID = $ID
-                    AND (Sender_ID = $senderID Or Receiver_ID = $senderID)
-                    AND (IsDeleted = 0)
-                    Order By ID DESC LIMIT 25) as ROWS Order By ID ASC ";
-            $result = mysql_query($sql);
-            if (mysql_num_rows($result) > 0) {
-                $rowCount = true;
-                while ($rows = mysql_fetch_assoc($result)) {
-                    $senderID = $rows['Sender_ID'];
-                    $message = $rows['Message'];
-                    $date = $rows['MessageDate'];
-                    // get receiver name
-                    $sql2 = "SELECT FirstName,LastName, ProfilePhoto,Username
+            if (!empty($urlUsername)) {
+                if (mysql_num_rows($result) > 0) {
+                    $rowCount = true;
+                    while ($rows = mysql_fetch_assoc($result)) {
+                        $recipientID = $rows['Sender_ID'];
+                        $message = $rows['Message'];
+                        $date = $rows['MessageDate'];
+                        $groupName = $rows['GroupName'];
+                        // get receiver name
+                        $sql2 = "SELECT FirstName,LastName, ProfilePhoto,Username
                     FROM Members, Profile
-                    WHERE Profile.Member_ID = $senderID
-                    AND Members.ID = $senderID ";
-                    $result2 = mysql_query($sql2) or die(mysql_error());
-                    $rows2 = mysql_fetch_assoc($result2);
-                    $pic = $rows2['ProfilePhoto'];
-                    $name = $rows2['FirstName'] .' '.$rows2['LastName'];
-                    $username = $rows2['Username'];
-                    echo "
+                    WHERE Profile.Member_ID = $recipientID
+                    AND Members.ID = $recipientID ";
+                        $result2 = mysql_query($sql2) or die(mysql_error());
+                        $rows2 = mysql_fetch_assoc($result2);
+                        $pic = $rows2['ProfilePhoto'];
+                        $name = $rows2['FirstName'] . ' ' . $rows2['LastName'];
+                        $username = $rows2['Username'];
+                        echo "
                     <div class='profileImageWrapper-Feed'>
                     <a href='/$username'>
                     <img src = '$mediaPath$pic' class='profilePhoto-Feed' alt='' />
@@ -415,12 +736,14 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
                     </a>
                     </div>
                     ";
-                    echo "<div class='post' style='clear:both'>".nl2br($message)."</div>";
-                    echo "<div style='opacity:0.5'>".date('l F d Y g:i:s A',strtotime($date))."</div>";
-                    echo "<hr/>";
+                        echo "<div class='post' style='clear:both'>" . nl2br($message) . "</div>";
+                        echo "<div style='opacity:0.5'>" . date('l F d Y g:i:s A', strtotime($date)) . "</div>";
+                        echo "<hr/>";
+                    }
                 }
             }
             ?>
+
 
 
 
@@ -436,12 +759,19 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
             </style>
 
             <?php
-            // reinitialize sender ID
-            $senderID = get_id_from_username($urlUsername);
+            if (strstr($urlUsername, "?")) {
+
+            } else if ($groupChatExist == false) {
+                // reinitialize sender ID
+                $recipientID = get_id_from_username($urlUsername);
+            }
+
+
             ?>
 
 
-            <form action="" method="post" enctype="multipart/form-data">
+
+            <form id="messageForm" action="" method="post" enctype="multipart/form-data">
                 Add Any Combination of:<br/>
                 <img src="/images/image-icon.png" height="30px" width="30px" alt="Photos/Video/Documents"/>
                 <strong>Photos/Videos/Documents</strong>
@@ -451,8 +781,13 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
 
                 <textarea name="message" id="message" class="form-control" placeholder="Type your message here"></textarea>
                 <input type="hidden" id="subject" name="subject" value="<?php echo $subject ?>" />
-                <input type="hidden" id="receiverID" name="receiverID" value="<?php echo $senderID ?>" />
-                <input type="hidden" id="username" name="username" value="<?php echo $urlUsername ?>"/>
+                <?php if (isset($recipientID) && !empty($recipientID)) { ?>
+                <input type="hidden" id="receiverID" name="receiverID[]" value="<?php echo $recipientID ?>" />
+                <?php } ?>
+                <input type="hidden" id="isGroupChat" name="isGroupChat" value="<?php echo $isGroupChat ?>" />
+                <input type="hidden" id="groupChatExist" name="groupChatExist" value="<?php echo $groupChatExist ?>" />
+                <input type="hidden" id="groupID" name="groupID" value="<?php echo $urlUsername ?>" />
+                <input type="hidden" id="groupName" name="groupName" value="<?php echo $groupName ?>" />
                 <input type="submit" class="btn btn-default" id="send" name="send" value="Send" />
                 <img src="/images/video-chat.png" height="50" width="50" style="border-left:1px solid black;"/>
                 <input type="submit" class="" id="videoSend" name="videoSend" value = "Start Video Chat" />
@@ -462,15 +797,16 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
 
             <?php if ($rowCount == true) { ?>
                 <form action="" method="post" onsubmit = "return confirm('Do you really want to delete this message thread')" >
-                    <input type="hidden" id="receiverID" name="receiverID" value="<?php echo $senderID ?>" />
+                    <input type="hidden" id="receiverID" name="receiverID" value="<?php echo $recipientID ?>" />
                     <input type="submit" class="btn btn-default" style="background:red;color:white;" id="delete" name="delete" value="Delete Messages" />
                 </form>
             <?php } ?>
             <!-------------------------------------------------------------------->
         </div>
     </div>
-
+    <a id='pageStart' href='#'></a>
 <?php
+$updateGroupChat = "";
 /* clear ALL new message bits for this thread owner with this particular person
    if this was the first time checking the message thread with this sender
    clear the first message bit.
@@ -478,50 +814,21 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
    one person deletes their tread and starts another,
    so it would be a first message again for the sender
 */
-$sql = "UPDATE Messages SET New = 0, FirstMessage = 0 WHERE ThreadOwner_ID = $ID AND (Sender_ID = $senderID Or Receiver_ID = $senderID) ";
-mysql_query($sql) or die(logError(mysql_error(), $url, "Updating new message bits to 0 after read"));
+
+    if ($groupChatExist == true) {
+        $sql = "UPDATE Messages SET New = 0 WHERE ThreadOwner_ID = $ID And GroupID = '$urlUsername' ";
+        mysql_query($sql) or die();
+        exit;
+    }
+
+    if ($groupChatExist == false) {
+    $sql2 = "UPDATE Messages SET New = 0 WHERE ThreadOwner_ID = $ID AND (Receiver_ID = $ID) And (Sender_ID = $recipientID) And (GroupID = '') ";
+    mysql_query($sql2) or die();
+    $sql3 = "UPDATE Messages SET New = 0 WHERE ThreadOwner_ID = $ID AND (Sender_ID = $ID) And (Receiver_ID = $recipientID) And (GroupID = '') ";
+    mysql_query($sql3) or die();
+    exit;
+}
+
 ?>
 
-    <script type="text/javascript">
 
-            $(function(){
-                //Keep track of last scroll
-                // 25 messages equals about 3500px
-                var initialPos = 3500;
-                $(window).scroll(function(event){
-                    //Sets the current scroll position
-                    var scrollingPos = $(this).scrollTop();
-                    //Determines up-or-down scrolling
-                    if (scrollingPos > initialPos){
-                        //Replace this with your function call for downward-scrolling
-                        //alert("DOWN");
-                    }
-                    else {
-                        //Replace this with your function call for upward-scrolling
-                        loadmore();
-                    }
-                    //Updates scroll position
-                    lastScroll = st;
-                });
-            });
-
-
-        function loadmore()
-        {
-            var val = document.getElementById("moreMessages").value;
-            $.ajax({
-                type: 'post',
-                url: '/loadMessages.php',
-                data: {
-                    senderID: <?php echo $senderID ?>
-                },
-                success: function (response) {
-                    var content = document.getElementById("moreMessages");
-                    content.innerHTML = content.innerHTML+response;
-
-                    // We increase the value by 10 because we limit the results by 10
-                    //document.getElementById("row_no").value = Number(val)+10;
-                }
-            });
-        }
-    </script>

@@ -10,6 +10,8 @@ $sql = "SELECT * FROM (SELECT * FROM Messages
                     AND (IsDeleted = 0)
                     Order By ID DESC LIMIT 25, 10000) as ROWS Order By ID ASC ";
 $result = mysql_query($sql);
+
+
 if (mysql_num_rows($result) > 0) {
     $rowCount = true;
     while ($rows = mysql_fetch_assoc($result)) {
