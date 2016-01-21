@@ -72,10 +72,12 @@ if (isset($_POST['videoSend']) && $_POST['videoSend'] = "Start Video Chat") {
 if (isset($_POST['send']) && $_POST['send'] == "Send") {
     StartSend:
     $uniqueID = uniqid();
-
     $message = $_POST['message'];
     $isGroupChat = $_POST['isGroupChat'];
     $groupName = $_POST['groupName'];
+
+
+
     $groupID = $_POST['groupID'];
 
     // if this is a new message, sender must include at least 2 people
@@ -428,6 +430,8 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
 
                 if ($isGroupChat) {
                     $groupID = $uniqueID;
+                    $senderFirstName = get_user_firstName($ID);
+                    $groupName .= ' '.$senderFirstName;
                 }
 
                 // create thread for group sender
