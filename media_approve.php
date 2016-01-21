@@ -43,7 +43,7 @@ $comment_ids = array_unique($comment_ids);
 foreach ($comment_ids as $item) {
 
     // only send email if account & email active
-    if (strlen($item) > 0) {
+    if (strlen($item) > 0 && $item != $ID) {
         if (checkActive($item)) {
             if (checkEmailActive($item)) {
                 build_and_send_email($user_id, $item, 7, $mediaName, '');
@@ -59,10 +59,11 @@ foreach ($comment_ids as $item) {
     $result = mysql_query($sql) or die(logError(mysql_error(), $url, "Getting ID of media owner"));
     $rows = mysql_fetch_assoc($result);
     $creatorID = $rows['Member_ID'];
-
+if ($ID != $creatorID) {
     if (checkEmailActive($creatorID)) {
         build_and_send_email($ID, $creatorID, 7, $mediaName, '');
     }
+}
 }
 
 //=========================================================================================================================//

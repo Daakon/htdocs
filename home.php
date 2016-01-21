@@ -459,7 +459,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
             $comment_ids = array_unique($comment_ids);
 //Send consumer notifications
             foreach ($comment_ids as $item) {
-                if (strlen($item) > 0) {
+                if (strlen($item) > 0 && $item != $ID) {
                     // only send email if account & email active
                     if (checkActive($item)) {
                         if (checkEmailActive($item)) {

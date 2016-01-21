@@ -38,7 +38,7 @@ $comment_ids = array_unique($comment_ids);
 
 foreach ($comment_ids as $item) {
 
-    if (!empty($item)) {
+    if (!empty($item) && $item != $ID) {
         // only send email if account & email active
         if (checkActive($item)) {
             if (checkEmailActive($item)) {
@@ -55,10 +55,11 @@ foreach ($comment_ids as $item) {
     $result = mysql_query($sql) or die(logError(mysql_error(), $url, "Getting Post owner ID"));
     $rows = mysql_fetch_assoc($result);
     $creatorID = $rows['Member_ID'];
-
+if ($ID != $creatorID) {
     if (checkEmailActive($ID)) {
         build_and_send_email($ID, $creatorID, 2, $postID, '');
     }
+}
 }
 
 
