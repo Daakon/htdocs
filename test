@@ -1,0 +1,41 @@
+
+
+                <?php
+                echo '<br/>';
+                echo '<div class="comment-style">';
+                while ($rows4 = mysql_fetch_assoc($result4)) {
+                    $comment = $rows4['PostComment'];
+                    $profilePhoto = $rows4['ProfilePhoto'];
+                    $commentID = $rows4['PostCommentID'];
+                    $commentOwnerID = $rows4['CommenterID'];
+                    $commenterUsername = $rows4['Username'];
+                    $commenterProfileUrl = "/$commenterUsername";
+
+                    echo '<div class="user-icon">';
+                    echo '<a href='.$commenterProfileUrl.'>';
+                    echo '<div class="profileImageWrapper-Feed">';
+                    echo '<img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" class ="enlarge-onhover img-responsive" />
+                    </a></div>
+
+                    <div class="commentNameWrapper-Feed">
+                    <a href='.$commenterProfileUrl.'>
+                    <div class="profileName-Feed">' .
+                        $rows4['FirstName'] .' '. $rows4['LastName'] .
+                        '</div>
+                        </a>' . nl2br($comment) .
+                        '</div>';
+
+                }
+                echo '</div>';
+                if ($commentOwnerID == $ID || $memberID == $ID) {
+                    //<!--DELETE BUTTON ------------------>
+                    echo '<div class="comment-delete">';
+                    echo '<form action="" method="post" onsubmit="return confirm(\'Do you really want to delete this comment?\')">';
+                    echo '<input type="hidden" name="commentID" id="commentID" value="' .  $commentID . '" />';
+                    echo '<input type ="submit" name="DeleteComment" id="DeleteComment" value="Delete" class="deleteButton" />';
+                    echo '</form>';
+                    echo '</div>';
+                    //<!------------------------------------->
+                }
+                }
+                ?>

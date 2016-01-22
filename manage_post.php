@@ -661,6 +661,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                         Group By PostComments.ID
                         Order By PostComments.ID DESC LIMIT 3, 100 ";
                 $result4 = mysql_query($sql4) or die(logError(mysql_error(), $url, "Getting 0-100 post comments"));
+
                 if (mysql_num_rows($result4) > 0) {
                 $moreComments = "moreComments$postID";
                 ?>
@@ -669,46 +670,49 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
                 <div id="<?php echo $moreComments ?>" style="display:none;">
 
-
                     <?php
                     echo '<br/>';
-                    echo '<div class="comment-style">';
-                    while ($rows4 = mysql_fetch_assoc($result4)) {
-                        $comment = $rows4['PostComment'];
-                        $profilePhoto = $rows4['ProfilePhoto'];
-                        $commentID = $rows4['PostCommentID'];
-                        $commentOwnerID = $rows4['CommenterID'];
-                        echo '<div class="user-icon">';
-                        echo '<a href='.$commenterProfileUrl.'>';
-                        echo '<div class="profileImageWrapper-Feed">';
-                        echo '<img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" class ="img-responsive" />
-                        </a></div>
+                    if (mysql_num_rows($result4) > 0) {
+                        echo '<div class="comment-style">';
+                        while ($rows4 = mysql_fetch_assoc($result4)) {
+                            $comment = $rows4['PostComment'];
+                            $profilePhoto = $rows4['ProfilePhoto'];
+                            $commentID = $rows4['PostCommentID'];
+                            $commentOwnerID = $rows4['CommenterID'];
+                            $commenterUsername = $rows4['Username'];
+                            $commenterProfileUrl = "/$commenterUsername";
 
-                        <div class="commentNameWrapper-Feed">
-                        <a href='.$commenterProfileUrl.'>
-                        <div class="profileName-Feed">&nbsp;&nbsp;' .
-                            $rows4['FirstName'] .' '. $rows4['LastName'] .
-                            '</div>
-                            </a>&nbsp;&nbsp;'. nl2br($comment) .
-                            '</div>
+                            echo '<div class="comment-row">';
+                            echo '<div class="profileImageWrapper-Feed">
+                    <a href='.$commenterProfileUrl.'>
+                    <img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" class ="enlarge-onhover img-responsive" />
+                    </a>
+                    </div>
 
-                        <div class="comment-content" style="clear:both"></div>';
-                        echo '</td></tr>';
-                    }
-                    echo '</div>';
+                     <div class="commentNameWrapper-Feed">
+                      <a href='.$commenterProfileUrl.'>
+                        <div class="profileName-Feed"><?php echo $name ?> ' .
+                                $rows4['FirstName'] . ' ' . $rows4['LastName'] .
+                                '</div>
+                     </a>
+                     ' . nl2br($comment) . '
+                    </div>
 
-
-                    if ($commentOwnerID == $ID) {
-                        //<!--DELETE BUTTON ------------------>
-                        echo '<div class="comment-delete">';
-                        echo '<form action="" method="post" onsubmit="return confirm(\'Do you really want to delete this comment?\')">';
-                        echo '<input type="hidden" name="commentID" id="commentID" value="' .  $commentID . '" />';
-                        echo '<input type ="submit" name="DeleteComment" id="DeleteComment" value="Delete" class="deleteButton" />';
-                        echo '</form>';
+                    <div class="comment-content" style="clear:both"></div>';
+                            echo '</div>';
+                            if ($commentOwnerID == $ID || $memberID == $ID) {
+                                //<!--DELETE BUTTON ------------------>
+                                echo '<div class="comment-delete">';
+                                echo '<form action="" method="post" onsubmit="return confirm(\'Do you really want to delete this comment?\')">';
+                                echo '<input type="hidden" name="commentID" id="commentID" value="' .  $commentID . '" />';
+                                echo '<input type ="submit" name="DeleteComment" id="DeleteComment" value="Delete" class="deleteButton" />';
+                                echo '</form>';
+                                echo '</div>';
+                                //<!------------------------------------->
+                            }
+                        }
                         echo '</div>';
-                        //<!------------------------------------->
                     }
-                    echo '</div>'; //end of more comments div
                     }
                     ?>
 

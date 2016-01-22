@@ -969,7 +969,8 @@ if (mysql_num_rows($result) > 0) {
                         Group By PostComments.ID
                         Order By PostComments.ID DESC LIMIT 3, 100 ";
             $result4 = mysql_query($sql4) or die(logError(mysql_error(), $url, "Getting 3 to 100 comments"));
-            if (mysql_num_rows($result4) > 0) {
+
+                     if (mysql_num_rows($result4) > 0) {
             $moreComments = "moreComments$postID";
             ?>
 
@@ -977,44 +978,50 @@ if (mysql_num_rows($result) > 0) {
 
             <div id="<?php echo $moreComments ?>" style="display:none;">
 
-
                 <?php
-                echo '<br/>';
+            echo '<br/>';
+            if (mysql_num_rows($result4) > 0) {
                 echo '<div class="comment-style">';
                 while ($rows4 = mysql_fetch_assoc($result4)) {
                     $comment = $rows4['PostComment'];
                     $profilePhoto = $rows4['ProfilePhoto'];
                     $commentID = $rows4['PostCommentID'];
                     $commentOwnerID = $rows4['CommenterID'];
-                    echo '<div class="user-icon">';
-                    echo '<a href='.$commenterProfileUrl.'>';
-                    echo '<div class="profileImageWrapper-Feed">';
-                    echo '<img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" class ="enlarge-onhover img-responsive" />
-                    </a></div>
+                    $commenterUsername = $rows4['Username'];
+                    $commenterProfileUrl = "/$commenterUsername";
 
-                    <div class="commentNameWrapper-Feed" style="padding-left:10px">
+                    echo '<div class="comment-row">';
+                    echo '<div class="profileImageWrapper-Feed">
                     <a href='.$commenterProfileUrl.'>
-                    <div class="profileName-Feed">'
-                    . $rows4['FirstName'] .' '. $rows4['LastName'] .
+                    <img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" class ="enlarge-onhover img-responsive" />
+                    </a>
+                    </div>
+
+                     <div class="commentNameWrapper-Feed">
+                      <a href='.$commenterProfileUrl.'>
+                        <div class="profileName-Feed"><?php echo $name ?> ' .
+                        $rows4['FirstName'] . ' ' . $rows4['LastName'] .
                         '</div>
-                         </a>' . nl2br($comment) .
-                        '</div>
-                        <div class="comment-content" style="clear:both"></div>';
-                    echo '</td></tr>';
+                     </a>
+                     ' . nl2br($comment) . '
+                    </div>
+
+                    <div class="comment-content" style="clear:both"></div>';
+                    echo '</div>';
+                    if ($commentOwnerID == $ID || $memberID == $ID) {
+                        //<!--DELETE BUTTON ------------------>
+                        echo '<div class="comment-delete">';
+                        echo '<form action="" method="post" onsubmit="return confirm(\'Do you really want to delete this comment?\')">';
+                        echo '<input type="hidden" name="commentID" id="commentID" value="' .  $commentID . '" />';
+                        echo '<input type ="submit" name="DeleteComment" id="DeleteComment" value="Delete" class="deleteButton" />';
+                        echo '</form>';
+                        echo '</div>';
+                        //<!------------------------------------->
+                    }
                 }
                 echo '</div>';
-                if ($commentOwnerID == $ID) {
-                    //<!--DELETE BUTTON ------------------>
-                    echo '<div class="comment-delete">';
-                    echo '<form action="" method="post" onsubmit="return confirm(\'Do you really want to delete this comment?\')">';
-                    echo '<input type="hidden" name="commentID" id="commentID" value="' .  $commentID . '" />';
-                    echo '<input type ="submit" name="DeleteComment" id="DeleteComment" value="Delete" class="deleteButton" />';
-                    echo '</form>';
-                    echo '</div>';
-                    //<!------------------------------------->
-                }
-                echo '</div>'; //end of more comments div
-                }
+            }
+            }
                 ?>
 
 
