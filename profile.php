@@ -621,8 +621,6 @@ $bgPhoto = $row['ProfilePhoto'];
             <hr/>
 
 
-
-
             <div align ="center">
 
                     <video src = " <?php echo $videoPath . $profileVideo ?>" poster="/poster/<?php echo $posterName ?>"  preload="auto" controls />
@@ -699,7 +697,7 @@ $bgPhoto = $row['ProfilePhoto'];
                 <div class="form-group">
                     <select class="form-control input-lg" id="Interest" name="Interest">
                         <option value="<?php echo $interest ?>"><?php echo $interest ?></option>
-                        <option value="Consumer">Consumer</option>
+                        <option value="Individual">Individual</option>
                         <?php echo category() ?>
                     </select>
                 </div>

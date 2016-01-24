@@ -171,39 +171,6 @@ if (!empty($_SESSION['ID'])) {
         <div class="row" >
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" >
 
-                <h3 style="padding-left:10px;">Testimonials</h3>
-
-                <!--Testimonial 1 -->
-                <div class="row">
-                    <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2" >
-                        <img src="/images/brian-slawin.jpg" class="testimony-img"/>
-                    </div>
-                    <div class="col-xs-12 col-sm-10 col-md-10 col-lg-10">
-                        <div class="testimony-text" >
-                            "Rapportbook gives businesses more visibility with the local community than any other social network."  - <b>Brian Slawin</b>, <a href="http://busyevent.com" target="_blank">Co-Founder, Busy Event </a>
-                        </div>
-                    </div>
-                </div>
-                <!--End Testimonial 1 -->
-
-                <hr/>
-
-                <!--Testimonial 2 -->
-                <div class="row">
-                    <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2" >
-                        <img src="/images/angela-larocca.jpg" class="testimony-img" />
-                    </div>
-                    <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-                        <div class="testimony-text">
-                            "You'll be amazed at how seamlessly Rapportbook allows you to interact with the businesses and consumers nearby." - <b>Angela LaRocca</b>, <a href="http://unidev.com" target="_blank">Brand Manager, Unidev</a>
-                        </div>
-                    </div>
-                </div>
-                <!--End Testimonial 2 -->
-                <hr/>
-
-                <br/>
-
                 <h5 class="padding-left-10">Rapportbook Communications Director Erin Thompson gives a talk about the company.</h5>
                 <a href="https://www.youtube.com/watch?v=jJMHsWxqF3M&t=27m45s" target="_blank" >
                     <h4 class="padding-left-10">
