@@ -294,19 +294,18 @@ $postOwner = $memberID;
 
             $result4 = mysql_query($sql4) or die(logError(mysql_error(), $url, "Gettig first 3 Connection Feed comments"));
 
+            $moreComments = "moreComments$postID";
 
             if (mysql_num_rows($result4) > 0) {
-            $moreComments = "moreComments$postID";
-            ?>
+                ?>
 
             <a href="javascript:showComments('<?php echo $moreComments ?>');">Show More</a>
 
             <div id="<?php echo $moreComments ?>" style="display:none;">
 
+                <div class="comment-style">
+
                 <?php
-            echo '<br/>';
-            if (mysql_num_rows($result4) > 0) {
-                echo '<div class="comment-style">';
                 while ($rows4 = mysql_fetch_assoc($result4)) {
                     $comment = $rows4['PostComment'];
                     $profilePhoto = $rows4['ProfilePhoto'];
@@ -314,40 +313,44 @@ $postOwner = $memberID;
                     $commentOwnerID = $rows4['CommenterID'];
                     $commenterUsername = $rows4['Username'];
                     $commenterProfileUrl = "/$commenterUsername";
-
-                    echo '<div class="comment-row">';
-                    echo '<div class="profileImageWrapper-Feed">
-                    <a href='.$commenterProfileUrl.'>
-                    <img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" class ="enlarge-onhover img-responsive" />
-                    </a>
+                ?>
+            <div class="comment-row">
+                <div class="profileImageWrapper-Feed">
+                    <a href='<?php echo $commenterProfileUrl ?>'>
+                        <img src = "<?php echo $mediaPath . $profilePhoto ?>" height = "50" width = "50" class ="enlarge-onhover img-responsive" />
+                        </a>
                     </div>
+                </div>
 
-                     <div class="commentNameWrapper-Feed">
-                      <a href='.$commenterProfileUrl.'>
-                        <div class="profileName-Feed"><?php echo $name ?> ' .
-                        $rows4['FirstName'] . ' ' . $rows4['LastName'] .
-                        '</div>
-                     </a>
-                     ' . nl2br($comment) . '
+                    <div class="commentNameWrapper-Feed">
+                        <a href='<?php echo $commenterProfileUrl ?>'>
+                            <div class="profileName-Feed">
+                                <?php echo $rows4['FirstName'] . ' ' . $rows4['LastName'] ?>
+                                </div>
+                        </a>
+                        <?php echo nl2br($comment) ?>
                     </div>
+                    <div class="comment-content" style="clear:both"></div>
 
-                    <div class="comment-content" style="clear:both"></div>';
-                    echo '</div>';
-                    if ($commentOwnerID == $ID || $memberID == $ID) {
-                        //<!--DELETE BUTTON ------------------>
-                        echo '<div class="comment-delete">';
-                        echo '<form action="" method="post" onsubmit="return confirm(\'Do you really want to delete this comment?\')">';
-                        echo '<input type="hidden" name="commentID" id="commentID" value="' .  $commentID . '" />';
-                        echo '<input type ="submit" name="DeleteComment" id="DeleteComment" value="Delete" class="deleteButton" />';
-                        echo '</form>';
-                        echo '</div>';
-                        //<!------------------------------------->
-                    }
+                    <!--DELETE BUTTON ------------------>
+                    <?php if ($commentOwnerID == $ID || $memberID == $ID) { ?>
+                    <div class="comment-delete">
+                        <form action="" method="post" onsubmit="return confirm(\'Do you really want to delete this comment?\')">
+                            <input type="hidden" name="commentID" id="commentID" value="' .  $commentID . '" />
+                            <input type ="submit" name="DeleteComment" id="DeleteComment" value="Delete" class="deleteButton" />
+                            </form>
+                        </div>
+                        <?php } ?>
+            <?php
+
                 }
-                echo '</div>';
-            }
+                ?>
+                    </div>
+            </div>
+                <?php
             }
                 ?>
+
 
 </div>
             </div>
@@ -356,12 +359,11 @@ $postOwner = $memberID;
                               End of comments div
                               ----------------------------------------------------->
 
-        </div>
-    </div>
+
     <?php
     }
     }
-    ?>
+?>
 
 
-    <!--Right Column -->
+<!--Right Column -->
