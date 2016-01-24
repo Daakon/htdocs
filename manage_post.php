@@ -1,12 +1,10 @@
 <?php
-
 require 'imports.php';
 get_head_files();
 get_header();
 require 'memory_settings.php';
 $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 $ID = $_SESSION['ID'];
-
 preg_match("/[^\/]+$/",$url ,$match);
 $username = $match[0];
 ?>
@@ -44,7 +42,6 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                 $photoFileTypes = array("image/jpg", "image/jpeg", "image/png", "image/tiff",
                     "image/gif", "image/raw");
                 $audioFileTypes = array("audio/wav", "audio/mp3");
-
                 $mediaName = $_FILES["flPostMedia"]["name"];
                 // remove ALL WHITESPACE from image name
                 $mediaName = preg_replace('/\s+/', '', $mediaName);
@@ -159,13 +156,11 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                         //ffmpeg command
                         $cmd = "$ffmpeg -i \"$postMediaFilePath\" -r 1 -ss 3 -t 1  -f image2 $poster 2>&1";
                         exec($cmd);
-
                         $img = '<video poster="/poster/'.$posterName.'" preload="none" autoplay="autoplay" muted controls>
                                 <source src = "' . $videoPath . $mediaName . '" type="video/mp4" />
                                 <source src = "' . $videoPath . $oggFileName . '" type = "video/ogg" />
                                 <source src = "' . $videoPath . $webmFileName . '" type = "video/webm" />
                                 </video>';
-
                     } else {
                         // if invalid file type
                         /*echo '<script>alert("Invalid File Type!");</script>';
@@ -173,9 +168,6 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                         exit; */
                     }
                     $comment = $comment . '<br/><br/>' . $img . '<br/>';
-
-
-
                     $sql = "INSERT INTO PostComments (Post_ID,     Member_ID,   Comment, CommentDate  ) Values
                                                       ('$postID', '$ID',      '$comment', CURDATE())";
                     mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting comment"));
@@ -200,23 +192,18 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                     $name2 = $name2."'s";
                     $ownerId = $rowsOwner['ID'];
                     $name2Link = $name2;
-
-
                     $orgPost = "<a href='/show_post.php?postID=$postID'>status</a>";
                     $orgPostSql = "SELECT Category FROM Posts WHERE ID = $postID ";
                     $orgPostResult = mysql_query($orgPostSql) or die(logError(mysql_error(), $url, "Getting original post commented on"));
                     $orgPostRow = mysql_fetch_assoc($orgPostResult);
                     $orgInterest = $orgPostRow['Category'];
-
                     // determine noun if profile owner commented on their own post and write bulletin
                     if ($ownerId == $ID) {
                         $noun = "a $orgPost they posted.";
                     }
                     else {
-
                         $noun = $name2 . ' post.';
                     }
-
                     $post = "$nameLink posted a new $mediaString comment on $noun<br/><br/>$img<br/>";
                     $post = mysql_real_escape_string($post);
                     $sqlInsertPost = "INSERT INTO Posts (Post,     Member_ID,   Category,         PostDate  ) Values
@@ -263,7 +250,6 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                 }
             }
 //Notify the post creator
-
             $sql = "SELECT Member_ID FROM Posts WHERE ID = '$postID' And Member_ID != $ID;";
             $result = mysql_query($sql) or die(logError(mysql_error(), $url, "Getting post owner ID"));
             $rows = mysql_fetch_assoc($result);
@@ -285,18 +271,14 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 ?>
 
 <?php
-
 // ----------------------------
 //delete post
 // ----------------------------
-
 if (isset($_POST['Delete']) && $_POST['Delete'] == "Delete") {
     $postID = $_POST['postID'];
     $sql = "Update Posts SET IsDeleted = '1' WHERE ID = $postID And Member_ID = $ID ";
     mysql_query($sql) or die (logError(mysql_error(), $url, "Deleting Post"));
-
 }
-
 // delete comment
 if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
     $commentID = $_POST['commentID'];
@@ -327,7 +309,6 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                 ID: $(this).closest('tr').find('.ID').val()
                 //add other properties similarly
             }
-
             $.ajax({
                 type: "post",
                 url: "/post_approve.php",
@@ -335,7 +316,6 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                 success: function (data) {
                     parentDiv.html(data);
                 }
-
             })
         });
     });
@@ -357,14 +337,12 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                 success: function (data) {
                     parentDiv.html(data);
                 }
-
             })
         });
     });
 </script>
 
 <script type="text/javascript">
-
     function showComments(id) {
         var e = document.getElementById(id);
         if (e.style.display == 'none') {
@@ -373,7 +351,6 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
         else
             e.style.display = 'none';
     }
-
 </script>
 
 <script>
@@ -401,7 +378,6 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
         $username = explode("?", $username);
         $username = $username[0];
         $profileID = get_id_from_username($username);
-
         $sql = "SELECT DISTINCT
     Members.ID As MemberID,
     Members.FirstName As FirstName,
@@ -421,11 +397,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
     And (Posts.IsDeleted = 0)
     Group By PostID
     Order By PostID DESC ";
-
-
         $result = mysql_query($sql) or die(logError(mysql_error(), $url, "Getting all member posts"));
-
-
         if (mysql_num_rows($result) > 0) {
         while ($rows = mysql_fetch_assoc($result)) {
         $memberID = $rows['MemberID'];
@@ -459,7 +431,6 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                 // check check post length if it has a url in it
                 if (strstr($post, "http://") || strstr($post, "https://")) {
                     echo nl2br($post);
-
                 }
                 else if (strlen($post) > 700) {
                     $post500 = substr($post, 0, strpos($post, ' ', 700)).'<br/>'; ?>
@@ -496,77 +467,54 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                     </form>
                 </div>
                 <!------------------------------------->
-
                 <?php
             }
-
             echo "<hr/>";
-
             //check if member has approved this post
             //----------------------------------------------------------------
             //require 'getSessionType.php';
-
             $sql2 = "SELECT ID FROM PostApprovals WHERE Post_ID = '$postID' AND Member_ID = '$ID'";
             $result2 = mysql_query($sql2) or die(logError(mysql_error(), $url, "Getting member approval"));
             $rows2 = mysql_fetch_assoc($result2);
-
-
             // get approvals for each post
             $approvals = mysql_num_rows(mysql_query("SELECT * FROM PostApprovals WHERE Post_ID = $postID "));
-
             // show disapprove if members has approved the post
             echo '<table>';
             echo '<tr>';
             echo '<td>';
             echo "<div id = 'approvals$postID'>";
-
             if (mysql_num_rows($result2) > 0) {
-
                 echo '<form>';
-
                 echo '<input type ="hidden" class = "postID" id = "postID" value = "' . $postID . '" />';
                 echo '<input type ="hidden" class = "ID" id = "ID" value = "' . $ID . '" />';
                 echo '<input type ="button" class = "btnDisapprove" />';
-
                 if ($approvals > 0) {
-
-
                     echo '&nbsp;<span>' . $approvals . '</font>';
                 }
                 echo '</form>';
             } else {
                 echo '<form>';
-
                 echo '<input type ="hidden" class = "postID" id = "postID" value = "' . $postID . '" />';
                 echo '<input type ="hidden" class = "ID" id = "ID" value = "' . $ID . '" />';
                 echo '<input type ="button" class = "btnApprove" />';
-
                 if ($approvals > 0) {
-
-
                     echo '&nbsp;<span>' . $approvals . '</font>';
                 }
                 echo '</form>';
             }
             echo '</div>'; // end of approval div
             echo '</td></tr></table>';
-
             //-------------------------------------------------------------
             // End of approvals
             //-----------------------------------------------------------
-
             ?>
-
             <div style="padding-top:10px;padding-bottom:10px;margin-top:10px;">
                 <form method="post" action="" enctype="multipart/form-data"
                       onsubmit="showCommentUploading('comment<?php echo $postID?>', this);">
-
                     <input type="text" class="form-control" name="postComment" id="postComment"
                            placeholder="Write a comment" title='' />
-
                     <h6>Attach A Photo/Video To Your Comment</h6>
                     <input type="file" name="flPostMedia" id="flPostMedia" style="max-width:180px;"/>
-
                     <br/>
                     <div id="comment<?php echo $postID ?>" style="display:none;">
                         <div class="progress">
@@ -582,8 +530,6 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                     <input type="hidden" name="scrollx" id="scrollx" value="0"/>
                     <input type="hidden" name="scrolly" id="scrolly" value="0"/>
                 </form>
-
-
                 <?php
                 $sql3 = "SELECT DISTINCT
                         PostComments.Comment As PostComment,
@@ -615,7 +561,6 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                         <img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" class ="img-responsive" />
                         </a>
                         </div>
-
                          <div class="commentNameWrapper-Feed" style="padding-left:10px">
                           <a href='.$commenterProfileUrl.'>
                             <div class="profileName-Feed"><?php echo $name ?> ' .
@@ -624,10 +569,8 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                          </a>
                          ' . nl2br($comment) . '
                         </div>
-
                     <div class="comment-content" style="clear:both"></div>';
                         echo '</div>';
-
                         if ($commentOwnerID == $ID || $ID == $memberID) {
                             //<!--DELETE BUTTON ------------------>
                             echo '<div class="comment-delete">';
@@ -642,9 +585,8 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                     echo '</div>';
                 }
                 ?>
+                <!--Show more comments -->
 
-                <!--Show more comments -->
-                <!--Show more comments -->
                 <?php
                 $sql4 = "SELECT DISTINCT
                         PostComments.Comment As PostComment,
@@ -662,9 +604,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                         Group By PostComments.ID
                         Order By PostComments.ID DESC LIMIT 3, 100 ";
                 $result4 = mysql_query($sql4) or die(logError(mysql_error(), $url, "Getting 3 to 100 comments"));
-
                 $moreComments = "moreComments$postID";
-
                 if (mysql_num_rows($result4) > 0) {
                     ?>
 
@@ -711,7 +651,6 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                                     </div>
                                 <?php } ?>
                                 <?php
-
                             }
                             ?>
                         </div>
@@ -720,19 +659,10 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                 }
                 ?>
 
-
-
-
-
-
-
-
-
+</div>
                 <!---------------------------------------------------
                                   End of comments div
                                   ----------------------------------------------------->
-
-
             </div>
             <?php
             }
@@ -755,35 +685,25 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
         <!--Right Column -->
 
 
-    </div> <!--End Middle Column -->
-
 </div>
 
 
 <br/><br/>
 
-</div>
-
 </body>
 </html>
 
 <?php
-
 $scrollx = 0;
 $scrolly = 0;
-
 if(!empty($_REQUEST['scrollx'])) {
     $scrollx = $_REQUEST['scrollx'];
 }
-
 if(!empty($_REQUEST['scrolly'])) {
     $scrolly = $_REQUEST['scrolly'];
 }
 ?>
 
 <script type="text/javascript">
-
     window.scrollTo(<?php echo "$scrollx" ?>, <?php echo "$scrolly" ?>);
-
 </script>
-

@@ -88,9 +88,6 @@ $postOwner = $memberID;
     </div>
 
 
-
-
-
     <div class="post" <?php echo $postStyle ?> style="clear:both;">
 
         <?php
