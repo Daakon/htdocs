@@ -21,8 +21,14 @@ $sql = "SELECT
                         Profile.ProfilePhoto As ProfilePhoto,
                         Profile.ProfileVideo As ProfileVideo,
                         Profile.Poster As Poster,
+                        Profile.Address As Address,
+                        Profile.ShowAddress As ShowAddress,
                         Profile.City As City,
+                        Profile.Zip As Zip,
+                        Profile.ShowZip As ShowZip,
                         Profile.State As State,
+                        Profile.Phone As Phone,
+                        Profile.ShowPhone As ShowPhone,
                         Profile.About As About,
                         Profile.RSS As RSS
                         FROM Members, Profile
@@ -44,8 +50,14 @@ $profileVideo = $rows['ProfileVideo'];
 $posterName = $rows['Poster'];
 $firstName = $rows['FirstName'];
 $lastName = $rows['LastName'];
+$address = $rows['Address'];
+$showAddress = $rows['ShowAddress'];
 $city = $rows["City"];
 $state = $rows['State'];
+$zip = $rows['Zip'];
+$showZip = $rows['ShowZip'];
+$phone = $rows['Phone'];
+$showPhone = $rows['ShowPhone'];
 $about = $rows['About'];
 $rss = $rows['RSS'];
 $email = $rows['Email'];
@@ -116,10 +128,12 @@ if (trim($profileVideo) != "default_video.png") { ?>
     <br/><br/>
 
     <!--Profile video --------------------------------------------------------------------------------->
-
     <?php if ($profileVideo != "default_video.png") { ?>
-        <video src = " <?php echo $videoPath . $profileVideo ?>" poster="/poster/<?php echo $posterName ?>"  preload="auto" controls />
+        <div align = "center">
+            <video src = " <?php echo $videoPath . $profileVideo ?>" poster="/poster/<?php echo $posterName ?>"  preload="auto" autoplay="autoplay" muted controls />
+        </div>
     <?php } ?>
+
 
 
     <h3>
@@ -129,17 +143,29 @@ if (trim($profileVideo) != "default_video.png") { ?>
 
     <!--Profile ---------------------------------------------------------------------------------------->
 
-
+    <?php
+    if ($showZip == 0) {
+        $zip = '';
+    }
+    if ($showAddress == 0) {
+        $address = '';
+    }
+    if ($showPhone == 0) {
+        $phone = '';
+    }
+    ?>
     <br/>
-
-    <?php echo "<span class='profileFont'>$city, $state </span>"; ?>
-
+    <?php echo "<span class='profileFont'>$address </span> <br/>"; ?>
+    <?php echo "<span class='profileFont'>$city, $state $zip </span> <br/>"; ?>
+    <?php echo "<span class='profileFont'>$phone</span>"; ?>
     <br/><br/>
 
 
     <?php echo "<span class='profileFont'>$about</span>"; ?>
 
     <br/><br/>
+
+
 
     <?php if (isset($ID) && !empty($ID) && $memberID != $ID) { ?>
 

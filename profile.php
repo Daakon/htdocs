@@ -188,9 +188,13 @@ if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
     }
     else { $city = getMemberCity($ID); }
 
+    $address = $_POST['Address'];
+    $showAddress = $_POST['ShowAddress'];
     $state = $_POST['State'];
     $zip = $_POST['Zip'];
+    $showZip = $_POST['ShowZip'];
     $phone = $_POST['Phone'];
+    $showPhone = $_POST['ShowPhone'];
     $email = $_POST['Email'];
     $about = $_POST['About'];
     $about = mysql_real_escape_string($about);
@@ -250,10 +254,14 @@ if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
     $result = mysql_query($sql) or die(mysql_error());
     // update Profile table
     $sql = "Update Profile
-            Set City = '$city',
+            Set Address = '$address',
+                ShowAddress = $showAddress,
+                City = '$city',
                 State = '$state',
                 Phone = '$phone',
+                ShowPhone = $showPhone,
                 Zip = '$zip',
+                ShowZip = $showZip,
                 About = '$about',
                 RSS = '$rss'
              WHERE Member_ID = $ID ";
@@ -516,10 +524,14 @@ $bgPhoto = $row['ProfilePhoto'];
                         Profile.ProfilePhoto As ProfilePhoto,
                         Profile.ProfileVideo As ProfileVideo,
                         Profile.Poster As Poster,
+                        Profile.Address As Address,
+                        Profile.ShowAddress As ShowAddress,
                         Profile.City As City,
                         Profile.State As State,
                         Profile.Zip As Zip,
+                        Profile.ShowZip As ShowZip,
                         Profile.Phone As Phone,
+                        Profile.ShowPhone As ShowPhone,
                         Profile.About As About,
                         Profile.RSS As RSS
                         FROM Members, Profile
@@ -539,10 +551,14 @@ $bgPhoto = $row['ProfilePhoto'];
             $posterName = $rows['Poster'];
             $firstName = $rows['FirstName'];
             $lastName = $rows['LastName'];
+            $address = $rows['Address'];
+            $showAddress = $rows['ShowAddress'];
             $city = $rows["City"];
             $state = $rows['State'];
             $zip = $rows['Zip'];
+            $showZip = $rows['ShowZip'];
             $phone = $rows['Phone'];
+            $showPhone = $rows['ShowPhone'];
             $about = $rows['About'];
             $email = $rows['Email'];
             $password = $rows['Password'];
@@ -665,6 +681,34 @@ $bgPhoto = $row['ProfilePhoto'];
                 </div>
 
                 <div class="form-group">
+                    <label for="Address">Address </label><span style="font-style: italic;padding-left:5px;font-size:12px;">
+                    <input type="text" class="form-control" id="Address" name="Address" value="<?php echo $address ?>" />
+                </div>
+
+                <?php
+                $otherShowAddressValue = "";
+                $otherShowAddressText = "";
+                if ($showAddress == 1) {
+                    $showAddressText = "Yes";
+                    $otherShowAddressValue = 0;
+                    $otherShowAddressText = "No";
+                }
+                else {
+                    $showAddressText = "No";
+                    $otherShowAddressValue = 1;
+                    $otherShowAddressText = "Yes";
+                }
+                ?>
+
+                <div class="form-group">
+                    <label for="ShowAddress">Show address in profile</label>
+                    <select id="ShowAddress" name="ShowAddress" class="form-control">
+                        <option value="<?php echo $showAddress ?>"><?php echo $showAddressText ?></option>
+                        <option value="<?php echo $otherShowAddressValue ?>"><?php echo $otherShowAddressText ?></option>
+                    </select>
+                </div>
+
+                <div class="form-group">
                     <label for="State">State</label>
                     <select id="State" name="State" class="form-control" onchange="getCity(this);" >
                         <option  value="<?php echo $state ?>"><?php echo $state ?></option>
@@ -687,11 +731,56 @@ $bgPhoto = $row['ProfilePhoto'];
                     <input type="text" class="form-control" id="Zip" name="Zip" value="<?php echo $zip ?>" />
                 </div>
 
+                <?php
+                $otherShowZipValue = "";
+                $otherShowZipText = "";
+                if ($showZip == 1) {
+                    $showZipText = "Yes";
+                    $otherShowZipValue = 0;
+                    $otherShowZipText = "No";
+                }
+                else {
+                    $showZipText = "No";
+                    $otherShowZipValue = 1;
+                    $otherShowZipText = "Yes";
+                }
+                ?>
+
+                <div class="form-group">
+                    <label for="ShowZip">Show zip code in profile</label>
+                    <select id="ShowZip" name="ShowZip" class="form-control">
+                        <option value="<?php echo $showZip ?>"><?php echo $showZipText ?></option>
+                        <option value="<?php echo $otherShowZipValue ?>"><?php echo $otherShowZipText ?></option>
+                    </select>
+                </div>
+
                 <div class="form-group">
                     <label for="Phone">Phone</label>
                     <input type="text" class="form-control" id="Phone" name="Phone" value="<?php echo $phone ?>" />
                 </div>
 
+                <?php
+                $otherShowPhoneValue = "";
+                $otherShowPhoneText = "";
+                if ($showPhone == 1) {
+                    $showPhoneText = "Yes";
+                    $otherShowPhoneValue = 0;
+                    $otherShowPhoneText = "No";
+                }
+                else {
+                    $showPhoneText = "No";
+                    $otherShowPhoneValue = 1;
+                    $otherShowPhoneText = "Yes";
+                }
+                ?>
+
+                <div class="form-group">
+                    <label for="ShowPhone">Show phone number in profile</label>
+                    <select id="ShowPhone" name="ShowPhone" class="form-control">
+                        <option value="<?php echo $showPhone ?>"><?php echo $showPhoneText ?></option>
+                        <option value="<?php echo $otherShowPhoneValue ?>"><?php echo $otherShowPhoneText ?></option>
+                    </select>
+                </div>
 
                     <label for="Service">Primary Interest</label>
                 <div class="form-group">
