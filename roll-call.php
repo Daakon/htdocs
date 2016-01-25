@@ -45,10 +45,12 @@ $sqlRollCall = " SELECT DISTINCT
 $rollCallResult = mysql_query($sqlRollCall) or die(logError(mysql_error(), $url, "Getting Connection Feed data"));
 // if no results
 if (mysql_num_rows($rollCallResult) == 0) {
+    $greetText = "Make the first $genre connection in $searchCity ";
+    if ($genre == "Individual") { $greetText = ""; }
     ?>
     <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 roll-call"
          align="left">
-        Make The First <?php echo $genre ?> Connection in <?php echo $searchCity ?>
+         <?php echo $greetText ?>
     </div>
 <?php }
 if (mysql_num_rows($rollCallResult) > 0) {

@@ -144,6 +144,9 @@ $age = $rows['Age'];
     if ($showPhone == 0) {
         $phone = '';
     }
+    else {
+        $phone = formatPhoneNumber($phone);
+    }
     ?>
 
     <?php echo "<span class='profileFont'>$address </span> <br/>"; ?>
