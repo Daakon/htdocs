@@ -314,6 +314,20 @@ if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
             return false;
         }
 
+
+        // check phone if provided
+        var phone = document.getElementById('Phone').value;
+        if (phone.length > 0) {
+            var format =/^\d{3}\-?\d{3}\-?\d{4}$/;
+            if (format.test(phone)) {
+                return true
+            }
+            else {
+                alert('Invalid phone format');
+                return false;
+            }
+        }
+
         // check password
         var password = document.getElementById('Password').value;
         if (password == '') {

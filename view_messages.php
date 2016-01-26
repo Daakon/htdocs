@@ -770,6 +770,9 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
                 $recipientID = get_id_from_username($urlUsername);
             }
 
+            if ($groupChatExist) {
+                echo "<span style='font-weight:bold;font-size:18px;'>In this group chat:</span> $groupName <br/><br/>";
+            }
 
             ?>
 
