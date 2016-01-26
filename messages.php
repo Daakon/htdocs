@@ -96,29 +96,39 @@ $ID = $_SESSION['ID'];
 
                         // check if 2 people have new messages first
 
-                        $sqly = "SELECT ID FROM Messages WHERE ThreadOwner_ID = $ID And (Sender_ID = $ID or Receiver_ID = $ID) And InitialMessage = 1 And New = 1 And GroupID = '$groupID' ";
+                        $sqly = "SELECT ID FROM Messages WHERE ThreadOwner_ID = $ID And (Sender_ID = $ID or Receiver_ID = $ID) And (InitialMessage = 1) And (New = 1) And (GroupID = '$groupID') ";
 
                         $resulty = mysql_query($sqly) or die();
 
-                        if (mysql_num_rows($resulty) > 0 || mysql_num_rows($resultz) > 0) {
+                        if (mysql_num_rows($resulty) > 0) {
                             // get ALL new messages owned by current session against the other person
 
-                            $sql3 = "SELECT ID FROM Messages WHERE (ThreadOwner_ID = $ID) And (Sender_ID = $otherID or Receiver_ID = $otherID)  And (New = 1) And (GroupID = '') ";
-                            $result3 = mysql_query($sql3) or die(logError(mysql_error(), $url, "Getting all new messages owned by current session against other person"));
-                            $row3 = mysql_fetch_assoc($result3);
+                            $sql4 = "SELECT ID FROM Messages WHERE (ThreadOwner_ID = $ID) And (Sender_ID = $otherID or Receiver_ID = $otherID)  And (New = 1) And (GroupID = '') ";
+                            $result4 = mysql_query($sql4) or die(logError(mysql_error(), $url, "Getting all new messages owned by current session against other person"));
+                            $row4 = mysql_fetch_assoc($result4);
 
                             // if we are past the first message, subtract the initial message row
 
-                            $messageCount = mysql_num_rows($result3);
+                            $messageCount = mysql_num_rows($result4);
+
                             $firstMessage = $rows['FirstMessage'];
                             if ($firstMessage == 0) {
                                     $messageCount = $messageCount - 1;
                                 }
+                            if ($messageCount > 0) {
+
+                                $notification = "<span style='color:#E30022;font-weight: bold'>". $messageCount." New</font>";
+                            }
+                            else {
+
+                                $notification = '';
+                            }
+                        }
+                        else {
+                            $notification = '';
                         }
 
-                        if ($messageCount > 0) {
-                            $notification = "<span style='color:#E30022;font-weight: bold'>". $messageCount." New</font>";
-                        }
+
                     }
 
 

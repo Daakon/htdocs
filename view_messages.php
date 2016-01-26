@@ -125,44 +125,6 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
         }
 
 
-        if ($isGroupChat == false) {
-            // check if sender has prior message thread with receiver
-            $sql = "SELECT * FROM Messages WHERE (ThreadOwner_ID = $ID) And (Receiver_ID = $receiverID Or Sender_ID = $receiverID) And (InitialMessage = 1) ";
-            $result = mysql_query($sql) or die();
-            $numRows = mysql_num_rows($result);
-            $initialMessage;
-            /*  if the sender deleted their messages with the receiver
-                the thread would no longer exist at all
-                so this would be a first message regardless for the sender
-            */
-
-            if ($numRows > 0) {
-                $initialMessage = 0;
-                $firstMessage = 0;
-            } else {
-                $initialMessage = 1;
-                $firstMessage = 1;
-            }
-
-            // check if sender has prior message thread with receiver
-            $sql = "SELECT * FROM Messages WHERE (ThreadOwner_ID = $receiverID) And (Receiver_ID = $ID Or Sender_ID = $ID) And (InitialMessage = 1) ";
-            $result = mysql_query($sql) or die();
-            $numRows = mysql_num_rows($result);
-            $initialMessage;
-            /*  if the sender deleted their messages with the receiver
-                the thread would no longer exist at all
-                so this would be a first message regardless for the sender
-            */
-
-            if ($numRows > 0) {
-                $rInitialMessage = 0;
-                $rFirstMessage = 0;
-            } else {
-                $rInitialMessage = 1;
-                $rFirstMessage = 1;
-            }
-        }
-
         //--------------------------------------------------------------------
         if ($groupChatExist) {
             $rInitialMessage = 0;
@@ -380,6 +342,42 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
                 // if not a group chat ----------------------------------------
                if ($isGroupChat == false) {
 
+                   // check if sender has prior message thread with receiver
+                   $sql = "SELECT * FROM Messages WHERE (ThreadOwner_ID = $ID) And (Receiver_ID = $receiverID Or Sender_ID = $receiverID) And (InitialMessage = 1) And (GroupID = '') ";
+                   $result = mysql_query($sql) or die();
+                   $numRows = mysql_num_rows($result);
+                   $initialMessage;
+                   /*  if the sender deleted their messages with the receiver
+                       the thread would no longer exist at all
+                       so this would be a first message regardless for the sender
+                   */
+
+                   if ($numRows > 0) {
+                       $initialMessage = 0;
+                       $firstMessage = 0;
+                   } else {
+                       $initialMessage = 1;
+                       $firstMessage = 1;
+                   }
+
+                   // check if sender has prior message thread with receiver
+                   $sql = "SELECT * FROM Messages WHERE (ThreadOwner_ID = $receiverID) And (Receiver_ID = $ID Or Sender_ID = $ID) And (InitialMessage = 1) And (GroupID = '') ";
+                   $result = mysql_query($sql) or die();
+                   $numRows = mysql_num_rows($result);
+                   $initialMessage;
+                   /*  if the sender deleted their messages with the receiver
+                       the thread would no longer exist at all
+                       so this would be a first message regardless for the sender
+                   */
+
+                   if ($numRows > 0) {
+                       $rInitialMessage = 0;
+                       $rFirstMessage = 0;
+                   } else {
+                       $rInitialMessage = 1;
+                       $rFirstMessage = 1;
+                   }
+
                    // create thread for sender
                    $sql = "INSERT INTO Messages (ThreadOwner_ID, Sender_ID,  Receiver_ID,    Subject,    Message,  InitialMessage, FirstMessage ,      MessageDate) Values
                                      ($ID,             $ID,       $receiverID, '$subject',  '$message', $initialMessage, $firstMessage, CURRENT_TIMESTAMP ) ";
@@ -538,7 +536,13 @@ foreach ($_POST['receiverID'] as $key => $receiverID) {
 // delete messages
 if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
     $receiverID = $_POST['receiverID'];
-    $sql = "DELETE FROM Messages WHERE ThreadOwner_ID = $ID AND (Sender_ID = $receiverID Or Receiver_ID = $receiverID) ";
+    $isGroupChat = $_POST['isGroupChat'];
+    $groupID = $_POST['groupID'];
+    $deleteGroupChat = '';
+    if ($isGroupChat) {
+        $deleteGroupChat = "AND (GroupID = '$groupID') ";
+    }
+    $sql = "DELETE FROM Messages WHERE ThreadOwner_ID = $ID AND (Sender_ID = $receiverID Or Receiver_ID = $receiverID) $deleteGroupChat";
     mysql_query($sql) or die(mysql_error());
     $username = get_username($ID);
     echo "<script>location = '/messages/$username'</script>";
@@ -805,7 +809,10 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
             <?php if ($rowCount == true) { ?>
                 <form action="" method="post" onsubmit = "return confirm('Do you really want to delete this message thread')" >
                     <input type="hidden" id="receiverID" name="receiverID" value="<?php echo $recipientID ?>" />
+                    <input type="hidden" id="isGroupChat" name="isGroupChat" value="<?php echo $isGroupChat ?>" />
+                    <input type="hidden" id="groupID" name="groupID" value="<?php echo $urlUsername ?>" />
                     <input type="submit" class="btn btn-default" style="background:red;color:white;" id="delete" name="delete" value="Delete Messages" />
+
                 </form>
             <?php } ?>
             <!-------------------------------------------------------------------->
@@ -822,7 +829,7 @@ $updateGroupChat = "";
    so it would be a first message again for the sender
 */
 
-    if ($groupChatExist == true) {
+    if ($groupChatExist) {
         $sql = "UPDATE Messages SET New = 0 WHERE ThreadOwner_ID = $ID And GroupID = '$urlUsername' ";
         mysql_query($sql) or die();
         exit;
