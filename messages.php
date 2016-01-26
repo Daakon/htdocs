@@ -59,13 +59,12 @@ $ID = $_SESSION['ID'];
 
                             // get ALL new messages owned by current session against the other person
 
-                            $sql3 = "SELECT ID FROM Messages WHERE ThreadOwner_ID = $ID And New = 1 And GroupID = '$groupID' AND InitialMessage =1 ";
+                            $sql3 = "SELECT ID FROM Messages WHERE ThreadOwner_ID = $ID And (New = 1) And (Sender_ID != $ID) And (GroupID = '$groupID') And (Receiver_ID = $ID) ";
                             $result3 = mysql_query($sql3) or die(logError(mysql_error(), $url, "Getting all new messages owned by current session against other person"));
                             $row3 = mysql_fetch_assoc($result3);
                             $count = mysql_num_rows($result3);
 
                             // if we are past the first message, subtract the initial message row
-
                             $messageCount = mysql_num_rows($result3);
                             $firstMessage = $rows['FirstMessage'];
                             if ($firstMessage == 0) {

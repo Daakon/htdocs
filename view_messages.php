@@ -388,7 +388,9 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
                                                  ($receiverID,    $ID,        $receiverID, '$subject', '$message',     '$rInitialMessage',    '1',        $rFirstMessage,     CURRENT_TIMESTAMP ) ";
                    mysql_query($sql) or die(mysql_error());
 
-                   build_and_send_email($ID, $receiverID, 8, "", "");
+                   if ($receiverID != $ID) {
+                       build_and_send_email($ID, $receiverID, 8, "", "");
+                   }
                }
 
 
@@ -418,8 +420,9 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
                     WHERE ThreadOwner_ID = $item AND GroupID = '$groupID' ";
                     mysql_query($sql2) or die(mysql_error());
 
-                    // and groupID param
-                    build_and_send_email($ID, $item, 8, "", "", $groupID);
+                    if ($item != $ID) {
+                        build_and_send_email($ID, $item, 8, "", "", $groupID);
+                    }
                 }
             }
 
@@ -453,8 +456,10 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
                                                  ('$receiverID',    $ID,      $receiverID,     '$subject', '$message', '$rInitialMessage',  '', $rFirstMessage, CURRENT_TIMESTAMP,  '$groupID',   '$groupName' ) ";
                     mysql_query($sql) or die(mysql_error());
 
-                    // add groupID param
-                    build_and_send_email($ID, $receiverID, 8, "", "", $groupID);
+
+                    if ($receiverID != $ID) {
+                        build_and_send_email($ID, $receiverID, 8, "", "", $groupID);
+                    }
 
                     // sent notification
                     if (strlen(check_phone($receiverID)) > 0) {
@@ -485,8 +490,10 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
                 echo "<script>alert('Message Sent'); </script>";
                 $receiverID = $_POST['receiverID'];
                 // sent notification
+                if ($receiverID != $ID) {
                 if (strlen(check_phone($receiverID)) > 0) {
                     text_notification($receiverID, $ID);
+                }
                 }
             }
         }
