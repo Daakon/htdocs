@@ -30,12 +30,12 @@ if (strstr($url, "localhost")) {
 elseif (strstr($url, "dev")) {
     $username = 'rapportb_rapport';
     $rapportbook = 'rapportb_devrapportbook';
-    $pass = 'admin10';
+    $pass = 'admin@10';
 }
 else {
     $username = 'rapportb_rapport';
     $rapportbook = 'rapportb_rapportbook';
-    $pass = 'admin10';
+    $pass = 'admin@10';
 }
 
 

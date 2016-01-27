@@ -182,7 +182,7 @@ function build_and_send_email($senderId, $toId, $notification, $postID, $pass, $
 
         $groupText = '';
         if (strlen($groupID) > 0) {
-            $groupText = "group";
+            //$groupText = "group";
             $username = $groupID;
         }
 
@@ -203,7 +203,7 @@ function build_and_send_email($senderId, $toId, $notification, $postID, $pass, $
         }
 
         $senderName = get_users_name_by_id($senderId);
-        $subject = "$senderName has sent you a new $groupText <a href='$link'>message</a>";
+        $subject = "$senderName has sent you a new <a href='$link'>message</a>";
     }
     if ($notification == 9) {
         // no posts

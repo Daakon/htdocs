@@ -84,7 +84,7 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
     if ($isGroupChat) {
         if (strlen($groupID == 0)) {
             if (strlen($groupName) == 0) {
-                echo "<script>alert('You must assign at least 2 people to this group');</script>";
+                echo "<script>alert('You must assign at least 2 people to this chat.');</script>";
                 exit;
             }
         }
@@ -652,7 +652,7 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
                 <?php if (!empty($_GET['groupchat']) || (!isset($recipientID) && empty($recipientID))) {
                     $isGroupChat = true;
                     ?>
-                    <h5>Group Chat
+                    <h5>Chat
                         &nbsp;&nbsp;<input type="text" class="search" id="searchID" value="<?php $final_name ?>"
                                            placeholder="Search for people"/>
                         <br/>
@@ -782,7 +782,7 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
             }
 
             if ($groupChatExist) {
-                echo "<span style='font-weight:bold;font-size:18px;'>In this group chat:</span> $groupName <br/><br/>";
+                echo "<span style='font-weight:bold;font-size:18px;'>In this chat:</span> $groupName <br/><br/>";
             }
 
             ?>

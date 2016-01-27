@@ -21,7 +21,7 @@ $ID = $_SESSION['ID'];
 
             <h2>Messages</h2>
             <hr/>
-            <a href="/view_messages?groupchat=groupchat">Start Group Chat</a>
+            <a href="/view_messages?groupchat=groupchat">Start Chat</a>
             <hr/>
 
             <?php
