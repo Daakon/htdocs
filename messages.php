@@ -51,6 +51,10 @@ $ID = $_SESSION['ID'];
                     if (strlen($groupID) > 0 && $groupID == $groupID) {
                         $pic = "group-chat-photo.png";
 
+
+                            $profilePic = "<div style='float:left; display:inline'>".getChatProfilePic($groupID, $ID)."</div>";
+
+
                         $name = $groupName;
                         $username = $groupID;
 
@@ -88,7 +92,8 @@ $ID = $_SESSION['ID'];
 
                         $result2 = mysql_query($sql2) or die(mysql_error());
                         $rows2 = mysql_fetch_assoc($result2);
-                        $pic = $rows2['ProfilePhoto'];
+                        $profilePhoto = $rows2['ProfilePhoto'];
+                        $profilePic = "<img src = '/media/$profilePhoto' class='profilePhoto-Feed' alt='' /> ";
 
                         $name = $rows2['FirstName'] . ' ' . $rows2['LastName'];
                         $username = $rows2['Username'];
@@ -131,10 +136,12 @@ $ID = $_SESSION['ID'];
                     }
 
 
+
+
                 echo "
                 <div class='profileImageWrapper-Feed'>
                 <a href = '/view_messages/$username'>
-                <img src = '$mediaPath$pic' class='profilePhoto-Feed' alt='' />
+                $profilePic
                 </a>
                 </div>
 

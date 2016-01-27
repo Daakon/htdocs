@@ -140,10 +140,10 @@ function check_password($user_id, $pass)
 function get_users_photo_by_id_raw($user_id)
 {
 
-    $sql = "SELECT DISTINCT MediaName FROM Media WHERE ID = $user_id";
+    $sql = "SELECT DISTINCT ProfilePhoto FROM Profile WHERE Member_ID = $user_id";
     $result = mysql_query($sql) or die(logError(mysql_error(), "model_functions", "get_users_photo_by_id_raw() failed"));
     while ($rows = mysql_fetch_assoc($result)) {
-        return $rows['MediaName'];
+        return $rows['ProfilePhoto'];
     }
 }
 
@@ -356,6 +356,36 @@ function formatPhoneNumber($phoneNumber) {
     }
 
     return $phoneNumber;
+}
+
+function getChatProfilePic($groupID, $ID) {
+    $sql = "SELECT ThreadOwner_ID FROM Messages Where GroupID = '$groupID' ";
+    $result = mysql_query($sql);
+    $width = '';
+    $height = '';
+
+    if (mysql_num_rows($result) > 2) { $width = 'width="50%"'; }
+
+    $profile_ids = array();
+    //Iterate over the results and sort out the biz ids from the consumer ones.
+    while ($rows = mysql_fetch_assoc($result)) {
+        array_push($profile_ids, $rows['ThreadOwner_ID']);
+    }
+
+//Boil the ids down to unique values bc we dont want it send double emails or notifications
+    $profile_ids = array_unique($profile_ids);
+//Send consumer notifications
+    $profilePic = '';
+
+    foreach ($profile_ids as $item) {
+
+        if (!empty($item) && $item != $ID) {
+            // only send email if account & email active
+            $profilePic .= "<image src= '/media/".get_users_photo_by_id_raw($item)."' style='float:left;' $width $height  alt='' />";
+        }
+    }
+
+    return $profilePic;
 }
 
 // text function for direct messages
