@@ -364,7 +364,7 @@ function getChatProfilePic($groupID, $ID) {
     $width = '';
     $height = '';
 
-    if (mysql_num_rows($result) > 2) { $width = 'width="50%"'; }
+    if (mysql_num_rows($result) > 2) { $width = 'width="50%"'; $height='height="33px"'; }
 
     $profile_ids = array();
     //Iterate over the results and sort out the biz ids from the consumer ones.
