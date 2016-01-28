@@ -423,6 +423,10 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
                     if ($item != $ID) {
                         build_and_send_email($ID, $item, 8, "", "", $groupID);
                     }
+                    // send notification
+                    if (strlen(check_phone($item)) > 0) {
+                        text_notification($item, $ID, $groupID);
+                    }
                 }
             }
 
@@ -461,7 +465,7 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
                         build_and_send_email($ID, $receiverID, 8, "", "", $groupID);
                     }
 
-                    // sent notification
+                    // send notification
                     if (strlen(check_phone($receiverID)) > 0) {
                         text_notification($receiverID, $ID);
                     }

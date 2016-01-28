@@ -389,7 +389,7 @@ function getChatProfilePic($groupID, $ID) {
 }
 
 // text function for direct messages
-function text_notification($receiverID, $senderID)
+function text_notification($receiverID, $senderID, $groupID)
 {
     if (checkSMSActive($receiverID)) {
         require 'class-Clockwork.php';
@@ -407,6 +407,10 @@ function text_notification($receiverID, $senderID)
             $clockwork = new Clockwork($API_KEY);
             $domain;
             $username = get_username($senderID);
+            // check if group message
+            if (strlen($groupID) > 0) {
+                $username = $groupID;
+            }
             if (strstr($url, "dev")) {
                 $domain = "http://dev.rapportbook.com/view_messages/$username";
             } else {
