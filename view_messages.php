@@ -390,7 +390,14 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
 
                    if ($receiverID != $ID) {
                        build_and_send_email($ID, $receiverID, 8, "", "");
+
+                       // send notification
+                       if (strlen(check_phone($receiverID)) > 0) {
+
+                           text_notification($receiverID, $ID, $groupID);
+                       }
                    }
+
                }
 
 
