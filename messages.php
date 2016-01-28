@@ -63,7 +63,7 @@ $ID = $_SESSION['ID'];
 
                             // get ALL new messages owned by current session against the other person
 
-                            $sql3 = "SELECT ID FROM Messages WHERE ThreadOwner_ID = $ID And (New = 1) And (Sender_ID != $ID) And (GroupID = '$groupID') And (Receiver_ID = $ID) ";
+                            $sql3 = "SELECT ID FROM Messages WHERE ThreadOwner_ID = $ID And (New = 1) And (GroupID = '$groupID') And (Receiver_ID = $ID) ";
                             $result3 = mysql_query($sql3) or die(logError(mysql_error(), $url, "Getting all new messages owned by current session against other person"));
                             $row3 = mysql_fetch_assoc($result3);
                             $count = mysql_num_rows($result3);
@@ -80,6 +80,9 @@ $ID = $_SESSION['ID'];
 
                         if ($messageCount > 0) {
                             $notification = "<span style='color:#E30022;font-weight: bold'>". $messageCount." New</font>";
+                        }
+                        else {
+                            $notification = '';
                         }
 
                     }
