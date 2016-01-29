@@ -18,13 +18,13 @@ get_header();
         require 'connect.php';
         $email = trim($_POST['email']);
 
-        $sql = "SELECT Email FROM Members WHERE (Email = '$email') ";
+        $sql = "SELECT ID, Email FROM Members WHERE (Email = '$email') ";
 
 
         $result = mysql_query($sql) or die(logError(mysql_error(), $url, "Getting Email from Members"));
         $rows = mysql_fetch_assoc($result);
 
-
+        $toId = $rows['ID'];
         $pass = $rows['Password'];
 
 
@@ -36,9 +36,7 @@ get_header();
         } // if email was found
 
         else {
-            $toId = $rows['ID'];
-
-            if (build_and_send_email(1, $toId, 5, '', '')) {
+            if (build_and_send_email(1, $toId, 5, '', '', '')) {
                 echo "<script>alert('Your password reset has been sent to your email on file');location='./'</script>";
             }
 

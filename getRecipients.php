@@ -10,6 +10,7 @@
 
     function removeRecipient(id) {
         $("span[id="+id+"]").remove();
+        $("input[value="+id+"]").val('');
         $("input[value="+id+"]").remove();
     }
 </script>
@@ -22,7 +23,7 @@ require 'imports.php';
 if($_POST)
 {
     $q=$_POST['search'];
-    $sql =mysql_query("select ID,FirstName,LastName,Email from Members where FirstName like '%$q%' or LastName like '%$q%' order by id LIMIT 5");
+    $sql =mysql_query("select ID,FirstName,LastName,Email from Members where concat(FirstName,'',LastName) like '%$q%' order by id LIMIT 5");
     while($row=mysql_fetch_array($sql))
     {
         $name=$row['FirstName'] . ' '.$row['LastName'];

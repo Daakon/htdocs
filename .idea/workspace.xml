@@ -5,7 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="51867226-c8dd-43fb-9a46-7c8a9e9ab742" name="Default" comment="Added media page.&#10;&#10;">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/view_messages.php" afterPath="$PROJECT_DIR$/view_messages.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/forgot-password.php" afterPath="$PROJECT_DIR$/forgot-password.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/getRecipients.php" afterPath="$PROJECT_DIR$/getRecipients.php" />
     </list>
     <ignored path="htdocs.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -63,7 +65,6 @@
         <option value="$PROJECT_DIR$/getState.php" />
         <option value="$PROJECT_DIR$/post_disapprove.php" />
         <option value="$PROJECT_DIR$/media_disapprove.php" />
-        <option value="$PROJECT_DIR$/forgot-password.php" />
         <option value="$PROJECT_DIR$/create_pass.php" />
         <option value="$PROJECT_DIR$/member_media.php" />
         <option value="$PROJECT_DIR$/member_following.php" />
@@ -76,7 +77,6 @@
         <option value="$PROJECT_DIR$/signup.php" />
         <option value="$PROJECT_DIR$/loadMessages.php" />
         <option value="$PROJECT_DIR$/html_functions.php" />
-        <option value="$PROJECT_DIR$/getRecipients.php" />
         <option value="$PROJECT_DIR$/commentInsert.php" />
         <option value="$PROJECT_DIR$/post_approve.php" />
         <option value="$PROJECT_DIR$/media_approve.php" />
@@ -96,6 +96,8 @@
         <option value="$PROJECT_DIR$/messages.php" />
         <option value="$PROJECT_DIR$/model_functions.php" />
         <option value="$PROJECT_DIR$/view_messages.php" />
+        <option value="$PROJECT_DIR$/getRecipients.php" />
+        <option value="$PROJECT_DIR$/forgot-password.php" />
       </list>
     </option>
   </component>
@@ -109,10 +111,9 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" interpreter_name="PHP 5.5" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="5" />
     <option name="y" value="23" />
     <option name="width" value="1280" />
-    <option name="height" value="722" />
+    <option name="height" value="714" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -170,7 +171,7 @@
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="full.screen.before.presentation.mode" value="false" />
     <property name="FullScreen" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/model_functions.php" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/forgot-password.php" />
     <property name="LayoutCode.rearrangeEntriesPHP" value="false" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="191" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
@@ -369,7 +370,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="5" y="23" width="1280" height="722" extended-state="6" />
+    <frame x="0" y="23" width="1280" height="714" extended-state="6" />
     <editor active="false" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21015625" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -626,13 +627,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/forgot-password.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.32297063">
-          <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/media_post_file_path.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.029360967">
@@ -765,13 +759,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.18611111">
           <caret line="45" column="41" selection-start-line="45" selection-start-column="41" selection-end-line="45" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/getRecipients.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.2692308">
-          <caret line="5" column="116" selection-start-line="5" selection-start-column="116" selection-end-line="5" selection-end-column="116" />
         </state>
       </provider>
     </entry>
@@ -1043,6 +1030,29 @@
             <marker date="1454018127000" expanded="true" signature="36610:36693" placeholder="UPDATE Messa... " />
             <marker date="1454018127000" expanded="true" signature="36803:36931" placeholder="UPDATE Messa... " />
             <marker date="1454018127000" expanded="true" signature="36981:37109" placeholder="UPDATE Messa... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/getRecipients.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6619469">
+          <caret line="25" column="138" selection-start-line="25" selection-start-column="138" selection-end-line="25" selection-end-column="138" />
+          <folding>
+            <marker date="1454025212000" expanded="true" signature="313:332" placeholder="..." />
+            <marker date="1454025212000" expanded="true" signature="357:373" placeholder="..." />
+            <marker date="1454025212000" expanded="true" signature="922:1036" placeholder="select ID,Fi... Members" />
+            <marker date="1454025212000" expanded="true" signature="922:1037" placeholder="select ID,Fi... Members" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/forgot-password.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.66902655">
+          <caret line="37" column="14" selection-start-line="37" selection-start-column="14" selection-end-line="37" selection-end-column="14" />
+          <folding>
+            <marker date="1454026060000" expanded="true" signature="279:333" placeholder="SELECT ID, E... Members" />
           </folding>
         </state>
       </provider>
