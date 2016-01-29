@@ -429,11 +429,12 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
 
                     if ($item != $ID) {
                         build_and_send_email($ID, $item, 8, "", "", $groupID);
+                        // send notification
+                        if (strlen(check_phone($item)) > 0) {
+                            text_notification($item, $ID, $groupID);
+                        }
                     }
-                    // send notification
-                    if (strlen(check_phone($item)) > 0) {
-                        text_notification($item, $ID, $groupID);
-                    }
+
                 }
             }
 
