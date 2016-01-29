@@ -391,8 +391,8 @@ function getChatProfilePic($groupID, $ID) {
 // text function for direct messages
 function text_notification($receiverID, $senderID, $groupID)
 {
+    require_once('class-Clockwork.php');
     if (checkSMSActive($receiverID)) {
-        require 'class-Clockwork.php';
         $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
         $result = mysql_query("SELECT Phone FROM Profile WHERE Member_ID = $receiverID") or die(logError(mysql_error(), "model_functions", "checkSMSActive() failed"));
         $row = mysql_fetch_assoc($result);
@@ -402,38 +402,42 @@ function text_notification($receiverID, $senderID, $groupID)
         $senderName = get_users_name($senderID);
         $receiverName = get_users_name($receiverID);
         $API_KEY = '7344d6254838e6d2c917c4cb78305a3235ba951d';
-        try {
+
             // Create a Clockwork object using your API key
             $clockwork = new Clockwork($API_KEY);
-            $domain;
+            $domain = null;
             $username = get_username($senderID);
             // check if group message
             if (strlen($groupID) > 0) {
                 $username = $groupID;
             }
             if (strstr($url, "dev")) {
-                $domain = "http://dev.rapportbook.com/view_messages/$username";
+                $domain = "dev.rapportbook.com/view_messages/$username";
             } else {
                 $domain = "http://rapportbook.com/view_messages/$username";
             }
+
+            $text = "You have a new message from $senderName on Rapportbook: $domain";
+
             // Setup and send a message
-            $text = "$senderName sent you a new message on Rapportbook. $domain";
             $message = array('to' => $number, 'message' => $text);
             $result = $clockwork->send($message);
             // Check if the send was successful
+        if (strlen($groupID) > 0) {} else {
             if ($result['success']) {
                 //echo 'Message sent - ID: ' . $result['id'];
-                echo "<script>alert('$receiverName was also sent an SMS');</script>";
+                echo "<script>alert('$receiverName was sent an SMS');</script>";
             } else {
                 $error = $result['error_message'];
                 echo "<script>alert('Message failed - Error: $error');</script>";
             }
-        } catch (ClockworkException $e) {
-            // dont want to display failures in the browser
-            //echo 'Exception sending SMS: ' . $e->getMessage();
         }
+
     }
+    return true;
 }
+
+
 
 // close opened html tags
 function closetags($html)

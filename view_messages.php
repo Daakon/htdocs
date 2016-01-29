@@ -458,7 +458,7 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
 
 
                 // loop for receivers in NEW group message
-                $receiverID = array_push($_POST['receiverID'], $ID);
+                array_push($_POST['receiverID'], $ID);
 
                 foreach ($_POST['receiverID'] as $key => $receiverID) {
 
@@ -470,14 +470,20 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
 
                     if ($receiverID != $ID) {
                         build_and_send_email($ID, $receiverID, 8, "", "", $groupID);
-                        // send notification
-                        if (strlen(check_phone($receiverID)) > 0) {
-                            text_notification($receiverID, $ID);
+                    }
+                }
+
+                foreach ($_POST['receiverID'] as $key => $receiverID) {
+                    // send notification
+                    if (strlen(check_phone($receiverID)) > 0) {
+                        if (text_notification($receiverID, $ID, $groupID)) {
+                            $receiverName = get_users_name($receiverID);
+                            $text = $receiverName ." was sent an SMS";
+                            echo "<script>alert('$text');</script>";
                         }
                     }
-
-
                 }
+
             }
 
                 echo "<script>alert('Message Sent'); </script>";
