@@ -418,10 +418,19 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
                 $recipient_ids = array_unique($recipient_ids);
                 foreach ($recipient_ids as $item) {
 
-                    // create thread for receiver
-                    $sql = "INSERT INTO Messages (ThreadOwner_ID, Sender_ID,    Receiver_ID,   Subject,    Message,   InitialMessage,     New, FirstMessage,   MessageDate,     GroupID , GroupName  ) VALUES
-                                                 ($item,            $ID,          $item,    '$subject', '$message', '$rInitialMessage',  '', $rFirstMessage, CURRENT_TIMESTAMP,  '$groupID',   '$groupName' ) ";
-                    mysql_query($sql) or die(mysql_error());
+                    if ($item == $ID) {
+                        // create thread for receiver
+                        $sql = "INSERT INTO Messages (ThreadOwner_ID, Sender_ID,    Receiver_ID,   Subject,    Message,   InitialMessage,    New,  FirstMessage,   MessageDate,         GroupID , GroupName  ) VALUES
+                                                      ($ID,            $ID,          $ID,    '$subject', '$message', '$rInitialMessage',  '1',  $rFirstMessage, CURRENT_TIMESTAMP,  '$groupID',   '$groupName' ) ";
+                        mysql_query($sql) or die(mysql_error());
+                    }
+
+                    if ($item != $ID) {
+                        // create thread for receiver
+                        $sql = "INSERT INTO Messages (ThreadOwner_ID, Sender_ID,    Receiver_ID,   Subject,    Message,   InitialMessage,    New,  FirstMessage,   MessageDate,         GroupID , GroupName  ) VALUES
+                                                      ($item,            $ID,          $item,    '$subject', '$message', '$rInitialMessage',  '1',  $rFirstMessage, CURRENT_TIMESTAMP,  '$groupID',   '$groupName' ) ";
+                        mysql_query($sql) or die(mysql_error());
+                    }
 
                     $sql2 = "UPDATE Messages SET New =1
                     WHERE ThreadOwner_ID = $item AND GroupID = '$groupID' ";
@@ -447,36 +456,27 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
                     $groupName .= ' '.$senderFirstName;
                 }
 
-                // create thread for group sender
-                $sql = "INSERT INTO Messages (ThreadOwner_ID, Sender_ID,      Receiver_ID,    Subject,    Message,  InitialMessage, FirstMessage ,      MessageDate,       GroupID, GroupName) Values
-                                                ($ID,             $ID,         $receiverID, '$subject',  '$message', $initialMessage, $firstMessage, CURRENT_TIMESTAMP,   '$groupID', '$groupName' ) ";
-                mysql_query($sql) or die(mysql_error());
 
                 // loop for receivers in NEW group message
+                $receiverID = array_push($_POST['receiverID'], $ID);
 
                 foreach ($_POST['receiverID'] as $key => $receiverID) {
 
-                    if ($isGroupChat == false) {
-                        $groupID = '';
-                        $groupName = '';
-                    }
-                    // if group ID, this means a group ID exists
-
-
-                    // create thread for receiver
-                    $sql = "INSERT INTO Messages (ThreadOwner_ID, Sender_ID,   Receiver_ID,     Subject,    Message,   InitialMessage,     New,  FirstMessage,   MessageDate,        GroupID ,      GroupName  ) VALUES
+                        // loop through everyone
+                        $sql = "INSERT INTO Messages (ThreadOwner_ID, Sender_ID,   Receiver_ID,     Subject,    Message,   InitialMessage,     New,  FirstMessage,   MessageDate,        GroupID ,      GroupName  ) VALUES
                                                  ('$receiverID',    $ID,      $receiverID,     '$subject', '$message', '$rInitialMessage',  '', $rFirstMessage, CURRENT_TIMESTAMP,  '$groupID',   '$groupName' ) ";
-                    mysql_query($sql) or die(mysql_error());
+                        mysql_query($sql) or die(mysql_error());
 
 
                     if ($receiverID != $ID) {
                         build_and_send_email($ID, $receiverID, 8, "", "", $groupID);
+                        // send notification
+                        if (strlen(check_phone($receiverID)) > 0) {
+                            text_notification($receiverID, $ID);
+                        }
                     }
 
-                    // send notification
-                    if (strlen(check_phone($receiverID)) > 0) {
-                        text_notification($receiverID, $ID);
-                    }
+
                 }
             }
 
