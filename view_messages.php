@@ -436,15 +436,23 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
                     WHERE ThreadOwner_ID = $item AND GroupID = '$groupID' ";
                     mysql_query($sql2) or die(mysql_error());
 
+                }
+
+                foreach ($recipient_ids as $item) {
+
                     if ($item != $ID) {
                         build_and_send_email($ID, $item, 8, "", "", $groupID);
                         // send notification
                         if (strlen(check_phone($item)) > 0) {
-                            text_notification($item, $ID, $groupID);
+                            if (text_notification($item, $ID, $groupID)) {
+                                $receiverName = get_users_name($item);
+                                $text = $receiverName . " was sent an SMS";
+                                echo "<script>alert('$text')</script>";
+                            }
                         }
                     }
-
                 }
+
             }
 
             // if a new group chat-----------------------------------------------------
@@ -475,11 +483,13 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
 
                 foreach ($_POST['receiverID'] as $key => $receiverID) {
                     // send notification
-                    if (strlen(check_phone($receiverID)) > 0) {
-                        if (text_notification($receiverID, $ID, $groupID)) {
-                            $receiverName = get_users_name($receiverID);
-                            $text = $receiverName ." was sent an SMS";
-                            echo "<script>alert('$text');</script>";
+                    if ($receiverID != $ID) {
+                        if (strlen(check_phone($receiverID)) > 0) {
+                            if (text_notification($receiverID, $ID, $groupID)) {
+                                $receiverName = get_users_name($receiverID);
+                                $text = $receiverName . " was sent an SMS";
+                                echo "<script>alert('$text');</script>";
+                            }
                         }
                     }
                 }
