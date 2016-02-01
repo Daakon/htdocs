@@ -317,9 +317,11 @@ if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
 
         // check phone if provided
         var phone = document.getElementById('Phone').value;
-        if (phone.length > 0) {
+        // remove special characters
+        var rawPhone = phone.replace(/[^\d]/g,'');
+        if (rawPhone.length > 0) {
             var format =/^\d{3}\-?\d{3}\-?\d{4}$/;
-            if (format.test(phone)) {
+            if (format.test(rawPhone)) {
                 return true
             }
             else {

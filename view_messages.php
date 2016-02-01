@@ -100,6 +100,15 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
         $groupName = $_POST['groupName'];
         $groupChatExist = $_POST['groupChatExist'];
 
+        $receiverCount = count($receiverID);
+
+        if ($receiverCount == 1) {
+            // one receiver means this is not a group chat
+            // so instantiate one on one variables
+          $isGroupChat = false;
+          $groupChatExist = false;
+          $groupName = '';
+        }
 
         // check for new group message
         if (!$isGroupChat) {
@@ -165,13 +174,13 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
                 $size = $_FILES['flPostMedia']['size'][$k];
                 // check if word doc
                 $ext = end(explode(".", $mediaName));
-                $docFileTypes = array("doc", "docx", "ppt", "pptx", "xsl", "xslx", "pdf");
+                $docFileTypes = array("doc", "docx", "ppt", "pptx", "xls", "xlsx", "pdf");
                 // if word
                 if ($ext == 'doc' || $ext == 'docx') {
                     $downloadText = mysql_real_escape_string("Download $orgName Word Document");
                 }
                 // if excel
-                if ($ext == 'xsl' || $ext == 'xslx') {
+                if ($ext == 'xls' || $ext == 'xlsx') {
                     $downloadText = mysql_real_escape_string("Download $orgName Spreadsheet");
                 }
                 // if powerpoint
@@ -678,8 +687,12 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
                 ?>
 
                 <?php if (!empty($_GET['groupchat']) || (!isset($recipientID) && empty($recipientID))) {
+                    // define if this is a group chat
                     $isGroupChat = true;
+                }
                     ?>
+
+                <?php if ($isGroupChat && $groupChatExist == false) { ?>
                     <h5>Chat
                         &nbsp;&nbsp;<input type="text" class="search" id="searchID" value="<?php $final_name ?>"
                                            placeholder="Search for people"/>
