@@ -80,16 +80,9 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
 
     $groupID = $_POST['groupID'];
 
-    // if this is a new message, sender must include at least 2 people
-    if ($isGroupChat) {
-        if (strlen($groupID == 0)) {
-            if (strlen($groupName) == 0) {
-                echo "<script>alert('You must assign at least 2 people to this chat.');</script>";
-                exit;
-            }
-        }
-    }
+    // get total receiver count
 
+    $receiverCount = count($_POST['receiverID']);
     foreach ($_POST['receiverID'] as $key => $receiverID) {
 
         $receiverUsername = $_POST['username'];
@@ -100,14 +93,13 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
         $groupName = $_POST['groupName'];
         $groupChatExist = $_POST['groupChatExist'];
 
-        $receiverCount = count($receiverID);
-
-        if ($receiverCount == 1) {
-            // one receiver means this is not a group chat
-            // so instantiate one on one variables
-          $isGroupChat = false;
-          $groupChatExist = false;
-          $groupName = '';
+        // creating a chat with one receiver means its a one on one message
+        if ($groupChat && $groupChatExist == false) {
+            if ($receiverCount == 1) {
+                $isGroupChat = false;
+                $groupChatExist = false;
+                $groupName = '';
+            }
         }
 
         // check for new group message
@@ -128,20 +120,27 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
         }
         $hasVideo = false;
 
-        $groupCheck = "";
-        if (strlen($groupID) > 1) {
-            $groupCheck = " (AND GroupID = '$groupID')";
-        }
-
 
         //--------------------------------------------------------------------
         if ($groupChatExist) {
-            $rInitialMessage = 0;
-            $initialMessage = 0;
-            $firstMessage = 0;
-            $rFirstMessage = 0;
-        }
+            // check if sender has prior message thread with EVERYONE in the GROUP
+            $sql = "SELECT * FROM Messages WHERE (ThreadOwner_ID = $ID) And (Receiver_ID = $receiverID Or Sender_ID = $receiverID) And (InitialMessage = 1) And (GroupID = '$groupID') ";
+            $result = mysql_query($sql) or die();
+            $numRows = mysql_num_rows($result);
+            $initialMessage;
+            /*  if the sender deleted their messages with the receiver
+                the thread would no longer exist at all
+                so this would be a first message regardless for the sender
+            */
 
+            if ($numRows > 0) {
+                $initialMessage = 0;
+                $firstMessage = 0;
+                $rInitialMessage = 0;
+                $rFirstMessage = 0;
+
+            }
+        }
 
         // ----------------------------------------------------------
 
@@ -537,32 +536,32 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
 
 // notify everyone
 foreach ($_POST['receiverID'] as $key => $receiverID) {
-    $groupCheck = "";
-    if (strlen($groupID) > 0) {
-        $groupCheck = " AND (GroupID = '$groupID')";
-    }
+
 
     // find the receiving member's initial message with the sender
     $sql = "SELECT * FROM Messages WHERE ThreadOwner_ID = $receiverID And (Receiver_ID = $receiverID) And (Sender_ID = $ID) And (InitialMessage = 1) $groupCheck";
     $result = mysql_query($sql);
     $count = mysql_num_rows($result);
 
-    // update the initial message row so we know which messages to render first in messages.php
-    if ($groupChatExist) {
-
-    }
-    else {
+    // update FirstMessage in the initial message row so we know which messages to render first in messages.php
         if (mysql_num_rows($result) > 0) {
-            $sql2 = "UPDATE Messages SET New = 1
+            $sql2 = "UPDATE Messages SET New = 1, FirstMessage = $rFirstMessage
             WHERE ThreadOwner_ID = $receiverID And Receiver_ID = $receiverID And Sender_ID = $ID And InitialMessage = 1 $groupCheck";
             mysql_query($sql2) or die(logError(mysql_error(), $url, "Updating initial message where receiver_ID = receiver_ID"));
-        } else {
+        }
 
-            $sql2 = "UPDATE Messages SET New = 1
+    // find the receiving member's initial message with the sender
+    $sql = "SELECT * FROM Messages WHERE ThreadOwner_ID = $receiverID And (Receiver_ID = $ID) And (Sender_ID = $receiverID) And (InitialMessage = 1) $groupCheck";
+    $result = mysql_query($sql);
+    $count = mysql_num_rows($result);
+
+    // update FirstMessage in the initial message row so we know which messages to render first in messages.php
+    if (mysql_num_rows($result) > 0) {
+
+            $sql2 = "UPDATE Messages SET New = 1, FirstMessage = $rFirstMessage
             WHERE ThreadOwner_ID = $receiverID And Receiver_ID = $ID And Sender_ID = $receiverID And InitialMessage = 1 $groupCheck";
             mysql_query($sql2) or die(logError(mysql_error(), $url, "Updating initial message where receiver ID = session ID "));
         }
-    }
 
 }
     if ($isGroupChat) {
