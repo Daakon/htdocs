@@ -820,10 +820,18 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
             } else if ($groupChatExist == false) {
                 // reinitialize sender ID
                 $recipientID = get_id_from_username($urlUsername);
+
+                $sql2 = "UPDATE Messages SET New = 0 WHERE ThreadOwner_ID = $ID AND (Receiver_ID = $ID) And (Sender_ID = $recipientID) And (GroupID = '') ";
+                mysql_query($sql2) or die();
+                $sql3 = "UPDATE Messages SET New = 0 WHERE ThreadOwner_ID = $ID AND (Sender_ID = $ID) And (Receiver_ID = $recipientID) And (GroupID = '') ";
+                mysql_query($sql3) or die();
             }
 
             if ($groupChatExist) {
                 echo "<span style='font-weight:bold;font-size:18px;'>In this chat:</span> $groupName <br/><br/>";
+
+                $sqlUpdate = "UPDATE Messages SET New = 0 WHERE ThreadOwner_ID = $ID And GroupID = '$urlUsername' ";
+                mysql_query($sqlUpdate) or die();
             }
 
             ?>
@@ -867,30 +875,5 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
         </div>
     </div>
     <a id='pageStart' href='#'></a>
-<?php
-$updateGroupChat = "";
-/* clear ALL new message bits for this thread owner with this particular person
-   if this was the first time checking the message thread with this sender
-   clear the first message bit.
-   we will never touch this first message bit again unless...
-   one person deletes their tread and starts another,
-   so it would be a first message again for the sender
-*/
-
-    if ($groupChatExist) {
-        $sql = "UPDATE Messages SET New = 0 WHERE ThreadOwner_ID = $ID And GroupID = '$urlUsername' ";
-        mysql_query($sql) or die();
-        exit;
-    }
-
-    if ($groupChatExist == false) {
-    $sql2 = "UPDATE Messages SET New = 0 WHERE ThreadOwner_ID = $ID AND (Receiver_ID = $ID) And (Sender_ID = $recipientID) And (GroupID = '') ";
-    mysql_query($sql2) or die();
-    $sql3 = "UPDATE Messages SET New = 0 WHERE ThreadOwner_ID = $ID AND (Sender_ID = $ID) And (Receiver_ID = $recipientID) And (GroupID = '') ";
-    mysql_query($sql3) or die();
-    exit;
-}
-
-?>
 
 
