@@ -625,18 +625,12 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
         min-height: 400px;
     }
 </style>
-<script language=" JavaScript" >
-    <!--
-    function LoadOnce()
-    {
-        window.location.reload();
-    }
-    //-->
-</script>
+
+<meta http-equiv="PRAGMA" content="NO-CACHE">
 
 <?php //check_demographics($ID); ?>
 
-<body onload="document.refresh()">
+<body onunload="">
 <div class="container" style="margin-top:-50px;">
     <?php
     ?>

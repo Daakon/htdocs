@@ -349,6 +349,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 </script>
 
 <script>
+    // cache the page so we can do a hard redirect and refresh prior page values
     function myFunction() {
         var page = readCookie('Page');
         var scrolly = readCookie('Scrolly');
@@ -356,9 +357,25 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
     }
 </script>
 
+<script>
+    // if back button in browser is click
+    // we will still refresh the prior page
+    // and get our scroll position
+    jQuery(document).ready(function($) {
 
+        if (window.history && window.history.pushState) {
 
-<body>
+            window.history.pushState('forward', null, './#forward');
+
+            $(window).on('popstate', function() {
+                myFunction();
+            });
+
+        }
+    });
+</script>
+
+<body onunload="myFunction()">
 
 <div class="container" style="padding-top: 20px;">
 

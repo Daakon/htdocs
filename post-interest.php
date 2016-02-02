@@ -667,11 +667,30 @@ $gender = getGender($ID);*/
 ?>
 
 <script>
+// cache the page so we can do a hard redirect and refresh prior page values
 function myFunction() {
     var page = readCookie('Page');
     var scrolly = readCookie('Scrolly');
     window.location=page+"?scrolly="+scrolly;
 }
+</script>
+
+<script>
+    // if back button in browser is click
+    // we will still refresh the prior page
+    // and get our scroll position
+    jQuery(document).ready(function($) {
+
+        if (window.history && window.history.pushState) {
+
+            window.history.pushState('forward', null, './#forward');
+
+            $(window).on('popstate', function() {
+               myFunction();
+            });
+
+        }
+    });
 </script>
 
     <div class="row row-padding">
