@@ -626,7 +626,6 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
     }
 </style>
 
-<meta http-equiv="PRAGMA" content="NO-CACHE">
 
 <?php //check_demographics($ID); ?>
 

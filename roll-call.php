@@ -104,7 +104,7 @@ $postOwner = $memberID;
 
             <?php echo nl2br($post500) ?>
             <br/>
-            <a style="display:block;" style="width:100%;" href="show_post?postID=<?php echo $postID ?>&email=0">
+            <a onclick="saveScrollPositionOnLinkClick('/home')" style="display:block;" style="width:100%;" href="show_post?postID=<?php echo $postID ?>&email=0">
                 <span style="color:black;font-weight: 800">Show More</span>
             </a>
 
