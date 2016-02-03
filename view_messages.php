@@ -93,8 +93,10 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
         $groupName = $_POST['groupName'];
         $groupChatExist = $_POST['groupChatExist'];
 
+
+
         // creating a chat with one receiver means its a one on one message
-        if ($groupChat && $groupChatExist == false) {
+        if ($isGroupChat && $groupChatExist == false) {
             if ($receiverCount == 1) {
                 $isGroupChat = false;
                 $groupChatExist = false;
@@ -412,8 +414,7 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
 
                     if ($item == $ID) {
 
-                        // create thread for receiver
-                        echo "<script>alert('$firstMessage');</script>";
+                        // create thread for sender
                         $sql = "INSERT INTO Messages (ThreadOwner_ID, Sender_ID,    Receiver_ID,   Subject,    Message,   InitialMessage,    New,  FirstMessage,   MessageDate,         GroupID ,     GroupName  ) VALUES
                                                       ($ID,            $ID,          $ID,        '$subject', '$message', '$initialMessage',  '1',  $firstMessage, CURRENT_TIMESTAMP,  '$groupID',   '$groupName' ) ";
                         mysql_query($sql) or die(mysql_error());
@@ -426,10 +427,6 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
                                                       ($item,            $ID,          $item,    '$subject', '$message', '$rInitialMessage',  '1',  $rFirstMessage, CURRENT_TIMESTAMP,  '$groupID',   '$groupName' ) ";
                         mysql_query($sql) or die(mysql_error());
                     }
-
-                    $sql2 = "UPDATE Messages SET New =1
-                    WHERE ThreadOwner_ID = $item AND GroupID = '$groupID' ";
-                    mysql_query($sql2) or die(mysql_error());
 
                 }
 
@@ -500,7 +497,7 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
 // if no media
 //----------------------
         else {
-            foreach ($_POST['receiverID'] as $key => $receiverID) {
+            /*foreach ($_POST['receiverID'] as $key => $receiverID) {
 
                 // create thread for sender
                 $sql = "INSERT INTO Messages (ThreadOwner_ID, Sender_ID,  Receiver_ID,    Subject,    Message,      InitialMessage,    MessageDate ,          GroupID ,      GroupName ) Values
@@ -518,28 +515,56 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
                     text_notification($receiverID, $ID);
                 }
                 }
-            }
+            }*/
         }
 
 // notify everyone
 foreach ($_POST['receiverID'] as $key => $receiverID) {
 
-    // update FirstMessage in the initial message row so we know which messages to render first in messages.php
-        if (mysql_num_rows($result) > 0) {
-            $sql2 = "UPDATE Messages SET New = 1, FirstMessage = 1
-            WHERE ThreadOwner_ID = $receiverID And Receiver_ID = $receiverID And Sender_ID = $ID And InitialMessage = 1 $groupCheck";
+    if ($groupChatExist) {
+        // loop for receivers in group message
+        $sqlRecipients = "SELECT ThreadOwner_ID FROM Messages Where GroupID = '$groupID' ";
+        $resultRecipients = mysql_query($sqlRecipients);
+        $recipient_ids = array();
+//Iterate over the results
+        while ($rows = mysql_fetch_assoc($resultRecipients)) {
+            array_push($recipient_ids, $rows['ThreadOwner_ID']);
+        }
+
+        $recipient_ids = array_unique($recipient_ids);
+        foreach ($recipient_ids as $item) {
+        if ($item != $ID) {
+            // update New so we know what to render first in messages.php
+            $sql2 = "UPDATE Messages SET New = 1
+            WHERE (ThreadOwner_ID = $item) And (InitialMessage = 1) And (GroupID = '$groupID')";
+            mysql_query($sql2) or die(logError(mysql_error(), $url, "Updating initial message where receiver_ID = receiver_ID"));
+            }
+        }
+    }
+
+    if ($isGroupChat && !$groupChatExist) {
+        foreach ($_POST['receiverID'] as $key => $receiverID) {
+            // update New so we know what to render first in messages.php
+            $sql2 = "UPDATE Messages SET New = 1
+            WHERE (ThreadOwner_ID = $receiverID) And (InitialMessage = 1) And (GroupID = '$groupID')";
             mysql_query($sql2) or die(logError(mysql_error(), $url, "Updating initial message where receiver_ID = receiver_ID"));
         }
+    }
 
-    // update FirstMessage in the initial message row so we know which messages to render first in messages.php
-    if (mysql_num_rows($result) > 0) {
+    if ($isGroupChat == false) {
+        // update New so we know what to render first in messages.php
+        $sql2 = "UPDATE Messages SET New = 1
+            WHERE (ThreadOwner_ID = $receiverID) And (Receiver_ID = $receiverID) And (Sender_ID = $ID) And (InitialMessage = 1) $groupCheck";
+        mysql_query($sql2) or die(logError(mysql_error(), $url, "Updating initial message where receiver_ID = receiver_ID"));
 
-            $sql2 = "UPDATE Messages SET New = 1, FirstMessage = 1
-            WHERE ThreadOwner_ID = $receiverID And Receiver_ID = $ID And Sender_ID = $receiverID And InitialMessage = 1 $groupCheck";
-            mysql_query($sql2) or die(logError(mysql_error(), $url, "Updating initial message where receiver ID = session ID "));
-        }
 
+        // update New so we know what to render first in messages.php
+        $sql2 = "UPDATE Messages SET New = 1
+            WHERE (ThreadOwner_ID = $receiverID) And (Receiver_ID = $ID) And (Sender_ID = $receiverID) And (InitialMessage = 1) $groupCheck";
+        mysql_query($sql2) or die(logError(mysql_error(), $url, "Updating initial message where receiver ID = session ID "));
+    }
 }
+
     if ($isGroupChat) {
         $receiverUsername = $groupID;
     }
@@ -796,16 +821,16 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
                 // reinitialize sender ID
                 $recipientID = get_id_from_username($urlUsername);
 
-                $sql2 = "UPDATE Messages SET New = 0 WHERE ThreadOwner_ID = $ID AND (Receiver_ID = $ID) And (Sender_ID = $recipientID) And (GroupID = '') ";
+                $sql2 = "UPDATE Messages SET New = 0, FirstMessage = 0 WHERE ThreadOwner_ID = $ID AND (Receiver_ID = $ID) And (Sender_ID = $recipientID) And (GroupID = '') ";
                 mysql_query($sql2) or die();
-                $sql3 = "UPDATE Messages SET New = 0 WHERE ThreadOwner_ID = $ID AND (Sender_ID = $ID) And (Receiver_ID = $recipientID) And (GroupID = '') ";
+                $sql3 = "UPDATE Messages SET New = 0, FirstMessage = 0 WHERE ThreadOwner_ID = $ID AND (Sender_ID = $ID) And (Receiver_ID = $recipientID) And (GroupID = '') ";
                 mysql_query($sql3) or die();
             }
 
             if ($groupChatExist) {
                 echo "<span style='font-weight:bold;font-size:18px;'>In this chat:</span> $groupName <br/><br/>";
 
-                $sqlUpdate = "UPDATE Messages SET New = 0 WHERE ThreadOwner_ID = $ID And GroupID = '$urlUsername' ";
+                $sqlUpdate = "UPDATE Messages SET New = 0, FirstMessage = 0 WHERE ThreadOwner_ID = $ID And GroupID = '$urlUsername' ";
                 mysql_query($sqlUpdate) or die();
             }
 

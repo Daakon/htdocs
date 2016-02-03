@@ -72,9 +72,7 @@ $ID = $_SESSION['ID'];
                             $messageCount = mysql_num_rows($result3);
                             $firstMessage = $rows['FirstMessage'];
                             if ($firstMessage == 0) {
-                                if (strlen($groupID) > 0) {
                                     $messageCount = $messageCount - 1;
-                                }
                             }
 
 
