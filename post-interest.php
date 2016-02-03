@@ -675,24 +675,6 @@ function myFunction() {
 }
 </script>
 
-<script>
-    // if back button in browser is click
-    // we will still refresh the prior page
-    // and get our scroll position
-    jQuery(document).ready(function($) {
-
-        if (window.history && window.history.pushState) {
-
-            window.history.pushState('forward', 'Post-interest', '');
-
-            $(window).on('popstate', function() {
-               myFunction();
-            });
-
-        }
-    });
-</script>
-
     <div class="row row-padding">
 <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 " align="left">
 

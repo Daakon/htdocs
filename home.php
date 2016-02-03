@@ -626,10 +626,19 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
     }
 </style>
 
+<!--Refresh page if back button is hit -->
+<input type="hidden" id="refreshed" value="no">
+<script type="text/javascript">
+    window.onload=function(){
+        var e=document.getElementById("refreshed");
+        if(e.value=="no")e.value="yes";
+        else{e.value="no";location.reload();}
+    }
+</script>
 
 <?php //check_demographics($ID); ?>
 
-<body onunload="">
+<body>
 <div class="container" style="margin-top:-50px;">
     <?php
     ?>

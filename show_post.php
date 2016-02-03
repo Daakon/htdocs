@@ -357,25 +357,8 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
     }
 </script>
 
-<script>
-    // if back button in browser is click
-    // we will still refresh the prior page
-    // and get our scroll position
-    jQuery(document).ready(function($) {
 
-        if (window.history && window.history.pushState) {
-
-            window.history.pushState('forward', null, '');
-
-            $(window).on('popstate', function() {
-                myFunction();
-            });
-
-        }
-    });
-</script>
-
-<body onunload="myFunction()">
+<body>
 
 <div class="container" style="padding-top: 20px;">
 
