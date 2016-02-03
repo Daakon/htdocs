@@ -626,9 +626,17 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
     }
 </style>
 
-<!--Refresh page if back button is hit -->
+
+<meta http-equiv="cache-control" content="max-age=0" />
+<meta http-equiv="cache-control" content="no-cache" />
+<meta http-equiv="expires" content="0" />
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+<meta http-equiv="pragma" content="no-cache" />
+
+
 <input type="hidden" id="refreshed" value="no">
 <script type="text/javascript">
+    // reload page (update likes) on desktop
     window.onload=function(){
         var e=document.getElementById("refreshed");
         if(e.value=="no")e.value="yes";
@@ -636,9 +644,19 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
     }
 </script>
 
+<script>
+    // reload page (update likes) on Iphone
+    window.onpageshow = function(event) {
+        if (event.persisted) {
+            window.location.reload();
+        }
+    }
+</script>
+
 <?php //check_demographics($ID); ?>
 
-<body>
+<!--empty onunload will clear browser cache for clean refresh -->
+<body onunload="">
 <div class="container" style="margin-top:-50px;">
     <?php
     ?>

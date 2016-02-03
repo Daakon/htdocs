@@ -9,6 +9,8 @@ if (!empty($_SESSION['ID'])) {
 }
 ?>
 
+
+
     <script>
         function checkSignup() {
 
