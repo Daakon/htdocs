@@ -439,7 +439,7 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
                             if (text_notification($item, $ID, $groupID)) {
                                 $receiverName = get_users_name($item);
                                 $text = $receiverName . " was sent an SMS";
-                                echo "<script>alert('$text')</script>";
+                                //echo "<script>alert('$text')</script>";
                             }
                         }
                     }
@@ -480,7 +480,7 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
                             if (text_notification($receiverID, $ID, $groupID)) {
                                 $receiverName = get_users_name($receiverID);
                                 $text = $receiverName . " was sent an SMS";
-                                echo "<script>alert('$text');</script>";
+                                //echo "<script>alert('$text');</script>";
                             }
                         }
                     }
@@ -602,7 +602,8 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
             type: 'post',
             url: '/loadMessages.php',
             data: {
-                senderID: <?php echo $recipientID ?>
+                senderID: <?php echo $recipientID ?>,
+                groupID: <?php echo $groupID ?>
             },
             success: function (response) {
                 var content = document.getElementById("moreMessages");
@@ -615,6 +616,21 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
     }
 </script>
 
+<script>
+    // show uploading
+    function showUploading() {
+        if (document.getElementById('post').value == '') {
+            alert('Your post appears to be empty');
+            return false;
+        }
+        if (document.getElementById('category').value == '') {
+            alert('You did not provide a business type');
+            return false
+        }
+        document.getElementById("progress").style.display = "block";
+        return true;
+    }
+</script>
 
 <?php include('media_sizes.html'); ?>
 
@@ -838,7 +854,7 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
 
 
 
-            <form id="messageForm" action="" method="post" enctype="multipart/form-data">
+            <form id="messageForm" action="" method="post" enctype="multipart/form-data" onsubmit="return showUploading()">
                 Add Any Combination of:<br/>
                 <img src="/images/image-icon.png" height="30px" width="30px" alt="Photos/Video/Documents"/>
                 <strong>Photos/Videos/Documents</strong>
@@ -860,7 +876,18 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
                 <input type="submit" class="" id="videoSend" name="videoSend" value = "Start Video Chat" />
             </form>
 
-            <br/><br/>
+            <br/>
+
+            <br/>
+            <div id="progress" style="display:none;">
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped progress-bar-danger active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" class="progress-bar">
+                        <b>File uploading...please wait</b>
+                    </div>
+                </div>
+            </div>
+
+            <br/>
 
             <?php if ($rowCount == true) { ?>
                 <form action="" method="post" onsubmit = "return confirm('Do you really want to delete this message thread')" >

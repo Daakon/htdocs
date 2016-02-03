@@ -655,7 +655,7 @@ $bgPhoto = $row['ProfilePhoto'];
 
             <div align ="center">
 
-                    <video src = " <?php echo $videoPath . $profileVideo ?>" poster="/poster/<?php echo $posterName ?>"  preload="auto" controls />
+                    <video src = " <?php echo $videoPath . $profileVideo ?>" poster="/poster/<?php echo $posterName ?>"  preload="auto" autoplay="autoplay" muted controls />
 
             </div>
 
