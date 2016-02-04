@@ -48,9 +48,11 @@ function get_users_name($user_id)
     $lastName = $rows['LastName'];
     if (strlen($lastName) > 0) {
         $name = $rows['FirstName'] . ' ' . $rows['LastName'];
+        $name = trim($name);
     }
     else {
         $name = $rows['FirstName'];
+        $name = trim($name);
     }
 
     return $name;
@@ -426,10 +428,10 @@ function text_notification($receiverID, $senderID, $groupID)
         if (strlen($groupID) > 0) {} else {
             if ($result['success']) {
                 //echo 'Message sent - ID: ' . $result['id'];
-                echo "<script>alert('$receiverName was sent an SMS');</script>";
+                //echo "<script>alert('$receiverName was sent an SMS');</script>";
             } else {
                 $error = $result['error_message'];
-                echo "<script>alert('Message failed - Error: $error');</script>";
+                //echo "<script>alert('Message failed - Error: $error');</script>";
             }
         }
 
