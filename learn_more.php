@@ -138,12 +138,14 @@ if (!empty($_SESSION['ID'])) {
 
                 <h4>
                     <div class="visible-xs">
-                        <a href="/login-mobile.php">Login</a>
+                        <a href="/login-mobile">Login</a> <a href="/support">Support</a>
                     </div>
 
                     <div class="hidden-xs">
-                        <a href="../">Login</a>
+                        <a href="../">Login</a> &nbsp;&nbsp;<a href="/support">Support</a>
                     </div>
+
+
                 </h4>
 
             </div>
