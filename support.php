@@ -41,7 +41,7 @@ $ID = $_SESSION['ID'];
             <br/>
 
             <h4>
-                <span>Direct questions to:</span><br/>
+                <span>For questions or help creating content:</span><br/>
                 <a href="mailto:info@rapportbook.com">info@rapportbook.com</a>
             </h4>
 
