@@ -554,13 +554,13 @@ foreach ($_POST['receiverID'] as $key => $receiverID) {
     if ($isGroupChat == false) {
         // update New so we know what to render first in messages.php
         $sql2 = "UPDATE Messages SET New = 1
-            WHERE (ThreadOwner_ID = $receiverID) And (Receiver_ID = $receiverID) And (Sender_ID = $ID) And (InitialMessage = 1) $groupCheck";
+            WHERE (ThreadOwner_ID = $receiverID) And (Receiver_ID = $receiverID) And (Sender_ID = $ID) And (InitialMessage = 1) And (GroupID = '') ";
         mysql_query($sql2) or die(logError(mysql_error(), $url, "Updating initial message where receiver_ID = receiver_ID"));
 
 
         // update New so we know what to render first in messages.php
         $sql2 = "UPDATE Messages SET New = 1
-            WHERE (ThreadOwner_ID = $receiverID) And (Receiver_ID = $ID) And (Sender_ID = $receiverID) And (InitialMessage = 1) $groupCheck";
+            WHERE (ThreadOwner_ID = $receiverID) And (Receiver_ID = $ID) And (Sender_ID = $receiverID) And (InitialMessage = 1) And (GroupID = '') ";
         mysql_query($sql2) or die(logError(mysql_error(), $url, "Updating initial message where receiver ID = session ID "));
     }
 }

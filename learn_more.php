@@ -70,6 +70,16 @@ if (!empty($_SESSION['ID'])) {
         <div class="row" style="margin-top:-20px;">
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" >
 
+                <div class="visible-xs" style="padding-left:10px;padding-top:10px;">
+                    <a href="/login-mobile"><button class="btn btn-default">Login</button></a> &nbsp;&nbsp;
+                    <a href="#signup"><button class="btn btn-default">Sign Up</button></a>
+                </div>
+
+                <div class="hidden-xs" style="padding-left:10px;padding-top:10px;">
+                    <a href="../"><button class="btn btn-default">Login</button></a> &nbsp;&nbsp;
+                    <a href="#signup"><button class="btn btn-default">Sign Up</button></a>
+                </div>
+
                 <p class="lead" style="padding-left:10px;padding-top:10px;">
                  Rapportbook is a <b>Social Yellow Pages</b>,
                  a community directory with real time content.
@@ -135,14 +145,14 @@ if (!empty($_SESSION['ID'])) {
                     </div>
 
                 </form>
-
+                <hr/>
                 <h4>
                     <div class="visible-xs">
-                        <a href="/login-mobile">Login</a> <a href="/support">Support</a>
+                        <a href="/login-mobile"><div class="btn btn-default">Login</div></a> <a href="/support">Support</a>
                     </div>
 
                     <div class="hidden-xs">
-                        <a href="../">Login</a> &nbsp;&nbsp;<a href="/support">Support</a>
+                        <a href="../"><div class="btn btn-default">Login</div></a> &nbsp;&nbsp;<a href="/support">Support</a>
                     </div>
 
 
