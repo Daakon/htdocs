@@ -198,6 +198,8 @@ if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
     $email = $_POST['Email'];
     $about = $_POST['About'];
     $about = mysql_real_escape_string($about);
+    $about = makeLinks($about);
+    $about = closetags($about);
     $interest = $_POST['Interest'];
     $rss = mysql_real_escape_string($_POST['RSS']);
     $dob = $_POST['DOB'];
@@ -692,7 +694,7 @@ $bgPhoto = $row['ProfilePhoto'];
                 </div>
 
                 <div class="form-group">
-                    <label for="LastName">Last Name </label><span style="font-style: italic;padding-left:5px;font-size:12px;">(Not required if using a business name)</span>
+                    <label for="LastName">Last Name </label><span style="font-style: italic;padding-left:5px;font-size:12px;font-weight:bold;color:red;">(Not required if using a business name)</span>
                     <input type="text" class="form-control" id="LastName" name="LastName" value="<?php echo $lastName ?>" onblur="capLname()" />
                 </div>
 

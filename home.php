@@ -678,16 +678,19 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
         <?php
         $genre = $_GET['genre'];
-        if (!empty($genre)) {
-            $_SESSION['Genre'] = $genre;
-            $genre = $_SESSION['Genre'];
-        }
-        else {
-            if (!empty($_SESSION['Genre'])) {
+            if (!empty($genre)) {
+                $_SESSION['Genre'] = $genre;
                 $genre = $_SESSION['Genre'];
             } else {
-                $genre = get_interest($ID);
+                if (!empty($_SESSION['Genre'])) {
+                    $genre = $_SESSION['Genre'];
+                } else {
+                    $genre = get_interest($ID);
+                }
             }
+
+        if ($genre == 'Individual') {
+            $genre = 'Show All';
         }
         ?>
 

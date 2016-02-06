@@ -52,7 +52,7 @@ $ID = $_SESSION['ID'];
                         $pic = "group-chat-photo.png";
 
 
-                            $profilePic = "<div style='float:left; display:inline'>".getChatProfilePic($groupID, $ID)."</div>";
+                            $profilePic = "<div style='float:left; display:inline;padding-right:10px;'>".getChatProfilePic($groupID, $ID)."</div>";
 
 
                         $name = $groupName;
