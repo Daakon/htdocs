@@ -2,6 +2,7 @@
 
 function makeLinks($str)
 {
+
     if (strlen($str) == 0) {
         // do nothing
         return $str;
@@ -9,14 +10,32 @@ function makeLinks($str)
         // has formatted links don't do anything
         return $str;
     } else {
-        // detect urls with ONLY a .com and NO http and NO www and NO anchr
-        $str = preg_replace_callback('#(\s|^)((https?://)?(\w|-)+(\.[a-z]{2,3})+(\:[0-9]+)?(?:/[^\s]*)?)(?=\s|\b)#is',
-            create_function('$m', 'if (!preg_match("#^(https?://)#", $m[2])) return $m[1]."<a href=\"http://".$m[2]."\" target=\"blank\">Click Here</a>"; else return $m[1]."<a href=\"".$m[2]."\" target=\"blank\">Click Here</a>";'),
-            $str);
 
-        // detect urls WITH a www but NO http and NO anchor
-        $str = preg_replace('$(https?://[a-z0-9_./?=&#-]+)(?![^<>]*>)$i', ' <a href="$1" target="_blank">Click Here</a> ', $str . " ");
-        $str = preg_replace('$(www\.[a-z0-9_./?=&#-]+)(?![^<>]*>)$i', '<a target="_blank" href="http://$1"  target="_blank">Click Here</a> ', $str . " ");
+        // get click here value for links
+        // if link has http parse_url will return a host name
+        $url_info = parse_url($str);
+        $clickHere = $url_info['host'];//hostname
+
+        // if link does not have http, we must find the link
+        // then dig the hostname out with a function
+        if (strstr($clickHere) == 0) {
+            $link = preg_match('/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i', $str, $matches);
+            $link = $matches[0];
+            $clickHere = get_string_between($link, "www.", ".com");
+        }
+
+
+        // detect urls with ONLY a .com and NO http and NO www and NO anchr
+
+
+            // detect urls WITH a www but NO http and NO anchor
+        if (strstr($str, "http") || strstr($str, "https")) {
+            $str = preg_replace('$(https?://[a-z0-9_./?=&#-]+)(?![^<>]*>)$i', ' <a href="$1" target="_blank">' . $clickHere . '</a> ', $str . " ");
+        }
+        else {
+            $str = preg_replace('$(www\.[a-z0-9_./?=&#-]+)(?![^<>]*>)$i', '<a target="_blank" href="http://$1"  target="_blank">' . $clickHere . '</a> ', $str . " ");
+        }
+
 
         // if post contains a url, get the title
         preg_match('/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i', $str, $matches);
@@ -116,4 +135,12 @@ function get_domain($url)
     return false;
 }
 
+function get_string_between($string, $start, $end){
+    $string = ' ' . $string;
+    $ini = strpos($string, $start);
+    if ($ini == 0) return '';
+    $ini += strlen($start);
+    $len = strpos($string, $end, $ini) - $ini;
+    return substr($string, $ini, $len);
+}
 ?>
