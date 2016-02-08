@@ -9,6 +9,10 @@ function makeLinks($str)
         return $str;
     } else {
 
+        // lowercase http so it will register as a hyperlink
+        $str = str_ireplace("http", "http", $str);
+
+
         // get click here value for links
         // if link has http parse_url will return a host name
         $url_info = parse_url($str);
@@ -32,6 +36,17 @@ function makeLinks($str)
             }
         }
 
+        // handle sub domains
+        if (preg_match('/(?:http[s]*\:\/\/)*(.*?)\.(?=[^\/]*\..{2,5})/i', $str, $subDomains)) {
+            if (strstr($str, "http")) {}
+            else {
+                $subDomain = $subDomains[0];
+                $newDomain = "http://$subDomain";
+                $str = str_replace($subDomain, $newDomain, $str);
+                $url_info = parse_url($str);
+                $clickHere = $url_info['host'];
+            }
+        }
 
         $str = str_replace("Click Here", $clickHere, $str);
 
@@ -128,4 +143,5 @@ function get_string_between($string, $start, $end){
     $len = strpos($string, $end, $ini) - $ini;
     return substr($string, $ini, $len);
 }
+
 ?>
