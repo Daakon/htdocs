@@ -9,8 +9,12 @@ function makeLinks($str)
         return $str;
     } else {
 
-        // lowercase http so it will register as a hyperlink
-        $str = str_ireplace("http", "http", $str);
+        $str = str_replace("HTTP", "http", $str);
+        $str = str_replace("Http", "http", $str);
+        $str = str_replace("hTTp", "http", $str);
+        $str = str_replace("hTtp", "http", $str);
+        $str = str_replace("htTp", "http", $str);
+        $str = str_replace("httP", "http", $str);
 
 
         // get click here value for links
@@ -37,17 +41,28 @@ function makeLinks($str)
         }
 
         // handle sub domains
-        if (preg_match('/(?:http[s]*\:\/\/)*(.*?)\.(?=[^\/]*\..{2,5})/i', $str, $subDomains)) {
+        if (preg_match('/^(.*)\.[^.]+\./', $str, $subDomains)) {
             if (strstr($str, "http")) {}
             else {
+                // get everything before the first . in the sub domain address
                 $subDomain = $subDomains[0];
-                $newDomain = "http://$subDomain";
+                $domainArray = array();
+                $domainArray = explode(' ', $subDomain);
+                // get the last element which is the first part of the sub domain
+                $trueDomain = end($domainArray);
+                // get all the text before the sub-domain
+                $newFirstPart = array_slice($domainArray, 0, -1);
+                // create a string instance of all the text before the sub domain
+                $firstPart = implode(' ',$newFirstPart);
+                // add http to the actual sub-domain and rebuild everything like it was
+                $newDomain = "$firstPart http://$trueDomain";
+                // replace the old text with the new http version
                 $str = str_replace($subDomain, $newDomain, $str);
-                $url_info = parse_url($str);
-                $clickHere = $url_info['host'];
+                // make the sub domain the click-able part
+                $trueDomainHyperlink = str_replace('.', '', $trueDomain);
+                $clickHere = $trueDomainHyperlink;
             }
         }
-
         $str = str_replace("Click Here", $clickHere, $str);
 
         // detect urls WITH a www but NO http and NO anchor
