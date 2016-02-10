@@ -80,7 +80,7 @@ if (!empty($_SESSION['ID'])) {
                     <a href="#signup"><button class="btn btn-default">Sign Up</button></a>
                 </div>
 
-                <p class="lead" style="padding-left:10px;padding-top:10px;">
+                <p class="lead"  style="padding-left:10px;padding-top:10px;font-weight:400;">
                  Rapportbook is a community directory that allows people to stay connected
                     to their local area.
                 </p>
