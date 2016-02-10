@@ -44,23 +44,25 @@ function makeLinks($str)
         if (preg_match('/^(.*)\.[^.]+\./', $str, $subDomains)) {
             if (strstr($str, "http")) {}
             else {
-                // get everything before the first . in the sub domain address
-                $subDomain = $subDomains[0];
-                $domainArray = array();
-                $domainArray = explode(' ', $subDomain);
-                // get the last element which is the first part of the sub domain
-                $trueDomain = end($domainArray);
-                // get all the text before the sub-domain
-                $newFirstPart = array_slice($domainArray, 0, -1);
-                // create a string instance of all the text before the sub domain
-                $firstPart = implode(' ',$newFirstPart);
-                // add http to the actual sub-domain and rebuild everything like it was
-                $newDomain = "$firstPart http://$trueDomain";
-                // replace the old text with the new http version
-                $str = str_replace($subDomain, $newDomain, $str);
-                // make the sub domain the click-able part
-                $trueDomainHyperlink = str_replace('.', '', $trueDomain);
-                $clickHere = $trueDomainHyperlink;
+                if (strstr($str, ".com") || strstr($str, ".net") || strstr($str, ".org")) {
+                    // get everything before the first . in the sub domain address
+                    $subDomain = $subDomains[0];
+                    $domainArray = array();
+                    $domainArray = explode(' ', $subDomain);
+                    // get the last element which is the first part of the sub domain
+                    $trueDomain = end($domainArray);
+                    // get all the text before the sub-domain
+                    $newFirstPart = array_slice($domainArray, 0, -1);
+                    // create a string instance of all the text before the sub domain
+                    $firstPart = implode(' ', $newFirstPart);
+                    // add http to the actual sub-domain and rebuild everything like it was
+                    $newDomain = "$firstPart http://$trueDomain";
+                    // replace the old text with the new http version
+                    $str = str_replace($subDomain, $newDomain, $str);
+                    // make the sub domain the click-able part
+                    $trueDomainHyperlink = str_replace('.', '', $trueDomain);
+                    $clickHere = $trueDomainHyperlink;
+                }
             }
         }
         $str = str_replace("Click Here", $clickHere, $str);
