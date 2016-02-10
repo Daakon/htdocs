@@ -482,25 +482,25 @@ function logError($error, $page, $object) {
 }
 
 // text function to all service providers for related service post
-function alert_all_matching_interests($interest, $state)
+function alert_followers($interest)
 {
     session_start();
     $ID = $_SESSION['ID'];
     require 'class-Clockwork.php';
     $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-    $result = mysql_query("SELECT ID, Interest FROM Members WHERE Interest = '$interest' And ID NOT IN ($ID)");
+    $currentDate = date("Y-m-d");
+    $result = mysql_query("SELECT Follower_ID FROM Follows WHERE Followed_ID = $ID");
 
     if (mysql_num_rows($result) > 0) {
         // stuff all of the members into an array
         while ($rows = mysql_fetch_assoc($result)) {
-            $interestID = $rows['ID'];
+            $followerID = $rows['Follower_ID'];
 
             // send all of the service providers with a phone an SMS
-            $interestResults = mysql_query("SELECT Phone FROM Profile WHERE Member_ID = $interestID And State = '$state'");
+            $followerResults = mysql_query("SELECT Post_Notification_Date FROM Profile WHERE Member_ID = $followerID And Post_Notification_Date < '$currentDate'  ");
 
-            if (mysql_num_rows($interestResults) > 0) {
-                while ($interestRows = mysql_fetch_assoc($interestResults)) {
-
+            if (mysql_num_rows($followerResults) > 0) {
+                while ($followerRows = mysql_fetch_assoc($followerResults)) {
                     //$number = $interestRows['Phone'];
                     //$number = preg_replace('/\D+/', '', $number);
                     //$number = "1" . $number;
@@ -532,11 +532,16 @@ function alert_all_matching_interests($interest, $state)
                         //echo 'Exception sending SMS: ' . $e->getMessage();
                     } */
                 }
+
+                // send out an email after text
+                if (checkEmailActive($followerID)) {
+                    build_and_send_email($ID, $followerID, 11, null, $interest);
+                }
+                // update post notification date
+                $sql = "Update Profile Set Post_Notification_Date = CURDATE() WHERE Member_ID = $followerID ";
+                mysql_query($sql) or die(mysql_error());
             }
-            // send out an email after text
-            if (checkEmailActive($interestID)) {
-                build_and_send_email(0, $interestID, 11, null, $interest);
-            }
+
         }
     }
 }

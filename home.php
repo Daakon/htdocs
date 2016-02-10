@@ -221,7 +221,7 @@ if (isset($_POST['submit'])) {
                                           ('$post',   '$category',   '$ID',      CURDATE())";
             mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting post without media"));
         }
-        alert_all_matching_interests($category, getMemberState($ID));
+        alert_followers($category);
     }
     echo "<script>location='/home.php?genre=$category&scrollx=630&scrolly=630'</script>";
 }

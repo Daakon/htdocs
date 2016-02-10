@@ -222,16 +222,18 @@ function build_and_send_email($senderId, $toId, $notification, $postID, $pass, $
         $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
         $link;
         if (strstr($url, "local")) {
-            $link = "home.php";
+            $link = "home?genere=$pass&scrollx=630&scrolly=630";
         }
         else if (strstr($url, "dev")) {
-            $link = "http://dev.rapportbook.com/home?scrollx=630&scrolly=630";
+            $link = "http://dev.rapportbook.com/home?genre=$pass&scrollx=630&scrolly=630";
         }
         else {
-            $link = "http://www.rapportbook.com/home?scrollx=630&scrolly=630";
+            $link = "http://www.rapportbook.com/home?genere=$pass&scrollx=630&scrolly=630";
         }
         // a post status update related to your service has been posted
-        $subject = "Someone just shared a post related to your interest. <a href='".$link."'>Click here</a> to see the post";
+        $name = get_users_name_by_id($senderId);
+        $subject = "$name just shared a new post. <a href='".$link."'>Click here</a> to see the post
+        <br/><br/>You are receiving this because you follow $name";
     }
     if ($notification == 12) {
         // follow
