@@ -583,10 +583,14 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
     $isGroupChat = $_POST['isGroupChat'];
     $groupID = $_POST['groupID'];
     $deleteGroupChat = '';
+
     if ($isGroupChat) {
-        $deleteGroupChat = "AND (GroupID = '$groupID') ";
+        $sql = "DELETE FROM Messages WHERE ThreadOwner_ID = $ID AND GroupID = '$groupID' ";
     }
-    $sql = "DELETE FROM Messages WHERE ThreadOwner_ID = $ID AND (Sender_ID = $receiverID Or Receiver_ID = $receiverID) $deleteGroupChat";
+    else {
+        $sql = "DELETE FROM Messages WHERE ThreadOwner_ID = $ID AND (Sender_ID = $receiverID Or Receiver_ID = $receiverID)";
+    }
+
     mysql_query($sql) or die(mysql_error());
     $username = get_username($ID);
     echo "<script>location = '/messages/$username'</script>";
