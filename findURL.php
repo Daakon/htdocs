@@ -61,10 +61,13 @@ function makeLinks($str)
                     $str = str_replace($subDomain, $newDomain, $str);
                     // make the sub domain the click-able part
                     $trueDomainHyperlink = str_replace('.', '', $trueDomain);
+                    $trueDomainHyperlink = str_replace('www', '', $trueDomain);
                     $clickHere = $trueDomainHyperlink;
                 }
             }
         }
+        $clickHere = str_replace('www', '', $clickHere);
+        $clickHere = str_replace('.', '', $clickHere);
         $str = str_replace("Click Here", $clickHere, $str);
 
         // detect urls WITH a www but NO http and NO anchor
