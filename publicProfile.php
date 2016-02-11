@@ -155,7 +155,7 @@ $age = $rows['Age'];
     <br/><br/>
 
 
-    <?php echo "<span class='profileFont'>$about</span>"; ?>
+    <?php echo "<span class='profileFont'>".nl2br($about)."</span>"; ?>
 
     <br/><br/>
 
