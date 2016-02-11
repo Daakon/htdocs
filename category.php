@@ -25,7 +25,6 @@ $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
     echo '<option value = "Marketing">Marketing</option>';
     echo '<option value = "Media">Media</option>';
     echo '<option value = "Modeling">Modeling</option>';
-    echo '<option value = "Music">Music</option>';
     echo '<option value = "Night Life">Night Life</option>';
     echo '<option value = "Photography">Photography</option>';
     echo '<option value = "Realty">Realty</option>';

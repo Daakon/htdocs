@@ -26,7 +26,7 @@ $ID = $_SESSION['ID'];
 
             <?php
             // get group and individual messages
-            $sql = "SELECT DISTINCT * FROM Messages WHERE ThreadOwner_ID = $ID AND (Receiver_ID = $ID Or Sender_ID = $ID) AND (InitialMessage = 1) AND (IsDeleted = 0) And LENGTH(GroupID) > 5
+            $sql = "SELECT DISTINCT * FROM Messages WHERE ThreadOwner_ID = $ID AND (Receiver_ID = $ID Or Sender_ID = $ID) AND (InitialMessage = 1) AND (IsDeleted = 0) And (LENGTH(GroupID) > 5) And (IsDeleted = 0)
                     UNION
                     SELECT DISTINCT * FROM Messages WHERE ThreadOwner_ID = $ID AND (Receiver_ID = $ID Or Sender_ID = $ID) AND (InitialMessage = 1) AND (IsDeleted = 0) And GroupID = ''
             Order By New Desc, ID Desc";

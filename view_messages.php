@@ -426,6 +426,10 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
                         $sql = "INSERT INTO Messages (ThreadOwner_ID, Sender_ID,    Receiver_ID,   Subject,    Message,   InitialMessage,    New,  FirstMessage,   MessageDate,         GroupID , GroupName  ) VALUES
                                                       ($item,            $ID,          $item,    '$subject', '$message', '$rInitialMessage',  '1',  $rFirstMessage, CURRENT_TIMESTAMP,  '$groupID',   '$groupName' ) ";
                         mysql_query($sql) or die(mysql_error());
+
+                        // bring deleted members back into chat
+                        $sql = "Update Messages Set IsDeleted = 0 WHERE ThreadOwner_ID = 1 And GroupID = '$groupID' And InitialMessage = 1 ";
+                        mysql_query($sql) or die(mysql_error());
                     }
 
                 }
@@ -585,7 +589,7 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
     $deleteGroupChat = '';
 
     if ($isGroupChat) {
-        $sql = "DELETE FROM Messages WHERE ThreadOwner_ID = $ID AND GroupID = '$groupID' ";
+        $sql = "UPDATE Messages SET IsDeleted = 1 WHERE (ThreadOwner_ID = $ID) And (InitialMessage = 1) AND (GroupID = '$groupID') ";
     }
     else {
         $sql = "DELETE FROM Messages WHERE ThreadOwner_ID = $ID AND (Sender_ID = $receiverID Or Receiver_ID = $receiverID)";
