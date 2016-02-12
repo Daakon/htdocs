@@ -31,7 +31,6 @@ function makeLinks($str)
         // if link does not have http, we must find the link
         // then dig the hostname out with a function
         if (strlen($clickHere) == 0) {
-            echo "<script>alert('$clickHere');</script>";
             $link = preg_match('/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i', $str, $matches);
             $link = $matches[0];
             $clickHere = get_string_between($link, "www.", ".com");
@@ -68,8 +67,13 @@ function makeLinks($str)
             }
         }
 
-        $clickHere = str_replace('www', '', $clickHere);
-        $clickHere = str_replace('.', '', $clickHere);
+        $clickHere = str_replace('www.', '', $clickHere);
+        $clickHere = str_replace('.net', '', $clickHere);
+        $clickHere = str_replace('.com', '', $clickHere);
+        $clickHere = str_replace('.org', '', $clickHere);
+        if ($clickHere[0] == '.') {
+            $clickHere = str_replace('.', '', $clickHere);
+        }
         $str = str_replace("Click Here", $clickHere, $str);
 
         // detect urls WITH a www but NO http and NO anchor
