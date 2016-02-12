@@ -1,3 +1,4 @@
+
 <!------------------------------------------------------
 ALWAYS COMPRESS THIS FILE BEFORE PUSHING TO PRODUCTION
 IT WILL INCREASE THE RENDERING TIME OF HTML ELEMENTS
@@ -601,9 +602,30 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
             var citySelection = document.getElementById('ddCity');
             var city = citySelection.options[citySelection.selectedIndex].value;
         }
+        document.getElementById('ddCurrentCity').style.display = 'block';
         window.location = "/home?genre="+encodeURIComponent(genre)+"&state="+encodeURIComponent(state)+"&city="+city;
     }
 </script>
+
+<script type = "text/javascript">
+    function updateCurrentFeed() {
+        var selection = document.getElementById('genre');
+        var genre = selection.options[selection.selectedIndex].value;
+        var stateSelect = document.getElementById('searchState');
+        var state = stateSelect.options[stateSelect.selectedIndex].value;
+        // check to see if the city has been reselected
+        if (document.getElementById('ddCurrentCity') == null) {
+            var city = "<?php echo $_GET['city'] ?>";
+        }
+        else {
+            var citySelection = document.getElementById('ddCurrentCity');
+            var city = citySelection.options[citySelection.selectedIndex].value;
+        }
+        document.getElementById('ddCurrentCity').style.display = 'block';
+        window.location = "/home?genre="+encodeURIComponent(genre)+"&state="+encodeURIComponent(state)+"&city="+city;
+    }
+</script>
+
 <script>
     function getCity(sel) {
         var state = sel.options[sel.selectedIndex].value;
@@ -616,6 +638,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
             },
             success: function(html) {
                 $("#divCity").html(html);
+                $("#ddCurrentCity").hide();
             }
         });
     }
@@ -678,16 +701,16 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
         <?php
         $genre = $_GET['genre'];
-            if (!empty($genre)) {
-                $_SESSION['Genre'] = $genre;
+        if (!empty($genre)) {
+            $_SESSION['Genre'] = $genre;
+            $genre = $_SESSION['Genre'];
+        } else {
+            if (!empty($_SESSION['Genre'])) {
                 $genre = $_SESSION['Genre'];
             } else {
-                if (!empty($_SESSION['Genre'])) {
-                    $genre = $_SESSION['Genre'];
-                } else {
-                    $genre = get_interest($ID);
-                }
+                $genre = get_interest($ID);
             }
+        }
 
         if ($genre == 'Individual') {
             $genre = 'Show All';
@@ -767,9 +790,31 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                     <option value="<?php echo $searchState ?>"><?php echo $searchState?></option>
                     <?php getState(); ?>
                 </select>
-                <br/><br/>
 
-                Current City: <b><?php echo $searchCity ?></b>
+
+                <h5>Current City:</h5>
+                <?php
+                $sql = "SELECT ID FROM State WHERE State = '$searchState'";
+                    $result = mysql_query($sql) or die(logError(mysql_error(), $url, "Getting State ID"));
+                    $rows = mysql_fetch_assoc($result);
+                    $stateID = $rows['ID'];
+
+                    $sql2 = "SELECT City FROM City WHERE State_ID = $stateID Order By City ASC ";
+                    $result2 = mysql_query($sql2) or die(mysql_error("You must select a city"));
+
+                    if (mysql_num_rows($result2) > 0) { ?>
+                                <select class='dropdown' name="ddCurrentCity" id="ddCurrentCity" onchange="updateCurrentFeed();">
+                                    <option value=""><?php echo $searchCity ?></option>
+
+                                    <?php
+
+                                    while ($rows2 = mysql_fetch_assoc($result2)) {
+                                        $city = $rows2['City'];
+                                    ?>
+                                        <option value = "<?php echo $city ?>"><?php echo $city ?></option>
+                                   <?php }} ?>
+                    </select>
+
 
                 <div id="divCity">
                 </div>
