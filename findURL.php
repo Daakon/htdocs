@@ -30,7 +30,8 @@ function makeLinks($str)
 
         // if link does not have http, we must find the link
         // then dig the hostname out with a function
-        if (strstr($clickHere) == 0) {
+        if (strlen($clickHere) == 0) {
+            echo "<script>alert('$clickHere');</script>";
             $link = preg_match('/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i', $str, $matches);
             $link = $matches[0];
             $clickHere = get_string_between($link, "www.", ".com");
@@ -42,7 +43,7 @@ function makeLinks($str)
 
         // handle sub domains
         if (preg_match('/^(.*)\.[^.]+\./', $str, $subDomains)) {
-            if (strstr($str, "http")) {}
+            if (strstr($str, "http")) { }
             else {
                 if (strstr($str, ".com") || strstr($str, ".net") || strstr($str, ".org")) {
                     // get everything before the first . in the sub domain address
@@ -66,6 +67,7 @@ function makeLinks($str)
                 }
             }
         }
+
         $clickHere = str_replace('www', '', $clickHere);
         $clickHere = str_replace('.', '', $clickHere);
         $str = str_replace("Click Here", $clickHere, $str);
