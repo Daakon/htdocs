@@ -7,6 +7,7 @@
     <list default="true" id="51867226-c8dd-43fb-9a46-7c8a9e9ab742" name="Default" comment="Added media page.&#10;&#10;">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/findURL.php" afterPath="$PROJECT_DIR$/findURL.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/roll-call.php" afterPath="$PROJECT_DIR$/roll-call.php" />
     </list>
     <ignored path="htdocs.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -79,7 +80,6 @@
         <option value="$PROJECT_DIR$/resources/css/site.css" />
         <option value="$PROJECT_DIR$/getRecipients.php" />
         <option value="$PROJECT_DIR$/forgot-password.php" />
-        <option value="$PROJECT_DIR$/roll-call.php" />
         <option value="$PROJECT_DIR$/post-interest.php" />
         <option value="$PROJECT_DIR$/.idea/devLogin.php" />
         <option value="$PROJECT_DIR$/devLogin.php" />
@@ -96,6 +96,7 @@
         <option value="$PROJECT_DIR$/test" />
         <option value="$PROJECT_DIR$/getCity.php" />
         <option value="$PROJECT_DIR$/home.php" />
+        <option value="$PROJECT_DIR$/roll-call.php" />
         <option value="$PROJECT_DIR$/findURL.php" />
       </list>
     </option>
@@ -370,7 +371,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="2" y="23" width="1152" height="643" extended-state="0" />
+    <frame x="2" y="23" width="1152" height="643" extended-state="1" />
     <editor active="false" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21015625" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -518,7 +519,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/roll-call.php</url>
-          <line>100</line>
+          <line>106</line>
           <option name="timeStamp" value="58" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
@@ -773,7 +774,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/findURL.php</url>
-          <line>142</line>
+          <line>150</line>
           <option name="timeStamp" value="141" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
@@ -966,11 +967,16 @@
           <line>56</line>
           <option name="timeStamp" value="203" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/findURL.php</url>
+          <line>120</line>
+          <option name="timeStamp" value="204" />
+        </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="204" />
+      <option name="time" value="205" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1506,25 +1512,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/roll-call.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.3076925">
-          <caret line="106" column="63" selection-start-line="106" selection-start-column="63" selection-end-line="106" selection-end-column="63" />
-          <folding>
-            <marker date="1454452181000" expanded="true" signature="558:1168" placeholder="SELECT DISTI... Members" />
-            <marker date="1454452181000" expanded="true" signature="4342:4418" placeholder="SELECT ID FR... PostApprovals" />
-            <marker date="1454452181000" expanded="true" signature="4663:4707" placeholder="SELECT * FRO... PostApprovals" />
-            <marker date="1454452181000" expanded="true" signature="7754:8597" placeholder="SELECT DISTI... PostComments" />
-            <marker date="1454452181000" expanded="true" signature="9393:9637" placeholder="..." />
-            <marker date="1454452181000" expanded="true" signature="9447:9610" placeholder="..." />
-            <marker date="1454452181000" expanded="true" signature="9697:10034" placeholder="..." />
-            <marker date="1454452181000" expanded="true" signature="9753:9962" placeholder="..." />
-            <marker date="1454452181000" expanded="true" signature="10093:10103" placeholder="..." />
-            <marker date="1454452181000" expanded="true" signature="11017:11865" placeholder="SELECT DISTI... PostComments" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/publicProfile.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.75303644">
@@ -1541,7 +1528,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1591,10 +1577,31 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/findURL.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6963563">
-          <caret line="74" column="58" selection-start-line="74" selection-start-column="58" selection-end-line="74" selection-end-column="58" />
+        <state vertical-scroll-proportion="0.79352224">
+          <caret line="134" column="56" selection-start-line="134" selection-start-column="56" selection-end-line="134" selection-end-column="56" />
           <folding>
-            <marker date="1455282621000" expanded="true" signature="6159:6226" placeholder="..." />
+            <marker date="1455311930000" expanded="true" signature="6159:6226" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/roll-call.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.27530363">
+          <caret line="99" column="39" selection-start-line="99" selection-start-column="39" selection-end-line="99" selection-end-column="39" />
+          <folding>
+            <element signature="n#style#0;n#a#0;n#div#2;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#1;n#a#0;n#div#2;n#div#1;n#!!top" expanded="true" />
+            <marker date="1455311888000" expanded="true" signature="558:1168" placeholder="SELECT DISTI... Members" />
+            <marker date="1455311888000" expanded="true" signature="4566:4642" placeholder="SELECT ID FR... PostApprovals" />
+            <marker date="1455311888000" expanded="true" signature="4887:4931" placeholder="SELECT * FRO... PostApprovals" />
+            <marker date="1455311888000" expanded="true" signature="7978:8821" placeholder="SELECT DISTI... PostComments" />
+            <marker date="1455311888000" expanded="true" signature="9617:9861" placeholder="..." />
+            <marker date="1455311888000" expanded="true" signature="9671:9834" placeholder="..." />
+            <marker date="1455311888000" expanded="true" signature="9921:10258" placeholder="..." />
+            <marker date="1455311888000" expanded="true" signature="9977:10186" placeholder="..." />
+            <marker date="1455311888000" expanded="true" signature="10317:10327" placeholder="..." />
+            <marker date="1455311888000" expanded="true" signature="11241:12089" placeholder="SELECT DISTI... PostComments" />
           </folding>
         </state>
       </provider>

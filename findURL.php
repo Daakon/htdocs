@@ -128,9 +128,17 @@ function makeLinks($str)
                 <a href="' . $link . '" target="_blank">' . $image . '</a>';
                 // remove special characters
                 $titleLink = mysql_real_escape_string($titleLink);
+                // trim white space in title
+                $titleLink = trim($titleLink);
+                // remove excessive white space in title
+                $titleLink = preg_replace('/\s+/', ' ', $titleLink);
+                // remove excessive line breaks in title
+                $titleLink = cleanBrTags($titleLink);
                 return $str . '<br/><br/>' . $titleLink;
             }
         }
+        $str = cleanBrTags($str);
+        $str = trim($str);
         return $str;
     }
 }
@@ -170,4 +178,10 @@ function get_string_between($string, $start, $end){
     return substr($string, $ini, $len);
 }
 
+function cleanBrTags($txt)
+{
+    $txt=preg_replace("{(<br[\\s]*(>|\/>)\s*){2,}}i", "<br /><br />", $txt);
+    $txt=preg_replace("{(<br[\\s]*(>|\/>)\s*)}i", "<br />", $txt);
+    return $txt;
+}
 ?>

@@ -93,6 +93,12 @@ $postOwner = $memberID;
     <div class="post" <?php echo $postStyle ?> style="clear:both;">
 
         <?php
+        // remove excessive white space
+        $post = preg_replace('/\s+/', ' ', $post);
+        // trim white space
+        $post = trim($post);
+        // remove excessive line breaks
+        $post = cleanBrTags($post);
 
         // check check post length if it has a url in it
         if (strstr($post, "http://") || strstr($post, "https://")) {
