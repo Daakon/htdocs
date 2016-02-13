@@ -445,7 +445,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                 <a href="<?php echo $profileUrl ?>">
                     <div class="profileName-Feed"><?php echo $name ?></div>
                 </a>
-                <div style="color:#9197a3;"><?php echo date('l F j, Y',strtotime($postDate)); ?></div>
+                <div class="date"><?php echo date('l F j, Y',strtotime($postDate)); ?></div>
             </div>
 
                 <div class="post" style="clear:both;">

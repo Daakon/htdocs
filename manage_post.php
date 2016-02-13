@@ -386,6 +386,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
     Posts.ID As PostID,
     Posts.Post As Post,
     Posts.Category As Category,
+    Posts.PostDate As PostDate,
     Profile.ProfilePhoto As ProfilePhoto
     FROM Members,Posts,Profile
     WHERE
@@ -407,7 +408,8 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
         $profilePhoto = $rows['ProfilePhoto'];
         $category = $rows['Category'];
         $post = $rows['Post'];
-        $postID = $rows['PostID']
+        $postID = $rows['PostID'];
+        $postDate = $rows['PostDate'];
         ?>
 
         <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 roll-call"
@@ -424,10 +426,18 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                 <a href="<?php echo $profileUrl ?>">
                     <div class="profileName-Feed"><?php echo $name ?></div>
                 </a>
+                <div class="date"><?php echo date('l F j, Y',strtotime($postDate)); ?></div>
             </div>
 
             <div class="post" style="clear:both;">
                 <?php
+                // remove excessive white space inside anchor tags
+                $post = preg_replace('~>\s+<~', '><', $post);
+                // trim white space
+                $post = trim($post);
+                // remove excessive line breaks
+                $post = cleanBrTags($post);
+
                 // check check post length if it has a url in it
                 if (strstr($post, "http://") || strstr($post, "https://")) {
                     echo nl2br($post);
@@ -456,6 +466,22 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
             <?php if ($memberID != $ID) { ?>
                 | <a href="/view_messages.php/<?php echo $username ?>"><span class="engageText"><img src="/images/messages.png" height="20" width="20" /> Message </span></a>
             <?php } ?>
+
+
+            <br/><br/>
+            <?php
+            $postPath = getPostPath();
+            $shareLinkID = "shareLink$postID"; ?>
+            <a href="javascript:showLink('<?php echo $shareLinkID ?>');">
+                <img src="/images/share.gif" height="50px" width="50px" />
+                <span style="color:black;font-weight:bold;">Share This Post</span>
+            </a>
+
+            <?php $shareLink = 'show_post?postID='.$postID.'&email=1';
+            $shortLink = shortenUrl($postPath.$shareLink);
+            ?>
+
+            <input id="<?php echo $shareLinkID ?>" style="display:none;" value ="<?php echo $shortLink ?>" />
 
             <?php if ($_SESSION['ID'] == get_id_from_username($username)) { ?>
 

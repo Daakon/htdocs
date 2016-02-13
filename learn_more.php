@@ -182,7 +182,7 @@ if (!empty($_SESSION['ID'])) {
         </div>
 
 
-        <div class="row" >
+     <!--   <div class="row" >
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" >
 
                 <h5 class="padding-left-10">Rapportbook Communications Director Erin Thompson gives a talk about the company.</h5>
@@ -209,7 +209,7 @@ if (!empty($_SESSION['ID'])) {
 
 
             </div>
-        </div>
+        </div>-->
 
         <br/>
 
@@ -299,7 +299,7 @@ if (!empty($_SESSION['ID'])) {
                 <a href="<?php echo $profileUrl ?>">
                     <div class="profileName-Feed"><?php echo $name ?></div>
                 </a>
-                <div style="color:#9197a3;"><?php echo date('l F j, Y',strtotime($postDate)); ?></div>
+                <div class="date"><?php echo date('l F j, Y',strtotime($postDate)); ?></div>
             </div>
 
 
