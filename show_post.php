@@ -477,13 +477,18 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
             }
             ?>
 
-            <?php $shareLinkID = "shareLink$postID"; ?>
+            <?php $shareLinkID = "shareLink$postID&email=1"; ?>
             <a href="javascript:showLink('<?php echo $shareLinkID ?>');">
                 <img src="/images/share.gif" height="50px" width="50px" />
                 <span style="color:black;font-weight:bold;">Share This Post</span>
             </a>
 
-            <?php $shareLink = 'show_post?postID='.$postID; ?>
+            <?php $shareLink = 'show_post?postID='.$postID;
+                $shareLink = get_tiny_url($postPath.$shareLink);
+            ?>
+
+
+
             <input id="<?php echo $shareLinkID ?>" style="display:none;" value ="<?php echo $postPath.$shareLink ?>" />
 
 <hr class="hr-line" />

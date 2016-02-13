@@ -159,7 +159,7 @@ $postOwner = $memberID;
            <span style="color:black;font-weight:bold;">Share This Post</span>
        </a>
 
-        <?php $shareLink = 'show_post?postID='.$postID; ?>
+        <?php $shareLink = 'show_post?postID='.$postID.'&email=1'; ?>
         <input id="<?php echo $shareLinkID ?>" style="display:none;" value ="<?php echo $postPath.$shareLink ?>" />
 
         <?php

@@ -360,6 +360,7 @@ function formatPhoneNumber($phoneNumber) {
     return $phoneNumber;
 }
 
+
 function getChatProfilePic($groupID, $ID) {
     $sql = "SELECT ThreadOwner_ID FROM Messages Where GroupID = '$groupID' ";
     $result = mysql_query($sql);
