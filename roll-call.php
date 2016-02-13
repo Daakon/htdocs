@@ -93,8 +93,8 @@ $postOwner = $memberID;
     <div class="post" <?php echo $postStyle ?> style="clear:both;">
 
         <?php
-        // remove excessive white space
-        $post = preg_replace('/\s+/', ' ', $post);
+        // remove excessive white space inside anchor tags
+        $post = preg_replace('~>\s+<~', '><', $post);
         // trim white space
         $post = trim($post);
         // remove excessive line breaks

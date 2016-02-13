@@ -131,7 +131,7 @@ function makeLinks($str)
                 // trim white space in title
                 $titleLink = trim($titleLink);
                 // remove excessive white space in title
-                $titleLink = preg_replace('/\s+/', ' ', $titleLink);
+                $titleLink = preg_replace('~>\s+<~', '><', $titleLink);
                 // remove excessive line breaks in title
                 $titleLink = cleanBrTags($titleLink);
                 return $str . '<br/><br/>' . $titleLink;

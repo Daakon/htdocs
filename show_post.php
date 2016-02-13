@@ -446,7 +446,17 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
             </div>
 
                 <div class="post" style="clear:both;">
-                <?php echo nl2br($post); ?>
+                <?php
+                // remove excessive white space inside anchor tags
+                $post = preg_replace('~>\s+<~', '><', $post);
+                // trim white space
+                $post = trim($post);
+                // remove excessive line breaks
+                $post = cleanBrTags($post);
+
+                echo nl2br($post);
+
+                ?>
             </div>
 
         <hr class="hr-line" />
@@ -484,7 +494,6 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
             </a>
 
             <?php $shareLink = 'show_post?postID='.$postID;
-                $shareLink = get_tiny_url($postPath.$shareLink);
             ?>
 
 

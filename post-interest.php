@@ -771,6 +771,12 @@ if (mysql_num_rows($result) > 0) {
 
     <div class="post" style="clear:both;">
                <?php
+                // remove excessive white space inside anchor tags
+                $post = preg_replace('~>\s+<~', '><', $post);
+                // trim white space
+                $post = trim($post);
+                // remove excessive line breaks
+                $post = cleanBrTags($post);
 
                 // check check post length if it has a url in it
                 if (strstr($post, "http://") || strstr($post, "https://")) {
