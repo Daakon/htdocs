@@ -393,6 +393,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
     Members.Username As Username,
     Posts.ID As PostID,
     Posts.Post As Post,
+    Posts.PostDate As PostDate,
     Posts.Category As Category,
     Profile.ProfilePhoto As ProfilePhoto
     FROM Members,Posts,Profile
@@ -426,6 +427,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
     $category = $rows['Category'];
     $post = $rows['Post'];
     $postID = $rows['PostID'];
+    $postDate = $rows['PostDate'];
     ?>
 
     <div class="row row-padding">
@@ -443,6 +445,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                 <a href="<?php echo $profileUrl ?>">
                     <div class="profileName-Feed"><?php echo $name ?></div>
                 </a>
+                <div style="color:#9197a3;"><?php echo date('l F j, Y',strtotime($postDate)); ?></div>
             </div>
 
                 <div class="post" style="clear:both;">

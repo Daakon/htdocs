@@ -709,6 +709,7 @@ $sql = "SELECT DISTINCT
     Members.Username As Username,
     Posts.ID As PostID,
     Posts.Post As Post,
+    Posts.PostDate As PostDate,
     Posts.Category As Category,
     Profile.ProfilePhoto As ProfilePhoto,
     Profile.City As City,
@@ -748,6 +749,7 @@ if (mysql_num_rows($result) > 0) {
         $post = $rows['Post'];
         $postID = $rows['PostID'];
         $postOwner = $memberID;
+        $postDate = $rows['PostDate'];
         ?>
 
         <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 roll-call" align="left">
@@ -766,6 +768,7 @@ if (mysql_num_rows($result) > 0) {
         <a href="<?php echo $profileUrl ?>">
             <div class="profileName-Feed"><?php echo $name ?></div>
         </a>
+            <div style="color:#9197a3;"><?php echo date('l F j, Y',strtotime($postDate)); ?></div>
     </div>
 
 

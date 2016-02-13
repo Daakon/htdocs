@@ -23,6 +23,7 @@ else {
 //$ads = getAds($genre, $age, $state, $interests, $gender);
 $sqlRollCall = " SELECT DISTINCT
     Posts.Post As Post,
+    Posts.PostDate As PostDate,
     Members.ID As MemberID,
     Members.FirstName As FirstName,
     Members.LastName As LastName,
@@ -64,6 +65,7 @@ $profilePhoto = $rows['ProfilePhoto'];
 $category = $rows['Category'];
 $post = $rows['Post'];
 $postID = $rows['PostID'];
+$postDate = $rows['PostDate'];
 $postOwner = $memberID;
 ?>
 
@@ -87,6 +89,7 @@ $postOwner = $memberID;
         <a href="<?php echo $profileUrl ?>">
             <div class="profileName-Feed"><?php echo $name ?></div>
         </a>
+        <div style="color:#9197a3;"><?php echo date('l F j, Y',strtotime($postDate)); ?></div>
     </div>
 
 

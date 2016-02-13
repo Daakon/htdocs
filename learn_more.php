@@ -242,6 +242,7 @@ if (!empty($_SESSION['ID'])) {
     Members.Username As Username,
     Posts.ID As PostID,
     Posts.Category As Category,
+    Posts.PostDate As PostDate,
     Profile.ProfilePhoto As ProfilePhoto,
     Profile.City As City,
     Profile.State As State
@@ -277,6 +278,7 @@ if (!empty($_SESSION['ID'])) {
         $category = $rows['Category'];
         $post = $rows['Post'];
         $postID = $rows['PostID'];
+        $postDate = $rows['PostDate'];
         $city = $rows['City'];
         $state = $rows['State'];
         $postOwner = $memberID;
@@ -297,6 +299,7 @@ if (!empty($_SESSION['ID'])) {
                 <a href="<?php echo $profileUrl ?>">
                     <div class="profileName-Feed"><?php echo $name ?></div>
                 </a>
+                <div style="color:#9197a3;"><?php echo date('l F j, Y',strtotime($postDate)); ?></div>
             </div>
 
 
