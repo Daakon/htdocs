@@ -820,8 +820,11 @@ if (mysql_num_rows($result) > 0) {
                    <span style="color:black;font-weight:bold;">Share This Post</span>
                </a>
 
-        <?php $shareLink = 'show_post?postID='.$postID.'&email=1'; ?>
-        <input id="<?php echo $shareLinkID ?>" style="display:none;" value ="<?php echo $postPath.$shareLink ?>" />
+        <?php $shareLink = 'show_post?postID='.$postID.'&email=1';
+              $shareLink = $postPath.$shareLink;
+              $shortLink = shortenUrl($shareLink);
+        ?>
+        <input id="<?php echo $shareLinkID ?>" style="display:none;" value ="<?php echo $shortLink ?>" />
 
             <hr class="hr-line" />
 

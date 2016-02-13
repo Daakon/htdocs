@@ -360,6 +360,19 @@ function formatPhoneNumber($phoneNumber) {
     return $phoneNumber;
 }
 
+function shortenUrl($url) {
+    // Create instance with key
+    require_once('GoogleUrlApi.php');
+
+    $key = 'AIzaSyDDJWMzugYylMWrc1T5VW2KNszzI-9s3v4';
+    $google = new GoogleUrlApi($key);
+
+// Test: Shorten a URL
+    $shortURL = $google->shorten($url);
+    return $shortURL; // returns http://goo.gl/DbkFol
+
+}
+
 
 function getChatProfilePic($groupID, $ID) {
     $sql = "SELECT ThreadOwner_ID FROM Messages Where GroupID = '$groupID' ";
