@@ -310,7 +310,7 @@ if (!empty($_SESSION['ID'])) {
                 $post = trim($post);
                 // remove excessive line breaks
                 $post = cleanBrTags($post);
-                
+
                 // check check post length if it has a url in it
                 if (strstr($post, "http://") || strstr($post, "https://")) {
                     echo nl2br($post);
@@ -332,22 +332,46 @@ if (!empty($_SESSION['ID'])) {
                 }
                 ?>
 
-                    <hr/>
-
-                    <a href="#signup" >
-                        <span class='engageText'>#<?php echo $category ?></span>
-                       &nbsp;
-                        <button >
-                            <span >Connect </span>
-                        </button>
-                    </a>
-
             </div>
 
+            <hr />
 
+            <a href="#signup" >
+                <span class='engageText'>#<?php echo $category ?></span>
+                &nbsp;
+                <button >
+                    <span >Connect </span>
+                </button>
+            </a>
 
-            <br/>
+            <br/><br/>
+
             <?php echo $city.', '. $state ?>
+
+            &nbsp;&nbsp;&nbsp;
+            <?php
+            $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+            if (strstr($url, "local")) {
+            }
+            elseif (strstr($url, "dev")) {
+                $postPath = "http://dev.rapportbook.com/";
+            }
+            else {
+                $postPath = "http://rapportbook.com/";
+            }
+            ?>
+
+            <?php $shareLinkID = "shareLink$postID"; ?>
+            <a href="javascript:showLink('<?php echo $shareLinkID ?>');">
+                <img src="/images/share.gif" height="50px" width="50px" />
+                <span style="color:black;font-weight:bold;">Share This Post</span>
+            </a>
+
+            <?php $shareLink = 'show_post?postID='.$postID.'&email=1'; ?>
+            <input id="<?php echo $shareLinkID ?>" style="display:none;" value ="<?php echo $postPath.$shareLink ?>" />
+
+
+
             <?php
 
             if (!isset($ID)) {
