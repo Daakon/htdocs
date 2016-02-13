@@ -6,7 +6,7 @@ $ffmpeg = '/usr/local/bin/ffmpeg';
 
 if (substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip')) ob_start("ob_gzhandler"); else ob_start();
 require 'connect.php';
-require 'mediaPath.php';
+require 'mediapath.php';
 require 'model_functions.php';
 if (strstr($url, "forgot-password") || strstr($url, "learn_more")
     || strstr($url, "login") || strstr($url, "signup")

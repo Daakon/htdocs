@@ -810,6 +810,19 @@ if (mysql_num_rows($result) > 0) {
                 <?php } ?>
 
 
+                <br/><br/>
+
+                 <?php
+                $postPath = getPostPath();
+                $shareLinkID = "shareLink$postID"; ?>
+               <a href="javascript:showLink('<?php echo $shareLinkID ?>');">
+                   <img src="/images/share.gif" height="50px" width="50px" />
+                   <span style="color:black;font-weight:bold;">Share This Post</span>
+               </a>
+
+        <?php $shareLink = 'show_post?postID='.$postID.'&email=1'; ?>
+        <input id="<?php echo $shareLinkID ?>" style="display:none;" value ="<?php echo $postPath.$shareLink ?>" />
+
             <hr class="hr-line" />
 
             <?php

@@ -476,31 +476,18 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
             <br/><br/>
 
             <?php
-            $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-            if (strstr($url, "local")) {
-            }
-            elseif (strstr($url, "dev")) {
-                $postPath = "http://dev.rapportbook.com/";
-            }
-            else {
-                $postPath = "http://rapportbook.com/";
-            }
-            ?>
-
-            <?php $shareLinkID = "shareLink$postID&email=1"; ?>
+            $postPath = getPostPath();
+            $shareLinkID = "shareLink$postID"; ?>
             <a href="javascript:showLink('<?php echo $shareLinkID ?>');">
                 <img src="/images/share.gif" height="50px" width="50px" />
                 <span style="color:black;font-weight:bold;">Share This Post</span>
             </a>
 
-            <?php $shareLink = 'show_post?postID='.$postID;
-            ?>
-
-
-
+            <?php $shareLink = 'show_post?postID='.$postID.'&email=1'; ?>
             <input id="<?php echo $shareLinkID ?>" style="display:none;" value ="<?php echo $postPath.$shareLink ?>" />
 
-<hr class="hr-line" />
+
+            <hr class="hr-line" />
 
 
 

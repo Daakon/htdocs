@@ -1,7 +1,7 @@
 <?php
 require 'connect.php';
 require 'model_functions.php';
-require 'mediaPath.php';
+require 'mediapath.php';
 require 'getSession.php';
 require 'html_functions.php';
 require 'findURL.php';
