@@ -676,6 +676,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
     }
 </script>
 
+
 <?php //check_demographics($ID); ?>
 
 <!--empty onunload will clear browser cache for clean refresh -->

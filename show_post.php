@@ -277,7 +277,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 }
 ?>
 
-
+<script src="/resources/js/site.js"></script>
 
 <script type="text/javascript">
     function saveScrollPositions(theForm) {
@@ -361,7 +361,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
 <body>
 
-<div class="container" style="padding-top: 20px;">
+<div class="container" style="margin-top: -20px;">
 
 
     <div class="row row-padding">
@@ -451,10 +451,11 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
         <hr class="hr-line" />
 
+
+
                 <?php if (isset($ID)) { ?>
 
                         <a href='/post-interest?interest=<?php echo urlencode($category) ?>' class='category'><span class="engageText">#<?php echo $category ?></span></a>
-
 
                     <?php if ($ID != $memberID) {?>
                             | <a href="/view_messages/<?php echo $username ?>"><span class="engageText"><img src = "/images/messages.png" height="20" width="20" /> Message </span> </a>
@@ -462,8 +463,32 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
                 <?php } ?>
 
+            <br/><br/>
+
+            <?php
+            $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+            if (strstr($url, "local")) {
+            }
+            elseif (strstr($url, "dev")) {
+                $postPath = "http://dev.rapportbook.com/";
+            }
+            else {
+                $postPath = "http://rapportbook.com/";
+            }
+            ?>
+
+            <?php $shareLinkID = "shareLink$postID"; ?>
+            <a href="javascript:showLink('<?php echo $shareLinkID ?>');">
+                <img src="/images/share.gif" height="50px" width="50px" />
+                <span style="color:black;font-weight:bold;">Share This Post</span>
+            </a>
+
+            <?php $shareLink = 'show_post?postID='.$postID; ?>
+            <input id="<?php echo $shareLinkID ?>" style="display:none;" value ="<?php echo $postPath.$shareLink ?>" />
 
 <hr class="hr-line" />
+
+
 
             <?php
             if (!empty($ID) || !isset($ID)) {

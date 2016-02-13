@@ -28,3 +28,16 @@
     }
 
 
+    function showLink(id) {
+        var shareLink = document.getElementById(id);
+        if (shareLink.style.display == 'none') {
+            shareLink.style.display = 'block';
+            shareLink.select();
+        }
+        else {
+            shareLink.style.display = 'none';
+        }
+        //document.getElementById(id).select();
+    }
+
+

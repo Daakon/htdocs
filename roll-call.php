@@ -123,6 +123,7 @@ $postOwner = $memberID;
 
     </div>
 
+
     <hr class="hr-line" />
 
     <?php if (isset($ID)) { ?>
@@ -137,6 +138,29 @@ $postOwner = $memberID;
     <?php } ?>
 
     <div >
+
+        <br/>
+
+        <?php
+        $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+        if (strstr($url, "local")) {
+        }
+        elseif (strstr($url, "dev")) {
+            $postPath = "http://dev.rapportbook.com/";
+        }
+        else {
+            $postPath = "http://rapportbook.com/";
+        }
+        ?>
+
+        <?php $shareLinkID = "shareLink$postID"; ?>
+       <a href="javascript:showLink('<?php echo $shareLinkID ?>');">
+           <img src="/images/share.gif" height="50px" width="50px" />
+           <span style="color:black;font-weight:bold;">Share This Post</span>
+       </a>
+
+        <?php $shareLink = 'show_post?postID='.$postID; ?>
+        <input id="<?php echo $shareLinkID ?>" style="display:none;" value ="<?php echo $postPath.$shareLink ?>" />
 
         <?php
 
