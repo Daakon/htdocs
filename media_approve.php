@@ -52,18 +52,6 @@ foreach ($comment_ids as $item) {
     }
 }
 
-
-    //Notify the post creator
-    $sql = "SELECT Member_ID FROM Media WHERE MediaName = '$mediaName';";
-
-    $result = mysql_query($sql) or die(logError(mysql_error(), $url, "Getting ID of media owner"));
-    $rows = mysql_fetch_assoc($result);
-    $creatorID = $rows['Member_ID'];
-if ($ID != $creatorID) {
-    if (checkEmailActive($creatorID)) {
-        build_and_send_email($ID, $creatorID, 7, $mediaName, '');
-    }
-}
 }
 
 //=========================================================================================================================//

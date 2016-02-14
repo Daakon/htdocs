@@ -116,7 +116,7 @@ function build_and_send_email($senderId, $toId, $notification, $postID, $pass, $
         $subject .= 'If you did not request to change your password, contact support at <a href = "mailto:info@rapportbook.com">info@rapportbook.com</a>';
     }
     if ($notification == 6) {
-// photo comment
+// comment with photo or video
         //  message notification
         $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
         $link;
@@ -253,6 +253,43 @@ function build_and_send_email($senderId, $toId, $notification, $postID, $pass, $
         // a post status update related to your service has been posted
         $subject = "$name is now following you. <a href='".$link."'>Click here</a> to see your followers.";
     }
+
+
+    if ($notification == 13) {
+// photo comment
+        // media id is the person's id who photo just got liked and is receiving this email
+        // get media contents
+        $sql = "SELECT * FROM Media WHERE ID = '$postID'";
+        $result = mysql_query($sql);
+        $rows = mysql_fetch_assoc($result);
+        $ID = $rows['Member_ID'];
+        $mediaName = $rows['MediaName'];
+        $mediaID = $rows['ID'];
+        $mediaDate = $rows['MediaDate'];
+        $mediaType = $rows['MediaType'];
+        $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+        $link;
+        if (strstr($url, "local")) {
+            $link = "media?id=$ID&mediaName=$mediaName&mid=$mediaID&mediaType=$mediaType&mediaDate=$mediaDate&h=0";
+        }
+        else if (strstr($url, "dev")) {
+            $link = "http://dev.rapportbook.com/media.php?id=$ID&mid=$mediaID&mediaName=$mediaName&mid=$mediaID&mediaType=$mediaType&mediaDate=$mediaDate&h=0";
+        }
+        else {
+            $link = "http://www.rapportbook.com/media.php?id=$mediaID&mediaName=$mediaName&mid=$mediaID&mediaType=$mediaType&mediaDate=$mediaDate&h=0";
+        }
+        $name = get_users_name_by_id($senderId);
+        if ($senderId == $toId) {
+            $name = 'You';
+        }
+        $text = "$name commented a <a href='$link'>photo</a> you're tagged in.";
+        $subject = "
+                <div>
+                $text
+                </div>
+                ";
+    }
+
     // if we have a notification, then send the email.
     if (strlen($notification) > 0) {
         if (strstr($url, "local")) {

@@ -47,19 +47,7 @@ foreach ($comment_ids as $item) {
         }
     }
 }
-
-    //Notify the post creator
-
-    $sql = "SELECT Member_ID FROM Posts WHERE ID = '$postID';";
-
-    $result = mysql_query($sql) or die(logError(mysql_error(), $url, "Getting Post owner ID"));
-    $rows = mysql_fetch_assoc($result);
-    $creatorID = $rows['Member_ID'];
-if ($ID != $creatorID) {
-    if (checkEmailActive($ID)) {
-        build_and_send_email($ID, $creatorID, 2, $postID, '');
-    }
-}
+    
 }
 
 

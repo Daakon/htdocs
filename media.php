@@ -190,25 +190,21 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
             }
 //Boil the id's down to unique values because we dont want to send double emails or notifications
             $comment_ids = array_unique($comment_ids);
+
+
 //Send consumer notifications
             foreach ($comment_ids as $item) {
                 if (strlen($item) > 0) {
-                    // only send email if account & email active
-                    if (checkActive($item)) {
-                        if (checkEmailActive($item)) {
-                                build_and_send_email($user_id, $item, 1, $mediaID);
+                    if ($item != $ID) {
+                        // only send email if account & email active
+                        if (checkActive($item)) {
+                            if (checkEmailActive($item)) {
+                                build_and_send_email($user_id, $item, 13, $mediaID);
+                            }
                         }
                     }
                 }
             }
-//Notify the post creator
-            $sql = "SELECT Member_ID FROM Media WHERE Member_ID = '$ownerID' And Member_ID != $ID ;";
-            $result = mysql_query($sql) or die(mysql_error());
-            $rows = mysql_fetch_assoc($result);
-            $creatorID = $rows['Member_ID'];
-                if (checkEmailActive($ID)) {
-                    build_and_send_email($ID, $creatorID, 1, $postID, '');
-                }
 
 //------------------
 //=========================================================================================================================//
@@ -585,6 +581,7 @@ $profileMediaSrc = trim("/media/" . $profilePhoto);
                         Members.ID As CommenterID,
                         Members.FirstName as FirstName,
                         Members.LastName As LastName,
+                        Members.Username As Username,
                         Profile.ProfilePhoto As ProfilePhoto
                         FROM MediaComments,Members, Profile
                         WHERE
@@ -603,9 +600,29 @@ $profileMediaSrc = trim("/media/" . $profilePhoto);
                     $profilePhoto = $rows3['ProfilePhoto'];
                     $commentID = $rows3['MediaCommentID'];
                     $commentOwnerID = $rows3['CommenterID'];
+                    $commenterUsername = $rows3['Username'];
+                    $commenterProfileUrl = "/$commenterUsername";
+
                     echo '<div class="comment-row">';
-                    echo '<div class="user-icon"><img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" style = "border:1px solid black" class ="enlarge-onhover img-responsive" /><div class="user-name">' . $rows3['FirstName'] . ' ' . $rows3['LastName'] . '</div></div><div class="comment-content">' . nl2br($comment) . '</div>';
-                    echo '</div>';
+                    echo '<div class="profileImageWrapper-Feed">
+                     <a href='.$commenterProfileUrl.'>
+                    <img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" style = "border:1px solid black" class ="enlarge-onhover img-responsive" />
+                    </a>
+                    </div>
+
+                    <div class="commentNameWrapper-Feed" style="padding-left:5px;">
+                     <a href='.$commenterProfileUrl.'>
+                    <div class="profileName-Feed">'
+                        . $rows3['FirstName'] . ' ' . $rows3['LastName'] . '
+                        </div>
+                        </a>'
+                        .nl2br($comment) . '
+                        </div>
+
+                    <div class="comment-content" style="clear:both"></div>
+                    </div>';
+
+
                     if ($commentOwnerID == $ID) {
                         //<!--DELETE BUTTON ------------------>
                         echo '<div class="comment-delete">';
@@ -638,45 +655,71 @@ $profileMediaSrc = trim("/media/" . $profilePhoto);
                         And Members.ID = Profile.Member_ID
                         Group By MediaComments.ID
                         Order By MediaComments.ID DESC LIMIT 3, 100 ";
+
             $result4 = mysql_query($sql4) or die(logError(mysql_error(), $url, "Getting media comments 3-100"));
-            if (mysql_num_rows($result4) > 0) {
+
             $moreComments = "moreComments$postID";
+
+            if (mysql_num_rows($result4) > 0) {
             ?>
 
             <a href="javascript:showComments('<?php echo $moreComments ?>');">Show More</a>
 
             <div id="<?php echo $moreComments ?>" style="display:none;">
 
+                <div class="comment-style">
 
                 <?php
-                echo '<br/>';
-                echo '<div class="comment-style">';
                 while ($rows4 = mysql_fetch_assoc($result4)) {
                     $comment = $rows4['MediaComment'];
                     $profilePhoto = $rows4['ProfilePhoto'];
                     $commentID = $rows4['MediaCommentID'];
                     $commentOwnerID = $rows4['CommenterID'];
-                    echo '<div class="user-icon">';
-                    echo '<img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" style = "border:1px solid black" class ="enlarge-onhover img-responsive" /><div class="user-name">' . $rows4['FirstName'] .' '. $rows4['LastName'] . '</div></div><div class="comment-content">' . nl2br($comment) . '</div>';
-                    echo '</td></tr>';
-                }
-                echo '</div>';
-                if ($commentOwnerID == $ID) {
-                    //<!--DELETE BUTTON ------------------>
-                    echo '<div class="comment-delete">';
-                    echo '<form action="" method="post" onsubmit="return confirm(\'Do you really want to delete this comment?\')">';
-                    echo '<input type="hidden" name="commentID" id="commentID" value="' .  $commentID . '" />';
-                    echo '<input type ="submit" name="DeleteComment" id="DeleteComment" value="Delete" class="deleteButton" />';
-                    echo '</form>';
-                    echo '</div>';
-                    //<!------------------------------------->
-                }
-                echo '</div>'; //end of more comments div
+                    $commenterUsername = $rows4['Username'];
+                    $commenterProfileUrl = "/$commenterUsername";
+                ?>
+
+                <div class="comment-row">
+                <div class="profileImageWrapper-Feed">
+                    <a href='<?php echo $commenterProfileUrl ?>'>
+                        <img src = "<?php echo $mediaPath . $profilePhoto ?>" height = "50" width = "50" class ="enlarge-onhover img-responsive" />
+                        </a>
+                    </div>
+                </div>
+
+                    <div class="commentNameWrapper-Feed">
+                        <a href='<?php echo $commenterProfileUrl ?>'>
+                            <div class="profileName-Feed">
+                                <?php echo $rows4['FirstName'] . ' ' . $rows4['LastName'] ?>
+                </div>
+                </a>
+                <?php echo nl2br($comment) ?>
+            </div>
+                <div class="comment-content" style="clear:both"></div>
+
+                    <!--DELETE BUTTON ------------------>
+                    <?php if ($commentOwnerID == $ID || $memberID == $ID) { ?>
+                        <div class="comment-delete">
+                            <form action="" method="post" onsubmit="return confirm(\'Do you really want to delete this comment?\')">
+                                <input type="hidden" name="commentID" id="commentID" value="' .  $commentID . '" />
+                                <input type ="submit" name="DeleteComment" id="DeleteComment" value="Delete" class="deleteButton" />
+                            </form>
+                        </div>
+                    <?php } ?>
+                    <?php
+
                 }
                 ?>
+                </div>
+            </div>
+                <?php
+            }
+            ?>
 
 
             </div>
+        </div>
+    </div>
             <!---------------------------------------------------
                               End of comments div
                               ----------------------------------------------------->
