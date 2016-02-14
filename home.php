@@ -766,24 +766,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                 <div>
 
 
-                    <h5>Search By Area
-                        <a href="#" class="i-msg" data-toggle="popover" title="Select Another City In The Current State" data-content="To select another city in the state
-                                            you are in now, you must select
-                                            the state again."><span class="glyphicon glyphicon-info-sign" /></a>
-                    </h5>
-
-
-                    <script>
-                        $(document).ready(function(){
-                            $('[data-toggle="popover"]').popover();
-                        });
-                    </script>
-
-                    <script>
-                        $(document).ready(function(){
-                            $('[data-toggle="picMessage"]').popover();
-                        });
-                    </script>
+                    <h5>Search By Area</h5>
 
 
                 </div>
@@ -825,21 +808,14 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
             </div>
 
 
-
-
             <form method="post" enctype="multipart/form-data" action="" onsubmit="return showUploading()">
                 <img src="/images/image-icon.png" height="30px" width="30px" alt="Photos/Video"/>
                 <strong>Add Photos/Video</strong>
                 <input type="file" width="10px;" name="flPostMedia[]" id="flPostMedia" multiple/>
 
-                <a href="#" class="i-msg" data-toggle="picMessage" title="Upload Multiple Files"
-                   data-content="To upload multiple photos on desktop, hold down CTRL or SHIFT key while selecting.">
-                    <span class="glyphicon glyphicon-info-sign" /></a>
-                </h5>
-
                 <br/>
                 <textarea name="post" id="post" class="form-control textArea"
-                          placeholder="Make a connection." ></textarea>
+                          placeholder="What's going on in <?php echo getMemberCity($ID) ?>" ></textarea>
                 <br/>
                 <div id="progress" style="display:none;">
                     <div class="progress">

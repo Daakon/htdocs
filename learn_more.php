@@ -81,8 +81,7 @@ if (!empty($_SESSION['ID'])) {
                 </div>
 
                 <p class="lead"  style="padding-left:10px;padding-top:10px;font-weight:400;">
-                 Rapportbook is a community directory that allows people to stay connected
-                    to their local area.
+                 Rapportbook is a social network that connects people to their local area.
                 </p>
 
             </div>
