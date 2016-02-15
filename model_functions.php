@@ -331,6 +331,17 @@ function isProfileVideo($videoPath) {
     }
 }
 
+function isAdmin($ID) {
+    $sql = "SELECT IsAdmin FROM Members WHERE ID = $ID And IsAdmin = 1 ";
+    $result = mysql_query($sql) or die(mysql_error());
+
+    if (mysql_num_rows($result) > 0) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
 
 function formatPhoneNumber($phoneNumber) {
     $phoneNumber = preg_replace('/[^0-9]/','',$phoneNumber);

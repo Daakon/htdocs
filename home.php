@@ -16,6 +16,8 @@ $post = mysql_real_escape_string($_POST['post']);
 $category = $_POST['category'];
 $city = $_SESSION['City'];
 $state = $_SESSION['State'];
+$IsSponsored = $_POST['IsSponsored'];
+
 if (isset($_POST['submit'])) {
     $_SESSION['NewPostID'] = null;
     $newPostID = null;
@@ -206,8 +208,9 @@ if (isset($_POST['submit'])) {
                 } // end of loop -----------------------------------
             }
             $post = $post . $newImage;
-            $sql = "INSERT INTO Posts (Post,    Poster,	      Category,  Member_ID,   PostDate) Values
-                                              ('$post', '$posterName', '$category', '$ID',       CURDATE())";
+    
+            $sql = "INSERT INTO Posts (Post,    Poster,	      Category,    Member_ID,  IsSponsored,      PostDate) Values
+                                      ('$post', '$posterName', '$category', '$ID',     '$IsSponsored',   CURDATE())";
             mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting post with media"));
             $newPostID = mysql_insert_id();
             // update Media table with new post id
@@ -218,8 +221,9 @@ if (isset($_POST['submit'])) {
             }
         } // if no media
         else {
-            $sql = "INSERT INTO Posts (Post,       Category,    Member_ID,   PostDate) Values
-                                          ('$post',   '$category',   '$ID',      CURDATE())";
+
+        $sql = "INSERT INTO     Posts (Post,       Category,    Member_ID,  IsSponsored,     PostDate) Values
+                                      ('$post',   '$category',   '$ID',    '$IsSponsored',    CURDATE())";
             mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting post without media"));
         }
         alert_followers($category);
@@ -832,6 +836,15 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                     <?php echo category() ?>
                 </select>
                 <br/>
+
+                <?php if (isAdmin($ID)) { ?>
+                Is This Post Sponsored
+                <select id="IsSponsored" name="IsSponsored">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+                    <br/><br/>
+                <?php } ?>
 
                 <input type="submit" class="post-button" name="submit" id="submit" value="Post"/>
             </form>

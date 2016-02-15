@@ -32,10 +32,10 @@ if ($profileID == $ID) {
         $username = get_username_from_url();
         $profileID = get_id_from_username($username);
 
-        $sql = "SELECT Admin FROM Members WHERE ID = $ID ";
+        $sql = "SELECT IsAdmin FROM Members WHERE ID = $ID ";
         $result = mysql_query($sql) or die(mysql_error());
         $rows = mysql_fetch_assoc($result);
-        if ($rows['Admin'] == 1) { ?>
+        if ($rows['IsAdmin'] == 1) { ?>
             <li><a href="/marketing_manager/<?php echo $username ?>"><img src = "/images/marketing-menu-glyph" height="20" width="20"/> Marketing Manager</a></li>
         <?php }
 
