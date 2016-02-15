@@ -959,7 +959,7 @@ if (mysql_num_rows($result) > 0) {
                             <div class="profileName-Feed"><?php echo $name ?> ' .
                                 $rows3['FirstName'] . ' ' . $rows3['LastName'] .
                                 '</div>
-                         </a>
+                         </a><br/>
                          ' . nl2br($comment) . '
                         </div>
 
@@ -1033,7 +1033,7 @@ if (mysql_num_rows($result) > 0) {
                             <div class="profileName-Feed">
                                 <?php echo $rows4['FirstName'] . ' ' . $rows4['LastName'] ?>
                                 </div>
-                        </a>
+                        </a><br/>
                         <?php echo nl2br($comment) ?>
                     </div>
                     <div class="comment-content" style="clear:both"></div>

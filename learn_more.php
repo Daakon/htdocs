@@ -80,12 +80,23 @@ if (!empty($_SESSION['ID'])) {
                     <a href="#signup"><button class="btn btn-default">Sign Up</button></a>
                 </div>
 
-                <p class="lead"  style="padding-left:10px;padding-top:10px;font-weight:bold;">
-                 Rapportbook is a social network that connects people to their community.
-                    <li class="display-block" style="font-size:16px;font-family:Georgia;padding-left:10px;">Share Things You Do in Your City</li>
-                    <li class="display-block" style="font-size:16px;font-family:Georgia;padding-left:10px;">Discover Fun Stuff Nearby.</li>
-                    <li class="display-block" style="font-size:16px;font-family:Georgia;padding-left:10px;">Stay Connected To Your Local Area</li>
-                </p>
+                <div class="visible-xs">
+                    <p class="lead"  style="padding-left:10px;padding-top:10px;font-weight:bold;">
+                        Rapportbook is a social network that <br/>connects people to their community.
+                    <li class="display-block" style="font-size:12px;font-family:Georgia;padding-left:10px;">Share Cool Things You See & Do Around Your City</li>
+                    <li class="display-block" style="font-size:12px;font-family:Georgia;padding-left:10px;">Discover Fun Stuff Nearby.</li>
+                    <li class="display-block" style="font-size:12px;font-family:Georgia;padding-left:10px;">Stay Connected To Your Local Area</li>
+                    </p>
+                </div>
+
+                <div class="hidden-xs">
+                    <p class="lead"  style="padding-left:10px;padding-top:10px;font-weight:bold;">
+                        Rapportbook is a social network that connects people to their community.
+                    <li class="display-block" style="font-size:20px;font-family:Georgia;padding-left:10px;">Share Cool Things You See & Do Around Your City</li>
+                    <li class="display-block" style="font-size:20px;font-family:Georgia;padding-left:10px;">Discover Fun Stuff Nearby.</li>
+                    <li class="display-block" style="font-size:20px;font-family:Georgia;padding-left:10px;">Stay Connected To Your Local Area</li>
+                    </p>
+                </div>
 
             </div>
 
@@ -182,36 +193,6 @@ if (!empty($_SESSION['ID'])) {
 
             </div>
         </div>
-
-
-     <!--   <div class="row" >
-            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" >
-
-                <h5 class="padding-left-10">Rapportbook Communications Director Erin Thompson gives a talk about the company.</h5>
-                <a href="https://www.youtube.com/watch?v=jJMHsWxqF3M&t=27m45s" target="_blank" >
-                    <h4 class="padding-left-10">
-                        Watch Video
-                    </h4>
-
-                    <img src="/images/Erin-Thompson.jpg" width="90%" height="350" class="padding-left-10">
-                </a>
-
-                <hr/>
-            </div>
-
-
-            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 padding-left-10 margin-top-10" >
-
-                <h5 class="padding-left-10">
-                    Rapportbook Founder & CEO Chris Weathers speaks on why he became an entrepreneur.
-                </h5>
-                <iframe max-width="400" height="315" src="https://www.youtube.com/embed/qiFa1-Mtj8c" frameborder="0" allowfullscreen class="padding-left-10"></iframe>
-
-                <br/><br/>
-
-
-            </div>
-        </div>-->
 
         <br/>
 
@@ -459,8 +440,8 @@ if (!empty($_SESSION['ID'])) {
                         <div class="profileName-Feed"><?php echo $name ?> ' .
                         $rows3['FirstName'] . ' ' . $rows3['LastName'] .
                         '</div>
-                     </a>' .nl2br($comment).'
-
+                     </a><br/>
+                     ' .nl2br($comment).'
                     </div>
 
                     <div class="comment-content" style="clear:both"></div>';
@@ -526,7 +507,7 @@ if (!empty($_SESSION['ID'])) {
                     <a href='.$commenterProfileUrl.'>
                     <div class="profileName-Feed">' . $rows4['FirstName'] .' '. $rows4['LastName'] .
                         '</div>
-                        </a>' . nl2br($comment) .
+                        </a><br/>' . nl2br($comment) .
                         '</div>
                         </div><div class="comment-content" style="clear:both">
                     </div>';
