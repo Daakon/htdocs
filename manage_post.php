@@ -387,6 +387,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
     Posts.Post As Post,
     Posts.Category As Category,
     Posts.PostDate As PostDate,
+    Posts.IsSponsored As IsSponsored,
     Profile.ProfilePhoto As ProfilePhoto
     FROM Members,Posts,Profile
     WHERE
@@ -410,6 +411,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
         $post = $rows['Post'];
         $postID = $rows['PostID'];
         $postDate = $rows['PostDate'];
+        $isSponsored = $rows['IsSponsored'];
         ?>
 
         <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 roll-call"
@@ -426,7 +428,9 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                 <a href="<?php echo $profileUrl ?>">
                     <div class="profileName-Feed"><?php echo $name ?></div>
                 </a>
-                <div class="date"><?php echo date('l F j, Y',strtotime($postDate)); ?></div>
+                <div class="date"><?php echo date('l F j, Y',strtotime($postDate)); ?>
+                    <?php if ($isSponsored) { echo "<br/>Sponsored"; } ?>
+                </div>
             </div>
 
             <div class="post" style="clear:both;">

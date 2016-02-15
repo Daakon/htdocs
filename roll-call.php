@@ -30,6 +30,7 @@ $sqlRollCall = " SELECT DISTINCT
     Members.Username As Username,
     Posts.ID As PostID,
     Posts.Category As Category,
+    Posts.IsSponsored As IsSponsored,
     Profile.ProfilePhoto As ProfilePhoto
     FROM Members,Posts,Profile
     WHERE
@@ -66,6 +67,7 @@ $category = $rows['Category'];
 $post = $rows['Post'];
 $postID = $rows['PostID'];
 $postDate = $rows['PostDate'];
+$isSponsored = $rows['IsSponsored'];
 $postOwner = $memberID;
 ?>
 
@@ -89,7 +91,9 @@ $postOwner = $memberID;
         <a href="<?php echo $profileUrl ?>">
             <div class="profileName-Feed"><?php echo $name ?></div>
         </a>
-        <div class="date"><?php echo date('l F j, Y',strtotime($postDate)); ?></div>
+        <div class="date"><?php echo date('l F j, Y',strtotime($postDate)); ?>
+            <?php if ($isSponsored) { echo "<br/>Sponsored"; } ?>
+        </div>
     </div>
 
 

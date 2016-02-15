@@ -711,6 +711,7 @@ $sql = "SELECT DISTINCT
     Posts.Post As Post,
     Posts.PostDate As PostDate,
     Posts.Category As Category,
+    Posts.IsSponsored As IsSponsored,
     Profile.ProfilePhoto As ProfilePhoto,
     Profile.City As City,
     Profile.State As State
@@ -750,6 +751,7 @@ if (mysql_num_rows($result) > 0) {
         $postID = $rows['PostID'];
         $postOwner = $memberID;
         $postDate = $rows['PostDate'];
+        $isSponsored = $rows['IsSponsored'];
         ?>
 
         <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 roll-call" align="left">
@@ -768,7 +770,9 @@ if (mysql_num_rows($result) > 0) {
         <a href="<?php echo $profileUrl ?>">
             <div class="profileName-Feed"><?php echo $name ?></div>
         </a>
-            <div class="date"><?php echo date('l F j, Y',strtotime($postDate)); ?></div>
+            <div class="date"><?php echo date('l F j, Y',strtotime($postDate)); ?>
+            <?php if ($isSponsored) { echo "<br/>Sponsored"; } ?>
+            </div>
     </div>
 
 

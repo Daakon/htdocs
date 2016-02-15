@@ -395,6 +395,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
     Posts.Post As Post,
     Posts.PostDate As PostDate,
     Posts.Category As Category,
+    Posts.IsSponsored As IsSponsored,
     Profile.ProfilePhoto As ProfilePhoto
     FROM Members,Posts,Profile
     WHERE
@@ -428,6 +429,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
     $post = $rows['Post'];
     $postID = $rows['PostID'];
     $postDate = $rows['PostDate'];
+    $isSponsored = $rows['IsSponsored'];
     ?>
 
     <div class="row row-padding">

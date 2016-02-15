@@ -80,14 +80,17 @@ if (!empty($_SESSION['ID'])) {
                     <a href="#signup"><button class="btn btn-default">Sign Up</button></a>
                 </div>
 
-                <p class="lead"  style="padding-left:10px;padding-top:10px;font-weight:400;">
-                 Rapportbook is a social network that connects people to their local area.
+                <p class="lead"  style="padding-left:10px;padding-top:10px;font-weight:bold;">
+                 Rapportbook is a social network that connects people to their community.
+                    <li class="display-block" style="font-size:16px;font-family:Georgia;padding-left:10px;">Share Things You Do in Your City</li>
+                    <li class="display-block" style="font-size:16px;font-family:Georgia;padding-left:10px;">Discover Fun Stuff Nearby.</li>
+                    <li class="display-block" style="font-size:16px;font-family:Georgia;padding-left:10px;">Stay Connected To Your Local Area</li>
                 </p>
 
             </div>
 
 
-            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="margin-top:-20px;">
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="margin-top:-10px;">
                 <img src="/images/using-phone.jpg" />
             </div>
 
@@ -242,6 +245,7 @@ if (!empty($_SESSION['ID'])) {
     Posts.ID As PostID,
     Posts.Category As Category,
     Posts.PostDate As PostDate,
+    Posts.IsSponsored As IsSponsored,
     Profile.ProfilePhoto As ProfilePhoto,
     Profile.City As City,
     Profile.State As State
@@ -280,6 +284,7 @@ if (!empty($_SESSION['ID'])) {
         $postDate = $rows['PostDate'];
         $city = $rows['City'];
         $state = $rows['State'];
+        $isSponsored = $rows['IsSponsored'];
         $postOwner = $memberID;
         ?>
 
@@ -298,7 +303,9 @@ if (!empty($_SESSION['ID'])) {
                 <a href="<?php echo $profileUrl ?>">
                     <div class="profileName-Feed"><?php echo $name ?></div>
                 </a>
-                <div class="date"><?php echo date('l F j, Y',strtotime($postDate)); ?></div>
+                <div class="date"><?php echo date('l F j, Y',strtotime($postDate)); ?>
+                <?php if ($isSponsored) { echo "<br/>Sponsored"; } ?>
+                </div>
             </div>
 
 
