@@ -157,14 +157,14 @@ $sql = "INSERT INTO Profile (Member_ID, Poster,               ProfileVideo,     
 $result = mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting default photo"));
 
 
-if ($rows['Interest'] != 'Consumer') {
+/*if ($rows['Interest'] != 'Consumer') {
 // insert default post
     $post = "Hey!, this is $fName. Just signed up and looking to network. Comment on this post or send a direct message if you want to connect.";
     $post = mysql_real_escape_string($post);
     $sql = "INSERT INTO Posts (Post,    Category,  Member_ID,   PostDate) Values
                           ('$post', '$interest', '$ID',       CURDATE())";
     mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting default post"));
-}
+}*/
 
 // Send out sign up email
 $toId = $rows['ID'];

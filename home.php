@@ -208,7 +208,7 @@ if (isset($_POST['submit'])) {
                 } // end of loop -----------------------------------
             }
             $post = $post . $newImage;
-    
+
             $sql = "INSERT INTO Posts (Post,    Poster,	      Category,    Member_ID,  IsSponsored,      PostDate) Values
                                       ('$post', '$posterName', '$category', '$ID',     '$IsSponsored',   CURDATE())";
             mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting post with media"));
