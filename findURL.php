@@ -134,7 +134,15 @@ function makeLinks($str)
                 $titleLink = preg_replace('~>\s+<~', '><', $titleLink);
                 // remove excessive line breaks in title
                 $titleLink = cleanBrTags($titleLink);
+
+                // clean up rouge link text
+                $cleanLink = explode('</a>%', $str);
+                $garb = $cleanLink[1];
+                if (strlen($garb) > 1) {
+                    $str = $cleanLink[0];
+                }
                 return $str . '<br/><br/>' . $titleLink;
+
             }
         }
         $str = cleanBrTags($str);
