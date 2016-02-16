@@ -124,7 +124,7 @@ function makeLinks($str)
                 // add link
                 $titleLink = '<a href="' . $link . '" target="_blank">' . $title . '</a>';
                 // style the title & add webpage image to link
-                $titleLink = '<span style="background:#f6f7f8;padding-right:5px;margin-top:10px;max-width:100%">' . $titleLink . '</span>
+                $titleLink = '<span style="padding-right:5px;margin-top:10px;max-width:100%">' . $titleLink . '</span>
                 <a href="' . $link . '" target="_blank">' . $image . '</a>';
                 // remove special characters
                 $titleLink = mysql_real_escape_string($titleLink);
