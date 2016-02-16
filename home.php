@@ -228,7 +228,7 @@ if (isset($_POST['submit'])) {
         }
         alert_followers($category);
     }
-    echo "<script>location='/home.php?genre=$category&scrollx=630&scrolly=630'</script>";
+    echo "<script>location='/home?genre=$category&scrollx=630&scrolly=630'</script>";
 }
 ?>
 <?php
