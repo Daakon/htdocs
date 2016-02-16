@@ -819,7 +819,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
                 <br/>
                 <textarea name="post" id="post" class="form-control textArea"
-                          placeholder="What's going on in <?php echo getMemberCity($ID) ?>" ></textarea>
+                          placeholder="Share some information with <?php echo getMemberCity($ID) ?>" ></textarea>
                 <br/>
                 <div id="progress" style="display:none;">
                     <div class="progress">

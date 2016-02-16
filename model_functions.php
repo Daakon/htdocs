@@ -521,27 +521,28 @@ function alert_followers($interest)
         while ($rows = mysql_fetch_assoc($result)) {
             $followerID = $rows['Follower_ID'];
 
-            // send all of the service providers with a phone an SMS
-            $followerResults = mysql_query("SELECT Post_Notification_Date FROM Profile WHERE Member_ID = $followerID And Post_Notification_Date < '$currentDate'  ");
+            // send an SMS
+            $followerResults = mysql_query("SELECT Post_Notification_Date, Phone FROM Profile WHERE Member_ID = $followerID And Post_Notification_Date < '$currentDate'  ");
 
             if (mysql_num_rows($followerResults) > 0) {
                 while ($followerRows = mysql_fetch_assoc($followerResults)) {
-                    //$number = $interestRows['Phone'];
-                    //$number = preg_replace('/\D+/', '', $number);
-                    //$number = "1" . $number;
-                    //$API_KEY = '7344d6254838e6d2c917c4cb78305a3235ba951d';
+                    $number = $followerRows['Phone'];
+                    $number = preg_replace('/\D+/', '', $number);
+                    $number = "1" . $number;
+                    $API_KEY = '7344d6254838e6d2c917c4cb78305a3235ba951d';
 
-                   /* try {
+                    try {
                         // Create a Clockwork object using your API key
                         $clockwork = new Clockwork($API_KEY);
-                        $domain;
+                        $domain = null;
                         if (strstr($url, "dev")) {
                             $domain = "http://dev.rapportbook.com/home?scrollx=630&scrolly=630";
                         } else {
                             $domain = "http://rapportbook.com/home?scrollx=630&scrolly=630";
                         }
                         // Setup and send a message
-                        $text = "There is a new post that matches your interest on Rapportbook. $domain";
+                        $name = get_users_name_by_id($ID);
+                        $text = "$name has shared a new post on Rapportbook. $domain";
                         $message = array('to' => $number, 'message' => $text);
                         $result = $clockwork->send($message);
 
@@ -555,7 +556,7 @@ function alert_followers($interest)
                     } catch (ClockworkException $e) {
                         // dont want to display failures in the browser
                         //echo 'Exception sending SMS: ' . $e->getMessage();
-                    } */
+                    }
                 }
 
                 // send out an email after text

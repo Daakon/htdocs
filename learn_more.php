@@ -83,8 +83,8 @@ if (!empty($_SESSION['ID'])) {
                 <div class="visible-xs">
                     <p class="lead"  style="padding-left:10px;padding-top:10px;font-weight:bold;">
                         Rapportbook is a social network that <br/>connects people to their community.
-                    <li class="display-block" style="font-size:12px;font-family:Georgia;padding-left:10px;">Share Cool Things You See & Do Around Your City</li>
-                    <li class="display-block" style="font-size:12px;font-family:Georgia;padding-left:10px;">Discover Fun Stuff Nearby.</li>
+                    <li class="display-block" style="font-size:12px;font-family:Georgia;padding-left:10px;">Share Information With Others Around You</li>
+                    <li class="display-block" style="font-size:12px;font-family:Georgia;padding-left:10px;">Discover Events Nearby</li>
                     <li class="display-block" style="font-size:12px;font-family:Georgia;padding-left:10px;">Stay Connected To Your Local Area</li>
                     </p>
                 </div>
@@ -92,8 +92,8 @@ if (!empty($_SESSION['ID'])) {
                 <div class="hidden-xs">
                     <p class="lead"  style="padding-left:10px;padding-top:10px;font-weight:bold;">
                         Rapportbook is a social network that connects people to their community.
-                    <li class="display-block" style="font-size:20px;font-family:Georgia;padding-left:10px;">Share Cool Things You See & Do Around Your City</li>
-                    <li class="display-block" style="font-size:20px;font-family:Georgia;padding-left:10px;">Discover Fun Stuff Nearby.</li>
+                    <li class="display-block" style="font-size:20px;font-family:Georgia;padding-left:10px;">Share Information With Others Around You</li>
+                    <li class="display-block" style="font-size:20px;font-family:Georgia;padding-left:10px;">Discover Events Nearby</li>
                     <li class="display-block" style="font-size:20px;font-family:Georgia;padding-left:10px;">Stay Connected To Your Local Area</li>
                     </p>
                 </div>

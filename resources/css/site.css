@@ -579,6 +579,11 @@ img {
     max-height:500px;
 }
 
+.post > a > img {
+    max-width: 300px;
+    max-height:300px;
+}
+
 video {
     max-width: 100%;
     width:500px;
@@ -654,6 +659,7 @@ a {
     -webkit-hyphens: auto;
     hyphens: auto;
 }
+
 
 .engageText {
     font-size: 16px;
