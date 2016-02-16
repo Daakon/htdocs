@@ -277,6 +277,17 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 }
 ?>
 
+<?php
+
+if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
+    $commentID = $_POST['commentID'];
+    $sql = "Update PostComments SET IsDeleted = '1' WHERE ID = $commentID";
+    mysql_query($sql) or die (mysql_error());
+    echo "<script>location='/show_post?scrollx=$scrollx&scrolly=$scrolly'</script>";
+}
+?>
+
+
 <script src="/resources/js/site.js"></script>
 
 <script type="text/javascript">

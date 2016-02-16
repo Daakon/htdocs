@@ -490,12 +490,13 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 //BELOW IS END OF POST COMMENT HANDLING CODE ==========================================================================//
         }
     }
-    echo "<script>location='/home.php?scrollx=$scrollx&scrolly=$scrolly'</script>";
+    echo "<script>location='/home?scrollx=$scrollx&scrolly=$scrolly'</script>";
 }
 if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
     $commentID = $_POST['commentID'];
     $sql = "Update PostComments SET IsDeleted = '1' WHERE ID = $commentID";
     mysql_query($sql) or die (mysql_error());
+    echo "<script>location='/home?scrollx=$scrollx&scrolly=$scrolly'</script>";
 }
 ?>
 <script type="text/javascript">

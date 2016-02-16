@@ -250,7 +250,7 @@ if (isset($_POST['submit'])) {
         }
 
     }
-    echo '<meta http-equiv="Location" content="/home.php">';
+    echo '<script>location="/post-interest?interest='.$category.'";</script>';
 }
 
 ?>
@@ -546,14 +546,15 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
         }
     }
-    echo '<meta http-equiv="Location" content="/home.php">';
+    echo '<script>location="/post-interest?interest='.$category.'";</script>';
 }
 
 if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
     $commentID = $_POST['commentID'];
+    $category = $_POST['category'];
     $sql = "Update PostComments SET IsDeleted = '1' WHERE ID = $commentID";
     mysql_query($sql) or die (mysql_error());
-
+    echo '<script>location="/post-interest?interest='.$category.'";</script>';
 }
 
 ?>
@@ -971,6 +972,7 @@ if (mysql_num_rows($result) > 0) {
                         echo '<div class="comment-delete">';
                         echo '<form action="" method="post" onsubmit="return confirm(\'Do you really want to delete this comment?\')">';
                         echo '<input type="hidden" name="commentID" id="commentID" value="' .  $commentID . '" />';
+                        echo '<input type="hidden" name="category" id="category" value="' .  $category . '" />';
                         echo '<input type ="submit" name="DeleteComment" id="DeleteComment" value="Delete" class="deleteButton" />';
                         echo '</form>';
                         echo '</div>';
@@ -1042,7 +1044,8 @@ if (mysql_num_rows($result) > 0) {
                     <?php if ($commentOwnerID == $ID || $memberID == $ID) { ?>
                     <div class="comment-delete">
                         <form action="" method="post" onsubmit="return confirm(\'Do you really want to delete this comment?\')">
-                            <input type="hidden" name="commentID" id="commentID" value="' .  $commentID . '" />
+                            <input type="hidden" name="commentID" id="commentID" value=" <?php echo $commentID ?>" />
+                            <input type="hidden" name="category" id="category" value="<?php echo $category ?>" />
                             <input type ="submit" name="DeleteComment" id="DeleteComment" value="Delete" class="deleteButton" />
                             </form>
                         </div>

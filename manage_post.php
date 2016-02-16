@@ -675,7 +675,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                                 <?php if ($commentOwnerID == $ID || $memberID == $ID) { ?>
                                     <div class="comment-delete">
                                         <form action="" method="post" onsubmit="return confirm(\'Do you really want to delete this comment?\')">
-                                            <input type="hidden" name="commentID" id="commentID" value="' .  $commentID . '" />
+                                            <input type="hidden" name="commentID" id="commentID" value="<?php echo $commentID ?>" />
                                             <input type ="submit" name="DeleteComment" id="DeleteComment" value="Delete" class="deleteButton" />
                                         </form>
                                     </div>
