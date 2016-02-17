@@ -83,18 +83,18 @@ if (!empty($_SESSION['ID'])) {
                 <div class="visible-xs">
                     <p class="lead"  style="padding-left:10px;padding-top:10px;font-weight:bold;">
                         Rapportbook is a social network that <br/>connects people to their community.
-                    <li class="display-block" style="font-size:12px;font-family:Georgia;padding-left:10px;">Share Information With Others Around You</li>
-                    <li class="display-block" style="font-size:12px;font-family:Georgia;padding-left:10px;">Discover Events Nearby</li>
-                    <li class="display-block" style="font-size:12px;font-family:Georgia;padding-left:10px;">Stay Connected To Your Local Area</li>
+                    <li class="display-block" style="font-size:12px;font-family:Georgia;padding-left:10px;">Get The Latest & Greatest Information From People Around You</li>
+                    <li class="display-block" style="font-size:12px;font-family:Georgia;padding-left:10px;">Discover Events & Opportunities Nearby</li>
+                    <li class="display-block" style="font-size:12px;font-family:Georgia;padding-left:10px;">If You Know Something...Share It!</li>
                     </p>
                 </div>
 
                 <div class="hidden-xs">
                     <p class="lead"  style="padding-left:10px;padding-top:10px;font-weight:bold;">
                         Rapportbook is a social network that connects people to their community.
-                    <li class="display-block" style="font-size:20px;font-family:Georgia;padding-left:10px;">Share Information With Others Around You</li>
+                    <li class="display-block" style="font-size:20px;font-family:Georgia;padding-left:10px;">Get The Latest & Greatest Information From People Around You</li>
                     <li class="display-block" style="font-size:20px;font-family:Georgia;padding-left:10px;">Discover Events Nearby</li>
-                    <li class="display-block" style="font-size:20px;font-family:Georgia;padding-left:10px;">Stay Connected To Your Local Area</li>
+                    <li class="display-block" style="font-size:20px;font-family:Georgia;padding-left:10px;">If You Know Something...Share It!</li>
                     </p>
                 </div>
 
