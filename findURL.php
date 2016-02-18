@@ -88,6 +88,7 @@ function makeLinks($str)
         if (!empty($matches[0])) {
             // get full URL
             $link = $matches[0];
+            $favicon = get_favicon($link);
             $string = $str;
             $title = get_title($link);
             // get domain.com
@@ -149,6 +150,8 @@ function makeLinks($str)
                 if (strstr($str, "</a>/")) {
                     $str = str_replace('</a>/', '</a>', $str);
                 }
+
+                $titleLink = $favicon.' '. $titleLink;
                 return $str . '<br/><br/>' . $titleLink;
 
             }
@@ -212,5 +215,26 @@ function remove_last_instance($search, $replace, $subject)
     }
 
     return $subject;
+}
+
+function get_favicon($url){
+    $faviconLink = $url."/favicon.ico";
+    if (favicon_exists($faviconLink)) {
+        $favicon = "<img src = '".$url."/favicon.ico' height='50' width='50' />";
+        $favicon = mysql_real_escape_string($favicon);
+        return $favicon;
+    }
+    else {
+        $favicon = "<img src= './images/internet_icon.png' height='50' width='50' />";
+        return $favicon;
+    }
+
+
+}
+
+function favicon_exists($url) {
+    $hdrs = @get_headers($url);
+
+    return is_array($hdrs) ? preg_match('/^HTTP\\/\\d+\\.\\d+\\s+2\\d\\d\\s+.*$/',$hdrs[0]) : false;
 }
 ?>
