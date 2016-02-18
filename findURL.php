@@ -141,6 +141,9 @@ function makeLinks($str)
                 if (strlen($garb) > 1) {
                     $str = $cleanLink[0];
                 }
+                if (strstr($str, "</a>/")) {
+                    $str = str_replace('</a>/', '</a>', $str);
+                }
                 return $str . '<br/><br/>' . $titleLink;
 
             }
@@ -191,5 +194,17 @@ function cleanBrTags($txt)
     $txt=preg_replace("{(<br[\\s]*(>|\/>)\s*){2,}}i", "<br /><br />", $txt);
     $txt=preg_replace("{(<br[\\s]*(>|\/>)\s*)}i", "<br />", $txt);
     return $txt;
+}
+
+function remove_last_instance($search, $replace, $subject)
+{
+    $pos = strrpos($subject, $search);
+
+    if($pos !== false)
+    {
+        $subject = substr_replace($subject, $replace, $pos, strlen($search));
+    }
+
+    return $subject;
 }
 ?>
