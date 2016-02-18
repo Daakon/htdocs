@@ -106,6 +106,7 @@ $postOwner = $memberID;
         $post = trim($post);
         // remove excessive line breaks
         $post = cleanBrTags($post);
+        $post = preg_replace('/<input"[^>]+\>/i', "", $post);
 
         // check check post length if it has a url in it
         if (strstr($post, "http://") || strstr($post, "https://")) {

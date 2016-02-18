@@ -121,6 +121,7 @@ function makeLinks($str)
                         $image = '';
                     }
                 }
+
                 // add link
                 $titleLink = '<a href="' . $link . '" target="_blank">' . $title . '</a>';
                 // style the title & add webpage image to link
@@ -134,6 +135,10 @@ function makeLinks($str)
                 $titleLink = preg_replace('~>\s+<~', '><', $titleLink);
                 // remove excessive line breaks in title
                 $titleLink = cleanBrTags($titleLink);
+
+                if (strstr($titleLink, "Search")) {
+                    $titleLink = str_replace("<div", "");
+                }
 
                 // clean up rouge link text
                 $cleanLink = explode('</a>%', $str);
@@ -150,6 +155,7 @@ function makeLinks($str)
         }
         $str = cleanBrTags($str);
         $str = trim($str);
+
         return $str;
     }
 }

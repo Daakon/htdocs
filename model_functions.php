@@ -540,6 +540,8 @@ function alert_followers($interest)
                         } else {
                             $domain = "http://rapportbook.com/home?scrollx=630&scrolly=630";
                         }
+                        $domain = shortenUrl($domain);
+
                         // Setup and send a message
                         $name = get_users_name_by_id($ID);
                         $text = "$name has shared a new post on Rapportbook. $domain";
