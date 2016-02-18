@@ -443,7 +443,8 @@ function text_notification($receiverID, $senderID, $groupID)
             } else {
                 $domain = "http://rapportbook.com/view_messages/$username";
             }
-
+                $domain = shortenUrl($domain);
+        
             $text = "You have a new message from $senderName on Rapportbook: $domain";
 
             // Setup and send a message
