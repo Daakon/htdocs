@@ -229,7 +229,7 @@ if (isset($_POST['submit'])) {
         alert_followers($category);
     }
 
-    echo '<script>location="/home?genre="+encodeURIComponent('.$category.')+"</script>';
+    echo "<script>location='/home?genre=".urlencode($category)."'</script>";
 }
 ?>
 <?php
@@ -491,7 +491,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 //BELOW IS END OF POST COMMENT HANDLING CODE ==========================================================================//
         }
     }
-    echo '<script>location="/home?genre="+encodeURIComponent('.$category.')+"</script>';
+    echo "<script>location='/home?genre=".urlencode($category)."'</script>";
 }
 if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
     $commentID = $_POST['commentID'];

@@ -546,7 +546,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
         }
     }
-    echo '<script>location="/post-interest?interest="+encodeURIComponent('.$category.')+"</script>';
+    echo "<script>location='/post-interest?interest=".urlencode($category)."&scrollx=$scrollx&scrolly=$scrolly'</script>";
 }
 
 if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
