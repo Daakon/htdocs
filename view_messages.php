@@ -139,6 +139,7 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
     // group messages dont condition to else statement without media
 // if photo is provided
         if (strlen($_FILES['flPostMedia']['name'] > 0)) {
+
             foreach ($_FILES['flPostMedia']['tmp_name'] as $k => $v) {
                 $mediaName = $_FILES['flPostMedia']['name'][$k];
                 $orgName = $_FILES['flPostMedia']['name'][$k];
@@ -172,17 +173,18 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
                 }
                 if (in_array($ext, $docFileTypes)) {
                     require 'media_post_file_path.php';
-                    require 'mediapath.php';
                     move_uploaded_file($tempName, $docFilePath);
                     $img = '<a href="' . $docPath . $mediaName . '" download >' . $downloadText . '</a>';
                     $img = mysql_real_escape_string($img);
                     goto BuildMessage;
                 }
 // check file size
+
                 if ($size > 500000000) {
                     echo '<script>alert("File is too large. The maximum file size is 500MB.");</script>';
                     exit;
                 }
+
                 // photo file types
                 $photoFileTypes = array("image/jpg", "image/jpeg", "image/png", "image/tiff",
                     "image/gif", "image/raw");
