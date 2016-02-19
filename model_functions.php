@@ -523,7 +523,7 @@ function alert_followers($interest)
             $followerID = $rows['Follower_ID'];
 
             // send an SMS
-            $followerResults = mysql_query("SELECT Post_Notification_Date, Phone FROM Profile WHERE Member_ID = $followerID And Post_Notification_Date < '$currentDate'  ");
+            $followerResults = mysql_query("SELECT Post_Notification_Date, Phone FROM Profile WHERE Member_ID = $followerID And DATE(Post_Notification_Date) < '$currentDate'  ");
 
             if (mysql_num_rows($followerResults) > 0) {
                 while ($followerRows = mysql_fetch_assoc($followerResults)) {
