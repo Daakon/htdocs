@@ -83,7 +83,7 @@ if (!empty($_SESSION['ID'])) {
                 <div class="visible-xs">
                     <p class="lead"  style="padding-left:10px;padding-top:10px;font-weight:bold;">
                         Rapportbook is a social network that <br/>connects people to their community.
-                    <li class="display-block" style="font-size:12px;font-family:Georgia;padding-left:10px;">Discover Nearby Places, Events & Opportunities</li>
+                    <li class="display-block" style="font-size:12px;font-family:Georgia;padding-left:10px;">Discover Places, Events & Opportunities Nearby</li>
                     <li class="display-block" style="font-size:12px;font-family:Georgia;padding-left:10px;">Share Information With Your Community</li>
                     <li class="display-block" style="font-size:12px;font-family:Georgia;padding-left:10px;">Stay Connected To The World Around You</li>
                     </p>
@@ -92,7 +92,7 @@ if (!empty($_SESSION['ID'])) {
                 <div class="hidden-xs">
                     <p class="lead"  style="padding-left:10px;padding-top:10px;font-weight:bold;">
                         Rapportbook is a social network that connects people to their community.
-                    <li class="display-block" style="font-size:20px;font-family:Georgia;padding-left:10px;">Discover Nearby Places, Events & Opportunities</li>
+                    <li class="display-block" style="font-size:20px;font-family:Georgia;padding-left:10px;">Discover Places, Events & Opportunities Nearby</li>
                     <li class="display-block" style="font-size:20px;font-family:Georgia;padding-left:10px;">Share Information With Your Community</li>
                     <li class="display-block" style="font-size:20px;font-family:Georgia;padding-left:10px;">Stay Connected To The World Around You</li>
                     </p>

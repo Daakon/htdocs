@@ -88,7 +88,13 @@ function makeLinks($str)
         if (!empty($matches[0])) {
             // get full URL
             $link = $matches[0];
-            $favicon = get_favicon($link."favicon.ico");
+
+            // make sure the we have a correctly formatted favicon path to check
+            $favicon = $link."favicon.ico";
+            if (strstr($favicon, "/favicon.ico")) { } else { $favicon = $link."/favicon.ico"; }
+
+            $favicon = get_favicon($favicon);
+
             $string = $str;
             $title = get_title($link);
             // get domain.com
@@ -137,9 +143,14 @@ function makeLinks($str)
                 // remove excessive line breaks in title
                 $titleLink = cleanBrTags($titleLink);
 
-                if (strstr($titleLink, "Search")) {
-                    $titleLink = str_replace("<div", "");
-                }
+                // find the second image and take only that from title link
+                // DESTROY EVERYTHING ELSE**************
+                preg_match('/(<img[^>]+>)/i', $titleLink, $imageTags);
+
+                $imageTag2 = $imageTags[1];
+                $titleArray = explode($imageTag2, $titleLink);
+                $titleLink = $titleArray[0].' '.$imageTag2;
+
 
                 // clean up rouge link text
                 $cleanLink = explode('</a>%', $str);
@@ -151,6 +162,7 @@ function makeLinks($str)
                     $str = str_replace('</a>/', '</a>', $str);
                 }
 
+                $titleLink = closetags($titleLink);
                 $titleLink = $favicon.' '. $titleLink;
                 return $str . '<br/><br/>' . $titleLink;
 

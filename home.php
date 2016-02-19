@@ -491,7 +491,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 //BELOW IS END OF POST COMMENT HANDLING CODE ==========================================================================//
         }
     }
-    echo "<script>location='/home?genre=".urlencode($category)."'</script>";
+    echo "<script>location='/home?genre=".urlencode($category)."&scrollx=$scrollx&scrolly=$scrolly'</script>";
 }
 if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
     $commentID = $_POST['commentID'];
@@ -821,7 +821,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
                 <br/>
                 <textarea name="post" id="post" class="form-control textArea"
-                          placeholder="Share some information with <?php echo getMemberCity($ID) ?>" ></textarea>
+                          placeholder="Share something with <?php echo getMemberCity($ID) ?>" ></textarea>
                 <br/>
                 <div id="progress" style="display:none;">
                     <div class="progress">

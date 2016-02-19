@@ -1,10 +1,4 @@
 <?php
-// compress application
-if (substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip')) {
-    ob_start("ob_gzhandler");
-} else {
-    ob_start();
-}
 
 $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 
