@@ -130,7 +130,7 @@ function makeLinks($str)
                 }
 
                 // add link
-                $titleLink = '<a href="' . $link . '" target="_blank">' . $title . '</a>';
+                $titleLink = '<a id="rbLink" href="' . $link . '" target="_blank">' . $title . '</a>';
                 // style the title & add webpage image to link
                 $titleLink = '<span style="padding-right:5px;margin-top:10px;max-width:100%">' . $titleLink . '</span>
                 <a href="' . $link . '" target="_blank">' . $image . '</a>';
@@ -147,9 +147,19 @@ function makeLinks($str)
                 // DESTROY EVERYTHING ELSE**************
                 preg_match('/(<img[^>]+>)/i', $titleLink, $imageTags);
 
-                $imageTag2 = $imageTags[1];
-                $titleArray = explode($imageTag2, $titleLink);
-                $titleLink = $titleArray[0].' '.$imageTag2;
+                $imageTag2 = $imageTags[0];
+
+                if (strlen($imageTag2) > 1) {
+                    $titleArray = explode($imageTag2, $titleLink);
+                    $titleLink = $titleArray[0] . ' ' . $imageTag2;
+                }
+                else {
+                    // cut everything off by our rbLink anchor tag
+                    preg_match("~<a(?=[^>]* name=[\"']([^'\"]*)|)(\s+[^>]*)?>(.*?)</a>~", $titleLink, $anchorTags);
+                    $anchorTag = $anchorTags[0];
+                    $titleArray = explode($anchorTag, $titleLink);
+                    $titleLink = $titleArray[0] . ' ' . $anchorTag;
+                }
 
 
                 // clean up rouge link text
