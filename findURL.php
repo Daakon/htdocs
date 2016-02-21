@@ -240,7 +240,7 @@ function remove_last_instance($search, $replace, $subject)
 }
 
 function get_favicon($faviconLink){
-        $favicon = "<img src = '".$faviconLink."' height='50' width='50' onerror=\"this.src='./images/internet_icon.png'\"/>";
+        $favicon = "<img src = '".$faviconLink."' height='50' width='50' onerror=\"this.src='/images/internet_icon.png'\"/>";
         $favicon = mysql_real_escape_string($favicon);
         return $favicon;
 }
