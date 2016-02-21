@@ -395,8 +395,12 @@ function getChatProfilePic($groupID, $ID) {
 
     $profile_ids = array();
     //Iterate over the results and sort out the biz ids from the consumer ones.
+    $counter = 0;
     while ($rows = mysql_fetch_assoc($result)) {
-        array_push($profile_ids, $rows['ThreadOwner_ID']);
+        if ($counter <= 4) {
+            array_push($profile_ids, $rows['ThreadOwner_ID']);
+            $counter++;
+        }
     }
 
 //Boil the ids down to unique values bc we dont want it send double emails or notifications
