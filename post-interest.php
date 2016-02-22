@@ -478,7 +478,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                         $noun = $name2 . ' post.';
                     }
 
-                    $post = "$nameLink posted a new $mediaString comment on $noun <br/><br/>$img<br/>";
+                    $post = "$nameLink posted a new $mediaString comment on previous $orgPost <br/><br/>$img<br/>";
                     $post = mysql_real_escape_string($post);
 
                     $sqlInsertPost = "INSERT INTO Posts (Post,     Member_ID,    PostDate  ) Values

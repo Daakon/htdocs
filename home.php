@@ -425,13 +425,15 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                     else {
                         $noun = $name2;
                     }
-                    $orgPost = "<a href='/show_post.php?postID=$postID'>post</a>";
+                    $orgPost = "<a href='/show_post.php?postID=$postID'>status</a>";
                     $orgPostSql = "SELECT Category FROM Posts WHERE ID = $postID ";
                     $orgPostResult = mysql_query($orgPostSql);
                     $orgPostRow = mysql_fetch_assoc($orgPostResult);
                     $orgInterest = $orgPostRow['Category'];
-                    $post = "$nameLink posted a new $mediaString comment on $noun $orgPost.<br/><br/>$img<br/>";
+                    $post = "$nameLink posted a new $mediaString comment on previous $orgPost.<br/><br/>$img<br/>";
                     $post = mysql_real_escape_string($post);
+
+
                     $sqlInsertPost = "INSERT INTO Posts (Post,     Member_ID,   Category,         PostDate  ) Values
                                                         ('$post', '$ID',      '$orgInterest',    CURDATE() ) ";
                     mysql_query($sqlInsertPost) or die(logError(mysql_error(), $url, "Inserting post that states a member posted a media comment on another member post"));

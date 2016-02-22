@@ -202,13 +202,23 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
 // get post owner data
 
+            $sql = "SELECT Member_ID FROM Posts WHERE ID = $postID";
+            $result = mysql_query($sql) or die(mysql_error());
+            $rows = mysql_fetch_assoc($result);
+            $ownerId = $rows['Member_ID'];
             $sqlOwner = "SELECT ID, FirstName, LastName FROM Members WHERE ID = '$ownerId' ";
-            $resultOwner = mysql_query($sqlOwner) or die(logError(mysql_error(), $url, "Getting post owner data"));
+            $resultOwner = mysql_query($sqlOwner) or die(mysql_error());
             $rowsOwner = mysql_fetch_assoc($resultOwner);
             $name2 = $rowsOwner['FirstName'] . ' ' . $rowsOwner['LastName'];
-            $name2 = $name2;
+            $name2 = $name2."'s";
             $ownerId = $rowsOwner['ID'];
             $name2Link = $name2;
+
+            $orgPost = "<a href='/show_post.php?postID=$postID'>status</a>";
+            $orgPostSql = "SELECT Category FROM Posts WHERE ID = $postID ";
+            $orgPostResult = mysql_query($orgPostSql) or die(logError(mysql_error(), $url, "Getting original post commented on"));
+            $orgPostRow = mysql_fetch_assoc($orgPostResult);
+            $orgInterest = $orgPostRow['Category'];
 
             // determine noun if profile owner commented on their own post and write bulletin
 
@@ -220,7 +230,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                 $noun = $name2 . ' post.';
             }
 
-            $post = "$nameLink posted a new $mediaString comment on $noun post.<br/><br/>$img<br/>";
+            $post = "$nameLink posted a new $mediaString comment on previous $orgPost.<br/><br/>$img<br/>";
             $post = mysql_real_escape_string($post);
 
             $sqlInsertPost = "INSERT INTO Posts (Post,     Member_ID,    PostDate  ) Values
