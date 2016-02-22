@@ -395,24 +395,27 @@ function getChatProfilePic($groupID, $ID) {
 
     $profile_ids = array();
     //Iterate over the results and sort out the biz ids from the consumer ones.
-    $counter = 0;
+
     while ($rows = mysql_fetch_assoc($result)) {
-        if ($counter <= 4) {
+
             array_push($profile_ids, $rows['ThreadOwner_ID']);
-            $counter++;
+
         }
-    }
+
 
 //Boil the ids down to unique values bc we dont want it send double emails or notifications
     $profile_ids = array_unique($profile_ids);
 //Send consumer notifications
     $profilePic = '';
 
+    $counter = 0;
     foreach ($profile_ids as $item) {
-
+        if ($counter <= 4) {
         if (!empty($item) && $item != $ID) {
             // only send email if account & email active
             $profilePic .= "<image src= '/media/".get_users_photo_by_id_raw($item)."' style='float:left;' $width $height  alt='' />";
+            $counter++;
+            }
         }
     }
 
@@ -527,7 +530,7 @@ function alert_followers($interest)
             $followerID = $rows['Follower_ID'];
 
             // send an SMS
-            $followerResults = mysql_query("SELECT Post_Notification_Date, Phone FROM Profile WHERE Member_ID = $followerID And DATE(Post_Notification_Date) < '$currentDate'  ");
+            $followerResults = mysql_query("SELECT Post_Notification_Date, Phone FROM Profile WHERE Member_ID = $followerID And DATE(Post_Notification_Date) < DATE(NOW())  ");
 
             if (mysql_num_rows($followerResults) > 0) {
                 while ($followerRows = mysql_fetch_assoc($followerResults)) {
