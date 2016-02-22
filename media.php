@@ -211,7 +211,13 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 //BELOW IS END OF POST COMMENT HANDLING CODE ==========================================================================//
 
     }
-    //echo "<script>location='/home.php?scrollx=$scrollx&scrolly=$scrolly'</script>";
+    $ownerID = $_SESSION['MediaMemberID'];
+    $mediaName = $_SESSION['MediaName'];
+    $mediaType = $_SESSION['MediaType'];
+    $mediaDate = $_SESSION['MediaDate'];
+    $mediaID = $_SESSION['MediaID'];
+    echo "<script>location='/media.php?id=$ownerID&mid=$mediaID&mediaName=$mediaName&mediaType=$mediaType&mediaDate=$mediaDate&scrollx=$scrollx&scrolly=$scrolly'</script>";
+
 }
 
 // handle photo delete
@@ -234,9 +240,17 @@ if (!empty($_GET['btnDelete']) && ($_GET['btnDelete'] == 'Delete Image')) {
 
 
 $mediaName = $_GET['mediaName'];
+$_SESSION['MediaName'] = $mediaName;
+
 $mediaType = $_GET['mediaType'];
+$_SESSION['MediaType'] = $mediaType;
+
 $mediaDate = $_GET['mediaDate'];
+$_SESSION['MediaDate'] = $mediaDate;
+
 $mediaID = $_GET['mid'];
+$_SESSION['MediaID'] = $mediaID;
+
 $memberID = $_GET['id'];
 $_SESSION['MediaMemberID'] = $memberID;
 
@@ -365,6 +379,24 @@ $profileMediaSrc = trim("/media/" . $profilePhoto);
     });
 </script>
 
+<script type="text/javascript">
+    function saveScrollPositions(theForm) {
+        if(theForm) {
+            var scrolly = typeof window.pageYOffset != 'undefined' ? window.pageYOffset : document.documentElement.scrollTop;
+            var scrollx = typeof window.pageXOffset != 'undefined' ? window.pageXOffset : document.documentElement.scrollLeft;
+            theForm.scrollx.value = scrollx;
+            theForm.scrolly.value = scrolly;
+        }
+    }
+</script>
+
+<script>
+    // show comment uploading
+    function showCommentUploading(comment, theForm) {
+        document.getElementById(comment).style.display = "block";
+        saveScrollPositions(theForm);
+    }
+</script>
 
 
 <script>
@@ -546,7 +578,7 @@ $profileMediaSrc = trim("/media/" . $profilePhoto);
             <div class="content-space">
             <?php if (isset($ID)) { ?>
                 <form method="post" action="" enctype="multipart/form-data"
-                      onsubmit="showCommentUploading('comment<?php echo $postID?>', this);">
+                      onsubmit="saveScrollPositions(this);">
 
                     <input type="text" class="form-control" name="mediaComment" id="mediaComment"
                            placeholder="Write a comment" title='' class="border"/>
@@ -755,3 +787,18 @@ $profileMediaSrc = trim("/media/" . $profilePhoto);
     </div>
 
 </body>
+
+<?php
+$scrollx = 0;
+$scrolly = 0;
+if(!empty($_REQUEST['scrollx'])) {
+    $scrollx = $_REQUEST['scrollx'];
+}
+if(!empty($_REQUEST['scrolly'])) {
+    $scrolly = $_REQUEST['scrolly'];
+}
+?>
+
+<script type="text/javascript">
+    window.scrollTo(<?php echo "$scrollx" ?>, <?php echo "$scrolly" ?>);
+</script>
