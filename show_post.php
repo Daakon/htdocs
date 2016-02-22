@@ -155,9 +155,25 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                 $img = '<a href = "media.php?id=' . $ID . '&mid=' . $mediaID . '&media=' . $media . '&type=' . $mediaType . '&mediaDate=' . $mediaDate . '">' . $img . '</a>';
             } // check if file type is a video
             elseif (in_array($type, $videoFileTypes)) {
+                // where ffmpeg is located
+                $ffmpeg = '/usr/local/bin/ffmpeg';
+                // poster file name
+                $posterName = "poster".uniqid().".jpg";
+                //where to save the image
+                $poster = "$posterPath$posterName";
+                //time to take screenshot at
+                $interval = 3;
+                //screenshot size
+                //$size = '440x280'; -s $size
+                //ffmpeg command
+                $cmd = "$ffmpeg -i \"$postMediaFilePath\" -r 1 -ss 3 -t 1  -f image2 $poster 2>&1";
+                exec($cmd);
 
-                $img = '<video src = "' . $postMediaFilePath . '" class="profileVideo" frameborder = "1" controls preload="none" SCALE="ToFit"></video>';
-                $img = '<a href = "media.php?id=' . $ID . '&mid=' . $mediaID . '&media=' . $media . '&type=' . $mediaType . '&mediaDate=' . $mediaDate . '">' . $img . '</a>';
+                $img = '<video poster="/poster/'.$posterName.'" preload="none" autoplay="autoplay" muted controls>
+                                <source src = "' . $videoPath . $mediaName . '" type="video/mp4" />
+                                <source src = "' . $videoPath . $oggFileName . '" type = "video/ogg" />
+                                <source src = "' . $videoPath . $webmFileName . '" type = "video/webm" />
+                                </video>';
             } else {
                 // if invalid file type
                 echo '<script>alert("Invalid File Type!");</script>';
@@ -511,9 +527,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
 
             <?php
-            if (!empty($ID) || !isset($ID)) {
-                $readonly = 'readonly';
-            }
+
             //check if member has approved this post
             //----------------------------------------------------------------
             //require 'getSessionType.php';
@@ -532,13 +546,21 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
             echo '<td>';
             echo "<div id = 'approvals$postID'>";
 
+
+            if (empty($ID) && !isset($ID)) {
+                $readonly = 'readonly';
+            }
+            else {
+                $readonly = '';
+            }
+
             if (mysql_num_rows($result2) > 0) {
 
                 echo '<form>';
 
                 echo '<input type ="hidden" class = "postID" id = "postID" value = "' . $postID . '" />';
                 echo '<input type ="hidden" class = "ID" id = "ID" value = "' . $ID . '" />';
-                echo '<input type ="button" class = "btnDisapprove" $readonly />';
+                echo '<input type ="button" class = "btnDisapprove"'. $readonly.' />';
 
                 if ($approvals > 0) {
 
@@ -551,7 +573,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
                 echo '<input type ="hidden" class = "postID" id = "postID" value = "' . $postID . '" />';
                 echo '<input type ="hidden" class = "ID" id = "ID" value = "' . $ID . '" />';
-                echo '<input type ="button" class = "btnApprove" $readonly />';
+                echo '<input type ="button" class = "btnApprove"'. $readonly.' />';
 
                 if ($approvals > 0) {
 
@@ -570,13 +592,15 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
             ?>
 
 
+
+
             <div class="content-space">
 
                 <form method="post" action="" enctype="multipart/form-data"
                       onsubmit="showCommentUploading('comment<?php echo $postID?>', this);">
 
                     <input type="text" class="form-control" name="postComment" id="postComment"
-                           placeholder="Write a comment" title='' readonly="<?php echo $readonly ?>" />
+                           placeholder="Write a comment" title='' <?php echo $readonly ?> />
 
                     <h6>Add Photo/Video</h6>
                     <input type="file" name="flPostMedia" id="flPostMedia" class="flPostMedia"/>
@@ -590,7 +614,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                         </div>
                     </div>
 
-                    <input type="submit" name="btnComment" id="btnComment" Value="Comment" readonly="<?php echo $readonly ?>" />
+                    <input type="submit" name="btnComment" id="btnComment" Value="Comment" <?php echo $readonly ?> />
                     <input type="hidden" name="postID" id="postID" Value="<?php echo $postID ?>"/>
                     <input type="hidden" name="ID" id="ID" value="<?php echo $ID ?>"/>
                     <input type="hidden" name="ownerId" id="ownerId" value="<?php echo $MemberID ?>"/>

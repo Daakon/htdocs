@@ -316,6 +316,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                 // create file type instance
                 if (in_array($type, $videoFileTypes)) {
                     // convert to mp4
+                    $mediaString = 'video';
                     $fileName = pathinfo($mediaName, PATHINFO_FILENAME);
                     $newFileName = $fileName.".mp4";
                     exec("ffmpeg -i $newFileName -vcodec libx264 -pix_fmt yuv420p -profile:v baseline -preset slow -crf 22 -movflags +faststart $newFileName");
@@ -404,8 +405,24 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                         $img = '<a href = "media.php?id=' . $ID . '&mid=' . $mediaID . '&mediaName=' . $media . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '">' . $img . '</a>';
                     } // check if file type is a video
                     elseif (in_array($type, $videoFileTypes)) {
-                        //$img = '<a href = "' . $videoPath . $mediaName . '"><video src = "' . $videoPath . $mediaName . '" poster="'.$images.'video-bg.jpg" preload="auto" controsl /></a>';
-                        $img = '<video src = "' . $videoPath . $mediaName . '" poster="/media/shot.jpg" preload="auto" controls />';
+                         // where ffmpeg is located
+                        $ffmpeg = '/usr/local/bin/ffmpeg';
+                        // poster file name
+                        $posterName = "poster".uniqid().".jpg";
+                        //where to save the image
+                        $poster = "$posterPath$posterName";
+                        //time to take screenshot at
+                        $interval = 3;
+                        //screenshot size
+                        //$size = '440x280'; -s $size
+                        //ffmpeg command
+                        $cmd = "$ffmpeg -i \"$postMediaFilePath\" -r 1 -ss 3 -t 1  -f image2 $poster 2>&1";
+                        exec($cmd);
+                        $img = '<video poster="/poster/'.$posterName.'" preload="none" autoplay="autoplay" muted controls>
+                                <source src = "' . $videoPath . $mediaName . '" type="video/mp4" />
+                                <source src = "' . $videoPath . $oggFileName . '" type = "video/ogg" />
+                                <source src = "' . $videoPath . $webmFileName . '" type = "video/webm" />
+                                </video>';
                     } else {
                         // if invalid file type
                         echo '<script>alert("Invalid File Type!");</script>';

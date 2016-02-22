@@ -11,6 +11,9 @@ if (!isset($_SESSION["ID"])) {
         echo "<script>alert('You are not logged in'); location = '/learn_more'</script>";
     }
 }
+else {
+    $ID = $_SESSION['ID'];
+}
 
 
 

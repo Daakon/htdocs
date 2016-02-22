@@ -282,6 +282,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                 }
                 if (in_array($type, $videoFileTypes)) {
                     // convert to mp4
+                    $mediaString = 'video';
                     $newFileName = $fileName.".mp4";
                     $audioName = $fileName;
                     $ffmpeg = '/usr/local/bin/ffmpeg';
@@ -361,7 +362,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                     }
                     if (in_array($type, $photoFileTypes)) {
                         $img = '<img src = "' . $mediaPath . $mediaName .'" />';
-                        $img = '<a href = "media?id=' . $ID . '&mid=' . $mediaID . '&mediaName=' . $media . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '">' . $img . '</a>';
+                        $img = '<a href = "media.php?id=' . $ID . '&mid=' . $mediaID . '&mediaName=' . $media . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '">' . $img . '</a>';
                     } // check if file type is a video
                     elseif (in_array($type, $videoFileTypes)) {
                         // where ffmpeg is located
