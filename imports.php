@@ -7,7 +7,9 @@ $ffmpeg = '/usr/local/bin/ffmpeg';
 
 require 'connect.php';
 require 'mediapath.php';
+
 require 'model_functions.php';
+
 if (strstr($url, "forgot-password") || strstr($url, "learn_more")
     || strstr($url, "login") || strstr($url, "signup")
     || strstr($url, "terms") || strstr($url, "show_post")
@@ -23,9 +25,14 @@ else {
     require 'getSession.php';
 }
 require 'category.php';
+
 require 'html_functions.php';
 require 'findURL.php';
-require 'email.php';
+
+if (strstr($url, "learn_more")) {} else {
+    require 'email.php';
+}
+
 require 'calendar.php';
 require 'getState.php';
 require 'memory_settings.php';

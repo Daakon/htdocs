@@ -80,29 +80,59 @@ if (!empty($_SESSION['ID'])) {
                     <a href="#signup"><button class="btn btn-default">Sign Up</button></a>
                 </div>
 
+                <!--Mobile -->
                 <div class="visible-xs">
-                    <p class="lead"  style="padding-left:10px;padding-top:10px;font-weight:bold;">
-                        Rapportbook is a social network that <br/>connects people to their community.
-                    <li class="display-block" style="font-size:12px;font-family:Georgia;padding-left:10px;">Discover Places, Events & Opportunities Nearby</li>
-                    <li class="display-block" style="font-size:12px;font-family:Georgia;padding-left:10px;">Share Information With Your Community</li>
-                    <li class="display-block" style="font-size:12px;font-family:Georgia;padding-left:10px;">Stay Connected To The World Around You</li>
-                    </p>
+
+                    <table style="margin-left:10px;margin-top:20px;margin-bottom:5px;">
+                        <tr>
+                            <td>
+                                <img src="/images/camera.png" height="50" width="50" />
+                            </td>
+                            <td style="font-size:16px;padding-left:10px;padding-right:5px;">
+                                Post Photos & Videos of Places You Go, Things You See & Stuff You Do In Your Community.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <img src="/images/news-and-events.png" height="50" width="100" style="padding-right:5px;margin-bottom:5px;" />
+                            </td>
+                            <td style="font-size:16px;padding-left:10px;border-top:2px solid #e3e3e3;">
+                                Share The Latest News & Events Nearby.
+                            </td>
+                        </tr>
+                    </table>
                 </div>
 
+                <!--Desktop -->
                 <div class="hidden-xs">
-                    <p class="lead"  style="padding-left:10px;padding-top:10px;font-weight:bold;">
-                        Rapportbook is a social network that connects people to their community.
-                    <li class="display-block" style="font-size:20px;font-family:Georgia;padding-left:10px;">Discover Places, Events & Opportunities Nearby</li>
-                    <li class="display-block" style="font-size:20px;font-family:Georgia;padding-left:10px;">Share Information With Your Community</li>
-                    <li class="display-block" style="font-size:20px;font-family:Georgia;padding-left:10px;">Stay Connected To The World Around You</li>
-                    </p>
+
+                    <table style="margin-left:10px;margin-top:20px;">
+                        <tr>
+                            <td>
+                                <img src="/images/camera.png" height="50" width="50" />
+                            </td>
+                            <td style="font-size:16px;padding-left:10px;">
+                                Post Photos & Videos of Places You Go, Things You See & Stuff You Do In Your Community.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <img src="/images/news-and-events.png" height="50" width="100" style="padding-right:5px;" />
+                            </td>
+                            <td style="font-size:16px;padding-left:10px;border-top:2px solid #e3e3e3;">
+                                Share The Latest News & Events Nearby.
+                            </td>
+                        </tr>
+                    </table>
+
                 </div>
+
 
             </div>
 
 
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="margin-top:-10px;">
-                <img src="/images/using-phone.jpg" />
+                <img src="/images/using-phone.jpg" style="width:100%" />
             </div>
 
         </div>

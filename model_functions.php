@@ -521,7 +521,6 @@ function alert_followers($interest)
     $ID = $_SESSION['ID'];
     require 'class-Clockwork.php';
     $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-    $currentDate = date("Y-m-d");
     $result = mysql_query("SELECT Follower_ID FROM Follows WHERE Followed_ID = $ID");
 
     if (mysql_num_rows($result) > 0) {

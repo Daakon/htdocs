@@ -484,7 +484,7 @@ $profileMediaSrc = trim("/media/" . $profilePhoto);
 
         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 ">
 
-            <img src="/media/<?php echo $profilePhoto ?>" height="100px" width="100px"/>
+            <img src="/media/<?php echo $profilePhoto ?>" height="100px" width="80px"/>
 
             <?php echo $name; ?><br/>
             <?php echo date("F j, Y", strtotime($mediaDate)) ?>
@@ -638,7 +638,7 @@ $profileMediaSrc = trim("/media/" . $profilePhoto);
                     echo '<div class="comment-row">';
                     echo '<div class="profileImageWrapper-Feed">
                      <a href='.$commenterProfileUrl.'>
-                    <img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" style = "border:1px solid black" class ="enlarge-onhover img-responsive" />
+                    <img src = "' . $mediaPath . $profilePhoto . '" class ="enlarge-onhover img-responsive" />
                     </a>
                     </div>
 
@@ -714,7 +714,7 @@ $profileMediaSrc = trim("/media/" . $profilePhoto);
                 <div class="comment-row">
                 <div class="profileImageWrapper-Feed">
                     <a href='<?php echo $commenterProfileUrl ?>'>
-                        <img src = "<?php echo $mediaPath . $profilePhoto ?>" height = "50" width = "50" class ="enlarge-onhover img-responsive" />
+                        <img src = "<?php echo $mediaPath . $profilePhoto ?>" />
                         </a>
                     </div>
                 </div>

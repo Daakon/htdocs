@@ -273,7 +273,7 @@ $postOwner = $memberID;
                     echo '<div class="comment-row">';
                     echo '<div class="profileImageWrapper-Feed">
                     <a href='.$commenterProfileUrl.'>
-                    <img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" class ="enlarge-onhover img-responsive" />
+                    <img src = "' . $mediaPath . $profilePhoto . '" class="profilePhoto-Feed enlarge-onhover " />
                     </a>
                     </div>
 
@@ -347,7 +347,7 @@ $postOwner = $memberID;
             <div class="comment-row">
                 <div class="profileImageWrapper-Feed">
                     <a href='<?php echo $commenterProfileUrl ?>'>
-                        <img src = "<?php echo $mediaPath . $profilePhoto ?>" height = "50" width = "50" class ="enlarge-onhover img-responsive" />
+                        <img src = "<?php echo $mediaPath . $profilePhoto ?>" />
                         </a>
                     </div>
                 </div>
