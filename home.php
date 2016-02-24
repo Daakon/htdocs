@@ -859,7 +859,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
         <br/>
 
         <?php
-        $limit = "100";
+        $limit = "25";
         require 'roll-call.php'
         ?>
 

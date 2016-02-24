@@ -97,7 +97,7 @@ if (!empty($_SESSION['ID'])) {
                                 <img src="/images/news-and-events.png" height="50" width="100" style="padding-right:5px;margin-bottom:5px;" />
                             </td>
                             <td style="font-size:16px;padding-left:10px;border-top:2px solid #e3e3e3;">
-                                Share The Latest News & Events Happening Nearby.
+                                Share The Latest News, Events & Causes Happening Nearby.
                             </td>
                         </tr>
                     </table>
@@ -120,7 +120,7 @@ if (!empty($_SESSION['ID'])) {
                                 <img src="/images/news-and-events.png" height="50" width="100" style="padding-right:5px;" />
                             </td>
                             <td style="font-size:16px;padding-left:10px;border-top:2px solid #e3e3e3;">
-                                Share The Latest News & Events Happening Nearby.
+                                Share The Latest News, Events & Causes Happening Nearby.
                             </td>
                         </tr>
                     </table>
@@ -246,7 +246,7 @@ if (!empty($_SESSION['ID'])) {
             $stateCondition = "";
         }
 
-        $limit = "100";
+        $limit = "25";
         $sqlRollCall = " SELECT DISTINCT
     Posts.Post As Post,
     Members.ID As MemberID,
