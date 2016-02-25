@@ -669,7 +669,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
            //alert("End Of The Page");
 
 
-            document.getElementById('gettingMore').style.display = 'block';
+            //document.getElementById('gettingMore').style.display = 'block';
 
             // get the lastPostID input value create by the connection feed code
             var lastPostID = document.getElementById('lastPostID').value;
@@ -926,7 +926,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
     </div>
 
-    <div id="gettingMore" align="center" style="display:none;" ><img src="/images/spinner.gif" height="50" width="50" /></div>
+
     <div id="loadMoreConnections">
     </div>
 
@@ -941,8 +941,11 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
 </div>
 
-
+<div id="gettingMore" align="center" style="display:block;margin-top:-20px;" ><img src="/images/spinner.gif" height="50" width="50" /></div>
 </body>
+
+
+
 </html>
 
 <?php

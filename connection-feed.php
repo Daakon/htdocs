@@ -358,6 +358,7 @@ $total = mysql_num_rows($rollCallResult);
                                     </div>
                                     <div class="comment-content" style="clear:both"></div>
 
+
                                     <!--DELETE BUTTON ------------------>
                                     <?php if ($commentOwnerID == $ID || $memberID == $ID) { ?>
                                         <div class="comment-delete">
