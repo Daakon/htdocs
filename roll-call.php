@@ -1,23 +1,4 @@
-<?php
-// pre-load Roll Call
-// get genre selection
 
-
-if (!empty($genre) && $genre != "Show All") {
-    $genreCondition = "And Posts.Category = '$genre' ";
-}
-else if($genre = "Show All") {
-    $genre = '';
-    $genreCondition = "And Posts.Category > '' ";
-}
-else { $genreCondition = "And Posts.Category = '$genre' "; }
-
-if (!empty($searchState)) {
-    $stateCondition = "AND (Profile.State = '$searchState' AND Profile.City = '$searchCity')";
-}
-else {
-    $stateCondition = "";
-}
 
 
 //$ads = getAds($genre, $age, $state, $interests, $gender);
@@ -45,6 +26,9 @@ $sqlRollCall = " SELECT DISTINCT
     Group By PostID
     Order By PostID DESC LIMIT $limit ";
 $rollCallResult = mysql_query($sqlRollCall) or die(logError(mysql_error(), $url, "Getting Connection Feed data"));
+
+
+
 // if no results
 if (mysql_num_rows($rollCallResult) == 0) {
     $greetText = "Make the first $genre connection in $searchCity ";
@@ -69,6 +53,7 @@ $postID = $rows['PostID'];
 $postDate = $rows['PostDate'];
 $isSponsored = $rows['IsSponsored'];
 $postOwner = $memberID;
+
 ?>
 
 
@@ -77,6 +62,7 @@ $postOwner = $memberID;
 <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 col-sm-12 col-xs-12 roll-call">
 
     <?php
+
     $profileUrl = "/$username";
     ?>
 
@@ -394,6 +380,9 @@ $postOwner = $memberID;
     }
     }
 ?>
+
+
+<!--        </div>-->
 
 
 <!--Right Column -->

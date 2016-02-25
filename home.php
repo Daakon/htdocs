@@ -539,7 +539,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
         $("body").delegate(".btnDisapprove", "click", function () {
             var parentDiv = $(this).closest("div[id^=approvals]");
             var data = {
-                postID: $(this).closest('div').find('.postID').val(),
+                postID: $(this).closest('').find('.postID').val(),
                 ID: $(this).closest('div').find('.ID').val()
                 //add other properties similarly
             }
@@ -652,12 +652,39 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
         });
     }
 </script>
+
+
+
 <style>
     .roll-call {
         min-height: 400px;
     }
 </style>
 
+
+
+<script>
+    $(window).scroll(function () {
+        if ($(document).height() <= $(window).scrollTop() + $(window).height()) {
+           //alert("End Of The Page");
+
+
+            document.getElementById('gettingMore').style.display = 'block';
+
+            // get the lastPostID input value create by the connection feed code
+            var lastPostID = document.getElementById('lastPostID').value;
+
+            //$("#loadMoreConnections").load("/loadMoreConnections.php?lastPostID="+lastPostID);
+            $('#loadMoreConnections').append($("<div>").load("/loadMoreConnections.php?lastPostID="+lastPostID));
+            // remove the last post ID input element so we only get the last one created with php
+            $("input[id=lastPostID]").remove();
+        }
+        else {
+
+        }
+
+    });
+</script>
 
 <meta http-equiv="cache-control" content="max-age=0" />
 <meta http-equiv="cache-control" content="no-cache" />
@@ -816,7 +843,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
             </div>
 
-
+            <i class="fa fa-refresh fa-spin" style="font-size:24px"></i>
             <form method="post" enctype="multipart/form-data" action="" onsubmit="return showUploading()">
                 <img src="/images/image-icon.png" height="30px" width="30px" alt="Photos/Video"/>
                 <strong>Add Photos/Video</strong>
@@ -859,14 +886,53 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
         <br/>
 
         <?php
-        $limit = "25";
-        require 'roll-call.php'
+            // pre-load Connection Feed
+            // get genre selection
+
+            if (isset($_POST['limit'])) {
+                $limit = $_POST['limit'];
+            }
+
+            if (isset($_POST['searchState'])) {
+                $searchState = $_POST['searchState'];
+
+            }
+
+            if (isset($_POST['searchCity'])) {
+                $searchCity = $_POST['searchCity'];
+                echo "<script>alert('$searchCity');</script>";
+            }
+
+            if (!empty($genre) && $genre != "Show All") {
+                $genreCondition = "And Posts.Category = '$genre' ";
+            }
+            else if($genre = "Show All") {
+                $genre = '';
+                $genreCondition = "And Posts.Category > '' ";
+            }
+            else { $genreCondition = "And Posts.Category = '$genre' "; }
+
+            if (!empty($searchState)) {
+                $stateCondition = "AND (Profile.State = '$searchState' AND Profile.City = '$searchCity')";
+            }
+            else {
+                $stateCondition = "";
+            }
+
+        $limit = "10";
+        $lastPostCondition = '';
+        require 'connection-feed.php';
         ?>
 
-        <!--        </div>-->
+    </div>
+
+    <div id="gettingMore" align="center" style="display:none;" ><img src="/images/spinner.gif" height="50" width="50" /></div>
+    <div id="loadMoreConnections">
+    </div>
 
 
-    </div> <!--Middle Column -->
+
+    <!--Middle Column -->
 
 </div>
 
