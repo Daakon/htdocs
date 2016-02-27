@@ -372,6 +372,13 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
         <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 roll-call"
              align="left" style="min-height: 10px;">
             <?php require 'profile_menu.php'; ?>
+            <img src="<?php echo get_users_photo_by_id(get_id_from_username($username)) ?>" class="profilePhoto-Feed " alt=""
+                 title="<?php echo $name ?>" />&nbsp;&nbsp;
+            <?php if (get_id_from_username($username) == $ID) {
+              echo "Your Posts";
+            } else {
+                echo  get_users_name_by_id(get_id_from_username($username))."'s Post"; }
+            ?>
         </div>
 
         <?php

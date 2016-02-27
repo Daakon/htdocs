@@ -249,7 +249,6 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
         else {
             $ID = $_SESSION['ID'];
-            echo "<script>alert('$ID');</script>";
             $sql = "INSERT INTO PostComments (Post_ID,  Member_ID,  Comment,  CommentDate ) Values
                                               ($postID, $ID,       '$comment', CURDATE())";
 
@@ -307,14 +306,23 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
 if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
     $commentID = $_POST['commentID'];
+    $postID = $_POST['postID'];
     $sql = "Update PostComments SET IsDeleted = '1' WHERE ID = $commentID";
     mysql_query($sql) or die (mysql_error());
-    echo "<script>location='/show_post?scrollx=$scrollx&scrolly=$scrolly'</script>";
+    echo "<script>location='/show_post?postID=$postID&scrollx=$scrollx&scrolly=$scrolly'</script>";
 }
 ?>
 
 
 <script src="/resources/js/site.js"></script>
+
+<script>
+    // show comment uploading
+    function showCommentUploading(comment, theForm) {
+        document.getElementById(comment).style.display = "block";
+        saveScrollPositions(theForm);
+    }
+</script>
 
 <script type="text/javascript">
     function saveScrollPositions(theForm) {
@@ -685,6 +693,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                             echo '<div class="comment-delete">';
                             echo '<form action="" method="post" onsubmit="return confirm(\'Do you really want to delete this comment?\')">';
                             echo '<input type="hidden" name="commentID" id="commentID" value="' .  $commentID . '" />';
+                            echo '<input type="hidden" name="postID" id="postID" value="' .  $postID . '" />';
                             echo '<input type ="submit" name="DeleteComment" id="DeleteComment" value="Delete" class="deleteButton" />';
                             echo '</form>';
                             echo '</div>';
