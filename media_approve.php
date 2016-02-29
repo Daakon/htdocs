@@ -18,7 +18,7 @@ $sql = "INSERT INTO MediaApprovals (Media_ID,  Member_ID) Values
 mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting media approval"));
 //An approval just popped so we should set the notifications
 //A comment was just made, we need to send out some notifications.
-//The first thing is to identify all of the id's connected with this bulletin
+//The first thing is to identify all of the id's connected with this media
 $user_id = $ID;
 
 
@@ -51,6 +51,24 @@ foreach ($comment_ids as $item) {
         }
     }
 }
+
+   // notify media owner if not in comment ids
+    $sql2 = "Select Member_ID From Media WHERE MediaName = '$mediaName' ";
+    $result2 = mysql_query($sql2);
+    $row2 = mysql_fetch_assoc($result2);
+    $mediaOwnerID = $row2['Member_ID'];
+
+    if (in_array($mediaOwnerID, $comment_ids)) {
+        // already notified
+    }
+    else {
+        // notify owner
+        if (checkActive($mediaOwnerID)) {
+            if (checkEmailActive($mediaOwnerID)) {
+                build_and_send_email($user_id, $mediaOwnerID, 7, $mediaName, '');
+            }
+        }
+    }
 
 }
 

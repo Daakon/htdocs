@@ -48,6 +48,24 @@ foreach ($comment_ids as $item) {
     }
 }
 
+    // notify post owner if not in comment ids
+    $sql2 = "Select Member_ID From Posts WHERE ID = '$postID' ";
+    $result2 = mysql_query($sql2);
+    $row2 = mysql_fetch_assoc($result2);
+    $postOwnerID = $row2['Member_ID'];
+
+    if (in_array($postOwnerID, $comment_ids)) {
+        // already notified
+    }
+    else {
+        // notify owner
+        if (checkActive($postOwnerID)) {
+            if (checkEmailActive($postOwnerID)) {
+                build_and_send_email($ID, $postOwnerID, 2, $postID, '');
+            }
+        }
+    }
+
 }
 
 

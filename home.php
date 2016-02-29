@@ -731,7 +731,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                 </a>
                 <li><a href="/messages/<?php echo get_username($ID) ?>"><img src = "/images/messages.png" height="20" width="20" /><?php require 'getNewMessageCount.php' ?></a></li>
                 <li><a href="/member_follows/<?php echo get_username($ID) ?>"><img src = "/images/follows.png" height="20" width="20" /><?php require 'getNewFollowCount.php' ?></a></li>
-
+                <li><a href="/coupons"><img src="/images/sales-tag.png" height="40" width="40" /></a></li>
             </ul>
 
         </div>
@@ -900,7 +900,6 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
             if (isset($_POST['searchCity'])) {
                 $searchCity = $_POST['searchCity'];
-                echo "<script>alert('$searchCity');</script>";
             }
 
             if (!empty($genre) && $genre != "Show All") {
@@ -918,7 +917,9 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
             else {
                 $stateCondition = "";
             }
+?>
 
+        <?php
         $limit = "10";
         $lastPostCondition = '';
         require 'connection-feed.php';
@@ -942,6 +943,26 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 </div>
 
 <div id="gettingMore" align="center" style="display:block;margin-top:-20px;" ><img src="/images/spinner.gif" height="50" width="50" /></div>
+
+<script type="text/javascript">
+
+    (function(){
+        var myDiv = document.getElementById("gettingMore");
+
+        var show = function(){
+            myDiv.style.display = "block";
+            setTimeout(hide, 5000);  // 5 seconds
+        }
+
+        var hide = function(){
+            myDiv.style.display = "none";
+        }
+
+        show();
+    })();
+
+</script>
+
 </body>
 
 
