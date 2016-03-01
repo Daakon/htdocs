@@ -167,11 +167,11 @@ if (isset($_POST['submit'])) {
                             <source src="' . $mediaPath . $mediaName . '" type="' . $mediaType . '">
                             Your browser does not support the audio element.
                             </audio>';
-                            $img = '<a href = "media.php?id=' . $ID . '&mediaName=' . $mediaName . '&mid=' . $mediaID . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '" ><br/>' . $img . '</a><br/><br/>';
+                            $img = '<a href = "/media.php?id=' . $ID . '&mediaName=' . $mediaName . '&mid=' . $mediaID . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '" ><br/>' . $img . '</a><br/><br/>';
                         }
                         if (in_array($type, $photoFileTypes)) {
                             $img = '<img src = "' . $mediaPath . $mediaName . '" />';
-                            $img = '<a href = "media.php?id=' . $ID . '&mid=' . $mediaID . '&mediaName=' . $media . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '">' . $img . '</a>';
+                            $img = '<a href = "/media.php?id=' . $ID . '&mid=' . $mediaID . '&mediaName=' . $media . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '">' . $img . '</a>';
                         } // check if file type is a video
                         if (in_array($type, $videoFileTypes)) {
                             // where ffmpeg is located
@@ -362,7 +362,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                     }
                     if (in_array($type, $photoFileTypes)) {
                         $img = '<img src = "' . $mediaPath . $mediaName .'" />';
-                        $img = '<a href = "media.php?id=' . $ID . '&mid=' . $mediaID . '&mediaName=' . $media . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '">' . $img . '</a>';
+                        $img = '<a href = "/media.php?id=' . $ID . '&mid=' . $mediaID . '&mediaName=' . $media . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '">' . $img . '</a>';
                     } // check if file type is a video
                     elseif (in_array($type, $videoFileTypes)) {
                         // where ffmpeg is located
@@ -583,7 +583,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
             return false;
         }
         if (document.getElementById('category').value == '') {
-            alert('You did not provide a business type');
+            alert('You did not provide a post category');
             return false
         }
         document.getElementById("progress").style.display = "block";
@@ -943,25 +943,6 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 </div>
 
 <div id="gettingMore" align="center" style="display:block;margin-top:-20px;" ><img src="/images/spinner.gif" height="50" width="50" /></div>
-
-<script type="text/javascript">
-
-    (function(){
-        var myDiv = document.getElementById("gettingMore");
-
-        var show = function(){
-            myDiv.style.display = "block";
-            setTimeout(hide, 5000);  // 5 seconds
-        }
-
-        var hide = function(){
-            myDiv.style.display = "none";
-        }
-
-        show();
-    })();
-
-</script>
 
 </body>
 

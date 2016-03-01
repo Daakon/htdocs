@@ -152,7 +152,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
             if (in_array($type, $photoFileTypes)) {
 
                 $img = '<img src = "' . $postMediaFilePath . '" />';
-                $img = '<a href = "media.php?id=' . $ID . '&mid=' . $mediaID . '&media=' . $media . '&type=' . $mediaType . '&mediaDate=' . $mediaDate . '">' . $img . '</a>';
+                $img = '<a href = "/media.php?id=' . $ID . '&mid=' . $mediaID . '&media=' . $media . '&type=' . $mediaType . '&mediaDate=' . $mediaDate . '">' . $img . '</a>';
             } // check if file type is a video
             elseif (in_array($type, $videoFileTypes)) {
                 // where ffmpeg is located
@@ -564,7 +564,8 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
             echo '<td>';
             echo "<div id = 'approvals$postID'>";
 
-
+            // re-instantiate session and cookie variables to detect if user is logged in
+            require 'getSession.php';
             if (empty($ID) && !isset($ID)) {
                 $readonly = 'readonly';
             }

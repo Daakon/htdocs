@@ -100,6 +100,14 @@ if (!empty($_SESSION['ID'])) {
                                 Share The Latest News, Events & Causes Happening In Your Area.
                             </td>
                         </tr>
+                        <tr>
+                        <td>
+                            <img src="/images/sales-tag.png" height="50" width="100" style="padding-right:5px;margin-bottom:5px;" />
+                        </td>
+                        <td style="font-size:16px;padding-left:10px;border-top:2px solid #e3e3e3;">
+                            Save Money With Local Businesses.
+                        </td>
+                        </tr>
                     </table>
                 </div>
 
@@ -121,6 +129,14 @@ if (!empty($_SESSION['ID'])) {
                             </td>
                             <td style="font-size:16px;padding-left:10px;border-top:2px solid #e3e3e3;">
                                 Share The Latest News, Events & Causes Happening In Your Area.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <img src="/images/sales-tag.png" height="50" width="100" style="padding-right:5px;margin-bottom:5px;" />
+                            </td>
+                            <td style="font-size:16px;padding-left:10px;border-top:2px solid #e3e3e3;">
+                                Save Money With Local Businesses.
                             </td>
                         </tr>
                     </table>
@@ -227,26 +243,15 @@ if (!empty($_SESSION['ID'])) {
         <br/>
 
 
-        <h5 class="padding-left-10">Checkout what people are sharing</h5>
+        <h5 align="center">Checkout our Member of The Week</h5>
     </div>
 
 
     <!--FEED STARTS HERE -->
-    <div class="col-lg-12 col-md-12 col-xs-12" style="background-color: #e3e3e3;padding-left:0px;padding-right:0px;">
+    <div class="col-lg-12 col-md-12 col-xs-12" style="background-color: #e3e3e3;padding-left:0px;padding-right:0px;" align="center">
         <?php
 
 
-        $genreCondition = "And Posts.Category > '' ";
-
-
-        if (!empty($searchState)) {
-            $stateCondition = "AND (Profile.State = '$searchState' AND Profile.City = '$searchCity')";
-        }
-        else {
-            $stateCondition = "";
-        }
-
-        $limit = "25";
         $sqlRollCall = " SELECT DISTINCT
     Posts.Post As Post,
     Members.ID As MemberID,
@@ -267,17 +272,15 @@ if (!empty($_SESSION['ID'])) {
     And (Members.ID = Posts.Member_ID)
     And (Members.ID = Profile.Member_ID)
     And (Posts.IsDeleted = 0)
-    AND (Posts.Category <> 'Sponsored')
-    $genreCondition
-    $stateCondition
-    Group By PostID
-    Order By PostID DESC LIMIT $limit ";
+    And (Posts.ID = 1)
+    AND (Posts.Category <> 'Sponsored') ";
+
         $rollCallResult = mysql_query($sqlRollCall) or die(logError(mysql_error(), $url, "Getting Learn more feed"));
 
         // if no results
         if (mysql_num_rows($rollCallResult) == 0) {
             ?>
-            <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 roll-call about-roll-call" align="left">
+            <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 roll-call about-roll-call" align="center">
                 No Results
             </div>
         <?php }
@@ -299,7 +302,8 @@ if (!empty($_SESSION['ID'])) {
         $postOwner = $memberID;
         ?>
 
-        <div class="col-lg-5 col-lg-offset-1 col-md-6 col-sm-6 col-xs-12 about-roll-call" align="left">
+        <div class="col-lg-5 col-lg-offset-3 col-md-5 col-md-offset-3 col-sm-6 col-xs-12 about-roll-call" align="left"
+        style="margin-bottom: 20px;">
 
             <?php
             $profileUrl = "#signup";
