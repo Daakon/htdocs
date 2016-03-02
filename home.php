@@ -358,7 +358,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                             <source src="'.$mediaPath . $mediaName.'" type="'.$mediaType.'">
                             Your browser does not support the audio element.
                             </audio>';
-                        $img = '<a href = "media.php?id=' . $ID . '&mediaName=' . $mediaName . '&mid=' . $mediaID . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '" ><br/>'.$img.'</a><br/><br/>';
+                        $img = '<a href = "/media.php?id=' . $ID . '&mediaName=' . $mediaName . '&mid=' . $mediaID . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '" ><br/>'.$img.'</a><br/><br/>';
                     }
                     if (in_array($type, $photoFileTypes)) {
                         $img = '<img src = "' . $mediaPath . $mediaName .'" />';

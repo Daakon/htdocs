@@ -63,9 +63,11 @@ foreach ($comment_ids as $item) {
     }
     else {
         // notify owner
-        if (checkActive($mediaOwnerID)) {
-            if (checkEmailActive($mediaOwnerID)) {
-                build_and_send_email($user_id, $mediaOwnerID, 7, $mediaName, '');
+        if ($ID != $mediaOwnerID) {
+            if (checkActive($mediaOwnerID)) {
+                if (checkEmailActive($mediaOwnerID)) {
+                    build_and_send_email($user_id, $mediaOwnerID, 7, $mediaName, '');
+                }
             }
         }
     }

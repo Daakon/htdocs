@@ -12,6 +12,10 @@ get_header();
         display:none;
     }
 
+    #ds-coupon-location::after {
+        content: "offered by Local Businesses";
+    }
+
     #ds-coupon-subfoot > a {
         display:none;
     }
@@ -61,12 +65,10 @@ $lon = $info['longitude'];
 ?>
 
 
-
-
 <div style="padding-left:5px;font-weight:500;margin-top:-20px;margin-bottom:10px;display:inline-block">
     <a href="/home" style="padding-right:10px;"><img src="/images/home.png" height="20" width="20"  /> Home</a>
     Location incorrect? <button onclick="getLocation()">Re-calculate Location</button>
-
+    <br/>
 </div>
 
 <script>
@@ -134,4 +136,10 @@ ls_categories=["all"]; ls_lat=lat; ls_lng=lon;
         show();
     })();
 
+</script>
+
+<script>
+    var div = document.getElementById('ds-coupon-text');
+
+    div.innerHTML = div.innerHTML + 'offered by local businesses';
 </script>

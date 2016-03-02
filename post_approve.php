@@ -58,10 +58,12 @@ foreach ($comment_ids as $item) {
         // already notified
     }
     else {
-        // notify owner
-        if (checkActive($postOwnerID)) {
-            if (checkEmailActive($postOwnerID)) {
-                build_and_send_email($ID, $postOwnerID, 2, $postID, '');
+        // notify owner if owner didn't approve post
+        if ($ID != $postOwnerID) {
+            if (checkActive($postOwnerID)) {
+                if (checkEmailActive($postOwnerID)) {
+                    build_and_send_email($ID, $postOwnerID, 2, $postID, '');
+                }
             }
         }
     }
