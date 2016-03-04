@@ -98,8 +98,7 @@ if (!empty($_SESSION['ID'])) {
                                     <br/>
                                     • A place you went <br/>
                                     • An event you attended <br/>
-                                    • Anything you experience <br/>
-                                    • Something Informative <b/>
+                                    • Whatever you think is cool<b/>
                                 </span>
                             </td>
                         </tr>
@@ -121,8 +120,7 @@ if (!empty($_SESSION['ID'])) {
                                     <br/>
                                     • A place you went <br/>
                                     • An event you attended <br/>
-                                    • Anything you experience <br/>
-                                    • Something Informative <b/>
+                                    • Whatever you think is cool <br/>
                                 </span>
                             </td>
                         </tr>

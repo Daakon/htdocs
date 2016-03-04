@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="51867226-c8dd-43fb-9a46-7c8a9e9ab742" name="Default" comment="Added media page.&#10;&#10;">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/html_functions.php" afterPath="$PROJECT_DIR$/html_functions.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/category.php" afterPath="$PROJECT_DIR$/category.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/learn_more.php" afterPath="$PROJECT_DIR$/learn_more.php" />
     </list>
     <ignored path="htdocs.iws" />
@@ -75,7 +75,6 @@
         <option value="$PROJECT_DIR$/GoogleUrlApi.php" />
         <option value="$PROJECT_DIR$/profile_menu.php" />
         <option value="$PROJECT_DIR$/signup.php" />
-        <option value="$PROJECT_DIR$/category.php" />
         <option value="$PROJECT_DIR$/view_messages.php" />
         <option value="$PROJECT_DIR$/test" />
         <option value="$PROJECT_DIR$/findURL.php" />
@@ -98,6 +97,7 @@
         <option value="$PROJECT_DIR$/media_approve.php" />
         <option value="$PROJECT_DIR$/html_functions.php" />
         <option value="$PROJECT_DIR$/learn_more.php" />
+        <option value="$PROJECT_DIR$/category.php" />
       </list>
     </option>
   </component>
@@ -913,22 +913,22 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/learn_more.php</url>
-          <line>367</line>
+          <line>365</line>
           <option name="timeStamp" value="230" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/learn_more.php</url>
-          <line>338</line>
+          <line>336</line>
           <option name="timeStamp" value="231" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/learn_more.php</url>
-          <line>346</line>
+          <line>344</line>
           <option name="timeStamp" value="232" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/learn_more.php</url>
-          <line>351</line>
+          <line>349</line>
           <option name="timeStamp" value="233" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
@@ -987,21 +987,6 @@
           <option name="timeStamp" value="245" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/category.php</url>
-          <line>12</line>
-          <option name="timeStamp" value="246" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/category.php</url>
-          <line>24</line>
-          <option name="timeStamp" value="247" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/category.php</url>
-          <line>9</line>
-          <option name="timeStamp" value="248" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/model_functions.php</url>
           <line>365</line>
           <option name="timeStamp" value="249" />
@@ -1028,12 +1013,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/learn_more.php</url>
-          <line>269</line>
+          <line>267</line>
           <option name="timeStamp" value="254" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/learn_more.php</url>
-          <line>294</line>
+          <line>292</line>
           <option name="timeStamp" value="255" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -1212,14 +1197,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="12.423077">
           <caret line="30" column="9" selection-start-line="22" selection-start-column="4" selection-end-line="30" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/category.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.3461539">
-          <caret line="9" column="44" selection-start-line="9" selection-start-column="44" selection-end-line="9" selection-end-column="44" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1665,26 +1642,29 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/learn_more.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.27530363">
-          <caret line="268" column="21" selection-start-line="268" selection-start-column="21" selection-end-line="268" selection-end-column="21" />
+        <state vertical-scroll-proportion="0.20647773">
+          <caret line="108" column="0" selection-start-line="108" selection-start-column="0" selection-end-line="109" selection-end-column="0" />
           <folding>
-            <element signature="e#2540#2600#0#HTML" expanded="true" />
-            <element signature="e#2858#2961#0#HTML" expanded="true" />
-            <element signature="e#3130#3180#0#HTML" expanded="true" />
-            <element signature="e#4087#4154#0#HTML" expanded="true" />
-            <element signature="e#4213#4263#0#HTML" expanded="true" />
-            <marker date="1457120443000" expanded="true" signature="10039:10704" placeholder="SELECT DISTI... Members" />
-            <marker date="1457120443000" expanded="true" signature="15335:15411" placeholder="SELECT ID FR... PostApprovals" />
-            <marker date="1457120443000" expanded="true" signature="15668:15721" placeholder="SELECT * FRO... PostApprovals" />
-            <marker date="1457120443000" expanded="true" signature="17219:17840" placeholder="SELECT DISTI... PostComments" />
-            <marker date="1457120443000" expanded="true" signature="18494:18738" placeholder="..." />
-            <marker date="1457120443000" expanded="true" signature="18548:18711" placeholder="..." />
-            <marker date="1457120443000" expanded="true" signature="18798:19063" placeholder="..." />
-            <marker date="1457120443000" expanded="true" signature="18798:19137" placeholder="..." />
-            <marker date="1457120443000" expanded="true" signature="18854:19063" placeholder="..." />
-            <marker date="1457120443000" expanded="false" signature="19196:19206" placeholder="..." />
-            <marker date="1457120443000" expanded="true" signature="20139:20933" placeholder="SELECT DISTI... PostComments" />
+            <marker date="1457131312000" expanded="true" signature="9913:10578" placeholder="SELECT DISTI... Members" />
+            <marker date="1457131312000" expanded="true" signature="15209:15285" placeholder="SELECT ID FR... PostApprovals" />
+            <marker date="1457131312000" expanded="true" signature="15542:15595" placeholder="SELECT * FRO... PostApprovals" />
+            <marker date="1457131312000" expanded="true" signature="17093:17714" placeholder="SELECT DISTI... PostComments" />
+            <marker date="1457131312000" expanded="true" signature="18368:18612" placeholder="..." />
+            <marker date="1457131312000" expanded="true" signature="18422:18585" placeholder="..." />
+            <marker date="1457131312000" expanded="true" signature="18672:18937" placeholder="..." />
+            <marker date="1457131312000" expanded="true" signature="18672:19011" placeholder="..." />
+            <marker date="1457131312000" expanded="true" signature="18728:18937" placeholder="..." />
+            <marker date="1457131312000" expanded="false" signature="19070:19080" placeholder="..." />
+            <marker date="1457131312000" expanded="true" signature="20013:20807" placeholder="SELECT DISTI... PostComments" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/category.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.034412954">
+          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>

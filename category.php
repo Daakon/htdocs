@@ -13,7 +13,6 @@ $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
     echo '<option value = "Community">Community</option>';
     echo '<option value = "Cosmetology">Cosmetology</option>';
     echo '<option value = "Education">Education</option>';
-    echo '<option value = "Employment">Employment</option>';
     echo '<option value = "Entertainment">Entertainment</option>';
     echo '<option value = "Events">Events</option>';
     echo '<option value = "Fashion & Modeling">Fashion & Modeling</option>';
