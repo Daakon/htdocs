@@ -83,30 +83,25 @@ if (!empty($_SESSION['ID'])) {
                 <!--Mobile -->
                 <div class="visible-xs">
 
-                    <table style="margin-left:10px;margin-top:20px;margin-bottom:5px;">
+                    <table style="margin-left:10px;margin-top:20px;margin-bottom:10px;">
                         <tr>
                             <td>
-                                <img src="/images/camera.png" height="50" width="50" />
+                                <img src="/images/local.png" height="100" width="100" />
                             </td>
-                            <td style="font-size:16px;padding-left:10px;padding-right:5px;">
-                                Post Photos & Videos of Places You Go, Things You See & Stuff You Do In Your Community.
-                            </td>
-                        </tr>
-                        <tr>
                             <td>
-                                <img src="/images/news-and-events.png" height="50" width="100" style="padding-right:5px;margin-bottom:5px;" />
+                                <span style="font-weight: bold;font-family:Georgia, Serif;color:#E30022;display:inline-block;font-size:20px;">
+                                    Rep Your City!
+                                </span>
+                                <br/>
+                                <span style="font-size:20px;font-family:Georgia, Serif;">
+                                    <b>Post:</b>
+                                    <br/>
+                                    • A place you went <br/>
+                                    • An event you attended <br/>
+                                    • Anything you experience <br/>
+                                    • Something Informative <b/>
+                                </span>
                             </td>
-                            <td style="font-size:16px;padding-left:10px;border-top:2px solid #e3e3e3;">
-                                Share The Latest News, Events & Causes Happening In Your Area.
-                            </td>
-                        </tr>
-                        <tr>
-                        <td>
-                            <img src="/images/sales-tag.png" height="50" width="100" style="padding-right:5px;margin-bottom:5px;" />
-                        </td>
-                        <td style="font-size:16px;padding-left:10px;border-top:2px solid #e3e3e3;">
-                            Save Money With Local Businesses.
-                        </td>
                         </tr>
                     </table>
                 </div>
@@ -117,26 +112,18 @@ if (!empty($_SESSION['ID'])) {
                     <table style="margin-left:10px;margin-top:20px;">
                         <tr>
                             <td>
-                                <img src="/images/camera.png" height="50" width="50" />
+                                <img src="/images/local.png" height="100" width="100" />
                             </td>
-                            <td style="font-size:16px;padding-left:10px;">
-                                Post Photos & Videos of Places You Go, Things You See & Stuff You Do In Your Community.
-                            </td>
-                        </tr>
-                        <tr>
                             <td>
-                                <img src="/images/news-and-events.png" height="50" width="100" style="padding-right:5px;" />
-                            </td>
-                            <td style="font-size:16px;padding-left:10px;border-top:2px solid #e3e3e3;">
-                                Share The Latest News, Events & Causes Happening In Your Area.
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <img src="/images/sales-tag.png" height="50" width="100" style="padding-right:5px;margin-bottom:5px;" />
-                            </td>
-                            <td style="font-size:16px;padding-left:10px;border-top:2px solid #e3e3e3;">
-                                Save Money With Local Businesses.
+                                <h1 style="font-weight: bold;font-family:Georgia, Serif;color:#E30022;">Rep Your City!</h1>
+                                <span style="font-size:20px;font-family:Georgia, Serif;">
+                                    <b>Post:</b>
+                                    <br/>
+                                    • A place you went <br/>
+                                    • An event you attended <br/>
+                                    • Anything you experience <br/>
+                                    • Something Informative <b/>
+                                </span>
                             </td>
                         </tr>
                     </table>
@@ -153,13 +140,13 @@ if (!empty($_SESSION['ID'])) {
 
         </div>
 
-        <div align="center" style="background:#E30022;color:white;padding-left:10px;padding-top:10px;">
+        <!--<div align="center" style="background:#E30022;color:white;padding-left:10px;padding-top:10px;">
             <h4>Watch the video to learn more.</h4>
             <video width="320" height="240" poster="/poster/how-it-works-poster.png" autoplay="autoplay" muted controls >
                 <source src="/images/Rapportbook-How-It-Works-Lo-Res.mp4" />
             </video>
             <br/>
-        </div>
+        </div>-->
 
         <div class="row" style="background:#e3e3e3;padding-left:10px;">
             <a id="signup"></a>
@@ -242,13 +229,20 @@ if (!empty($_SESSION['ID'])) {
 
         <br/>
 
+        <div class="hidden-xs">
+            <h3 align="center" style="margin-left:-100px;"><img src="/images/stars.png" height="50" width="150" style="padding-right:10px;" />Member of The Week<img src="/images/stars.png" height="50" width="150" style="padding-left:10px;" /></h3>
+        </div>
 
-        <h5 align="center">Checkout our Member of The Week</h5>
+        <div class="visible-xs">
+            <h4 align="center" style="margin-left:-10px;">
+                <img src="/images/stars.png" height="50" width="50" style="padding-right:10px;" />Member of The Week<img src="/images/stars.png" height="50" width="50" style="padding-left:10px;" />
+            </h4>
+        </div>
     </div>
 
 
     <!--FEED STARTS HERE -->
-    <div class="col-lg-12 col-md-12 col-xs-12" style="background-color: #e3e3e3;padding-left:0px;padding-right:0px;" align="center">
+    <div class="col-lg-12 col-md-12 col-xs-12" style="background-color: #e3e3e3;" align="center">
         <?php
 
 
@@ -275,12 +269,13 @@ if (!empty($_SESSION['ID'])) {
     And (Posts.ID = 1)
     AND (Posts.Category <> 'Sponsored') ";
 
+        // last member of the month post = 259
         $rollCallResult = mysql_query($sqlRollCall) or die(logError(mysql_error(), $url, "Getting Learn more feed"));
 
         // if no results
         if (mysql_num_rows($rollCallResult) == 0) {
             ?>
-            <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 roll-call about-roll-call" align="center">
+            <div class="col-lg-offset-4 col-lg-8 col-md-offset-4 col-md-8 roll-call" >
                 No Results
             </div>
         <?php }
@@ -302,8 +297,8 @@ if (!empty($_SESSION['ID'])) {
         $postOwner = $memberID;
         ?>
 
-        <div class="col-lg-5 col-lg-offset-3 col-md-5 col-md-offset-3 col-sm-6 col-xs-12 about-roll-call" align="left"
-        style="margin-bottom: 20px;">
+        <div class="col-lg-5 col-lg-offset-3 col-md-5 col-md-offset-3 col-sm-6 col-xs-12 roll-call" align="left"
+        style="margin-bottom: 20px;margin-top:10px;">
 
             <?php
             $profileUrl = "#signup";
