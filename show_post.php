@@ -649,6 +649,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                 $sql3 = "SELECT DISTINCT
                         PostComments.Comment As PostComment,
                         PostComments.ID As PostCommentID,
+                        PostComments.CommentDate as CommentDate,
                         Members.ID As CommenterID,
                         Members.FirstName as FirstName,
                         Members.LastName As LastName,
@@ -670,6 +671,8 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                         $profilePhoto = $rows3['ProfilePhoto'];
                         $commentID = $rows3['PostCommentID'];
                         $commentOwnerID = $rows3['CommenterID'];
+                        $commentDate = $rows3['CommentDate'];
+
                         echo '<div class="comment-row">';
                         echo '<div class="profileImageWrapper-Feed">
                         <a href='.$commenterProfileUrl.'>
@@ -684,6 +687,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                                 '</div>
                          </a><br/>
                          ' . nl2br($comment) . '
+                          <div class="date">'. date('l F j, Y',strtotime($commentDate)) .'</div>
                         </div>
 
                     <div class="comment-content" style="clear:both"></div>';
@@ -711,6 +715,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                 $sql4 = "SELECT DISTINCT
                         PostComments.Comment As PostComment,
                         PostComments.ID As PostCommentID,
+                        PostComments.CommentDate as CommentDate,
                         Members.ID As CommenterID,
                         Members.FirstName as FirstName,
                         Members.LastName As LastName,
@@ -744,6 +749,8 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                                 $commentOwnerID = $rows4['CommenterID'];
                                 $commenterUsername = $rows4['Username'];
                                 $commenterProfileUrl = "/$commenterUsername";
+                                $commentDate = $rows4['CommentDate'];
+
                                 ?>
                                 <div class="comment-row">
                                     <div class="profileImageWrapper-Feed">
@@ -760,6 +767,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                                         </div>
                                     </a><br/>
                                     <?php echo nl2br($comment) ?>
+                                    <div class="date"><?php echo date('l F j, Y',strtotime($commentDate)) ?></div>
                                 </div>
                                 <div class="comment-content" style="clear:both"></div>
 

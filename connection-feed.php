@@ -240,6 +240,7 @@ $total = mysql_num_rows($rollCallResult);
                     $sql3 = "SELECT DISTINCT
                         PostComments.Comment As PostComment,
                         PostComments.ID As PostCommentID,
+                        PostComments.CommentDate As CommentDate,
                         Members.ID As CommenterID,
                         Members.FirstName as FirstName,
                         Members.LastName As LastName,
@@ -265,6 +266,7 @@ $total = mysql_num_rows($rollCallResult);
                             $commentOwnerID = $rows3['CommenterID'];
                             $commenterUsername = $rows3['Username'];
                             $commenterProfileUrl = "/$commenterUsername";
+                            $commentDate = $rows3['CommentDate'];
 
                             echo '<div class="comment-row">';
                             echo '<div class="profileImageWrapper-Feed">
@@ -280,6 +282,7 @@ $total = mysql_num_rows($rollCallResult);
                                 '</div>
                      </a><br/>
                      ' . nl2br($comment) . '
+                     <div class="date">'. date('l F j, Y',strtotime($commentDate)) .'</div>
                     </div>
 
                     <div class="comment-content" style="clear:both"></div>';
@@ -304,6 +307,7 @@ $total = mysql_num_rows($rollCallResult);
                     $sql4 = "SELECT DISTINCT
                         PostComments.Comment As PostComment,
                         PostComments.ID As PostCommentID,
+                        PostComments.CommentDate As CommentDate,
                         Members.ID As CommenterID,
                         Members.FirstName as FirstName,
                         Members.LastName As LastName,
@@ -339,11 +343,12 @@ $total = mysql_num_rows($rollCallResult);
                                     $commentOwnerID = $rows4['CommenterID'];
                                     $commenterUsername = $rows4['Username'];
                                     $commenterProfileUrl = "/$commenterUsername";
+                                    $commentDate = $rows4['CommentDate'];
                                     ?>
                                     <div class="comment-row">
                                         <div class="profileImageWrapper-Feed">
                                             <a href='<?php echo $commenterProfileUrl ?>'>
-                                                <img src = "<?php echo $mediaPath . $profilePhoto ?>" />
+                                                <img src = "<?php echo $mediaPath . $profilePhoto ?>" class="profilePhoto-Feed enlarge-onhover " />
                                             </a>
                                         </div>
                                     </div>
@@ -355,6 +360,7 @@ $total = mysql_num_rows($rollCallResult);
                                             </div>
                                         </a><br/>
                                         <?php echo nl2br($comment) ?>
+                                        <div class="date"><?php echo date('l F j, Y',strtotime($commentDate)) ?></div>
                                     </div>
                                     <div class="comment-content" style="clear:both"></div>
 
