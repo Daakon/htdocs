@@ -94,11 +94,11 @@ if (!empty($_SESSION['ID'])) {
                                 </span>
                                 <br/>
                                 <span style="font-size:20px;font-family:Georgia, Serif;">
-                                    <b>Post:</b>
+                                    <b style="font-size:18px;">Things you can share:</b>
                                     <br/>
-                                    • A place you went <br/>
-                                    • An event you attended <br/>
-                                    • Whatever you think is cool<b/>
+                                    • Places you go <br/>
+                                    • News & Events <br/>
+                                    • Whatever is cool<b/>
                                 </span>
                             </td>
                         </tr>
@@ -116,11 +116,11 @@ if (!empty($_SESSION['ID'])) {
                             <td>
                                 <h1 style="font-weight: bold;font-family:Georgia, Serif;color:#E30022;">Rep Your City!</h1>
                                 <span style="font-size:20px;font-family:Georgia, Serif;">
-                                    <b>Post:</b>
+                                    <b>Things you can share:</b>
                                     <br/>
-                                    • A place you went <br/>
-                                    • An event you attended <br/>
-                                    • Whatever you think is cool <br/>
+                                    • Places you go <br/>
+                                    • News & Events <br/>
+                                    • Whatever is cool<b/>
                                 </span>
                             </td>
                         </tr>
