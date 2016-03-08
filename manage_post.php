@@ -572,7 +572,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                 $sql3 = "SELECT DISTINCT
                         PostComments.Comment As PostComment,
                         PostComments.ID As PostCommentID,
-                        CommentDate.Comment As CommentDate,
+                        PostComments.Comment As CommentDate,
                         Members.ID As CommenterID,
                         Members.FirstName as FirstName,
                         Members.LastName As LastName,
@@ -633,7 +633,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                 $sql4 = "SELECT DISTINCT
                         PostComments.Comment As PostComment,
                         PostComments.ID As PostCommentID,
-                        CommentDate.Comment As CommentDate,
+                        PostComments.Comment As CommentDate,
                         Members.ID As CommenterID,
                         Members.FirstName as FirstName,
                         Members.LastName As LastName,

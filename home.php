@@ -673,9 +673,10 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
             // get the lastPostID input value create by the connection feed code
             var lastPostID = document.getElementById('lastPostID').value;
-
+            var genreSelection = document.getElementById('genre');
+            var genre = genreSelection.options[genreSelection.selectedIndex].value;
             //$("#loadMoreConnections").load("/loadMoreConnections.php?lastPostID="+lastPostID);
-            $('#loadMoreConnections').append($("<div>").load("/loadMoreConnections.php?lastPostID="+lastPostID));
+            $('#loadMoreConnections').append($("<div>").load("/loadMoreConnections.php?lastPostID="+lastPostID+"&genre="+encodeURIComponent(genre)));
             // remove the last post ID input element so we only get the last one created with php
             $("input[id=lastPostID]").remove();
         }
