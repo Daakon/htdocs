@@ -170,6 +170,8 @@ $total = mysql_num_rows($rollCallResult);
                             <form action="" method="post" onsubmit="return confirm('Do you really want to block this member?') && saveScrollPositions(this) ">
                                 <input type="hidden" id="blockedID" name="blockedID" class="blockedID" value="<?php echo $memberID ?>" />
                                 <input type="hidden" id="ID" name="ID" class="ID" value="<?php echo $ID ?>" />
+                                <input type="hidden" name="scrollx" id="scrollx" value="0"/>
+                                <input type="hidden" name="scrolly" id="scrolly" value="0"/>
                                 <input type="submit" id="block" name="block" class="btnBlock" value="Block This User" />
                             </form>
                         </div>
