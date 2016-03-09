@@ -37,8 +37,7 @@ $ID = $_SESSION['ID'];
 
                     if ($rows['Sender_ID'] != $ID) {
                         $otherID = $rows['Sender_ID'];
-                    }
-                    else {
+                    } else {
                         $otherID = $rows['Receiver_ID'];
                     }
 
@@ -52,7 +51,7 @@ $ID = $_SESSION['ID'];
                         $pic = "group-chat-photo.png";
 
 
-                            $profilePic = "<div style='float:left; display:inline;padding-right:10px;'>".getChatProfilePic($groupID, $ID)."</div>";
+                        $profilePic = "<div style='float:left; display:inline;padding-right:10px;'>" . getChatProfilePic($groupID, $ID) . "</div>";
 
 
                         $name = $groupName;
@@ -61,29 +60,33 @@ $ID = $_SESSION['ID'];
                         // check group thread
 
 
-                            // get ALL new messages owned by current session against the other person
+                        // get ALL new messages owned by current session against the other person
 
-                            $sql3 = "SELECT ID FROM Messages WHERE ThreadOwner_ID = $ID And (New = 1) And (GroupID = '$groupID') ";
-                            $result3 = mysql_query($sql3) or die(logError(mysql_error(), $url, "Getting all new messages owned by current session against other person"));
-                            $row3 = mysql_fetch_assoc($result3);
-                            $count = mysql_num_rows($result3);
+                        $sql3 = "SELECT ID FROM Messages WHERE ThreadOwner_ID = $ID And (New = 1) And (GroupID = '$groupID') ";
+                        $result3 = mysql_query($sql3) or die(logError(mysql_error(), $url, "Getting all new messages owned by current session against other person"));
+                        $row3 = mysql_fetch_assoc($result3);
+                        $count = mysql_num_rows($result3);
 
-                            // if we are past the first message, subtract the initial message row
-                            $messageCount = mysql_num_rows($result3);
-                            $firstMessage = $rows['FirstMessage'];
-                            if ($firstMessage == 0) {
-                                    $messageCount = $messageCount - 1;
-                            }
+                        // if we are past the first message, subtract the initial message row
+                        $messageCount = mysql_num_rows($result3);
+                        $firstMessage = $rows['FirstMessage'];
+                        if ($firstMessage == 0) {
+                            $messageCount = $messageCount - 1;
+                        }
 
 
                         if ($messageCount > 0) {
-                            $notification = "<span style='color:#E30022;font-weight: bold'>". $messageCount." New</font>";
-                        }
-                        else {
+                            $notification = "<span style='color:#E30022;font-weight: bold'>" . $messageCount . " New</font>";
+                        } else {
                             $notification = '';
                         }
 
                     }
+
+                    if (checkBlock($ID, $otherID)) {
+                        echo "<span style='margin-left:-50px;'><img src='/images/default_photo.png' height='50' width='50' />Member not found </span>";
+                    } else {
+
                     if ($groupID == '') {
 
                         $sql2 = "SELECT FirstName,LastName,Username, ProfilePhoto
@@ -118,25 +121,23 @@ $ID = $_SESSION['ID'];
 
                             $firstMessage = $rows['FirstMessage'];
                             if ($firstMessage == 0) {
-                                    $messageCount = $messageCount - 1;
-                                }
+                                $messageCount = $messageCount - 1;
+                            }
                             if ($messageCount > 0) {
 
-                                $notification = "<span style='color:#E30022;font-weight: bold'>". $messageCount." New</font>";
-                            }
-                            else {
+                                $notification = "<span style='color:#E30022;font-weight: bold'>" . $messageCount . " New</font>";
+                            } else {
 
                                 $notification = '';
                             }
-                        }
-                        else {
+                        } else {
                             $notification = '';
                         }
 
 
                     }
 
-
+                }
 
 
                 echo "

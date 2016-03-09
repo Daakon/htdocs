@@ -45,8 +45,10 @@ $profileID = get_id_from_username($username);
             while ($rows = mysql_fetch_assoc($result)) {
 
                 $followedID = $rows['Followed_ID'];
+                if (checkBlock($ID, $followedID) == false) {
 
-                $sql2 = "SELECT
+
+                    $sql2 = "SELECT
                       Members.ID As MemberID,
                         Members.FirstName As FirstName,
                         Members.LastName As LastName,
@@ -58,48 +60,49 @@ $profileID = get_id_from_username($username);
                       AND Profile.Member_ID = $followedID
                       Group By Interest
                       Order By Interest ASC ";
-                $result2 = mysql_query($sql2) or die(logError(mysql_error(), $url, "Getting profile photos and names of who user is following"));
+                    $result2 = mysql_query($sql2) or die(logError(mysql_error(), $url, "Getting profile photos and names of who user is following"));
 
 
-                while ($rows2 = mysql_fetch_assoc($result2)) {
+                    while ($rows2 = mysql_fetch_assoc($result2)) {
 
-                    $firstName = $rows2['FirstName'];
-                    $lastName = $rows2['LastName'];
-                    $name = $rows2['FirstName'] . ' ' . $rows2['LastName'];
-                    $username = $rows2['Username'];
-                    $profilePhoto = $rows2['ProfilePhoto'];
-                    $interest = $rows2['Interest'];
+                        $firstName = $rows2['FirstName'];
+                        $lastName = $rows2['LastName'];
+                        $name = $rows2['FirstName'] . ' ' . $rows2['LastName'];
+                        $username = $rows2['Username'];
+                        $profilePhoto = $rows2['ProfilePhoto'];
+                        $interest = $rows2['Interest'];
 
-                    $profileUrl = "/$username";
-                    ?>
+                        $profileUrl = "/$username";
+                        ?>
 
 
-                    <div class='profileImageWrapper-Feed'>
-                        <a href="<?php echo $profileUrl ?>">
-                            <img src="<?php echo $mediaPath. $profilePhoto ?>" class="profilePhoto-Feed enlarge-onhover " alt=""
-                                 title="<?php echo $name ?>" />
-                        </a>
-                    </div>
+                        <div class='profileImageWrapper-Feed'>
+                            <a href="<?php echo $profileUrl ?>">
+                                <img src="<?php echo $mediaPath . $profilePhoto ?>"
+                                     class="profilePhoto-Feed enlarge-onhover " alt=""
+                                     title="<?php echo $name ?>"/>
+                            </a>
+                        </div>
 
-                    <div class='profileNameWrapper-Feed'>
-                        <a href="<?php echo $profileUrl ?>">
-                            <div class="profileName-Feed">
-                                <?php echo $name ?>
-                                <span style="font-style: italic;font-weight: normal">
+                        <div class='profileNameWrapper-Feed'>
+                            <a href="<?php echo $profileUrl ?>">
+                                <div class="profileName-Feed">
+                                    <?php echo $name ?>
+                                    <span style="font-style: italic;font-weight: normal">
                                     (<?php echo $interest ?>)
                                 </span>
-                            </div>
-                        </a>
+                                </div>
+                            </a>
 
-                    </div>
+                        </div>
 
 
                         <hr class="hr-line" style="clear: both;"/>
 
-            <?php
+                        <?php
+                    }
                 }
             }
-
             ?>
 
         </div>

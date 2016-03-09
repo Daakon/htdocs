@@ -46,6 +46,8 @@ $profileID = get_id_from_username($username);
             $followerID = $rows['Follower_ID'];
             $new = $rows['New'];
 
+            if (checkBlock($ID, $followerID) == false) {
+                
             $sql2 = "SELECT
                       Members.ID As MemberID,
                         Members.FirstName As FirstName,
@@ -70,12 +72,16 @@ $profileID = get_id_from_username($username);
                 $interest = $rows2['Interest'];
 
                 $profileUrl = "/$username";
-?>
+                $memberID = get_id_from_username($username);
+
+
+                ?>
 
                 <div class='profileImageWrapper-Feed'>
                     <a href="<?php echo $profileUrl ?>">
-                        <img src="<?php echo $mediaPath. $profilePhoto ?>" class="profilePhoto-Feed enlarge-onhover " alt=""
-                             title="<?php echo $name ?>" />
+                        <img src="<?php echo $mediaPath . $profilePhoto ?>" class="profilePhoto-Feed enlarge-onhover "
+                             alt=""
+                             title="<?php echo $name ?>"/>
                     </a>
                 </div>
 
@@ -87,7 +93,7 @@ $profileID = get_id_from_username($username);
                                     (<?php echo $interest ?>)
                                 </span>
                             <?php
-                            if ($ID == $profileID  && $new == 1) {
+                            if ($ID == $profileID && $new == 1) {
                                 echo "<span style='color:red;'>New</span>";
                             }
                             ?>
@@ -98,9 +104,11 @@ $profileID = get_id_from_username($username);
 
 
                 <hr class="hr-line" style="clear: both;"/>
-        <?php
+                <?php
             }
         }
+            }
+
 
         ?>
 
