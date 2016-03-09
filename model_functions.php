@@ -98,7 +98,15 @@ function get_users_name_by_id($user_id)
 
     $result = mysql_query($sql) or die(logError(mysql_error(), "model_functions", "get_users_name_by_id() failed"));
     while ($rows = mysql_fetch_assoc($result)) {
-        return $rows['FirstName'] . ' ' . $rows['LastName'];
+        $firstName = $rows['FirstName'];
+        $lastName = $rows['LastName'];
+        if (strlen($lastName) > 0) {
+            $name = $firstName.''.$lastName;
+        }
+        else {
+            $name = $firstName;
+        }
+        return $name;
     }
 }
 
@@ -572,7 +580,9 @@ function alert_followers($interest)
 
                         // Setup and send a message
                         $name = get_users_name_by_id($ID);
+                        $name = trim($name);
                         $text = "$name has shared a new post on Rapportbook. $domain";
+                        $text = trim($text);
                         $message = array('to' => $number, 'message' => $text);
                         $result = $clockwork->send($message);
 

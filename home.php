@@ -430,7 +430,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                     $orgPostResult = mysql_query($orgPostSql);
                     $orgPostRow = mysql_fetch_assoc($orgPostResult);
                     $orgInterest = $orgPostRow['Category'];
-                    $post = "$nameLink posted a new $mediaString comment on previous $orgPost.<br/><br/>$img<br/>";
+                    $post = "$nameLink posted a new $mediaString comment on a previous $orgPost.<br/><br/>$img<br/>";
                     $post = mysql_real_escape_string($post);
 
 
