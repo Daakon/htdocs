@@ -41,3 +41,16 @@
     }
 
 
+    function showOptions(id) {
+        var blockButton = document.getElementById(id);
+        if (blockButton.style.display == 'none') {
+            blockButton.style.display = 'block';
+        }
+        else {
+            blockButton.style.display = 'none';
+        }
+        //document.getElementById(id).select();
+    }
+
+
+

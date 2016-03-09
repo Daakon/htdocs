@@ -514,6 +514,27 @@ function logError($error, $page, $object) {
     exit;
 }
 
+
+function checkBlock($ID, $memberID) {
+    $sql = "SELECT EXISTS (SELECT BlockedID FROM Blocks WHERE BlockerID = $ID AND BlockedID = $memberID)";
+    $result = mysql_query($sql) or die(mysql_error());
+    $count = mysql_num_rows($result);
+    // if this query returns true, then this user is blocked
+    // now we must run the actual query
+    if ($count == 1) {
+        $sql1 = "SELECT BlockedID FROM Blocks WHERE BlockerID = $ID AND BlockedID = $memberID";
+        $result1 = mysql_query($sql1) or die(mysql_error());
+        if (mysql_num_rows($result1) > 0) {
+            return true;
+        }
+        else { return false; }
+     }
+    else {
+        return false;
+    }
+}
+
+
 // text function to all service providers for related service post
 function alert_followers($interest)
 {

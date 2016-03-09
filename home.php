@@ -498,11 +498,33 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 }
 if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
     $commentID = $_POST['commentID'];
+
+    $scrollx = $_REQUEST['scrollx'];
+    $scrolly = $_REQUEST['scrolly'];
+
     $sql = "Update PostComments SET IsDeleted = '1' WHERE ID = $commentID";
     mysql_query($sql) or die (mysql_error());
     echo "<script>location='/home?scrollx=$scrollx&scrolly=$scrolly'</script>";
 }
 ?>
+
+<?php
+if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
+    $blockedID = $_POST['blockedID'];
+    $ID = $_POST['ID'];
+
+    $scrollx = $_REQUEST['scrollx'];
+    $scrolly = $_REQUEST['scrolly'];
+
+    $sql = "INSERT INTO Blocks (BlockerID,   BlockedID) Values
+                              ('$ID',  '$blockedID')";
+    mysql_query($sql) or die(mysql_error());
+    echo "<script>location='/home?scrollx=$scrollx&scrolly=$scrolly'</script>";
+}
+?>
+
+<script type="text/javascript" src="resources/js/site.js"></script>
+
 <script type="text/javascript">
     function saveScrollPositions(theForm) {
         if(theForm) {
@@ -539,7 +561,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
         $("body").delegate(".btnDisapprove", "click", function () {
             var parentDiv = $(this).closest("div[id^=approvals]");
             var data = {
-                postID: $(this).closest('').find('.postID').val(),
+                postID: $(this).closest('div').find('.postID').val(),
                 ID: $(this).closest('div').find('.ID').val()
                 //add other properties similarly
             }
@@ -555,6 +577,9 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
         });
     });
 </script>
+
+
+
 <script type="text/javascript">
     function showPost(long,short) {
         var longPost = document.getElementById(long);
@@ -653,7 +678,18 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
     }
 </script>
 
-
+<script>
+    function showOptions(id) {
+        var blockButton = document.getElementById(id);
+        if (blockButton.style.display == 'none') {
+            blockButton.style.display = 'block';
+        }
+        else {
+            blockButton.style.display = 'none';
+        }
+        //document.getElementById(id).select();
+    }
+</script>
 
 <style>
     .roll-call {

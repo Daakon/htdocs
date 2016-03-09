@@ -67,10 +67,8 @@ $total = mysql_num_rows($rollCallResult);
         $lastPostID = $rows['LastPostID'];
         ?>
 
-
-
-
-        <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 col-sm-12 col-xs-12 roll-call">
+        <?php if (checkBlock($ID, $memberID)) { $display = "style= 'display:none;'"; } else { $display = "style='display:block;'"; } ?>
+        <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 col-sm-12 col-xs-12 roll-call" <?php echo $display ?>>
 
             <?php
 
@@ -92,6 +90,7 @@ $total = mysql_num_rows($rollCallResult);
                     <?php if ($isSponsored) { echo "<br/>Sponsored"; } ?>
                 </div>
             </div>
+
 
 
             <div class="post" <?php echo $postStyle ?> style="clear:both;">
@@ -158,6 +157,24 @@ $total = mysql_num_rows($rollCallResult);
                 ?>
 
                 <input id="<?php echo $shareLinkID ?>" style="display:none;" value ="<?php echo $shortLink ?>" />
+
+
+                    <?php if ($ID != $memberID) {
+
+                        $optionsID = "options$postID";
+                    ?>
+
+                        <br/>
+                            <a href="javascript:showOptions('<?php echo $optionsID ?>');" style="font-size:50px;color:black">...</a>
+                            <div style="display:none;" id="<?php echo $optionsID ?>">
+                            <form action="" method="post" onsubmit="return confirm('Do you really want to block this member?') && saveScrollPositions(this) ">
+                                <input type="hidden" id="blockedID" name="blockedID" class="blockedID" value="<?php echo $memberID ?>" />
+                                <input type="hidden" id="ID" name="ID" class="ID" value="<?php echo $ID ?>" />
+                                <input type="submit" id="block" name="block" class="btnBlock" value="Block This User" />
+                            </form>
+                        </div>
+
+                <?php } ?>
 
                 <?php
 
@@ -290,9 +307,11 @@ $total = mysql_num_rows($rollCallResult);
                             if ($commentOwnerID == $ID || $memberID == $ID) {
                                 //<!--DELETE BUTTON ------------------>
                                 echo '<div class="comment-delete">';
-                                echo '<form action="" method="post" onsubmit="return confirm(\'Do you really want to delete this comment?\')">';
+                                echo '<form action="" method="post" onsubmit="return confirm(\'Do you really want to delete this comment?\') && saveScrollPositions(this) ">';
                                 echo '<input type="hidden" name="commentID" id="commentID" value="' .  $commentID . '" />';
                                 echo '<input type ="submit" name="DeleteComment" id="DeleteComment" value="Delete" class="deleteButton" />';
+                                echo '<input type="hidden" name="scrollx" id="scrollx" value="0"/>';
+                                echo '<input type="hidden" name="scrolly" id="scrolly" value="0"/>';
                                 echo '</form>';
                                 echo '</div>';
                                 //<!------------------------------------->
