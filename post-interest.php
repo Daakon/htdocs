@@ -714,10 +714,20 @@ function myFunction() {
 
 <?php
 
-/*$ads = getAds($genre, $age, $state, $interests, $gender);
-$ageStart = $_GET['ageStart'];
-$ageEnd = $_GET['ageEnd'];
-$gender = $_GET['gender'];*/
+$sql1 = "SELECT BlockedID, BlockerID FROM Blocks WHERE (BlockerID = $ID Or BlockedID = $ID)";
+$result1 = mysql_query($sql1) or die(logError(mysql_error(), $url, ""));
+
+$blockIDs = array();
+
+//Get blocked IDs
+while ($rows1 = mysql_fetch_assoc($result1)) {
+    if ($rows1['BlockedID'] != $ID) {
+        array_push($blockIDs, $rows1['BlockedID']);
+        if ($rows1['BlockerID'] != $ID) {
+            array_push($blockIDs, $rows1['BlockerID']);
+        }
+    }
+}
 
 // Get All Categories nationwide
 $sql = "SELECT DISTINCT
@@ -739,6 +749,7 @@ $sql = "SELECT DISTINCT
     And Members.IsSuspended = 0
     And Members.ID = Posts.Member_ID
     And Members.ID = Profile.Member_ID
+    And (Members.ID Not in ( '" . implode($blockIDs, "', '") . "' ))
     And Posts.IsDeleted = 0
     AND Posts.Category = '$category'
     Group By PostID
@@ -955,6 +966,7 @@ if (mysql_num_rows($result) > 0) {
                         PostComments.Post_ID = $postID
                         AND Members.ID = Profile.Member_ID
                         And Members.ID = PostComments.Member_ID
+                        And (Members.ID Not in ( '" . implode($blockIDs, "', '") . "' ))
                         And PostComments.IsDeleted = 0
                         Group By PostComments.ID
                         Order By PostComments.ID DESC LIMIT 3 ";
@@ -968,6 +980,8 @@ if (mysql_num_rows($result) > 0) {
                     $commentID = $rows3['PostCommentID'];
                     $commentOwnerID = $rows3['CommenterID'];
                     $commentDate = $rows3['CommentDate'];
+
+                    if (checkBlock($ID, $commentOwnerID)) { $display = "style= 'display:none;'"; } else { $display = "style='display:block;'"; }
 
                     echo '<div class="comment-row"'. $display.'>';
                         echo '<div class="profileImageWrapper-Feed">
@@ -1019,6 +1033,7 @@ if (mysql_num_rows($result) > 0) {
                         WHERE
                         PostComments.Post_ID = $postID
                         And Members.ID = PostComments.Member_ID
+                        And (Members.ID Not in ( '" . implode($blockIDs, "', '") . "' ))
                         And PostComments.IsDeleted = 0
                         And Members.ID = Profile.Member_ID
                         Group By PostComments.ID
@@ -1045,6 +1060,8 @@ if (mysql_num_rows($result) > 0) {
                     $commenterUsername = $rows4['Username'];
                     $commenterProfileUrl = "/$commenterUsername";
                     $commentDate = $rows4['CommentDate'];
+
+                    if (checkBlock($ID, $ID)) { $display = "style= 'display:none;'"; } else { $display = "style='display:block;'"; }
                 ?>
             <div class="comment-row" <?php echo $display ?>>
                 <div class="profileImageWrapper-Feed">

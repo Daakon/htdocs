@@ -1,4 +1,19 @@
 <?php
+$ID = $_SESSION['ID'];
+$sql1 = "SELECT BlockedID, BlockerID FROM Blocks WHERE (BlockerID = $ID Or BlockedID = $ID)";
+$result1 = mysql_query($sql1) or die(logError(mysql_error(), $url, ""));
+
+$blockIDs = array();
+
+//Get blocked IDs
+while ($rows1 = mysql_fetch_assoc($result1)) {
+    if ($rows1['BlockedID'] != $ID) {
+        array_push($blockIDs, $rows1['BlockedID']);
+        if ($rows1['BlockerID'] != $ID) {
+            array_push($blockIDs, $rows1['BlockerID']);
+        }
+    }
+}
 
 //$ads = getAds($genre, $age, $state, $interests, $gender);
 $sqlRollCall = " SELECT DISTINCT
@@ -19,6 +34,7 @@ And (Members.IsSuspended = 0)
 And (Members.ID = Posts.Member_ID)
 And (Members.ID = Profile.Member_ID)
 And (Posts.IsDeleted = 0)
+And (Members.ID Not in ( '" . implode($blockIDs, "', '") . "' ))
 AND (Posts.Category <> 'Sponsored')
 $lastPostCondition
 $genreCondition
@@ -67,8 +83,8 @@ $total = mysql_num_rows($rollCallResult);
         $lastPostID = $rows['LastPostID'];
         ?>
 
-        <?php if (checkBlock($ID, $memberID)) { $display = "style= 'display:none;'"; } else { $display = "style='display:block;'"; } ?>
-        <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 col-sm-12 col-xs-12 roll-call" <?php echo $display ?>>
+
+        <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 col-sm-12 col-xs-12 roll-call" >
 
             <?php
 
@@ -270,6 +286,7 @@ $total = mysql_num_rows($rollCallResult);
                         PostComments.Post_ID = $postID
                         AND Members.ID = Profile.Member_ID
                         And Members.ID = PostComments.Member_ID
+                        And (Members.ID Not in ( '" . implode($blockIDs, "', '") . "' ))
                         And PostComments.IsDeleted = 0
                         Group By PostComments.ID
                         Order By PostComments.ID DESC LIMIT 3 ";
@@ -277,7 +294,7 @@ $total = mysql_num_rows($rollCallResult);
                     $result3 = mysql_query($sql3) or die(logError(mysql_error(), $url, "Gettig first 3 Connection Feed comments"));
                     echo '<br/>';
                     if (mysql_num_rows($result3) > 0) {
-                        echo '<div class="comment-style"'.$display.'>';
+                        echo '<div class="comment-style">';
                         while ($rows3 = mysql_fetch_assoc($result3)) {
                             $comment = $rows3['PostComment'];
                             $profilePhoto = $rows3['ProfilePhoto'];
@@ -287,7 +304,9 @@ $total = mysql_num_rows($rollCallResult);
                             $commenterProfileUrl = "/$commenterUsername";
                             $commentDate = $rows3['CommentDate'];
 
-                            echo '<div class="comment-row"'. $display.'>';
+                          //if (checkBlock($ID, $commentOwnerID)) { $display2 = "style= 'display:none;'"; } else { $display2 = "style='display:block;'"; }
+
+                            echo '<div class="comment-row" >';
                             echo '<div class="profileImageWrapper-Feed">
                     <a href='.$commenterProfileUrl.'>
                     <img src = "' . $mediaPath . $profilePhoto . '" class="profilePhoto-Feed enlarge-onhover " />
@@ -339,6 +358,7 @@ $total = mysql_num_rows($rollCallResult);
                         PostComments.Post_ID = $postID
                         AND Members.ID = Profile.Member_ID
                         And Members.ID = PostComments.Member_ID
+                        And (Members.ID Not in ( '" . implode($blockIDs, "', '") . "' ))
                         And PostComments.IsDeleted = 0
                         Group By PostComments.ID
                         Order By PostComments.ID DESC LIMIT 3, 100 ";
@@ -354,7 +374,7 @@ $total = mysql_num_rows($rollCallResult);
 
                         <div id="<?php echo $moreComments ?>" style="display:none;">
 
-                            <div class="comment-style" <?php echo $display ?>>
+                            <div class="comment-style">
 
                                 <?php
                                 while ($rows4 = mysql_fetch_assoc($result4)) {
@@ -365,8 +385,11 @@ $total = mysql_num_rows($rollCallResult);
                                     $commenterUsername = $rows4['Username'];
                                     $commenterProfileUrl = "/$commenterUsername";
                                     $commentDate = $rows4['CommentDate'];
+
+                                    //if (checkBlock($ID, $commentOwnerID)) { $display3 = "style= 'display:none;'"; } else { $display3 = "style='display:block;'"; }
                                     ?>
-                                    <div class="comment-row" <?php echo $display ?>>
+
+                                    <div class="comment-row" >
                                         <div class="profileImageWrapper-Feed">
                                             <a href='<?php echo $commenterProfileUrl ?>'>
                                                 <img src = "<?php echo $mediaPath . $profilePhoto ?>" class="profilePhoto-Feed enlarge-onhover " />

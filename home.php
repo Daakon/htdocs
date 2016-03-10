@@ -939,14 +939,17 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
                 $searchCity = $_POST['searchCity'];
             }
 
+
             if (!empty($genre) && $genre != "Show All") {
                 $genreCondition = "And Posts.Category = '$genre' ";
             }
-            else if($genre = "Show All") {
+            else if($genre == "Show All") {
                 $genre = '';
                 $genreCondition = "And Posts.Category > '' ";
             }
             else { $genreCondition = "And Posts.Category = '$genre' "; }
+
+
 
             if (!empty($searchState)) {
                 $stateCondition = "AND (Profile.State = '$searchState' AND Profile.City = '$searchCity')";
