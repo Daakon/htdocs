@@ -7,13 +7,15 @@ if ($_SESSION['UsernameUpdated'] == 1) {
 }
 else {
     $username = $match[0];
+    $memberID = get_id_from_username($username);
+
+    if (checkBlock($ID, $memberID)) {
+        echo "<script>alert('This profile could not be found');location='/home' </script>";
+        exit;
+    }
 }
 
-$memberID = get_id_from_username($username);
 
-if (checkBlock($ID, $memberID)) {
-    echo "<script>alert('This profile could not be found');location='/home' </script>";
-}
 
 $sql = "SELECT
                         Members.ID As MemberID,
