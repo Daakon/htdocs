@@ -277,7 +277,7 @@ $total = mysql_num_rows($rollCallResult);
                     $result3 = mysql_query($sql3) or die(logError(mysql_error(), $url, "Gettig first 3 Connection Feed comments"));
                     echo '<br/>';
                     if (mysql_num_rows($result3) > 0) {
-                        echo '<div class="comment-style">';
+                        echo '<div class="comment-style"'.$display.'>';
                         while ($rows3 = mysql_fetch_assoc($result3)) {
                             $comment = $rows3['PostComment'];
                             $profilePhoto = $rows3['ProfilePhoto'];
@@ -287,7 +287,7 @@ $total = mysql_num_rows($rollCallResult);
                             $commenterProfileUrl = "/$commenterUsername";
                             $commentDate = $rows3['CommentDate'];
 
-                            echo '<div class="comment-row">';
+                            echo '<div class="comment-row"'. $display.'>';
                             echo '<div class="profileImageWrapper-Feed">
                     <a href='.$commenterProfileUrl.'>
                     <img src = "' . $mediaPath . $profilePhoto . '" class="profilePhoto-Feed enlarge-onhover " />
@@ -354,7 +354,7 @@ $total = mysql_num_rows($rollCallResult);
 
                         <div id="<?php echo $moreComments ?>" style="display:none;">
 
-                            <div class="comment-style">
+                            <div class="comment-style" <?php echo $display ?>>
 
                                 <?php
                                 while ($rows4 = mysql_fetch_assoc($result4)) {
@@ -366,7 +366,7 @@ $total = mysql_num_rows($rollCallResult);
                                     $commenterProfileUrl = "/$commenterUsername";
                                     $commentDate = $rows4['CommentDate'];
                                     ?>
-                                    <div class="comment-row">
+                                    <div class="comment-row" <?php echo $display ?>>
                                         <div class="profileImageWrapper-Feed">
                                             <a href='<?php echo $commenterProfileUrl ?>'>
                                                 <img src = "<?php echo $mediaPath . $profilePhoto ?>" class="profilePhoto-Feed enlarge-onhover " />

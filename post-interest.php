@@ -772,7 +772,8 @@ if (mysql_num_rows($result) > 0) {
         $isSponsored = $rows['IsSponsored'];
         ?>
 
-        <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 roll-call" align="left">
+        <?php if (checkBlock($ID, $memberID)) { $display = "style= 'display:none;'"; } else { $display = "style='display:block;'"; } ?>
+        <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 roll-call" align="left" <?php echo $display ?>>
 
         <?php
         $profileUrl = "/$username";
@@ -960,7 +961,7 @@ if (mysql_num_rows($result) > 0) {
             $result3 = mysql_query($sql3) or die(logError(mysql_error(), $url, "Getting first 3 comments"));
             echo '<br/>';
             if (mysql_num_rows($result3) > 0) {
-                echo '<div class="comment-style">';
+                echo '<div class="comment-style"'.$display.'>';
                 while ($rows3 = mysql_fetch_assoc($result3)) {
                     $comment = $rows3['PostComment'];
                     $profilePhoto = $rows3['ProfilePhoto'];
@@ -968,7 +969,7 @@ if (mysql_num_rows($result) > 0) {
                     $commentOwnerID = $rows3['CommenterID'];
                     $commentDate = $rows3['CommentDate'];
 
-                    echo '<div class="comment-row">';
+                    echo '<div class="comment-row"'. $display.'>';
                         echo '<div class="profileImageWrapper-Feed">
                         <a href='.$commenterProfileUrl.'>
                         <img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" class ="enlarge-onhover img-responsive" />
@@ -1033,7 +1034,7 @@ if (mysql_num_rows($result) > 0) {
 
             <div id="<?php echo $moreComments ?>" style="display:none;">
 
-                <div class="comment-style">
+                <div class="comment-style" <?php echo $display ?>>
 
                 <?php
                 while ($rows4 = mysql_fetch_assoc($result4)) {
@@ -1045,7 +1046,7 @@ if (mysql_num_rows($result) > 0) {
                     $commenterProfileUrl = "/$commenterUsername";
                     $commentDate = $rows4['CommentDate'];
                 ?>
-            <div class="comment-row">
+            <div class="comment-row" <?php echo $display ?>>
                 <div class="profileImageWrapper-Feed">
                     <a href='<?php echo $commenterProfileUrl ?>'>
                         <img src = "<?php echo $mediaPath . $profilePhoto ?>" height = "50" width = "50" class ="enlarge-onhover img-responsive" />

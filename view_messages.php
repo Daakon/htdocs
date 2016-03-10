@@ -796,6 +796,18 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
                         $message = $rows['Message'];
                         $date = $rows['MessageDate'];
                         $groupName = $rows['GroupName'];
+
+                        if (checkBlock($ID, $recipientID)) {
+                            $display = "style= 'display:none;'";
+                            $display2 = "style='display:none;clear:both;'";
+                            $display3 = "style=display:none;opacity:0.5;'";
+                        }
+                        else {
+                            $display = "style='display:block;'";
+                            $display2 = "style='clear:both;'";
+                            $display3 = "style=opacity:0.5;'";
+                        }
+
                         // get receiver name
                         $sql2 = "SELECT FirstName,LastName, ProfilePhoto,Username
                     FROM Members, Profile
@@ -807,19 +819,21 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
                         $name = $rows2['FirstName'] . ' ' . $rows2['LastName'];
                         $username = $rows2['Username'];
                         echo "
-                    <div class='profileImageWrapper-Feed'>
+
+
+                    <div class='profileImageWrapper-Feed' $display>
                     <a href='/$username'>
                     <img src = '$mediaPath$pic' class='profilePhoto-Feed' alt='' />
                     </a>
                     </div>
-                    <div class='profileNameWrapper-Feed'>
+                    <div class='profileNameWrapper-Feed' $display>
                     <a href='/$username'>
                     <div class=\"profileName-Feed\">$name</div>
                     </a>
                     </div>
                     ";
-                        echo "<div class='post' style='clear:both'>" . nl2br($message) . "</div>";
-                        echo "<div style='opacity:0.5'>" . date('l F d Y g:i:s A', strtotime($date)) . "</div>";
+                        echo "<div class='post' $display2>" . nl2br($message) . "</div>";
+                        echo "<div $display3>" . date('l F d Y g:i:s A', strtotime($date)) . "</div>";
                         echo "<hr/>";
                     }
                 }

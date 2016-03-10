@@ -83,11 +83,20 @@ $ID = $_SESSION['ID'];
 
                     }
 
-                    if (checkBlock($ID, $otherID)) {
-                        echo "<span style='margin-left:-50px;'><img src='/images/default_photo.png' height='50' width='50' />Member not found </span>";
-                    } else {
+
 
                     if ($groupID == '') {
+
+                        $sqlBlocked = "SELECT BlockedID,BlockerID FROM Blocks WHERE (BlockerID = $ID Or BlockedID = $ID)";
+                        $resultBlocked = mysql_query($sqlBlocked) or die(logError(mysql_error(), $url, "Getting IDs for all post commentors"));
+
+                        $blockIDs = array();
+
+//Iterate over the results and sort out the biz ids from the consumer ones.
+                        while ($rowsBlocked = mysql_fetch_assoc($resultBlocked)) {
+                            array_push($blockIDs, $rowsBlocked['BlockedID'], $rowsBlocked['BlockerID']);
+                        }
+
 
                         $sql2 = "SELECT FirstName,LastName,Username, ProfilePhoto
                                  FROM Members, Profile
@@ -137,7 +146,7 @@ $ID = $_SESSION['ID'];
 
                     }
 
-                }
+
 
 
                 echo "

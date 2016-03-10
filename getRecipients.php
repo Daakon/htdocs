@@ -20,14 +20,14 @@
 
 require 'imports.php';
 $ID = $_SESSION['ID'];
-$sql1 = "SELECT BlockedID FROM Blocks WHERE (BlockerID = $ID Or BlockedID = $ID)";
+$sql1 = "SELECT BlockedID, BlockerID FROM Blocks WHERE (BlockerID = $ID Or BlockedID = $ID)";
 $result1 = mysql_query($sql1) or die(logError(mysql_error(), $url, "Getting IDs for all post commentors"));
 
 $blockIDs = array();
 
 //Iterate over the results and sort out the biz ids from the consumer ones.
 while ($rows = mysql_fetch_assoc($result1)) {
-    array_push($blockIDs, $rows['BlockedID']);
+    array_push($blockIDs, $rows['BlockedID'], $rows['BlockerID']);
 }
 
 

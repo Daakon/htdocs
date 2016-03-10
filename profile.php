@@ -633,6 +633,7 @@ $bgPhoto = $row['ProfilePhoto'];
                 <img src = "<?php echo $mediaPath.$profilePhoto ?>" class="profilePhoto" alt="Profile Photo" />
             </div>
 
+            <br/>
 
             <form method="post" enctype="multipart/form-data" action="" >
                 <img src="/images/image-icon.png" class="img-icon" alt="Photos/Video"/>
