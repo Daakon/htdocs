@@ -786,7 +786,7 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
             }
         }
 
-        if ($genre == 'Individual') {
+        if ($genre == 'All') {
             $genre = 'Show All';
         }
         ?>

@@ -16,7 +16,12 @@ function makeLinks($str)
         $str = str_replace("htTp", "http", $str);
         $str = str_replace("httP", "http", $str);
 
-
+        // remove special characters in query string that will cause a rouge link to be built
+        if (strstr($str, "?") && strstr($str, "+") && strstr($str, "%")) {
+            $str = str_replace("+", "&", $str);
+            $str = str_replace("!", "&", $str);
+            $str = str_replace("%", "&", $str);
+}
         // get click here value for links
         // if link has http parse_url will return a host name
         $url_info = parse_url($str);
@@ -88,7 +93,6 @@ function makeLinks($str)
         if (!empty($matches[0])) {
             // get full URL
             $link = $matches[0];
-
             // make sure the we have a correctly formatted favicon path to check
             $favicon = $link."favicon.ico";
             if (strstr($favicon, "/favicon.ico")) { } else { $favicon = $link."/favicon.ico"; }
@@ -171,6 +175,7 @@ function makeLinks($str)
                 if (strstr($str, "</a>/")) {
                     $str = str_replace('</a>/', '</a>', $str);
                 }
+
 
                 $titleLink = closetags($titleLink);
                 $titleLink = $favicon.' '. $titleLink;

@@ -172,7 +172,7 @@ if (!empty($_SESSION['ID'])) {
                     </div>
 
                     <select class="form-control input-lg" id="interest" name="interest">
-                        <option value="">Select Your Profile Type</option>
+                        <option value="">Select An Interest To Follow</option>
                         <?php echo category() ?>
                     </select>
                     <br/>
