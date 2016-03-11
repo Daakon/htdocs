@@ -5,8 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="51867226-c8dd-43fb-9a46-7c8a9e9ab742" name="Default" comment="Added media page.&#10;&#10;">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/home.php" afterPath="$PROJECT_DIR$/home.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/learn_more.php" afterPath="$PROJECT_DIR$/learn_more.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/profile_menu.php" afterPath="$PROJECT_DIR$/profile_menu.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/profile_menu_public.php" afterPath="$PROJECT_DIR$/profile_menu_public.php" />
     </list>
     <ignored path="htdocs.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -93,10 +93,10 @@
         <option value="$PROJECT_DIR$/findURL.php" />
         <option value="$PROJECT_DIR$/show_post.php" />
         <option value="$PROJECT_DIR$/settings.php" />
-        <option value="$PROJECT_DIR$/profile_menu_public.php" />
-        <option value="$PROJECT_DIR$/profile_menu.php" />
         <option value="$PROJECT_DIR$/home.php" />
         <option value="$PROJECT_DIR$/learn_more.php" />
+        <option value="$PROJECT_DIR$/profile_menu_public.php" />
+        <option value="$PROJECT_DIR$/profile_menu.php" />
       </list>
     </option>
   </component>
@@ -1156,7 +1156,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5060729">
           <caret line="41" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1557,9 +1556,6 @@
         <state vertical-scroll-proportion="-12.423077">
           <caret line="42" column="0" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
           <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#0;n#table#0;n#div#0;n#div#0;n#!!top" expanded="true" />
             <marker date="1457716096000" expanded="true" signature="322:379" placeholder="DELETE FROM " />
             <marker date="1457716096000" expanded="true" signature="322:435" placeholder="DELETE FROM " />
             <marker date="1457716096000" expanded="true" signature="720:823" placeholder="INSERT INTO Blocks... " />
@@ -1571,33 +1567,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/profile_menu_public.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.730769">
-          <caret line="81" column="65" selection-start-line="81" selection-start-column="65" selection-end-line="81" selection-end-column="65" />
-          <folding>
-            <element signature="e#2598#2635#0#HTML" expanded="true" />
-            <marker date="1457718588000" expanded="true" signature="137:199" placeholder="SELECT First... Members" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/profile_menu.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-12.423077">
-          <caret line="26" column="12" selection-start-line="26" selection-start-column="12" selection-end-line="26" selection-end-column="56" />
-          <folding>
-            <marker date="1457718596000" expanded="true" signature="1895:1934" placeholder="SELECT IsAdm... Members" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/home.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="3.7165992">
           <caret line="895" column="44" selection-start-line="895" selection-start-column="44" selection-end-line="895" selection-end-column="44" />
           <folding>
-            <element signature="n#style#0;n#a#1;n#div#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
             <marker date="1457722160000" expanded="true" signature="8463:8731" placeholder="INSERT INTO Media... " />
             <marker date="1457722160000" expanded="true" signature="9014:9064" placeholder="SELECT * FRO... Media" />
             <marker date="1457722160000" expanded="true" signature="9782:9997" placeholder="..." />
@@ -1644,6 +1618,26 @@
             <marker date="1457722972000" expanded="true" signature="18332:18541" placeholder="..." />
             <marker date="1457722972000" expanded="false" signature="18674:18684" placeholder="..." />
             <marker date="1457722972000" expanded="true" signature="19617:20411" placeholder="SELECT DISTI... PostComments" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/profile_menu.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.034412954">
+          <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <folding>
+            <marker date="1457729106000" expanded="true" signature="1981:2020" placeholder="SELECT IsAdm... Members" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/profile_menu_public.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.72267205">
+          <caret line="70" column="12" selection-start-line="70" selection-start-column="12" selection-end-line="70" selection-end-column="88" />
+          <folding>
+            <marker date="1457729056000" expanded="true" signature="137:199" placeholder="SELECT First... Members" />
           </folding>
         </state>
       </provider>

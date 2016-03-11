@@ -67,7 +67,8 @@ if ($_SESSION['ID'] != $profileID) { ?>
     </style>
 
     <div class="dropdown">
-        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Profile Menu
+        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+            <img src="<?php echo get_users_photo_by_id($ID) ?>" height="30" width="30"/> Profile Menu
             <span class="caret"></span>
         </button>
         <ul class="dropdown-menu">
