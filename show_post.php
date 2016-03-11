@@ -429,23 +429,27 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
 
     <?php
-    $ID = $_SESSION['ID'];
-    $sql1 = "SELECT BlockedID, BlockerID FROM Blocks WHERE (BlockerID = $ID Or BlockedID = $ID)";
-    $result1 = mysql_query($sql1) or die(logError(mysql_error(), $url, ""));
+    $postID = $_GET['postID'];
 
-    $blockIDs = array();
+    if (isset($_SESSION['ID']) && !empty($_SESSION['ID'])) {
+        $blockCondition = " And (Members.ID Not in ( '" . implode($blockIDs, "', '") . "' )) ";
+        $ID = $_SESSION['ID'];
+        $sql1 = "SELECT BlockedID, BlockerID FROM Blocks WHERE (BlockerID = $ID Or BlockedID = $ID)";
+        $result1 = mysql_query($sql1) or die(logError(mysql_error(), $url, ""));
 
-    //Get blocked IDS
-    while ($rows1 = mysql_fetch_assoc($result1)) {
-        if ($rows1['BlockedID'] != $ID) {
-            array_push($blockIDs, $rows1['BlockedID']);
-            if ($rows1['BlockerID'] != $ID) {
-                array_push($blockIDs, $rows1['BlockerID']);
+        $blockIDs = array();
+
+        //Get blocked IDS
+        while ($rows1 = mysql_fetch_assoc($result1)) {
+            if ($rows1['BlockedID'] != $ID) {
+                array_push($blockIDs, $rows1['BlockedID']);
+                if ($rows1['BlockerID'] != $ID) {
+                    array_push($blockIDs, $rows1['BlockerID']);
+                }
             }
         }
     }
-
-    $postID = $_GET['postID'];
+    else { $blockCondition = ''; }
 
     $sql = "SELECT DISTINCT
     Members.ID As MemberID,
@@ -465,7 +469,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
     And Members.IsSuspended = 0
     And Members.ID = Posts.Member_ID
     And Members.ID = Profile.Member_ID
-    And (Members.ID Not in ( '" . implode($blockIDs, "', '") . "' ))
+    $blockCondition
     And Posts.IsDeleted = 0
     Group By Posts.ID
     Order By Posts.ID DESC ";
@@ -676,7 +680,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                         PostComments.Post_ID = $postID
                         AND Members.ID = Profile.Member_ID
                         And Members.ID = PostComments.Member_ID
-                        And (Members.ID Not in ( '" . implode($blockIDs, "', '") . "' ))
+                        $blockCondition
                         And PostComments.IsDeleted = 0
                         Group By PostComments.ID
                         Order By PostComments.ID DESC LIMIT 3 ";
@@ -742,7 +746,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                         WHERE
                         PostComments.Post_ID = $postID
                         And Members.ID = PostComments.Member_ID
-                        And (Members.ID Not in ( '" . implode($blockIDs, "', '") . "' ))
+                        $blockCondition
                         And PostComments.IsDeleted = 0
                         And Members.ID = Profile.Member_ID
                         Group By PostComments.ID
