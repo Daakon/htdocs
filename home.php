@@ -761,16 +761,7 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
 
         <!--        <!--Middle Column -->
         <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8">
-
-            <ul id="menu"  class="list-inline">
-                <a href="/<?php echo get_username($ID) ?>">
-                    <img src="<?php echo get_users_photo_by_id($ID) ?>" class="profile-image-nav"/>
-                </a>
-                <li><a href="/messages/<?php echo get_username($ID) ?>"><img src = "/images/messages.png" height="20" width="20" /><?php require 'getNewMessageCount.php' ?></a></li>
-                <li><a href="/member_follows/<?php echo get_username($ID) ?>"><img src = "/images/follows.png" height="20" width="20" /><?php require 'getNewFollowCount.php' ?></a></li>
-                <li><a href="/coupons"><img src="/images/sales-tag.png" height="40" width="40" /></a></li>
-            </ul>
-
+                <?php require 'profile_menu.php'; ?>
         </div>
 
         <?php
