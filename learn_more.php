@@ -133,18 +133,10 @@ if (!empty($_SESSION['ID'])) {
 
 
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="margin-top:-10px;">
-                <img src="/images/using-phone.jpg" style="width:100%" />
+                <img src="/images/people-sharing.png" style="width:100%" />
             </div>
 
         </div>
-
-        <!--<div align="center" style="background:#E30022;color:white;padding-left:10px;padding-top:10px;">
-            <h4>Watch the video to learn more.</h4>
-            <video width="320" height="240" poster="/poster/how-it-works-poster.png" autoplay="autoplay" muted controls >
-                <source src="/images/Rapportbook-How-It-Works-Lo-Res.mp4" />
-            </video>
-            <br/>
-        </div>-->
 
         <div class="row" style="background:#e3e3e3;padding-left:10px;">
             <a id="signup"></a>
@@ -264,7 +256,7 @@ if (!empty($_SESSION['ID'])) {
     And (Members.ID = Posts.Member_ID)
     And (Members.ID = Profile.Member_ID)
     And (Posts.IsDeleted = 0)
-    And (Posts.ID = 1)
+    And (Posts.ID = 259)
     AND (Posts.Category <> 'Sponsored') ";
 
         // last member of the month post = 259

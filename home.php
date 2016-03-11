@@ -893,7 +893,7 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
 
 
                 <br/>
-                <select class="form-control input-lg dropdown" id="category" name="category" >
+                <select class="form-control " id="category" name="category" >
                     <option value="">Select Post Type </option>
                     <?php echo category() ?>
                 </select>
