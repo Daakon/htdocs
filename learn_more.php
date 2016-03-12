@@ -86,7 +86,7 @@ if (!empty($_SESSION['ID'])) {
                     <table style="margin-left:10px;margin-top:20px;margin-bottom:10px;">
                         <tr>
                             <td>
-                                <img src="/images/local.png" height="100" width="100" />
+                                <img src="/images/local.png" height="80" width="80" />
                             </td>
                             <td>
                                 <span style="font-weight: bold;font-family:Georgia, Serif;color:#E30022;display:inline-block;font-size:20px;">
@@ -96,9 +96,9 @@ if (!empty($_SESSION['ID'])) {
                                 <span style="font-size:20px;font-family:Georgia, Serif;">
                                     <b style="font-size:18px;">Things you can share:</b>
                                     <br/>
-                                    • Suggest places to go<br/>
-                                    • News & Events <br/>
-                                    • Whatever is cool<b/>
+                                    • Suggest Fun Places to Go<br/>
+                                    • Upcoming Events <br/>
+                                    • News about your City<b/>
                                 </span>
                             </td>
                         </tr>
@@ -118,9 +118,9 @@ if (!empty($_SESSION['ID'])) {
                                 <span style="font-size:20px;font-family:Georgia, Serif;">
                                     <b>Things you can share:</b>
                                     <br/>
-                                    • Suggest places to go <br/>
-                                    • News & Events <br/>
-                                    • Whatever is cool<b/>
+                                    • Suggest Fun Places to Go <br/>
+                                    • Upcoming Events <br/>
+                                    • News about your City<b/>
                                 </span>
                             </td>
                         </tr>
