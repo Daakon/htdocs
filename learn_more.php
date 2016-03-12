@@ -94,7 +94,7 @@ if (!empty($_SESSION['ID'])) {
                                 </span>
                                 <br/>
                                 <span style="font-size:20px;font-family:Georgia, Serif;">
-                                    <b style="font-size:18px;">Things you can share:</b>
+                                    <b style="font-size:18px;">Things you can post:</b>
                                     <br/>
                                     • Suggest Fun Places to Go<br/>
                                     • Upcoming Events <br/>
@@ -116,7 +116,7 @@ if (!empty($_SESSION['ID'])) {
                             <td>
                                 <h1 style="font-weight: bold;font-family:Georgia, Serif;color:#E30022;">Rep Your City!</h1>
                                 <span style="font-size:20px;font-family:Georgia, Serif;">
-                                    <b>Things you can share:</b>
+                                    <b>Things you can post:</b>
                                     <br/>
                                     • Suggest Fun Places to Go <br/>
                                     • Upcoming Events <br/>
