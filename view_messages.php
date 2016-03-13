@@ -423,7 +423,7 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
 
                     }
 
-                    if ($item != $ID) {
+                    if ($item != $ID && checkBlock($ID, $item) == false) {
                         // create thread for receiver
                         $sql = "INSERT INTO Messages (ThreadOwner_ID, Sender_ID,    Receiver_ID,   Subject,    Message,   InitialMessage,    New,  FirstMessage,   MessageDate,         GroupID , GroupName  ) VALUES
                                                       ($item,            $ID,          $item,    '$subject', '$message', '$rInitialMessage',  '1',  $rFirstMessage, CURRENT_TIMESTAMP,  '$groupID',   '$groupName' ) ";
@@ -468,14 +468,16 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
 
                 foreach ($_POST['receiverID'] as $key => $receiverID) {
 
+                    if (checkBlock($ID, $receiverID) == false) {
                         // loop through everyone
                         $sql = "INSERT INTO Messages (ThreadOwner_ID, Sender_ID,   Receiver_ID,     Subject,    Message,   InitialMessage,     New,  FirstMessage,   MessageDate,        GroupID ,      GroupName  ) VALUES
                                                  ('$receiverID',    $ID,      $receiverID,     '$subject', '$message', '$rInitialMessage',  '', $rFirstMessage, CURRENT_TIMESTAMP,  '$groupID',   '$groupName' ) ";
                         mysql_query($sql) or die(mysql_error());
 
 
-                    if ($receiverID != $ID) {
-                        build_and_send_email($ID, $receiverID, 8, "", "", $groupID);
+                        if ($receiverID != $ID) {
+                            build_and_send_email($ID, $receiverID, 8, "", "", $groupID);
+                        }
                     }
                 }
 
@@ -848,11 +850,6 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
                 <?php require 'profile_menu.php'; ?>
             </ul>
 
-            <style>
-                .list-inline {
-                    margin-top:-20px;
-                }
-            </style>
 
             <?php
             if (strstr($urlUsername, "?")) {

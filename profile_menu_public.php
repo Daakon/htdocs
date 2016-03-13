@@ -83,6 +83,19 @@ if ($_SESSION['ID'] != $profileID) { ?>
             <li><a href="/settings/<?php echo get_username($ID)?>"><img src="/images/settings.png" height="20" width="20" />Settings</a></li>
             <li><a href ="/support" class="visible-xs" ><img src = "/images/support.png" height="20" width="20" /> Support</a></li>
             <li><a href ="/logout" ><img src = "/images/logout.png" height="20" width="20" /> Log Out</a></li>
+<?php
+    $username = get_username_from_url();
+    $profileID = get_id_from_username($username);
+
+    $sql = "SELECT IsAdmin FROM Members WHERE ID = $ID ";
+    $result = mysql_query($sql) or die(mysql_error());
+    $rows = mysql_fetch_assoc($result);
+    if ($rows['IsAdmin'] == 1) { ?>
+    <li><a href="/marketing_manager/<?php echo $username ?>"><img src = "/images/marketing-menu-glyph" height="20" width="20"/> Marketing Manager</a></li>
+<?php }
+
+echo "</ul>";
+?>
         </ul>
     </div>
 
