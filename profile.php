@@ -805,7 +805,7 @@ $bgPhoto = $row['ProfilePhoto'];
                 <div class="form-group">
                     <select class="form-control input-lg" id="Interest" name="Interest">
                         <option value="<?php echo $interest ?>"><?php echo $interest ?></option>
-                        <option value="Individual">Individual</option>
+                        <option value="All">All</option>
                         <?php echo category() ?>
                     </select>
                 </div>

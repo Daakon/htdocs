@@ -96,7 +96,7 @@ if (!empty($_SESSION['ID'])) {
                                 <span style="font-size:20px;font-family:Georgia, Serif;">
                                     <b style="font-size:18px;">Things you can post:</b>
                                     <br/>
-                                    • Suggest Fun Places to Go<br/>
+                                    • Suggest Cool Places to Go<br/>
                                     • Upcoming Events <br/>
                                     • News about your City<b/>
                                 </span>
@@ -118,9 +118,9 @@ if (!empty($_SESSION['ID'])) {
                                 <span style="font-size:20px;font-family:Georgia, Serif;">
                                     <b>Things you can post:</b>
                                     <br/>
-                                    • Suggest Fun Places to Go <br/>
+                                    • Suggest Cool Places to Go <br/>
                                     • Upcoming Events <br/>
-                                    • News about your City<b/>
+                                    • News about your City<br/><br/>
                                 </span>
                             </td>
                         </tr>
@@ -133,7 +133,7 @@ if (!empty($_SESSION['ID'])) {
 
 
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="margin-top:-10px;">
-                <img src="/images/people-sharing.png" style="width:100%" />
+                <img src="/images/people-sharing.png" style="width:100%;" />
             </div>
 
         </div>

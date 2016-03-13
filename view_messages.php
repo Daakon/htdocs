@@ -860,6 +860,11 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
             } else if ($groupChatExist == false) {
                 // reinitialize sender ID
                 $recipientID = get_id_from_username($urlUsername);
+                $readonly = "";
+
+                if (checkBlock($ID, $recipientID)) {
+                    $readonly = "disabled = 'disabled'";
+                }
 
                 $sql2 = "UPDATE Messages SET New = 0, FirstMessage = 0 WHERE ThreadOwner_ID = $ID AND (Receiver_ID = $ID) And (Sender_ID = $recipientID) And (GroupID = '') ";
                 mysql_query($sql2) or die();
@@ -895,7 +900,7 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
                 <input type="hidden" id="groupChatExist" name="groupChatExist" value="<?php echo $groupChatExist ?>" />
                 <input type="hidden" id="groupID" name="groupID" value="<?php echo $urlUsername ?>" />
                 <input type="hidden" id="groupName" name="groupName" value="<?php echo $groupName ?>" />
-                <input type="submit" class="btn btn-default" id="send" name="send" value="Send" />
+                <input type="submit" class="btn btn-default" id="send" name="send" value="Send" <?php echo $readonly ?> />
                 <img src="/images/video-chat.png" height="50" width="50" style="border-left:1px solid black;"/>
                 <input type="submit" class="" id="videoSend" name="videoSend" value = "Start Video Chat" />
             </form>
