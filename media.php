@@ -761,10 +761,10 @@ $profileMediaSrc = trim("/media/" . $profilePhoto);
 
 
 
-            if ($_SESSION['ID'] == $memberID) {
+            if ($ID == $memberID) {
             ?>
             <br/><br/>
-            <form method="get" action="" onsubmit="return confirm('Are you sure you want to delete this photo')">
+            <form method="get" action="" onsubmit="return confirm('Are you sure you want to delete this media')">
                 <?php
                 echo '<input type = "submit" name = "btnDelete" id = "btnDelete" value = "Delete Image" class="deleteButton" /><br/><br/>';
                 echo '<input type ="hidden" name = "mediaID" id = "mediaID" value = "' . $mediaID . '" />';

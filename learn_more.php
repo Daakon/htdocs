@@ -86,19 +86,12 @@ if (!empty($_SESSION['ID'])) {
                     <table style="margin-left:10px;margin-top:20px;margin-bottom:10px;">
                         <tr>
                             <td>
-                                <img src="/images/local.png" height="80" width="80" />
-                            </td>
-                            <td>
                                 <span style="font-weight: bold;font-family:Georgia, Serif;color:#E30022;display:inline-block;font-size:20px;">
-                                    Rep Your City!
+                                   <img src="/images/local.png" height="80" width="80" /> Rep Your City!
                                 </span>
                                 <br/>
-                                <span style="font-size:20px;font-family:Georgia, Serif;">
-                                    <b style="font-size:18px;">Things you can post:</b>
-                                    <br/>
-                                    • Suggest Cool Places to Go<br/>
-                                    • Upcoming Events <br/>
-                                    • News about your City<b/>
+                                <span style="font-size:20px;font-family:Georgia, Serif;padding-right:5px;">
+                                    Post random things you see and do in your city.
                                 </span>
                             </td>
                         </tr>
@@ -116,11 +109,7 @@ if (!empty($_SESSION['ID'])) {
                             <td>
                                 <h1 style="font-weight: bold;font-family:Georgia, Serif;color:#E30022;">Rep Your City!</h1>
                                 <span style="font-size:20px;font-family:Georgia, Serif;">
-                                    <b>Things you can post:</b>
-                                    <br/>
-                                    • Suggest Cool Places to Go <br/>
-                                    • Upcoming Events <br/>
-                                    • News about your City<br/><br/>
+                                   Post random things you see and do in your city.
                                 </span>
                             </td>
                         </tr>

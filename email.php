@@ -148,6 +148,7 @@ function build_and_send_email($senderId, $toId, $notification, $postID, $pass, $
         $sql = "SELECT * FROM Media WHERE MediaName = '$postID'";
         $result = mysql_query($sql);
         $rows = mysql_fetch_assoc($result);
+        $memberID = $rows['MemberID'];
         $mediaName = $postID;
         $mediaID = $rows['ID'];
         $mediaDate = $rows['MediaDate'];
@@ -155,13 +156,13 @@ function build_and_send_email($senderId, $toId, $notification, $postID, $pass, $
         $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
         $link;
         if (strstr($url, "local")) {
-            $link = "media?id=$ID&mediaName=$mediaName&mid=$mediaID&mediaType=$mediaType&mediaDate=$mediaDate&h=0";
+            $link = "media?id=$memberID&mediaName=$mediaName&mid=$mediaID&mediaType=$mediaType&mediaDate=$mediaDate&h=0";
         }
         else if (strstr($url, "dev")) {
-            $link = "http://dev.rapportbook.com/media.php?id=$ID&mediaName=$mediaName&mid=$mediaID&mediaType=$mediaType&mediaDate=$mediaDate&h=0";
+            $link = "http://dev.rapportbook.com/media.php?id=$memberID&mediaName=$mediaName&mid=$mediaID&mediaType=$mediaType&mediaDate=$mediaDate&h=0";
         }
         else {
-            $link = "http://www.rapportbook.com/media.php?id=$ID&mediaName=$mediaName&mid=$mediaID&mediaType=$mediaType&mediaDate=$mediaDate&h=0";
+            $link = "http://www.rapportbook.com/media.php?id=$memberID&mediaName=$mediaName&mid=$mediaID&mediaType=$mediaType&mediaDate=$mediaDate&h=0";
         }
         $name = get_users_name_by_id($senderId);
         if ($senderId == $toId) {
