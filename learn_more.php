@@ -90,8 +90,8 @@ if (!empty($_SESSION['ID'])) {
                                    <img src="/images/local.png" height="80" width="80" /> Rep Your City!
                                 </span>
                                 <br/>
-                                <span style="font-size:20px;font-family:Georgia, Serif;padding-right:5px;">
-                                    Post random things you see and do in your city.
+                                <span style="font-size:18px;font-family:Georgia, Serif;padding-right:5px;">
+                                    Share the latest news & events in your city.
                                 </span>
                             </td>
                         </tr>
@@ -109,7 +109,7 @@ if (!empty($_SESSION['ID'])) {
                             <td>
                                 <h1 style="font-weight: bold;font-family:Georgia, Serif;color:#E30022;">Rep Your City!</h1>
                                 <span style="font-size:20px;font-family:Georgia, Serif;">
-                                   Post random things you see and do in your city.
+                                   Share the latest news & events in your city.
                                 </span>
                             </td>
                         </tr>
