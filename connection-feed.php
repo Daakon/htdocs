@@ -164,8 +164,8 @@ $total = mysql_num_rows($rollCallResult);
                 $postPath = getPostPath();
                 $shareLinkID = "shareLink$postID"; ?>
                 <a href="javascript:showLink('<?php echo $shareLinkID ?>');">
-                    <img src="/images/share.gif" height="50px" width="50px" />
-                    <span style="color:black;font-weight:bold;">Share This Post</span>
+                    <img src="/images/share.gif" height="25px" width="25px" />
+                    <span style="color:black;font-weight:bold;">Share</span>
                 </a>
 
                 <?php $shareLink = 'show_post?postID='.$postID.'&email=1';
@@ -181,7 +181,7 @@ $total = mysql_num_rows($rollCallResult);
                     ?>
 
                         <br/>
-                            <a href="javascript:showOptions('<?php echo $optionsID ?>');" style="font-size:50px;color:black">...</a>
+                            <a href="javascript:showOptions('<?php echo $optionsID ?>');" style="font-size:20px;color:black">...</a>
                             <div style="display:none;" id="<?php echo $optionsID ?>">
                             <form action="" method="post" onsubmit="return confirm('Do you really want to block this member?') && saveScrollPositions(this) ">
                                 <input type="hidden" id="blockedID" name="blockedID" class="blockedID" value="<?php echo $memberID ?>" />

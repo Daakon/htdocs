@@ -86,13 +86,12 @@ if (!empty($_SESSION['ID'])) {
                     <table style="margin-left:10px;margin-top:20px;margin-bottom:10px;">
                         <tr>
                             <td>
-                                <span style="font-weight: bold;font-family:Georgia, Serif;color:#E30022;display:inline-block;font-size:20px;">
-                                   <img src="/images/local.png" height="80" width="80" /> Rep Your City!
-                                </span>
-                                <br/>
-                                <span style="font-size:18px;font-family:Georgia, Serif;padding-right:5px;">
-                                    Share the latest news & events in your city.
-                                </span>
+                                <h4 style="font-family:Georgia;">Share the Latest <b>News</b>, <b>Events</b> & <b>Personal Experiences</b> in Your Community.</h4>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="color:#E30022;font-style: italic;font-family: Georgia">
+                                <h4>Play Games & Win Prizes!</h4>
                             </td>
                         </tr>
                     </table>
@@ -104,13 +103,12 @@ if (!empty($_SESSION['ID'])) {
                     <table style="margin-left:10px;margin-top:20px;">
                         <tr>
                             <td>
-                                <img src="/images/local.png" height="100" width="100" />
+                                <h3 style="font-family:Georgia;">Share the Latest <b>News</b>, <b>Events</b> & <b>Personal Experiences</b> in Your Community.</h3>
                             </td>
-                            <td>
-                                <h1 style="font-weight: bold;font-family:Georgia, Serif;color:#E30022;">Rep Your City!</h1>
-                                <span style="font-size:20px;font-family:Georgia, Serif;">
-                                   Share the latest news & events in your city.
-                                </span>
+                        </tr>
+                        <tr>
+                            <td style="color:#E30022;font-style: italic;font-family: Georgia">
+                                <h3>Play Games & Win Prizes!</h3>
                             </td>
                         </tr>
                     </table>

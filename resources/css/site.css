@@ -17,12 +17,14 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
     /* Make h tags responsive */
+    overflow-wrap: break-word;
     word-wrap: break-word;
-    -webkit-hyphens: auto;
-    -moz-hyphens: auto;
-    -ms-hyphens: auto;
-    -o-hyphens: auto;
-    hyphens: auto;
+    -ms-word-break: break-all;
+    /* This is the dangerous one in WebKit, as it breaks things wherever */
+    word-break: break-all;
+    /* Instead use this non-standard one: */
+    word-break: break-word;
+
 }
 
 .header {
@@ -632,15 +634,15 @@ a:hover {
 
 .btnApprove {
     background: url("/images/gray_check.png") no-repeat;
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
     border: none;
 }
 
 .btnDisapprove {
     background: url("/images/red_check.png") no-repeat;
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
     border: none;
 }
 

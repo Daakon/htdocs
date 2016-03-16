@@ -873,7 +873,22 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
 
             </div>
 
-            <i class="fa fa-refresh fa-spin" style="font-size:24px"></i>
+            <div style="margin-bottom:10px;margin-top:-20px;padding-bottom:10px;border-bottom:2px solid #E30022;" align="center">
+            <h3 style="color:#E30022;">LET'S PLAY A GAME!</h3>
+                <!--***********************************-->
+
+                <img src="/images/themes/stpats.jpeg" height="50" width="50" alt="St Pats" />
+                <b>SHOW OFF YOUR GREEN!</b>
+                <br/>
+                Post St. Pattys Day celebration
+                <br/>
+                <b>Hastag #ReppinGreen</b>
+                <br/>
+                Get <b>10 Likes</b> & Win a <b>$10 Gift Card</b>
+
+                <!--***********************************-->
+            </div>
+
             <form method="post" enctype="multipart/form-data" action="" onsubmit="return showUploading()">
                 <img src="/images/image-icon.png" height="30px" width="30px" alt="Photos/Video"/>
                 <strong>Add Photos/Video</strong>

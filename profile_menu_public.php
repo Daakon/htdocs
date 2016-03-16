@@ -93,8 +93,6 @@ if ($_SESSION['ID'] != $profileID) { ?>
     if ($rows['IsAdmin'] == 1) { ?>
     <li><a href="/marketing_manager/<?php echo $username ?>"><img src = "/images/marketing-menu-glyph" height="20" width="20"/> Marketing Manager</a></li>
 <?php }
-
-echo "</ul>";
 ?>
         </ul>
     </div>

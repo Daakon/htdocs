@@ -45,7 +45,7 @@ if ($profileID == $ID) {
         echo "</ul>";
         echo "</div>";
         }
-        else {
+        else  {
             require 'profile_menu_public.php';
 
         }
