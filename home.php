@@ -896,7 +896,7 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
 
                 <br/>
                 <textarea name="post" id="post" class="form-control textArea"
-                          placeholder="Share something with <?php echo getMemberCity($ID) ?>" ></textarea>
+                          placeholder="Share News,Events or Play with <?php echo getMemberCity($ID) ?>" ></textarea>
                 <br/>
                 <div id="progress" style="display:none;">
                     <div class="progress">
@@ -909,7 +909,7 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
 
                 <br/>
                 <select class="form-control " id="category" name="category" >
-                    <option value="">Select Post Type </option>
+                    <option value="">Select Hash Tag </option>
                     <?php echo category() ?>
                 </select>
                 <br/>

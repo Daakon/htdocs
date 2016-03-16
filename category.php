@@ -4,32 +4,16 @@ function category()
     session_start();
 $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 
-    if (strstr($url, "learn_more")) {
-        echo '<option value = "All">All</option>';
+    if (strstr($url, "learn_more") || strstr($url, "profile")) {
+        echo '<option value = "Events">Events</option>';
+        echo '<option value = "News">News</option>';
     }
-    echo '<option value = "Art & Photography">Art & Photography</option>';
-    echo '<option value = "Automotive">Automotive</option>';
-    echo '<option value = "Business">Business</option>';
-    echo '<option value = "Community">Community</option>';
-    echo '<option value = "Cosmetology">Cosmetology</option>';
-    echo '<option value = "Education">Education</option>';
-    echo '<option value = "Entertainment">Entertainment</option>';
-    echo '<option value = "Events">Events</option>';
-    echo '<option value = "Fashion & Modeling">Fashion & Modeling</option>';
-    echo '<option value = "Finance">Finance</option>';
-    echo '<option value = "Fitness">Fitness</option>';
-    echo '<option value = "Gaming">Gaming</option>';
-    echo '<option value = "Household">Household</option>';
-    echo '<option value = "Legal">Legal</option>';
-    echo '<option value = "Literature">Literature</option>';
-    echo '<option value = "Media">Media</option>';
-    echo '<option value = "Night Life">Night Life</option>';
-    echo '<option value = "Realty">Realty</option>';
-    echo '<option value = "Retail">Retail</option>';
-    echo '<option value = "Restaurant">Restaurant</option>';
-    echo '<option value = "Sports">Sports</option>';
-    echo '<option value = "Technology">Technology</option>';
-    echo '<option value = "Wellness">Wellness</option>';
+    else {
+        echo '<option value = "Events">Events</option>';
+        echo '<option value = "News">News</option>';
+        echo '<option value = "ReppinGreen">ReppinGreen</option>';
+    }
+
 }
 
 function age() {

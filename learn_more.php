@@ -103,12 +103,7 @@ if (!empty($_SESSION['ID'])) {
                     <table style="margin-left:10px;margin-top:20px;">
                         <tr>
                             <td>
-                                <h3 style="font-family:Georgia;">Share the Latest <b>News</b>, <b>Events</b> & <b>Personal Experiences</b> in Your Community.</h3>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="color:#E30022;font-style: italic;font-family: Georgia">
-                                <h3>Play Games & Win Prizes!</h3>
+                                <h3 style="font-family:Georgia;">Share the Latest <b>News</b> & <b>Events</b> in Your Community or <b>Play Games</b> & <b>Win Prizes</b>.</h3>
                             </td>
                         </tr>
                     </table>
