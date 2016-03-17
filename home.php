@@ -882,9 +882,9 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
                 <br/>
                 Post St. Pattys Day Celebration
                 <br/>
-                Trending Hastag <b>#ReppinGreen</b>
+                Hastag <b>#ReppinGreen</b>
                 <br/>
-                Get <b>10 Likes</b> & Win a <b>$10 Gift Card</b>
+                The most likes wins a <b>$50 Gift Card</b>
 
                 <!--***********************************-->
             </div>
