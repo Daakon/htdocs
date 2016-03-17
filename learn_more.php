@@ -86,7 +86,12 @@ if (!empty($_SESSION['ID'])) {
                     <table style="margin-left:10px;margin-top:20px;margin-bottom:10px;">
                         <tr>
                             <td>
-                                <h4 style="font-family:Georgia;">Share the Latest <b>News</b> & <b>Events</b> in Your Community or Play the <b>HashTag Game</b> & Win Prizes.</h4>
+                                <ul>
+                                    <li class="display-block lead">Share the Latest <b>News</b> & <b>Events</b><br/> in Your Community</li>
+                                    <li class="display-block lead">Play <b>HashTag</b> & Win Prizes.</li>
+                                </ul>
+
+
                             </td>
                         </tr>
                     </table>
@@ -98,7 +103,10 @@ if (!empty($_SESSION['ID'])) {
                     <table style="margin-left:10px;margin-top:20px;">
                         <tr>
                             <td>
-                                <h3 style="font-family:Georgia;">Share the Latest <b>News</b> & <b>Events</b> in Your Community or Play the <b>HashTag Game</b> & Win Prizes.</h3>
+                                <ul>
+                                    <li class="display-block lead">Share the Latest <b>News</b> & <b>Events</b><br/> in Your Community</li>
+                                    <li class="display-block lead">Play <b>HashTag</b> & Win Prizes.</li>
+                                </ul>
                             </td>
                         </tr>
                     </table>
