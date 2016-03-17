@@ -12,7 +12,7 @@ function get_head_files()
 
 
         <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
-        <meta name="description" content="Rep Your City!">
+        <meta name="description" content="Share the latest News & Events in your community or play the Hashtag Game & win prizes">
         <meta name="keywords" content="<?php echo $keywords ?>">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta http-equiv="content-type" content="text/html; charset=utf-8"/>

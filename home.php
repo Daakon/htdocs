@@ -882,7 +882,7 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
                 <br/>
                 Post St. Pattys Day celebration
                 <br/>
-                <b>Hastag #ReppinGreen</b>
+                Hastag <b>#ReppinGreen</b>
                 <br/>
                 Get <b>10 Likes</b> & Win a <b>$10 Gift Card</b>
 
@@ -896,7 +896,7 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
 
                 <br/>
                 <textarea name="post" id="post" class="form-control textArea"
-                          placeholder="Share News,Events or Play with <?php echo getMemberCity($ID) ?>" ></textarea>
+                          placeholder="Share News,Events or Hashtag with <?php echo getMemberCity($ID) ?>" ></textarea>
                 <br/>
                 <div id="progress" style="display:none;">
                     <div class="progress">
