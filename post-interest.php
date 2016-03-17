@@ -729,6 +729,14 @@ while ($rows1 = mysql_fetch_assoc($result1)) {
     }
 }
 
+if ($category == "News" || $category == "Events") {
+    $postApprovalCondition = "";
+    $orderBy = "PostID";
+}
+else {
+ $postApprovalCondition = "(Select Count(ID) FROM PostApprovals Where Post_ID = PostID) As PostApprovals, ";
+ $orderBy = "PostApprovals";
+}
 // Get All Categories nationwide
 $sql = "SELECT DISTINCT
     Members.ID As MemberID,
@@ -742,6 +750,7 @@ $sql = "SELECT DISTINCT
     Posts.IsSponsored As IsSponsored,
     Profile.ProfilePhoto As ProfilePhoto,
     Profile.City As City,
+    $postApprovalCondition
     Profile.State As State
     FROM Members,Posts,Profile
     WHERE
@@ -753,7 +762,7 @@ $sql = "SELECT DISTINCT
     And Posts.IsDeleted = 0
     AND Posts.Category = '$category'
     Group By PostID
-    Order By PostID DESC ";
+    Order By $orderBy DESC ";
 
 $result = mysql_query($sql) or die(logError(mysql_error(), $url, "Getting all nationwide posts"));
 
