@@ -874,7 +874,7 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
             </div>
 
             <div style="margin-bottom:10px;margin-top:-20px;padding-bottom:10px;border-bottom:2px solid #E30022;" align="center">
-            <h3 style="color:#E30022;">LET'S PLAY A GAME!</h3>
+            <h3 style="color:#E30022;">LET'S PLAY HASHTAG!</h3>
                 <!--***********************************-->
 
                 <img src="/images/themes/stpats.jpeg" height="50" width="50" alt="St Pats" />
