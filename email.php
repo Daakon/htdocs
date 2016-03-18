@@ -226,10 +226,10 @@ function build_and_send_email($senderId, $toId, $notification, $postID, $pass, $
             $link = "home?genere=$pass&scrollx=630&scrolly=630";
         }
         else if (strstr($url, "dev")) {
-            $link = "http://dev.rapportbook.com/home?genre=$pass&scrollx=630&scrolly=630";
+            $link = "http://dev.rapportbook.com/show_post?postID=$postID&email=1";
         }
         else {
-            $link = "http://www.rapportbook.com/home?genere=$pass&scrollx=630&scrolly=630";
+            $link = "http://www.rapportbook.com/show_post?postID=$postID&email=1";
         }
         // a post status update related to your service has been posted
         $name = get_users_name_by_id($senderId);

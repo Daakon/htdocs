@@ -3,6 +3,7 @@
 $username = get_username_from_url();
 $profileID = get_id_from_username($username);
 
+
 if ($profileID == $ID) {
 
 ?>
@@ -27,7 +28,7 @@ if ($profileID == $ID) {
         <li><a href="/manage_post/<?php echo $username ?>"><img src="/images/post.png" height="20" width="20" /> Manage Posts</a></li>
         <li><a href="/messages/<?php echo $username ?>"><img src = "/images/messages.png" height="20" width="20" /> Messages <?php require 'getNewMessageCount.php' ?></a></li>
         <li><a href="/member_follows/<?php echo get_username($profileID) ?>"><img src = "/images/follows.png" height="20" width="20" /> Followers <?php require 'getNewFollowCount.php' ?></a></li>
-        <li><a href="/settings/<?php echo get_username($ID)?>"><img src="/images/settings.png" height="20" width="20" />Settings</a></li>
+        <li><a href="/settings/<?php echo get_username($ID) ?>"><img src="/images/settings.png" height="20" width="20" />Settings</a></li>
         <li><a href ="/support" class="visible-xs" ><img src = "/images/support.png" height="20" width="20" />Support</a></li>
         <li><a href ="/logout" ><img src = "/images/logout.png" height="20" width="20" /> Log Out</a></li>
         <?php

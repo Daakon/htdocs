@@ -11,7 +11,7 @@ $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
     else {
         echo '<option value = "Events">Events</option>';
         echo '<option value = "News">News</option>';
-        echo '<option value = "ReppinGreen">ReppinGreen</option>';
+        echo '<option value = "RepSB16">RpSB16</option>';
     }
 
 }

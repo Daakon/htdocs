@@ -3,8 +3,8 @@ require 'imports.php';
 
 get_head_files();
 get_header();
-$_SESSION['ID'] = $ID;
 
+$ID = $_SESSION['ID'];
 ?>
 
 <?php

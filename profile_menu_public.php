@@ -80,7 +80,7 @@ if ($_SESSION['ID'] != $profileID) { ?>
             <li><a href="/messages/<?php echo get_username($ID) ?>"><img src = "/images/messages.png" height="20" width="20" /> Messages</a></li>
             <li><a href="/member_follows/<?php echo $username ?>"><img src = "/images/follows.png" height="20" width="20" /> Followers</a></li>
             <li><a href="/<?php echo get_username($ID)?>"><span style="color:black;font-weight: 900;"><img src="<?php echo get_users_photo_by_id($ID) ?>" height="20" width="20"/> My Profile</span></a></li>
-            <li><a href="/settings/<?php echo get_username($ID)?>"><img src="/images/settings.png" height="20" width="20" />Settings</a></li>
+            <li><a href="/settings/<?php echo get_username($ID) ?>"><img src="/images/settings.png" height="20" width="20" />Settings</a></li>
             <li><a href ="/support" class="visible-xs" ><img src = "/images/support.png" height="20" width="20" /> Support</a></li>
             <li><a href ="/logout" ><img src = "/images/logout.png" height="20" width="20" /> Log Out</a></li>
 <?php

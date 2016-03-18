@@ -101,7 +101,7 @@ function get_users_name_by_id($user_id)
         $firstName = $rows['FirstName'];
         $lastName = $rows['LastName'];
         if (strlen($lastName) > 0) {
-            $name = $firstName.''.$lastName;
+            $name = $firstName.' '.$lastName;
         }
         else {
             $name = $firstName;
@@ -548,7 +548,7 @@ function checkBlock($ID, $memberID) {
 
 
 // text function to all service providers for related service post
-function alert_followers($interest)
+function alert_followers($postID)
 {
     session_start();
     $ID = $_SESSION['ID'];
@@ -576,9 +576,9 @@ function alert_followers($interest)
                         $clockwork = new Clockwork($API_KEY);
                         $domain = null;
                         if (strstr($url, "dev")) {
-                            $domain = "http://dev.rapportbook.com/home?genre=Show%20All&scrollx=630&scrolly=630";
+                            $domain = "http://dev.rapportbook.com/show_post.php?postID=$postID&email=1";
                         } else {
-                            $domain = "http://rapportbook.com/home?genre=Show%20All&scrollx=630&scrolly=630";
+                            $domain = "http://rapportbook.com/show_post.php?postID=$postID&email=1";
                         }
                         $domain = shortenUrl($domain);
 
@@ -605,7 +605,7 @@ function alert_followers($interest)
 
                 // send out an email after text
                 if (checkEmailActive($followerID)) {
-                    build_and_send_email($ID, $followerID, 11, null, $interest);
+                    build_and_send_email($ID, $followerID, 11, null, $postID);
                 }
                 // update post notification date
                 $sql = "Update Profile Set Post_Notification_Date = CURDATE() WHERE Member_ID = $followerID ";

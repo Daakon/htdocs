@@ -57,6 +57,7 @@ $profileID = get_id_from_username($username);
                         Profile.ProfilePhoto As ProfilePhoto
                       FROM Members, Profile WHERE
                       Members.ID = $followerID
+                      And Members.IsActive = 1
                       AND Profile.Member_ID = $followerID
                       Order By Interest ASC ";
             $result2 = mysql_query($sql2) or die(logError(mysql_error(), $url, "Getting profile photos and names of members who follow user"));
@@ -89,9 +90,6 @@ $profileID = get_id_from_username($username);
                     <a href="<?php echo $profileUrl ?>">
                         <div class="profileName-Feed">
                             <?php echo $name ?>
-                            <span style="font-style: italic;font-weight: normal">
-                                    (<?php echo $interest ?>)
-                                </span>
                             <?php
                             if ($ID == $profileID && $new == 1) {
                                 echo "<span style='color:red;'>New</span>";

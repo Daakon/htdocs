@@ -57,6 +57,7 @@ $profileID = get_id_from_username($username);
                         Profile.ProfilePhoto As ProfilePhoto
                       FROM Members, Profile WHERE
                       Members.ID = $followedID
+                      And Members.IsActive = 1
                       AND Profile.Member_ID = $followedID
                       Group By Interest
                       Order By Interest ASC ";
@@ -88,9 +89,6 @@ $profileID = get_id_from_username($username);
                             <a href="<?php echo $profileUrl ?>">
                                 <div class="profileName-Feed">
                                     <?php echo $name ?>
-                                    <span style="font-style: italic;font-weight: normal">
-                                    (<?php echo $interest ?>)
-                                </span>
                                 </div>
                             </a>
 

@@ -205,12 +205,12 @@ if (!empty($_SESSION['ID'])) {
         <br/>
 
         <div class="hidden-xs">
-            <h3 align="center" style="margin-left:-100px;"><img src="/images/stars.png" height="50" width="150" style="padding-right:10px;" />Member of The Week<img src="/images/stars.png" height="50" width="150" style="padding-left:10px;" /></h3>
+            <h3 align="center" style="margin-left:-100px;"><img src="/images/stars.png" height="50" width="150" style="padding-right:10px;" />Featured Member<img src="/images/stars.png" height="50" width="150" style="padding-left:10px;" /></h3>
         </div>
 
         <div class="visible-xs">
             <h4 align="center" style="margin-left:-10px;">
-                <img src="/images/stars.png" height="50" width="50" style="padding-right:10px;" />Member of The Week<img src="/images/stars.png" height="50" width="50" style="padding-left:10px;" />
+                <img src="/images/stars.png" height="50" width="50" style="padding-right:10px;" />Featured Member<img src="/images/stars.png" height="50" width="50" style="padding-left:10px;" />
             </h4>
         </div>
     </div>
@@ -241,7 +241,7 @@ if (!empty($_SESSION['ID'])) {
     And (Members.ID = Posts.Member_ID)
     And (Members.ID = Profile.Member_ID)
     And (Posts.IsDeleted = 0)
-    And (Posts.ID = 259)
+    And (Posts.ID = 314)
     AND (Posts.Category <> 'Sponsored') ";
 
         // last member of the month post = 259

@@ -226,7 +226,7 @@ if (isset($_POST['submit'])) {
                                       ('$post',   '$category',   '$ID',    '$IsSponsored',    CURDATE())";
             mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting post without media"));
         }
-        alert_followers($category);
+        alert_followers($lastPostID);
     }
 
     echo "<script>location='/home?genre=".urlencode($category)."'</script>";
@@ -877,12 +877,10 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
             <h3 style="color:#E30022;">LET'S PLAY HASHTAG!</h3>
                 <!--***********************************-->
 
-                <img src="/images/themes/stpats.jpeg" height="50" width="50" alt="St Pats" />
-                <b>SHOW OFF YOUR GREEN!</b>
+                <img src="/images/themes/spring-break.jpg" height="50" width="50" alt="St Pats" />
+                <b>Post your favorite Spring Break moment</b>
                 <br/>
-                Post St. Pattys Day Celebration
-                <br/>
-                Hastag <b>#ReppinGreen</b>
+                Hastag <b>#RepSB16</b>
                 <br/>
                 The most likes wins a <b>$50 Gift Card</b>
 
