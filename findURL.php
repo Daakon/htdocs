@@ -21,10 +21,14 @@ function makeLinks($str)
         $str = str_replace("hTtp", "http", $str);
 
         // if top domain ends a sentence, remove period
-        // peroid will keep a domain from being recognized 
+        // peroid will keep a domain from being recognized
         $str = str_replace("com.", "com", $str);
         $str = str_replace("net.", "net", $str);
         $str = str_replace("org.", "org", $str);
+
+        preg_match("/[^\/]+$/", $str, $fileNameMatch);
+        $fileName = $fileNameMatch[0];
+        $fileName = str_replace(".", "", $fileName);
 
         // remove special characters in query string that will cause a rouge link to be built
         if (strstr($str, "?") && strstr($str, "+") && strstr($str, "%")) {
@@ -86,6 +90,7 @@ function makeLinks($str)
         $clickHere = str_replace('.net', '', $clickHere);
         $clickHere = str_replace('.com', '', $clickHere);
         $clickHere = str_replace('.org', '', $clickHere);
+
         if ($clickHere[0] == '.') {
             $clickHere = str_replace('.', '', $clickHere);
         }
@@ -186,7 +191,8 @@ function makeLinks($str)
                     $str = str_replace('</a>/', '</a>', $str);
                 }
 
-
+                // remove any script tags that may come back from a website
+                $titleLink = preg_replace('#<script(.*?)>(.*?)</script>#is', '', $titleLink);
                 $titleLink = closetags($titleLink);
                 $titleLink = $favicon.' '. $titleLink;
                 return $str . '<br/><br/>' . $titleLink;
