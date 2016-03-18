@@ -9,12 +9,22 @@ function makeLinks($str)
         return $str;
     } else {
 
+        // ************ do string prepping *************
+
+        // make all versions of hyperlink lower case
         $str = str_replace("HTTP", "http", $str);
         $str = str_replace("Http", "http", $str);
         $str = str_replace("hTTp", "http", $str);
         $str = str_replace("hTtp", "http", $str);
         $str = str_replace("htTp", "http", $str);
         $str = str_replace("httP", "http", $str);
+        $str = str_replace("hTtp", "http", $str);
+
+        // if top domain ends a sentence, remove period
+        // peroid will keep a domain from being recognized 
+        $str = str_replace("com.", "com", $str);
+        $str = str_replace("net.", "net", $str);
+        $str = str_replace("org.", "org", $str);
 
         // remove special characters in query string that will cause a rouge link to be built
         if (strstr($str, "?") && strstr($str, "+") && strstr($str, "%")) {

@@ -576,9 +576,9 @@ function alert_followers($interest)
                         $clockwork = new Clockwork($API_KEY);
                         $domain = null;
                         if (strstr($url, "dev")) {
-                            $domain = "http://dev.rapportbook.com/home?scrollx=630&scrolly=630";
+                            $domain = "http://dev.rapportbook.com/home?genre=Show%20All&scrollx=630&scrolly=630";
                         } else {
-                            $domain = "http://rapportbook.com/home?scrollx=630&scrolly=630";
+                            $domain = "http://rapportbook.com/home?genre=Show%20All&scrollx=630&scrolly=630";
                         }
                         $domain = shortenUrl($domain);
 
