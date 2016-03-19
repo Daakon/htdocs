@@ -191,6 +191,16 @@ function makeLinks($str)
                     $str = str_replace('</a>/', '</a>', $str);
                 }
 
+                // remove hashtag
+                $link = preg_match('/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i', $str, $matches);
+                $thisLink = $matches[0];
+                $cleanLink = explode('#', $thisLink);
+                $garb = $cleanLink[1];
+                if (strlen($garb) > 1) {
+                    $str = str_replace($garb, '', $str);
+                    $str = str_replace('#.', '', $str);
+                }
+
                 // remove any script tags that may come back from a website
                 $titleLink = preg_replace('#<script(.*?)>(.*?)</script>#is', '', $titleLink);
                 $titleLink = closetags($titleLink);
