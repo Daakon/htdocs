@@ -150,7 +150,7 @@ $age = $rows['Age'];
 
     } else { echo "<span class='red-font'>You must be logged in to message this person</span>"; }
 
-    
+
     ?>
 
 </div>

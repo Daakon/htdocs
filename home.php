@@ -643,20 +643,10 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
 
 <script type = "text/javascript">
     function updateCurrentFeed() {
-        var selection = document.getElementById('genre');
-        var genre = selection.options[selection.selectedIndex].value;
         var stateSelect = document.getElementById('searchState');
         var state = stateSelect.options[stateSelect.selectedIndex].value;
-        // check to see if the city has been reselected
-        if (document.getElementById('ddCurrentCity') == null) {
-            var city = "<?php echo $_GET['city'] ?>";
-        }
-        else {
-            var citySelection = document.getElementById('ddCurrentCity');
-            var city = citySelection.options[citySelection.selectedIndex].value;
-        }
-        document.getElementById('ddCurrentCity').style.display = 'block';
-        window.location = "/home?genre="+encodeURIComponent(genre)+"&state="+encodeURIComponent(state)+"&city="+city;
+
+        window.location = "/home?state="+encodeURIComponent(state);
     }
 </script>
 
@@ -799,20 +789,6 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
         }
         ?>
 
-        <?php
-        $searchCity = $_GET['city'];
-        if (!empty($searchCity)) {
-            $_SESSION['City'] = $searchCity;
-            $searchCity = $_SESSION['City'];
-        }
-        else {
-            if (!empty($_SESSION['City']) && isset($_SESSION['City'])) {
-                $searchCity = $_SESSION['City'];
-            } else {
-                $searchCity = getMemberCity($ID);
-            }
-        }
-        ?>
 
         <!--Middle Column -->
         <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 roll-call"
@@ -829,7 +805,7 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
 
 
                 </div>
-                <select id="searchState" name="searchState" onchange="getCity(this)" class="dropdown">
+                <select id="searchState" name="searchState" onchange="updateCurrentFeed()" class="dropdown">
                     <option value="<?php echo $searchState ?>"><?php echo $searchState?></option>
                     <?php getState(); ?>
                 </select>
@@ -924,7 +900,7 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
 
 
             if (!empty($searchState)) {
-                $stateCondition = "AND (Profile.State = '$searchState' AND Profile.City = '$searchCity')";
+                $stateCondition = "AND (Profile.State = '$searchState')";
             }
             else {
                 $stateCondition = "";
