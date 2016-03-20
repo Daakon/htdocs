@@ -754,7 +754,7 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
 
 <!--empty onunload will clear browser cache for clean refresh -->
 <body onunload="">
-<div class="container" style="margin-top:-50px;">
+<div class="container">
     <?php
     ?>
     <div class="row row-padding">
@@ -822,17 +822,10 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
 
             <div align = "center">
 
-                <h5>Search Posts By Type</h5>
-                <select id="genre" name="genre" onchange="updateFeed()" class="dropdown">
-                    <option value="<?php echo $genre ?>"><?php echo $genre ?></option>
-                    <option value="Show All">Show All</option>
-                    <?php echo category() ?>
-                </select>
-
                 <div>
 
 
-                    <h5>Search By Area</h5>
+                    <h5>Search Posts By Area</h5>
 
 
                 </div>
@@ -841,33 +834,6 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
                     <?php getState(); ?>
                 </select>
 
-
-                <h5>Current City:</h5>
-                <?php
-                $sql = "SELECT ID FROM State WHERE State = '$searchState'";
-                    $result = mysql_query($sql) or die(logError(mysql_error(), $url, "Getting State ID"));
-                    $rows = mysql_fetch_assoc($result);
-                    $stateID = $rows['ID'];
-
-                    $sql2 = "SELECT City FROM City WHERE State_ID = $stateID Order By City ASC ";
-                    $result2 = mysql_query($sql2) or die(mysql_error("You must select a city"));
-
-                    if (mysql_num_rows($result2) > 0) { ?>
-                                <select class='dropdown' name="ddCurrentCity" id="ddCurrentCity" onchange="updateCurrentFeed();">
-                                    <option value=""><?php echo $searchCity ?></option>
-
-                                    <?php
-
-                                    while ($rows2 = mysql_fetch_assoc($result2)) {
-                                        $city = $rows2['City'];
-                                    ?>
-                                        <option value = "<?php echo $city ?>"><?php echo $city ?></option>
-                                   <?php }} ?>
-                    </select>
-
-
-                <div id="divCity">
-                </div>
 
                 <hr class="hr-line"/>
 
@@ -894,7 +860,7 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
 
                 <br/>
                 <textarea name="post" id="post" class="form-control textArea"
-                          placeholder="Share News,Events or Play Hashtag" ></textarea>
+                          placeholder="Share Your Best Spring Break Moment" ></textarea>
                 <br/>
                 <div id="progress" style="display:none;">
                     <div class="progress">

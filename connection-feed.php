@@ -37,7 +37,6 @@ And (Posts.IsDeleted = 0)
 And (Members.ID Not in ( '" . implode($blockIDs, "', '") . "' ))
 AND (Posts.Category <> 'Sponsored')
 $lastPostCondition
-$genreCondition
 $stateCondition
 Group By PostID
 Order By PostID DESC LIMIT $limit ";

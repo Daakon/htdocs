@@ -41,15 +41,10 @@ $ID = $_SESSION['ID'];
             <br/>
 
             <h4>
-                <span>For questions or help creating content:</span><br/>
+                <span>Direct any questions or concerns to:</span><br/>
                 <a href="mailto:info@rapportbook.com">info@rapportbook.com</a>
             </h4>
 
-            <h4>Watch the video to learn more.</h4>
-            <video width="320" height="240" poster="/poster/how-it-works-poster.png" autoplay="autoplay" muted controls >
-                <source src="/images/Rapportbook-How-It-Works-Lo-Res.mp4" />
-            </video>
-<br/>
             <b>Corporate Headquarters</b>
             <br/>
             911 Washington Ave
@@ -60,6 +55,8 @@ $ID = $_SESSION['ID'];
             <br>
             USA
 
+            <br/><br/>
+            <a href="javascript:history.go(-1)">Back</a>
     </div>
 </div>
 

@@ -22,15 +22,15 @@ if (!empty($_SESSION['ID'])) {
                 return false;
             }
 
+            // check state
+            var ddState = document.getElementById('State');
+            var state = ddState.options[ddState.selectedIndex].value;
 
-            // check interest
-            var ddInterest = document.getElementById('interest');
-            var interest = ddInterest.options[ddInterest.selectedIndex].value;
-
-            if (interest == '' || year.length == 0) {
-                alert('Interest needed');
+            if (state == '') {
+                alert('State needed');
                 return false;
             }
+
             return true;
 
         }
@@ -87,11 +87,8 @@ if (!empty($_SESSION['ID'])) {
                         <tr>
                             <td>
                                 <ul>
-                                    <li class="display-block lead">Share the Latest <b>News</b> & <b>Events</b><br/> in Your Community</li>
                                     <li class="display-block lead">Play <b>HashTag</b> & Win Prizes.</li>
                                 </ul>
-
-
                             </td>
                         </tr>
                     </table>
@@ -103,10 +100,16 @@ if (!empty($_SESSION['ID'])) {
                     <table style="margin-left:10px;margin-top:20px;">
                         <tr>
                             <td>
-                                <ul>
-                                    <li class="display-block lead">Share the Latest <b>News</b> & <b>Events</b><br/> in Your Community</li>
-                                    <li class="display-block lead">Play <b>HashTag</b> & Win Prizes.</li>
-                                </ul>
+                                    <span style="font-size:20px;">Play <b>HashTag</b> & Win Prizes.</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <img class="display-block lead" src="/images/hashtag.gif" height="150" width="400" />
+
+                                    <span class="display-block lead">Post stuff based on a hash tag we give you.</span>
+                                    <span class="display-block lead">The most likes wins a $50 Gift Card.</span>
+
                             </td>
                         </tr>
                     </table>
@@ -148,10 +151,13 @@ if (!empty($_SESSION['ID'])) {
                         </div>
                     </div>
 
-                    <select class="form-control input-lg" id="interest" name="interest">
-                        <option value="">Select An Interest To Follow</option>
-                        <?php echo category() ?>
-                    </select>
+                    <div class="form-group">
+                        <select id="State" name="State" class="form-control" >
+                            <option  value="">Select Your State</option>
+                            <?php getState() ?>
+                        </select>
+                    </div>
+
                     <br/>
 
                     <small>By clicking sign up, you agree to our <a href="/terms">terms</a></small>

@@ -4,15 +4,8 @@ function category()
     session_start();
 $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 
-    if (strstr($url, "learn_more") || strstr($url, "profile")) {
-        echo '<option value = "Events">Events</option>';
-        echo '<option value = "News">News</option>';
-    }
-    else {
-        echo '<option value = "Events">Events</option>';
-        echo '<option value = "News">News</option>';
         echo '<option value = "RepSB16">RpSB16</option>';
-    }
+
 
 }
 

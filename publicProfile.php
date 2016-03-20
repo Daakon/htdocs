@@ -27,11 +27,8 @@ $sql = "SELECT
                         Profile.ProfilePhoto As ProfilePhoto,
                         Profile.ProfileVideo As ProfileVideo,
                         Profile.Poster As Poster,
-                        Profile.Address As Address,
-                        Profile.ShowAddress As ShowAddress,
-                        Profile.City As City,
-                        Profile.Zip As Zip,
-                        Profile.ShowZip As ShowZip,
+
+
                         Profile.State As State,
                         Profile.Phone As Phone,
                         Profile.ShowPhone As ShowPhone,
@@ -140,29 +137,6 @@ $age = $rows['Age'];
 
     <!--Profile ---------------------------------------------------------------------------------------->
 
-    <?php
-    if ($showZip == 0) {
-        $zip = '';
-    }
-    if ($showAddress == 0) {
-        $address = '';
-    }
-    if ($showPhone == 0) {
-        $phone = '';
-    }
-    else {
-        $phone = formatPhoneNumber($phone);
-    }
-    ?>
-
-    <?php echo "<span class='profileFont'>$address </span> <br/>"; ?>
-    <?php echo "<span class='profileFont'>$city, $state $zip </span> <br/>"; ?>
-    <?php echo "<span class='profileFont'>$phone</span>"; ?>
-    <br/><br/>
-
-
-    <?php echo "<span class='profileFont'>".nl2br($about)."</span>"; ?>
-
     <br/><br/>
 
 
@@ -176,11 +150,7 @@ $age = $rows['Age'];
 
     } else { echo "<span class='red-font'>You must be logged in to message this person</span>"; }
 
-    if (strlen($rss) > 0) {
-        echo "<h3>$firstName's RSS Feed</h3>";
-        require 'rss.php';
-
-    }
+    
     ?>
 
 </div>

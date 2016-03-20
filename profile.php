@@ -200,7 +200,6 @@ if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
     $about = mysql_real_escape_string($about);
     $about = makeLinks($about);
     $about = closetags($about);
-    $interest = $_POST['Interest'];
     $rss = mysql_real_escape_string($_POST['RSS']);
     $dob = $_POST['DOB'];
     $emailStatus = $_POST['EmailStatus'];
@@ -249,7 +248,6 @@ if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
           Email = '$email',
           EmailActive = '$emailStatus ',
           SmsActive = '$smsStatus ',
-          Interest = '$interest',
           Password = '$password'
           $usernameUpdate
           WHERE ID = $ID ";
@@ -310,15 +308,15 @@ if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
         }
 
         // check zip
-        var zip = document.getElementById('Zip').value;
+       /* var zip = document.getElementById('Zip').value;
         if (zip == '' || zip == "0") {
             alert('Zip Code needed');
             return false;
-        }
+        }*/
 
 
         // check phone if provided
-        var phone = document.getElementById('Phone').value;
+        /*var phone = document.getElementById('Phone').value;
         // remove special characters
         var rawPhone = phone.replace(/[^\d]/g,'');
         if (rawPhone.length > 0) {
@@ -330,30 +328,21 @@ if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
                 alert('Invalid phone format');
                 return false;
             }
-        }
+        }*/
 
         // check password
-        var password = document.getElementById('Password').value;
+        /*var password = document.getElementById('Password').value;
         if (password == '') {
             alert('Password needed');
             return false;
-        }
+        }*/
 
         // check password
-        var about = document.getElementById('About').value;
+        /*var about = document.getElementById('About').value;
         if (about == '') {
             alert('Please provide something about yourself in your about section');
             return false;
-        }
-
-        // check interest
-        var ddInterest = document.getElementById('Interest');
-        var interest = ddInterest.options[ddInterest.selectedIndex].value;
-
-        if (interest == '') {
-            alert('Interest needed');
-            return false;
-        }
+        }*/
 
         // check dob
         var dob = document.getElementById('DOB').value;
@@ -535,7 +524,7 @@ $bgPhoto = $row['ProfilePhoto'];
                         Members.Email As Email,
                         Members.Password As Password,
                         Members.DOB As DOB,
-                        Members.Interest As Interest,
+
                         Members.EmailActive As EmailStatus,
                         Members.SmsActive As SmsStatus,
                         Members.IsUsernameUpdated As IsUsernameUpdated,
@@ -581,7 +570,7 @@ $bgPhoto = $row['ProfilePhoto'];
             $email = $rows['Email'];
             $password = $rows['Password'];
             $dob = $rows['DOB'];
-            $interest = $rows['Interest'];
+
             $rss = $rows['RSS'];
             $emailStatus = $rows['EmailStatus'];
             $smsStatus = $rows['SmsStatus'];
@@ -689,7 +678,7 @@ $bgPhoto = $row['ProfilePhoto'];
             <form id="ajax-form" method="post" action = "" onsubmit="return checkFields();">
 
                 <div class="form-group">
-                    <label for="FirstName">First Name or Business Name</label>
+                    <label for="FirstName">First Name</label>
                     <br/>
                     <input type ="text" class="form-control" id="FirstName" name="FirstName" value="<?php echo $firstName ?>" onblur="capFname()" />
                 </div>
@@ -699,13 +688,13 @@ $bgPhoto = $row['ProfilePhoto'];
                     <input type="text" class="form-control" id="LastName" name="LastName" value="<?php echo $lastName ?>" onblur="capLname()" />
                 </div>
 
-                <div class="form-group">
+               <!-- <div class="form-group">
                     <label for="Address">Address </label><span style="font-style: italic;padding-left:5px;font-size:12px;">
-                    <input type="text" class="form-control" id="Address" name="Address" value="<?php echo $address ?>" />
-                </div>
+                    <input type="text" class="form-control" id="Address" name="Address" value="<?php /*echo $address */?>" />
+                </div>-->
 
                 <?php
-                $otherShowAddressValue = "";
+             /*   $otherShowAddressValue = "";
                 $otherShowAddressText = "";
                 if ($showAddress == 1) {
                     $showAddressText = "Yes";
@@ -716,42 +705,42 @@ $bgPhoto = $row['ProfilePhoto'];
                     $showAddressText = "No";
                     $otherShowAddressValue = 1;
                     $otherShowAddressText = "Yes";
-                }
+                }*/
                 ?>
 
-                <div class="form-group">
+               <!-- <div class="form-group">
                     <label for="ShowAddress">Show address in profile</label>
                     <select id="ShowAddress" name="ShowAddress" class="form-control">
-                        <option value="<?php echo $showAddress ?>"><?php echo $showAddressText ?></option>
-                        <option value="<?php echo $otherShowAddressValue ?>"><?php echo $otherShowAddressText ?></option>
+                        <option value="<?php /*echo $showAddress */?>"><?php /*echo $showAddressText */?></option>
+                        <option value="<?php /*echo $otherShowAddressValue */?>"><?php /*echo $otherShowAddressText */?></option>
                     </select>
-                </div>
+                </div>-->
 
                 <div class="form-group">
                     <label for="State">State</label>
-                    <select id="State" name="State" class="form-control" onchange="getCity(this);" >
+                    <select id="State" name="State" class="form-control" >
                         <option  value="<?php echo $state ?>"><?php echo $state ?></option>
                         <?php getState() ?>
                     </select>
                 </div>
 
-                <label for="City">City:</label>
+               <!-- <label for="City">City:</label>
                 <br/>
-                <?php echo $city ?>
+                <?php /*echo $city */?>
 
                 <br/>
 
                 <div id="divCity"></div>
 
-                <br/>
+                <br/>-->
 
-                <div class="form-group">
+                <!--<div class="form-group">
                     <label for="Zip">Zip Code</label>
-                    <input type="text" class="form-control" id="Zip" name="Zip" value="<?php echo $zip ?>" />
-                </div>
+                    <input type="text" class="form-control" id="Zip" name="Zip" value="<?php /*echo $zip */?>" />
+                </div>-->
 
                 <?php
-                $otherShowZipValue = "";
+               /* $otherShowZipValue = "";
                 $otherShowZipText = "";
                 if ($showZip == 1) {
                     $showZipText = "Yes";
@@ -762,24 +751,24 @@ $bgPhoto = $row['ProfilePhoto'];
                     $showZipText = "No";
                     $otherShowZipValue = 1;
                     $otherShowZipText = "Yes";
-                }
+                }*/
                 ?>
 
-                <div class="form-group">
+               <!-- <div class="form-group">
                     <label for="ShowZip">Show zip code in profile</label>
                     <select id="ShowZip" name="ShowZip" class="form-control">
-                        <option value="<?php echo $showZip ?>"><?php echo $showZipText ?></option>
-                        <option value="<?php echo $otherShowZipValue ?>"><?php echo $otherShowZipText ?></option>
+                        <option value="<?php /*echo $showZip */?>"><?php /*echo $showZipText */?></option>
+                        <option value="<?php /*echo $otherShowZipValue */?>"><?php /*echo $otherShowZipText */?></option>
                     </select>
-                </div>
+                </div>-->
 
-                <div class="form-group">
+                <!--<div class="form-group">
                     <label for="Phone">Phone</label>
-                    <input type="text" class="form-control" id="Phone" name="Phone" value="<?php echo $phone ?>" />
-                </div>
+                    <input type="text" class="form-control" id="Phone" name="Phone" value="<?php /*echo $phone */?>" />
+                </div>-->
 
                 <?php
-                $otherShowPhoneValue = "";
+                /*$otherShowPhoneValue = "";
                 $otherShowPhoneText = "";
                 if ($showPhone == 1) {
                     $showPhoneText = "Yes";
@@ -790,47 +779,38 @@ $bgPhoto = $row['ProfilePhoto'];
                     $showPhoneText = "No";
                     $otherShowPhoneValue = 1;
                     $otherShowPhoneText = "Yes";
-                }
+                }*/
                 ?>
 
-                <div class="form-group">
+                <!--<div class="form-group">
                     <label for="ShowPhone">Show phone number in profile</label>
                     <select id="ShowPhone" name="ShowPhone" class="form-control">
-                        <option value="<?php echo $showPhone ?>"><?php echo $showPhoneText ?></option>
-                        <option value="<?php echo $otherShowPhoneValue ?>"><?php echo $otherShowPhoneText ?></option>
+                        <option value="<?php /*echo $showPhone */?>"><?php /*echo $showPhoneText */?></option>
+                        <option value="<?php /*echo $otherShowPhoneValue */?>"><?php /*echo $otherShowPhoneText */?></option>
                     </select>
-                </div>
+                </div>-->
 
-                    <label for="Service">Primary Interest</label>
-                <div class="form-group">
-                    <select class="form-control input-lg" id="Interest" name="Interest">
-                        <option value="<?php echo $interest ?>"><?php echo $interest ?></option>
-                        <option value="All">All</option>
-                        <?php echo category() ?>
-                    </select>
-                </div>
-
-
+<!--
                 <div class="form-group">
                     <label for="About">About</label>
-                    <textarea class="form-control textArea" id="About" name="About"><?php echo $about ?></textarea>
+                    <textarea class="form-control textArea" id="About" name="About"><?php /*echo $about */?></textarea>
                 </div>
-
+-->
 
                 <div class="form-group">
                     <label for="Email">Email</label>
                     <input type="email" class="form-control" id="Email" name="Email" value="<?php echo $email ?>" />
                 </div>
 
-                <div class="form-group">
+                <!--<div class="form-group">
                     <label for="RSS">RSS</label>
                     <br/>
-                    <input type ="text" class="form-control" id="RSS" name="RSS" value="<?php echo $rss ?>"  />
-                </div>
+                    <input type ="text" class="form-control" id="RSS" name="RSS" value="<?php /*echo $rss */?>"  />
+                </div>-->
 
                 <div class="form-group">
                     <label for="DOB">Date Of Birth</label>
-                    <input type="date" class="form-control" id="DOB" name="DOB" value="<?php echo $dob ?>" />
+                    <input type="date" class="form-control" id="DOB" name="DOB" value="<?php /*echo $dob */?>" />
                 </div>
                 <br/>
 
@@ -910,11 +890,13 @@ $bgPhoto = $row['ProfilePhoto'];
             </form>
 
                 <br/>
-                <?php if (strlen($rss) > 0) {
+                <?php /*if (strlen($rss) > 0) {
                     echo "<h3>Your RSS Feed</h3>";
                     require 'rss.php';
 
-             } } ?>
+             } */
+
+            } ?>
             <!------------->
 
         </div>

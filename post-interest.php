@@ -749,7 +749,6 @@ $sql = "SELECT DISTINCT
     Posts.Category As Category,
     Posts.IsSponsored As IsSponsored,
     Profile.ProfilePhoto As ProfilePhoto,
-    Profile.City As City,
     $postApprovalCondition
     Profile.State As State
     FROM Members,Posts,Profile
@@ -782,7 +781,6 @@ if (mysql_num_rows($result) > 0) {
         $lastName = $rows['LastName'];
         $username = $rows['Username'];
         $profilePhoto = $rows['ProfilePhoto'];
-        $city = $rows['City'];
         $state = $rows['State'];
         $category = $rows['Category'];
         $post = $rows['Post'];
@@ -848,7 +846,7 @@ if (mysql_num_rows($result) > 0) {
 
             <hr class="hr-line"/>
 
-             <?php echo $city .', '. $state; ?>
+             <?php echo $state; ?>
 
 
                  <?php if ($ID != $memberID) {?>
