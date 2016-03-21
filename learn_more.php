@@ -86,9 +86,9 @@ if (!empty($_SESSION['ID'])) {
                     <table style="margin-left:10px;margin-top:20px;margin-bottom:10px;">
                         <tr>
                             <td>
-                                <span style="font-size:20px;">Play <b>HashTag</b> & Rep Your State.</span>
+                                <span style="font-size:20px;">Play <b>HashTag</b> & Shop on Us!</span>
                                 <span class="display-block">&#149 Post stuff based on a hash tag we give you.</span>
-                                <span class="display-block">&#149 Winners in each state receive a $50 Gift Card.</span>
+                                <span class="display-block">&#149 Winners receive a $50 Gift Card.</span>
                             </td>
                         </tr>
                     </table>
@@ -100,7 +100,7 @@ if (!empty($_SESSION['ID'])) {
                     <table style="margin-left:10px;margin-top:20px;">
                         <tr>
                             <td>
-                                    <span style="font-size:20px;">Play <b>HashTag</b> & Rep Your State.</span>
+                                    <span style="font-size:20px;">Play <b>HashTag</b> & Shop on Us!</span>
                             </td>
                         </tr>
                         <tr>
@@ -108,7 +108,7 @@ if (!empty($_SESSION['ID'])) {
                                 <img class="display-block lead" src="/images/hashtag.gif" height="150" width="400" />
 
                                     <span class="display-block lead">Post stuff based on a hash tag we give you.</span>
-                                    <span class="display-block lead">Winners in each state receive a $50 Gift Card.</span>
+                                    <span class="display-block lead">Winners receive a $50 Gift Card.</span>
 
                             </td>
                         </tr>
