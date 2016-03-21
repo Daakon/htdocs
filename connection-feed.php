@@ -7,9 +7,12 @@ $blockIDs = array();
 
 //Get blocked IDs
 while ($rows1 = mysql_fetch_assoc($result1)) {
-    if ($rows1['BlockedID'] != $ID) {
+    $blockedID = $rows['BlockedID'];
+    $blockerID = $rows['BlockerID'];
+    if ($blockedID != $ID) {
         array_push($blockIDs, $rows1['BlockedID']);
-        if ($rows1['BlockerID'] != $ID) {
+        if ($blockerID != $ID) {
+
             array_push($blockIDs, $rows1['BlockerID']);
         }
     }
