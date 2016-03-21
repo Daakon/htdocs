@@ -709,7 +709,7 @@ function myFunction() {
 
 ?>
 
-<h4>Nationwide <?php echo $category ?> Posts</h4>
+<h4>Nationwide <?php echo $category ?> Leader Board</h4>
 </div>
 
 <?php
@@ -729,14 +729,10 @@ while ($rows1 = mysql_fetch_assoc($result1)) {
     }
 }
 
-if ($category == "News" || $category == "Events") {
-    $postApprovalCondition = "";
-    $orderBy = "PostID";
-}
-else {
+
  $postApprovalCondition = "(Select Count(ID) FROM PostApprovals Where Post_ID = PostID) As PostApprovals, ";
  $orderBy = "PostApprovals";
-}
+
 // Get All Categories nationwide
 $sql = "SELECT DISTINCT
     Members.ID As MemberID,

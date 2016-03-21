@@ -35,7 +35,7 @@ And (Members.ID = Posts.Member_ID)
 And (Members.ID = Profile.Member_ID)
 And (Posts.IsDeleted = 0)
 And (Members.ID Not in ( '" . implode($blockIDs, "', '") . "' ))
-AND (Posts.Category <> 'Sponsored')
+AND Posts.Category = '$category'
 $lastPostCondition
 $stateCondition
 Group By PostID

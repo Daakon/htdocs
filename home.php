@@ -744,7 +744,7 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
 
 <!--empty onunload will clear browser cache for clean refresh -->
 <body onunload="">
-<div class="container">
+<div class="container" style="margin-top:-20px;">
     <?php
     ?>
     <div class="row row-padding">
@@ -800,13 +800,9 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
 
                 <div>
 
-
-                    <h5>Search Posts By Area</h5>
-
-
                 </div>
                 <select id="searchState" name="searchState" onchange="updateCurrentFeed()" class="dropdown">
-                    <option value="<?php echo $searchState ?>"><?php echo $searchState?></option>
+                    <option value="<?php echo $searchState ?>"><?php echo $searchState?> Leader Board</option>
                     <?php getState(); ?>
                 </select>
 
@@ -818,13 +814,13 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
             <div style="margin-bottom:10px;margin-top:-20px;padding-bottom:10px;border-bottom:2px solid #E30022;" align="center">
             <h3 style="color:#E30022;">LET'S PLAY HASHTAG!</h3>
                 <!--***********************************-->
-
+                <?php $category = "RepSB16"; ?>
                 <img src="/images/themes/spring-break.jpg" height="50" width="50" alt="St Pats" />
                 <b>Post your favorite Spring Break moment</b>
                 <br/>
-                Hastag <b>#RepSB16</b>
+                Hastag <b><?php echo $category ?></b>
                 <br/>
-                The most likes wins a <b>$50 Gift Card</b>
+                Winners receive a <b>$50 Gift Card</b>
 
                 <!--***********************************-->
             </div>
@@ -909,6 +905,8 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
 
         <?php
         $limit = "10";
+        $postApprovalCondition = "(Select Count(ID) FROM PostApprovals Where Post_ID = PostID) As PostApprovals, ";
+        $orderBy = "PostApprovals";
         $lastPostCondition = '';
         require 'connection-feed.php';
         ?>
