@@ -393,54 +393,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                     $sql = "INSERT INTO PostComments (Post_ID,     Member_ID,   Comment, CommentDate  ) Values
                                                       ('$postID', '$ID',      '$comment', CURDATE())";
                     mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting post comment"));
-// create post
-                    // get poster data
-                    $sqlPoster = "SELECT ID, FirstName, LastName, Gender FROM Members WHERE ID = '$ID' ";
-                    $resultPoster = mysql_query($sqlPoster) or die(mysql_error());
-                    $rowsPoster = mysql_fetch_assoc($resultPoster);
-                    $name = $rowsPoster['FirstName'] . ' ' . $rowsPoster['LastName'];
-                    $posterId = $rowsPoster['ID'];
-                    $gender = $rowsPoster['Gender'];
-                    $nameLink = $name;
-// get photo owner data
-                    $sql = "SELECT Member_ID FROM Posts WHERE ID = $postID";
-                    $result = mysql_query($sql) or die(mysql_error());
-                    $rows = mysql_fetch_assoc($result);
-                    $ownerId = $rows['Member_ID'];
-                    $sqlOwner = "SELECT ID, FirstName, LastName FROM Members WHERE ID = '$ownerId' ";
-                    $resultOwner = mysql_query($sqlOwner) or die(logError(mysql_error(), $url, "Getting post owner name to create string to say which member post was commented on"));
-                    $rowsOwner = mysql_fetch_assoc($resultOwner);
-                    $name2 = $rowsOwner['FirstName'] . ' ' . $rowsOwner['LastName'];
-                    $name2 = $name2."'s";
-                    $ownerId = $rowsOwner['ID'];
-                    $name2Link = $name2;
-                    // determine noun if profile owner commented on their own post and write bulletin
-                    if ($ownerId == $ID) {
-                        if ($gender == 1) {
-                            $noun = 'his';
-                        } else {
-                            $noun = 'her';
-                        }
-                    }
-                    else {
-                        $noun = $name2;
-                    }
-                    $orgPost = "<a href='/show_post.php?postID=$postID'>status</a>";
-                    $orgPostSql = "SELECT Category FROM Posts WHERE ID = $postID ";
-                    $orgPostResult = mysql_query($orgPostSql);
-                    $orgPostRow = mysql_fetch_assoc($orgPostResult);
-                    $orgInterest = $orgPostRow['Category'];
-                    $post = "$nameLink posted a new $mediaString comment on a previous $orgPost.<br/><br/>$img<br/>";
-                    $post = mysql_real_escape_string($post);
 
-
-                    $sqlInsertPost = "INSERT INTO Posts (Post,     Member_ID,   Category,         PostDate  ) Values
-                                                        ('$post', '$ID',      '$orgInterest',    CURDATE() ) ";
-                    mysql_query($sqlInsertPost) or die(logError(mysql_error(), $url, "Inserting post that states a member posted a media comment on another member post"));
-                    $newPostID = mysql_insert_id();
-// update new photo with post id for commenting later
-                    $sql = "UPDATE Media SET Post_ID = '$newPostID' WHERE MediaName = '$mediaName' ";
-                    mysql_query($sql) or die(logError(mysql_error(), $url, "Updating Media with new post ID which was triggered from post comment with media"));
                 }
             }
 //----------------------
@@ -812,6 +765,7 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
             </div>
 
             <div style="margin-bottom:10px;margin-top:-20px;padding-bottom:10px;border-bottom:2px solid #E30022;" align="center">
+
             <h3 style="color:#E30022;">LET'S PLAY HASHTAG!</h3>
                 <!--***********************************-->
                 <?php $category = "RepSB16"; ?>
@@ -825,6 +779,14 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
                 <!--***********************************-->
             </div>
 
+<?php if (isGameLocked($category)) {
+    echo "<div align = 'center' style='color:red;font-weight:bold;'>Sorry the game is Locked with 100 posts. Please vote for a winner</div>";
+}
+elseif (hasExistingGamePost($category, $ID)) {
+    echo "<div align = 'center' style='color:red;font-weight:bold;'>You have an existing post for this game. <br/>Delete your post to post again.</div>";
+   }
+   else {
+    ?>
             <form method="post" enctype="multipart/form-data" action="" onsubmit="return showUploading()">
                 <img src="/images/image-icon.png" height="30px" width="30px" alt="Photos/Video"/>
                 <strong>Add Photos/Video</strong>
@@ -861,6 +823,8 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
 
                 <input type="submit" class="post-button" name="submit" id="submit" value="Post"/>
             </form>
+
+            <?php } ?>
 
         </div>
 

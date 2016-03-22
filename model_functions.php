@@ -545,7 +545,34 @@ function checkBlock($ID, $memberID) {
     }
 }
 
+function isGameLocked($hashTag) {
+    $sql = "Select count(ID) as PostCount FROM Posts WHERE Category = '$hashTag' ";
+    $result = mysql_query($sql) or die(mysql_error());
+    $rows = mysql_fetch_assoc($result);
+    $postCount = $rows['PostCount'];
 
+    if ($postCount >= 100) {
+        return true;
+    }
+    else {
+        return false;
+    }
+
+}
+
+function hasExistingGamePost($hashTag, $ID) {
+    $sql = "Select ID FROM Posts WHERE Member_ID = $ID and Category = '$hashTag' and IsDeleted = 0 ";
+    $result = mysql_query($sql) or die(mysql_error());
+    $rows = mysql_fetch_assoc($result);
+    $postID = $rows['ID'];
+
+    if ($postID > 0) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
 
 // text function to all service providers for related service post
 function alert_followers($postID)
@@ -585,7 +612,7 @@ function alert_followers($postID)
                         // Setup and send a message
                         $name = get_users_name_by_id($ID);
                         $name = trim($name);
-                        $text = "$name has shared a new post on Rapportbook. $domain";
+                        $text = "$name just start playing hashtag. $domain";
                         $text = trim($text);
                         $message = array('to' => $number, 'message' => $text);
                         $result = $clockwork->send($message);

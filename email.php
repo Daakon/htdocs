@@ -233,7 +233,7 @@ function build_and_send_email($senderId, $toId, $notification, $postID, $pass, $
         }
         // a post status update related to your service has been posted
         $name = get_users_name_by_id($senderId);
-        $subject = "$name just shared a new post. <a href='".$link."'>Click here</a> to see the post
+        $subject = "$name just started playing hashtag. <a href='".$link."'>Click here</a> to see the post
         <br/><br/>You are receiving this because you follow $name";
     }
     if ($notification == 12) {

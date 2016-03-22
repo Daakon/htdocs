@@ -76,7 +76,7 @@ if ($_SESSION['ID'] != $profileID) { ?>
 <!--            <li><a href="/coupons"><img src="/images/sales-tag.png" height="20" width="20" /> Coupons</a></li>-->
             <li <?php echo $showProfile ?>><a href="/<?php echo $username ?>"><img src="/images/profile.png" height="20" width="20" /> Profile</a></li>
 <!--            <li><a href="/member_media/--><?php //echo $username ?><!--"><img src="/images/media.png" height="20" width="20" /> Media</a></li>-->
-            <!--<li><a href="/manage_post/<?php /*echo $username */?>"><img src="/images/post.png" height="20" width="20" /> Posts</a></li>-->
+            <li><a href="/manage_post/<?php echo get_username($ID) ?>"><img src="/images/post.png" height="20" width="20" /> Manage Posts</a></li>
             <li><a href="/messages/<?php echo get_username($ID) ?>"><img src = "/images/messages.png" height="20" width="20" /> Message</a></li>
 <!--            <li><a href="/member_follows/--><?php //echo $username ?><!--"><img src = "/images/follows.png" height="20" width="20" /> Followers</a></li>-->
             <li><a href="/<?php echo get_username($ID)?>"><span style="color:black;font-weight: 900;"><img src="<?php echo get_users_photo_by_id($ID) ?>" height="20" width="20"/> My Profile</span></a></li>
