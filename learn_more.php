@@ -86,10 +86,11 @@ if (!empty($_SESSION['ID'])) {
                     <table style="margin-left:10px;margin-top:20px;margin-bottom:10px;">
                         <tr>
                             <td>
-                                <span style="font-size:20px;">Play <b>HashTag</b> & Shop on Us!</span>
-                                <span class="display-block">&#149 Post stuff based on a hash tag we give you.</span>
-                                <span class="display-block">&#149 Winners receive a $50 Gift Card.</span>
+                                <span style="font-size:20px;">Play Games & Shop on Us!</span>
                             </td>
+                        </tr>
+                        <tr>
+                            <td><a href="/support">View Games & Rules</a></td>
                         </tr>
                     </table>
                 </div>
@@ -100,16 +101,12 @@ if (!empty($_SESSION['ID'])) {
                     <table style="margin-left:10px;margin-top:20px;">
                         <tr>
                             <td>
-                                    <span style="font-size:20px;">Play <b>HashTag</b> & Shop on Us!</span>
+                                <span class="lead" style="font-weight:bold;">Play Games & Shop on Us!</span>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <img class="display-block lead" src="/images/hashtag.gif" height="150" width="400" />
-
-                                    <span class="display-block lead">Post stuff based on a hash tag we give you.</span>
-                                    <span class="display-block lead">Winners receive a $50 Gift Card.</span>
-
+                                <a style ="font-size:20px;" href="/support">View Games & Rules</a>
                             </td>
                         </tr>
                     </table>
@@ -120,8 +117,9 @@ if (!empty($_SESSION['ID'])) {
             </div>
 
 
-            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="margin-top:-10px;">
-                <img src="/images/people-sharing.png" style="width:100%;" />
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="margin-top:0px;">
+                <img style="float:left;" src="/images/trophy.jpg" width="50%" />
+                <img style="float:right;" src="/images/giftcard.jpg" width="50%" />
             </div>
 
         </div>
@@ -149,13 +147,6 @@ if (!empty($_SESSION['ID'])) {
                         <div class="col-md-6">
                             <div class="error-text"></div>
                         </div>
-                    </div>
-
-                    <div class="form-group">
-                        <select id="State" name="State" class="form-control" >
-                            <option  value="">Select Your State</option>
-                            <?php getState() ?>
-                        </select>
                     </div>
 
                     <br/>
@@ -188,7 +179,7 @@ if (!empty($_SESSION['ID'])) {
             </div>
 
             <div class="col-lg-5 col-lg-offset-1 col-md-5 col-md-offset-1 col-sm-12 col-xs-12">
-                <h4 style="font-weight: bold">Follow Us:</h4>
+                <h5>Follow us to stay up on new games and giveaways:</h5>
                 <a href="http://facebook.com/rapportbook" target="_blank"><img src="/images/facebook-logo-red.png" height="50" width="50"></a>
                 <a href="http://twitter.com/rapportbook" target="_blank"><img src="/images/twitter-logo-red.png" height="=50" width="50"></a>
                 <a href="http://blog.rapportbook.com" target="_blank"><img src="/images/tumblr-logo-red.png" height="40" width="40"/> </a>
@@ -279,7 +270,7 @@ if (!empty($_SESSION['ID'])) {
         ?>
 
         <div class="col-lg-5 col-lg-offset-3 col-md-5 col-md-offset-3 col-sm-6 col-xs-12 roll-call" align="left"
-        style="margin-bottom: 20px;margin-top:10px;">
+             style="margin-bottom: 20px;margin-top:10px;">
 
             <?php
             $profileUrl = "#signup";
@@ -295,7 +286,7 @@ if (!empty($_SESSION['ID'])) {
                     <div class="profileName-Feed"><?php echo $name ?></div>
                 </a>
                 <div class="date"><?php echo date('l F j, Y',strtotime($postDate)); ?>
-                <?php if ($isSponsored) { echo "<br/>Sponsored"; } ?>
+                    <?php if ($isSponsored) { echo "<br/>Sponsored"; } ?>
                 </div>
             </div>
 

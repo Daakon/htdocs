@@ -38,7 +38,41 @@ $ID = $_SESSION['ID'];
             <img src="/images/helpicon.png" width="40" height="40"/>
 
             <span class="lead bold">Support</span>
-            <br/>
+            <br/><br/>
+
+            <h4><div style="color:blue;"  onclick="document.getElementById('hashtag').style.display = 'block';">Hashtag</div></h4>
+
+            <div id="hashtag" style="display:none;">
+                <li class="display-block">1. You must post content related to the current hashtag.</li>
+                <li class="display-block">2. Posts must contain a photo and or video.</li>
+                <li class="display-block">3. The game locks after 100 people have posted content.
+                    <i>If you miss the game, you are encouraged to vote for those who made the cut.</i></li>
+                <li class="display-block">4. You can only make one post per contest.
+                    If you want to post something again you must delete your current post.</li>
+                <li class="display-block">5. There are several variables that go into choosing a winner including: <i>originality, votes/likes and overall popularity.</i>.</li>
+                <li class="display-block">6. The amount of winners and gift card amounts can vary from game to game.</li>
+
+                <div style="margin-bottom:20px;margin-top:10px;"  onclick="document.getElementById('hashtag').style.display = 'none';"><img src="/images/close.png" height="25" width="25"/>
+                    <!-- adding onclick to hide this element when you click it -->
+                    Close
+                </div>
+
+            </div>
+
+            <h4><div style="color:blue;"  onclick="document.getElementById('piedpiper').style.display = 'block';">Pied Piper</div></h4>
+
+            <div id="piedpiper" style="display:none;">
+                <li class="display-block">1. Get 10 followers and receive a $50 Gift Card.</li>
+
+                <div style="margin-bottom:20px;margin-top:10px;"  onclick="document.getElementById('piedpiper').style.display = 'none';"><img src="/images/close.png" height="25" width="25"/>
+                    <!-- adding onclick to hide this element when you click it -->
+                    Close
+                </div>
+
+            </div>
+
+
+<br/>
 
             <h4>
                 <span>Direct any questions or concerns to:</span><br/>

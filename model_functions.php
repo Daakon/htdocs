@@ -551,7 +551,7 @@ function isGameLocked($hashTag) {
     $rows = mysql_fetch_assoc($result);
     $postCount = $rows['PostCount'];
 
-    if ($postCount >= 100) {
+    if ($postCount >= 1) {
         return true;
     }
     else {

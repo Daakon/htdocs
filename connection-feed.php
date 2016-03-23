@@ -40,7 +40,6 @@ And (Posts.IsDeleted = 0)
 And (Members.ID Not in ( '" . implode($blockIDs, "', '") . "' ))
 AND Posts.Category = '$category'
 $lastPostCondition
-$stateCondition
 Group By PostID
 Order By PostID DESC LIMIT $limit ";
 $rollCallResult = mysql_query($sqlRollCall) or die(logError(mysql_error(), $url, "Getting Connection Feed data"));
@@ -148,7 +147,7 @@ $total = mysql_num_rows($rollCallResult);
             <hr class="hr-line" />
 
             <?php if (isset($ID)) { ?>
-                <a href='/post-interest?interest=<?php echo urlencode($category) ?>' onclick="saveScrollPositionOnLinkClick('/home')" class='category'><span class="engageText">#<?php echo $category ?></span></a>
+                <span style="color:#E30022;">#<?php echo $category ?></span>
 
 
 

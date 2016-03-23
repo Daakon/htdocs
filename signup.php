@@ -8,7 +8,6 @@ $email = $_POST['email'];
 $emailSplit = explode("@", $email);
 $username = $emailSplit[0];
 
-$state = $_POST['State'];
 
 // captilize first letter only
 $fName = ucfirst(strtolower($username));
@@ -61,8 +60,8 @@ $sql = "UPDATE Members SET SignupDate = '$date' WHERE ID = '$ID' ";
 $result = mysql_query($sql) or die(logError(mysql_error(), $url, "Getting sign up date"));
 
 // insert default profile pic into profile table
-$sql = "INSERT INTO Profile (Member_ID,  Poster,               ProfileVideo,        State   ) Values
-                            ($ID,       'default_photo.png', 'default_video.png', '$state'  )    ";
+$sql = "INSERT INTO Profile (Member_ID,  Poster,               ProfileVideo ) Values
+                            ($ID,       'default_photo.png', 'default_video.png' )    ";
 $result = mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting default photo"));
 
 

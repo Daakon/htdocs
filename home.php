@@ -28,10 +28,17 @@ if (isset($_POST['submit'])) {
     } else {
         if (strlen($post) > 0) {
             $post = makeLinks($post);
+
+
             // Loop through each image uploaded.
             if (strlen($_FILES['flPostMedia']['name'] > 0)) {
                 foreach ($_FILES['flPostMedia']['tmp_name'] as $k => $v) {
                     $mediaName = $_FILES['flPostMedia']['name'][$k];
+
+                    if (strlen($mediaName) == 0) {
+                        echo "<script>alert('A photo or video is required'); location='/home'</script>";
+                        exit;
+                    }
                     // remove ALL WHITESPACE from image name
                     $mediaName = preg_replace('/\s+/', '', $mediaName);
                     // remove ALL SPECIAL CHARACTERS, Images paths are extremely sensitive
@@ -754,25 +761,15 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
                 <div>
 
                 </div>
-                <select id="searchState" name="searchState" onchange="updateCurrentFeed()" class="dropdown">
-                    <option value="<?php echo $searchState ?>"><?php echo $searchState?> Leader Board</option>
-                    <?php getState(); ?>
-                </select>
-
-
-                <hr class="hr-line"/>
 
             </div>
 
             <div style="margin-bottom:10px;margin-top:-20px;padding-bottom:10px;border-bottom:2px solid #E30022;" align="center">
 
-            <h3 style="color:#E30022;">LET'S PLAY HASHTAG!</h3>
                 <!--***********************************-->
                 <?php $category = "RepSB16"; ?>
-                <img src="/images/themes/spring-break.jpg" height="50" width="50" alt="St Pats" />
+                <img src="/images/themes/spring-break.jpg" height="50" width="50" alt="St Pats" style="margin-top:20px;" />
                 <b>Post your favorite Spring Break moment</b>
-                <br/>
-                Hastag <b><?php echo $category ?></b>
                 <br/>
                 Winners receive a <b>$50 Gift Card</b>
 
@@ -780,11 +777,40 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
             </div>
 
 <?php if (isGameLocked($category)) {
-    echo "<div align = 'center' style='color:red;font-weight:bold;'>Sorry the game is Locked with 100 posts. Please vote for a winner</div>";
+    echo "<div align = 'center' style='color:red;font-weight:bold;'>Sorry the game is Locked with 100 posts. Please vote for a winner";
+    ?>
+    <h5 style="color:black">Check out our social media to find other ways to win stuff:</h5>
+                <a href="http://facebook.com/rapportbook" target="_blank"><img src="/images/facebook-logo-red.png" height="25" width="25"></a>
+                <a href="http://twitter.com/rapportbook" target="_blank"><img src="/images/twitter-logo-red.png" height="=25" width="25"></a>
+                <a href="http://blog.rapportbook.com" target="_blank"><img src="/images/tumblr-logo-red.png" height="20" width="20"/> </a>
+                <a href="http://instagram.com/officialrapportbook" target="_blank"><img src="/images/instagram-logo-red.png" height="25" width="25"/></a>
+                <a href="http://pintrest.com/rapportbook" target="_blank"><img src="/images/pintrest-logo-red.png" height="25" width="25" /> </a>
+                <a href="http://linkedin.com/company/rapportbook" target="_blank"><img src="/images/linkedin-logo-red.png" height="20" width="20" /></a>
+                <a href="https://plus.google.com/+Rapportbook/" target="_blank"><img src="/images/google-youtube-logo.png" height="20" width="25" style="padding-left:8px;" /></a>
+                <br/><br/>
+
+            <a href="/view_messages.php/Rapportbook">Tell us what prizes you would like to win</a>
+        </div>
+    <?php
+
 }
 elseif (hasExistingGamePost($category, $ID)) {
     echo "<div align = 'center' style='color:red;font-weight:bold;'>You have an existing post for this game. <br/>Delete your post to post again.</div>";
-   }
+    ?>
+        <h5 style="color:black">Check out our social media to find other ways to win stuff:</h5>
+        <a href="http://facebook.com/rapportbook" target="_blank"><img src="/images/facebook-logo-red.png" height="25" width="25"></a>
+        <a href="http://twitter.com/rapportbook" target="_blank"><img src="/images/twitter-logo-red.png" height="=25" width="25"></a>
+        <a href="http://blog.rapportbook.com" target="_blank"><img src="/images/tumblr-logo-red.png" height="20" width="20"/> </a>
+        <a href="http://instagram.com/officialrapportbook" target="_blank"><img src="/images/instagram-logo-red.png" height="25" width="25"/></a>
+        <a href="http://pintrest.com/rapportbook" target="_blank"><img src="/images/pintrest-logo-red.png" height="25" width="25" /> </a>
+        <a href="http://linkedin.com/company/rapportbook" target="_blank"><img src="/images/linkedin-logo-red.png" height="20" width="20" /></a>
+        <a href="https://plus.google.com/+Rapportbook/" target="_blank"><img src="/images/google-youtube-logo.png" height="20" width="25" style="padding-left:8px;" /></a>
+        <br/><br/>
+
+        <a href="/view_messages.php/Rapportbook">Tell us what prizes you would like to win</a>
+    </div>
+    <?php
+}
    else {
     ?>
             <form method="post" enctype="multipart/form-data" action="" onsubmit="return showUploading()">

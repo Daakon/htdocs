@@ -716,13 +716,13 @@ $bgPhoto = $row['ProfilePhoto'];
                     </select>
                 </div>-->
 
-                <div class="form-group">
+                <!--<div class="form-group">
                     <label for="State">State</label>
                     <select id="State" name="State" class="form-control" >
-                        <option  value="<?php echo $state ?>"><?php echo $state ?></option>
-                        <?php getState() ?>
+                        <option  value="<?php /*echo $state */?>"><?php /*echo $state */?></option>
+                        <?php /*getState() */?>
                     </select>
-                </div>
+                </div>-->
 
                <!-- <label for="City">City:</label>
                 <br/>
