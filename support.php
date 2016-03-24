@@ -29,16 +29,15 @@ $ID = $_SESSION['ID'];
 </div>
 
     <div class="row" style="padding:0px;">
-        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 padding-0">
-            <img src="/images/support-person.jpg" style="height:100%;width:100%;"/>
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <img src="/images/rules.jpg" style="height:50%;width:50%;"/>
         </div>
 
 
-        <div class="col-xs-12 col-md-6 col-lg-6" style="background:#f1f1f1;border:2px #e3e3e3 solid">
-            <img src="/images/helpicon.png" width="40" height="40"/>
+        <div class="col-xs-12 col-md-6 col-lg-6" style="padding-left:50px;">
 
-            <span class="lead bold">Support</span>
-            <br/><br/>
+            <span class="lead bold">Games & Rules</span>
+            <hr class="hr-line"/>
 
             <h4><div style="color:blue;"  onclick="document.getElementById('hashtag').style.display = 'block';">Hashtag</div></h4>
 
@@ -49,7 +48,7 @@ $ID = $_SESSION['ID'];
                     <i>If you miss the game, you are encouraged to vote for those who made the cut.</i></li>
                 <li class="display-block">4. You can only make one post per contest.
                     If you want to post something again you must delete your current post.</li>
-                <li class="display-block">5. There are several variables that go into choosing a winner including: <i>originality, votes/likes and overall popularity.</i>.</li>
+                <li class="display-block">5. There are several variables that go into choosing a winner including: <i>originality, votes/likes and overall popularity</i>.</li>
                 <li class="display-block">6. The amount of winners and gift card amounts can vary from game to game.</li>
 
                 <div style="margin-bottom:20px;margin-top:10px;"  onclick="document.getElementById('hashtag').style.display = 'none';"><img src="/images/close.png" height="25" width="25"/>
@@ -62,7 +61,7 @@ $ID = $_SESSION['ID'];
             <h4><div style="color:blue;"  onclick="document.getElementById('piedpiper').style.display = 'block';">Pied Piper</div></h4>
 
             <div id="piedpiper" style="display:none;">
-                <li class="display-block">1. Get 10 followers and receive a $50 Gift Card.</li>
+                <li class="display-block">1. Get your first 10 followers and receive a $50 Gift Card.</li>
 
                 <div style="margin-bottom:20px;margin-top:10px;"  onclick="document.getElementById('piedpiper').style.display = 'none';"><img src="/images/close.png" height="25" width="25"/>
                     <!-- adding onclick to hide this element when you click it -->
@@ -72,7 +71,7 @@ $ID = $_SESSION['ID'];
             </div>
 
 
-<br/>
+<hr class="hr-line"/>
 
             <h4>
                 <span>Direct any questions or concerns to:</span><br/>
