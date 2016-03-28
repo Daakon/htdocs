@@ -641,37 +641,10 @@ $bgPhoto = $row['ProfilePhoto'];
                 <input type="submit" class="post-button" name="photo" id="photo" value="Upload Photo" onclick="showPhotoUploading()" />
             </form>
 
-            <br/>
-            <hr/>
 
+            <hr class="hr-line"/>
 
-            <div align ="center">
-
-                    <video src = " <?php echo $videoPath . $profileVideo ?>" poster="/poster/<?php echo $posterName ?>"  preload="auto" autoplay="autoplay" muted controls />
-
-            </div>
-
-
-            <form method="post" enctype="multipart/form-data" action="" onsubmit="showUploading()">
-                <img src="/images/image-icon.png" class="img-icon" alt="Photos/Video"/>
-                <strong>Upload A Profile Video</strong>
-                <input type="file" width="10px;" name="flPostVideo" id="flPostVideo"/>
-                <input type="hidden" name="MAX_FILE_SIZE" value="500000000" />
-                <br/>
-                <div id="VideoProgress" style="display:none;">
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-striped progress-bar-danger active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" class="progress-bar">
-                            <span class="sr-only">Loading</span>
-                        </div>
-                    </div>
-                </div>
-                <br/>
-                <input type="submit" class="post-button" name="video" id="video" value="Upload Video" onclick="showVideoUploading()" />
-            </form>
-            <!--Profile ---------------------------------------------------------------------------------------->
-
-
-            <br/>
+ <!--Profile ---------------------------------------------------------------------------------------->
             <p id="notice"></p>
             <br/>
 

@@ -13,38 +13,6 @@ get_head_files();
 
 <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
 
-<script>
-    // redirect first time visitors directly to learn more page
-    function redirect(){
-        var thecookie = readCookie('doRedirect');
-        if(!thecookie){
-            window.location = '/learn_more.php';
-        }}
-
-    function createCookie(name,value,days)
-    {
-        if (days){
-            var date = new Date();date.setTime(date.getTime()+(days*24*60*60*1000));
-            var expires = "; expires="+date.toGMTString();
-        }
-        else
-            var expires = "";document.cookie = name+"="+value+expires+"; path=/";}
-
-    function readCookie(name){
-        var nameEQ = name + "=";
-        var ca = document.cookie.split(';');
-        for(var i=0;i < ca.length;i++){var c = ca[i];
-            while (c.charAt(0)==' ') c = c.substring(1,c.length);
-            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
-        }
-        return null;
-    }
-    window.onload = function(){
-        redirect();
-        createCookie('doRedirect','true','999');
-    }
-</script>
-
 
 <script>
     function capFname() {
@@ -172,7 +140,7 @@ a {
 
                     </ul>
 
-                <img src="/images/Playdoe-red.png" height="200" width="auto" />
+                <img src="/images/Playdoe-Logo.png" height="200" width="auto" />
 
             </div>
                 </div>

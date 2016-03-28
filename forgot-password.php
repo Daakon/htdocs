@@ -36,7 +36,7 @@ get_header();
         } // if email was found
 
         else {
-            if (build_and_send_email(1, $toId, 5, '', '', '')) {
+            if (build_and_send_email(22, $toId, 5, '', '', '')) {
                 echo "<script>alert('Your password reset has been sent to your email on file');location='./'</script>";
             }
 

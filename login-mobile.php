@@ -10,7 +10,7 @@ get_header();
 
     <div class="col-xs-12">
 
-        <img src="/images/Rapportbook-Logo.png" height="50" width="50" />
+        <img src="/images/Playdoe-Logo.png" height="50" width="50" />
         <span class="lead bold">Log in</span>
         <br/><br/>
 
