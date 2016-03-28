@@ -315,7 +315,7 @@ function build_and_send_email($senderId, $toId, $notification, $postID, $pass, $
         $message .= "<tr><td><hr /><br/><img src = '$profilePhoto' height='100' width='100' /></td></tr>";
         $message .= "<tr><td>$subject<br/></td></tr>";
         $message .= "<tr><td><hr/>If you received this email in error contact us at <mailto:info@rapportbook.com>info@rapportbook.com</a>";
-        $message .= "<br/>Rapportbook LLC, 911 Washington Ave, Suite 501, St.Louis,MO 63101 USA </td></tr>";
+        $message .= "<br/>Playdoe LLC, 911 Washington Ave, Suite 501, St.Louis,MO 63101 USA </td></tr>";
         $message .= "</table></body></html>";
         $header = "From: Rapportbook <admin@rapportbook.com> \r\n";
         $header .= "Content-type: text/html";

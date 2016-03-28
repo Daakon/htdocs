@@ -12,7 +12,7 @@ function get_head_files()
 
 
         <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
-        <meta name="description" content="Play Hashtag and Shop on Us!">
+        <meta name="description" content="Play Games and Shop on Us!">
         <meta name="keywords" content="<?php echo $keywords ?>">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
@@ -105,7 +105,7 @@ function get_head_files()
     <form method="post" action="login.php" class="form-inline" >
         <header class="navbar navbar-default navbar-static-top header">
             <a href="/learn_more" title="Login or Sign Up">
-            <img src="/images/Rapportbook-Logo-White-Text-Large.png" alt="Rapportbook" height="40" width="auto"
+            <img src="/images/Playdoe-white.png" alt="Rapportbook" height="40" width="auto"
                  class="logo-image"/>
             </a>
 
@@ -134,10 +134,13 @@ function get_header()
 
 
     <header class="navbar navbar-default navbar-static-top header">
-        <a href="/homepage.php">
-            <img src="/images/Rapportbook-Logo-White-Text-Large.png" alt="Rapportbook" height="40" width="315"
+        <div align="center">
+        <a href="/homepage.php" style="text-align: center">
+
+            <img src="/images/Playdoe-white.png" alt="Rapportbook" height="40" width="315"
                  class="logo-image"/>
         </a>
+        </div>
         <?php $ID = $_SESSION['ID']; ?>
 
 

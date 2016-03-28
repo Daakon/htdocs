@@ -795,7 +795,7 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
 
 }
 elseif (hasExistingGamePost($category, $ID)) {
-    echo "<div align = 'center' style='color:red;font-weight:bold;'>You have an existing post for this game. <br/>Delete your post to post again.</div>";
+    echo "<div align = 'center' style='color:red;font-weight:bold;'>You have an existing post for this game. <br/>Delete your post to post again.";
     ?>
         <h5 style="color:black">Check out our social media to find other ways to win stuff:</h5>
         <a href="http://facebook.com/rapportbook" target="_blank"><img src="/images/facebook-logo-red.png" height="25" width="25"></a>

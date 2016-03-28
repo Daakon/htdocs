@@ -124,18 +124,13 @@ get_head_files();
 
 <style>
 a {
-    color:white;
+    color:black;
 }
 </style>
 
 <?php require 'checkLogin.php'; ?>
 
-    <body class="index"
-    style="background: url('/images/bg.jpg')no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;>
+    <body class="index">
 
 <div class="container-fluid" >
 
@@ -177,7 +172,7 @@ a {
 
                     </ul>
 
-                <img src="/images/Rapportbook-Logo.png" height="200" width="200" />
+                <img src="/images/Playdoe-red.png" height="200" width="auto" />
 
             </div>
                 </div>

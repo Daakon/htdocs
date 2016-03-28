@@ -188,19 +188,19 @@ if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
     }
     else { $city = getMemberCity($ID); }
 
-    $address = $_POST['Address'];
+  /*  $address = $_POST['Address'];
     $showAddress = $_POST['ShowAddress'];
     $state = $_POST['State'];
     $zip = $_POST['Zip'];
     $showZip = $_POST['ShowZip'];
     $phone = $_POST['Phone'];
-    $showPhone = $_POST['ShowPhone'];
+    $showPhone = $_POST['ShowPhone'];*/
     $email = $_POST['Email'];
-    $about = $_POST['About'];
+    /*$about = $_POST['About'];
     $about = mysql_real_escape_string($about);
     $about = makeLinks($about);
     $about = closetags($about);
-    $rss = mysql_real_escape_string($_POST['RSS']);
+    $rss = mysql_real_escape_string($_POST['RSS']);*/
     $dob = $_POST['DOB'];
     $emailStatus = $_POST['EmailStatus'];
     $smsStatus = $_POST['SmsStatus'];
@@ -253,7 +253,7 @@ if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
           WHERE ID = $ID ";
     $result = mysql_query($sql) or die(mysql_error());
     // update Profile table
-    $sql = "Update Profile
+    /*$sql = "Update Profile
             Set Address = '$address',
                 ShowAddress = $showAddress,
                 City = '$city',
@@ -265,7 +265,7 @@ if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
                 About = '$about',
                 RSS = '$rss'
              WHERE Member_ID = $ID ";
-    mysql_query($sql) or die(logError(mysql_error(), $url, "Updating Profile"));
+    mysql_query($sql) or die(logError(mysql_error(), $url, "Updating Profile"));*/
     echo "<script>alert('Update Successful');location='/$username'</script>";
 }
 ?>

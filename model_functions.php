@@ -460,7 +460,7 @@ function text_notification($receiverID, $senderID, $groupID)
             }
                 $domain = shortenUrl($domain);
 
-            $text = "You have a new message from $senderName on Rapportbook: $domain";
+            $text = "You have a new message from $senderName on Playdoe: $domain";
 
             // Setup and send a message
             $message = array('to' => $number, 'message' => $text);
@@ -551,7 +551,7 @@ function isGameLocked($hashTag) {
     $rows = mysql_fetch_assoc($result);
     $postCount = $rows['PostCount'];
 
-    if ($postCount >= 1) {
+    if ($postCount >= 100) {
         return true;
     }
     else {
