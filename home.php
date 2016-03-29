@@ -584,20 +584,10 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
 </script>
 <script type = "text/javascript">
     function updateFeed() {
-        var selection = document.getElementById('genre');
-        var genre = selection.options[selection.selectedIndex].value;
-        var stateSelect = document.getElementById('searchState');
-        var state = stateSelect.options[stateSelect.selectedIndex].value;
-        // check to see if the city has been reselected
-        if (document.getElementById('ddCity') == null) {
-            var city = "<?php echo $_GET['city'] ?>";
-        }
-        else {
-            var citySelection = document.getElementById('ddCity');
-            var city = citySelection.options[citySelection.selectedIndex].value;
-        }
-        document.getElementById('ddCurrentCity').style.display = 'block';
-        window.location = "/home?genre="+encodeURIComponent(genre)+"&state="+encodeURIComponent(state)+"&city="+city;
+        var selection = document.getElementById('hashtag');
+        var hashtag = selection.options[selection.selectedIndex].value;
+
+        window.location = "/home?genre="+encodeURIComponent(hashtag);
     }
 </script>
 
@@ -767,7 +757,14 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
             <div style="margin-bottom:10px;margin-top:-20px;padding-bottom:10px;border-bottom:2px solid #E30022;" align="center">
 
                 <!--***********************************-->
-                <?php $category = "RepSB16"; ?>
+                <?php
+                if (isset($_GET['CurrentHashTag']) && !empty($_GET['CurrentHashTag'])) {
+                    $hashtag = $_GET['CurrentHashTag'];
+                } else {
+                    $hashtag = "RepSB16";
+                    $_SESSION['Hashtag'] = $hashtag;
+                }
+                ?>
                 <img src="/images/themes/spring-break.jpg" height="50" width="50" alt="St Pats" style="margin-top:20px;" />
                 <b>Post your favorite Spring Break moment</b>
                 <br/>
@@ -776,7 +773,7 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
                 <!--***********************************-->
             </div>
 
-<?php if (isGameLocked($category)) {
+<?php if (isGameLocked($hashtag)) {
     echo "<div align = 'center' style='color:red;font-weight:bold;'>Sorry the game is Locked with 100 posts. Please vote for a winner";
     ?>
     <h5 style="color:black">Check out our social media to find other ways to win stuff:</h5>
@@ -794,7 +791,7 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
     <?php
 
 }
-elseif (hasExistingGamePost($category, $ID)) {
+elseif (hasExistingGamePost($hashtag, $ID)) {
     echo "<div align = 'center' style='color:red;font-weight:bold;'>You have an existing post for this game. <br/>Delete your post to post again.";
     ?>
         <h5 style="color:black">Check out our social media to find other ways to win stuff:</h5>
@@ -832,9 +829,9 @@ elseif (hasExistingGamePost($category, $ID)) {
 
 
                 <br/>
-                <select class="form-control " id="category" name="category" >
+                <select class="form-control " id="hashtag" name="hashtag" onchange="updateFeed()" >
                     <option value="">Select Hash Tag </option>
-                    <?php echo category() ?>
+                    <?php category() ?>
                 </select>
                 <br/>
 

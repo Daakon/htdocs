@@ -38,7 +38,7 @@ And (Members.ID = Posts.Member_ID)
 And (Members.ID = Profile.Member_ID)
 And (Posts.IsDeleted = 0)
 And (Members.ID Not in ( '" . implode($blockIDs, "', '") . "' ))
-AND Posts.Category = '$category'
+AND Posts.Category = '$hashtag'
 $lastPostCondition
 Group By PostID
 Order By PostID DESC LIMIT $limit ";

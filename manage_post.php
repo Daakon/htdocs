@@ -5,6 +5,7 @@ get_header();
 require 'memory_settings.php';
 $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 $ID = $_SESSION['ID'];
+$hashtag = $_SESSION['Hashtag'];
 preg_match("/[^\/]+$/",$url ,$match);
 $username = $match[0];
 ?>
@@ -420,6 +421,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
     And (Members.IsSuspended = 0)
     And (Members.ID = Posts.Member_ID)
     And (Members.ID = Profile.Member_ID)
+    And (Posts.Category = '$hashtag')
     And (Posts.IsDeleted = 0)
     Group By PostID
     Order By PostID DESC ";
@@ -734,11 +736,11 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                 <div class="row row-padding">
                     <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 roll-call" align="left">
                         <?php if ($ID == get_id_from_username($username)) { ?>
-                            <div>You do not have anything posted.</div>
+                            <div>You do not have anything posted for the <?php echo $hashtag ?> game.</div>
                         <?php } else {
                             $firstName = get_user_firstName(get_id_from_username($username));
                             ?>
-                            <div><?php echo $firstName ?> does not have anything posted.</div>
+                            <div><?php echo $firstName ?> does not have anything posted for the <?php echo $hashtag ?> game.</div>
                         <?php } ?>
                     </div>
                 </div>
