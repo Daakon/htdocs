@@ -311,7 +311,7 @@ function build_and_send_email($senderId, $toId, $notification, $postID, $pass, $
         $message = "<html><body>";
         $message .= "<table style = 'border:1px solid lightgray;background: #f6f7f8;'>";
         $message .= "<tr style = 'color:white;'>";
-        $message .= "<td><img src = 'http://rapportbook.com/images/Rapportbook-Logo.png' height='25' width='25' /><br/></td>";
+        $message .= "<td><img src = 'http://rapportbook.com/images/Playdoe-Logo.png' height='25' width='25' /><br/></td>";
         $message .= "<tr><td><hr /><br/><img src = '$profilePhoto' height='100' width='100' /></td></tr>";
         $message .= "<tr><td>$subject<br/></td></tr>";
         $message .= "<tr><td><hr/>If you received this email in error contact us at <mailto:info@rapportbook.com>info@rapportbook.com</a>";
