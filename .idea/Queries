@@ -1,0 +1,3 @@
+--Follower of the month query
+SELECT Followed_ID, count(Followed_ID) as FollowerCount FROM (Select Followed_ID FROM Follows
+                                where FollowDate Between '2016-03-20' and '2016-03-30') As Follows  order by FollowerCount desc

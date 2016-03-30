@@ -13,8 +13,8 @@ $ID = $_POST['ID'];
 
 if (!empty($_POST['ID'])) {
 
-$sql = "INSERT INTO MediaApprovals (Media_ID,  Member_ID) Values
-                                  ('$mediaID', '$ID')";
+$sql = "INSERT INTO MediaApprovals (Media_ID,  Member_ID, MediaApproveDate) Values
+                                  ('$mediaID', '$ID',     CURDATE())";
 mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting media approval"));
 //An approval just popped so we should set the notifications
 //A comment was just made, we need to send out some notifications.

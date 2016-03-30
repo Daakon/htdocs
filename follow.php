@@ -6,7 +6,7 @@ require 'imports.php';
 $memberID = $_POST['memberID'];
 $ID = $_POST['ID'];
 
-$sql = "INSERT INTO Follows (Followed_ID, Follower_ID, New) Values ($memberID, $ID, 1)";
+$sql = "INSERT INTO Follows (Followed_ID, Follower_ID, New, FollowDate) Values ($memberID, $ID, 1, CURDATE())";
 mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting new follower"));
 
 // only send email if account & email active

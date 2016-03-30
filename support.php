@@ -61,7 +61,7 @@ $ID = $_SESSION['ID'];
             <h4><div style="color:blue;"  onclick="document.getElementById('piedpiper').style.display = 'block';">Pied Piper</div></h4>
 
             <div id="piedpiper" style="display:none;">
-                <li class="display-block">1. Get your first 10 followers and receive a $50 Gift Card.</li>
+                <li class="display-block">1. The member with the most new followers each week gets a $10 gift card.</li>
 
                 <div style="margin-bottom:20px;margin-top:10px;"  onclick="document.getElementById('piedpiper').style.display = 'none';"><img src="/images/close.png" height="25" width="25"/>
                     <!-- adding onclick to hide this element when you click it -->
