@@ -73,7 +73,7 @@ function build_and_send_email($senderId, $toId, $notification, $postID, $pass, $
         $name = get_users_name_by_id($toId);
         $nameArray = explode(' ', $name);
         $name = $nameArray[0];
-        $subject = "Congratulations $name, you now have a new profile on Rapportbook.<br/>";
+        $subject = "Congratulations $name, you now have a new profile on Playdoe. Enjoy playing games and winning cool prizes.<br/>";
         $subject .= "Your temporary password is <b>$pass</b><br/>";
         $subject .= '<a href = "http://www.rapportbook.com">Login</a> to your account now!';
     }
@@ -314,13 +314,13 @@ function build_and_send_email($senderId, $toId, $notification, $postID, $pass, $
         $message .= "<td><img src = 'http://rapportbook.com/images/Playdoe-Logo.png' height='25' width='25' /><br/></td>";
         $message .= "<tr><td><hr /><br/><img src = '$profilePhoto' height='100' width='100' /></td></tr>";
         $message .= "<tr><td>$subject<br/></td></tr>";
-        $message .= "<tr><td><hr/>If you received this email in error contact us at <mailto:info@rapportbook.com>info@rapportbook.com</a>";
+        $message .= "<tr><td><hr/>If you received this email in error contact us at <mailto:info@playdoe.com>info@playdoe.com</a>";
         $message .= "<br/>Playdoe LLC, 911 Washington Ave, Suite 501, St.Louis,MO 63101 USA </td></tr>";
         $message .= "</table></body></html>";
-        $header = "From: Rapportbook <admin@rapportbook.com> \r\n";
+        $header = "From: Playdoe <admin@playdoe.com> \r\n";
         $header .= "Content-type: text/html";
-        ini_set('sendmail_from', 'info@rapportbook.com');
-        if (mail($toEmail, 'Rapportbook: Notification Alert', $message, $header)) {
+        ini_set('sendmail_from', 'info@playdoe.com');
+        if (mail($toEmail, 'Playdoe', $message, $header)) {
             // mail sent
             return true;
         } else {

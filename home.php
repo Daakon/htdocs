@@ -633,7 +633,7 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
 
 <style>
     .roll-call {
-        min-height: 400px;
+        min-height: 100px;
     }
 </style>
 
@@ -754,7 +754,7 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
 
             </div>
 
-            <div style="margin-bottom:10px;margin-top:-20px;padding-bottom:10px;border-bottom:2px solid #E30022;" align="center">
+            <div style="margin-bottom:10px;margin-top:-20px;padding-bottom:10px;" align="center">
 
                 <!--***********************************-->
                 <?php
@@ -765,10 +765,6 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
                     $_SESSION['Hashtag'] = $hashtag;
                 }
                 ?>
-                <img src="/images/themes/spring-break.jpg" height="50" width="50" alt="St Pats" style="margin-top:20px;" />
-                <b>Post your favorite Spring Break moment</b>
-                <br/>
-                Winners receive a <b>$50 Gift Card</b>
 
                 <!--***********************************-->
             </div>
@@ -812,12 +808,12 @@ elseif (hasExistingGamePost($hashtag, $ID)) {
     ?>
             <form method="post" enctype="multipart/form-data" action="" onsubmit="return showUploading()">
                 <img src="/images/image-icon.png" height="30px" width="30px" alt="Photos/Video"/>
-                <strong>Add Photos/Video</strong>
+                <strong>Add Photos/Videos</strong>
                 <input type="file" width="10px;" name="flPostMedia[]" id="flPostMedia" multiple/>
 
                 <br/>
                 <textarea name="post" id="post" class="form-control textArea"
-                          placeholder="Share Your Best Spring Break Moment" ></textarea>
+                          placeholder="So whatcha got?" ></textarea>
                 <br/>
                 <div id="progress" style="display:none;">
                     <div class="progress">
@@ -835,20 +831,14 @@ elseif (hasExistingGamePost($hashtag, $ID)) {
                 </select>
                 <br/>
 
-                <?php if (isAdmin($ID)) { ?>
-                Is This Post Sponsored
-                <select id="IsSponsored" name="IsSponsored">
-                    <option value="0">No</option>
-                    <option value="1">Yes</option>
-                </select>
-                    <br/><br/>
-                <?php } ?>
 
                 <input type="submit" class="post-button" name="submit" id="submit" value="Post"/>
             </form>
 
             <?php } ?>
 
+
+            <a href="/hashtag_codes" style="margin-top:20px;" >View Hashtag Codes & Prizes</a>
         </div>
 
         <br/>
