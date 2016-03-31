@@ -61,7 +61,7 @@ $ID = $_SESSION['ID'];
             <h4><div style="color:blue;"  onclick="document.getElementById('piedpiper').style.display = 'block';">Pied Piper</div></h4>
 
             <div id="piedpiper" style="display:none;">
-                <li class="display-block">1. The member with the most new followers each week gets a $10 gift card.</li>
+                <li class="display-block">The member with the most new followers each week gets a $10 gift card.</li>
 
                 <div style="margin-bottom:20px;margin-top:10px;"  onclick="document.getElementById('piedpiper').style.display = 'none';"><img src="/images/close.png" height="25" width="25"/>
                     <!-- adding onclick to hide this element when you click it -->
@@ -70,6 +70,17 @@ $ID = $_SESSION['ID'];
 
             </div>
 
+            <h4><div style="color:blue;"  onclick="document.getElementById('paparazzi').style.display = 'block';">Paparazzi</div></h4>
+
+            <div id="paparazzi" style="display:none;">
+                <li class="display-block">The member with the most photo or video likes each week gets a $10 gift card.</li>
+
+                <div style="margin-bottom:20px;margin-top:10px;"  onclick="document.getElementById('paparazzi').style.display = 'none';"><img src="/images/close.png" height="25" width="25"/>
+                    <!-- adding onclick to hide this element when you click it -->
+                    Close
+                </div>
+
+            </div>
 
 <hr class="hr-line"/>
 

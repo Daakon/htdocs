@@ -6,12 +6,12 @@ session_start();
 
 $limit = 10;
 $lastPostID = $_GET['lastPostID'];
-$genre = $_GET['genre'];
+$hashtag = $_GET['hashtag'];
 
 
-if (isset($genre) && !empty($genre)) {
-    if ($genre == 'Show All') {} else {
-        $genreCondition = "And Posts.Category = '$genre' ";
+if (isset($hashtag) && !empty($hashtag)) {
+    if ($hashtag == 'Show All') {} else {
+        $genreCondition = "And Posts.Category = '$hashtag' ";
     }
 }
 

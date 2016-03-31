@@ -13,7 +13,7 @@ require 'memory_settings.php';
 $ID = $_SESSION['ID'];
 // handle connection feed post
 $post = mysql_real_escape_string($_POST['post']);
-$category = $_POST['category'];
+$category = $_POST['hashtag'];
 $city = $_SESSION['City'];
 $state = $_SESSION['State'];
 $IsSponsored = $_POST['IsSponsored'];
@@ -24,7 +24,7 @@ if (isset($_POST['submit'])) {
     if ($_SESSION['Post'] == $_POST['post']) {
         echo "<script>alert('Your post appears to be empty');</script>";
     } else if ($category == "") {
-        echo "<script>alert('Your post needs a business type');</script>";
+        echo "<script>alert('Your post needs a hash tag');</script>";
     } else {
         if (strlen($post) > 0) {
             $post = makeLinks($post);
@@ -236,7 +236,7 @@ if (isset($_POST['submit'])) {
         alert_followers($lastPostID);
     }
 
-    echo "<script>location='/home?genre=".urlencode($category)."'</script>";
+    echo "<script>location='/home?hashtag=".urlencode($category)."'</script>";
 }
 ?>
 <?php
@@ -454,7 +454,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 //BELOW IS END OF POST COMMENT HANDLING CODE ==========================================================================//
         }
     }
-    echo "<script>location='/home?genre=".urlencode($category)."&scrollx=$scrollx&scrolly=$scrolly'</script>";
+    echo "<script>location='/home?hashtag=".urlencode($category)."&scrollx=$scrollx&scrolly=$scrolly'</script>";
 }
 if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
     $commentID = $_POST['commentID'];
@@ -587,18 +587,11 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
         var selection = document.getElementById('hashtag');
         var hashtag = selection.options[selection.selectedIndex].value;
 
-        window.location = "/home?genre="+encodeURIComponent(hashtag);
+        window.location = "/home?hashtag="+encodeURIComponent(hashtag);
     }
 </script>
 
-<script type = "text/javascript">
-    function updateCurrentFeed() {
-        var stateSelect = document.getElementById('searchState');
-        var state = stateSelect.options[stateSelect.selectedIndex].value;
 
-        window.location = "/home?state="+encodeURIComponent(state);
-    }
-</script>
 
 <script>
     function getCity(sel) {
@@ -635,6 +628,7 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
     .roll-call {
         min-height: 100px;
     }
+
 </style>
 
 
@@ -644,17 +638,20 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
         if ($(document).height() <= $(window).scrollTop() + $(window).height()) {
            //alert("End Of The Page");
 
-
-            //document.getElementById('gettingMore').style.display = 'block';
-
+            // instantiate spinner as hidden
+            document.getElementById('gettingMore').style.display = 'none';
             // get the lastPostID input value create by the connection feed code
             var lastPostID = document.getElementById('lastPostID').value;
-            var genreSelection = document.getElementById('genre');
-            var genre = genreSelection.options[genreSelection.selectedIndex].value;
+            var hashtagSelection = document.getElementById('hashtag');
+            var hashtag = hashtagSelection.options[hashtagSelection.selectedIndex].value;
             //$("#loadMoreConnections").load("/loadMoreConnections.php?lastPostID="+lastPostID);
-            $('#loadMoreConnections').append($("<div>").load("/loadMoreConnections.php?lastPostID="+lastPostID+"&genre="+encodeURIComponent(genre)));
+            $('#loadMoreConnections').append($("<div>").load("/loadMoreConnections.php?lastPostID="+lastPostID+"&hashtag="+encodeURIComponent(hashtag)));
             // remove the last post ID input element so we only get the last one created with php
             $("input[id=lastPostID]").remove();
+
+            // if we are still getting posts then display spinner
+            document.getElementById('gettingMore').style.display = 'none';
+
         }
         else {
 
@@ -758,8 +755,8 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
 
                 <!--***********************************-->
                 <?php
-                if (isset($_GET['CurrentHashTag']) && !empty($_GET['CurrentHashTag'])) {
-                    $hashtag = $_GET['CurrentHashTag'];
+                if (isset($_GET['genre']) && !empty($_GET['hashtag'])) {
+                    $hashtag = $_GET['hashtag'];
                 } else {
                     $hashtag = "RepSB16";
                     $_SESSION['Hashtag'] = $hashtag;
@@ -768,6 +765,7 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
 
                 <!--***********************************-->
             </div>
+
 
 <?php if (isGameLocked($hashtag)) {
     echo "<div align = 'center' style='color:red;font-weight:bold;'>Sorry the game is Locked with 100 posts. Please vote for a winner";
@@ -825,8 +823,9 @@ elseif (hasExistingGamePost($hashtag, $ID)) {
 
 
                 <br/>
-                <select class="form-control " id="hashtag" name="hashtag" onchange="updateFeed()" >
+                <select class="form-control " id="hashtag" name="hashtag" >
                     <option value="">Select Hash Tag </option>
+                    <option value="<?php echo $hashtag ?>" selected="selected"><?php echo $hashtag ?></option>
                     <?php category() ?>
                 </select>
                 <br/>
@@ -837,11 +836,22 @@ elseif (hasExistingGamePost($hashtag, $ID)) {
 
             <?php } ?>
 
+            <hr class="hr-line">
 
             <a href="/hashtag_codes" style="margin-top:20px;" >View Hashtag Codes & Prizes</a>
+            <br/><br/>
+
+            <select class="form-control" id="hashtag" name="hashtag" onchange="updateFeed()" >
+                <option value="">Go to a different game </option>
+                <?php category() ?>
+            </select>
+            <br/>
         </div>
 
         <br/>
+
+
+
 
         <?php
             // pre-load Connection Feed
@@ -905,7 +915,9 @@ elseif (hasExistingGamePost($hashtag, $ID)) {
 
 </div>
 
+<?php if ($noPosts == false) { ?>
 <div id="gettingMore" align="center" style="display:block;margin-top:-20px;" ><img src="/images/spinner.gif" height="50" width="50" /></div>
+<?php } ?>
 
 </body>
 

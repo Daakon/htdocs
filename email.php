@@ -49,7 +49,7 @@ function build_and_send_email($senderId, $toId, $notification, $postID, $pass, $
         if ($senderId == $toId) {
             $name = 'You';
         }
-        $text = "$name approved a <a href='$link'>post</a> you're tagged in.";
+        $text = "$name liked a <a href='$link'>post</a> you're tagged in.";
         $subject = "
                 <div>
                 $text
@@ -168,7 +168,7 @@ function build_and_send_email($senderId, $toId, $notification, $postID, $pass, $
         if ($senderId == $toId) {
             $name = 'You';
         }
-        $text = "$name approved a <a href='$link'>photo</a> you're tagged in.";
+        $text = "$name liked a <a href='$link'>photo</a> you're tagged in.";
         $subject = "
                 <div>
                 $text
@@ -320,7 +320,8 @@ function build_and_send_email($senderId, $toId, $notification, $postID, $pass, $
         $header = "From: Playdoe <admin@playdoe.com> \r\n";
         $header .= "Content-type: text/html";
         ini_set('sendmail_from', 'info@playdoe.com');
-        if (mail($toEmail, 'Playdoe', $message, $header)) {
+        // set subject
+        if (mail($toEmail, 'Notification', $message, $header)) {
             // mail sent
             return true;
         } else {

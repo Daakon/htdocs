@@ -151,7 +151,7 @@ function get_header()
 
 
 
-            <div class=" visible-sm visible-md visible-lg pull-right">
+            <div class=" visible-sm visible-md visible-lg pull-right" style="margin-top:-30px;">
                 <ul class="list-inline">
 <!--                    <li><a href="/advertising.php" style="color:white;">Advertise</a></li>-->
                     <li><a href="/support" style="color:white;">Support</a></li>
