@@ -428,31 +428,10 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
                 }
             }
         }
-        echo "<script>alert('Message Sent'); </script>";
+        //echo "<script>alert('Message Sent'); </script>";
     }
-//----------------------
-// if no media
-//----------------------
-    else {
-        /*foreach ($_POST['receiverID'] as $key => $receiverID) {
-            // create thread for sender
-            $sql = "INSERT INTO Messages (ThreadOwner_ID, Sender_ID,  Receiver_ID,    Subject,    Message,      InitialMessage,    MessageDate ,          GroupID ,      GroupName ) Values
-                                          ($ID,             $ID,       $receiverID, '$subject',  '$message',    '$initialMessage', CURRENT_TIMESTAMP,    '$groupID',    '$groupName' ) ";
-            mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting message withoutmedia for sender"));
-            // create thread for receiver
-            $sql = "INSERT INTO Messages (ThreadOwner_ID, Sender_ID, Receiver_ID,  Subject,    Message,   InitialMessage,    New,       MessageDate ,       GroupID ,      GroupName   ) VALUES
-                                         ($receiverID,    $ID,        $receiverID, '$subject', '$message',  '$initialMessage', '1',    CURRENT_TIMESTAMP,    '$groupID',   '$groupName' ) ";
-            mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting message without media for receiver"));
-            echo "<script>alert('Message Sent'); </script>";
-            $receiverID = $_POST['receiverID'];
-            // sent notification
-            if ($receiverID != $ID) {
-            if (strlen(check_phone($receiverID)) > 0) {
-                text_notification($receiverID, $ID);
-            }
-            }
-        }*/
-    }
+
+
 // notify everyone
     foreach ($_POST['receiverID'] as $key => $receiverID) {
         if ($groupChatExist) {

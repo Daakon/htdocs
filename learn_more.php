@@ -86,7 +86,7 @@ if (!empty($_SESSION['ID'])) {
                     <table style="margin-left:10px;margin-top:20px;margin-bottom:10px;">
                         <tr>
                             <td>
-                                <span style="font-size:20px;">Play Games & Shop on Us!</span>
+                                <span class="lead">Play Games & Make Doe.</span>
                             </td>
                         </tr>
                         <tr>
@@ -101,7 +101,7 @@ if (!empty($_SESSION['ID'])) {
                     <table style="margin-left:10px;margin-top:20px;">
                         <tr>
                             <td>
-                                <span class="lead" style="font-weight:bold;">Play Games & Shop on Us!</span>
+                                <span class="lead">Play Games & Make Doe.</span>
                             </td>
                         </tr>
                         <tr>
@@ -117,9 +117,8 @@ if (!empty($_SESSION['ID'])) {
             </div>
 
 
-            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="margin-top:0px;">
-                <img style="float:left;" src="/images/trophy.jpg" width="50%" />
-                <img style="float:right;" src="/images/giftcard.jpg" width="50%" />
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="padding-left:20%">
+                <img style="float:left;" src="/images/Playdoe-Logo.png" width="80%"  />
             </div>
 
         </div>
@@ -180,13 +179,13 @@ if (!empty($_SESSION['ID'])) {
 
             <div class="col-lg-5 col-lg-offset-1 col-md-5 col-md-offset-1 col-sm-12 col-xs-12">
                 <h5>Follow us to stay up on new games and giveaways:</h5>
-                <a href="http://facebook.com/rapportbook" target="_blank"><img src="/images/facebook-logo-red.png" height="50" width="50"></a>
-                <a href="http://twitter.com/rapportbook" target="_blank"><img src="/images/twitter-logo-red.png" height="=50" width="50"></a>
-                <a href="http://blog.rapportbook.com" target="_blank"><img src="/images/tumblr-logo-red.png" height="40" width="40"/> </a>
-                <a href="http://instagram.com/officialrapportbook" target="_blank"><img src="/images/instagram-logo-red.png" height="50" width="50"/></a>
-                <a href="http://pintrest.com/rapportbook" target="_blank"><img src="/images/pintrest-logo-red.png" height="50" width="50" /> </a>
-                <a href="http://linkedin.com/company/rapportbook" target="_blank"><img src="/images/linkedin-logo-red.png" height="40" width="40" /></a>
-                <a href="https://plus.google.com/+Rapportbook/" target="_blank"><img src="/images/google-youtube-logo.png" height="40" width="50" style="padding-left:8px;" /></a>
+                <a href="http://facebook.com/officialplaydoe" target="_blank"><img src="/images/facebook-logo-red.png" height="50" width="50"></a>
+                <a href="http://twitter.com/officialplaydoe" target="_blank"><img src="/images/twitter-logo-red.png" height="=50" width="50"></a>
+                <a href="http://officialplaydoe.tumblr.com/" target="_blank"><img src="/images/tumblr-logo-red.png" height="40" width="40"/> </a>
+                <a href="http://instagram.com/officialplaydoe" target="_blank"><img src="/images/instagram-logo-red.png" height="50" width="50"/></a>
+                <a href="https://www.pinterest.com/officialplaydoe/" target="_blank"><img src="/images/pintrest-logo-red.png" height="50" width="50" /> </a>
+                <a href="http://linkedin.com/company/officialplaydoe" target="_blank"><img src="/images/linkedin-logo-red.png" height="40" width="40" /></a>
+                <a href="https://plus.google.com/u/0/b/100826332083461810042/100826332083461810042/posts" target="_blank"><img src="/images/google-youtube-logo.png" height="40" width="50" style="padding-left:8px;" /></a>
                 <br/>
 
                 <div style="margin-top:60px;">

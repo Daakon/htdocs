@@ -48,11 +48,14 @@ $rollCallResult = mysql_query($sqlRollCall) or die(logError(mysql_error(), $url,
 
 // if no results
 if (mysql_num_rows($rollCallResult) == 0) {
-
     ?>
     <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 roll-call"
          align="left">
         <?php //echo $greetText ?>
+
+        <img src="/images/Playdoe-Logo.png" height="100" width="100" />
+        <br/>
+        Right now, the money is all yours!
     </div>
 <?php }
 if (mysql_num_rows($rollCallResult) > 0) {
