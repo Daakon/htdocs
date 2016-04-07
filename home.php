@@ -771,16 +771,16 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
     echo "<div align = 'center' style='color:red;font-weight:bold;'>Sorry the game is Locked with 100 posts. Please vote for a winner";
     ?>
     <h5 style="color:black">Check out our social media to find other ways to win stuff:</h5>
-                <a href="http://facebook.com/rapportbook" target="_blank"><img src="/images/facebook-logo-red.png" height="25" width="25"></a>
-                <a href="http://twitter.com/rapportbook" target="_blank"><img src="/images/twitter-logo-red.png" height="=25" width="25"></a>
-                <a href="http://blog.rapportbook.com" target="_blank"><img src="/images/tumblr-logo-red.png" height="20" width="20"/> </a>
-                <a href="http://instagram.com/officialrapportbook" target="_blank"><img src="/images/instagram-logo-red.png" height="25" width="25"/></a>
-                <a href="http://pintrest.com/rapportbook" target="_blank"><img src="/images/pintrest-logo-red.png" height="25" width="25" /> </a>
-                <a href="http://linkedin.com/company/rapportbook" target="_blank"><img src="/images/linkedin-logo-red.png" height="20" width="20" /></a>
-                <a href="https://plus.google.com/+Rapportbook/" target="_blank"><img src="/images/google-youtube-logo.png" height="20" width="25" style="padding-left:8px;" /></a>
+                <a href="http://facebook.com/playdoe" target="_blank"><img src="/images/facebook-logo-red.png" height="25" width="25"></a>
+                <a href="http://twitter.com/playdoe" target="_blank"><img src="/images/twitter-logo-red.png" height="=25" width="25"></a>
+                <a href="http://blog.playdoe.com" target="_blank"><img src="/images/tumblr-logo-red.png" height="20" width="20"/> </a>
+                <a href="http://instagram.com/officialplaydoe" target="_blank"><img src="/images/instagram-logo-red.png" height="25" width="25"/></a>
+                <a href="http://pintrest.com/playdoe" target="_blank"><img src="/images/pintrest-logo-red.png" height="25" width="25" /> </a>
+                <a href="http://linkedin.com/company/playdoe" target="_blank"><img src="/images/linkedin-logo-red.png" height="20" width="20" /></a>
+                <a href="https://plus.google.com/+playdoe/" target="_blank"><img src="/images/google-youtube-logo.png" height="20" width="25" style="padding-left:8px;" /></a>
                 <br/><br/>
 
-            <a href="/view_messages.php/Rapportbook">Tell us what prizes you would like to win</a>
+            <a href="/view_messages.php/playdoe">Tell us what prizes you would like to win</a>
         </div>
     <?php
 
@@ -789,16 +789,16 @@ elseif (hasExistingGamePost($hashtag, $ID)) {
     echo "<div align = 'center' style='color:red;font-weight:bold;'>You have an existing post for this game. <br/>Delete your post to post again.";
     ?>
         <h5 style="color:black">Check out our social media to find other ways to win stuff:</h5>
-        <a href="http://facebook.com/rapportbook" target="_blank"><img src="/images/facebook-logo-red.png" height="25" width="25"></a>
-        <a href="http://twitter.com/rapportbook" target="_blank"><img src="/images/twitter-logo-red.png" height="=25" width="25"></a>
-        <a href="http://blog.rapportbook.com" target="_blank"><img src="/images/tumblr-logo-red.png" height="20" width="20"/> </a>
-        <a href="http://instagram.com/officialrapportbook" target="_blank"><img src="/images/instagram-logo-red.png" height="25" width="25"/></a>
-        <a href="http://pintrest.com/rapportbook" target="_blank"><img src="/images/pintrest-logo-red.png" height="25" width="25" /> </a>
-        <a href="http://linkedin.com/company/rapportbook" target="_blank"><img src="/images/linkedin-logo-red.png" height="20" width="20" /></a>
-        <a href="https://plus.google.com/+Rapportbook/" target="_blank"><img src="/images/google-youtube-logo.png" height="20" width="25" style="padding-left:8px;" /></a>
+        <a href="http://facebook.com/playdoe" target="_blank"><img src="/images/facebook-logo-red.png" height="25" width="25"></a>
+        <a href="http://twitter.com/playdoe" target="_blank"><img src="/images/twitter-logo-red.png" height="=25" width="25"></a>
+        <a href="http://blog.playdoe.com" target="_blank"><img src="/images/tumblr-logo-red.png" height="20" width="20"/> </a>
+        <a href="http://instagram.com/officialplaydoe" target="_blank"><img src="/images/instagram-logo-red.png" height="25" width="25"/></a>
+        <a href="http://pintrest.com/playdoe" target="_blank"><img src="/images/pintrest-logo-red.png" height="25" width="25" /> </a>
+        <a href="http://linkedin.com/company/playdoe" target="_blank"><img src="/images/linkedin-logo-red.png" height="20" width="20" /></a>
+        <a href="https://plus.google.com/+playdoe/" target="_blank"><img src="/images/google-youtube-logo.png" height="20" width="25" style="padding-left:8px;" /></a>
         <br/><br/>
 
-        <a href="/view_messages.php/Rapportbook">Tell us what prizes you would like to win</a>
+        <a href="/view_messages.php/playdoe">Tell us what prizes you would like to win</a>
     </div>
     <?php
 }

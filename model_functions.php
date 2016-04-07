@@ -125,9 +125,9 @@ function get_users_photo_by_id($user_id)
     if (strstr($url, "localhost")) {
         $fullMediaPath = "/media/$photo";
     } elseif (strstr($url, "dev")) {
-        $fullMediaPath = "http://dev.rapportbook.com/media/$photo";
+        $fullMediaPath = "http://dev.playdoe.com/media/$photo";
     } else {
-        $fullMediaPath = "http://rapportbook.com/media/$photo";
+        $fullMediaPath = "http://playdoe.com/media/$photo";
     }
     return $fullMediaPath;
 }
@@ -454,9 +454,9 @@ function text_notification($receiverID, $senderID, $groupID)
                 $username = $groupID;
             }
             if (strstr($url, "dev")) {
-                $domain = "dev.rapportbook.com/view_messages/$username";
+                $domain = "dev.playdoe.com/view_messages/$username";
             } else {
-                $domain = "http://rapportbook.com/view_messages/$username";
+                $domain = "http://playdoe.com/view_messages/$username";
             }
                 $domain = shortenUrl($domain);
 
@@ -603,9 +603,9 @@ function alert_followers($postID)
                         $clockwork = new Clockwork($API_KEY);
                         $domain = null;
                         if (strstr($url, "dev")) {
-                            $domain = "http://dev.rapportbook.com/show_post.php?postID=$postID&email=1";
+                            $domain = "http://dev.playdoe.com/show_post.php?postID=$postID&email=1";
                         } else {
-                            $domain = "http://rapportbook.com/show_post.php?postID=$postID&email=1";
+                            $domain = "http://playdoe.com/show_post.php?postID=$postID&email=1";
                         }
                         $domain = shortenUrl($domain);
 

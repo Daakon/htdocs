@@ -24,17 +24,17 @@ $localhost = 'localhost';
 
 if (strstr($url, "localhost")) {
     $username = 'root';
-    $rapportbook = 'rapportbook';
+    $playdoe = 'playdoe';
     $pass = 'admin10';
 }
 elseif (strstr($url, "dev")) {
-    $username = 'rapportb_rapport';
-    $rapportbook = 'rapportb_devplaydoe';
+    $username = 'playdoe_playdoe';
+    $playdoe = 'playdoe_devplaydoe';
     $pass = 'admin@10';
 }
 else {
-    $username = 'rapportb_rapport';
-    $rapportbook = 'rapportb_playdoe';
+    $username = 'playdoe_playdoe';
+    $playdoe = 'playdoe_playdoe';
     $pass = 'admin@10';
 }
 
@@ -43,7 +43,7 @@ $conn = mysql_connect($localhost, $username, $pass);
 if (!$conn) {
     die(mysql_error());
 } else {
-    mysql_select_db($rapportbook, $conn);
+    mysql_select_db($playdoe, $conn);
 }
 
 ?>

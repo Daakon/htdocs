@@ -20,10 +20,10 @@ get_header();
                 <b style="color:#E30022">RepSB16</b>: Post a photo(s) and or video(s) that depicts your favorite spring break moment from 2016.
                 <br/>
                 <b style="">Prize</b>: $50 Gift Card
-            </p
+            </p>
 
-
-
+            <hr class="hr-line" />
+            <a href="/support">View Recurring Games</a>
             </div>
         </div>
 

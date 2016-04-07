@@ -86,7 +86,10 @@ if (!empty($_SESSION['ID'])) {
                     <table style="margin-left:10px;margin-top:20px;margin-bottom:10px;">
                         <tr>
                             <td>
-                                <span class="lead">Play Games & Make Doe.</span>
+                                <h5>Go Viral & Get Paid</h5>
+                                <span class="lead">
+                                    Win prizes for posting content that goes viral.
+                                </span>
                             </td>
                         </tr>
                         <tr>
@@ -101,7 +104,10 @@ if (!empty($_SESSION['ID'])) {
                     <table style="margin-left:10px;margin-top:20px;">
                         <tr>
                             <td>
-                                <span class="lead">Play Games & Make Doe.</span>
+                                <h2>Go Viral & Get Paid</h2>
+                                <span class="lead">
+                                    Win prizes for posting content that goes viral.
+                                </span>
                             </td>
                         </tr>
                         <tr>
@@ -185,7 +191,7 @@ if (!empty($_SESSION['ID'])) {
                 <a href="http://instagram.com/officialplaydoe" target="_blank"><img src="/images/instagram-logo-red.png" height="50" width="50"/></a>
                 <a href="https://www.pinterest.com/officialplaydoe/" target="_blank"><img src="/images/pintrest-logo-red.png" height="50" width="50" /> </a>
                 <a href="http://linkedin.com/company/officialplaydoe" target="_blank"><img src="/images/linkedin-logo-red.png" height="40" width="40" /></a>
-                <a href="https://plus.google.com/u/0/b/100826332083461810042/100826332083461810042/posts" target="_blank"><img src="/images/google-youtube-logo.png" height="40" width="50" style="padding-left:8px;" /></a>
+                <a href="https://plus.google.com/u/0/b/100826332083461810042/100826332083461810042/about" target="_blank"><img src="/images/google-youtube-logo.png" height="40" width="50" style="padding-left:8px;" /></a>
                 <br/>
 
                 <div style="margin-top:60px;">

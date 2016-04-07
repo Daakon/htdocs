@@ -12,7 +12,7 @@ function get_head_files()
 
 
         <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
-        <meta name="description" content="Playdoe offers fun competitions with great prizes. Come play Hashtag with us and see what kind of doe you can pick up!">
+        <meta name="description" content="Earn money for sharing great content.">
         <meta name="keywords" content="<?php echo $keywords ?>">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta http-equiv="content-type" content="text/html; charset=utf-8"/>

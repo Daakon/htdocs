@@ -12,20 +12,20 @@ if (strstr($url, "local")) {
     $docPath = "/doc/";
 }
 elseif (strstr($url, "dev")) {
-    $videoPath = "http://dev.rapportbook.com/media/";
-    $posterPath = "/home/rapportbook/dev/poster/";
-    $imagesPath = "http://dev.rapportbook.com/images/";
-    $mediaPath = "http://dev.rapportbook.com/media/";
-    $docPath = "http://dev.rapportbook.com/doc/";
-    $postPath = "http://dev.rapportbook.com/";
+    $videoPath = "http://dev.playdoe.com/media/";
+    $posterPath = "/home/playdoe/dev/poster/";
+    $imagesPath = "http://dev.playdoe.com/images/";
+    $mediaPath = "http://dev.playdoe.com/media/";
+    $docPath = "http://dev.playdoe.com/doc/";
+    $postPath = "http://dev.playdoe.com/";
 }
 else {
-    $videoPath = "http://rapportbook.com/media/";
-    $posterPath = "/home/rapportbook/public_html/poster/";
-    $imagesPath = "http://rapportbook.com/images/";
-    $mediaPath = "http://rapportbook.com/media/";
-    $docPath = "http://rapportbook.com/doc/";
-    $postPath = "http://rapportbook.com/";
+    $videoPath = "http://playdoe.com/media/";
+    $posterPath = "/home/playdoe/public_html/poster/";
+    $imagesPath = "http://playdoe.com/images/";
+    $mediaPath = "http://playdoe.com/media/";
+    $docPath = "http://playdoe.com/doc/";
+    $postPath = "http://playdoe.com/";
 }
 
 function getPostPath() {
@@ -34,10 +34,10 @@ function getPostPath() {
     if (strstr($url, "local")) {
     }
     elseif (strstr($url, "dev")) {
-        $postPath = "http://dev.rapportbook.com/";
+        $postPath = "http://dev.playdoe.com/";
     }
     else {
-        $postPath = "http://rapportbook.com/";
+        $postPath = "http://playdoe.com/";
     }
     return $postPath;
 }
