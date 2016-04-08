@@ -55,7 +55,7 @@ if (mysql_num_rows($rollCallResult) == 0) {
 
         <img src="/images/Playdoe-Logo.png" height="100" width="100" />
         <br/>
-        You got this!
+        <span style="color:red;">Post.</span> <span style="color:blue">Play.</span> <span style="color:green">Win Money.</span>
     </div>
 <?php }
 if (mysql_num_rows($rollCallResult) > 0) {

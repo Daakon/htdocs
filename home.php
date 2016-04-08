@@ -811,12 +811,12 @@ elseif (hasExistingGamePost($hashtag, $ID)) {
     ?>
             <form method="post" enctype="multipart/form-data" action="" onsubmit="return showUploading()">
                 <img src="/images/image-icon.png" height="30px" width="30px" alt="Photos/Video"/>
-                <strong>Add Photos/Videos</strong>
+                <strong>Upload Photos/Videos</strong><span style="color:red;padding-left:10px;">* Required</span>
                 <input type="file" width="10px;" name="flPostMedia[]" id="flPostMedia" multiple/>
 
                 <br/>
                 <textarea name="post" id="post" class="form-control textArea"
-                          placeholder="So whatcha got?" ></textarea>
+                          placeholder="Add a caption to your photo(s) & or video(s)" ></textarea>
                 <br/>
                 <div id="progress" style="display:none;">
                     <div class="progress">
@@ -842,7 +842,7 @@ elseif (hasExistingGamePost($hashtag, $ID)) {
 
             <hr class="hr-line">
 
-            <a href="/hashtag_codes" style="margin-top:20px;" >View Hashtag Codes & Prizes</a>
+            <a href="/hashtag_codes" style="margin-top:20px;" >View Hashtag Codes & Payouts</a>
             <br/><br/>
 
             <select class="form-control" id="hashtag" name="hashtag" onchange="updateFeed()" >
