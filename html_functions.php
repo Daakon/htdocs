@@ -50,7 +50,7 @@ function get_head_files()
         $pageName = $_SERVER['PHP_SELF'];
 
         if (strstr($pageName, 'index')) {
-        $pageName = 'Rapportbook';
+        $pageName = 'Playdoe';
         }
             $pageName = str_replace('/',' ',$pageName);
             $pageName = str_replace('_', ' ', $pageName);
@@ -105,7 +105,7 @@ function get_head_files()
     <form method="post" action="login.php" class="form-inline" >
         <header class="navbar navbar-default navbar-static-top header">
             <a href="/learn_more" title="Login or Sign Up">
-            <img src="/images/Playdoe-white.png" alt="Rapportbook" height="40" width="auto"
+            <img src="/images/Playdoe-white.png" alt="Playdoe" height="40" width="auto"
                  class="logo-image"/>
             </a>
 
@@ -137,7 +137,7 @@ function get_header()
         <div align="center">
         <a href="/homepage.php" style="text-align: center">
 
-            <img src="/images/Playdoe-white.png" alt="Rapportbook" height="40" width="315"
+            <img src="/images/Playdoe-white.png" alt="Playdoe" height="40" width="315"
                  class="logo-image"/>
         </a>
         </div>

@@ -86,9 +86,9 @@ if (!empty($_SESSION['ID'])) {
                     <table style="margin-left:10px;margin-top:20px;margin-bottom:10px;">
                         <tr>
                             <td>
-                                <h5>Go Viral & Get Paid</h5>
+                                <h5><span style="color:red;">Post. </span><span style="color:blue;">Play. </span><span style="color:green">Win Money.</span></h5>
                                 <span class="lead">
-                                    Win prizes for posting content that goes viral.
+                                    Make money for posting great content.
                                 </span>
                             </td>
                         </tr>
@@ -104,9 +104,9 @@ if (!empty($_SESSION['ID'])) {
                     <table style="margin-left:10px;margin-top:20px;">
                         <tr>
                             <td>
-                                <h2>Go Viral & Get Paid</h2>
+                                <h2><span style="color:red;">Post. </span><span style="color:blue;">Play. </span><span style="color:green">Win Money.</span></h2>
                                 <span class="lead">
-                                    Win prizes for posting content that goes viral.
+                                    Make money for posting great content.
                                 </span>
                             </td>
                         </tr>
