@@ -149,7 +149,7 @@ $total = mysql_num_rows($rollCallResult);
             <hr class="hr-line" />
 
             <?php if (isset($ID)) { ?>
-                <span style="color:#E30022;">#<?php echo $category ?></span>
+                <span class="engageText"><?php echo $category ?></span>
 
 
 
@@ -163,17 +163,6 @@ $total = mysql_num_rows($rollCallResult);
 
                 <br/>
 
-                <?php
-                $postPath = getPostPath();
-                $shareLinkID = "shareLink$postID"; ?>
-                <a href="javascript:showLink('<?php echo $shareLinkID ?>');">
-                    <img src="/images/share.gif" height="25px" width="25px" />
-                    <span style="color:black;font-weight:bold;">Share</span>
-                </a>
-
-                <?php $shareLink = 'show_post?postID='.$postID.'&email=1';
-                $shortLink = shortenUrl($postPath.$shareLink);
-                ?>
 
                 <input id="<?php echo $shareLinkID ?>" style="display:none;" value ="<?php echo $shortLink ?>" />
 

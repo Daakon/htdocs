@@ -4,7 +4,7 @@ function category()
     session_start();
 $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 
-        echo '<option value = "RepSB16">RpSB16</option>';
+        echo '<option value = "#RepHomeTeam">#RepHomeTeam</option>';
 
 
 }

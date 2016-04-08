@@ -753,12 +753,16 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
 
             <div style="margin-bottom:10px;margin-top:-20px;padding-bottom:10px;" align="center">
 
-                <!--***********************************-->
+                <!--***********************************
+                UPDATE MAIN HASHTAG GAME HERE
+                **************************************-->
                 <?php
                 if (isset($_GET['genre']) && !empty($_GET['hashtag'])) {
                     $hashtag = $_GET['hashtag'];
                 } else {
-                    $hashtag = "RepSB16";
+                    // set the default option to the first game
+                    // update the category function with the new game value
+                    $hashtag = "#RepHomeTeam";
                     $_SESSION['Hashtag'] = $hashtag;
                 }
                 ?>
@@ -825,7 +829,6 @@ elseif (hasExistingGamePost($hashtag, $ID)) {
                 <br/>
                 <select class="form-control " id="hashtag" name="hashtag" >
                     <option value="">Select Hash Tag </option>
-                    <option value="<?php echo $hashtag ?>" selected="selected"><?php echo $hashtag ?></option>
                     <?php category() ?>
                 </select>
                 <br/>

@@ -491,25 +491,15 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
             <hr/>
 
-            <a href='/post-interest.php?interest=<?php echo urlencode($category) ?>' onclick="saveScrollPositionOnLinkClick('/manage_post/<?php echo $username ?>')"><span class="engageText">#<?php echo $category ?></span></a>
+            <span class="engageText"><?php echo $category ?></span>
 
             <?php if ($memberID != $ID) { ?>
                 | <a href="/view_messages.php/<?php echo $username ?>"><span class="engageText"><img src="/images/messages.png" height="20" width="20" /> Message </span></a>
             <?php } ?>
 
 
-            <br/><br/>
-            <?php
-            $postPath = getPostPath();
-            $shareLinkID = "shareLink$postID"; ?>
-            <a href="javascript:showLink('<?php echo $shareLinkID ?>');">
-                <img src="/images/share.gif" height="50px" width="50px" />
-                <span style="color:black;font-weight:bold;">Share This Post</span>
-            </a>
+            <br/>
 
-            <?php $shareLink = 'show_post?postID='.$postID.'&email=1';
-            $shortLink = shortenUrl($postPath.$shareLink);
-            ?>
 
             <input id="<?php echo $shareLinkID ?>" style="display:none;" value ="<?php echo $shortLink ?>" />
 
