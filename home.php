@@ -761,7 +761,8 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
                     $hashtag = $_GET['hashtag'];
                 } else {
                     // set the default option to the first game
-                    // update the category function with the new game value
+                    // 1. update the category function with the new game value
+                    // 2. update hashtag_codes.php with new game description
                     $hashtag = "#RepHomeTeam";
                     $_SESSION['Hashtag'] = $hashtag;
                 }

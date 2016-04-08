@@ -17,9 +17,9 @@ get_header();
             <hr class="hr-line" />
 
             <p style="font-size:16px;">
-                <b style="color:#E30022">RepSB16</b>: Post a photo(s) and or video(s) that depicts your favorite spring break moment from 2016.
+                <b style="color:#E30022">#RepHomeTeam</b>: Post a photo(s) and or video(s) that depicts your favorite baseball team.
                 <br/>
-                <b style="">Prize</b>: $50 Gift Card
+                <b style="">Prize</b>: $50 Cash deposited in your Venmo or PayPal account.
             </p>
 
             <hr class="hr-line" />

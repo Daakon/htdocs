@@ -49,7 +49,7 @@ $ID = $_SESSION['ID'];
                 <li class="display-block">4. You can only make one post per contest.
                     If you want to post something again you must delete your current post.</li>
                 <li class="display-block">5. There are several variables that go into choosing a winner including: <i>originality, votes/likes and overall popularity</i>.</li>
-                <li class="display-block">6. The amount of winners and gift card amounts can vary from game to game.</li>
+                <li class="display-block">6. The amount of winners and cash amounts can vary from game to game.</li>
 
                 <div style="margin-bottom:20px;margin-top:10px;"  onclick="document.getElementById('hashtag').style.display = 'none';"><img src="/images/close.png" height="25" width="25"/>
                     <!-- adding onclick to hide this element when you click it -->
@@ -58,10 +58,14 @@ $ID = $_SESSION['ID'];
 
             </div>
 
+            <hr class="hr-line" />
+
+            <h5>Recurring Games</h5>
+
             <h4><div style="color:blue;"  onclick="document.getElementById('piedpiper').style.display = 'block';">Pied Piper</div></h4>
 
             <div id="piedpiper" style="display:none;">
-                <li class="display-block">The member with the most new followers each week gets a $10 gift card.</li>
+                <li class="display-block">The member with the most new followers each week gets $10 cash.</li>
 
                 <div style="margin-bottom:20px;margin-top:10px;"  onclick="document.getElementById('piedpiper').style.display = 'none';"><img src="/images/close.png" height="25" width="25"/>
                     <!-- adding onclick to hide this element when you click it -->
@@ -73,7 +77,7 @@ $ID = $_SESSION['ID'];
             <h4><div style="color:blue;"  onclick="document.getElementById('paparazzi').style.display = 'block';">Paparazzi</div></h4>
 
             <div id="paparazzi" style="display:none;">
-                <li class="display-block">The member with the most photo or video likes each week gets a $10 gift card.</li>
+                <li class="display-block">The member with the most photo or video likes each week gets $10 cash.</li>
 
                 <div style="margin-bottom:20px;margin-top:10px;"  onclick="document.getElementById('paparazzi').style.display = 'none';"><img src="/images/close.png" height="25" width="25"/>
                     <!-- adding onclick to hide this element when you click it -->
@@ -81,6 +85,10 @@ $ID = $_SESSION['ID'];
                 </div>
 
             </div>
+
+            <br/>
+
+            <h5>*Cash payouts are deposited in either your PayPal or Venmo account.</h5>
 
 <hr class="hr-line"/>
 
