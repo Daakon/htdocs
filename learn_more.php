@@ -68,7 +68,7 @@ if (!empty($_SESSION['ID'])) {
     <div align="left" >
 
         <div class="row" style="margin-top:-20px;">
-            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" >
+            <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12" >
 
                 <div class="visible-xs" style="padding-left:10px;padding-top:10px;">
                     <a href="/login-mobile"><button class="btn btn-default">Login</button></a> &nbsp;&nbsp;
@@ -90,8 +90,8 @@ if (!empty($_SESSION['ID'])) {
                                 <span class="lead">
                                     &#9679; Sign up <br/>
                                     &#9679; Pick a #hashtag <br/>
-                                    &#9679; Post about it <br/>
-                                    &#9679; The status with the most likes wins money <br/>
+                                    &#9679; Share a photo & or video with a caption that relates to the hashtag <br/>
+                                    &#9679; The post with the most likes wins money <br/>
                                     We do this every week! <br/>
                                 </span>
                             </td>
@@ -112,8 +112,8 @@ if (!empty($_SESSION['ID'])) {
                                 <span class="lead">
                                     &#9679; Sign up <br/>
                                     &#9679; Pick a #hashtag <br/>
-                                    &#9679; Post about it <br/>
-                                    &#9679; The status with the most likes wins money <br/>
+                                    &#9679; Share a photo & or video with a caption that relates to the hashtag <br/>
+                                    &#9679; The post with the most likes wins money <br/>
                                     We do this every week! <br/>
                                 </span>
                             </td>
@@ -131,7 +131,7 @@ if (!empty($_SESSION['ID'])) {
             </div>
 
 
-            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="padding-left:20%">
+            <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12" style="padding-left:20%">
                 <img style="float:left;" src="/images/Playdoe-Logo.png" width="80%"  />
             </div>
 
