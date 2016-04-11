@@ -97,7 +97,7 @@ if (!empty($_SESSION['ID'])) {
                             </td>
                         </tr>
                         <tr>
-                            <td><a href="/support">View Games & Rules</a></td>
+                            <td><a href="/support">View All Games & Rules</a></td>
                         </tr>
                     </table>
                 </div>
@@ -120,7 +120,7 @@ if (!empty($_SESSION['ID'])) {
                         </tr>
                         <tr>
                             <td>
-                                <a style ="font-size:20px;" href="/support">View Games & Rules</a>
+                                <a style ="font-size:20px;" href="/support">View All Games & Rules</a>
                             </td>
                         </tr>
                     </table>
