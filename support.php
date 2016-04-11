@@ -42,7 +42,7 @@ $ID = $_SESSION['ID'];
             <h4><div style="color:blue;"  onclick="document.getElementById('hashtag').style.display = 'block';">Hashtag</div></h4>
 
             <div id="hashtag" style="display:none;">
-                <li class="display-block">1. You must post content related to the current hashtag.</li>
+                <li class="display-block">1. Share a post related to the current hashtag.</li>
                 <li class="display-block">2. Posts must contain a photo and or video.</li>
                 <li class="display-block">3. The game locks after 100 people have posted content.
                     <i>If you miss the game, you are encouraged to vote for those who made the cut.</i></li>

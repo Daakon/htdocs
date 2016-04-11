@@ -501,27 +501,6 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
 }
 ?>
 
-<script type="text/javascript">
-    function loadmore()
-    {
-        var val = document.getElementById("moreMessages").value;
-        $.ajax({
-            type: 'post',
-            url: '/loadMessages.php',
-            data: {
-                senderID: <?php echo $recipientID ?>,
-                groupID: <?php echo $groupID ?>
-            },
-            success: function (response) {
-                var content = document.getElementById("moreMessages");
-                content.innerHTML = content.innerHTML+response;
-                // We increase the value by 10 because we limit the results by 10
-                //document.getElementById("row_no").value = Number(val)+10;
-            }
-        });
-    }
-</script>
-
 <script>
     // show uploading
     function showUploading() {
@@ -670,11 +649,6 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
             }
             ?>
 
-            <?php if (mysql_num_rows($result) > 24) { ?>
-                <div id="moreButton"><button onclick="loadmore()" style="margin-bottom:20px;">Show More Messages</button></div>
-            <?php } ?>
-
-            <div id="moreMessages"></div>
 
             <?php
             if (!empty($urlUsername)) {

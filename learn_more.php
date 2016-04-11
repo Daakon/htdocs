@@ -86,9 +86,13 @@ if (!empty($_SESSION['ID'])) {
                     <table style="margin-left:10px;margin-top:20px;margin-bottom:10px;">
                         <tr>
                             <td>
-                                <h5><span style="color:red;">Post. </span><span style="color:blue;">Play. </span><span style="color:green">Win Money.</span></h5>
+                                <h3><span style="color:red;">Post. </span><span style="color:blue;">Play. </span><span style="color:green">Win Money.</span></h3>
                                 <span class="lead">
-                                    Make money for posting great content.
+                                    &#9679; Sign up <br/>
+                                    &#9679; Pick a #hashtag <br/>
+                                    &#9679; Post about it <br/>
+                                    &#9679; The status with the most likes wins money <br/>
+                                    We do this every week! <br/>
                                 </span>
                             </td>
                         </tr>
@@ -106,7 +110,11 @@ if (!empty($_SESSION['ID'])) {
                             <td>
                                 <h2><span style="color:red;">Post. </span><span style="color:blue;">Play. </span><span style="color:green">Win Money.</span></h2>
                                 <span class="lead">
-                                    Make money for posting great content.
+                                    &#9679; Sign up <br/>
+                                    &#9679; Pick a #hashtag <br/>
+                                    &#9679; Post about it <br/>
+                                    &#9679; The status with the most likes wins money <br/>
+                                    We do this every week! <br/>
                                 </span>
                             </td>
                         </tr>
@@ -190,7 +198,7 @@ if (!empty($_SESSION['ID'])) {
                 <a href="http://officialplaydoe.tumblr.com/" target="_blank"><img src="/images/tumblr-logo-red.png" height="40" width="40"/> </a>
                 <a href="http://instagram.com/officialplaydoe" target="_blank"><img src="/images/instagram-logo-red.png" height="50" width="50"/></a>
                 <a href="https://www.pinterest.com/officialplaydoe/" target="_blank"><img src="/images/pintrest-logo-red.png" height="50" width="50" /> </a>
-                <a href="http://linkedin.com/company/officialplaydoe" target="_blank"><img src="/images/linkedin-logo-red.png" height="40" width="40" /></a>
+                <a href="https://www.linkedin.com/company/playdoe" target="_blank"><img src="/images/linkedin-logo-red.png" height="40" width="40" /></a>
                 <a href="https://plus.google.com/u/0/b/100826332083461810042/100826332083461810042/about" target="_blank"><img src="/images/google-youtube-logo.png" height="40" width="50" style="padding-left:8px;" /></a>
                 <br/>
 
@@ -329,37 +337,6 @@ if (!empty($_SESSION['ID'])) {
                 ?>
 
             </div>
-
-            <hr />
-
-            <a href="#signup" >
-                <span class='engageText'>#<?php echo $category ?></span>
-                &nbsp;
-                <button >
-                    <span >Connect </span>
-                </button>
-            </a>
-
-            <br/><br/>
-
-            <?php echo $city.', '. $state ?>
-
-            &nbsp;&nbsp;&nbsp;
-            <?php
-            $postPath = getPostPath();
-            $shareLinkID = "shareLink$postID"; ?>
-            <a href="javascript:showLink('<?php echo $shareLinkID ?>');">
-                <img src="/images/share.gif" height="50px" width="50px" />
-                <span style="color:black;font-weight:bold;">Share This Post</span>
-            </a>
-
-            <?php $shareLink = 'show_post?postID='.$postID.'&email=1';
-            $shareLink = $postPath.$shareLink;
-            $shortLink = shortenUrl($shareLink);
-            ?>
-            <input id="<?php echo $shareLinkID ?>" style="display:none;" value ="<?php echo $shortLink ?>" />
-
-
 
             <?php
 
