@@ -83,17 +83,15 @@ if (!empty($_SESSION['ID'])) {
                 <!--Mobile -->
                 <div class="visible-xs">
 
-                    <table style="margin-left:10px;margin-top:20px;margin-bottom:10px;">
+                    <table style="margin-left:10px;margin-top:20px;margin-bottom:10px;margin-right:10px;">
                         <tr>
                             <td>
                                 <h3><span style="color:red;">Post. </span><span style="color:blue;">Play. </span><span style="color:green">Win Money.</span></h3>
-                                <span class="lead">
-                                    &#9679; Sign up <br/>
-                                    &#9679; Pick a #hashtag <br/>
-                                    &#9679; Share a photo & or video with a caption that relates to the hashtag <br/>
-                                    &#9679; The post with the most likes wins money <br/>
-                                    We do this every week! <br/>
-                                </span>
+                                <p>
+                                    Share photos and videos based on a hashtag.
+                                    If your post gets the most likes, you get cash deposited into your Venmo or Paypal account.
+                                    Sign up or login now to see what the current hashtag is.
+                                </p>
                             </td>
                         </tr>
                         <tr>
@@ -109,13 +107,11 @@ if (!empty($_SESSION['ID'])) {
                         <tr>
                             <td>
                                 <h2><span style="color:red;">Post. </span><span style="color:blue;">Play. </span><span style="color:green">Win Money.</span></h2>
-                                <span class="lead">
-                                    &#9679; Sign up <br/>
-                                    &#9679; Pick a #hashtag <br/>
-                                    &#9679; Share a photo & or video with a caption that relates to the hashtag <br/>
-                                    &#9679; The post with the most likes wins money <br/>
-                                    We do this every week! <br/>
-                                </span>
+                                <p>
+                                    Share photos and videos based on a hashtag.
+                                    If your post gets the most likes, you get cash deposited into your Venmo or Paypal account.
+                                    Sign up or login now to see what the current hashtag is.
+                                </p>
                             </td>
                         </tr>
                         <tr>

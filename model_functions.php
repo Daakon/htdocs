@@ -582,6 +582,7 @@ function alert_followers($postID)
     require 'class-Clockwork.php';
     $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
     $result = mysql_query("SELECT Follower_ID FROM Follows WHERE Followed_ID = $ID");
+    $hashtag = $_SESSION['Hashtag'];
 
     if (mysql_num_rows($result) > 0) {
         // stuff all of the members into an array
@@ -612,7 +613,7 @@ function alert_followers($postID)
                         // Setup and send a message
                         $name = get_users_name_by_id($ID);
                         $name = trim($name);
-                        $text = "$name just start playing hashtag. $domain";
+                        $text = "$name just started playing $hashtag. $domain";
                         $text = trim($text);
                         $message = array('to' => $number, 'message' => $text);
                         $result = $clockwork->send($message);

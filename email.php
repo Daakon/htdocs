@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 function build_and_send_email($senderId, $toId, $notification, $postID, $pass, $groupID)
 {
     $toEmail = get_email_by_id($toId);
@@ -223,17 +225,18 @@ function build_and_send_email($senderId, $toId, $notification, $postID, $pass, $
         $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
         $link;
         if (strstr($url, "local")) {
-            $link = "home?genere=$pass&scrollx=630&scrolly=630";
+
         }
         else if (strstr($url, "dev")) {
-            $link = "http://dev.playdoe.com/show_post?postID=$postID&email=1";
+            $link = "http://dev.playdoe.com/show_post?postID=$pass&email=1";
         }
         else {
-            $link = "http://www.playdoe.com/show_post?postID=$postID&email=1";
+            $link = "http://www.playdoe.com/show_post?postID=$pass&email=1";
         }
         // a post status update related to your service has been posted
         $name = get_users_name_by_id($senderId);
-        $subject = "$name just started playing hashtag. <a href='".$link."'>Click here</a> to see the post
+        $hashtag = $_SESSION['Hashtag'];
+        $subject = "$name just started playing $hashtag. <a href='".$link."'>Click here</a> to see the post
         <br/><br/>You are receiving this because you follow $name";
     }
     if ($notification == 12) {

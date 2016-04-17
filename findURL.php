@@ -5,10 +5,11 @@ function makeLinks($str)
         // do nothing
         return $str;
     } elseif (strstr($str, "<a href")) {
+        $str = preg_replace('/(([\w!#$%&\'*+\-\/=?^`{|}~]|\\\\\\\\|\\\\?"|\\\\ )+\.)*([\w!#$%&\'*+\-\/=?^`{|}~]|\\\\\\\\|\\\\?"|\\\\ )+@((\w+[\.-])*[a-zA-Z]{2,}|\[(\d{1,3}\.){3}\d{1,3}\])/', '<a href="mailto:$0">$0</a>', $str);
         // has formatted links don't do anything
         return $str;
     } else {
-
+        $str = preg_replace('/(([\w!#$%&\'*+\-\/=?^`{|}~]|\\\\\\\\|\\\\?"|\\\\ )+\.)*([\w!#$%&\'*+\-\/=?^`{|}~]|\\\\\\\\|\\\\?"|\\\\ )+@((\w+[\.-])*[a-zA-Z]{2,}|\[(\d{1,3}\.){3}\d{1,3}\])/', '<a href="mailto:$0">$0</a>', $str);
         // ************ do string prepping *************
 
         // make all versions of hyperlink lower case

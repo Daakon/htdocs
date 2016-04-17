@@ -816,7 +816,7 @@ elseif (hasExistingGamePost($hashtag, $ID)) {
 
                 <br/>
                 <textarea name="post" id="post" class="form-control textArea"
-                          placeholder="Add a caption to your photo(s) & or video(s)" ></textarea>
+                          placeholder="Add a caption to your photos & videos" ></textarea>
                 <br/>
                 <div id="progress" style="display:none;">
                     <div class="progress">

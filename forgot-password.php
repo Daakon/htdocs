@@ -49,7 +49,7 @@ get_header();
 
         <form action="" method="post">
             <div class="form-group">
-                <img src="/images/Rapportbook-Logo.png" height="50" width="50" />
+                <img src="/images/Playdoe-Logo.png" height="50" width="50" />
                 <span class="lead bold">Reset Password</span>
                 <br/><br/>
                 <input type="text" class="form-control" id="email" name="email" placeholder="Email"/>
