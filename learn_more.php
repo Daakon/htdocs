@@ -88,9 +88,10 @@ if (!empty($_SESSION['ID'])) {
                             <td>
                                 <h3><span style="color:red;">Post. </span><span style="color:blue;">Play. </span><span style="color:green">Win Money.</span></h3>
                                 <p>
-                                    Share photos and videos based on a hashtag.
-                                    If your post gets the most likes, you get cash deposited into your Venmo or Paypal account.
+                                    Share a photo or video based on our hashtag & get <b>$10</b> automatically deposited into your Venmo or PayPal account.
+                                    If your post gets the most likes during our hashtag game, you get more cash deposited into your Venmo or Paypal account.
                                     Sign up or login now to see what the current hashtag is.
+
                                 </p>
                             </td>
                         </tr>
@@ -108,8 +109,8 @@ if (!empty($_SESSION['ID'])) {
                             <td>
                                 <h2><span style="color:red;">Post. </span><span style="color:blue;">Play. </span><span style="color:green">Win Money.</span></h2>
                                 <p>
-                                    Share photos and videos based on a hashtag.
-                                    If your post gets the most likes, you get cash deposited into your Venmo or Paypal account.
+                                    Share a photo or video based on our hashtag & get <b>$10</b> automatically deposited into your Venmo or PayPal account.
+                                    If your post gets the most likes during our hashtag game, you get more cash deposited into your Venmo or Paypal account.
                                     Sign up or login now to see what the current hashtag is.
                                 </p>
                             </td>
