@@ -29,7 +29,8 @@ Members.Username As Username,
 Posts.ID As PostID,
 Posts.Category As Category,
 Posts.IsSponsored As IsSponsored,
-Profile.ProfilePhoto As ProfilePhoto
+Profile.ProfilePhoto As ProfilePhoto,
+(Select count(PostID) From PostApprovals Where Post_ID = PostID) As Likes
 FROM Members,Posts,Profile
 WHERE
 Members.IsActive = 1
@@ -41,7 +42,8 @@ And (Members.ID Not in ( '" . implode($blockIDs, "', '") . "' ))
 AND Posts.Category = '$hashtag'
 $lastPostCondition
 Group By PostID
-Order By PostID DESC LIMIT $limit ";
+
+Order By Likes DESC LIMIT $limit ";
 $rollCallResult = mysql_query($sqlRollCall) or die(logError(mysql_error(), $url, "Getting Connection Feed data"));
 
 

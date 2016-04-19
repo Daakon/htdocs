@@ -19,7 +19,7 @@ get_header();
             <p style="font-size:16px;">
                 <b style="color:#E30022">#RepHomeTeam</b>: Post a photo(s) and or video(s) that depicts your favorite baseball team.
                 <br/>
-                <b style="">Prize</b>: $50 Cash deposited in your Venmo or PayPal account.
+                <b style="">Prize</b>: $100 Cash deposited in your Venmo or PayPal account.
             </p>
 
             <hr class="hr-line" />

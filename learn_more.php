@@ -89,7 +89,7 @@ if (!empty($_SESSION['ID'])) {
                                 <h3><span style="color:red;">Post. </span><span style="color:blue;">Play. </span><span style="color:green">Win Money.</span></h3>
                                 <p>
                                     Share a photo or video based on our hashtag & get <b>$10</b> automatically deposited into your Venmo or PayPal account.
-                                    If your post gets the most likes during our hashtag game, you get more cash deposited into your Venmo or Paypal account.
+                                    If your post gets the most likes during our hashtag game, you get <b>$100</b> deposited into your Venmo or Paypal account.
                                     Sign up or login now to see what the current hashtag is.
 
                                 </p>
@@ -110,7 +110,7 @@ if (!empty($_SESSION['ID'])) {
                                 <h2><span style="color:red;">Post. </span><span style="color:blue;">Play. </span><span style="color:green">Win Money.</span></h2>
                                 <p>
                                     Share a photo or video based on our hashtag & get <b>$10</b> automatically deposited into your Venmo or PayPal account.
-                                    If your post gets the most likes during our hashtag game, you get more cash deposited into your Venmo or Paypal account.
+                                    If your post gets the most likes during our hashtag game, you get <b>$100</b> deposited into your Venmo or Paypal account.
                                     Sign up or login now to see what the current hashtag is.
                                 </p>
                             </td>
