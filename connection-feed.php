@@ -163,18 +163,11 @@ $total = mysql_num_rows($rollCallResult);
 
             <div >
 
-                <br/>
-
-
-                <input id="<?php echo $shareLinkID ?>" style="display:none;" value ="<?php echo $shortLink ?>" />
-
-
                     <?php if ($ID != $memberID) {
 
                         $optionsID = "options$postID";
                     ?>
-
-                        <br/>
+                        
                             <a href="javascript:showOptions('<?php echo $optionsID ?>');" style="font-size:20px;color:black">...</a>
                             <div style="display:none;" id="<?php echo $optionsID ?>">
                             <form action="" method="post" onsubmit="return confirm('Do you really want to block this member?') && saveScrollPositions(this) ">
