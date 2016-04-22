@@ -167,7 +167,7 @@ $total = mysql_num_rows($rollCallResult);
 
                         $optionsID = "options$postID";
                     ?>
-                        
+
                             <a href="javascript:showOptions('<?php echo $optionsID ?>');" style="font-size:20px;color:black">...</a>
                             <div style="display:none;" id="<?php echo $optionsID ?>">
                             <form action="" method="post" onsubmit="return confirm('Do you really want to block this member?') && saveScrollPositions(this) ">
@@ -209,7 +209,7 @@ $total = mysql_num_rows($rollCallResult);
                     echo '<input type ="hidden" class = "ID" id = "ID" value = "' . $ID . '" />';
                     echo '<input type ="button" class = "btnDisapprove"'. $readonly.' />';
                     if ($approvals > 0) {
-                        echo '&nbsp;<span>' . $approvals . '</font>';
+                        echo '&nbsp;<span>' . $approvals . '</span>';
                     }
                     echo '</form>';
                 } else {
@@ -218,7 +218,7 @@ $total = mysql_num_rows($rollCallResult);
                     echo '<input type ="hidden" class = "ID" id = "ID" value = "' . $ID . '" />';
                     echo '<input type ="button" class = "btnApprove"'. $readonly.' />';
                     if ($approvals > 0) {
-                        echo '&nbsp;<span>' . $approvals . '</font>';
+                        echo '&nbsp;<span>' . $approvals . '</span>';
                     }
                     echo '</form>';
                 }

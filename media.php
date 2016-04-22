@@ -531,13 +531,12 @@ $profileMediaSrc = trim("/media/" . $profilePhoto);
                 $rows3 = mysql_fetch_assoc($result3);
                 $approvals = mysql_num_rows($result3);
 
-                echo '<table><tr><td>';
-                echo "<div id = 'approvals$postID'>";
+                echo '<table><tr>';
+                echo "<div id = 'approvals$postID' style='display:inline'>";
 
                 if (mysql_num_rows($result2) > 0) {
-
+                    echo '<td>';
                     echo '<form>';
-
                     echo '<input type ="hidden" class = "ID" value="' . $ID . '"/>';
                     echo '<input type ="hidden" class = "mediaID" value = "' . $mediaID . '" />';
                     echo '<input type ="hidden" class = "mediaName" value ="' . $mediaName . '" />';
@@ -545,34 +544,39 @@ $profileMediaSrc = trim("/media/" . $profilePhoto);
                     echo '<input type ="hidden" class = "mediaDate" id = "mediaDate" value = "' . $mediaDate . '" />';
                     echo '<input type ="button" class = "btnDisapprove" />';
 
+                    echo '</form>';
+                    echo '</td>';
 
                     if ($approvals > 0) {
                         //echo '<tr><td>';
-
-                        echo '&nbsp;<span>' . $approvals . '</font>';
+                        echo '<td>';
+                        echo $approvals;
+                        echo '</td>';
                     }
-                    echo '</form>';
+
                 } else {
 
+                    echo '<td>';
                     echo '<form>';
-
+                    echo '<span style="display: inline;">';
                     echo '<input type ="hidden" class = "ID" value="' . $ID . '"/>';
                     echo '<input type ="hidden" class = "mediaID" value = "' . $mediaID . '" />';
                     echo '<input type ="hidden" class = "mediaName" id = "mediaName" value ="' . $mediaName . '" />';
                     echo '<input type ="hidden" class = "mediaType" id = "type" value = "' . $mediaType . '" />';
                     echo '<input type ="hidden" class = "mediaDate" id = "mediaDate" value = "' . $mediaDate . '" />';
                     echo '<input type ="button" class = "btnApprove" />';
-
+                    echo '</td>';
 
                     if ($approvals > 0) {
 
-
-                        echo '&nbsp;<span>' . $approvals . '</font>';
+                        echo '<td>';
+                        echo $approvals;
+                        echo '</td>';
                     }
                     echo '</form>';
                 }
                 echo "</div>"; // end of approval div
-                echo '</td></tr></table>';
+                echo '</tr></table>';
 ?>
 
             <div class="content-space">
