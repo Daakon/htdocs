@@ -15,6 +15,7 @@ if (strstr($url, "forgot-password") || strstr($url, "learn_more")
     || strstr($url, "terms") || strstr($url, "show_post")
     || strstr($url, "support") || strstr($url, "homepage")
     || strstr($url, "create_pass") || strstr($url, "something_happened")
+    || strstr($url, "hashtag_codes")
 ) {
     // dont check session
 }
