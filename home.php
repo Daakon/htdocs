@@ -782,7 +782,7 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
                 <a href="http://instagram.com/officialplaydoe" target="_blank"><img src="/images/instagram-logo-red.png" height="25" width="25"/></a>
                 <a href="http://pintrest.com/playdoe" target="_blank"><img src="/images/pintrest-logo-red.png" height="25" width="25" /> </a>
                 <a href="http://linkedin.com/company/playdoe" target="_blank"><img src="/images/linkedin-logo-red.png" height="20" width="20" /></a>
-                <a href="https://plus.google.com/+playdoe/" target="_blank"><img src="/images/google-youtube-logo.png" height="20" width="25" style="padding-left:8px;" /></a>
+                <a href="https://plus.google.com/u/0/b/100826332083461810042/100826332083461810042/about" target="_blank"><img src="/images/google-youtube-logo.png" height="20" width="25" style="padding-left:8px;" /></a>
                 <br/><br/>
 
             <a href="/view_messages.php/playdoe">Tell us what prizes you would like to win</a>
@@ -800,7 +800,7 @@ elseif (hasExistingGamePost($hashtag, $ID)) {
         <a href="http://instagram.com/officialplaydoe" target="_blank"><img src="/images/instagram-logo-red.png" height="25" width="25"/></a>
         <a href="http://pintrest.com/playdoe" target="_blank"><img src="/images/pintrest-logo-red.png" height="25" width="25" /> </a>
         <a href="http://linkedin.com/company/playdoe" target="_blank"><img src="/images/linkedin-logo-red.png" height="20" width="20" /></a>
-        <a href="https://plus.google.com/+playdoe/" target="_blank"><img src="/images/google-youtube-logo.png" height="20" width="25" style="padding-left:8px;" /></a>
+        <a href="https://plus.google.com/u/0/b/100826332083461810042/100826332083461810042/about" target="_blank"><img src="/images/google-youtube-logo.png" height="20" width="25" style="padding-left:8px;" /></a>
         <br/><br/>
 
         <a href="/view_messages.php/playdoe">Tell us what prizes you would like to win</a>
