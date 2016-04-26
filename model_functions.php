@@ -545,7 +545,7 @@ function checkBlock($ID, $memberID) {
     }
 }
 
-function isGameLocked($hashTag) {
+/*function isGameLocked($hashTag) {
     $sql = "Select count(ID) as PostCount FROM Posts WHERE Category = '$hashTag' ";
     $result = mysql_query($sql) or die(mysql_error());
     $rows = mysql_fetch_assoc($result);
@@ -558,10 +558,10 @@ function isGameLocked($hashTag) {
         return false;
     }
 
-}
+}*/
 
-function hasExistingGamePost($hashTag, $ID) {
-    $sql = "Select ID FROM Posts WHERE Member_ID = $ID and Category = '$hashTag' and IsDeleted = 0 ";
+function hasExistingGamePost($ID) {
+    $sql = "Select ID FROM Posts WHERE Member_ID = $ID and IsDeleted = 0 ";
     $result = mysql_query($sql) or die(mysql_error());
     $rows = mysql_fetch_assoc($result);
     $postID = $rows['ID'];

@@ -88,15 +88,11 @@ if (!empty($_SESSION['ID'])) {
                             <td>
                                 <h3><span style="color:red;">Post. </span><span style="color:blue;">Play. </span><span style="color:green">Win Money.</span></h3>
                                 <p>
-                                    Be one of the first 10 people to share a photo or video based on our hashtag & get <b>$10</b> automatically deposited into your Venmo or PayPal account.
-                                    If your post gets the most likes during our hashtag game, you get <b>$100</b> deposited into your Venmo or Paypal account.
-                                    Sign up or login now to see what the current hashtag is.
+                                    Get paid for sharing photos and videos. The first 10 people who share a photo or video get <b>$10</b> deposited into their Venmo or PayPal account.
+                                    The post with most likes get <b>$100</b> deposited into their Venmo or PayPal account.
 
                                 </p>
                             </td>
-                        </tr>
-                        <tr>
-                            <td><a href="/support">View All Games & Rules</a></td>
                         </tr>
                     </table>
                 </div>
@@ -109,15 +105,9 @@ if (!empty($_SESSION['ID'])) {
                             <td>
                                 <h2><span style="color:red;">Post. </span><span style="color:blue;">Play. </span><span style="color:green">Win Money.</span></h2>
                                 <p>
-                                    Be one of the first 10 people to share a photo or video based on our hashtag & get <b>$10</b> automatically deposited into your Venmo or PayPal account.
-                                    If your post gets the most likes during our hashtag game, you get <b>$100</b> deposited into your Venmo or Paypal account.
-                                    Sign up or login now to see what the current hashtag is.
+                                    Get paid for sharing photos and videos. The first 10 people who share a photo or video get <b>$10</b> deposited into their Venmo or PayPal account.
+                                    The post with most likes get <b>$100</b> deposited into their Venmo or PayPal account.
                                 </p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a style ="font-size:20px;" href="/support">View All Games & Rules</a>
                             </td>
                         </tr>
                     </table>
@@ -248,7 +238,7 @@ if (!empty($_SESSION['ID'])) {
     And (Members.ID = Posts.Member_ID)
     And (Members.ID = Profile.Member_ID)
     And (Posts.IsDeleted = 0)
-    And (Posts.ID = 314)
+    And (Posts.ID = 1)
     AND (Posts.Category <> 'Sponsored') ";
 
         // last member of the month post = 259

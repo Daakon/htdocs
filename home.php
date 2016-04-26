@@ -13,7 +13,7 @@ require 'memory_settings.php';
 $ID = $_SESSION['ID'];
 // handle connection feed post
 $post = mysql_real_escape_string($_POST['post']);
-$category = $_POST['hashtag'];
+//$category = $_POST['hashtag'];
 $city = $_SESSION['City'];
 $state = $_SESSION['State'];
 $IsSponsored = $_POST['IsSponsored'];
@@ -23,9 +23,9 @@ if (isset($_POST['submit'])) {
     $newPostID = null;
     if ($_SESSION['Post'] == $_POST['post']) {
         echo "<script>alert('Your post appears to be empty');</script>";
-    } else if ($category == "") {
+    } /*else if ($category == "") {
         echo "<script>alert('Your post needs a hash tag');</script>";
-    } else {
+    }*/ else {
         if (strlen($post) > 0) {
             $post = makeLinks($post);
 
@@ -236,7 +236,7 @@ if (isset($_POST['submit'])) {
         alert_followers($lastPostID);
     }
 
-    echo "<script>location='/home?hashtag=".urlencode($category)."'</script>";
+    echo "<script>location='/home'</script>";
 }
 ?>
 <?php
@@ -454,7 +454,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 //BELOW IS END OF POST COMMENT HANDLING CODE ==========================================================================//
         }
     }
-    echo "<script>location='/home?hashtag=".urlencode($category)."&scrollx=$scrollx&scrolly=$scrolly'</script>";
+    echo "<script>location='/home?&scrollx=$scrollx&scrolly=$scrolly'</script>";
 }
 if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
     $commentID = $_POST['commentID'];
@@ -642,10 +642,8 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
             document.getElementById('gettingMore').style.display = 'none';
             // get the lastPostID input value create by the connection feed code
             var lastPostID = document.getElementById('lastPostID').value;
-            var hashtagSelection = document.getElementById('hashtag');
-            var hashtag = hashtagSelection.options[hashtagSelection.selectedIndex].value;
             //$("#loadMoreConnections").load("/loadMoreConnections.php?lastPostID="+lastPostID);
-            $('#loadMoreConnections').append($("<div>").load("/loadMoreConnections.php?lastPostID="+lastPostID+"&hashtag="+encodeURIComponent(hashtag)));
+            $('#loadMoreConnections').append($("<div>").load("/loadMoreConnections.php?lastPostID="+lastPostID));
             // remove the last post ID input element so we only get the last one created with php
             $("input[id=lastPostID]").remove();
 
@@ -721,20 +719,6 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
         }
         ?>
 
-        <?php
-        $searchState = $_GET['state'];
-        if (!empty($searchState)) {
-            $_SESSION['State'] = $searchState;
-            $searchState = $_SESSION['State'];
-        }
-        else {
-            if (!empty($_SESSION['State'])) {
-                $searchState = $_SESSION['State'];
-            } else {
-                $searchState = getMemberState($ID);
-            }
-        }
-        ?>
 
 
         <!--Middle Column -->
@@ -753,57 +737,18 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
 
             <div style="margin-bottom:10px;margin-top:-20px;padding-bottom:10px;" align="center">
 
-                <!--***********************************
-                UPDATE MAIN HASHTAG GAME HERE
-                **************************************-->
-                <?php
-                if (isset($_GET['genre']) && !empty($_GET['hashtag'])) {
-                    $hashtag = $_GET['hashtag'];
-                } else {
-                    // set the default option to the first game
-                    // 1. update the category function with the new game value
-                    // 2. update hashtag_codes.php with new game description
-                    $hashtag = "#RepHomeTeam";
-                    $_SESSION['Hashtag'] = $hashtag;
-                }
-                ?>
 
                 <!--***********************************-->
             </div>
 
 
-<?php if (isGameLocked($hashtag)) {
-    echo "<div align = 'center' style='color:red;font-weight:bold;'>Sorry the game is Locked with 100 posts. Please vote for a winner";
-    ?>
-    <h5 style="color:black">Check out our social media to find other ways to win stuff:</h5>
-                <a href="http://facebook.com/playdoe" target="_blank"><img src="/images/facebook-logo-red.png" height="25" width="25"></a>
-                <a href="http://twitter.com/playdoe" target="_blank"><img src="/images/twitter-logo-red.png" height="=25" width="25"></a>
-                <a href="http://blog.playdoe.com" target="_blank"><img src="/images/tumblr-logo-red.png" height="20" width="20"/> </a>
-                <a href="http://instagram.com/officialplaydoe" target="_blank"><img src="/images/instagram-logo-red.png" height="25" width="25"/></a>
-                <a href="http://pintrest.com/playdoe" target="_blank"><img src="/images/pintrest-logo-red.png" height="25" width="25" /> </a>
-                <a href="http://linkedin.com/company/playdoe" target="_blank"><img src="/images/linkedin-logo-red.png" height="20" width="20" /></a>
-                <a href="https://plus.google.com/u/0/b/100826332083461810042/100826332083461810042/about" target="_blank"><img src="/images/google-youtube-logo.png" height="20" width="25" style="padding-left:8px;" /></a>
-                <br/><br/>
-
-            <a href="/view_messages.php/playdoe">Tell us what prizes you would like to win</a>
-        </div>
-    <?php
-
-}
-elseif (hasExistingGamePost($hashtag, $ID)) {
+<?php if (hasExistingGamePost($ID)) {
     echo "<div align = 'center' style='color:red;font-weight:bold;'>You have an existing post for this game. <br/>Delete your post to post again.";
     ?>
-        <h5 style="color:black">Check out our social media to find other ways to win stuff:</h5>
-        <a href="http://facebook.com/playdoe" target="_blank"><img src="/images/facebook-logo-red.png" height="25" width="25"></a>
-        <a href="http://twitter.com/playdoe" target="_blank"><img src="/images/twitter-logo-red.png" height="=25" width="25"></a>
-        <a href="http://blog.playdoe.com" target="_blank"><img src="/images/tumblr-logo-red.png" height="20" width="20"/> </a>
-        <a href="http://instagram.com/officialplaydoe" target="_blank"><img src="/images/instagram-logo-red.png" height="25" width="25"/></a>
-        <a href="http://pintrest.com/playdoe" target="_blank"><img src="/images/pintrest-logo-red.png" height="25" width="25" /> </a>
-        <a href="http://linkedin.com/company/playdoe" target="_blank"><img src="/images/linkedin-logo-red.png" height="20" width="20" /></a>
-        <a href="https://plus.google.com/u/0/b/100826332083461810042/100826332083461810042/about" target="_blank"><img src="/images/google-youtube-logo.png" height="20" width="25" style="padding-left:8px;" /></a>
-        <br/><br/>
-
-        <a href="/view_messages.php/playdoe">Tell us what prizes you would like to win</a>
+            <div style="color:black">
+            <h2>Your AD Here</h2>
+            Contact us at <a href="mailto:info@playdoe.com">info@playdoe.com</a>
+                </div>
     </div>
     <?php
 }
@@ -826,12 +771,10 @@ elseif (hasExistingGamePost($hashtag, $ID)) {
                     </div>
                 </div>
 
-
-                <br/>
-                <select class="form-control " id="hashtag" name="hashtag" >
+               <!-- <select class="form-control " id="hashtag" name="hashtag" >
                     <option value="">Select Hash Tag </option>
-                    <?php category() ?>
-                </select>
+                    <?php /*category() */?>
+                </select>-->
                 <br/>
 
 
@@ -842,14 +785,13 @@ elseif (hasExistingGamePost($hashtag, $ID)) {
 
             <hr class="hr-line">
 
-            <a href="/hashtag_codes" style="margin-top:20px;" >View Hashtag Codes & Payouts</a>
+            The post with the most likes wins <b>$100</b>
             <br/><br/>
 
-            <select class="form-control" id="hashtag" name="hashtag" onchange="updateFeed()" >
+            <!--<select class="form-control" id="hashtag" name="hashtag" onchange="updateFeed()" >
                 <option value="">Go to a different game </option>
-                <?php category() ?>
-            </select>
-            <br/>
+                <?php /*category() */?>
+            </select>-->
         </div>
 
         <br/>

@@ -39,7 +39,6 @@ And (Members.ID = Posts.Member_ID)
 And (Members.ID = Profile.Member_ID)
 And (Posts.IsDeleted = 0)
 And (Members.ID Not in ( '" . implode($blockIDs, "', '") . "' ))
-AND Posts.Category = '$hashtag'
 $lastPostCondition
 Group By PostID
 
@@ -151,12 +150,9 @@ $total = mysql_num_rows($rollCallResult);
             <hr class="hr-line" />
 
             <?php if (isset($ID)) { ?>
-                <span class="engageText"><?php echo $category ?></span>
-
-
 
                 <?php if ($ID != $memberID) {?>
-                    | <a href="/view_messages/<?php echo $username ?>"><span class="engageText"><img src = "/images/messages.png" height="20" width="20" /> Message </span> </a>
+                    <a href="/view_messages/<?php echo $username ?>"><span class="engageText"><img src = "/images/messages.png" height="20" width="20" /> Message </span> </a>
                 <?php } ?>
 
             <?php } ?>
