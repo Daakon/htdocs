@@ -491,7 +491,7 @@ $bgPhoto = $row['ProfilePhoto'];
 
     <div class="row row-padding">
 
-        <div class="col-md-8  col-lg-8 col-md-offset-2 col-lg-offset-2 roll-call ">
+        <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2  roll-call ">
 
             <?php
                 require 'profile_menu.php';

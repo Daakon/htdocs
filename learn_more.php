@@ -88,8 +88,7 @@ if (!empty($_SESSION['ID'])) {
                             <td>
                                 <h3><span style="color:red;">Post. </span><span style="color:blue;">Play. </span><span style="color:green">Win Money.</span></h3>
                                 <p>
-                                    Get paid for sharing photos and videos. The first 10 people who share a photo or video at the beginning of the week get <b>$10</b> deposited into their Venmo or PayPal account.
-                                    The post with most likes at the end of the week gets <b>$100</b> deposited into their Venmo or PayPal account.
+                                    Share the coolest photo or video you have on your phone. The post with the most likes wins $100. Go to playdoe.com now!
 
                                 </p>
                             </td>
@@ -105,8 +104,7 @@ if (!empty($_SESSION['ID'])) {
                             <td>
                                 <h2><span style="color:red;">Post. </span><span style="color:blue;">Play. </span><span style="color:green">Win Money.</span></h2>
                                 <p>
-                                    Get paid for sharing photos and videos. The first 10 people who share a photo or video at the beginning of the week get <b>$10</b> deposited into their Venmo or PayPal account.
-                                    The post with most likes at the end of the week gets <b>$100</b> deposited into their Venmo or PayPal account.
+                                    Share the coolest photo or video you have on your phone. The post with the most likes wins $100. Go to playdoe.com now!
                                 </p>
                             </td>
                         </tr>

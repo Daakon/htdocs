@@ -63,6 +63,7 @@ if ($_SESSION['ID'] != $profileID) { ?>
     <style>
         .dropdown {
             background: transparent;
+            padding-left:10px;
         }
     </style>
 

@@ -23,7 +23,7 @@ $profileID = get_id_from_username($username);
 
     <div class="row row-padding" >
 
-    <div class="col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8 roll-call member-media" >
+    <div class="col-md-offset-2 col-md-8 col-lg-offset-3 col-lg-6 roll-call member-media" style="padding-left:10px;">
         <?php require 'profile_menu.php'; ?>
 
         <h3><?php if ($username != get_username($ID)) {

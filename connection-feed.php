@@ -50,13 +50,16 @@ $rollCallResult = mysql_query($sqlRollCall) or die(logError(mysql_error(), $url,
 // if no results
 if (mysql_num_rows($rollCallResult) == 0) {
     ?>
-    <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 roll-call"
+    <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-8 roll-call"
          align="left">
         <?php //echo $greetText ?>
 
         <img src="/images/Playdoe-Logo.png" height="100" width="100" />
         <br/>
-        <span style="color:red;">Post.</span> <span style="color:blue">Play.</span> <span style="color:green">Win Money.</span>
+        <p>
+            <span style="color:red;">Post.</span> <span style="color:blue">Play.</span> <span style="color:green">Win Money.</span>
+        </p>
+
     </div>
 <?php }
 if (mysql_num_rows($rollCallResult) > 0) {
@@ -88,7 +91,7 @@ $total = mysql_num_rows($rollCallResult);
         ?>
 
 
-        <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 col-sm-12 col-xs-12 roll-call" >
+        <div class="col-lg-offset-3 col-lg-6 col-md-offset-2 col-md-8 col-sm-12 col-xs-12 roll-call" >
 
             <?php
 
@@ -149,10 +152,11 @@ $total = mysql_num_rows($rollCallResult);
 
             <hr class="hr-line" />
 
+
             <?php if (isset($ID)) { ?>
 
                 <?php if ($ID != $memberID) {?>
-                    <a href="/view_messages/<?php echo $username ?>"><span class="engageText"><img src = "/images/messages.png" height="20" width="20" /> Message </span> </a>
+                    <a href="/view_messages/<?php echo $username ?>" style="padding-left:10px;"><span class="engageText"><img src = "/images/messages.png" height="20" width="20" /> Message </span> </a>
                 <?php } ?>
 
             <?php } ?>
@@ -164,7 +168,7 @@ $total = mysql_num_rows($rollCallResult);
                         $optionsID = "options$postID";
                     ?>
 
-                            <a href="javascript:showOptions('<?php echo $optionsID ?>');" style="font-size:20px;color:black">...</a>
+                            <a href="javascript:showOptions('<?php echo $optionsID ?>');" style="font-size:20px;color:black;padding-left:10px;">...</a>
                             <div style="display:none;" id="<?php echo $optionsID ?>">
                             <form action="" method="post" onsubmit="return confirm('Do you really want to block this member?') && saveScrollPositions(this) ">
                                 <input type="hidden" id="blockedID" name="blockedID" class="blockedID" value="<?php echo $memberID ?>" />
@@ -174,6 +178,7 @@ $total = mysql_num_rows($rollCallResult);
                                 <input type="submit" id="block" name="block" class="btnBlock" value="Block This User" />
                             </form>
                         </div>
+</p>
 
                 <?php } ?>
 
@@ -187,6 +192,7 @@ $total = mysql_num_rows($rollCallResult);
                 }
 
                 echo "<hr class='hr-line'/>";
+
 
                 //check if member has approved this post
                 //----------------------------------------------------------------
@@ -223,7 +229,10 @@ $total = mysql_num_rows($rollCallResult);
                 //-------------------------------------------------------------
                 // End of approvals
                 //-----------------------------------------------------------
+                echo "</p>";
                 ?>
+
+
 
                 <div class="content-space">
                     <?php if (isset($ID)) { ?>

@@ -69,7 +69,7 @@ $age = $rows['Age'];
 
 ?>
 
-<div align ="center">
+<div class="col-lg-offset-3 col-lg-6 col-md-offset-2 col-md-8 roll-call" align ="center">
 
     <?php if (isset($_SESSION['ID'])) { ?>
 
@@ -120,14 +120,6 @@ $age = $rows['Age'];
 
 
     <br/><br/>
-
-    <!--Profile video --------------------------------------------------------------------------------->
-    <?php if ($profileVideo != "default_video.png") { ?>
-        <div align = "center">
-            <video src = " <?php echo $videoPath . $profileVideo ?>" poster="/poster/<?php echo $posterName ?>"  preload="auto" autoplay="autoplay" muted controls />
-        </div>
-    <?php } ?>
-
 
 
     <h3>

@@ -370,8 +370,8 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
     <div class="row row-padding">
 
-        <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 roll-call"
-             align="left" style="min-height: 10px;">
+        <div class="col-lg-offset-3 col-lg-6 col-md-offset-2 col-md-8 roll-call"
+             align="left" style="min-height: 10px;padding-left:10px;">
             <?php require 'profile_menu.php'; ?>
             <img src="<?php echo get_users_photo_by_id(get_id_from_username($username)) ?>" class="profilePhoto-Feed " alt=""
                  title="<?php echo $name ?>" />&nbsp;&nbsp;
@@ -440,7 +440,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
         $isSponsored = $rows['IsSponsored'];
         ?>
 
-        <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 roll-call"
+        <div class="col-lg-offset-3 col-lg-6 col-md-offset-2 col-md-8 roll-call"
              align="left">
 
             <div class="profileImageWrapper-Feed">
@@ -726,11 +726,11 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                 <div class="row row-padding">
                     <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 roll-call" align="left">
                         <?php if ($ID == get_id_from_username($username)) { ?>
-                            <div>You do not have anything posted for the <?php echo $hashtag ?> game.</div>
+                            <div style="padding-left:15px;">You do not have anything posted for the <?php echo $hashtag ?> game.</div>>
                         <?php } else {
                             $firstName = get_user_firstName(get_id_from_username($username));
                             ?>
-                            <div><?php echo $firstName ?> does not have anything posted for the <?php echo $hashtag ?> game.</div>
+                            <div style="padding-left:15px;"><?php echo $firstName ?> does not have anything posted for the <?php echo $hashtag ?> game.</div>
                         <?php } ?>
                     </div>
                 </div>

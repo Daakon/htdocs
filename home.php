@@ -28,7 +28,7 @@ if (isset($_POST['submit'])) {
     }*/ else {
         if (strlen($post) > 0) {
             $post = makeLinks($post);
-
+            $post = "<p>$post</p>";
 
             // Loop through each image uploaded.
             if (strlen($_FILES['flPostMedia']['name'] > 0)) {
@@ -174,11 +174,9 @@ if (isset($_POST['submit'])) {
                             <source src="' . $mediaPath . $mediaName . '" type="' . $mediaType . '">
                             Your browser does not support the audio element.
                             </audio>';
-                            $img = '<a href = "/media.php?id=' . $ID . '&mediaName=' . $mediaName . '&mid=' . $mediaID . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '" ><br/>' . $img . '</a><br/><br/>';
                         }
                         if (in_array($type, $photoFileTypes)) {
-                            $img = '<img src = "' . $mediaPath . $mediaName . '" />';
-                            $img = '<a href = "/media.php?id=' . $ID . '&mid=' . $mediaID . '&mediaName=' . $media . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '">' . $img . '</a>';
+                            $img = '<img src = "' . $mediaPath . $mediaName . '" width="100%" height="auto" />';
                         } // check if file type is a video
                         if (in_array($type, $videoFileTypes)) {
                             // where ffmpeg is located
@@ -194,13 +192,13 @@ if (isset($_POST['submit'])) {
                             //ffmpeg command
                             $cmd = "$ffmpeg -i \"$postMediaFilePath\" -r 1 -ss 3 -t 1  -f image2 $poster 2>&1";
                             exec($cmd);
-                            $img = '<video poster="/poster/' . $posterName . '" preload="none" autoplay="autoplay" muted controls>
+                            $img = '<video poster="/poster/' . $posterName . '" preload="none" autoplay="autoplay" muted controls width="100%" height="auto">
                                 <source src = "' . $videoPath . $mediaName . '" type="video/mp4" />
                                 <source src = "' . $videoPath . $oggFileName . '" type = "video/ogg" />
                                 <source src = "' . $videoPath . $webmFileName . '" type = "video/webm" />
                                 </video>';
                         }
-                        $newImage .= '<br/><br/>'.$img;
+                        $newImage .= $img;
                     }
                     // predict next post ID so when can reference each image to the new post
                     $sql = "SELECT ID FROM Posts Order by ID DESC LIMIT 1";
@@ -368,8 +366,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                         $img = '<a href = "/media.php?id=' . $ID . '&mediaName=' . $mediaName . '&mid=' . $mediaID . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '" ><br/>'.$img.'</a><br/><br/>';
                     }
                     if (in_array($type, $photoFileTypes)) {
-                        $img = '<img src = "' . $mediaPath . $mediaName .'" />';
-                        $img = '<a href = "/media.php?id=' . $ID . '&mid=' . $mediaID . '&mediaName=' . $media . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '">' . $img . '</a>';
+                        $img = '<img src = "' . $mediaPath . $mediaName .'"  />';
                     } // check if file type is a video
                     elseif (in_array($type, $videoFileTypes)) {
                         // where ffmpeg is located
@@ -697,8 +694,7 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
         <!--        <!--Middle Column -->
         <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8">
                 <?php require 'profile_menu.php'; ?>
-            <a href="/messages/<?php echo $username ?>"><img src = "/images/messages.png" height="20" width="20" /> <?php require 'getNewMessageCount.php' ?></a>
-            <a style="padding-left:20px;" href="/member_follows/<?php echo get_username($ID) ?>"><img src = "/images/follows.png" height="20" width="20" /><?php require 'getNewFollowCount.php' ?></a>
+
         </div>
 
         <?php
@@ -722,12 +718,12 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
 
 
         <!--Middle Column -->
-        <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 roll-call"
-             align="left">
+        <div class="col-lg-offset-3 col-lg-6 col-md-offset-2 col-md-8 roll-call"
+             align="left" >
 
             <!--If a service provider -->
 
-            <div align = "center">
+            <div align = "center" style="margin-left:10px;">
 
                 <div>
 
@@ -742,19 +738,14 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
             </div>
 
 
-<?php if (hasExistingGamePost($ID)) {
-    echo "<div align = 'center' style='color:red;font-weight:bold;'>You have an existing post for this game. <br/>Delete your post to post again.";
-    ?>
-            <div style="color:black">
-            <h2>Your AD Here</h2>
-            Contact us at <a href="mailto:info@playdoe.com">info@playdoe.com</a>
+            <div class="hidden-lg">
+
+                <div style="padding-left:10px;padding-bottom:20px;">
+                <a href="/messages/<?php echo $username ?>"><img src = "/images/messages.png" height="20" width="20" /> <?php require 'getNewMessageCount.php' ?></a>
+                <a style="padding-left:20px;" href="/member_follows/<?php echo get_username($ID) ?>"><img src = "/images/follows.png" height="20" width="20" /><?php require 'getNewFollowCount.php' ?></a>
                 </div>
-    </div>
-    <?php
-}
-   else {
-    ?>
-            <form method="post" enctype="multipart/form-data" action="" onsubmit="return showUploading()">
+
+            <form method="post" enctype="multipart/form-data" action="" onsubmit="return showUploading()" >
                 <img src="/images/image-icon.png" height="30px" width="30px" alt="Photos/Video"/>
                 <strong>Upload Photos/Videos</strong><span style="color:red;padding-left:10px;">* Required</span>
                 <input type="file" width="10px;" name="flPostMedia[]" id="flPostMedia" multiple/>
@@ -781,17 +772,20 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
                 <input type="submit" class="post-button" name="submit" id="submit" value="Post"/>
             </form>
 
-            <?php } ?>
-
             <hr class="hr-line">
 
-            The post with the most likes wins <b>$100</b>
+            </div>
+
+            <div class="visible-lg" style="padding-left:10px;padding-bottom:10px;">
+                <a href="/messages/<?php echo $username ?>"><img src = "/images/messages.png" height="20" width="20" /> <?php require 'getNewMessageCount.php' ?></a>
+                <a style="padding-left:20px;" href="/member_follows/<?php echo get_username($ID) ?>"><img src = "/images/follows.png" height="20" width="20" /><?php require 'getNewFollowCount.php' ?></a>
+                </div>
+            <p style="color:#818488;">
+            The post with the most likes each week wins <b>$100</b>
+            </p>
             <br/><br/>
 
-            <!--<select class="form-control" id="hashtag" name="hashtag" onchange="updateFeed()" >
-                <option value="">Go to a different game </option>
-                <?php /*category() */?>
-            </select>-->
+
         </div>
 
         <br/>

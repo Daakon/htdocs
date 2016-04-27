@@ -7,7 +7,7 @@ body {
     background-repeat:no-repeat;
     background-size:100% 100%;
     background-position:inherit;
-    background: #e3e3e3;
+    background: #F0F0F0  ;
 }
 
 .container {
@@ -35,6 +35,11 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 20px;
     border:3px solid gray;
     text-align: center;
+}
+
+p {
+    padding-left:10px;
+    padding-right:10px;
 }
 
 .index {
@@ -146,6 +151,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .content-space {
     margin-top:1%;
+    padding-left:10px;
+    padding-right:10px;
 }
 
 .padding-0 {
@@ -175,7 +182,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .member-media {
     margin-right:5px;
-    background-size:100% auto
+    background-size:100% auto;
+    padding-left:10px;
 }
 
 .margin-bottom-20 {
@@ -226,6 +234,10 @@ h1, h2, h3, h4, h5, h6 {
     width: 300px;
 }
 
+ form {
+    margin-left:10px;
+    padding-right:10px;
+}
 .signup-button {
     margin-left: 350px;
     width: 150px;
@@ -238,12 +250,15 @@ h1, h2, h3, h4, h5, h6 {
     color: black;
     padding-top: 5px;
     padding-bottom: 20px;
+    padding-left:0px;
+    padding-right:0px;
     margin-bottom:20px !important;
     max-width: 100%;
     min-width: 150px;
     word-break: keep-all;
     min-height: 500px;
     font-size: 14px;
+    border: 1px solid #e3e3e3;
 }
 
 .ad-desktop {
@@ -275,6 +290,7 @@ h1, h2, h3, h4, h5, h6 {
     color: white;
     padding: 5px 10px;
     font-size: 20px;
+    margin-left:10px;
 }
 
 
@@ -358,6 +374,7 @@ img[src='Error.src']{
 .profileImageWrapper-Feed {
     float:left;
     width:50px;
+    padding-left:5px;
 }
 
 .profileNameWrapper-Feed {
@@ -579,7 +596,7 @@ iframe {
 
 img {
     max-width: 100%;
-    max-height:500px;
+    max-height:auto;
 }
 
 .post > a > img {
@@ -638,6 +655,7 @@ a:hover {
     width: 20px;
     height: 20px;
     border: none;
+    margin-left:10px;
 }
 
 .btnDisapprove {
@@ -645,6 +663,7 @@ a:hover {
     width: 20px;
     height: 20px;
     border: none;
+    margin-left:10px;
 }
 
 a {
