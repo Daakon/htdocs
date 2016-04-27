@@ -48,11 +48,22 @@ if (isset($_POST['submit'])) {
                     $type = $_FILES['flPostMedia']['type'][$k];
                     $tempName = $_FILES['flPostMedia']['tmp_name'][$k];
                     $size = $_FILES['flPostMedia']['size'][$k];
+                    $mediaFile = $tempName;
+
                     if (strlen($mediaName) > 0) {
 // check file size
                         if ($size > 5000000000) {
                             echo '<script>alert("File is too large. The maximum file size is 500MB.");</script>';
                             exit();
+                        }
+
+                        $checkImage = getimagesize($mediaFile);
+                        $width = $checkImage[0];
+                        $height = $checkImage[1];
+
+                        if ($width < 600 || $height < 600) {
+                            echo '<script>alert("This image is too small. Must be minimum 600 x 600");location = "/home"</script>';
+                            exit;
                         }
                         // create media type arrays
                         $videoFileTypes = array("video/mpeg", "video/mpg", "video/ogg", "video/mp4",
@@ -65,7 +76,7 @@ if (isset($_POST['submit'])) {
                         // add unique id to image name to make it unique and add it to the file server
                         $fileName = pathinfo($mediaName, PATHINFO_FILENAME);
                         $mediaName = trim(uniqid() . $mediaName);
-                        $mediaFile = $tempName;
+
                         $mediaFile2 = "";
                         copy($tempName, $mediaFile2);
                         $mediaFile3 = "";
@@ -234,7 +245,7 @@ if (isset($_POST['submit'])) {
         alert_followers($lastPostID);
     }
 
-    echo "<script>location='/home'</script>";
+    echo "<script>alert('Your image was posted!');location='/home'</script>";
 }
 ?>
 <?php
