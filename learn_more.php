@@ -86,11 +86,16 @@ if (!empty($_SESSION['ID'])) {
                     <table style="margin-left:10px;margin-top:20px;margin-bottom:10px;margin-right:10px;">
                         <tr>
                             <td>
-                                <h3><span style="color:red;">Post. </span><span style="color:blue;">Play. </span><span style="color:green">Win Money.</span></h3>
-                                <p>
-                                    Share the coolest photo or video you have on your phone. The post with the most likes wins $100. Go to playdoe.com now!
-
-                                </p>
+                                <h4><span style="color:red;">Post. </span><span style="color:blue;">Play. </span><span style="color:green"> Win.</span></h4>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Share photos and videos of things you do throughout your day.
+                                <br/>
+                                Earn points for each post.
+                                <br>
+                                Redeem your points for cash or a gift card at anytime.
                             </td>
                         </tr>
                     </table>
@@ -102,10 +107,17 @@ if (!empty($_SESSION['ID'])) {
                     <table style="margin-left:10px;margin-top:20px;">
                         <tr>
                             <td>
-                                <h2><span style="color:red;">Post. </span><span style="color:blue;">Play. </span><span style="color:green">Win Money.</span></h2>
-                                <p>
-                                    Share the coolest photo or video you have on your phone. The post with the most likes wins $100. Go to playdoe.com now!
-                                </p>
+                                <h2><span style="color:green;">Post. </span><span style="color:blue;">Play. </span><span style="color:red"> Win.</span></h2>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Share photos and videos of things you do throughout your day.
+                                <br/>
+                                Earn a point for each post.
+                                <br>
+                                Redeem your points for cash or a gift card at anytime.
                             </td>
                         </tr>
                     </table>
@@ -267,7 +279,7 @@ if (!empty($_SESSION['ID'])) {
         $postOwner = $memberID;
         ?>
 
-        <div class="col-lg-5 col-lg-offset-3 col-md-5 col-md-offset-3 col-sm-6 col-xs-12 roll-call" align="left"
+        <div class="col-lg-5 col-lg-offset-3 col-md-5 col-md-offset-3 col-sm-6 col-xs-12 roll-call-feed" align="left"
              style="margin-bottom: 20px;margin-top:10px;">
 
             <?php

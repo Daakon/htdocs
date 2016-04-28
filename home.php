@@ -61,10 +61,13 @@ if (isset($_POST['submit'])) {
                         $width = $checkImage[0];
                         $height = $checkImage[1];
 
-                        if ($width < 600 || $height < 600) {
-                            echo '<script>alert("This image is too small. Must be minimum 600 x 600");location = "/home"</script>';
+                        if (in_array($type, $photoFileTypes)) {
+                        if ($width < 200 || $height < 200) {
+                            echo '<script>alert("This image is too small.");location = "/home"</script>';
                             exit;
                         }
+                    }
+
                         // create media type arrays
                         $videoFileTypes = array("video/mpeg", "video/mpg", "video/ogg", "video/mp4",
                             "video/quicktime", "video/webm", "video/x-matroska",
@@ -575,10 +578,7 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
             alert('Your post appears to be empty');
             return false;
         }
-        if (document.getElementById('category').value == '') {
-            alert('You did not provide a post category');
-            return false
-        }
+
         document.getElementById("progress").style.display = "block";
         return true;
     }
@@ -590,14 +590,7 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
         saveScrollPositions(theForm);
     }
 </script>
-<script type = "text/javascript">
-    function updateFeed() {
-        var selection = document.getElementById('hashtag');
-        var hashtag = selection.options[selection.selectedIndex].value;
 
-        window.location = "/home?hashtag="+encodeURIComponent(hashtag);
-    }
-</script>
 
 
 
@@ -642,7 +635,7 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
 
 
 <script>
-    $(window).scroll(function () {
+    /*$(window).scroll(function () {
         if ($(document).height() <= $(window).scrollTop() + $(window).height()) {
            //alert("End Of The Page");
 
@@ -663,7 +656,7 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
 
         }
 
-    });
+    });*/
 </script>
 
 <meta http-equiv="cache-control" content="max-age=0" />
@@ -765,13 +758,6 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
                 <textarea name="post" id="post" class="form-control textArea"
                           placeholder="Add a caption to your photos & videos" ></textarea>
                 <br/>
-                <div id="progress" style="display:none;">
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-striped progress-bar-danger active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" class="progress-bar">
-                            <b>File uploading...please wait</b>
-                        </div>
-                    </div>
-                </div>
 
                <!-- <select class="form-control " id="hashtag" name="hashtag" >
                     <option value="">Select Hash Tag </option>
@@ -783,16 +769,27 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
                 <input type="submit" class="post-button" name="submit" id="submit" value="Post"/>
             </form>
 
+                <div id="progress" style="display:none;padding-top:5px;">
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped progress-bar-danger active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" class="progress-bar">
+                            <b>File uploading...please wait</b>
+                        </div>
+                    </div>
+                </div>
+
             <hr class="hr-line">
 
             </div>
+
+
 
             <div class="visible-lg" style="padding-left:10px;padding-bottom:10px;">
                 <a href="/messages/<?php echo $username ?>"><img src = "/images/messages.png" height="20" width="20" /> <?php require 'getNewMessageCount.php' ?></a>
                 <a style="padding-left:20px;" href="/member_follows/<?php echo get_username($ID) ?>"><img src = "/images/follows.png" height="20" width="20" /><?php require 'getNewFollowCount.php' ?></a>
                 </div>
+
             <p style="color:#818488;">
-            The post with the most likes each week wins <b>$100</b>
+            Inspire The World
             </p>
             <br/><br/>
 
@@ -867,7 +864,9 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
 </div>
 
 <?php if ($noPosts == false) { ?>
+<!--
 <div id="gettingMore" align="center" style="display:block;margin-top:-20px;" ><img src="/images/spinner.gif" height="50" width="50" /></div>
+-->
 <?php } ?>
 
 </body>

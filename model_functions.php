@@ -545,20 +545,14 @@ function checkBlock($ID, $memberID) {
     }
 }
 
-/*function isGameLocked($hashTag) {
-    $sql = "Select count(ID) as PostCount FROM Posts WHERE Category = '$hashTag' ";
+function getPostCount($ID) {
+    $sql = "Select count(ID) as PostCount From Posts Where Member_ID = $ID";
     $result = mysql_query($sql) or die(mysql_error());
     $rows = mysql_fetch_assoc($result);
     $postCount = $rows['PostCount'];
 
-    if ($postCount >= 100) {
-        return true;
-    }
-    else {
-        return false;
-    }
-
-}*/
+    return $postCount;
+}
 
 function hasExistingGamePost($ID) {
     $sql = "Select ID FROM Posts WHERE Member_ID = $ID and IsDeleted = 0 ";
@@ -613,7 +607,7 @@ function alert_followers($postID)
                         // Setup and send a message
                         $name = get_users_name_by_id($ID);
                         $name = trim($name);
-                        $text = "$name just started playing $hashtag. $domain";
+                        $text = "$name just shared a new post. $domain";
                         $text = trim($text);
                         $message = array('to' => $number, 'message' => $text);
                         $result = $clockwork->send($message);

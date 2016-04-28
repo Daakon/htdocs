@@ -245,13 +245,29 @@ p {
     font-size: 26px;
 }
 
-.roll-call {
+.roll-call-feed {
     background: white;
     color: black;
     padding-top: 5px;
     padding-bottom: 20px;
     padding-left:0px;
     padding-right:0px;
+    margin-bottom:20px !important;
+    max-width: 100%;
+    min-width: 150px;
+    word-break: keep-all;
+    min-height: 500px;
+    font-size: 14px;
+    border: 1px solid #e3e3e3;
+}
+
+.roll-call {
+    background: white;
+    color: black;
+    padding-top: 5px;
+    padding-bottom: 20px;
+    padding-left:10px;
+    padding-right:10px;
     margin-bottom:20px !important;
     max-width: 100%;
     min-width: 150px;
@@ -610,7 +626,7 @@ img {
 
 video {
     max-width: 100%;
-    width:500px;
+    width:100%;
     max-height: 500px;
     object-fit: inherit;
 }

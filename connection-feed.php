@@ -42,7 +42,7 @@ And (Members.ID Not in ( '" . implode($blockIDs, "', '") . "' ))
 $lastPostCondition
 Group By PostID
 
-Order By Likes DESC LIMIT $limit ";
+Order By PostID DESC ";
 $rollCallResult = mysql_query($sqlRollCall) or die(logError(mysql_error(), $url, "Getting Connection Feed data"));
 
 
@@ -50,14 +50,14 @@ $rollCallResult = mysql_query($sqlRollCall) or die(logError(mysql_error(), $url,
 // if no results
 if (mysql_num_rows($rollCallResult) == 0) {
     ?>
-    <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-8 roll-call"
+    <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-8 roll-call-feed"
          align="left">
         <?php //echo $greetText ?>
 
         <img src="/images/Playdoe-Logo.png" height="100" width="100" />
         <br/>
         <p>
-            <span style="color:red;">Post.</span> <span style="color:blue">Play.</span> <span style="color:green">Win Money.</span>
+            <span style="color:red;">Post.</span> <span style="color:blue">Play.</span> <span style="color:green">Win.</span>
         </p>
 
     </div>
@@ -91,7 +91,7 @@ $total = mysql_num_rows($rollCallResult);
         ?>
 
 
-        <div class="col-lg-offset-3 col-lg-6 col-md-offset-2 col-md-8 col-sm-12 col-xs-12 roll-call" >
+        <div class="col-lg-offset-3 col-lg-6 col-md-offset-2 col-md-8 col-sm-12 col-xs-12 roll-call-feed" >
 
             <?php
 

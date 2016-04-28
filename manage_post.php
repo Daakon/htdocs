@@ -376,9 +376,10 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
             <img src="<?php echo get_users_photo_by_id(get_id_from_username($username)) ?>" class="profilePhoto-Feed " alt=""
                  title="<?php echo $name ?>" />&nbsp;&nbsp;
             <?php if (get_id_from_username($username) == $ID) {
-              echo "Your Posts";
+                $postCount = getPostCount($ID);
+              echo "Your Posts : <b>Total points to redeem:</b> ". getPostCount($ID);
             } else {
-                echo  get_users_name_by_id(get_id_from_username($username))."'s Post"; }
+                echo  get_users_name_by_id(get_id_from_username($username))."'s Post";  }
             ?>
         </div>
 
@@ -438,11 +439,11 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
         $postID = $rows['PostID'];
         $postDate = $rows['PostDate'];
         $isSponsored = $rows['IsSponsored'];
+            $postCount = $rows['PostCount'];
         ?>
 
         <div class="col-lg-offset-3 col-lg-6 col-md-offset-2 col-md-8 roll-call"
              align="left">
-
             <div class="profileImageWrapper-Feed">
                 <a href="<?php echo $profileUrl ?>">
                     <img src="<?php echo $mediaPath. $profilePhoto ?>" class="profilePhoto-Feed " alt=""
