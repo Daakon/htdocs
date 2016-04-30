@@ -235,8 +235,7 @@ function build_and_send_email($senderId, $toId, $notification, $postID, $pass, $
         }
         // a post status update related to your service has been posted
         $name = get_users_name_by_id($senderId);
-        $hashtag = $_SESSION['Hashtag'];
-        $subject = "$name just started playing $hashtag. <a href='".$link."'>Click here</a> to see the post
+        $subject = "$name just shared a new post. $hashtag. <a href='".$link."'>Click here</a> to view it.
         <br/><br/>You are receiving this because you follow $name";
     }
     if ($notification == 12) {

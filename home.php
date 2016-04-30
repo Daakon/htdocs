@@ -788,11 +788,6 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
                 <a style="padding-left:20px;" href="/member_follows/<?php echo get_username($ID) ?>"><img src = "/images/follows.png" height="20" width="20" /><?php require 'getNewFollowCount.php' ?></a>
                 </div>
 
-            <p style="color:#818488;">
-            Inspire The World
-            </p>
-            <br/><br/>
-
 
         </div>
 

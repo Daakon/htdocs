@@ -376,8 +376,8 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
             <img src="<?php echo get_users_photo_by_id(get_id_from_username($username)) ?>" class="profilePhoto-Feed " alt=""
                  title="<?php echo $name ?>" />&nbsp;&nbsp;
             <?php if (get_id_from_username($username) == $ID) {
-                $postCount = getPostCount($ID);
-              echo "Your Posts : <b>Total points to redeem:</b> ". getPostCount($ID);
+              echo "<b>Total points to redeem:</b> ". getRedeemPoints($ID);
+                if (getRedeemPoints($ID) > 0) { echo "<br/><a href='/view_messages/playdoe'>Redeem Here</a>"; }
             } else {
                 echo  get_users_name_by_id(get_id_from_username($username))."'s Post";  }
             ?>
@@ -727,11 +727,11 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                 <div class="row row-padding">
                     <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 roll-call" align="left">
                         <?php if ($ID == get_id_from_username($username)) { ?>
-                            <div style="padding-left:15px;">You do not have anything posted for the <?php echo $hashtag ?> game.</div>>
+                            <div style="padding-left:15px;">You do not have anything posted.</div>
                         <?php } else {
                             $firstName = get_user_firstName(get_id_from_username($username));
                             ?>
-                            <div style="padding-left:15px;"><?php echo $firstName ?> does not have anything posted for the <?php echo $hashtag ?> game.</div>
+                            <div style="padding-left:15px;"><?php echo $firstName ?> does not have anything posted.</div>
                         <?php } ?>
                     </div>
                 </div>

@@ -545,13 +545,22 @@ function checkBlock($ID, $memberID) {
     }
 }
 
-function getPostCount($ID) {
-    $sql = "Select count(ID) as PostCount From Posts Where Member_ID = $ID";
+function getRedeemPoints($ID) {
+    $sql = "Select count(ID) as PostCount From Posts Where Member_ID = $ID and IsDeleted = 0 and IsRedeemed = 0 ";
     $result = mysql_query($sql) or die(mysql_error());
     $rows = mysql_fetch_assoc($result);
     $postCount = $rows['PostCount'];
 
-    return $postCount;
+    $sql2 = "SELECT Distinct Members.FirstName, Members.LastName, Follows.Followed_ID As ParentFollowedID, (Select count(Followed_ID) From Follows where Followed_ID = ParentFollowedID) As FollowerCount
+    FROM Follows,Members
+    Where (Members.ID = Follows.Followed_ID) ";
+    $result2 = mysql_query($sql2) or die(mysql_error());
+    $rows2 = mysql_fetch_assoc($result2);
+    $followerCount = $rows['FollowerCount'];
+
+    $redeemPoints = $postCount + $followerCount;
+
+    return $redeemPoints;
 }
 
 function hasExistingGamePost($ID) {
