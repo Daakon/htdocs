@@ -86,16 +86,20 @@ if (!empty($_SESSION['ID'])) {
                     <table style="margin-left:10px;margin-top:20px;margin-bottom:10px;margin-right:10px;">
                         <tr>
                             <td>
-                                <h4><span style="color:red;">Post. </span><span style="color:blue;">Play. </span><span style="color:green"> Win.</span></h4>
+                                <h4><span style="color:red;">It's more fun </span><span style="color:blue;">when you</span><span style="color:green"> get a gift.</span></h4>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                Share photos and videos of things you do throughout your day.
-                                <br/>
-                                Earn points for each post.
-                                <br>
-                                Redeem your points for cash or a gift card at anytime.
+                                <img src="/images/camera.png" height="20px" width="20px" />
+                                Share photos and videos throughout your day.
+                                <br/><br/>
+                                <img src="/images/points.png" height="20px" width="20px" />
+                                Earn points for each post and follower you get.
+                                <br><br/>
+                                <img src="/images/redeem.png" height="20px" width="20px" />
+                                Redeem your points for cash or a gift card.
+                                <br/><br/>
                             </td>
                         </tr>
                     </table>
@@ -107,17 +111,21 @@ if (!empty($_SESSION['ID'])) {
                     <table style="margin-left:10px;margin-top:20px;">
                         <tr>
                             <td>
-                                <h2><span style="color:green;">Post. </span><span style="color:blue;">Play. </span><span style="color:red"> Win.</span></h2>
+                                <h2><span style="color:red;">It's more fun </span><span style="color:blue;">when you</span><span style="color:green"> get a gift.</span></h2>
 
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                Share photos and videos of things you do throughout your day.
-                                <br/>
-                                Earn a point for each post.
-                                <br>
-                                Redeem your points for cash or a gift card at anytime.
+                                <img src="/images/camera.png" height="20px" width="20px" />
+                                Share photos and videos throughout your day.
+                                <br/><br/>
+                                <img src="/images/points.png" height="20px" width="20px" />
+                                Earn points for each post and follower you get.
+                                <br><br/>
+                                <img src="/images/redeem.png" height="20px" width="20px" />
+                                Redeem your points for cash or a gift card.
+                                <br/><br/>
                             </td>
                         </tr>
                     </table>
@@ -196,7 +204,7 @@ if (!empty($_SESSION['ID'])) {
                 <a href="http://instagram.com/officialplaydoe" target="_blank"><img src="/images/instagram-logo-red.png" height="50" width="50"/></a>
                 <a href="https://www.pinterest.com/officialplaydoe/" target="_blank"><img src="/images/pintrest-logo-red.png" height="50" width="50" /> </a>
                 <a href="https://www.linkedin.com/company/playdoe" target="_blank"><img src="/images/linkedin-logo-red.png" height="40" width="40" /></a>
-                <a href="https://plus.google.com/u/0/b/100826332083461810042/100826332083461810042/about" target="_blank"><img src="/images/google-youtube-logo.png" height="40" width="50" style="padding-left:8px;" /></a>
+                <a href="https://plus.google.com/b/109922168318774544833/109922168318774544833/about" target="_blank"><img src="/images/google-youtube-logo.png" height="40" width="50" style="padding-left:8px;" /></a>
                 <br/>
 
                 <div style="margin-top:60px;">
