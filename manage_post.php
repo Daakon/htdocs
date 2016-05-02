@@ -376,8 +376,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
             <img src="<?php echo get_users_photo_by_id(get_id_from_username($username)) ?>" class="profilePhoto-Feed " alt=""
                  title="<?php echo $name ?>" />&nbsp;&nbsp;
             <?php if (get_id_from_username($username) == $ID) {
-              echo "<b>Total points to redeem:</b> ". getRedeemPoints($ID);
-                if (getRedeemPoints($ID) > 0) { echo "<br/><a href='/view_messages/playdoe'>Redeem Here</a>"; }
+              echo "<span style='color:#888888'>Your posts</span>";
             } else {
                 echo  get_users_name_by_id(get_id_from_username($username))."'s Post";  }
             ?>

@@ -35,10 +35,11 @@ $ID = $_SESSION['ID'];
 
         <div class="col-xs-12 col-md-6 col-lg-6" style="padding-left:50px;">
 
-            <h4><div style="color:blue;"  onclick="document.getElementById('rules').style.display = 'block';">View Game Rules</div></h4>
+            <h4><div style="color:blue;"  onclick="document.getElementById('rules').style.display = 'block';">How It Works</div></h4>
 
             <div id="rules" style="display:none;">
                 <li class="display-block" style="padding-bottom:10px;">1. Each status you post and each follower you gain earns you one point each.</li>
+                <li class="display-block" style="padding-bottom:10px;">1. Each point is worth ¢25.</li>
                 <li class="display-block" style="padding-bottom:10px;">2. You must collect a minimum of 10 points before redeeming your points for cash or a gift card.</i>.</li>
                 <li class="display-block" style="padding-bottom:10px;">3. Since your points are based on your status posts, your post will be deleted once you redeem your points.</li>
                 <li class="display-block" style="padding-bottom:10px;">3. To redeem your points, direct message 'Playdoe' and let us know you would like to redeem your points.

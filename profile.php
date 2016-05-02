@@ -624,23 +624,26 @@ $bgPhoto = $row['ProfilePhoto'];
 
             <br/>
 
-            <form method="post" enctype="multipart/form-data" action="" >
-                <img src="/images/image-icon.png" class="img-icon" alt="Photos/Video"/>
-                <strong>Upload A Profile Photo</strong>
-                <input type="file" width="10px;" name="flPostPhoto" id="flPostPhoto"/>
-                <input type="hidden" name="MAX_FILE_SIZE" value="500000000"
-                <br/>
-                <div id="PhotoProgress" style="display:none;">
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-striped progress-bar-danger active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" class="progress-bar">
-                            <span class="sr-only">Loading</span>
+            <div class="hidden-lg">
+
+                <form method="post" enctype="multipart/form-data" action="" >
+                    <img src="/images/image-icon.png" class="img-icon" alt="Photos/Video"/>
+                    <strong>Upload A Profile Photo</strong>
+                    <input type="file" width="10px;" name="flPostPhoto" id="flPostPhoto"/>
+                    <input type="hidden" name="MAX_FILE_SIZE" value="500000000"
+                    <br/>
+                    <div id="PhotoProgress" style="display:none;">
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped progress-bar-danger active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" class="progress-bar">
+                                <span class="sr-only">Loading</span>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <br/>
-                <input type="submit" class="post-button" name="photo" id="photo" value="Upload Photo" onclick="showPhotoUploading()" />
-            </form>
+                    <br/>
+                    <input type="submit" class="post-button" name="photo" id="photo" value="Upload Photo" onclick="showPhotoUploading()" />
+                </form>
 
+            </div>
 
             <hr class="hr-line"/>
 

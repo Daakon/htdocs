@@ -168,10 +168,12 @@ function makeLinks($str)
                 preg_match('/(<img[^>]+>)/i', $titleLink, $imageTags);
 
                 $imageTag2 = $imageTags[0];
+                $endingAnchor = "";
 
                 if (strlen($imageTag2) > 1) {
                     $titleArray = explode($imageTag2, $titleLink);
                     $titleLink = $titleArray[0] . ' ' . $imageTag2;
+                    $endingAnchor = "</a>";
                 }
                 else {
                     // cut everything off by our rbLink anchor tag
@@ -205,7 +207,7 @@ function makeLinks($str)
                 // remove any script tags that may come back from a website
                 $titleLink = preg_replace('#<script(.*?)>(.*?)</script>#is', '', $titleLink);
                 $titleLink = closetags($titleLink);
-                $titleLink = $favicon.' '. $titleLink;
+                $titleLink = $favicon.' '. $titleLink . $endingAnchor;
                 return $str . '<br/><br/>' . $titleLink;
 
             }

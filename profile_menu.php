@@ -11,7 +11,7 @@ if ($profileID == $ID) {
 <style>
     .dropdown {
         background: transparent;
-        padding-left:10px;
+        padding-left:0px;
     }
 </style>
 

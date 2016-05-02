@@ -697,7 +697,7 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
 
         <!--        <!--Middle Column -->
         <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8">
-                <?php require 'profile_menu.php'; ?>
+
 
         </div>
 
@@ -725,16 +725,6 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
         <div class="col-lg-offset-3 col-lg-6 col-md-offset-2 col-md-8 roll-call"
              align="left" >
 
-            <!--If a service provider -->
-
-            <div align = "center" style="margin-left:10px;">
-
-                <div>
-
-                </div>
-
-            </div>
-
             <div style="margin-bottom:10px;margin-top:-20px;padding-bottom:10px;" align="center">
 
 
@@ -744,10 +734,22 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
 
             <div class="hidden-lg">
 
-                <div style="padding-left:10px;padding-bottom:20px;">
+                <div style="padding-left:10px;padding-bottom:0px;">
+                    <?php require 'profile_menu.php'; ?>
+
+                    <div style="margin-top:-10px">
                 <a href="/messages/<?php echo $username ?>"><img src = "/images/messages.png" height="20" width="20" /> <?php require 'getNewMessageCount.php' ?></a>
                 <a style="padding-left:20px;" href="/member_follows/<?php echo get_username($ID) ?>"><img src = "/images/follows.png" height="20" width="20" /><?php require 'getNewFollowCount.php' ?></a>
+                <br/><br/>
+                    <?php
+                    echo "<span style='color:#888888'><img src='images/points.png' height='20' width='20' /> Total points to redeem:</span> ". getRedeemPoints($ID);
+                    if (getRedeemPoints($ID) > 0) { echo "<br/><a href='/view_messages/playdoe'>Redeem Here</a>"; };
+                    ?>
+                        </div>
+
                 </div>
+
+                <hr class="hr-line" />
 
             <form method="post" enctype="multipart/form-data" action="" onsubmit="return showUploading()" >
                 <img src="/images/image-icon.png" height="30px" width="30px" alt="Photos/Video"/>
@@ -784,8 +786,14 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
 
 
             <div class="visible-lg" style="padding-left:10px;padding-bottom:10px;">
+                <?php require 'profile_menu.php'; ?>
                 <a href="/messages/<?php echo $username ?>"><img src = "/images/messages.png" height="20" width="20" /> <?php require 'getNewMessageCount.php' ?></a>
                 <a style="padding-left:20px;" href="/member_follows/<?php echo get_username($ID) ?>"><img src = "/images/follows.png" height="20" width="20" /><?php require 'getNewFollowCount.php' ?></a>
+                <br/><br/>
+                <?php
+                echo "<span style='color:#888888'><span style='color:#888888'><img src='images/points.png' height='20' width='20' /> Total points to redeem:</span> ". getRedeemPoints($ID);
+                if (getRedeemPoints($ID) > 0) { echo "<br/><a href='/view_messages/playdoe'>Redeem Here</a>"; };
+                ?>
                 </div>
 
 

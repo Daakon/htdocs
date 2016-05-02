@@ -197,7 +197,7 @@ if (!empty($_SESSION['ID'])) {
             </div>
 
             <div class="col-lg-5 col-lg-offset-1 col-md-5 col-md-offset-1 col-sm-12 col-xs-12">
-                <h5>Follow us to stay up on new games and giveaways:</h5>
+                <h5>Follow us:</h5>
                 <a href="http://facebook.com/officialplaydoe" target="_blank"><img src="/images/facebook-logo-red.png" height="50" width="50"></a>
                 <a href="http://twitter.com/officialplaydoe" target="_blank"><img src="/images/twitter-logo-red.png" height="=50" width="50"></a>
                 <a href="http://officialplaydoe.tumblr.com/" target="_blank"><img src="/images/tumblr-logo-red.png" height="40" width="40"/> </a>

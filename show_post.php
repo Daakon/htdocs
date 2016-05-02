@@ -536,8 +536,6 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
                 <?php if (isset($ID)) { ?>
 
-                        <a href='/post-interest?interest=<?php echo urlencode($category) ?>' class='category'><span class="engageText">#<?php echo $category ?></span></a>
-
                     <?php if ($ID != $memberID) {?>
                             | <a href="/view_messages/<?php echo $username ?>"><span class="engageText"><img src = "/images/messages.png" height="20" width="20" /> Message </span> </a>
                             <?php } ?>
@@ -674,6 +672,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                         Members.ID As CommenterID,
                         Members.FirstName as FirstName,
                         Members.LastName As LastName,
+                        Members.Username As Username,
                         Profile.ProfilePhoto As ProfilePhoto
                         FROM PostComments,Members, Profile
                         WHERE
@@ -693,6 +692,8 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                         $profilePhoto = $rows3['ProfilePhoto'];
                         $commentID = $rows3['PostCommentID'];
                         $commentOwnerID = $rows3['CommenterID'];
+                        $commenterUsername = $rows3['Username'];
+                        $commenterProfileUrl = "/$commenterUsername";
                         $commentDate = $rows3['CommentDate'];
 
                         echo '<div class="comment-row">';
@@ -741,6 +742,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                         Members.ID As CommenterID,
                         Members.FirstName as FirstName,
                         Members.LastName As LastName,
+                        Members.Username As Username,
                         Profile.ProfilePhoto As ProfilePhoto
                         FROM PostComments,Members, Profile
                         WHERE
