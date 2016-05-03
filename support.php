@@ -42,12 +42,14 @@ $ID = $_SESSION['ID'];
                 <li class="display-block" style="padding-bottom:10px;">2. Each point is worth ¢25.</li>
                 <li class="display-block" style="padding-bottom:10px;">3. You must collect a minimum of 10 points before redeeming your points for cash or a gift card.</i>.</li>
                 <li class="display-block" style="padding-bottom:10px;">4. Once you redeem your points, your points are reset to 0.</li>
-                <li class="display-block" style="padding-bottom:10px;">3. <b>To redeem your points, direct message 'Playdoe' and let us know you would like to redeem your points.
-                Tell us what you would like in exchange for your points, rather it's cash or a gift card. If you want a gift card, tell us of the
-                business you want a gift card from. If the gift card is available, we will send it to the email you used to sign up with. If the
+                <li class="display-block" style="padding-bottom:10px;">3. <b>To redeem your points, direct message '<span style="color:red">Playdoe</span>' and let us know you would like to redeem your points.
+                Tell us what you would like in exchange for your points, rather it's cash or a gift card. If you want a gift card, tell us the
+                business you want the gift card from. If the gift card is available, we will send the claim code to your Playdoe inbox. If the
                 gift card is not available, we will work to provide an ancillary gift card option.</b></li>
 
                 <h5 style="font-style: italic">*Cash payouts are deposited in either your PayPal or Venmo account.</h5>
+
+                <lead>*Rewards processing can take up to 24 hours.</lead>
 
                 <div style="margin-bottom:20px;margin-top:10px;"  onclick="document.getElementById('rules').style.display = 'none';"><img src="/images/close.png" height="25" width="25"/>
                     <!-- adding onclick to hide this element when you click it -->
