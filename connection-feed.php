@@ -78,7 +78,12 @@ $total = mysql_num_rows($rollCallResult);
         $memberID = $rows['MemberID'];
         $firstName = $rows['FirstName'];
         $lastName = $rows['LastName'];
-        $name = $rows['FirstName'] . ' ' . $rows['LastName'];
+        if (strlen($lastName) > 0) {
+            $name = $rows['FirstName'] . ' ' . $rows['LastName'];
+        } else {
+            $name = $rows['FirstName'];
+        }
+
         $username = $rows['Username'];
         $profilePhoto = $rows['ProfilePhoto'];
         $category = $rows['Category'];
@@ -242,8 +247,10 @@ $total = mysql_num_rows($rollCallResult);
                             <input type="text" class="form-control" name="postComment" id="postComment"
                                    placeholder="Write a comment" title='' />
 
-                            <h6>Add Photos/Video</h6>
-                            <input type="file" name="flPostMedia" id="flPostMedia" class="flPostMedia"/>
+                           <span class="hidden-lg">
+                                <h6>Add Photos/Video</h6>
+                                <input type="file" name="flPostMedia" id="flPostMedia" class="flPostMedia"/>
+                            </span>
 
                             <br/>
                             <div id="comment<?php echo $postID ?>" style="display:none;">

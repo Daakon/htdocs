@@ -743,7 +743,7 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
                 <br/><br/>
                     <?php
                     echo "<span style='color:#888888'><img src='images/points.png' height='20' width='20' /> Total points to redeem:</span> ". getRedeemPoints($ID);
-                    if (getRedeemPoints($ID) > 0) { echo "<br/><a href='/view_messages/playdoe'>Redeem Here</a>"; };
+                    if (getRedeemPoints($ID) > 0) { echo "<br/><a href='/support'>How To Redeem My Points</a>"; };
                     ?>
                         </div>
 
@@ -792,7 +792,7 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
                 <br/><br/>
                 <?php
                 echo "<span style='color:#888888'><span style='color:#888888'><img src='images/points.png' height='20' width='20' /> Total points to redeem:</span> ". getRedeemPoints($ID);
-                if (getRedeemPoints($ID) > 0) { echo "<br/><a href='/view_messages/playdoe'>Redeem Here</a>"; };
+                if (getRedeemPoints($ID) > 0) { echo "<br/><a href='/support'>How to Redeem My Points</a>"; };
                 ?>
                 </div>
 

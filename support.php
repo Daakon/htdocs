@@ -39,13 +39,13 @@ $ID = $_SESSION['ID'];
 
             <div id="rules" style="display:none;">
                 <li class="display-block" style="padding-bottom:10px;">1. Each status you post and each follower you gain earns you one point each.</li>
-                <li class="display-block" style="padding-bottom:10px;">1. Each point is worth ¢25.</li>
-                <li class="display-block" style="padding-bottom:10px;">2. You must collect a minimum of 10 points before redeeming your points for cash or a gift card.</i>.</li>
-                <li class="display-block" style="padding-bottom:10px;">3. Since your points are based on your status posts, your post will be deleted once you redeem your points.</li>
-                <li class="display-block" style="padding-bottom:10px;">3. To redeem your points, direct message 'Playdoe' and let us know you would like to redeem your points.
+                <li class="display-block" style="padding-bottom:10px;">2. Each point is worth ¢25.</li>
+                <li class="display-block" style="padding-bottom:10px;">3. You must collect a minimum of 10 points before redeeming your points for cash or a gift card.</i>.</li>
+                <li class="display-block" style="padding-bottom:10px;">4. Once you redeem your points, your points are reset to 0.</li>
+                <li class="display-block" style="padding-bottom:10px;">3. <b>To redeem your points, direct message 'Playdoe' and let us know you would like to redeem your points.
                 Tell us what you would like in exchange for your points, rather it's cash or a gift card. If you want a gift card, tell us of the
                 business you want a gift card from. If the gift card is available, we will send it to the email you used to sign up with. If the
-                gift card is not available, we will work to provide an ancillary gift card option.</li>
+                gift card is not available, we will work to provide an ancillary gift card option.</b></li>
 
                 <h5 style="font-style: italic">*Cash payouts are deposited in either your PayPal or Venmo account.</h5>
 
