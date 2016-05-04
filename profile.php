@@ -660,7 +660,7 @@ $bgPhoto = $row['ProfilePhoto'];
                 </div>
 
                 <div class="form-group">
-                    <label for="LastName">Last Name </label><span style="font-style: italic;padding-left:5px;font-size:12px;font-weight:bold;color:red;">(Not required if using a business name)</span>
+                    <label for="LastName">Last Name </label><span style="font-style: italic;padding-left:5px;font-size:12px;font-weight:bold;color:red;">(Not required)</span>
                     <input type="text" class="form-control" id="LastName" name="LastName" value="<?php echo $lastName ?>" onblur="capLname()" />
                 </div>
 

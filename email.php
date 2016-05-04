@@ -75,7 +75,8 @@ function build_and_send_email($senderId, $toId, $notification, $postID, $pass, $
         $name = get_users_name_by_id($toId);
         $nameArray = explode(' ', $name);
         $name = $nameArray[0];
-        $subject = "Congratulations $name, you now have a new profile on Playdoe. Enjoy playing games and winning cool prizes.<br/>";
+        $subject = "Congratulations $name, you now have a new profile on Playdoe.
+                    Start sharing great content, accumulating points and redeeming those points for gift cards and cash!<br/>";
         $subject .= "Your temporary password is <b>$pass</b><br/>";
         $subject .= '<a href = "http://www.playdoe.com">Login</a> to your account now!';
     }
