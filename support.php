@@ -51,6 +51,11 @@ $ID = $_SESSION['ID'];
 
                 <lead>*Rewards processing can take up to 24 hours.</lead>
 
+                <hr class="hr-line"/>
+                <h4 style="color:red;">Not Allowed</h4>
+
+                <li class="display-block" style="padding-bottom:10px;">1. Posting of duplicate photos and videos. These posts will be flagged.</li>
+
                 <div style="margin-bottom:20px;margin-top:10px;"  onclick="document.getElementById('rules').style.display = 'none';"><img src="/images/close.png" height="25" width="25"/>
                     <!-- adding onclick to hide this element when you click it -->
                     Close
