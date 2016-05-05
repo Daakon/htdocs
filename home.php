@@ -248,7 +248,7 @@ if (isset($_POST['submit'])) {
         alert_followers($lastPostID);
     }
 
-    echo "<script>alert('Your image was posted!');location='/home'</script>";
+    echo "<script>location='/home'</script>";
 }
 ?>
 <?php
@@ -751,25 +751,20 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
 
                 <hr class="hr-line" />
 
-            <form method="post" enctype="multipart/form-data" action="" onsubmit="return showUploading()" >
-                <img src="/images/image-icon.png" height="30px" width="30px" alt="Photos/Video"/>
-                <strong>Upload Photos/Videos</strong><span style="color:red;padding-left:10px;">* Required</span>
-                <input type="file" width="10px;" name="flPostMedia[]" id="flPostMedia" multiple/>
+                <?php if (hasTenPost($ID) == false) { ?>
+                    <form method="post" enctype="multipart/form-data" action="" onsubmit="return showUploading()" >
+                        <img src="/images/image-icon.png" height="30px" width="30px" alt="Photos/Video"/>
+                        <strong>Upload Photos/Videos</strong><span style="color:red;padding-left:10px;">* Required</span>
+                        <input type="file" width="10px;" name="flPostMedia[]" id="flPostMedia" multiple/>
 
-                <br/>
-                <textarea name="post" id="post" class="form-control textArea"
-                          placeholder="Add a caption to your photos & videos" ></textarea>
-                <br/>
+                        <br/>
+                        <textarea name="post" id="post" class="form-control textArea"
+                                  placeholder="Add a caption to your photos & videos" ></textarea>
+                        <br/>
 
-               <!-- <select class="form-control " id="hashtag" name="hashtag" >
-                    <option value="">Select Hash Tag </option>
-                    <?php /*category() */?>
-                </select>-->
-                <br/>
-
-
-                <input type="submit" class="post-button" name="submit" id="submit" value="Post"/>
-            </form>
+                        <input type="submit" class="post-button" name="submit" id="submit" value="Post"/>
+                    </form>
+                <?php } else { echo "<h5 align='center'>You have reached your daily post limit."; } ?>
 
                 <div id="progress" style="display:none;padding-top:5px;">
                     <div class="progress">

@@ -563,13 +563,13 @@ function getRedeemPoints($ID) {
     return $redeemPoints;
 }
 
-function hasExistingGamePost($ID) {
-    $sql = "Select ID FROM Posts WHERE Member_ID = $ID and IsDeleted = 0 ";
+function hasTenPost($ID) {
+    $sql = "Select count(ID) as PostCount FROM Posts Where (Member_ID = $ID) And (IsRedeemed = 0) And (DATE(PostDate) = DATE(NOW()))";
     $result = mysql_query($sql) or die(mysql_error());
     $rows = mysql_fetch_assoc($result);
-    $postID = $rows['ID'];
+    $postCount = $rows['PostCount'];
 
-    if ($postID > 0) {
+    if ($postCount > 9) {
         return true;
     }
     else {

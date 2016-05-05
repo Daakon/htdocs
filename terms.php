@@ -58,12 +58,13 @@ get_head_files();
         Abusing the platform to increase point totals will not be tolerated. Duplicate posts are in direct violation of our content policy.
         If duplicate posts are detected, you account could be subject to suspension or termination. Sharing content that does
         not have context or is of low quality is also a violation of our content policy and subjects your account to suspension or termination.
+        You are encouraged to share content others can enjoy and engage with via a like or comment.
         Playdoe reserves the right to determine if any content posted meets our policy standards.
     </p>
 
     <p>
     <h5>Rewards</h5>
-        What is offered for rewarding of points is subject to change at anytime. Any financial reward provided will be provided via a
+        What is offered for rewarding of points is subject to change at anytime. Any cash reward provided will be provided via a
         third party application which currently stands as Venmo and PayPal. It is the member's responsibility to provide accurate
         information. If there is an errant deposit to the wrong bank account, remedy will be at the discretion of the application that
         handles the transaction, as Playdoe bears no responsibility for recovering misappropriated funds. Playdoe is only provided a member's email address as an indication as to what account should receive the

@@ -730,32 +730,34 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
             ?>
 
 
+            <div class="hidden-lg">
 
-            <form id="messageForm" action="" method="post" enctype="multipart/form-data" onsubmit="return showUploading()">
-                Add Any Combination of:<br/>
-                <img src="/images/image-icon.png" height="30px" width="30px" alt="Photos/Video/Documents"/>
-                <strong>Photos/Videos/Documents</strong>
+                <form id="messageForm" action="" method="post" enctype="multipart/form-data" onsubmit="return showUploading()">
+                    Add Any Combination of:<br/>
+                    <img src="/images/image-icon.png" height="30px" width="30px" alt="Photos/Video/Documents"/>
+                    <strong>Photos/Videos</strong>
+
+                    <input type="file" width="10px;" name="flPostMedia[]" id="flPostMedia" multiple />
+            </div>
+
+                    <textarea name="message" id="message" class="form-control" placeholder="Type your message here"></textarea>
+                    <input type="hidden" id="subject" name="subject" value="<?php echo $subject ?>" />
+                    <?php if (isset($recipientID) && !empty($recipientID)) { ?>
+                        <input type="hidden" id="receiverID" name="receiverID[]" value="<?php echo $recipientID ?>" />
+                    <?php } ?>
+                    <input type="hidden" id="isGroupChat" name="isGroupChat" value="<?php echo $isGroupChat ?>" />
+                    <input type="hidden" id="groupChatExist" name="groupChatExist" value="<?php echo $groupChatExist ?>" />
+                    <input type="hidden" id="groupID" name="groupID" value="<?php echo $urlUsername ?>" />
+                    <input type="hidden" id="groupName" name="groupName" value="<?php echo $groupName ?>" />
+                    <input type="submit" class="btn btn-default" id="send" name="send" value="Send" <?php echo $readonly ?> />
+                    <img src="/images/video-chat.png" height="50" width="50" style="border-left:1px solid black;"/>
+                    <input type="submit" class="" id="videoSend" name="videoSend" value = "Start Video Chat" />
+                </form>
+
+                <br/><br/>
 
 
-                <input type="file" width="10px;" name="flPostMedia[]" id="flPostMedia" multiple />
 
-                <textarea name="message" id="message" class="form-control" placeholder="Type your message here"></textarea>
-                <input type="hidden" id="subject" name="subject" value="<?php echo $subject ?>" />
-                <?php if (isset($recipientID) && !empty($recipientID)) { ?>
-                    <input type="hidden" id="receiverID" name="receiverID[]" value="<?php echo $recipientID ?>" />
-                <?php } ?>
-                <input type="hidden" id="isGroupChat" name="isGroupChat" value="<?php echo $isGroupChat ?>" />
-                <input type="hidden" id="groupChatExist" name="groupChatExist" value="<?php echo $groupChatExist ?>" />
-                <input type="hidden" id="groupID" name="groupID" value="<?php echo $urlUsername ?>" />
-                <input type="hidden" id="groupName" name="groupName" value="<?php echo $groupName ?>" />
-                <input type="submit" class="btn btn-default" id="send" name="send" value="Send" <?php echo $readonly ?> />
-                <img src="/images/video-chat.png" height="50" width="50" style="border-left:1px solid black;"/>
-                <input type="submit" class="" id="videoSend" name="videoSend" value = "Start Video Chat" />
-            </form>
-
-            <br/>
-
-            <br/>
             <div id="progress" style="display:none;">
                 <div class="progress">
                     <div class="progress-bar progress-bar-striped progress-bar-danger active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" class="progress-bar">
