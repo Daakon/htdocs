@@ -558,7 +558,13 @@ function getRedeemPoints($ID) {
     $rows2 = mysql_fetch_assoc($result2);
     $followerCount = $rows['FollowerCount'];
 
-    $redeemPoints = $postCount + $followerCount;
+    $sql3 = "SELECT count(ID) as PostLikes
+    From Posts Where Member_ID = $ID and IsDeleted = 0 and IsRedeemed = 0 ";
+    $result3 = mysql_query($sql) or die(mysql_error());
+    $row3 = mysql_fetch_assoc($result3);
+    $postLikes = $rows['PostLikes'];
+
+    $redeemPoints = $postCount + $postLikes + $followerCount;
 
     return $redeemPoints;
 }

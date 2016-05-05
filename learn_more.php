@@ -92,13 +92,13 @@ if (!empty($_SESSION['ID'])) {
                         <tr>
                             <td>
                                 <img src="/images/camera.png" height="20px" width="20px" />
-                                Share photos and videos throughout your day.
+                                Share Photos and Videos throughout your day.
                                 <br/><br/>
                                 <img src="/images/points.png" height="20px" width="20px" />
-                                Earn points for each post and follower you get.
+                                Earn points for every Post, Like and Follower.
                                 <br><br/>
                                 <img src="/images/redeem.png" height="20px" width="20px" />
-                                Redeem your points for cash or a gift card.
+                                Redeem your points for Cash or a Gift Card.
                                 <br/><br/>
                             </td>
                         </tr>
@@ -118,13 +118,13 @@ if (!empty($_SESSION['ID'])) {
                         <tr>
                             <td>
                                 <img src="/images/camera.png" height="20px" width="20px" />
-                                Share photos and videos throughout your day.
+                                Share Photos and Videos throughout your day.
                                 <br/><br/>
                                 <img src="/images/points.png" height="20px" width="20px" />
-                                Earn points for each post and follower you get.
+                                Earn points for every Post, Like and Follower.
                                 <br><br/>
                                 <img src="/images/redeem.png" height="20px" width="20px" />
-                                Redeem your points for cash or a gift card.
+                                Redeem your points for Cash or a Gift Card.
                                 <br/><br/>
                             </td>
                         </tr>

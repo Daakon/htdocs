@@ -40,7 +40,7 @@ $ID = $_SESSION['ID'];
             <div id="rules" style="display:none;">
                 <li class="display-block" style="padding-bottom:10px;">1. Each post you share, each post like you get and each follower you gain earns you one point each.</li>
                 <li class="display-block" style="padding-bottom:10px;">2. Each point is worth ¢10.</li>
-                <li class="display-block" style="padding-bottom:10px;">3. The maximum post you can make a day is 10.</li>
+                <li class="display-block" style="padding-bottom:10px;">3. The maximum posts you can share a day is 10.</li>
                 <li class="display-block" style="padding-bottom:10px;">4. You must collect a minimum of 10 points before redeeming your points for cash or a gift card.</i>.</li>
                 <li class="display-block" style="padding-bottom:10px;">5. Once you redeem your points, your points are reset to 0.</li>
                 <li class="display-block" style="padding-bottom:10px;">6. <b>To redeem your points, direct message '<span style="color:red">Playdoe Redemption</span>' and let us know you would like to redeem your points.
@@ -50,7 +50,7 @@ $ID = $_SESSION['ID'];
 
                 <h5 style="font-style: italic">*Cash payouts are deposited in either your PayPal or Venmo account.</h5>
 
-                <lead>*Rewards processing can take up to 24 hours.</lead>
+                <lead>*Rewards processing can take 24 to 48 hours.</lead>
 
                 <hr class="hr-line"/>
                 <h4 style="color:red;">Not Allowed</h4>
