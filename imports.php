@@ -42,4 +42,10 @@ if (strstr($url, "login-mobile.php")) {
     require 'checkLogin.php';
 }
 
+
+if (IsSuspended($ID)) {
+    echo "<script>alert('This account has been suspended. Please contact support: support@playdoe.com'); location = '/logout.php';</script>";
+
+}
+
 ?>

@@ -583,6 +583,20 @@ function hasTenPost($ID) {
     }
 }
 
+function IsSuspended($ID) {
+    $sql = "Select IsSuspended From Members Where ID = $ID ";
+    $result = mysql_query($sql) or die(mysql_error());
+    $rows = mysql_fetch_assoc($result);
+    $isSuspended = $rows['IsSuspended'];
+
+    if ($isSuspended == 0) {
+        return false;
+    }
+    else {
+        return true;
+    }
+}
+
 // text function to all service providers for related service post
 function alert_followers($postID)
 {
