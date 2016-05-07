@@ -10,6 +10,12 @@ $ffmpeg = '/usr/local/bin/ffmpeg';
 get_head_files();
 get_header();
 require 'memory_settings.php';
+
+if (isSuspended($ID)) {
+    echo "<script>alert('This account has been suspended. Please contact support: support@playdoe.com'); location = '/logout.php';</script>";
+
+}
+
 $ID = $_SESSION['ID'];
 // handle connection feed post
 $post = mysql_real_escape_string($_POST['post']);
@@ -480,6 +486,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 ?>
 
 <?php
+// block member
 if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
     $blockedID = $_POST['blockedID'];
     $ID = $_POST['ID'];
@@ -491,6 +498,27 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
                               ('$ID',  '$blockedID')";
     mysql_query($sql) or die(mysql_error());
     echo "<script>location='/home?scrollx=$scrollx&scrolly=$scrolly'</script>";
+}
+?>
+
+
+<?php
+// validate email
+if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification') {
+    $ID = $_POST['id'];
+
+    if (strstr($url, "local")) {
+        $link = "/validate_email";
+    }
+    else if (strstr($url, "dev")) {
+        $link = "http://dev.playdoe.com/validate_email";
+    }
+    else {
+        $link = "http://www.playdoe.com/validate_email";
+    }
+
+    build_and_send_email(22, $ID, 14, $link);
+    echo "<script>alert('Your validation link was sent'); location='/home'</script>";
 }
 ?>
 
@@ -751,6 +779,8 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
 
                 <hr class="hr-line" />
 
+                <?php if (isEmailValidated($ID)) { ?>
+
                 <?php if (hasTenPost($ID) == false) { ?>
                     <form method="post" enctype="multipart/form-data" action="" onsubmit="return showUploading()" >
                         <img src="/images/image-icon.png" height="30px" width="30px" alt="Photos/Video"/>
@@ -764,7 +794,21 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
 
                         <input type="submit" class="post-button" name="submit" id="submit" value="Post"/>
                     </form>
-                <?php } else { echo "<h5 align='center'>You have reached your daily post limit."; } ?>
+                <?php } else { echo "<h5 align='center'>You have reached your daily post limit."; }
+
+                    }
+                else {
+                        echo "You must verify your email before posting <br/>
+
+                            <form method='post' action='' >
+                                <input type='hidden' id='id' name='id' value='$ID' />
+                                <input type='submit' id='validate' name='validate' value='Send Email Verification' />
+                            </form>
+                        ";
+
+                    }
+
+                ?>
 
                 <div id="progress" style="display:none;padding-top:5px;">
                     <div class="progress">

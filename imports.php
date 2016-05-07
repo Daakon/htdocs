@@ -15,7 +15,7 @@ if (strstr($url, "forgot-password") || strstr($url, "learn_more")
     || strstr($url, "terms") || strstr($url, "show_post")
     || strstr($url, "support") || strstr($url, "homepage")
     || strstr($url, "create_pass") || strstr($url, "something_happened")
-    || strstr($url, "hashtag_codes")
+    || strstr($url, "hashtag_codes") || strstr($url, "validate_email")
 ) {
     // dont check session
 }
@@ -43,9 +43,5 @@ if (strstr($url, "login-mobile.php")) {
 }
 
 
-if (IsSuspended($ID)) {
-    echo "<script>alert('This account has been suspended. Please contact support: support@playdoe.com'); location = '/logout.php';</script>";
-
-}
 
 ?>

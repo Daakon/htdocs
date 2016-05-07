@@ -58,6 +58,7 @@ function build_and_send_email($senderId, $toId, $notification, $postID, $pass, $
                 </div>
                ";
     }
+
     if ($notification == 3) {
 // sign up email
         //  message notification
@@ -67,10 +68,10 @@ function build_and_send_email($senderId, $toId, $notification, $postID, $pass, $
             $link = "index.php";
         }
         else if (strstr($url, "dev")) {
-            $link = "http://dev.playdoe.com";
+            $link = "http://dev.playdoe.com/validate_email?x=";
         }
         else {
-            $link = "http://www.playdoe.com";
+            $link = "http://www.playdoe.com/validate_email?x=";
         }
         $name = get_users_name_by_id($toId);
         $nameArray = explode(' ', $name);
@@ -78,8 +79,9 @@ function build_and_send_email($senderId, $toId, $notification, $postID, $pass, $
         $subject = "Congratulations $name, you now have a new profile on Playdoe.
                     Start sharing great content, accumulating points and redeeming those points for gift cards and cash!<br/>";
         $subject .= "Your temporary password is <b>$pass</b><br/>";
-        $subject .= '<a href = "http://www.playdoe.com">Login</a> to your account now!';
+        $subject .= '<a href = "'.$link.$toId.'">Validate your email</a>';
     }
+
     if ($notification == 4) {
 // password recovery
         //  message notification
@@ -98,6 +100,7 @@ function build_and_send_email($senderId, $toId, $notification, $postID, $pass, $
         $subject = "Our records indicate you have requested your password. Your passowrd is <b>$pass</b> <br/>";
         $subject .= "Log in <a href = '$link'>here</a>";
     }
+
     if ($notification == 5) {
 // change password
         //  message notification
@@ -118,6 +121,7 @@ function build_and_send_email($senderId, $toId, $notification, $postID, $pass, $
         $subject = "Click this <a href = '$link'>link</a> to create a new password. <br/>";
         $subject .= 'If you did not request to change your password, contact support at <a href = "mailto:info@playdoe.com">info@playdoe.com</a>';
     }
+
     if ($notification == 6) {
 // comment with photo or video
         //  message notification
@@ -143,6 +147,7 @@ function build_and_send_email($senderId, $toId, $notification, $postID, $pass, $
                 </div>
                 ";
     }
+
     if ($notification == 7) {
 // photo approve
         // media id is the person's id who photo just got liked and is receiving this email
@@ -178,6 +183,7 @@ function build_and_send_email($senderId, $toId, $notification, $postID, $pass, $
                 </div>
                 ";
     }
+
     if ($notification == 8) {
         //  message notification
         $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
@@ -209,18 +215,21 @@ function build_and_send_email($senderId, $toId, $notification, $postID, $pass, $
         $senderName = get_users_name_by_id($senderId);
         $subject = "$senderName has sent you a new <a href='$link'>message</a>";
     }
+
     if ($notification == 9) {
         // no posts
         $subject = "We noticed you have not created any posts.
                 Posts are the best way to get seen by people and become really popular.
                 Login and create a post today.";
     }
+
     if ($notification == 10) {
         // no profile photo notification
         $subject = "We noticed you have not uploaded a profile photo.
                 Your profile photo is one of the most important parts to your profile.
                 Pictures are EVERYTHING so login and upload your profile photo today.";
     }
+
     if ($notification == 11) {
         // related post
         $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
@@ -236,9 +245,10 @@ function build_and_send_email($senderId, $toId, $notification, $postID, $pass, $
         }
         // a post status update related to your service has been posted
         $name = get_users_name_by_id($senderId);
-        $subject = "$name just shared a new post. $hashtag. <a href='".$link."'>Click here</a> to view it.
+        $subject = "$name just shared a new post. <a href='".$link."'>Click here</a> to view it.
         <br/><br/>You are receiving this because you follow $name";
     }
+
     if ($notification == 12) {
         // follow
         $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
@@ -294,6 +304,11 @@ function build_and_send_email($senderId, $toId, $notification, $postID, $pass, $
                 ";
     }
 
+    if ($notification == 14) {
+
+        $subject = "<a href=".$postID."?x=$toId'>Click here to validate your email</a>";
+    }
+
     // if we have a notification, then send the email.
     if (strlen($notification) > 0) {
         if (strstr($url, "local")) {
@@ -332,5 +347,6 @@ function build_and_send_email($senderId, $toId, $notification, $postID, $pass, $
             return false;
         }
     }
+
 }
 ?>

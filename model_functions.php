@@ -583,7 +583,21 @@ function hasTenPost($ID) {
     }
 }
 
-function IsSuspended($ID) {
+function isEmailValidated($ID) {
+    $sql = "Select IsEmailValidated From Members Where ID = $ID ";
+    $result = mysql_query($sql) or die(mysql_error());
+    $rows = mysql_fetch_assoc($result);
+    $isEmailValidated = $rows['IsEmailValidated'];
+
+    if ($isEmailValidated == 0) {
+        return false;
+    }
+    else {
+        return true;
+    }
+}
+
+function isSuspended($ID) {
     $sql = "Select IsSuspended From Members Where ID = $ID ";
     $result = mysql_query($sql) or die(mysql_error());
     $rows = mysql_fetch_assoc($result);
