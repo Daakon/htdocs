@@ -11,20 +11,23 @@ get_head_files();
 get_header();
 require 'memory_settings.php';
 
+
+$ID = $_SESSION['ID'];
+
 if (isSuspended($ID)) {
     echo "<script>alert('This account has been suspended. Please contact support: support@playdoe.com'); location = '/logout.php';</script>";
 
 }
 
-$ID = $_SESSION['ID'];
-// handle connection feed post
-$post = mysql_real_escape_string($_POST['post']);
-//$category = $_POST['hashtag'];
-$city = $_SESSION['City'];
-$state = $_SESSION['State'];
-$IsSponsored = $_POST['IsSponsored'];
 
 if (isset($_POST['submit'])) {
+    // handle connection feed post
+    $post = mysql_real_escape_string($_POST['post']);
+//$category = $_POST['hashtag'];
+    $city = $_SESSION['City'];
+    $state = $_SESSION['State'];
+    $IsSponsored = $_POST['IsSponsored'];
+
     $_SESSION['NewPostID'] = null;
     $newPostID = null;
     if ($_SESSION['Post'] == $_POST['post']) {
