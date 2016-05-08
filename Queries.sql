@@ -19,7 +19,7 @@ ORDER BY FollowerCount DESC
 --Update Redemption Status
 Update Posts Set IsRedeemed = 1 Where IsRedeemed = 0 And Member_ID = X
 
-Update PostApprovals Set IsRedeemed = 1 Wehre IsRedeemed = 0 And Member_ID = X
+Update PostApprovals Set IsRedeemed = 1 Where IsRedeemed = 0 And Member_ID = X
 
-Update Follows Set IsReemed = 1 Where IsRedeemed = 0 And Followed_ID = X
+Update Follows Set IsRedeemed = 1 Where IsRedeemed = 0 And Followed_ID = X
 
