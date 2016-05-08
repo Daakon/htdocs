@@ -716,7 +716,6 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
     }
 </script>
 
-
 <?php //check_demographics($ID); ?>
 
 <!--empty onunload will clear browser cache for clean refresh -->
@@ -762,8 +761,28 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
                 <!--***********************************-->
             </div>
 
+            <?php
+            //Detect special conditions devices
+            $iPod    = stripos($_SERVER['HTTP_USER_AGENT'],"iPod");
+            $iPhone  = stripos($_SERVER['HTTP_USER_AGENT'],"iPhone");
+            $iPad    = stripos($_SERVER['HTTP_USER_AGENT'],"iPad");
+            $Android = stripos($_SERVER['HTTP_USER_AGENT'],"Android");
+            $webOS   = stripos($_SERVER['HTTP_USER_AGENT'],"webOS");
 
-            <div class="hidden-desktop">
+            //do something with this information
+            /*if( $iPod || $iPhone ){
+                //browser reported as an iPhone/iPod touch -- do something here
+            }else if($iPad){
+                //browser reported as an iPad -- do something here
+            }else if($Android){
+                //browser reported as an Android device -- do something here
+            }else if($webOS){
+                //browser reported as a webOS device -- do something here
+            }*/
+
+            // only show form on mobile devices
+            if ($iPhone || $iPad || $Android) {
+            ?>
 
                 <div style="padding-left:10px;padding-bottom:0px;">
                     <?php require 'profile_menu.php'; ?>
@@ -784,7 +803,9 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
 
                 <?php if (isEmailValidated($ID)) { ?>
 
-                <?php if (hasTenPost($ID) == false) { ?>
+                <?php if (hasTenPost($ID) == false) {
+
+                        ?>
                     <form method="post" enctype="multipart/form-data" action="" onsubmit="return showUploading()" >
                         <img src="/images/image-icon.png" height="30px" width="30px" alt="Photos/Video"/>
                         <strong>Upload Photos/Videos</strong><span style="color:red;padding-left:10px;">* Required</span>
@@ -823,11 +844,10 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
 
             <hr class="hr-line">
 
-            </div>
+            <?php } ?>
 
 
-
-            <div class="visible-lg visible-md" style="padding-left:10px;padding-bottom:10px;">
+            <?php if (!$iPhone || !$iPad || !$Android) { ?>
                 <?php require 'profile_menu.php'; ?>
                 <a href="/messages/<?php echo $username ?>"><img src = "/images/messages.png" height="20" width="20" /> <?php require 'getNewMessageCount.php' ?></a>
                 <a style="padding-left:20px;" href="/member_follows/<?php echo get_username($ID) ?>"><img src = "/images/follows.png" height="20" width="20" /><?php require 'getNewFollowCount.php' ?></a>
@@ -836,7 +856,8 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
                 echo "<span style='color:#888888'><span style='color:#888888'><img src='images/points.png' height='20' width='20' /> Total points to redeem:</span> ". getRedeemPoints($ID);
                 if (getRedeemPoints($ID) > 0) { echo "<br/><a href='/support'>How to Redeem My Points</a>"; };
                 ?>
-                </div>
+
+            <?php } ?>
 
 
         </div>
