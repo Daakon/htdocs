@@ -847,7 +847,7 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
             <?php } ?>
 
 
-            <?php if (!$iPhone || !$iPad || !$Android) { ?>
+            <?php if (!$iPhone && !$iPad && !$Android) { ?>
                 <?php require 'profile_menu.php'; ?>
                 <a href="/messages/<?php echo $username ?>"><img src = "/images/messages.png" height="20" width="20" /> <?php require 'getNewMessageCount.php' ?></a>
                 <a style="padding-left:20px;" href="/member_follows/<?php echo get_username($ID) ?>"><img src = "/images/follows.png" height="20" width="20" /><?php require 'getNewFollowCount.php' ?></a>
