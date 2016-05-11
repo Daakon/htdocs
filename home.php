@@ -71,7 +71,7 @@ if (isset($_POST['submit'])) {
                         $height = $checkImage[1];
 
                         if (in_array($type, $photoFileTypes)) {
-                        if ($width < 200 || $height < 200) {
+                        if ($width < 300 || $height < 300) {
                             echo '<script>alert("This image is too small.");location = "/home"</script>';
                             exit;
                         }
