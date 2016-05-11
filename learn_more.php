@@ -86,7 +86,7 @@ if (!empty($_SESSION['ID'])) {
                     <table style="margin-left:10px;margin-top:20px;margin-bottom:10px;margin-right:10px;">
                         <tr>
                             <td>
-                                <h4>It's more fun when you get a gift.</h4>
+                                <h4>Share Your Talent With The World.</h4>
                             </td>
                         </tr>
                         <tr>
@@ -111,7 +111,7 @@ if (!empty($_SESSION['ID'])) {
                     <table style="margin-left:10px;margin-top:20px;">
                         <tr>
                             <td>
-                                <h2>It's more fun when you get a gift.</h2>
+                                <h2>Share Your Talent With The World.</h2>
 
                             </td>
                         </tr>
@@ -137,7 +137,7 @@ if (!empty($_SESSION['ID'])) {
 
 
             <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12" style="padding-left:20%">
-                <img style="float:left;" src="/images/Like-Redeem-Large.png" width="80%"  />
+                <img style="float:left;" src="/images/Playdoe-Logo.png" width="80%"  />
             </div>
 
         </div>

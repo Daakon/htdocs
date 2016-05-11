@@ -50,7 +50,7 @@ $rollCallResult = mysql_query($sqlRollCall) or die(logError(mysql_error(), $url,
 // if no results
 if (mysql_num_rows($rollCallResult) == 0) {
     ?>
-    <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-8 roll-call-feed"
+    <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6 roll-call-feed"
          align="left">
         <?php //echo $greetText ?>
 
@@ -96,7 +96,7 @@ $total = mysql_num_rows($rollCallResult);
         ?>
 
 
-        <div class="col-lg-offset-3 col-lg-6 col-md-offset-2 col-md-8 col-sm-12 col-xs-12 roll-call-feed" >
+        <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6 col-sm-12 col-xs-12 roll-call-feed" >
 
             <?php
 
@@ -105,7 +105,7 @@ $total = mysql_num_rows($rollCallResult);
 
             <div class="profileImageWrapper-Feed">
                 <a href="<?php echo $profileUrl ?>">
-                    <img src="<?php echo $mediaPath. $profilePhoto ?>" class="profilePhoto-Feed enlarge-onhover " alt=""
+                    <img src="<?php echo $mediaPath. $profilePhoto ?>" class="profilePhoto-Feed" alt=""
                          title="<?php echo $name ?>" />
                 </a>
             </div>

@@ -106,7 +106,7 @@ function get_users_name_by_id($user_id)
         else {
             $name = $firstName;
         }
-        return $name;
+        return trim($name);
     }
 }
 

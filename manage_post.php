@@ -10,8 +10,6 @@ preg_match("/[^\/]+$/",$url ,$match);
 $username = $match[0];
 ?>
 
-<?php include('media_sizes.html');  ?>
-
 <?php
 //-------------------------------------------------
 // handle post comments
@@ -370,15 +368,15 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
     <div class="row row-padding">
 
-        <div class="col-lg-offset-3 col-lg-6 col-md-offset-2 col-md-8 roll-call"
-             align="left" style="min-height: 10px;padding-left:10px;">
+        <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6 roll-call"
+             align="left" style="min-height: 10px;">
             <?php require 'profile_menu.php'; ?>
             <img src="<?php echo get_users_photo_by_id(get_id_from_username($username)) ?>" class="profilePhoto-Feed " alt=""
                  title="<?php echo $name ?>" />&nbsp;&nbsp;
             <?php if (get_id_from_username($username) == $ID) {
               echo "<span style='color:#888888'>Your posts</span>";
             } else {
-                echo  get_users_name_by_id(get_id_from_username($username))."'s Post";  }
+                echo get_users_name_by_id(get_id_from_username($username))."'s Post";  }
             ?>
         </div>
 
@@ -441,8 +439,8 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
             $postCount = $rows['PostCount'];
         ?>
 
-        <div class="col-lg-offset-3 col-lg-6 col-md-offset-2 col-md-8 roll-call"
-             align="left">
+            <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6 col-sm-12 col-xs-12 roll-call-feed" >
+
             <div class="profileImageWrapper-Feed">
                 <a href="<?php echo $profileUrl ?>">
                     <img src="<?php echo $mediaPath. $profilePhoto ?>" class="profilePhoto-Feed " alt=""
@@ -494,7 +492,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
             <span class="engageText"><?php echo $category ?></span>
 
             <?php if ($memberID != $ID) { ?>
-                | <a href="/view_messages.php/<?php echo $username ?>"><span class="engageText"><img src="/images/messages.png" height="20" width="20" /> Message </span></a>
+                <a href="/view_messages.php/<?php echo $username ?>" style="padding-left:10px;"><span class="engageText"><img src="/images/messages.png" height="20" width="20" /> Message </span></a>
             <?php } ?>
 
 
@@ -554,7 +552,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
             // End of approvals
             //-----------------------------------------------------------
             ?>
-            <div style="padding-top:10px;padding-bottom:10px;margin-top:10px;">
+            <div style="padding-top:10px;padding-bottom:10px;margin-top:10px;padding-left:10px;padding-right:10px;">
                 <form method="post" action="" enctype="multipart/form-data"
                       onsubmit="showCommentUploading('comment<?php echo $postID?>', this);">
                     <input type="text" class="form-control" name="postComment" id="postComment"
@@ -724,7 +722,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
             }
             else { ?>
                 <div class="row row-padding">
-                    <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 roll-call" align="left">
+                    <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6 roll-call-feed" align="left">
                         <?php if ($ID == get_id_from_username($username)) { ?>
                             <div style="padding-left:15px;">You do not have anything posted.</div>
                         <?php } else {

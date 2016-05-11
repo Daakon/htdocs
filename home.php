@@ -752,7 +752,7 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
 
 
         <!--Middle Column -->
-        <div class="col-lg-offset-3 col-lg-6 col-md-offset-2 col-md-8 roll-call"
+        <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6 roll-call"
              align="left" >
 
             <div style="margin-bottom:10px;margin-top:-20px;padding-bottom:10px;" align="center">
