@@ -546,25 +546,22 @@ function checkBlock($ID, $memberID) {
 }
 
 function getRedeemPoints($ID) {
-    $sql = "Select count(ID) as PostCount From Posts Where Member_ID = $ID and IsDeleted = 0 and IsRedeemed = 0 ";
-    $result = mysql_query($sql) or die(mysql_error());
-    $rows = mysql_fetch_assoc($result);
-    $postCount = $rows['PostCount'];
 
-    $sql2 = "SELECT Distinct Members.FirstName, Members.LastName, Follows.Followed_ID As ParentFollowedID, (Select count(Followed_ID) From Follows where Followed_ID = ParentFollowedID) As FollowerCount
+    $sql3 = "SELECT count(ID) as PostLikes
+    From Posts Where Member_ID = $ID and IsDeleted = 0 and IsRedeemed = 0 ";
+    $result3 = mysql_query($sql3) or die(mysql_error());
+    $rows3 = mysql_fetch_assoc($result3);
+    $postLikes = $rows3['PostLikes'];
+
+   /* $sql2 = "SELECT Distinct Members.FirstName, Members.LastName, Follows.Followed_ID As ParentFollowedID, (Select count(Followed_ID) From Follows where Followed_ID = ParentFollowedID) As FollowerCount
     FROM Follows,Members
     Where (Members.ID = Follows.Followed_ID) ";
     $result2 = mysql_query($sql2) or die(mysql_error());
     $rows2 = mysql_fetch_assoc($result2);
-    $followerCount = $rows['FollowerCount'];
+    $followerCount = $rows2['FollowerCount'];*/
 
-    $sql3 = "SELECT count(ID) as PostLikes
-    From Posts Where Member_ID = $ID and IsDeleted = 0 and IsRedeemed = 0 ";
-    $result3 = mysql_query($sql) or die(mysql_error());
-    $row3 = mysql_fetch_assoc($result3);
-    $postLikes = $rows['PostLikes'];
 
-    $redeemPoints = $postCount + $postLikes + $followerCount;
+    $redeemPoints = $postLikes;
 
     return $redeemPoints;
 }

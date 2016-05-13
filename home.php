@@ -71,8 +71,8 @@ if (isset($_POST['submit'])) {
                         $height = $checkImage[1];
 
                         if (in_array($type, $photoFileTypes)) {
-                        if ($width < 300 || $height < 300) {
-                            echo '<script>alert("This image is too small.");location = "/home"</script>';
+                        if ($width < 1080 || $height < 1080) {
+                            echo '<script>alert("This image is too small. Make sure you are only uploading a photo or video you took with your mobile device");location = "/home"</script>';
                             exit;
                         }
                     }
@@ -666,7 +666,7 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
 
 
 <script>
-    /*$(window).scroll(function () {
+    $(window).scroll(function () {
         if ($(document).height() <= $(window).scrollTop() + $(window).height()) {
            //alert("End Of The Page");
 
@@ -687,7 +687,7 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
 
         }
 
-    });*/
+    });
 </script>
 
 <meta http-equiv="cache-control" content="max-age=0" />
@@ -809,7 +809,7 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
                     <form method="post" enctype="multipart/form-data" action="" onsubmit="return showUploading()" >
                         <img src="/images/image-icon.png" height="30px" width="30px" alt="Photos/Video"/>
                         <strong>Upload Photos/Videos</strong><span style="color:red;padding-left:10px;">* Required</span>
-                        <input type="file" width="10px;" name="flPostMedia[]" id="flPostMedia" multiple/>
+                        <input type="file" width="10px;" name="flPostMedia[]" id="flPostMedia" mutiple capture="camera" />
 
                         <br/>
                         <textarea name="post" id="post" class="form-control textArea"
@@ -930,9 +930,9 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
 </div>
 
 <?php if ($noPosts == false) { ?>
-<!--
+
 <div id="gettingMore" align="center" style="display:block;margin-top:-20px;" ><img src="/images/spinner.gif" height="50" width="50" /></div>
--->
+
 <?php } ?>
 
 </body>

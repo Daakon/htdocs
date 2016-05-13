@@ -42,7 +42,7 @@ And (Members.ID Not in ( '" . implode($blockIDs, "', '") . "' ))
 $lastPostCondition
 Group By PostID
 
-Order By PostID DESC ";
+Order By PostID DESC Limit $limit";
 $rollCallResult = mysql_query($sqlRollCall) or die(logError(mysql_error(), $url, "Getting Connection Feed data"));
 
 

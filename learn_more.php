@@ -85,23 +85,29 @@ if (!empty($_SESSION['ID'])) {
 
                     <table style="margin-left:10px;margin-top:20px;margin-bottom:10px;margin-right:10px;">
                         <tr>
-                            <td>
-                                <h4>Share Your Talent With The World.</h4>
+                            <td colspan="2">
+                                <h4>Earn Extra Cash!</h4>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <img src="/images/camera.png" height="20px" width="20px" />
-                                Share Photos and Videos of your Artistic work.
-                                <br/><br/>
-                                <img src="/images/points.png" height="20px" width="20px" />
-                                Earn points for every Post, Like and Follower.
-                                <br><br/>
-                                <img src="/images/redeem.png" height="20px" width="20px" />
-                                Redeem your points for Cash or a Gift Card.
-                                <br/><br/>
+                                <img src="/images/points.png" height="50px" width="50px" style="margin-bottom:10px;" />
+                            </td>
+                            <td style="padding-left:10px;">
+                                Earn points for every like on your Photos & Videos.
                             </td>
                         </tr>
+
+                        <tr>
+                            <td>
+                                <img src="/images/Like-Redeem.png" height="50px" width="50px" style="margin-bottom:10px;" />
+                            </td>
+                            <td style="padding-left:10px;">
+                                Redeem your points for Cash or a Gift Card.
+                            </td>
+
+                        </tr>
+
                     </table>
                 </div>
 
@@ -110,23 +116,27 @@ if (!empty($_SESSION['ID'])) {
 
                     <table style="margin-left:10px;margin-top:20px;">
                         <tr>
-                            <td>
-                                <h2>Share Your Talent With The World.</h2>
-
+                            <td colspan="2">
+                                <h3>Earn Extra Cash!</h3>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <img src="/images/camera.png" height="20px" width="20px" />
-                                Share Photos and Videos of your Artistic work.
-                                <br/><br/>
-                                <img src="/images/points.png" height="20px" width="20px" />
-                                Earn points for every Post, Like and Follower.
-                                <br><br/>
-                                <img src="/images/redeem.png" height="20px" width="20px" />
-                                Redeem your points for Cash or a Gift Card.
-                                <br/><br/>
+                                <img src="/images/points.png" height="50px" width="50px" style="margin-bottom:10px;" />
                             </td>
+                            <td style="padding-left:10px;">
+                                Earn points for every like on your Photos & Videos.
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <img src="/images/Like-Redeem.png" height="50px" width="50px" style="margin-bottom:10px;" />
+                            </td>
+                            <td style="padding-left:10px;">
+                                Redeem your points for Cash or a Gift Card.
+                            </td>
+
                         </tr>
                     </table>
 

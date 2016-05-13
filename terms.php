@@ -64,7 +64,7 @@ get_head_files();
 
     <p>
     <h5>Rewards</h5>
-        What is offered for rewarding of points is subject to change at anytime. Any cash reward provided will be provided via a
+        What is offered for rewarding of points is subject to change at anytime. <a href="/support.php">View points system here.</a> Any cash reward provided will be provided via a
         third party application which currently stands as Venmo and PayPal. It is the member's responsibility to provide accurate
         information. If there is an errant deposit to the wrong bank account, remedy will be at the discretion of the application that
         handles the transaction, as Playdoe bears no responsibility for recovering misappropriated funds. Playdoe is only provided a member's email address as an indication as to what account should receive the

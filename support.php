@@ -38,8 +38,8 @@ $ID = $_SESSION['ID'];
             <h4><div style="color:blue;"  onclick="document.getElementById('rules').style.display = 'block';">How It Works</div></h4>
 
             <div id="rules" style="display:none;">
-                <li class="display-block" style="padding-bottom:10px;">1. Each post you share, each post like you get and each follower you gain earns you one point each.</li>
-                <li class="display-block" style="padding-bottom:10px;">2. Each point is worth ¢10.</li>
+                <li class="display-block" style="padding-bottom:10px;">1. Each post like you get and each follower you gain earns you one point each.</li>
+                <li class="display-block" style="padding-bottom:10px;">2. Each point is worth ¢25.</li>
                 <li class="display-block" style="padding-bottom:10px;">3. The maximum posts you can share a day is 10.</li>
                 <li class="display-block" style="padding-bottom:10px;">4. You must collect a minimum of 10 points before redeeming your points for cash or a gift card.</i>.</li>
                 <li class="display-block" style="padding-bottom:10px;">5. Once you redeem your points, your points are reset to 0.</li>
