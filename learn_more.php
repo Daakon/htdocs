@@ -68,7 +68,7 @@ if (!empty($_SESSION['ID'])) {
     <div align="left" >
 
         <div class="row" style="margin-top:-20px;">
-            <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12" >
+            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12" >
 
                 <div class="visible-xs" style="padding-left:10px;padding-top:10px;">
                     <a href="/login-mobile"><button class="btn btn-default">Login</button></a> &nbsp;&nbsp;
@@ -84,28 +84,17 @@ if (!empty($_SESSION['ID'])) {
                 <div class="visible-xs">
 
                     <table style="margin-left:10px;margin-top:20px;margin-bottom:10px;margin-right:10px;">
-                        <tr>
-                            <td colspan="2">
-                                <h4>Earn Extra Cash!</h4>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <img src="/images/points.png" height="50px" width="50px" style="margin-bottom:10px;" />
-                            </td>
-                            <td style="padding-left:10px;">
-                                Earn points for every like on your Photos & Videos.
-                            </td>
-                        </tr>
 
                         <tr>
                             <td>
-                                <img src="/images/Like-Redeem.png" height="50px" width="50px" style="margin-bottom:10px;" />
+                                <img src="/images/Like-Redeem-Large.png" height="50px" width="50px" style="margin-bottom:10px;" />
                             </td>
-                            <td style="padding-left:10px;">
-                                Redeem your points for Cash or a Gift Card.
+                            <td style="padding-left:0px;">
+                                <p>
+                                    Share photos and videos of the things you care about.
+                                    And when people like your posts, you make money.
+                                </p>
                             </td>
-
                         </tr>
 
                     </table>
@@ -116,28 +105,17 @@ if (!empty($_SESSION['ID'])) {
 
                     <table style="margin-left:10px;margin-top:20px;">
                         <tr>
-                            <td colspan="2">
-                                <h3>Earn Extra Cash!</h3>
-                            </td>
-                        </tr>
-                        <tr>
                             <td>
-                                <img src="/images/points.png" height="50px" width="50px" style="margin-bottom:10px;" />
+                                <img src="/images/Like-Redeem-Large.png" height="100px" width="100px" style="margin-bottom:10px;" />
                             </td>
                             <td style="padding-left:10px;">
-                                Earn points for every like on your Photos & Videos.
+                                <p style="font-size:20px;">
+                                    Share photos and videos of the things you care about. <br/>
+                                    And when people like your posts, you make money. <br/>
+                                </p>
                             </td>
                         </tr>
 
-                        <tr>
-                            <td>
-                                <img src="/images/Like-Redeem.png" height="50px" width="50px" style="margin-bottom:10px;" />
-                            </td>
-                            <td style="padding-left:10px;">
-                                Redeem your points for Cash or a Gift Card.
-                            </td>
-
-                        </tr>
                     </table>
 
                 </div>
@@ -146,9 +124,9 @@ if (!empty($_SESSION['ID'])) {
             </div>
 
 
-            <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12" style="padding-left:20%">
+           <!-- <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12" style="padding-left:20%">
                 <img style="float:left;" src="/images/Playdoe-Logo.png" width="80%"  />
-            </div>
+            </div>-->
 
         </div>
 

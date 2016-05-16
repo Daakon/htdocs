@@ -561,7 +561,7 @@ function getRedeemPoints($ID) {
     $followerCount = $rows2['FollowerCount'];*/
 
 
-    $redeemPoints = $postLikes;
+    $redeemPoints = $postLikes * 0.25;
 
     return $redeemPoints;
 }

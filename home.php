@@ -792,8 +792,8 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
                 <a style="padding-left:20px;" href="/member_follows/<?php echo get_username($ID) ?>"><img src = "/images/follows.png" height="20" width="20" /><?php require 'getNewFollowCount.php' ?></a>
                 <br/><br/>
                     <?php
-                    echo "<span style='color:#888888'><img src='images/points.png' height='20' width='20' /> Total points to redeem:</span> ". getRedeemPoints($ID);
-                    if (getRedeemPoints($ID) > 0) { echo "<br/><a href='/support'>How To Redeem My Points</a>"; };
+                    echo "<span style='color:#888888'><img src='images/dollar-sign.jpeg' height='50' width='50' /> Money Made:</span> $". getRedeemPoints($ID);
+                    if (getRedeemPoints($ID) > 0.0) { echo "<br/><a href='/support'>How To Get My Money</a>"; };
                     ?>
                         </div>
 
@@ -849,12 +849,12 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
 
             <?php if (!$iPhone && !$iPad && !$Android) { ?>
                 <?php require 'profile_menu.php'; ?>
-                <a href="/messages/<?php echo $username ?>"><img src = "/images/messages.png" height="20" width="20" /> <?php require 'getNewMessageCount.php' ?></a>
+                <a href="/messages/<?php echo $username ?>"><img src = "/images/messages.png" height=20" width="20" /> <?php require 'getNewMessageCount.php' ?></a>
                 <a style="padding-left:20px;" href="/member_follows/<?php echo get_username($ID) ?>"><img src = "/images/follows.png" height="20" width="20" /><?php require 'getNewFollowCount.php' ?></a>
                 <br/><br/>
                 <?php
-                echo "<span style='color:#888888'><span style='color:#888888'><img src='images/points.png' height='20' width='20' /> Total points to redeem:</span> ". getRedeemPoints($ID);
-                if (getRedeemPoints($ID) > 0) { echo "<br/><a href='/support'>How to Redeem My Points</a>"; };
+                echo "<span style='color:#888888'><span style='color:#888888'><img src='images/dollar-sign.jpeg' height='50' width='50' /> Money Made:</span> $". getRedeemPoints($ID);
+                if (getRedeemPoints($ID) > 0.0) { echo "<br/><a href='/support'>How To Get My Money</a>"; };
                 ?>
 
             <?php } ?>
