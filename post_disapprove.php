@@ -5,6 +5,7 @@ require 'imports.php';
 
 $postID = $_POST['postID'];
 $ID = $_POST['ID'];
+$memberID = $_POST['memberID'];
 
 $sql = "DELETE FROM PostApprovals WHERE Post_ID = '$postID' AND Member_ID = '$ID' ";
 mysql_query($sql) or die(logError(mysql_error(), $url, "Deleting post approval"));
@@ -29,6 +30,7 @@ if (mysql_num_rows($result2) > 0) {
 
     echo '<input type ="text" class = "postID" id = "postID" value = "' . $postID . '" />';
     echo '<input type ="text" class = "ID" id = "ID" value = "' . $ID . '" />';
+    echo '<input type ="hidden" class = "memberID" id = "memberID" value = "' . $memberID . '" />';
     echo '<input type ="button" class = "btnDisapprove" />';
 
     if ($approvals > 0) {
@@ -42,6 +44,7 @@ if (mysql_num_rows($result2) > 0) {
 
     echo '<input type ="hidden" class = "postID" id = "postID" value = "' . $postID . '" />';
     echo '<input type ="hidden" class = "ID" id = "ID" value = "' . $ID . '" />';
+    echo '<input type ="hidden" class = "memberID" id = "memberID" value = "' . $memberID . '" />';
     echo '<input type ="button" class = "btnApprove" />';
 
     if ($approvals > 0) {

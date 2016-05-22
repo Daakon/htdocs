@@ -544,7 +544,8 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
             var parentDiv = $(this).closest("div[id^=approvals]");
             var data = {
                 postID: $(this).closest('div').find('.postID').val(),
-                ID: $(this).closest('div').find('.ID').val()
+                ID: $(this).closest('div').find('.ID').val(),
+                memberID: $(this).closest('div').find('.memberID').val()
                 //add other properties similarly
             }
             $.ajax({
@@ -566,7 +567,8 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
             var parentDiv = $(this).closest("div[id^=approvals]");
             var data = {
                 postID: $(this).closest('div').find('.postID').val(),
-                ID: $(this).closest('div').find('.ID').val()
+                ID: $(this).closest('div').find('.ID').val(),
+                memberID: $(this).closest('div').find('.memberID').val()
                 //add other properties similarly
             }
             $.ajax({

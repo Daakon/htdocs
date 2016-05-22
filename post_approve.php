@@ -5,12 +5,13 @@ require 'imports.php';
 // variables that get sent in post must have identical names every where they exist
 $postID = $_POST['postID'];
 $ID = $_POST['ID'];
+$memberID = $_POST['memberID'];
 
 if (!empty($_POST['ID'])) {
 
 
-$sql = "INSERT INTO PostApprovals (Post_ID,   Member_ID) Values
-                                  ('$postID',  '$ID')";
+$sql = "INSERT INTO PostApprovals (Post_ID,   Member_ID, Owner_ID) Values
+                                  ('$postID',  '$ID', '$memberID')";
 mysql_query($sql) or die(mysql_error());
 
 
@@ -97,6 +98,7 @@ if (mysql_num_rows($result2) > 0) {
 
     echo '<input type ="hidden" class = "postID" id = "postID" value = "' . $postID . '" />';
     echo '<input type ="hidden" class = "ID" id = "ID" value = "' . $ID . '" />';
+    echo '<input type ="hidden" class = "memberID" id = "memberID" value = "' . $memberID . '" />';
     echo '<input type ="button" class = "btnDisapprove" />';
 
     if ($approvals > 0) {
@@ -110,6 +112,7 @@ if (mysql_num_rows($result2) > 0) {
 
     echo '<input type ="hidden" class = "postID" id = "postID" value = "' . $postID . '" />';
     echo '<input type ="hidden" class = "ID" id = "ID" value = "' . $ID . '" />';
+    echo '<input type ="hidden" class = "memberID" id = "memberID" value = "' . $memberID . '" />';
     echo '<input type ="button" class = "btnApprove" />';
 
     if ($approvals > 0) {

@@ -1,4 +1,7 @@
 --Post Like Query
+
+
+
 Select count(ID) as LikeCount
 From PostApprovals
 Where (Member_ID = X) and (IsRedeemed = 0)

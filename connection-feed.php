@@ -22,7 +22,7 @@ while ($rows1 = mysql_fetch_assoc($result1)) {
 $sqlRollCall = " SELECT DISTINCT
 Posts.Post As Post,
 Posts.PostDate As PostDate,
-Members.ID As MemberID,
+Posts.Member_ID As MemberID,
 Members.FirstName As FirstName,
 Members.LastName As LastName,
 Members.Username As Username,
@@ -215,6 +215,7 @@ $total = mysql_num_rows($rollCallResult);
                     echo '<form>';
                     echo '<input type ="hidden" name="postID" class = "postID" id = "postID" value = "' . $postID . '" />';
                     echo '<input type ="hidden" class = "ID" id = "ID" value = "' . $ID . '" />';
+                    echo '<input type ="text" class = "memberID" id = "memberID" value = "' . $memberID . '" />';
                     echo '<input type ="button" class = "btnDisapprove"'. $readonly.' />';
                     if ($approvals > 0) {
                         echo '&nbsp;<span>' . $approvals . '</span>';
@@ -224,6 +225,7 @@ $total = mysql_num_rows($rollCallResult);
                     echo '<form>';
                     echo '<input type ="hidden" name="postID" class = "postID" id = "postID" value = "' . $postID . '" />';
                     echo '<input type ="hidden" class = "ID" id = "ID" value = "' . $ID . '" />';
+                    echo '<input type ="hidden" name="memberID" class = "memberID" id = "memberID" value = "' . $memberID . '" />';
                     echo '<input type ="button" class = "btnApprove"'. $readonly.' />';
                     if ($approvals > 0) {
                         echo '&nbsp;<span>' . $approvals . '</span>';
@@ -275,7 +277,7 @@ $total = mysql_num_rows($rollCallResult);
                             <input type="submit" name="btnComment" id="btnComment" class="btnComment" Value="Comment"/>
                             <input type="hidden" name="postID" id="postID" class="postID" Value="<?php echo $postID ?>"/>
                             <input type="hidden" name="ID" id="ID" class="ID" value="<?php echo $ID ?>"/>
-                            <input type="hidden" name="ownerId" class="ownerId" id="ownerId" value="<?php echo $MemberID ?>"/>
+                            <input type="hidden" name="ownerId" class="ownerId" id="ownerId" value="<?php echo $memberID ?>"/>
                             <input type="hidden" name="scrollx" id="scrollx" value="0"/>
                             <input type="hidden" name="scrolly" id="scrolly" value="0"/>
                         </form>
