@@ -20,7 +20,7 @@ if (empty($_SESSION['EMAIL']) && !isset($_SESSION['EMAIL'])) {
     <div class="col-lg-offset-2 col-md-offset-2 col-lg-8 col-md-8 roll-call">
 
 
-        <img src="/images/Rapportbook-Logo.png" height="50" width="50" />
+        <img src="/images/Playdoe-Logo.png" height="50" width="50" />
         <span class="lead bold">Enter your new password</span>
         <br/><br/>
 

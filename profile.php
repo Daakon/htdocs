@@ -207,10 +207,12 @@ if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
     $password = $_POST['Password'];
     $username = $_POST['Username'];
     $usernameStatus = $_POST['UsernameStatus'];
+    $updatePasswordBit = '';
 
 //only if password has changed do we hash it
     if (check_password($ID, $password)==false) {
         $password = md5($password);
+        $updatePasswordBit = "IsEmailValidated = 0, ";
     }
 
     // check email
@@ -230,7 +232,7 @@ if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
         if ($_SESSION['Username'] != trim($username)) {
             // remove white spaces
             $username = preg_replace('/\s+/', '', $username);
-            $usernameUpdate = ", Username = '$username', IsUsernameUpdated = 1 ";
+            $usernameUpdate = " Username = '$username', IsUsernameUpdated = 1, ";
             $_SESSION['Username'] = $username;
             $username = $_SESSION['Username'];
             $_SESSION['UsernameUpdated'] = 1;
@@ -242,6 +244,8 @@ if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
     // update Member table first
     $sql = "Update Members
           Set
+          $updatePasswordBit
+          $usernameUpdate
           FirstName = '$firstName',
           LastName = '$lastName',
           DOB = '$dob',
@@ -249,7 +253,6 @@ if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
           EmailActive = '$emailStatus ',
           SmsActive = '$smsStatus ',
           Password = '$password'
-          $usernameUpdate
           WHERE ID = $ID ";
     $result = mysql_query($sql) or die(mysql_error());
     // update Profile table
@@ -491,7 +494,7 @@ $bgPhoto = $row['ProfilePhoto'];
 
     <div class="row row-padding">
 
-        <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6 col-sm-12 col-xs-12 roll-call-feed">
+        <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6 col-sm-12 col-xs-12 roll-call">
 
             <?php
                 require 'profile_menu.php';

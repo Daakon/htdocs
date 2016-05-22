@@ -560,8 +560,11 @@ function getRedeemPoints($ID) {
     $rows2 = mysql_fetch_assoc($result2);
     $followerCount = $rows2['FollowerCount'];*/
 
-
-    $redeemPoints = $postLikes * 0.25;
+    if ($postLikes == 0) {
+        $redeemPoints = 0;
+    } else {
+        $redeemPoints = $postLikes * 0.25;
+    }
 
     return $redeemPoints;
 }

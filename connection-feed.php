@@ -56,9 +56,9 @@ if (mysql_num_rows($rollCallResult) == 0) {
 
         <img src="/images/Playdoe-Logo.png" height="100" width="100" />
         <br/>
-        <p>
-            <span style="color:red;">Post.</span> <span style="color:blue">Play.</span> <span style="color:green">Win.</span>
-        </p>
+        <lead style="padding-left:10px;">
+            Get Paid To Share
+        </lead>
 
     </div>
 <?php }
@@ -141,6 +141,7 @@ $total = mysql_num_rows($rollCallResult);
 
                     <?php echo nl2br($post500) ?>
                     <br/>
+                    <a href="#<?php echo $postID ?>"></a>
                     <a onclick="saveScrollPositionOnLinkClick('/home')" style="display:block;" style="width:100%;" href="show_post?postID=<?php echo $postID ?>&email=0">
                         <span style="color:black;font-weight: 800">Show More</span>
                     </a>
@@ -180,7 +181,7 @@ $total = mysql_num_rows($rollCallResult);
                                 <input type="hidden" id="ID" name="ID" class="ID" value="<?php echo $ID ?>" />
                                 <input type="hidden" name="scrollx" id="scrollx" value="0"/>
                                 <input type="hidden" name="scrolly" id="scrolly" value="0"/>
-                                <input type="submit" id="block" name="block" class="btnBlock" value="Block This User" />
+                                <input type="submit" id="block" name="block" class="btnBlock" style="margin-left:10px;" value="Block This User" />
                             </form>
                         </div>
 </p>
@@ -238,8 +239,19 @@ $total = mysql_num_rows($rollCallResult);
                 ?>
 
 
+                <?php
+                //Detect device
+                $iPod    = stripos($_SERVER['HTTP_USER_AGENT'],"iPod");
+                $iPhone  = stripos($_SERVER['HTTP_USER_AGENT'],"iPhone");
+                $iPad    = stripos($_SERVER['HTTP_USER_AGENT'],"iPad");
+                $Android = stripos($_SERVER['HTTP_USER_AGENT'],"Android");
+                $webOS   = stripos($_SERVER['HTTP_USER_AGENT'],"webOS");
+
+                ?>
+
 
                 <div class="content-space">
+
                     <?php if (isset($ID)) { ?>
                         <form method="post" action="" enctype="multipart/form-data"
                               onsubmit="showCommentUploading('comment<?php echo $postID?>', this);">
@@ -247,10 +259,10 @@ $total = mysql_num_rows($rollCallResult);
                             <input type="text" class="form-control" name="postComment" id="postComment"
                                    placeholder="Write a comment" title='' />
 
-                           <span class="hidden-lg">
+                            <?php if ($iPhone || $iPad || $Android) { ?>
                                 <h6>Add Photos/Video</h6>
                                 <input type="file" name="flPostMedia" id="flPostMedia" class="flPostMedia"/>
-                            </span>
+                           <?php } ?>
 
                             <br/>
                             <div id="comment<?php echo $postID ?>" style="display:none;">
@@ -260,10 +272,10 @@ $total = mysql_num_rows($rollCallResult);
                                     </div>
                                 </div>
                             </div>
-                            <input type="submit" name="btnComment" id="btnComment" Value="Comment"/>
-                            <input type="hidden" name="postID" id="postID" Value="<?php echo $postID ?>"/>
-                            <input type="hidden" name="ID" id="ID" value="<?php echo $ID ?>"/>
-                            <input type="hidden" name="ownerId" id="ownerId" value="<?php echo $MemberID ?>"/>
+                            <input type="submit" name="btnComment" id="btnComment" class="btnComment" Value="Comment"/>
+                            <input type="hidden" name="postID" id="postID" class="postID" Value="<?php echo $postID ?>"/>
+                            <input type="hidden" name="ID" id="ID" class="ID" value="<?php echo $ID ?>"/>
+                            <input type="hidden" name="ownerId" class="ownerId" id="ownerId" value="<?php echo $MemberID ?>"/>
                             <input type="hidden" name="scrollx" id="scrollx" value="0"/>
                             <input type="hidden" name="scrolly" id="scrolly" value="0"/>
                         </form>
@@ -431,9 +443,10 @@ $total = mysql_num_rows($rollCallResult);
 
 
                 </div>
-            </div>
 
-        </div>
+            </div>
+</div>
+
 
         <!---------------------------------------------------
                           End of comments div
