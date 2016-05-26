@@ -238,7 +238,7 @@ if (isset($_POST['submit'])) {
             $post = $post . $newImage;
 
             $sql = "INSERT INTO Posts (Post,    Poster,	      Category,    Member_ID,  IsSponsored,      PostDate) Values
-                                      ('$post', '$posterName', '$category', '$ID',     '$IsSponsored',   CURDATE())";
+                                      ('$post', '$posterName', '$category', '$ID',     '$IsSponsored',   NOW())";
             mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting post with media"));
             $newPostID = mysql_insert_id();
             // update Media table with new post id
@@ -833,8 +833,14 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
 
                 <?php if (isEmailValidated($ID)) { ?>
 
-                <?php if (hasTenPost($ID) == false) {
+                <?php
 
+                    if (hasHourPast($ID) == false) {
+                        echo "<h5 align='center'>You can only post once an hour. <img src='/images/hourglass.gif' height='50' width='50' /></h5>";
+                    }
+                    else {
+
+                    if (hasTenPost($ID) == false) {
                         ?>
                     <form method="post" enctype="multipart/form-data" action="" onsubmit="return showUploading()" >
                         <img src="/images/image-icon.png" height="30px" width="30px" alt="Photos/Video"/>
@@ -848,9 +854,16 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
 
                         <input type="submit" class="post-button" name="submit" id="submit" value="Post"/>
                     </form>
-                <?php } else { echo "<h5 align='center'>You have reached your daily post limit."; }
+                <?php
 
-                    }
+                    } // hasTenPost
+
+                    else { echo "<h5 align='center'>You have reached your daily post limit."; }
+
+                } // hasHourPast
+
+                    } // isEmailValidated
+
                 else {
                         echo "You must verify your email before posting <br/>
 

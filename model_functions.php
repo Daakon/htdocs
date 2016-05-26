@@ -547,11 +547,10 @@ function checkBlock($ID, $memberID) {
 
 function getRedeemPoints($ID) {
 
-    $sql3 = "SELECT count(ID) as PostLikes
-    From Posts Where Member_ID = $ID and IsDeleted = 0 and IsRedeemed = 0 ";
-    $result3 = mysql_query($sql3) or die(mysql_error());
-    $rows3 = mysql_fetch_assoc($result3);
-    $postLikes = $rows3['PostLikes'];
+    $sql = "SELECT count(*) as Likes From PostApprovals Where Owner_ID = $ID and IsRedeemed = 0";
+    $result = mysql_query($sql) or die(mysql_error());
+    $rows = mysql_fetch_assoc($result);
+    $likes = $rows['Likes'];
 
    /* $sql2 = "SELECT Distinct Members.FirstName, Members.LastName, Follows.Followed_ID As ParentFollowedID, (Select count(Followed_ID) From Follows where Followed_ID = ParentFollowedID) As FollowerCount
     FROM Follows,Members
@@ -560,12 +559,11 @@ function getRedeemPoints($ID) {
     $rows2 = mysql_fetch_assoc($result2);
     $followerCount = $rows2['FollowerCount'];*/
 
-    if ($postLikes == 0) {
+    if ($likes == 0) {
         $redeemPoints = 0;
     } else {
-        $redeemPoints = $postLikes * 0.25;
+        $redeemPoints = $likes * 0.25;
     }
-
     return $redeemPoints;
 }
 
@@ -608,6 +606,25 @@ function isSuspended($ID) {
     }
     else {
         return true;
+    }
+}
+
+function hasHourPast($ID) {
+    $sql = "SELECT PostDate From Posts Where Member_ID = $ID Order by PostDate DESC LIMIT 1";
+    $result = mysql_query($sql) or die(mysql_error());
+    $rows = mysql_fetch_assoc($result);
+    $timeOfLastPost = $rows['PostDate'];
+    // get server time
+    date_default_timezone_set('America/Chicago'); // CDT
+    $currentTime = date('Y-m-d H:i:s');
+
+    $timeElapsed = strtotime($currentTime) - strtotime($timeOfLastPost);
+
+    if ($timeElapsed >= 3600) {
+        return true;
+    }
+    else {
+        return false;
     }
 }
 

@@ -266,7 +266,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 //BELOW IS END OF POST COMMENT HANDLING CODE ==========================================================================//
         }
     }
-    echo "<script>location='/manage_post/$username?scrollx=$scrollx&scrolly=$scrolly'</script>";
+    echo "<script>location='/manage_post/$username#comment$postID'</script>";
 }
 ?>
 
@@ -552,14 +552,28 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
             // End of approvals
             //-----------------------------------------------------------
             ?>
+
+                <?php
+                //Detect device
+                $iPod    = stripos($_SERVER['HTTP_USER_AGENT'],"iPod");
+                $iPhone  = stripos($_SERVER['HTTP_USER_AGENT'],"iPhone");
+                $iPad    = stripos($_SERVER['HTTP_USER_AGENT'],"iPad");
+                $Android = stripos($_SERVER['HTTP_USER_AGENT'],"Android");
+                $webOS   = stripos($_SERVER['HTTP_USER_AGENT'],"webOS");
+                ?>
+
             <div style="padding-top:10px;padding-bottom:10px;margin-top:10px;padding-left:10px;padding-right:10px;">
                 <form method="post" action="" enctype="multipart/form-data"
                       onsubmit="showCommentUploading('comment<?php echo $postID?>', this);">
                     <input type="text" class="form-control" name="postComment" id="postComment"
                            placeholder="Write a comment" title='' />
+
+            <?php if ($iPhone || $iPad || $Android) { ?>
                     <h6>Attach A Photo/Video To Your Comment</h6>
                     <input type="file" name="flPostMedia" id="flPostMedia" style="max-width:180px;"/>
                     <br/>
+                <?php } ?>
+
                     <div id="comment<?php echo $postID ?>" style="display:none;">
                         <div class="progress">
                             <div class="progress-bar progress-bar-striped progress-bar-danger active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">

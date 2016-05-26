@@ -630,7 +630,14 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
             ?>
 
 
-
+            <?php
+            //Detect device
+            $iPod    = stripos($_SERVER['HTTP_USER_AGENT'],"iPod");
+            $iPhone  = stripos($_SERVER['HTTP_USER_AGENT'],"iPhone");
+            $iPad    = stripos($_SERVER['HTTP_USER_AGENT'],"iPad");
+            $Android = stripos($_SERVER['HTTP_USER_AGENT'],"Android");
+            $webOS   = stripos($_SERVER['HTTP_USER_AGENT'],"webOS");
+            ?>
 
             <div class="content-space">
 
@@ -640,8 +647,10 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                     <input type="text" class="form-control" name="postComment" id="postComment"
                            placeholder="Write a comment" title='' <?php echo $readonly ?> />
 
+                    <?php if ($iPhone || $iPad || $Android) { ?>
                     <h6>Add Photo/Video</h6>
                     <input type="file" name="flPostMedia" id="flPostMedia" class="flPostMedia"/>
+                    <?php } ?>
 
                     <br/>
                     <div id="comment<?php echo $postID ?>" style="display:none;">

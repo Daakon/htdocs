@@ -4,7 +4,7 @@
 
 Select count(ID) as LikeCount
 From PostApprovals
-Where (Member_ID = X) and (IsRedeemed = 0)
+Where (Owner_ID = X) and (IsRedeemed = 0)
 
 --Follower Query
 /*SELECT COUNT( Followed_ID ) AS FollowerCount

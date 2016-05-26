@@ -215,7 +215,7 @@ $total = mysql_num_rows($rollCallResult);
                     echo '<form>';
                     echo '<input type ="hidden" name="postID" class = "postID" id = "postID" value = "' . $postID . '" />';
                     echo '<input type ="hidden" class = "ID" id = "ID" value = "' . $ID . '" />';
-                    echo '<input type ="text" class = "memberID" id = "memberID" value = "' . $memberID . '" />';
+                    echo '<input type ="hidden" class = "memberID" id = "memberID" value = "' . $memberID . '" />';
                     echo '<input type ="button" class = "btnDisapprove"'. $readonly.' />';
                     if ($approvals > 0) {
                         echo '&nbsp;<span>' . $approvals . '</span>';
