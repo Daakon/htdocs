@@ -72,7 +72,13 @@ get_head_files();
         what business they receive a gift card for. If the business selected by a member does not offer a gift card or does not offer it for
         the amount the accumulated points call for, Playdoe will attempt to determine what other business a member would want a gift card for.
         Processing rewards can take anywhere from 24 to 48 hours.
+    </p>
 
+    <p>
+        <h5>Income & Taxes</h5>
+        By signing up to Playdoe, you are in effect acting as an independent contractor, therefore any funds you receive from Playdoe
+        are not taxed and the money you earn could be considered income. It is your responsibility to contact an accountant to
+        determine your tax responsibilities with your Playdoe earnings.
     </p>
 
     <p>
