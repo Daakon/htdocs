@@ -632,7 +632,6 @@ function hasHourPast($ID) {
 function hashtag_links($string) {
     //preg_match_all('/#(\w+)/',$string,$matches);
         $string = preg_replace('/#(\w+)/', ' <a href="post-interest?hashtag=$1">#$1</a>', $string);
-        $string = mysql_real_escape_string($string);
         $string = str_replace("</a>  <a href", "</a>&nbsp;<a href", $string);
     return $string;
 }

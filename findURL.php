@@ -109,11 +109,6 @@ function makeLinks($str)
         if (!empty($matches[0])) {
             // get full URL
             $link = $matches[0];
-            // make sure the we have a correctly formatted favicon path to check
-            $favicon = $link."favicon.ico";
-            if (strstr($favicon, "/favicon.ico")) { } else { $favicon = $link."/favicon.ico"; }
-
-            $favicon = get_favicon($favicon);
 
             $string = $str;
             $title = get_title($link);
@@ -129,25 +124,8 @@ function makeLinks($str)
             if (strlen($title) > 1) {
                 // check if web page has an image to add to the link
                 $content = file_get_contents($link);
-                if (preg_match("/<img.*src=\"(.*)\"/", $content, $images)) {
-                    $image = $images[0];
-                }
-                // extract the src for that image
-                // to make sure it has a full path
-                $srcPattern = '/src="([^"]*)"/';
-                preg_match($srcPattern, $image, $Imatches);
-                $src = $Imatches[1];
-                // if there is a full path image
-                if (strlen($src) > 0) {
-                    if (strstr($src, "http://") || strstr($src, "https://")) {
-                        // do nothing to the image variable
-                    }
-                    else {
-                        // return nothing, cannot guess image path on someone else's server
-                        // too risky of returning a broken image.
-                        $image = '';
-                    }
-                }
+
+
 
                 // add link
                 $titleLink = '<a id="rbLink" href="' . $link . '" target="_blank">' . $title . '</a>';
@@ -163,25 +141,15 @@ function makeLinks($str)
                 // remove excessive line breaks in title
                 $titleLink = cleanBrTags($titleLink);
 
-                // find the second image and take only that from title link
-                // DESTROY EVERYTHING ELSE**************
-                preg_match('/(<img[^>]+>)/i', $titleLink, $imageTags);
-
-                $imageTag2 = $imageTags[0];
                 $endingAnchor = "";
 
-                if (strlen($imageTag2) > 1) {
-                    $titleArray = explode($imageTag2, $titleLink);
-                    $titleLink = $titleArray[0] . ' ' . $imageTag2;
-                    $endingAnchor = "</a>";
-                }
-                else {
+
                     // cut everything off by our rbLink anchor tag
                     preg_match("~<a(?=[^>]* name=[\"']([^'\"]*)|)(\s+[^>]*)?>(.*?)</a>~", $titleLink, $anchorTags);
                     $anchorTag = $anchorTags[0];
                     $titleArray = explode($anchorTag, $titleLink);
                     $titleLink = $titleArray[0] . ' ' . $anchorTag;
-                }
+
 
 
                 // clean up rouge link text
@@ -207,7 +175,7 @@ function makeLinks($str)
                 // remove any script tags that may come back from a website
                 $titleLink = preg_replace('#<script(.*?)>(.*?)</script>#is', '', $titleLink);
                 $titleLink = closetags($titleLink);
-                $titleLink = $favicon.' '. $titleLink . $endingAnchor;
+                $titleLink = $titleLink . $endingAnchor;
                 return $str . '<br/><br/>' . $titleLink;
 
             }
@@ -271,12 +239,6 @@ function remove_last_instance($search, $replace, $subject)
     }
 
     return $subject;
-}
-
-function get_favicon($faviconLink){
-        $favicon = "<img src = '".$faviconLink."' height='50' width='50' onerror=\"this.src='/images/internet_icon.png'\"/>";
-        $favicon = mysql_real_escape_string($favicon);
-        return $favicon;
 }
 
 ?>
