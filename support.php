@@ -41,11 +41,14 @@ $ID = $_SESSION['ID'];
                 <li class="display-block" style="padding-bottom:10px;">1. Every time you get a post like, your point total increases.</li>
                 <li class="display-block" style="padding-bottom:10px;">2. Your points are always visible on your home page.</li>
                 <li class="display-block" style="padding-bottom:10px;">3. The maximum posts you can share a day is 10.</li>
-                <li class="display-block" style="padding-bottom:10px;">4. Once you redeem your money, your points are reset to $0.</li>
-                <li class="display-block" style="padding-bottom:10px;">5. <b>To redeem your points, direct message '<span style="color:red">Playdoe Redemption</span>' and let us know you would like to redeem your points.
-                Tell us how you would like to receive your points, rather it's cash or a gift card. If you want a gift card, tell us the
-                business you want the gift card from. Note Walmart rounds gifts to increments of $5 and we will always round down. If the gift card is available, we will send the claim code to your Playdoe inbox. If the
-                gift card is not available, we will work to provide an ancillary gift card option.</b></li>
+                <li class="display-block" style="padding-bottom:10px;">4. The maximum posts you can share a day is 10.</li>
+                <li class="display-block" style="padding-bottom:10px;">5. The value of a point is volatile and based on an algorithm.</li>
+                <li class="display-block" style="padding-bottom:10px;">6. <b>To redeem your points, direct message <span style="color:red">Playdoe Redemption</span>.
+                The redemption team will let you know what your points are worth at that time.
+                If you elect to redeem your points, you will need to tell us how you would like to receive your points, rather it's cash or a gift card.
+                If you want a gift card, tell us the business you want the gift card from. Note Walmart rounds gifts to increments of $5 and
+                we will always round down. If the gift card is available, we will send the claim code to your Playdoe inbox.
+                If the gift card is not available, we will work to provide an ancillary gift card option.</b></li>
 
                 <h5 style="font-style: italic">*Cash payouts are deposited in either your PayPal or Venmo account.</h5>
 
