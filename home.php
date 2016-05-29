@@ -37,6 +37,8 @@ if (isset($_POST['submit'])) {
     }*/ else {
         if (strlen($post) > 0) {
             $post = makeLinks($post);
+            $post = hashtag_links($post);
+
             $post = "<p>$post</p>";
 
             // Loop through each image uploaded.

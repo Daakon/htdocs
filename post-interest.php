@@ -576,8 +576,6 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
 ?>
 
-<?php include('media_sizes.html'); ?>
-
 
 <script type="text/javascript">
     function saveScrollPositions(theForm) {
@@ -697,19 +695,17 @@ function myFunction() {
 <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 " align="left">
 
         <ul class="list-inline">
-            <li>
-                <button style="margin-top:20px;" onclick="myFunction()">Go Back</button>
-            </li>
-            <li><a href="/<?php echo get_username($ID) ?>">Go To Your Profile <?php require 'getNewMessageCount.php' ?></a></li>
+
+            <li> <a style="padding-top:10px;" href="javascript:history.go(-1)">Go Back</a></li>
         </ul>
 </div>
 
 <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 ">
-<?php $category = $_GET['interest'];
+<?php $hashtag = $_GET['hashtag'];
 
 ?>
 
-<h4>Nationwide <?php echo $category ?> Leader Board</h4>
+<h4><?php echo "#".$hashtag ?></h4>
 </div>
 
 <?php
@@ -730,36 +726,31 @@ while ($rows1 = mysql_fetch_assoc($result1)) {
 }
 
 
- $postApprovalCondition = "(Select Count(ID) FROM PostApprovals Where Post_ID = PostID) As PostApprovals, ";
- $orderBy = "PostApprovals";
+//$ads = getAds($genre, $age, $state, $interests, $gender);
+$like = mysql_real_escape_string("#$hashtag");
+$sql = " SELECT DISTINCT
+Posts.ID As PostID,
+Posts.Post As Post,
+Posts.PostDate As PostDate,
+Posts.Member_ID As MemberID,
+Members.FirstName As FirstName,
+Members.LastName As LastName,
+Members.Username As Username,
+Profile.ProfilePhoto As ProfilePhoto
 
-// Get All Categories nationwide
-$sql = "SELECT DISTINCT
-    Members.ID As MemberID,
-    Members.FirstName As FirstName,
-    Members.LastName As LastName,
-    Members.Username As Username,
-    Posts.ID As PostID,
-    Posts.Post As Post,
-    Posts.PostDate As PostDate,
-    Posts.Category As Category,
-    Posts.IsSponsored As IsSponsored,
-    Profile.ProfilePhoto As ProfilePhoto,
-    $postApprovalCondition
-    Profile.State As State
-    FROM Members,Posts,Profile
-    WHERE
-    Members.IsActive = 1
-    And Members.IsSuspended = 0
-    And Members.ID = Posts.Member_ID
-    And Members.ID = Profile.Member_ID
-    And (Members.ID Not in ( '" . implode($blockIDs, "', '") . "' ))
-    And Posts.IsDeleted = 0
-    AND Posts.Category = '$category'
-    Group By PostID
-    Order By $orderBy DESC ";
+FROM Members,Posts,Profile
+WHERE
+Members.IsActive = 1
+And (Members.IsSuspended = 0)
+And (Members.ID = Posts.Member_ID)
+And (Members.ID = Profile.Member_ID)
+And (Posts.IsDeleted = 0)
+And (Members.ID Not in ( '" . implode($blockIDs, "', '") . "' ))
+and (Posts.Post Like '%$like%')
+Group By PostID
 
-$result = mysql_query($sql) or die(logError(mysql_error(), $url, "Getting all nationwide posts"));
+Order By PostID DESC";
+$result = mysql_query($sql) or die(logError(mysql_error(), $url, "Getting Connection Feed data"));
 
 // if no results
 if (mysql_num_rows($result) == 0) {
@@ -777,13 +768,10 @@ if (mysql_num_rows($result) > 0) {
         $lastName = $rows['LastName'];
         $username = $rows['Username'];
         $profilePhoto = $rows['ProfilePhoto'];
-        $state = $rows['State'];
-        $category = $rows['Category'];
         $post = $rows['Post'];
         $postID = $rows['PostID'];
         $postOwner = $memberID;
         $postDate = $rows['PostDate'];
-        $isSponsored = $rows['IsSponsored'];
         ?>
 
         <?php if (checkBlock($ID, $memberID)) { $display = "style= 'display:none;'"; } else { $display = "style='display:block;'"; } ?>
@@ -846,7 +834,7 @@ if (mysql_num_rows($result) > 0) {
 
 
                  <?php if ($ID != $memberID) {?>
-                    | <a href="/view_messages/<?php echo $username ?>"><img src="/images/messages.png" height="20" width="20" /> Message </a>
+                    <a href="/view_messages/<?php echo $username ?>"><img src="/images/messages.png" height="20" width="20" /> Message </a>
                 <?php } ?>
 
 
@@ -856,8 +844,8 @@ if (mysql_num_rows($result) > 0) {
                 $postPath = getPostPath();
                 $shareLinkID = "shareLink$postID"; ?>
                <a href="javascript:showLink('<?php echo $shareLinkID ?>');">
-                   <img src="/images/share.gif" height="50px" width="50px" />
-                   <span style="color:black;font-weight:bold;">Share This Post</span>
+                   <img src="/images/share.gif" height="25px" width="25px" />
+
                </a>
 
         <?php $shareLink = 'show_post?postID='.$postID.'&email=1';

@@ -562,7 +562,7 @@ function getRedeemPoints($ID) {
     if ($likes == 0) {
         $redeemPoints = 0;
     } else {
-        $redeemPoints = $likes * 0.25;
+        $redeemPoints = $likes * 0.01;
     }
     return $redeemPoints;
 }
@@ -626,6 +626,15 @@ function hasHourPast($ID) {
     else {
         return false;
     }
+}
+
+/// Find hash tags
+function hashtag_links($string) {
+    //preg_match_all('/#(\w+)/',$string,$matches);
+        $string = preg_replace('/#(\w+)/', ' <a href="post-interest?hashtag=$1">#$1</a>', $string);
+        $string = mysql_real_escape_string($string);
+        $string = str_replace("</a>  <a href", "</a>&nbsp;<a href", $string);
+    return $string;
 }
 
 // text function to all service providers for related service post
