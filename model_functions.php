@@ -562,7 +562,7 @@ function getRedeemPoints($ID) {
     if ($likes == 0) {
         $redeemPoints = 0;
     } else {
-        $redeemPoints = $likes * 0.01;
+        $redeemPoints = $likes;
     }
     return $redeemPoints;
 }

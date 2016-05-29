@@ -91,8 +91,8 @@ if (!empty($_SESSION['ID'])) {
                             </td>
                             <td style="padding-left:0px;">
                                 <p>
-                                    Share photos and videos of the things you care about.
-                                    And when people like your posts, you make money.
+                                    Playdoe is a social network that pays you to share content.
+                                    Earn points every time someone likes your post. Redeem your points for cash or a gift card.
                                 </p>
                             </td>
                         </tr>
@@ -110,8 +110,8 @@ if (!empty($_SESSION['ID'])) {
                             </td>
                             <td style="padding-left:10px;">
                                 <p style="font-size:20px;">
-                                    Share photos and videos of the things you care about. <br/>
-                                    And when people like your posts, you make money. <br/>
+                                    Playdoe is a social network that pays you to share content.
+                                    Earn points every time someone likes your post. Redeem your points for cash or a gift card.
                                 </p>
                             </td>
                         </tr>

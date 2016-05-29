@@ -824,8 +824,8 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
                 <a style="padding-left:20px;" href="/member_follows/<?php echo get_username($ID) ?>"><img src = "/images/follows.png" height="20" width="20" /><?php require 'getNewFollowCount.php' ?></a>
                 <br/><br/>
                     <?php
-                    echo "<span style='color:#888888'><img src='images/dollar-sign.jpeg' height='50' width='50' /> Money Made:</span> ". money_format('$%i',getRedeemPoints($ID));
-                    if (getRedeemPoints($ID) > 0.0) { echo "<br/><a href='/support'>How To Get My Money</a>"; };
+                    echo "<span style='color:#888888'><img src='images/points.png' height='50' width='50' /> Total Points: </span> ". getRedeemPoints($ID);
+                    if (getRedeemPoints($ID) > 0) { echo "<br/><a href='/support'>Redeem My Points</a>"; };
                     ?>
                         </div>
 
@@ -900,8 +900,8 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
                 <a style="padding-left:20px;" href="/member_follows/<?php echo get_username($ID) ?>"><img src = "/images/follows.png" height="20" width="20" /><?php require 'getNewFollowCount.php' ?></a>
                 <br/><br/>
                 <?php
-                echo "<span style='color:#888888'><span style='color:#888888'><img src='images/dollar-sign.jpeg' height='50' width='50' /> Money Made:</span> ". money_format('$%i',getRedeemPoints($ID));
-                if (getRedeemPoints($ID) > 0.0) { echo "<br/><a href='/support'>How To Get My Money</a>"; };
+                echo "<span style='color:#888888'><span style='color:#888888'><img src='images/points.png' height='50' width='50' /> Total Points: </span>". getRedeemPoints($ID);
+                if (getRedeemPoints($ID) > 0) { echo "<br/><a href='/support'>Redeem My Points</a>"; };
                 ?>
 
             <?php } ?>

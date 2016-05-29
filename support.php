@@ -38,29 +38,18 @@ $ID = $_SESSION['ID'];
             <h4><div style="color:blue;"  onclick="document.getElementById('rules').style.display = 'block';">How It Works</div></h4>
 
             <div id="rules" style="display:none;">
-                <li class="display-block" style="padding-bottom:10px;">1. Every time you get a post like, your cash amount increases.</li>
-                <li class="display-block" style="padding-bottom:10px;">2. You earnings are always visible on the home page.</li>
+                <li class="display-block" style="padding-bottom:10px;">1. Every time you get a post like, your point total increases.</li>
+                <li class="display-block" style="padding-bottom:10px;">2. Your points are always visible on your home page.</li>
                 <li class="display-block" style="padding-bottom:10px;">3. The maximum posts you can share a day is 10.</li>
-                <li class="display-block" style="padding-bottom:10px;">4. You must make a minimum of $5 before redeeming your money for cash or a gift card.</i>.</li>
-                <li class="display-block" style="padding-bottom:10px;">5. Once you redeem your money, your bank is reset to $0.</li>
-                <li class="display-block" style="padding-bottom:10px;">6. <b>To get your money, direct message '<span style="color:red">Playdoe Redemption</span>' and let us know you would like to redeem your points.
-                Tell us how you would like to receive your money, rather it's cash or a gift card. If you want a gift card, tell us the
+                <li class="display-block" style="padding-bottom:10px;">4. Once you redeem your money, your points are reset to $0.</li>
+                <li class="display-block" style="padding-bottom:10px;">5. <b>To redeem your points, direct message '<span style="color:red">Playdoe Redemption</span>' and let us know you would like to redeem your points.
+                Tell us how you would like to receive your points, rather it's cash or a gift card. If you want a gift card, tell us the
                 business you want the gift card from. Note Walmart rounds gifts to increments of $5 and we will always round down. If the gift card is available, we will send the claim code to your Playdoe inbox. If the
                 gift card is not available, we will work to provide an ancillary gift card option.</b></li>
 
                 <h5 style="font-style: italic">*Cash payouts are deposited in either your PayPal or Venmo account.</h5>
 
                 <lead>*Rewards processing can take 24 to 48 hours.</lead>
-
-                <hr class="hr-line"/>
-                <h4 style="color:red;">Not Allowed</h4>
-
-                <li class="display-block" style="padding-bottom:10px;">1. Posting of duplicate photos and videos.</li>
-                <li class="display-block" style="padding-bottom:10px;">2. Exhibiting practices that can be deemed as abusing the points system.</li>
-
-                Any of these detected practices will be flagged and subject your account to suspension or termination.
-                You are encouraged to share content others can enjoy and engage with via a like or comment.
-                <br/><br/>
 
                 <a href="/terms">Click here to view our terms and policy</a>
 
