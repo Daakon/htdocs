@@ -54,9 +54,20 @@ $ID = $_SESSION['ID'];
 
                 <lead>*Rewards processing can take 24 to 48 hours.</lead>
 
-                <a href="/terms">Click here to view our terms and policy</a>
+                <h4><div style="color:blue;"  onclick="document.getElementById('points').style.display = 'block';">View Point System</div></h4>
 
                 <br/>
+
+                <div id="points" style="display:none;padding-right:10px;">
+                    <li class="list-group-item list-group-item-danger display-block">1500 Points = $3</li>
+                    <li class="list-group-item list-group-item-danger display-block">2500 Points = $5</li>
+                    <li class="list-group-item list-group-item-danger display-block">4000 Points = $10</li>
+                    <li class="list-group-item list-group-item-danger display-block">9000 Points = $25</li>
+                    <li class="list-group-item list-group-item-danger display-block">17000 Points = $50</li>
+                    </div>
+
+                <br/>
+                <a href="/terms">Click here to view our terms and policy</a>
 
                 <div style="margin-bottom:20px;margin-top:10px;"  onclick="document.getElementById('rules').style.display = 'none';"><img src="/images/close.png" height="25" width="25"/>
                     <!-- adding onclick to hide this element when you click it -->
