@@ -1,13 +1,10 @@
 --Post Like Query
-
-
-
 Select count(ID) as LikeCount
 From PostApprovals
 Where (Owner_ID = X) and (IsRedeemed = 0)
 
 --Follower Query
-SELECT COUNT( Followed_ID ) AS FollowerCount
+SELECT COUNT(ID) AS FollowerCount
 FROM Follows
 WHERE Followed_ID = X
 AND IsRedeemed =0

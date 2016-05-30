@@ -571,7 +571,8 @@ function getRedeemPoints($ID) {
 }
 
 function hasTenPost($ID) {
-    $sql = "Select count(ID) as PostCount FROM Posts Where (Member_ID = $ID) And (IsRedeemed = 0) And (DATE(PostDate) = DATE(NOW()))";
+    $sql = "Select count(ID) as PostCount FROM Posts Where (Member_ID = $ID)
+    And (IsRedeemed = 0) And (DATE(PostDate) = DATE(NOW()))  And (IsDeleted = 0)";
     $result = mysql_query($sql) or die(mysql_error());
     $rows = mysql_fetch_assoc($result);
     $postCount = $rows['PostCount'];
@@ -613,7 +614,7 @@ function isSuspended($ID) {
 }
 
 function hasHourPast($ID) {
-    $sql = "SELECT PostDate From Posts Where Member_ID = $ID Order by PostDate DESC LIMIT 1";
+    $sql = "SELECT PostDate From Posts Where Member_ID = $ID And IsDeleted = 0 Order by PostDate DESC LIMIT 1";
     $result = mysql_query($sql) or die(mysql_error());
     $rows = mysql_fetch_assoc($result);
     $timeOfLastPost = $rows['PostDate'];
