@@ -7,11 +7,16 @@ From PostApprovals
 Where (Owner_ID = X) and (IsRedeemed = 0)
 
 --Follower Query
-/*SELECT COUNT( Followed_ID ) AS FollowerCount
+SELECT COUNT( Followed_ID ) AS FollowerCount
 FROM Follows
 WHERE Followed_ID = X
 AND IsRedeemed =0
-ORDER BY FollowerCount DESC*/
+ORDER BY FollowerCount DESC
+
+--Sign up referrals
+Select count(ID) as ReferralCount
+From Referrals
+Where (Referral_ID = $ID)
 
 
 --Update Redemption Status

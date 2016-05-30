@@ -547,23 +547,26 @@ function checkBlock($ID, $memberID) {
 
 function getRedeemPoints($ID) {
 
-    $sql = "SELECT count(*) as Likes From PostApprovals Where Owner_ID = $ID and IsRedeemed = 0";
+    $sql = "SELECT count(ID) as LikeCount From PostApprovals Where Owner_ID = $ID and IsRedeemed = 0";
     $result = mysql_query($sql) or die(mysql_error());
     $rows = mysql_fetch_assoc($result);
-    $likes = $rows['Likes'];
+    $likeCount = $rows['LikeCount'];
+    $likePoints = $likeCount;
 
-   /* $sql2 = "SELECT Distinct Members.FirstName, Members.LastName, Follows.Followed_ID As ParentFollowedID, (Select count(Followed_ID) From Follows where Followed_ID = ParentFollowedID) As FollowerCount
-    FROM Follows,Members
-    Where (Members.ID = Follows.Followed_ID) ";
+    $sql2 = "SELECT count(ID) as FollowerCount From Follows Where Followed_ID = $ID and IsRedeemed = 0 ";
     $result2 = mysql_query($sql2) or die(mysql_error());
     $rows2 = mysql_fetch_assoc($result2);
-    $followerCount = $rows2['FollowerCount'];*/
+    $followerCount = $rows2['FollowerCount'];
+    $followerPoints = $followerCount * 10;
 
-    if ($likes == 0) {
-        $redeemPoints = 0;
-    } else {
-        $redeemPoints = $likes;
-    }
+    $sql3 = "Select count(ID) as ReferralCount From Referrals Where Referral_ID = $ID And IsRedeemed = 0 ";
+    $result3 = mysql_query($sql3) or die(mysql_error());
+    $rows3 = mysql_fetch_assoc($result3);
+    $referralCount = $rows3['ReferralCount'];
+    $referralPoints = $referralCount * 100;
+
+    // tally redemption points
+    $redeemPoints = $likePoints + $followerPoints + $referralPoints;
     return $redeemPoints;
 }
 

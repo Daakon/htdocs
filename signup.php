@@ -68,7 +68,7 @@ $result = mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting defa
 
 // insert Referral ID if exists
 if (strlen($referredBy) > 0) {
-    $sql = "INSERT INTO Referrals (SignupID, ReferralID) Values ($ID, '$referredBy') ";
+    $sql = "INSERT INTO Referrals (Signup_ID, Referral_ID) Values ($ID, '$referredBy') ";
     $result = mysql_query($sql) or die(mysql_error());
 }
 
