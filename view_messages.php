@@ -53,7 +53,7 @@ else {
 <?php
 if (isset($_POST['videoSend']) && $_POST['videoSend'] = "Start Video Chat") {
     // build out appear.in link
-    $appearID = 'Rapportbook'.uniqid();
+    $appearID = 'Playdoe'.uniqid();
     $appearLink = "<iframe src=\"https://appear.in/$appearID\" frameborder=\"0\" height=\"300\"></iframe>";
     $message = $appearLink;
     $hasVideo = true;
@@ -517,8 +517,6 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
     }
 </script>
 
-<?php include('media_sizes.html'); ?>
-
 
 
 <body onload='location.href="#pageStart"'>
@@ -529,6 +527,7 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
         <div class="col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8 roll-call ">
 
             <h2>View Messages</h2>
+
             <hr/>
 
             <script type="text/javascript" src="jquery-1.8.0.min.js"></script>
@@ -729,6 +728,28 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
             }
             ?>
 
+            <?php
+            if ($urlUsername == 'redeem') { ?>
+                <div style="margin-top:-30px;padding-bottom:30px;">
+                <h3>Redeem Your Points</h3>
+                If you are electing to redeem your points, you will need to tell us how you would like to receive your points, rather it's cash or a gift card.
+                If you want a gift card, tell us the business you want the gift card from. Note Walmart offers gift cards in increments of $5 and
+                we will always round down. If the gift card is available, we will send the claim code to your Playdoe inbox.
+                If the gift card is not available, we will work to provide an ancillary gift card option.
+
+                    <h4><div style="color:blue;"  onclick="document.getElementById('points').style.display = 'block';">View Point System</div></h4>
+
+                    <br/>
+
+                    <div id="points" style="display:none;padding-right:10px;">
+                        <li class="list-group-item list-group-item-danger display-block">1500 Points = $3</li>
+                        <li class="list-group-item list-group-item-danger display-block">2500 Points = $5</li>
+                        <li class="list-group-item list-group-item-danger display-block">4000 Points = $10</li>
+                        <li class="list-group-item list-group-item-danger display-block">9000 Points = $25</li>
+                        <li class="list-group-item list-group-item-danger display-block">17000 Points = $50</li>
+                    </div>
+                </div>
+            <?php } ?>
 
             <div class="hidden-lg">
 

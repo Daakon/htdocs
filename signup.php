@@ -5,6 +5,7 @@ require 'imports.php';
 $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 
 $email = $_POST['email'];
+$referredBy = $_POST['referredBy'];
 $emailSplit = explode("@", $email);
 $username = $emailSplit[0];
 
@@ -38,8 +39,8 @@ if (mysql_num_rows($result) > 0) {
 
 
 
-$sql = "INSERT INTO Members (FirstName, LastName, Email,    Username,      Password,        SignupDate,   IsSuspended, EmailActive, LastLogin     )
-Values 			            ('$fName', '$lName', '$email', '$username',  '".md5($pass)."',  CURRENT_DATE(),   0,           1,       CURRENT_DATE() )";
+$sql = "INSERT INTO Members (FirstName, LastName, Email,    Username,   ReferralID,    Password,        SignupDate,   IsSuspended, EmailActive, LastLogin     )
+Values 			            ('$fName', '$lName', '$email', '$username', '$username', '".md5($pass)."',  CURRENT_DATE(),   0,           1,       CURRENT_DATE() )";
 $result = mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting new member account"));
 
 $ID = mysql_insert_id();
@@ -64,6 +65,12 @@ $sql = "INSERT INTO Profile (Member_ID,  Poster,               ProfileVideo ) Va
                             ($ID,       'default_photo.png', 'default_video.png' )    ";
 $result = mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting default photo"));
 
+
+// insert Referral ID if exists
+if (strlen($referredBy) > 0) {
+    $sql = "INSERT INTO Referrals (SignupID, ReferralID) Values ($ID, '$referredBy') ";
+    $result = mysql_query($sql) or die(mysql_error());
+}
 
 // Send out sign up email
 $toId = $rows['ID'];

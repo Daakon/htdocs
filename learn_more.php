@@ -67,6 +67,36 @@ if (!empty($_SESSION['ID'])) {
 
     <div align="left" >
 
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Referral ID</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            A referral ID is not required to sign up but if someone did refer you, please provide their Referral ID.
+                            This is one of the ways members earn points to redeem for cash and gift cards. Make sure you provide the
+                            correct Referral ID and double check it before you enter it as it cannot be undone once you sign up.
+                            Once you sign up, you will be assigned a Referral ID which you can give to people to use as well.
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <!-- End Modal -->
+
         <div class="row" style="margin-top:-20px;">
             <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12" >
 
@@ -124,9 +154,6 @@ if (!empty($_SESSION['ID'])) {
             </div>
 
 
-           <!-- <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12" style="padding-left:20%">
-                <img style="float:left;" src="/images/Playdoe-Logo.png" width="80%"  />
-            </div>-->
 
         </div>
 
@@ -149,13 +176,18 @@ if (!empty($_SESSION['ID'])) {
                             <label class="sr-only" for="email">Email Address</label>
                             <input class="form-control input-lg" type="email" name="email" id="email"
                                    placeholder="Email"/>
+
+                            <label class="sr-only" for="referredBy">Referred By</label>
+                            <input class="form-control input-lg" type="text" name="referredBy" id="referredBy"
+                                   placeholder="Referral ID" /> <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">What's Referral ID ?</button>
                         </div>
                         <div class="col-md-6">
                             <div class="error-text"></div>
                         </div>
                     </div>
 
-                    <br/>
+
+            <br/>
 
                     <small>By clicking sign up, you agree to our <a href="/terms">terms</a></small>
                     <br/><br/>

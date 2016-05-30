@@ -825,7 +825,7 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
                 <br/><br/>
                     <?php
                     echo "<span style='color:#888888'><img src='images/points.png' height='50' width='50' /> Total Points: </span> ". getRedeemPoints($ID);
-                    if (getRedeemPoints($ID) > 0) { echo "<br/><a href='/support'>Redeem My Points</a>"; };
+                    if (getRedeemPoints($ID) > 0) { echo "<br/><a href='/view_messages/redeem'>Redeem My Points</a>"; };
                     ?>
                         </div>
 
@@ -901,7 +901,7 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
                 <br/><br/>
                 <?php
                 echo "<span style='color:#888888'><span style='color:#888888'><img src='images/points.png' height='50' width='50' /> Total Points: </span>". getRedeemPoints($ID);
-                if (getRedeemPoints($ID) > 0) { echo "<br/><a href='/support'>Redeem My Points</a>"; };
+                if (getRedeemPoints($ID) > 0) { echo "<br/><a href='/view_messages/redeem'>Redeem My Points</a>"; };
                 ?>
 
             <?php } ?>

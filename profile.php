@@ -274,8 +274,6 @@ if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
 ?>
 
 
-<?php include('media_sizes.html'); ?>
-
 <link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet"/>
 <script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
 
@@ -527,7 +525,7 @@ $bgPhoto = $row['ProfilePhoto'];
                         Members.Email As Email,
                         Members.Password As Password,
                         Members.DOB As DOB,
-
+                        Members.ReferralID As ReferralID,
                         Members.EmailActive As EmailStatus,
                         Members.SmsActive As SmsStatus,
                         Members.IsUsernameUpdated As IsUsernameUpdated,
@@ -578,6 +576,7 @@ $bgPhoto = $row['ProfilePhoto'];
             $emailStatus = $rows['EmailStatus'];
             $smsStatus = $rows['SmsStatus'];
             $usernameStatus = $rows['IsUsernameUpdated'];
+            $referralID = $rows['ReferralID'];
 
             if (strlen($posterName) == 0) {
                 $posterName = "video-bg.jpg";
@@ -671,8 +670,16 @@ $bgPhoto = $row['ProfilePhoto'];
             <hr class="hr-line"/>
 
  <!--Profile ---------------------------------------------------------------------------------------->
-            <p id="notice"></p>
-            <br/>
+
+                <font color="red">Your Referral ID:</font> <b><?php echo $referralID ?></b>
+                <br/>
+                    <small>
+                        Use your Referral ID to give to others who you get to sign up.
+                        This is how we track people you refer. Referrals are worth 10 points.
+                    </small>
+
+
+                <br/><br/>
 
             <form id="ajax-form" method="post" action = "" onsubmit="return checkFields();">
 

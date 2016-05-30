@@ -38,17 +38,11 @@ $ID = $_SESSION['ID'];
             <h4><div style="color:blue;"  onclick="document.getElementById('rules').style.display = 'block';">How It Works</div></h4>
 
             <div id="rules" style="display:none;">
-                <li class="display-block" style="padding-bottom:10px;">1. Every time you get a post like, your point total increases.</li>
+                <li class="display-block" style="padding-bottom:10px;">1. Your points increase from post likes and sign up referrals.</li>
                 <li class="display-block" style="padding-bottom:10px;">2. Your points are always visible on your home page.</li>
                 <li class="display-block" style="padding-bottom:10px;">3. The maximum posts you can share a day is 10.</li>
-                <li class="display-block" style="padding-bottom:10px;">4. The maximum posts you can share a day is 10.</li>
-                <li class="display-block" style="padding-bottom:10px;">5. The value of a point is volatile and based on an algorithm.</li>
-                <li class="display-block" style="padding-bottom:10px;">6. <b>To redeem your points, direct message <span style="color:red">Playdoe Redemption</span>.
-                The redemption team will let you know what your points are worth at that time.
-                If you elect to redeem your points, you will need to tell us how you would like to receive your points, rather it's cash or a gift card.
-                If you want a gift card, tell us the business you want the gift card from. Note Walmart rounds gifts to increments of $5 and
-                we will always round down. If the gift card is available, we will send the claim code to your Playdoe inbox.
-                If the gift card is not available, we will work to provide an ancillary gift card option.</b></li>
+                <li class="display-block" style="padding-bottom:10px;">4. To redeem your points, <a href="/view_messages/redeem">direct message Playdoe Redemption by clicking here.</a></li>
+                <li class="display-block" style="padding-bottom:10px;">5. Once you redeem your points, they are reset to 0.</li>
 
                 <h5 style="font-style: italic">*Cash payouts are deposited in either your PayPal or Venmo account.</h5>
 

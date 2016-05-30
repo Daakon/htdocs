@@ -775,7 +775,7 @@ if (mysql_num_rows($result) > 0) {
         ?>
 
         <?php if (checkBlock($ID, $memberID)) { $display = "style= 'display:none;'"; } else { $display = "style='display:block;'"; } ?>
-        <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 roll-call" align="left" <?php echo $display ?>>
+        <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 roll-call-feed" align="left" <?php echo $display ?>>
 
         <?php
         $profileUrl = "/$username";
@@ -840,19 +840,21 @@ if (mysql_num_rows($result) > 0) {
 
                 <br/><br/>
 
-                 <?php
-                $postPath = getPostPath();
-                $shareLinkID = "shareLink$postID"; ?>
-               <a href="javascript:showLink('<?php echo $shareLinkID ?>');">
-                   <img src="/images/share.gif" height="25px" width="25px" />
+                <div style="padding-left:20px">
+                     <?php
+                    $postPath = getPostPath();
+                    $shareLinkID = "shareLink$postID"; ?>
+                   <a href="javascript:showLink('<?php echo $shareLinkID ?>');">
+                       <img src="/images/share.gif" height="25px" width="25px" />
 
-               </a>
+                   </a>
 
-        <?php $shareLink = 'show_post?postID='.$postID.'&email=1';
-              $shareLink = $postPath.$shareLink;
-              $shortLink = shortenUrl($shareLink);
-        ?>
-        <input id="<?php echo $shareLinkID ?>" style="display:none;" value ="<?php echo $shortLink ?>" />
+                <?php $shareLink = 'show_post?postID='.$postID.'&email=1';
+                      $shareLink = $postPath.$shareLink;
+                      $shortLink = shortenUrl($shareLink);
+                ?>
+                <input id="<?php echo $shareLinkID ?>" style="display:none;" value ="<?php echo $shortLink ?>" />
+            </div>
 
             <hr class="hr-line" />
 
