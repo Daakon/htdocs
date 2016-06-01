@@ -268,7 +268,7 @@ if (isset($_POST['submit'])) {
 //-------------------------------------------------
 if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
     $postID = $_POST['postID'];
-    $ownerId = $_POST['memberID'];
+    $ownerId = $_POST['ownerID'];
     $comment = $_POST['postComment'];
     $comment = mysql_real_escape_string($comment);
     if (strlen($comment) > 0) {
@@ -419,8 +419,8 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                         exit; */
                     }
                     $comment = $comment . '<br/><br/>' . $img . '<br/>';
-                    $sql = "INSERT INTO PostComments (Post_ID,     Member_ID,   Comment, CommentDate  ) Values
-                                                      ('$postID', '$ID',      '$comment', CURDATE())";
+                    $sql = "INSERT INTO PostComments (Post_ID,     Member_ID,  Owner_ID,   Comment, CommentDate  ) Values
+                                                      ($postID,      $ID,      $ownerId, '$comment', CURDATE())";
                     mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting post comment"));
 
                 }
@@ -429,8 +429,8 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 // if not comment photo
 //----------------------
             else {
-                $sql = "INSERT INTO PostComments (Post_ID,  Member_ID,    Comment, CommentDate ) Values
-                                                 ('$postID', '$ID',      '$comment', CURDATE())";
+                $sql = "INSERT INTO PostComments (Post_ID,  Member_ID,  Owner_ID,   Comment,  CommentDate ) Values
+                                                 ('$postID', '$ID',     '$ownerId', '$comment', CURDATE())";
                 mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting comment without media"));
             }
             $scrollx = $_REQUEST['scrollx'];

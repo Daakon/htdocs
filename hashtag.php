@@ -692,7 +692,7 @@ function myFunction() {
 </script>
 
     <div class="row row-padding">
-<div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 " align="left">
+<div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6 " align="left">
 
         <ul class="list-inline">
 
@@ -700,7 +700,7 @@ function myFunction() {
         </ul>
 </div>
 
-<div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 ">
+<div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6 ">
 <?php $hashtag = $_GET['hashtag'];
 
 ?>
@@ -775,14 +775,14 @@ if (mysql_num_rows($result) > 0) {
         ?>
 
         <?php if (checkBlock($ID, $memberID)) { $display = "style= 'display:none;'"; } else { $display = "style='display:block;'"; } ?>
-        <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 roll-call-feed" align="left" <?php echo $display ?>>
+        <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6 roll-call-feed" align="left" <?php echo $display ?>>
 
         <?php
         $profileUrl = "/$username";
         ?>
               <div class="profileImageWrapper-Feed">
         <a href="<?php echo $profileUrl ?>">
-            <img src="<?php echo $mediaPath. $profilePhoto ?>" class="profilePhoto-Feed enlarge-onhover " alt=""
+            <img src="<?php echo $mediaPath. $profilePhoto ?>" class="profilePhoto-Feed" alt=""
                  title="<?php echo $name ?>" />
         </a>
     </div>
@@ -834,7 +834,7 @@ if (mysql_num_rows($result) > 0) {
 
 
                  <?php if ($ID != $memberID) {?>
-                    <a href="/view_messages/<?php echo $username ?>"><img src="/images/messages.png" height="20" width="20" /> Message </a>
+                    <a style="padding-left:20px;" href="/view_messages/<?php echo $username ?>"><img src="/images/messages.png" height="20" width="20" /> Message </a>
                 <?php } ?>
 
 

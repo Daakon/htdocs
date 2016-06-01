@@ -277,7 +277,7 @@ $total = mysql_num_rows($rollCallResult);
                             <input type="submit" name="btnComment" id="btnComment" class="btnComment" Value="Comment"/>
                             <input type="hidden" name="postID" id="postID" class="postID" Value="<?php echo $postID ?>"/>
                             <input type="hidden" name="ID" id="ID" class="ID" value="<?php echo $ID ?>"/>
-                            <input type="hidden" name="ownerId" class="ownerId" id="ownerId" value="<?php echo $memberID ?>"/>
+                            <input type="hidden" name="ownerID" class="ownerID" id="ownerID" value="<?php echo $memberID ?>"/>
                             <input type="hidden" name="scrollx" id="scrollx" value="0"/>
                             <input type="hidden" name="scrolly" id="scrolly" value="0"/>
                         </form>
@@ -289,7 +289,7 @@ $total = mysql_num_rows($rollCallResult);
                         PostComments.Comment As PostComment,
                         PostComments.ID As PostCommentID,
                         PostComments.CommentDate As CommentDate,
-                        Members.ID As CommenterID,
+                        Members.ID As CommentOwnerID,
                         Members.FirstName as FirstName,
                         Members.LastName As LastName,
                         Members.Username As Username,
@@ -312,7 +312,7 @@ $total = mysql_num_rows($rollCallResult);
                             $comment = $rows3['PostComment'];
                             $profilePhoto = $rows3['ProfilePhoto'];
                             $commentID = $rows3['PostCommentID'];
-                            $commentOwnerID = $rows3['CommenterID'];
+                            $commentOwnerID = $rows3['CommentOwnerID'];
                             $commenterUsername = $rows3['Username'];
                             $commenterProfileUrl = "/$commenterUsername";
                             $commentDate = $rows3['CommentDate'];
@@ -361,7 +361,7 @@ $total = mysql_num_rows($rollCallResult);
                         PostComments.Comment As PostComment,
                         PostComments.ID As PostCommentID,
                         PostComments.CommentDate As CommentDate,
-                        Members.ID As CommenterID,
+                        Members.ID As CommentOwnerID,
                         Members.FirstName as FirstName,
                         Members.LastName As LastName,
                         Members.Username As Username,
@@ -394,7 +394,7 @@ $total = mysql_num_rows($rollCallResult);
                                     $comment = $rows4['PostComment'];
                                     $profilePhoto = $rows4['ProfilePhoto'];
                                     $commentID = $rows4['PostCommentID'];
-                                    $commentOwnerID = $rows4['CommenterID'];
+                                    $commentOwnerID = $rows4['CommentOwnerID'];
                                     $commenterUsername = $rows4['Username'];
                                     $commenterProfileUrl = "/$commenterUsername";
                                     $commentDate = $rows4['CommentDate'];

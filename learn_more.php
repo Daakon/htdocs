@@ -121,8 +121,8 @@ if (!empty($_SESSION['ID'])) {
                             </td>
                             <td style="padding-left:0px;">
                                 <p>
-                                    Playdoe is a social network that pays you to share content.
-                                    Earn points every time someone likes your post. Redeem your points for cash or a gift card.
+                                    Playdoe is a rewards application that allows you to earn points for sharing content, gaining followers
+                                    and getting sign up referrals. Redeem your points for cash and gift cards.
                                 </p>
                             </td>
                         </tr>
@@ -140,8 +140,8 @@ if (!empty($_SESSION['ID'])) {
                             </td>
                             <td style="padding-left:10px;">
                                 <p style="font-size:20px;">
-                                    Playdoe is a social network that pays you to share content.
-                                    Earn points every time someone likes your post. Redeem your points for cash or a gift card.
+                                    Playdoe is a rewards application that allows you to earn points for sharing content, gaining followers
+                                    and getting sign up referrals. Redeem your points for cash and gift cards.
                                 </p>
                             </td>
                         </tr>

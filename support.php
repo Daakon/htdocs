@@ -23,7 +23,7 @@ $ID = $_SESSION['ID'];
                 <a href="/login-mobile.php" >Login or Sign Up</a>
             </div>
         <?php } else { ?>
-            <a href="javascript:history.go(-1)">Go Back</a>
+            <a style="padding-left:20px;" href="javascript:history.go(-1)">Go Back</a>
         <?php } ?>
     </div>
 
