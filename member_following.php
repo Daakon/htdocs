@@ -60,7 +60,7 @@ $profileID = get_id_from_username($username);
                       And Members.IsActive = 1
                       AND Profile.Member_ID = $followedID
                       Group By Interest
-                      Order By Interest ASC ";
+                      Order By New Desc";
                     $result2 = mysql_query($sql2) or die(logError(mysql_error(), $url, "Getting profile photos and names of who user is following"));
 
 
