@@ -837,12 +837,6 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
 
                 <?php
 
-                    if (hasHourPast($ID) == false) {
-                        echo "<h5 align='center'>You can only post once an hour. <img src='/images/hourglass.gif' height='50' width='50' /></h5>";
-                    }
-                    else {
-
-                    if (hasTenPost($ID) == false) {
                         ?>
                     <form method="post" enctype="multipart/form-data" action="" onsubmit="return showUploading()" >
                         <img src="/images/image-icon.png" height="30px" width="30px" alt="Photos/Video"/>
@@ -857,12 +851,6 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
                         <input type="submit" class="post-button" name="submit" id="submit" value="Post"/>
                     </form>
                 <?php
-
-                    } // hasTenPost
-
-                    else { echo "<h5 align='center'>You have reached your daily post limit."; }
-
-                } // hasHourPast
 
                     } // isEmailValidated
 

@@ -38,11 +38,9 @@ $ID = $_SESSION['ID'];
             <h4><div style="color:blue;"  onclick="document.getElementById('rules').style.display = 'block';">How It Works</div></h4>
 
             <div id="rules" style="display:none;">
-                <li class="display-block" style="padding-bottom:10px;">1. Your points increase from post likes and sign up referrals.</li>
-                <li class="display-block" style="padding-bottom:10px;">2. Your points are always visible on your home page.</li>
-                <li class="display-block" style="padding-bottom:10px;">3. The maximum posts you can share a day is 10.</li>
-                <li class="display-block" style="padding-bottom:10px;">4. Once you reach 10 referrals, to redeem your points, <a href="/view_messages/redeem">direct message Playdoe Redemption by clicking here.</a></li>
-                <li class="display-block" style="padding-bottom:10px;">5. Once you redeem your points, they are reset to 0.</li>
+                <li class="display-block" style="padding-bottom:10px;">1. Your money increase based sign up referrals who validate their accounts and share content.</li>
+                <li class="display-block" style="padding-bottom:10px;">2. Your referral money is always visible on your home page.</li>
+                <li class="display-block" style="padding-bottom:10px;">3. Once you reach 10 referrals, to redeem your money, <a href="/view_messages/redeem">direct message Playdoe Redemption by clicking here.</a></li>
 
                 <h5 style="font-style: italic">*Cash payouts are deposited in either your PayPal or Venmo account.</h5>
 
