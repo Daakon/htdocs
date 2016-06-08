@@ -545,39 +545,24 @@ function checkBlock($ID, $memberID) {
     }
 }
 
-function getRedeemPoints($ID) {
-
-    // get like points
-    $sql = "SELECT count(ID) as LikeCount From PostApprovals Where Owner_ID = $ID and IsRedeemed = 0";
-    $result = mysql_query($sql) or die(mysql_error());
-    $rows = mysql_fetch_assoc($result);
-    $likeCount = $rows['LikeCount'];
-    $likePoints = $likeCount * 3;
+function getRedeemPoints($ID, $username) {
 
     // get post comment points
-    $sql4 = "select count(*) As CommentCount from PostComments where Owner_ID = $ID and Member_ID != $ID and IsRedeemed = 0 ";
-    $result4 = mysql_query($sql4) or die(mysql_error());
-    $rows4 = mysql_fetch_assoc($result4);
-    $commentCount = $rows4['CommentCount'];
-    $commentPoints = $commentCount * 3;
-
-    // get follower points
-    $sql2 = "SELECT count(ID) as FollowerCount From Follows Where Followed_ID = $ID and IsRedeemed = 0 ";
-    $result2 = mysql_query($sql2) or die(mysql_error());
-    $rows2 = mysql_fetch_assoc($result2);
-    $followerCount = $rows2['FollowerCount'];
-    $followerPoints = $followerCount * 10;
-
     // get referral points
-    $sql3 = "Select count(ID) as ReferralCount From Referrals Where Referral_ID = $ID And IsRedeemed = 0 ";
+    $sql3 = "SELECT COUNT(Referrals.ID )
+    FROM Referrals, Members
+    WHERE Referrals.Referral_ID = '$username'
+    AND Referrals.IsRedeemed =0
+    AND Referrals.Signup_ID = Members.ID
+    AND Members.IsEmailValidated =1";
     $result3 = mysql_query($sql3) or die(mysql_error());
     $rows3 = mysql_fetch_assoc($result3);
     $referralCount = $rows3['ReferralCount'];
-    $referralPoints = $referralCount * 100;
+    $referralPoints =  money_format('$%i', $referralCount);
 
 
     // tally redemption points
-    $redeemPoints = $likePoints + $commentPoints + $followerPoints + $referralPoints;
+    $redeemPoints = $referralPoints;
     return $redeemPoints;
 }
 

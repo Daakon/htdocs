@@ -41,7 +41,7 @@ $ID = $_SESSION['ID'];
                 <li class="display-block" style="padding-bottom:10px;">1. Your points increase from post likes and sign up referrals.</li>
                 <li class="display-block" style="padding-bottom:10px;">2. Your points are always visible on your home page.</li>
                 <li class="display-block" style="padding-bottom:10px;">3. The maximum posts you can share a day is 10.</li>
-                <li class="display-block" style="padding-bottom:10px;">4. To redeem your points, <a href="/view_messages/redeem">direct message Playdoe Redemption by clicking here.</a></li>
+                <li class="display-block" style="padding-bottom:10px;">4. Once you reach 10 referrals, to redeem your points, <a href="/view_messages/redeem">direct message Playdoe Redemption by clicking here.</a></li>
                 <li class="display-block" style="padding-bottom:10px;">5. Once you redeem your points, they are reset to 0.</li>
 
                 <h5 style="font-style: italic">*Cash payouts are deposited in either your PayPal or Venmo account.</h5>
@@ -50,17 +50,8 @@ $ID = $_SESSION['ID'];
 
                 <h4><div style="color:blue;"  onclick="document.getElementById('points').style.display = 'block';">View Point System</div></h4>
 
-                <br/>
+                <br/><br/>
 
-                <div id="points" style="display:none;padding-right:10px;">
-                    <li class="list-group-item list-group-item-danger display-block">1500 Points = $3</li>
-                    <li class="list-group-item list-group-item-danger display-block">2500 Points = $5</li>
-                    <li class="list-group-item list-group-item-danger display-block">4000 Points = $10</li>
-                    <li class="list-group-item list-group-item-danger display-block">9000 Points = $25</li>
-                    <li class="list-group-item list-group-item-danger display-block">17000 Points = $50</li>
-                    </div>
-
-                <br/>
                 <a href="/terms">Click here to view our terms and policy</a>
 
                 <div style="margin-bottom:20px;margin-top:10px;"  onclick="document.getElementById('rules').style.display = 'none';"><img src="/images/close.png" height="25" width="25"/>

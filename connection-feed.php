@@ -57,13 +57,13 @@ if (mysql_num_rows($rollCallResult) == 0) {
         <img src="/images/Playdoe-Logo.png" height="100" width="100" />
         <br/>
         <lead style="padding-left:10px;">
-            Get Paid To Share
+            It Pays To Be Social
         </lead>
 
     </div>
 <?php }
 if (mysql_num_rows($rollCallResult) > 0) {
-$total = mysql_num_rows($rollCallResult);
+    $total = mysql_num_rows($rollCallResult);
     $counter = 0;
     while ($rows = mysql_fetch_assoc($rollCallResult)) {
         // determine the last Post ID and use that for JS to find
@@ -93,6 +93,8 @@ $total = mysql_num_rows($rollCallResult);
         $isSponsored = $rows['IsSponsored'];
         $postOwner = $memberID;
         $lastPostID = $rows['LastPostID'];
+
+
         ?>
 
 
@@ -169,7 +171,7 @@ $total = mysql_num_rows($rollCallResult);
 
             <div >
 
-                    <?php if ($ID != $memberID) {
+                <?php if ($ID != $memberID) {
 
                         $optionsID = "options$postID";
                     ?>
@@ -191,10 +193,16 @@ $total = mysql_num_rows($rollCallResult);
                 <?php
 
                 if (!isset($ID)) {
-                    $readonly = "readonly";
+                    $disabled = "disabled";
                 }
                 else {
-                    $readonly = "";
+                    $disabled = "";
+                }
+
+                if (isEmailValidated($ID)) {
+                    $disabled = '';
+                } else {
+                    $disabled = 'disabled';
                 }
 
                 echo "<hr class='hr-line'/>";
@@ -216,7 +224,7 @@ $total = mysql_num_rows($rollCallResult);
                     echo '<input type ="hidden" name="postID" class = "postID" id = "postID" value = "' . $postID . '" />';
                     echo '<input type ="hidden" class = "ID" id = "ID" value = "' . $ID . '" />';
                     echo '<input type ="hidden" class = "memberID" id = "memberID" value = "' . $memberID . '" />';
-                    echo '<input type ="button" class = "btnDisapprove"'. $readonly.' />';
+                    echo '<input type ="button" class = "btnDisapprove"'. $disabled.' />';
                     if ($approvals > 0) {
                         echo '&nbsp;<span>' . $approvals . '</span>';
                     }
@@ -226,7 +234,7 @@ $total = mysql_num_rows($rollCallResult);
                     echo '<input type ="hidden" name="postID" class = "postID" id = "postID" value = "' . $postID . '" />';
                     echo '<input type ="hidden" class = "ID" id = "ID" value = "' . $ID . '" />';
                     echo '<input type ="hidden" name="memberID" class = "memberID" id = "memberID" value = "' . $memberID . '" />';
-                    echo '<input type ="button" class = "btnApprove"'. $readonly.' />';
+                    echo '<input type ="button" class = "btnApprove"'. $disabled.' />';
                     if ($approvals > 0) {
                         echo '&nbsp;<span>' . $approvals . '</span>';
                     }
@@ -259,12 +267,12 @@ $total = mysql_num_rows($rollCallResult);
                               onsubmit="showCommentUploading('comment<?php echo $postID?>', this);">
 
                             <input type="text" class="form-control" name="postComment" id="postComment"
-                                   placeholder="Write a comment" title='' />
+                                   placeholder="Write a comment" title='' <?php echo $disabled ?> />
 
                             <?php if ($iPhone || $iPad || $Android) { ?>
                                 <h6>Add Photos/Video</h6>
                                 <input type="file" name="flPostMedia" id="flPostMedia" class="flPostMedia"/>
-                           <?php } ?>
+                            <?php } ?>
 
                             <br/>
                             <div id="comment<?php echo $postID ?>" style="display:none;">
@@ -274,7 +282,7 @@ $total = mysql_num_rows($rollCallResult);
                                     </div>
                                 </div>
                             </div>
-                            <input type="submit" name="btnComment" id="btnComment" class="btnComment" Value="Comment"/>
+                            <input type="submit" name="btnComment" id="btnComment" class="btnComment" Value="Comment" <?php echo $disabled ?> />
                             <input type="hidden" name="postID" id="postID" class="postID" Value="<?php echo $postID ?>"/>
                             <input type="hidden" name="ID" id="ID" class="ID" value="<?php echo $ID ?>"/>
                             <input type="hidden" name="ownerID" class="ownerID" id="ownerID" value="<?php echo $memberID ?>"/>
@@ -317,7 +325,7 @@ $total = mysql_num_rows($rollCallResult);
                             $commenterProfileUrl = "/$commenterUsername";
                             $commentDate = $rows3['CommentDate'];
 
-                          //if (checkBlock($ID, $commentOwnerID)) { $display2 = "style= 'display:none;'"; } else { $display2 = "style='display:block;'"; }
+                            //if (checkBlock($ID, $commentOwnerID)) { $display2 = "style= 'display:none;'"; } else { $display2 = "style='display:block;'"; }
 
                             echo '<div class="comment-row" >';
                             echo '<div class="profileImageWrapper-Feed">
@@ -447,7 +455,7 @@ $total = mysql_num_rows($rollCallResult);
                 </div>
 
             </div>
-</div>
+        </div>
 
 
         <!---------------------------------------------------
@@ -460,4 +468,3 @@ $total = mysql_num_rows($rollCallResult);
 }
 
 ?>
-

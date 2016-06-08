@@ -116,13 +116,11 @@ if (!empty($_SESSION['ID'])) {
                     <table style="margin-left:10px;margin-top:20px;margin-bottom:10px;margin-right:10px;">
 
                         <tr>
-                            <td>
-                                <img src="/images/Like-Redeem-Large.png" height="50px" width="50px" style="margin-bottom:10px;" />
-                            </td>
                             <td style="padding-left:0px;">
                                 <p>
-                                    Playdoe is a rewards application that allows you to earn points for sharing content, gaining followers
-                                    and getting sign up referrals. Redeem your points for cash and gift cards.
+                                    Playdoe is a social application that allows people to share cool photos and videos.
+                                    Make a $1 for every person you refer that shares content.
+                                </p>
                                 </p>
                             </td>
                         </tr>
@@ -140,8 +138,8 @@ if (!empty($_SESSION['ID'])) {
                             </td>
                             <td style="padding-left:10px;">
                                 <p style="font-size:20px;">
-                                    Playdoe is a rewards application that allows you to earn points for sharing content, gaining followers
-                                    and getting sign up referrals. Redeem your points for cash and gift cards.
+                                    Playdoe is a social application that allows people to share cool photos and videos.
+                                    Make a $1 for every person you refer that shares content.
                                 </p>
                             </td>
                         </tr>

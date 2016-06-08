@@ -824,8 +824,8 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
                 <a style="padding-left:20px;" href="/member_follows/<?php echo get_username($ID) ?>"><img src = "/images/follows.png" height="20" width="20" /><?php require 'getNewFollowCount.php' ?></a>
                 <br/><br/>
                     <?php
-                    echo "<span style='color:#888888'><img src='images/points.png' height='50' width='50' /> Total Points: </span> ". getRedeemPoints($ID);
-                    if (getRedeemPoints($ID) > 0) { echo "<br/><a href='/view_messages/redeem'>Redeem My Points</a>"; };
+                    echo "<span style='color:#888888'><img src='images/points.png' height='50' width='50' /> Referral Money: </span> ". getRedeemPoints($ID, get_username($ID));
+                    if (getRedeemPoints($ID, get_username($ID)) > 9) { echo "<br/><a href='/view_messages/redeem'>Redeem My Money</a>"; };
                     ?>
                         </div>
 
@@ -867,7 +867,7 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
                     } // isEmailValidated
 
                 else {
-                        echo "You must verify your email before posting <br/>
+                        echo "You must verify your email before posting, liking or commenting. <br/>
 
                             <form method='post' action='' >
                                 <input type='hidden' id='id' name='id' value='$ID' />
@@ -900,8 +900,8 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
                 <a style="padding-left:20px;" href="/member_follows/<?php echo get_username($ID) ?>"><img src = "/images/follows.png" height="20" width="20" /><?php require 'getNewFollowCount.php' ?></a>
                 <br/><br/>
                 <?php
-                echo "<span style='color:#888888'><span style='color:#888888'><img src='images/points.png' height='50' width='50' /> Total Points: </span>". getRedeemPoints($ID);
-                if (getRedeemPoints($ID) > 0) { echo "<br/><a href='/view_messages/redeem'>Redeem My Points</a>"; };
+                echo "<span style='color:#888888'><span style='color:#888888'><img src='images/points.png' height='50' width='50' /> Referral Money: </span>". getRedeemPoints($ID, get_username($ID));
+                if (getRedeemPoints($ID, get_username($ID)) > 9) { echo "<br/><a href='/view_messages/redeem'>Redeem My Money</a>"; };
                 ?>
 
             <?php } ?>
