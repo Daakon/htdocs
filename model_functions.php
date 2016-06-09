@@ -591,7 +591,18 @@ function getRedeemPoints($ID, $username) {
     $commentCount = $rows['CommentCount'];
     $commentMoney = $commentCount * 0.01;
 
-    $addedMoney = $referralMoney + $likeMoney + $commentMoney;
+    $sql1 = "SELECT COUNT(Follows.ID) AS FollowerCount
+    FROM Follows, Members
+    WHERE Follows.Followed_ID = $ID
+    AND IsRedeemed =0
+    And Follows.Follower_ID = Members.ID
+    And Members.IsEmailValidated = 1";
+    $result1 = mysql_query($sql1) or die(mysql_error());
+    $rows1 = mysql_fetch_assoc($result1);
+    $followerCount = $rows1['FollowerCount'];
+    $followerMoney = $followerCount * 0.01;
+
+    $addedMoney = $referralMoney + $likeMoney + $commentMoney + $followerMoney;
     $totalMoney =  money_format('$%i', $addedMoney);
 
     // tally redemption points
