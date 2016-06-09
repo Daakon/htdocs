@@ -9,6 +9,10 @@ $referredBy = $_POST['referredBy'];
 $emailSplit = explode("@", $email);
 $username = $emailSplit[0];
 
+if (check_referral_ID($referredBy) == false) {
+        echo "<script>alert('Referral ID not found. Please check back with the person who referred you.'); location ='/learn_more'</script>";
+        exit;
+    }
 
 // captilize first letter only
 $fName = ucfirst(strtolower($username));
@@ -68,9 +72,12 @@ $result = mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting defa
 
 // insert Referral ID if exists
 if (strlen($referredBy) > 0) {
-    $sql = "INSERT INTO Referrals (Signup_ID, Referral_ID) Values ($ID, '$referredBy') ";
-    $result = mysql_query($sql) or die(mysql_error());
-}
+
+        $sql = "INSERT INTO Referrals (Signup_ID, Referral_ID, ReferralDate) Values ($ID, '$referredBy', NOW()) ";
+        $result = mysql_query($sql) or die(mysql_error());
+    }
+
+
 
 // Send out sign up email
 $toId = $rows['ID'];

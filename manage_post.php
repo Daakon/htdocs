@@ -498,12 +498,23 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
             <br/>
 
+                <?php
+                $postPath = getPostPath();
+                $shareLinkID = "shareLink$postID"; ?>
+                <a href="javascript:showLink('<?php echo $shareLinkID ?>');">
+                    <img style="margin-left:20px;" src="/images/share.gif" height="50px" width="50px" />
+                </a>
 
-            <input id="<?php echo $shareLinkID ?>" style="display:none;" value ="<?php echo $shortLink ?>" />
+                <?php $shareLink = 'show_post?postID='.$postID.'&email=1';
+                $shareLink = $postPath.$shareLink;
+                $shortLink = shortenUrl($shareLink);
+                ?>
+                <input style="margin-left:20px;" id="<?php echo $shareLinkID ?>" style="display:none;" value ="<?php echo $shortLink ?>" />
+
 
             <?php if ($_SESSION['ID'] == get_id_from_username($username)) { ?>
 
-                <div class="content-space" style="padding-top:20px;">
+                <div class="content-space" style="padding-top:20px;margin-left:10px;">
                     <!--DELETE BUTTON ------------------>
                     <form action="" method="post" onsubmit="return confirm('Do you really want to delete this post?')">
                         <input type="hidden" name="postID" id="postID" value="<?php echo $postID ?>"/>
@@ -636,7 +647,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                         echo '</div>';
                         if ($commentOwnerID == $ID || $ID == $memberID) {
                             //<!--DELETE BUTTON ------------------>
-                            echo '<div class="comment-delete">';
+                            echo '<div class="comment-delete" >';
                             echo '<form action="" method="post" onsubmit="return confirm(\'Do you really want to delete this comment?\')">';
                             echo '<input type="hidden" name="commentID" id="commentID" value="' .  $commentID . '" />';
                             echo '<input type ="submit" name="DeleteComment" id="DeleteComment" value="Delete" class="deleteButton" />';

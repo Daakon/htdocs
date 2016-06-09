@@ -545,19 +545,17 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
             <br/><br/>
 
             <?php
-            /*$postPath = getPostPath();
-            $shareLinkID = "shareLink$postID"; */?><!--
-            <a href="javascript:showLink('<?php /*echo $shareLinkID */?>');">
-                <img src="/images/share.gif" height="50px" width="50px" />
-                <span style="color:black;font-weight:bold;">Share This Post</span>
+            $postPath = getPostPath();
+            $shareLinkID = "shareLink$postID"; ?>
+            <a href="javascript:showLink('<?php echo $shareLinkID ?>');">
+                <img style="margin-left:20px;" src="/images/share.gif" height="50px" width="50px" />
             </a>
 
-            <?php /*$shareLink = 'show_post?postID='.$postID.'&email=1';
-                  $shareLink = $postPath.$shareLink;
-                  $shortLink = shortenUrl($shareLink);
-            */?>
-            <input id="<?php /*echo $shareLinkID */?>" style="display:none;" value ="<?php /*echo $shortLink */?>" />
--->
+            <?php $shareLink = 'show_post?postID='.$postID.'&email=1';
+            $shareLink = $postPath.$shareLink;
+            $shortLink = shortenUrl($shareLink);
+            ?>
+            <input style="margin-left:20px;" id="<?php echo $shareLinkID ?>" style="display:none;" value ="<?php echo $shortLink ?>" />
 
             <hr class="hr-line" />
 

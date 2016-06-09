@@ -91,6 +91,18 @@ function get_username($user_id)
 
 }
 
+function check_referral_ID($referralID) {
+    $sql = "SELECT Username FROM Members WHERE Username = '$referralID' ";
+    $result = mysql_query($sql) or die(mysql_error());
+    if (mysql_num_rows($result) > 0) {
+       return true;
+    }
+    else {
+        return false;
+    }
+
+}
+
 function get_users_name_by_id($user_id)
 {
 
@@ -547,9 +559,8 @@ function checkBlock($ID, $memberID) {
 
 function getRedeemPoints($ID, $username) {
 
-    // get post comment points
-    // get referral points
-    $sql3 = "SELECT COUNT(Referrals.ID )
+    // get referral money
+    $sql3 = "SELECT COUNT(Referrals.ID ) as ReferralCount
     FROM Referrals, Members
     WHERE Referrals.Referral_ID = '$username'
     AND Referrals.IsRedeemed =0
@@ -558,12 +569,11 @@ function getRedeemPoints($ID, $username) {
     $result3 = mysql_query($sql3) or die(mysql_error());
     $rows3 = mysql_fetch_assoc($result3);
     $referralCount = $rows3['ReferralCount'];
-    $referralPoints =  money_format('$%i', $referralCount);
+    $referralMoney =  money_format('$%i', $referralCount);
 
 
     // tally redemption points
-    $redeemPoints = $referralPoints;
-    return $redeemPoints;
+    return $referralMoney;
 }
 
 function hasTenPost($ID) {
