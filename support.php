@@ -41,7 +41,7 @@ $ID = $_SESSION['ID'];
             <li class="display-block" style="padding-bottom:10px;">3. Once you reach 10 referrals, to redeem your money, <a href="/view_messages/redeem">direct message Playdoe Redemption by clicking here.</a></li>
 
             <h3>100 Likes</h3>
-            <li class="display-block" style="padding-bottom:10px;">1. Get 100 Likes on a post and win $100.</li>
+            <li class="display-block" style="padding-bottom:10px;">1. Get 100 Likes on a post and earn $100.</li>
             <li class="display-block" style="padding-bottom:10px;">2. Once you get 100 Likes, go to your profile, share the post and send the link in a message to
                 <a href="/view_messages/redeem">Playdoe Redemption.</a></li>
 
