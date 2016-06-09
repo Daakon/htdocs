@@ -569,11 +569,33 @@ function getRedeemPoints($ID, $username) {
     $result3 = mysql_query($sql3) or die(mysql_error());
     $rows3 = mysql_fetch_assoc($result3);
     $referralCount = $rows3['ReferralCount'];
-    $referralMoney =  money_format('$%i', $referralCount);
+    $referralMoney = $referralCount * 1;
 
+    $sql = "Select count(PostApprovals.ID) as LikeCount
+    From PostApprovals, Members
+    Where (PostApprovals.Owner_ID = $ID) and (PostApprovals.IsRedeemed = 0)
+    And PostApprovals.Member_ID = Members.ID
+    And Members.IsEmailValidated = 1";
+    $result = mysql_query($sql) or die(mysql_error());
+    $rows = mysql_fetch_assoc($result);
+    $likeCount = $rows['LikeCount'];
+    $likeMoney = $likeCount * 0.01;
+
+    $sql2 = "Select Count(PostComments.ID) As CommentCount
+    FROM PostComments, Members
+    WHERE PostComments.Owner_ID = $ID And PostComments.IsRedeemed = 0
+    And PostComments.Member_ID = Members.ID
+    And Members.IsEmailValidated = 1";
+    $result = mysql_query($sql) or die(mysql_error());
+    $rows = mysql_fetch_assoc($result);
+    $commentCount = $rows['CommentCount'];
+    $commentMoney = $commentCount * 0.01;
+
+    $addedMoney = $referralMoney + $likeMoney + $commentMoney;
+    $totalMoney =  money_format('$%i', $addedMoney);
 
     // tally redemption points
-    return $referralMoney;
+    return $totalMoney;
 }
 
 function hasTenPost($ID) {
