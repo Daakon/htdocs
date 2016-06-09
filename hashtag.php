@@ -845,7 +845,7 @@ if (mysql_num_rows($result) > 0) {
                     $postPath = getPostPath();
                     $shareLinkID = "shareLink$postID"; ?>
                    <a href="javascript:showLink('<?php echo $shareLinkID ?>');">
-                       <img src="/images/share.gif" height="25px" width="25px" />
+                       <img src="/images/share.gif" height="50" width="50" />
 
                    </a>
 
