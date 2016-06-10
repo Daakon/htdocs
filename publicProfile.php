@@ -2,6 +2,8 @@
 // render profile public view
 $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 preg_match("/[^\/]+$/",$url ,$match);
+$ID = $_SESSION['ID'];
+
 if ($_SESSION['UsernameUpdated'] == 1) {
     $username = $_SESSION['Username'];
 }
@@ -82,20 +84,21 @@ $age = $rows['Age'];
                     $sqlFollow = "SELECT * FROM Follows WHERE Follower_ID = $ID And Followed_ID = $memberID ";
                     $resultFollow = mysql_query($sqlFollow) or die (logError(mysql_error(), $url, "Getting Follows"));
 
-                    if (mysql_num_rows($resultFollow) == 0) {
-                        echo '<form>';
-                        echo '<input type = "hidden" class = "followerID" value = "' . $ID . '" />';
-                        echo '<input type = "hidden" class = "followedID" value = "' . $memberID . '">';
-                        echo '<input type = "button" class = "btnFollow" value = "Follow" />';
-                        echo '</form>';
-                    } else {
-                        echo '<form>';
-                        echo '<input type = "hidden" class = "followerID" value = "' . $ID . '" />';
-                        echo '<input type = "hidden" class = "followedID" value = "' . $memberID . '">';
-                        echo '<input type = "button" class = "btnUnfollow" value = "Unfollow" />';
-                        echo '</form>';
+                    if (isEmailValidated($ID)) {
+                        if (mysql_num_rows($resultFollow) == 0) {
+                            echo '<form>';
+                            echo '<input type = "hidden" class = "followerID" value = "' . $ID . '" />';
+                            echo '<input type = "hidden" class = "followedID" value = "' . $memberID . '">';
+                            echo '<input type = "button" class = "btnFollow" value = "Follow" />';
+                            echo '</form>';
+                        } else {
+                            echo '<form>';
+                            echo '<input type = "hidden" class = "followerID" value = "' . $ID . '" />';
+                            echo '<input type = "hidden" class = "followedID" value = "' . $memberID . '">';
+                            echo '<input type = "button" class = "btnUnfollow" value = "Unfollow" />';
+                            echo '</form>';
+                        }
                     }
-
                     ?>
                 </td>
             </tr>
