@@ -794,12 +794,7 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
             // set local currency
             //setlocale(LC_MONETARY,"en_US");
 
-            //Detect device
-            $iPod    = stripos($_SERVER['HTTP_USER_AGENT'],"iPod");
-            $iPhone  = stripos($_SERVER['HTTP_USER_AGENT'],"iPhone");
-            $iPad    = stripos($_SERVER['HTTP_USER_AGENT'],"iPad");
-            $Android = stripos($_SERVER['HTTP_USER_AGENT'],"Android");
-            $webOS   = stripos($_SERVER['HTTP_USER_AGENT'],"webOS");
+
 
             //do something with this information
             /*if( $iPod || $iPhone ){
@@ -938,6 +933,7 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
                 $stateCondition = "";
             }
 ?>
+
 
         <?php
         $limit = "10";

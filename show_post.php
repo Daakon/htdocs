@@ -555,7 +555,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
             $shareLink = $postPath.$shareLink;
             $shortLink = shortenUrl($shareLink);
             ?>
-            <input style="margin-left:20px;" id="<?php echo $shareLinkID ?>" style="display:none;" value ="<?php echo $shortLink ?>" />
+            <input id="<?php echo $shareLinkID ?>" style="display:none;margin-left:20px;" value ="<?php echo $shortLink ?>" />
 
             <hr class="hr-line" />
 
