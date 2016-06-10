@@ -45,10 +45,13 @@ $ID = $_SESSION['ID'];
             <li class="display-block" style="padding-bottom:10px;">2. Once you get 100 Likes, go to your profile, share the post and send the link in a message to
                 <a href="/view_messages/redeem">Playdoe Redemption.</a></li>
 
-            <h3>Likes & Comments</h3>
-            <li class="display-block" style="padding-bottom:10px;">1. Earn ¢1 for every like and comment.</li>
-            <li class="display-block" style="padding-bottom:10px;">2. Must accrue a minimum of $10 to redeem a payout.</li>
+            <h3>Likes</h3>
+            <li class="display-block" style="padding-bottom:10px;">1. Earn ¢1 for every like.</li>
 
+            <h3>Comments</h3>
+            <li class="display-block" style="padding-bottom:10px;">1. Earn ¢1 for every like and comment.</li>
+
+            <h5 style="font-style: italic">*Minimum $10 accrual needed to redeem payout.</h5>
             <h5 style="font-style: italic">*Cash payouts are deposited in either your PayPal or Venmo account.</h5>
 
             <lead>*Rewards processing can take 24 to 48 hours.</lead>

@@ -731,22 +731,19 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
             <?php
             if ($urlUsername == 'redeem') { ?>
                 <div style="margin-top:-30px;padding-bottom:30px;">
-                <h3>Redeem Your Points</h3>
-                If you are electing to redeem your points, you will need to tell us how you would like to receive your points, rather it's cash or a gift card.
-                If you want a gift card, tell us the business you want the gift card from. Note Walmart offers gift cards in increments of $5 and
-                we will always round down. If the gift card is available, we will send the claim code to your Playdoe inbox.
-                If the gift card is not available, we will work to provide an ancillary gift card option.
+                <h3>Redeeming Money</h3>
+                You must eclipse a minimum of $10 to redeem you money. You will need to tell us if you want to receive your money via PayPal or Venmo.
 
-                    <h4><div style="color:blue;"  onclick="document.getElementById('points').style.display = 'block';">View Point System</div></h4>
+
+                    <h4><div style="color:blue;"  onclick="document.getElementById('points').style.display = 'block';">View Payment System</div></h4>
 
                     <br/>
 
                     <div id="points" style="display:none;padding-right:10px;">
-                        <li class="list-group-item list-group-item-danger display-block">1500 Points = $3</li>
-                        <li class="list-group-item list-group-item-danger display-block">2500 Points = $5</li>
-                        <li class="list-group-item list-group-item-danger display-block">4000 Points = $10</li>
-                        <li class="list-group-item list-group-item-danger display-block">9000 Points = $25</li>
-                        <li class="list-group-item list-group-item-danger display-block">17000 Points = $50</li>
+                        <li class="list-group-item list-group-item-danger display-block">Likes = ¢1 each</li>
+                        <li class="list-group-item list-group-item-danger display-block">Comments = ¢1 each</li>
+                        <li class="list-group-item list-group-item-danger display-block">Referrals = $1 each</li>
+                        <li class="list-group-item list-group-item-danger display-block">100 Likes = $100</li>
                     </div>
                 </div>
             <?php } ?>
