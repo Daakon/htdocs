@@ -204,11 +204,11 @@ if (!empty($_SESSION['ID'])) {
             <hr/>
             <h4>
                 <div class="visible-xs">
-                    <a href="/login-mobile"><div class="btn btn-default">Login</div></a> <a href="/support">Support</a>
+                    <a href="/login-mobile"><div class="btn btn-default">Login</div></a>
                 </div>
 
                 <div class="hidden-xs">
-                    <a href="../"><div class="btn btn-default">Login</div></a> &nbsp;&nbsp;<a href="/support">Support</a>
+                    <a href="../"><div class="btn btn-default">Login</div></a>
                 </div>
 
 
@@ -217,7 +217,7 @@ if (!empty($_SESSION['ID'])) {
         </div>
 
         <div class="col-lg-5 col-lg-offset-1 col-md-5 col-md-offset-1 col-sm-12 col-xs-12">
-            <h5>Follow us:</h5>
+            <h5>Questions or concerns? Message us:</h5>
             <a href="http://facebook.com/officialplaydoe" target="_blank"><img src="/images/facebook-logo-red.png" height="50" width="50"></a>
             <a href="http://twitter.com/officialplaydoe" target="_blank"><img src="/images/twitter-logo-red.png" height="=50" width="50"></a>
             <a href="http://officialplaydoe.tumblr.com/" target="_blank"><img src="/images/tumblr-logo-red.png" height="40" width="40"/> </a>

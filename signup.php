@@ -82,6 +82,41 @@ if (strlen($referredBy) > 0) {
 // Send out sign up email
 $toId = $rows['ID'];
 build_and_send_email(0,$ID, 3, null,$pass);
+
+$firstName = get_user_firstName($ID);
+// DM new member with instructions
+$message = "<p>Hey $firstName, You can now make money from your social media efforts.
+        <br/>
+        1. Get paid every time someone likes your post.
+        <br/>
+        2. Get paid every time someone comments on your post.
+        <br/>
+        3. Get paid every time you get a new follower.
+        <br/>
+        4. Get paid every time you refer your friends to join Playdoe
+        <br/>
+        You have a referral ID assigned to you. Go to your profile and you will see it. Give that to your friends so you can get get paid for referring them. You have also earned $1 for signing yourself up.
+        <br/>
+        Last but not least, if you are really popular, get 100 likes on a single post and you will earn $100.
+        <br/>
+        You will see a running total of your money on your home screen.
+        <br/>
+        So as you can see, there are many ways to make money from your social media efforts here on Playdoe.
+        <br/>
+        Make sure you keep this message and reply anytime you have a question about how things work.
+        <br/>
+        You can do one better and follow us so you have easy access to our profile and you can see all of the posts we make about how to do certain things and how features work.</p>";
+
+$message = mysql_escape_string($message);
+$subject = "Welcome to Playdoe";
+$receiverID = $ID;
+$rInitialMessage = 1;
+$rFirstMessage = 1;
+$supportID = 448;
+// create thread for receiver
+$sql = "INSERT INTO Messages  (ThreadOwner_ID, Sender_ID,   Receiver_ID,  Subject,    Message,         InitialMessage,      New,        FirstMessage,       MessageDate   ) VALUES
+                              ($receiverID,    $supportID,  $receiverID, '$subject', '$message',     '$rInitialMessage',    '1',        $rFirstMessage,     CURRENT_TIMESTAMP ) ";
+mysql_query($sql) or die(mysql_error());
 ?>
 
 <!--track sign ups through Google-->

@@ -119,7 +119,9 @@ function get_head_files()
 
 
                 <a href="forgot-password" class="forgot-password-link hidden-xs">Forgot Your Password?</a>
+                <?php if (!empty($_SESSION['ID']) && isset($_SESSION['ID'])) { ?>
                 <a href="/support" class="hidden-xs">Support</a>
+                <?php } ?>
             </div>
 
         </header>
@@ -144,17 +146,14 @@ function get_header()
         <?php $ID = $_SESSION['ID']; ?>
 
 
-
         <!--desktop layout -->
-
-
-
-
 
             <div class=" visible-sm visible-md visible-lg pull-right" style="margin-top:-30px;">
                 <ul class="list-inline">
 <!--                    <li><a href="/advertising.php" style="color:white;">Advertise</a></li>-->
+                    <?php if (!empty($_SESSION['ID']) && isset($_SESSION['ID'])) { ?>
                     <li><a href="/support" style="color:white;">Support</a></li>
+                    <?php } ?>
                 </ul>
             </div>
 

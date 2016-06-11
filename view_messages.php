@@ -623,12 +623,28 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
             }
             ?>
 
-            <h4 style="color:red;font-weight:bold;"><?php echo $subject ?></h4>
-            <br/>
 
             <?php
             if (strstr($urlUsername, "?")) {
             } else {
+
+                // get subject
+                if ($groupChatExist) {
+                    $subjectSql = "SELECT Subject FROM (SELECT * FROM Messages
+                    WHERE ThreadOwner_ID = $ID
+                    AND (GroupID = '$urlUsername')
+                    Order By ID DESC LIMIT 10) as ROWS Order By ID ASC ";
+                    $subjectResult = mysql_query($sql);
+                    $subjectCount = mysql_num_rows($subjectResult);
+                } else {
+                    $subjectSql = "SELECT Subject FROM (SELECT * FROM Messages
+                    WHERE ThreadOwner_ID = $ID
+                    AND (Sender_ID = $recipientID Or Receiver_ID = $recipientID)
+                    AND (IsDeleted = 0) And (GroupID = '')
+                    Order By ID DESC LIMIT 10) as ROWS Order By ID ASC ";
+                    $subjectResult = mysql_query($subjectSql);
+                }
+
                 // check if group message
                 if ($groupChatExist) {
                     $sql = "SELECT * FROM (SELECT * FROM Messages
@@ -645,9 +661,16 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
                     Order By ID DESC LIMIT 10) as ROWS Order By ID ASC ";
                     $result = mysql_query($sql);
                 }
+
+                $subjectRows = mysql_fetch_assoc($subjectResult);
+                $subject = $subjectRows['Subject'];
             }
+
             ?>
 
+            <br/>
+            <h4><?php echo $subject ?></h4>
+            <br/>
 
             <?php
             if (!empty($urlUsername)) {

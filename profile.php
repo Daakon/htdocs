@@ -675,7 +675,7 @@ $bgPhoto = $row['ProfilePhoto'];
                 <br/>
                     <small>
                         Use your Referral ID to give to others who you get to sign up.
-                        This is how we track people you refer. Referrals are worth 10 points.
+                        This is how we track people you refer and make sure you get paid.
                     </small>
 
 

@@ -77,8 +77,8 @@ function build_and_send_email($senderId, $toId, $notification, $postID, $pass, $
         $nameArray = explode(' ', $name);
         $name = $nameArray[0];
         $subject = "Congratulations $name, you now have a new profile on Playdoe.
-                    Start sharing great content, accumulating points and redeeming those points for gift cards and cash!<br/>";
-        $subject .= "Your temporary password is <b>$pass</b><br/>";
+                    Start sharing great content and watch how quickly you start making money!<br/>";
+        $subject .= "Your temporary password is <b>$pass</b><br/>. Be sure to change it right away.";
         $subject .= '<a href = "'.$link.$toId.'">Validate your email</a>';
     }
 

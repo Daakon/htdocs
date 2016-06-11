@@ -334,6 +334,10 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                     }
                     // read exif data
                     $exif = @exif_read_data($mediaFile);
+                    if (empty($exif) || !isset($exif)) {
+                        echo "<script>alert('Your photo could not be uploaded');location='/home'</script>";
+                        exit;
+                    }
                     if (!empty($exif['Orientation'])) {
                         $ort = $exif['Orientation'];
                         switch ($ort) {
