@@ -101,6 +101,12 @@ $message = "<p>Hey $firstName, You can now make money from your social media eff
         <br/>
         You will see a running total of your money on your home screen.
         <br/>
+        You must reach a $10 threshold before redeeming you money. At which point you would direct message the <a href='/view_messages/redeem'>Playdoe Redemption Team</a>, who handles all member redemptions.
+         <br/>
+        If you do not have an account, you can elect to receive a gift card for the value of your cash balance. Please request the gift card of your preference at the time of your redemption request. If an electronic gift card is available we will provide it. Some restrictions apply depending on the particular company, such as Walmart only offers gift cards in increments of $5, so your cash balance will be rounded up or down to the nearest dollar.
+        <br/>
+        You cannot partially redeem your balance, our system is currently all of nothing.
+        <br/>
         So as you can see, there are many ways to make money from your social media efforts here on Playdoe.
         <br/>
         Make sure you keep this message and reply anytime you have a question about how things work.

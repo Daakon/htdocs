@@ -71,7 +71,8 @@ $ID = $_SESSION['ID'];
 
         <h4>
             <span>Direct any questions or concerns to:</span><br/>
-            <a href="mailto:info@playdoe.com">info@playdoe.com</a>
+            <a href="http://facebook.com/officialplaydoe" target="_blank"><img src="/images/facebook-logo-red.png" height="50" width="50"></a>
+            <a href="http://twitter.com/officialplaydoe" target="_blank"><img src="/images/twitter-logo-red.png" height="=50" width="50"></a>
         </h4>
 
         <b>Corporate Headquarters</b>
