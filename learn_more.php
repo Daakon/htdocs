@@ -224,7 +224,7 @@ if (!empty($_SESSION['ID'])) {
             <a href="http://instagram.com/officialplaydoe" target="_blank"><img src="/images/instagram-logo-red.png" height="50" width="50"/></a>
             <a href="https://www.pinterest.com/officialplaydoe/" target="_blank"><img src="/images/pintrest-logo-red.png" height="50" width="50" /> </a>
             <a href="https://www.linkedin.com/company/playdoe" target="_blank"><img src="/images/linkedin-logo-red.png" height="40" width="40" /></a>
-            <a href="https://plus.google.com/b/109922168318774544833/109922168318774544833/about" target="_blank"><img src="/images/google-youtube-logo.png" height="40" width="50" style="padding-left:8px;" /></a>
+<!--            <a href="https://plus.google.com/b/109922168318774544833/109922168318774544833/about" target="_blank"><img src="/images/google-youtube-logo.png" height="40" width="50" style="padding-left:8px;" /></a>-->
             <br/>
 
             <div style="margin-top:60px;">

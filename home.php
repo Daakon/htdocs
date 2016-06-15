@@ -274,6 +274,8 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
     if (strlen($comment) > 0) {
 // find urls
         $comment = makeLinks($comment);
+        $comment = hashtag_links($comment);
+
         if ($_SESSION['PostComment'] == $_POST['postComment']) {
             echo "<script>alert('Your comment appears to be empty');</script>";
         } else {

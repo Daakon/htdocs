@@ -38,7 +38,7 @@ $profileID = get_id_from_username($username);
         <hr/>
         <?php
         $memberID = get_id_from_username($username);
-        $sql = "SELECT * FROM Follows WHERE Follows.Followed_ID = $memberID";
+        $sql = "SELECT * FROM Follows WHERE Follows.Followed_ID = $memberID Order By New Desc";
         $result = mysql_query($sql) or die(logError(mysql_error(), $url, "Getting members who follow user"));
 
         while ($rows = mysql_fetch_assoc($result)) {
@@ -58,8 +58,7 @@ $profileID = get_id_from_username($username);
                       FROM Members, Profile WHERE
                       Members.ID = $followerID
                       And Members.IsActive = 1
-                      AND Profile.Member_ID = $followerID
-                      Order By New Desc ";
+                      AND Profile.Member_ID = $followerID ";
             $result2 = mysql_query($sql2) or die(logError(mysql_error(), $url, "Getting profile photos and names of members who follow user"));
 
 
