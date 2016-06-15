@@ -539,10 +539,8 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                     <?php if ($ID != $memberID) {?>
                              <a style="padding-left:20px;" href="/view_messages/<?php echo $username ?>"><span class="engageText"><img src = "/images/messages.png" height="20" width="20" /> Message </span> </a>
                             <?php } ?>
-
                 <?php } ?>
 
-            <br/><br/>
 
             <?php
             $postPath = getPostPath();

@@ -97,7 +97,7 @@ $message = "<p>Hey $firstName, You can now make money from your social media eff
         <br/>
         You have a referral ID assigned to you. Go to your profile and you will see it. Give that to your friends so you can get get paid for referring them. You have also earned $1 for signing yourself up.
         <br/>
-        Last but not least, if you are really popular, get 100 likes on a single post and you will earn $100.
+        Last but not least, if you are really popular, get 20 referrals and earn a bonus of $20.
         <br/>
         You will see a running total of your money on your home screen.
         <br/>

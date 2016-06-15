@@ -182,6 +182,7 @@ if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
     $firstName = mysql_real_escape_string($firstName);
     $lastName = $_POST['LastName'];
     $lastName = mysql_real_escape_string($lastName);
+    $about = $_POST['about'];
 
     if (!empty($_POST['ddCity']) && isset($_POST['ddCity'])) {
         $city = $_POST['ddCity'];
@@ -196,11 +197,12 @@ if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
     $phone = $_POST['Phone'];
     $showPhone = $_POST['ShowPhone'];*/
     $email = $_POST['Email'];
-    /*$about = $_POST['About'];
+    $about = $_POST['About'];
     $about = mysql_real_escape_string($about);
     $about = makeLinks($about);
     $about = closetags($about);
-    $rss = mysql_real_escape_string($_POST['RSS']);*/
+
+    /*$rss = mysql_real_escape_string($_POST['RSS']);*/
     $dob = $_POST['DOB'];
     $emailStatus = $_POST['EmailStatus'];
     $smsStatus = $_POST['SmsStatus'];
@@ -254,10 +256,13 @@ if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
           SmsActive = '$smsStatus ',
           Password = '$password'
           WHERE ID = $ID ";
-    $result = mysql_query($sql) or die(mysql_error());
+         mysql_query($sql) or die(mysql_error());
     // update Profile table
-    /*$sql = "Update Profile
-            Set Address = '$address',
+    $sql = "Update Profile
+            Set About = '$about'
+             WHERE Member_ID = $ID ";
+
+    /*Address = '$address',
                 ShowAddress = $showAddress,
                 City = '$city',
                 State = '$state',
@@ -265,10 +270,10 @@ if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
                 ShowPhone = $showPhone,
                 Zip = '$zip',
                 ShowZip = $showZip,
-                About = '$about',
-                RSS = '$rss'
-             WHERE Member_ID = $ID ";
-    mysql_query($sql) or die(logError(mysql_error(), $url, "Updating Profile"));*/
+
+                RSS = '$rss' */
+
+    mysql_query($sql) or die(mysql_error());
     echo "<script>alert('Update Successful');location='/$username'</script>";
 }
 ?>
@@ -796,12 +801,12 @@ $bgPhoto = $row['ProfilePhoto'];
                     </select>
                 </div>-->
 
-<!--
+
                 <div class="form-group">
                     <label for="About">About</label>
-                    <textarea class="form-control textArea" id="About" name="About"><?php /*echo $about */?></textarea>
+                    <textarea class="form-control textArea" id="About" name="About"><?php echo nl2br($about) ?></textarea>
                 </div>
--->
+
 
                 <div class="form-group">
                     <label for="Email">Email</label>

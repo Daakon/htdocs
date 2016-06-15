@@ -29,8 +29,6 @@ $sql = "SELECT
                         Profile.ProfilePhoto As ProfilePhoto,
                         Profile.ProfileVideo As ProfileVideo,
                         Profile.Poster As Poster,
-
-
                         Profile.State As State,
                         Profile.Phone As Phone,
                         Profile.ShowPhone As ShowPhone,
@@ -129,6 +127,9 @@ $age = $rows['Age'];
         <?php echo "<div class=\"public-profile-label profileFont\">$firstName $lastName </div>" ?>
     </h3>
 
+    <h4>
+        <?php echo $about ?>
+    </h4>
 
     <!--Profile ---------------------------------------------------------------------------------------->
 
