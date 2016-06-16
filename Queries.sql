@@ -42,11 +42,18 @@ UPDATE Follows SET IsRedeemed =1 WHERE Followed_ID = X and IsRedeemed = 0
 
 --Sign up referrals
 --Join Members table to make sure member has validated their email
-SELECT COUNT(Referrals.ID )
+SELECT COUNT( Referrals.ID ) AS ReferralCount
 FROM Referrals, Members
-WHERE Referrals.Referral_ID =  'X'
+WHERE Referrals.Referral_ID =  '$username'
 AND Referrals.IsRedeemed =0
 AND Referrals.Signup_ID = Members.ID
+AND Referrals.Signup_ID
+IN (
+SELECT Posts.Member_ID
+FROM Posts, Referrals
+WHERE Posts.Member_ID = Referrals.Signup_ID
+AND Posts.IsDeleted =0
+)
 AND Members.IsEmailValidated =1
 
 --Update Referrals

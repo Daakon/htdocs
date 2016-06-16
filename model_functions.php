@@ -560,11 +560,18 @@ function checkBlock($ID, $memberID) {
 function getRedeemPoints($ID, $username) {
 
     // get referral money
-    $sql3 = "SELECT COUNT(Referrals.ID ) as ReferralCount
+    $sql3 = "SELECT COUNT( Referrals.ID ) AS ReferralCount
     FROM Referrals, Members
-    WHERE Referrals.Referral_ID = '$username'
+    WHERE Referrals.Referral_ID =  '$username'
     AND Referrals.IsRedeemed =0
     AND Referrals.Signup_ID = Members.ID
+    AND Referrals.Signup_ID
+    IN (
+    SELECT Posts.Member_ID
+    FROM Posts, Referrals
+    WHERE Posts.Member_ID = Referrals.Signup_ID
+    AND Posts.IsDeleted =0
+    )
     AND Members.IsEmailValidated =1";
     $result3 = mysql_query($sql3) or die(mysql_error());
     $rows3 = mysql_fetch_assoc($result3);
