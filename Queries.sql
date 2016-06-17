@@ -49,10 +49,12 @@ AND Referrals.IsRedeemed =0
 AND Referrals.Signup_ID = Members.ID
 AND Referrals.Signup_ID
 IN (
+
 SELECT Posts.Member_ID
-FROM Posts, Referrals
-WHERE Posts.Member_ID = Referrals.Signup_ID
-AND Posts.IsDeleted =0
+FROM Posts
+WHERE Posts.IsDeleted =0
+GROUP BY Posts.ID
+HAVING COUNT( Posts.ID ) >=5
 )
 AND Members.IsEmailValidated =1
 

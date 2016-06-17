@@ -93,11 +93,11 @@ $message = "<p>Hey $firstName, You can now make money from your social media eff
         <br/>
         3. Get paid every time you get a new follower.
         <br/>
-        4. Get paid every time you refer your friends to join Playdoe
+        4. Get paid every time you refer your friends to join Playdoe and your referral makes at least 5 unique posts.
         <br/>
         You have a referral ID assigned to you. Go to your profile and you will see it. Give that to your friends so you can get get paid for referring them. You have also earned $1 for signing yourself up.
         <br/>
-        Last but not least, if you are really popular, get 20 referrals and earn a bonus of $20.
+        Last but not least, if you are really popular, get 20 referrals and earn $20.
         <br/>
         You will see a running total of your money on your home screen.
         <br/>
