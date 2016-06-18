@@ -73,11 +73,11 @@ if (isset($_POST['submit'])) {
                         $height = $checkImage[1];
 
                         if (in_array($type, $photoFileTypes)) {
-                        if ($width < 1080 || $height < 1080) {
-                            echo '<script>alert("This image is too small. Make sure you are only uploading a photo or video you took with your mobile device");location = "/home"</script>';
-                            exit;
+                            if ($width < 1080 || $height < 1080) {
+                                echo '<script>alert("This image is too small. Make sure you are only uploading a photo or video you took with your mobile device");location = "/home"</script>';
+                                exit;
+                            }
                         }
-                    }
 
                         // create media type arrays
                         $videoFileTypes = array("video/mpeg", "video/mpg", "video/ogg", "video/mp4",
@@ -252,7 +252,7 @@ if (isset($_POST['submit'])) {
         } // if no media
         else {
 
-        $sql = "INSERT INTO     Posts (Post,       Category,    Member_ID,  IsSponsored,     PostDate) Values
+            $sql = "INSERT INTO     Posts (Post,       Category,    Member_ID,  IsSponsored,     PostDate) Values
                                       ('$post',   '$category',   '$ID',    '$IsSponsored',    CURDATE())";
             mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting post without media"));
         }
@@ -703,7 +703,7 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
 <script>
     $(window).scroll(function () {
         if ($(document).height() <= $(window).scrollTop() + $(window).height()) {
-           //alert("End Of The Page");
+            //alert("End Of The Page");
 
             // instantiate spinner as hidden
             document.getElementById('gettingMore').style.display = 'none';
@@ -815,20 +815,20 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
 
             // only show form on mobile devices
             if ($iPhone || $iPad || $Android) {
-            ?>
+                ?>
 
                 <div style="padding-left:10px;padding-bottom:0px;">
                     <?php require 'profile_menu.php'; ?>
 
                     <div style="margin-top:-10px">
-                <a href="/messages/<?php echo $username ?>"><img src = "/images/messages.png" height="20" width="20" /> <?php require 'getNewMessageCount.php' ?></a>
-                <a style="padding-left:20px;" href="/member_follows/<?php echo get_username($ID) ?>"><img src = "/images/follows.png" height="20" width="20" /><?php require 'getNewFollowCount.php' ?></a>
-                <br/><br/>
-                    <?php
-                    echo "<span style='color:#888888'><img src='images/money.jpg' height='50' width='50' /> Total Money: </span> ". getRedeemPoints($ID, get_username($ID));
-                    if (getRedeemPoints($ID, get_username($ID)) > 9) { echo "<br/><a href='/view_messages/redeem'>Redeem My Money</a>"; };
-                    ?>
-                        </div>
+                        <a href="/messages/<?php echo $username ?>"><img src = "/images/messages.png" height="20" width="20" /> <?php require 'getNewMessageCount.php' ?></a>
+                        <a style="padding-left:20px;" href="/member_follows/<?php echo get_username($ID) ?>"><img src = "/images/follows.png" height="20" width="20" /><?php require 'getNewFollowCount.php' ?></a>
+                        <br/><br/>
+                        <?php
+                        echo "<span style='color:#888888'><img src='images/money.jpg' height='50' width='50' /> Total Money: </span> ". getRedeemPoints($ID, get_username($ID));
+                        if (getRedeemPoints($ID, get_username($ID)) > 9) { echo "<br/><a href='/view_messages/redeem'>Redeem My Money</a>"; };
+                        ?>
+                    </div>
 
                 </div>
 
@@ -836,37 +836,40 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
 
                 <?php if (isEmailValidated($ID)) { ?>
 
-                <?php
+                    <?php
+                    if (hasHourPast($ID) == false) {
+                        echo "<h5 align='center'>You can only post once an hour. <img src='/images/hourglass.gif' height='50' width='50' /></h5>";
+                    }
+                    else {
+                        if (hasTenPost($ID) == false) {
+                            ?>
+                            <form method="post" enctype="multipart/form-data" action="" onsubmit="return showUploading()" >
+                                <img src="/images/image-icon.png" height="30px" width="30px" alt="Photos/Video"/>
+                                <strong>Upload Photos/Videos</strong><span style="color:red;padding-left:10px;">* Required</span>
+                                <input type="file" width="10px;" name="flPostMedia[]" id="flPostMedia" mutiple capture="camera" />
 
-                        ?>
-                    <form method="post" enctype="multipart/form-data" action="" onsubmit="return showUploading()" >
-                        <img src="/images/image-icon.png" height="30px" width="30px" alt="Photos/Video"/>
-                        <strong>Upload Photos/Videos</strong><span style="color:red;padding-left:10px;">* Required</span>
-                        <input type="file" width="10px;" name="flPostMedia[]" id="flPostMedia" mutiple capture="camera" />
-
-                        <br/>
+                                <br/>
                         <textarea name="post" id="post" class="form-control textArea"
                                   placeholder="Add a caption to your photos & videos" ></textarea>
-                        <br/>
+                                <br/>
 
-                        <input type="submit" class="post-button" name="submit" id="submit" value="Post"/>
-                    </form>
-                <?php
-
-                    } // isEmailValidated
-
+                                <input type="submit" class="post-button" name="submit" id="submit" value="Post"/>
+                            </form>
+                            <?php
+                        } // hasTenPost
+                        else { echo "<h5 align='center'>You have reached your daily post limit."; }
+                    } // hasHourPast
+                } // isEmailValidated
                 else {
-                        echo "You must verify your email before posting, liking or commenting. <br/>
-
+                    echo "You must verify your email before posting <br/>
                             <form method='post' action='' >
                                 <input type='hidden' id='id' name='id' value='$ID' />
                                 <input type='submit' id='validate' name='validate' value='Send Email Verification' />
                             </form>
                         ";
-
-                    }
-
+                }
                 ?>
+
 
                 <div id="progress" style="display:none;padding-top:5px;">
                     <div class="progress">
@@ -876,7 +879,7 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
                     </div>
                 </div>
 
-            <hr class="hr-line">
+                <hr class="hr-line">
 
             <?php } ?>
 
@@ -904,41 +907,41 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
 
 
         <?php
-            // pre-load Connection Feed
-            // get genre selection
+        // pre-load Connection Feed
+        // get genre selection
 
-            if (isset($_POST['limit'])) {
-                $limit = $_POST['limit'];
-            }
+        if (isset($_POST['limit'])) {
+            $limit = $_POST['limit'];
+        }
 
-            if (isset($_POST['searchState'])) {
-                $searchState = $_POST['searchState'];
+        if (isset($_POST['searchState'])) {
+            $searchState = $_POST['searchState'];
 
-            }
+        }
 
-            if (isset($_POST['searchCity'])) {
-                $searchCity = $_POST['searchCity'];
-            }
-
-
-            if (!empty($genre) && $genre != "Show All") {
-                $genreCondition = "And Posts.Category = '$genre' ";
-            }
-            else if($genre == "Show All") {
-                $genre = '';
-                $genreCondition = "And Posts.Category > '' ";
-            }
-            else { $genreCondition = "And Posts.Category = '$genre' "; }
+        if (isset($_POST['searchCity'])) {
+            $searchCity = $_POST['searchCity'];
+        }
 
 
+        if (!empty($genre) && $genre != "Show All") {
+            $genreCondition = "And Posts.Category = '$genre' ";
+        }
+        else if($genre == "Show All") {
+            $genre = '';
+            $genreCondition = "And Posts.Category > '' ";
+        }
+        else { $genreCondition = "And Posts.Category = '$genre' "; }
 
-            if (!empty($searchState)) {
-                $stateCondition = "AND (Profile.State = '$searchState')";
-            }
-            else {
-                $stateCondition = "";
-            }
-?>
+
+
+        if (!empty($searchState)) {
+            $stateCondition = "AND (Profile.State = '$searchState')";
+        }
+        else {
+            $stateCondition = "";
+        }
+        ?>
 
 
         <?php
@@ -968,7 +971,7 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
 
 <?php if ($noPosts == false) { ?>
 
-<div id="gettingMore" align="center" style="display:block;margin-top:-20px;" ><img src="/images/spinner.gif" height="50" width="50" /></div>
+    <div id="gettingMore" align="center" style="display:block;margin-top:-20px;" ><img src="/images/spinner.gif" height="50" width="50" /></div>
 
 <?php } ?>
 

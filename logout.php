@@ -10,6 +10,6 @@ session_unset();
 // clear cookie
 setcookie("ID", "", time()-3600);
 
-echo "<script>location = '../' </script>";
+echo "<script>location = '/learn_more' </script>";
 
 ?>
