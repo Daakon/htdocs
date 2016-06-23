@@ -48,11 +48,13 @@ function makeLinks($str)
             $str);
 
 
+        preg_match('/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i', $str, $matches);
+        $link = $matches[0];
+
         // if link does not have http, we must find the link
         // then dig the hostname out with a function
         if (strlen($clickHere) == 0) {
-            $link = preg_match('/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i', $str, $matches);
-            $link = $matches[0];
+
             $clickHere = get_string_between($link, "www.", ".com");
             if (strlen($clickHere) == 0) {
                 // this means the prior function found a link with no http or www
@@ -105,21 +107,35 @@ function makeLinks($str)
             $str = preg_replace('$(www\.[a-z0-9_./?=&#-]+)(?![^<>]*>)$i', '<a target="_blank" href="http://$1"  target="_blank">' . $clickHere . '</a> ', $str . " ");
         }
 
+        $title = pageTitle($link);
+        $title = mysql_real_escape_string($title);
+
         $str = cleanBrTags($str);
-        $str = trim($str);
+        $str = trim($title) . ' '. trim($str);
 
         return $str;
     }
 }
 
-function get_title($url){
-    $str = file_get_contents($url);
-    if(strlen($str)>0){
-        $str = trim(preg_replace('/\s+/', ' ', $str)); // supports line breaks inside <title>
-        preg_match("/\<title\>(.*)\<\/title\>/i",$str,$title); // ignore case
-        return $title[1];
+function pageTitle($page_url)
+{
+    $read_page=file_get_contents($page_url);
+    preg_match("/<title.*?>[\n\r\s]*(.*)[\n\r\s]*<\/title>/", $read_page, $page_title);
+    if (isset($page_title[1]))
+    {
+        if ($page_title[1] == '')
+        {
+            return $page_url;
+        }
+        $page_title = $page_title[1];
+        return trim($page_title);
+    }
+    else
+    {
+        return $page_url;
     }
 }
+
 function __extractHostName($url)
 {
     // gets i.e google
