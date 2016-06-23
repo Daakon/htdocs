@@ -95,15 +95,17 @@ $message = "<p>Hey $firstName, You can now make money from your social media eff
         <br/>
         4. Get paid every time you refer your friends to join Playdoe and your referral makes at least 5 unique posts.
         <br/>
-        You have a referral ID assigned to you. Go to your profile and you will see it. Give that to your friends so you can get get paid for referring them. You have also earned $1 for signing yourself up.
+        You have a referral ID assigned to you. Go to your profile and you will see it. Give that to your friends so you can get get paid for referring them.
         <br/>
-        Last but not least, if you are really popular, get 20 referrals and earn $20.
+        Last but not least, if you are really popular, get 20 referrals to share 5 posts and earn $20.
+        <br/>
+        You will earn $1 for yourself once you reach 5 post.
         <br/>
         You will see a running total of your money on your home screen.
         <br/>
         You must reach a $10 threshold before redeeming you money. At which point you would direct message the <a href='/view_messages/redeem'>Playdoe Redemption Team</a>, who handles all member redemptions.
          <br/>
-        If you do not have an account, you can elect to receive a gift card for the value of your cash balance. Please request the gift card of your preference at the time of your redemption request. If an electronic gift card is available we will provide it. Some restrictions apply depending on the particular company, such as Walmart only offers gift cards in increments of $5, so your cash balance will be rounded up or down to the nearest dollar.
+        If you do not have a bank account, you can elect to receive a gift card for the value of your cash balance. Please request the gift card of your preference at the time of your redemption request. If an electronic gift card is available we will provide it. Some restrictions apply depending on the particular company, such as Walmart only offers gift cards in increments of $5, so your cash balance will be rounded up or down to the nearest dollar.
         <br/>
         You cannot partially redeem your balance, our system is currently all of nothing.
         <br/>

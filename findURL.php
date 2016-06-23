@@ -104,88 +104,14 @@ function makeLinks($str)
         else {
             $str = preg_replace('$(www\.[a-z0-9_./?=&#-]+)(?![^<>]*>)$i', '<a target="_blank" href="http://$1"  target="_blank">' . $clickHere . '</a> ', $str . " ");
         }
-        // if post contains a url, get the title
-        preg_match('/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i', $str, $matches);
-        if (!empty($matches[0])) {
-            // get full URL
-            $link = $matches[0];
 
-            $string = $str;
-            $title = get_title($link);
-            // get domain.com
-            $hostFullName = get_domain($link);
-            // get only host name 'domain'
-            $host = __extractHostName($link);
-            // if no link, title will contain host name
-            if (empty($link)) {
-                $title = $host;
-            }
-            // if page has no title, don't build title link
-            if (strlen($title) > 1) {
-                // check if web page has an image to add to the link
-                $content = file_get_contents($link);
-
-
-
-                // add link
-                $titleLink = '<a id="rbLink" href="' . $link . '" target="_blank">' . $title . '</a>';
-                // style the title & add webpage image to link
-                $titleLink = '<span style="padding-right:5px;margin-top:10px;max-width:100%">' . $titleLink . '</span>
-                <a href="' . $link . '" target="_blank">' . $image . '</a>';
-                // remove special characters
-                $titleLink = mysql_real_escape_string($titleLink);
-                // trim white space in title
-                $titleLink = trim($titleLink);
-                // remove excessive white space in title
-                $titleLink = preg_replace('~>\s+<~', '><', $titleLink);
-                // remove excessive line breaks in title
-                $titleLink = cleanBrTags($titleLink);
-
-                $endingAnchor = "";
-
-
-                    // cut everything off by our rbLink anchor tag
-                    preg_match("~<a(?=[^>]* name=[\"']([^'\"]*)|)(\s+[^>]*)?>(.*?)</a>~", $titleLink, $anchorTags);
-                    $anchorTag = $anchorTags[0];
-                    $titleArray = explode($anchorTag, $titleLink);
-                    $titleLink = $titleArray[0] . ' ' . $anchorTag;
-
-
-
-                // clean up rouge link text
-                $cleanLink = explode('</a>%', $str);
-                $garb = $cleanLink[1];
-                if (strlen($garb) > 1) {
-                    $str = $cleanLink[0];
-                }
-                if (strstr($str, "</a>/")) {
-                    $str = str_replace('</a>/', '</a>', $str);
-                }
-
-                // remove hashtag
-                $link = preg_match('/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i', $str, $matches);
-                $thisLink = $matches[0];
-                $cleanLink = explode('#', $thisLink);
-                $garb = $cleanLink[1];
-                if (strlen($garb) > 1) {
-                    $str = str_replace($garb, '', $str);
-                    $str = str_replace('#.', '', $str);
-                }
-
-                // remove any script tags that may come back from a website
-                $titleLink = preg_replace('#<script(.*?)>(.*?)</script>#is', '', $titleLink);
-                $titleLink = closetags($titleLink);
-                $titleLink = $titleLink . $endingAnchor;
-                return $str . '<br/><br/>' . $titleLink;
-
-            }
-        }
         $str = cleanBrTags($str);
         $str = trim($str);
 
         return $str;
     }
 }
+
 function get_title($url){
     $str = file_get_contents($url);
     if(strlen($str)>0){

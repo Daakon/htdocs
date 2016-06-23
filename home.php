@@ -825,7 +825,7 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
                         <a style="padding-left:20px;" href="/member_follows/<?php echo get_username($ID) ?>"><img src = "/images/follows.png" height="20" width="20" /><?php require 'getNewFollowCount.php' ?></a>
                         <br/><br/>
                         <?php
-                        echo "<span style='color:#888888'><img src='images/money.jpg' height='50' width='50' /> Total Money: </span> ". getRedeemPoints($ID, get_username($ID));
+                        echo "<span style='color:#888888'><img src='images/Playdoe-Logo.png' height='50' width='50' /> Total Money: </span> ". getRedeemPoints($ID, get_username($ID));
                         if (getRedeemPoints($ID, get_username($ID)) > 9) { echo "<br/><a href='/view_messages/redeem'>Redeem My Money</a>"; };
                         ?>
                     </div>
@@ -838,7 +838,7 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
 
                     <?php
                     if (hasHourPast($ID) == false) {
-                        echo "<h5 align='center'>You can only post once an hour. <img src='/images/hourglass.gif' height='50' width='50' /></h5>";
+                        echo "<h5 align='center'>Great job! Post again in one hour. <img src='/images/hourglass.gif' height='50' width='50' /></h5>";
                     }
                     else {
                         if (hasTenPost($ID) == false) {
@@ -857,7 +857,7 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
                             </form>
                             <?php
                         } // hasTenPost
-                        else { echo "<h5 align='center'>You have reached your daily post limit."; }
+                        else { echo "<h5 align='center'>You have reached your daily post limit, great job!"; }
                     } // hasHourPast
                 } // isEmailValidated
                 else {
@@ -892,7 +892,7 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
                 <a style="padding-left:20px;" href="/member_follows/<?php echo get_username($ID) ?>"><img src = "/images/follows.png" height="20" width="20" /><?php require 'getNewFollowCount.php' ?></a>
                 <br/><br/>
                 <?php
-                echo "<span style='color:#888888'><span style='color:#888888'><img src='images/money.jpg' height='50' width='50' /> Total Money: </span>". getRedeemPoints($ID, get_username($ID));
+                echo "<span style='color:#888888'><span style='color:#888888'><img src='images/Playdoe-Logo.png' height='50' width='50' /> Total Money: </span>". getRedeemPoints($ID, get_username($ID));
                 if (getRedeemPoints($ID, get_username($ID)) > 9) { echo "<br/><a href='/view_messages/redeem'>Redeem My Money</a>"; };
                 ?>
 
