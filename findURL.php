@@ -108,6 +108,7 @@ function makeLinks($str)
         }
 
         $title = pageTitle($link);
+
         $title = mysql_real_escape_string($title);
 
         $str = cleanBrTags($str);
@@ -168,6 +169,7 @@ function cleanBrTags($txt)
 {
     $txt=preg_replace("{(<br[\\s]*(>|\/>)\s*){2,}}i", "<br /><br />", $txt);
     $txt=preg_replace("{(<br[\\s]*(>|\/>)\s*)}i", "<br />", $txt);
+
     return $txt;
 }
 

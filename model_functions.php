@@ -587,7 +587,7 @@ function getRedeemPoints($ID, $username) {
     $result = mysql_query($sql) or die(mysql_error());
     $rows = mysql_fetch_assoc($result);
     $likeCount = $rows['LikeCount'];
-    $likeMoney = $likeCount * 0.01;
+    $likeMoney = $likeCount * 0.04;
 
     $sql2 = "Select Count(PostComments.ID) As CommentCount
     FROM PostComments, Members
@@ -597,7 +597,7 @@ function getRedeemPoints($ID, $username) {
     $result = mysql_query($sql) or die(mysql_error());
     $rows = mysql_fetch_assoc($result);
     $commentCount = $rows['CommentCount'];
-    $commentMoney = $commentCount * 0.01;
+    $commentMoney = $commentCount * 0.04;
 
     $sql1 = "SELECT COUNT(Follows.ID) AS FollowerCount
     FROM Follows, Members
@@ -608,7 +608,7 @@ function getRedeemPoints($ID, $username) {
     $result1 = mysql_query($sql1) or die(mysql_error());
     $rows1 = mysql_fetch_assoc($result1);
     $followerCount = $rows1['FollowerCount'];
-    $followerMoney = $followerCount * 0.01;
+    $followerMoney = $followerCount * 0.05;
 
     $addedMoney = $referralMoney + $likeMoney + $commentMoney + $followerMoney;
     $totalMoney =  money_format('$%i', $addedMoney);
@@ -682,8 +682,10 @@ function hasHourPast($ID) {
 /// Find hash tags
 function hashtag_links($string) {
     //preg_match_all('/#(\w+)/',$string,$matches);
+    if (strstr($string, '#039')) { } else {
         $string = preg_replace('/#(\w+)/', ' <a href="/hashtag?hashtag=$1">#$1</a>', $string);
         $string = str_replace("</a>  <a href", "</a>&nbsp;<a href", $string);
+    }
     return $string;
 }
 

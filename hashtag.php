@@ -736,8 +736,8 @@ Posts.Member_ID As MemberID,
 Members.FirstName As FirstName,
 Members.LastName As LastName,
 Members.Username As Username,
-Profile.ProfilePhoto As ProfilePhoto
-
+Profile.ProfilePhoto As ProfilePhoto,
+(Select count(PostID) From PostApprovals Where Post_ID = PostID) As Likes
 FROM Members,Posts,Profile
 WHERE
 Members.IsActive = 1
@@ -749,7 +749,7 @@ And (Members.ID Not in ( '" . implode($blockIDs, "', '") . "' ))
 and (Posts.Post Like '%$like%')
 Group By PostID
 
-Order By PostID DESC";
+Order By Likes DESC";
 $result = mysql_query($sql) or die(logError(mysql_error(), $url, "Getting Connection Feed data"));
 
 // if no results
