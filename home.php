@@ -902,11 +902,15 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
                                 "class": "thumb-image"
                             }).appendTo(image_holder);
 
+                            $("<video />", {
+                                "src": e.target.result,
+                                "class": "thumb-image"
+                            }).appendTo(image_holder);
                         }
                         image_holder.show();
                         reader.readAsDataURL($(this)[0].files[0]);
                     } else {
-                        alert("This browser does not support FileReader.");
+                        alert("This browser does not support image preview.");
                     }
                 });
 

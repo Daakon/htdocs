@@ -97,6 +97,8 @@ $message = "<p>Hey $firstName, You can now make money from your social media eff
         <br/>
         You have a referral ID assigned to you. Go to your profile and you will see it. Give that to your friends so you can get get paid for referring them.
         <br/>
+        5. Compete in our weekly hashtag game and win $50 to $100.
+        <br/>
         Last but not least, if you are really popular, get 20 referrals to share 5 posts and earn $20.
         <br/>
         You will earn $1 for yourself once you reach 5 post.
@@ -108,8 +110,6 @@ $message = "<p>Hey $firstName, You can now make money from your social media eff
         If you do not have a bank account, you can elect to receive a gift card for the value of your cash balance. Please request the gift card of your preference at the time of your redemption request. If an electronic gift card is available we will provide it. Some restrictions apply depending on the particular company, such as Walmart only offers gift cards in increments of $5, so your cash balance will be rounded up or down to the nearest dollar.
         <br/>
         You cannot partially redeem your balance, our system is currently all of nothing.
-        <br/>
-        So as you can see, there are many ways to make money from your social media efforts here on Playdoe.
         <br/>
         Make sure you keep this message and reply anytime you have a question about how things work.
         <br/>
