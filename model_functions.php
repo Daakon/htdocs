@@ -699,7 +699,7 @@ function hashtag_links($string) {
             || strstr($word, '#054') || strstr($word, '#055') || strstr($word, '#056') || strstr($word, '#057')
             || strstr($word, '#058') || strstr($word, '#059') || strstr($word, '#060') || strstr($word, '#061')
             || strstr($word, '#062') || strstr($word, '#063')) { } else {
-            $word = preg_replace('/#(\w+)/', ' <a href="/hashtag?hashtag=$1" style="padding-left:5px;">#$1</a>&nbsp;', $word);
+            $word = preg_replace('/#(\w+)/', ' <a href="/hashtag?hashtag=$1" style="padding-right:2px;">#$1</a>', $word);
             $word = str_replace("</a>  <a href", "</a>&nbsp;<a href", $word);
             $result .= $word . ' ';
         }
