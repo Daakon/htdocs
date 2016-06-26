@@ -97,7 +97,7 @@ $message = "<p>Hey $firstName, You can now make money from your social media eff
         <br/>
         You have a referral ID assigned to you. Go to your profile and you will see it. Give that to your friends so you can get get paid for referring them.
         <br/>
-        5. Compete in our weekly hashtag game and win $50 to $100.
+        5. Compete in our weekly hashtag game and win $50 to $100 every time you get the most likes.
         <br/>
         Last but not least, if you are really popular, get 20 referrals to share 5 posts and earn $20.
         <br/>
