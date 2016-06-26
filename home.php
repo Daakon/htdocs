@@ -751,6 +751,8 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
     }
 </script>
 
+
+
 <?php //check_demographics($ID); ?>
 
 <!--empty onunload will clear browser cache for clean refresh -->
@@ -846,7 +848,8 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
                             <form method="post" enctype="multipart/form-data" action="" onsubmit="return showUploading()" >
                                 <img src="/images/image-icon.png" height="30px" width="30px" alt="Photos/Video"/>
                                 <strong>Upload Photos/Videos</strong><span style="color:red;padding-left:10px;">* Required</span>
-                                <input type="file" width="10px;" name="flPostMedia[]" id="flPostMedia" mutiple capture="camera" />
+                                <input type="file" width="10px;" name="flPostMedia[]" id="flPostMedia" />
+                                <div id="image-holder"> </div>
 
                                 <br/>
                         <textarea name="post" id="post" class="form-control textArea"
@@ -883,7 +886,31 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
 
             <?php } ?>
 
+            <script>
+                // preview image upload
+                $("#flPostMedia").on('change', function () {
 
+                    if (typeof (FileReader) != "undefined") {
+
+                        var image_holder = $("#image-holder");
+                        image_holder.empty();
+
+                        var reader = new FileReader();
+                        reader.onload = function (e) {
+                            $("<img />", {
+                                "src": e.target.result,
+                                "class": "thumb-image"
+                            }).appendTo(image_holder);
+
+                        }
+                        image_holder.show();
+                        reader.readAsDataURL($(this)[0].files[0]);
+                    } else {
+                        alert("This browser does not support FileReader.");
+                    }
+                });
+
+            </script>
 
 
             <?php if (!$iPhone && !$iPad && !$Android) { ?>

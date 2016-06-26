@@ -681,12 +681,31 @@ function hasHourPast($ID) {
 
 /// Find hash tags
 function hashtag_links($string) {
-    //preg_match_all('/#(\w+)/',$string,$matches);
-    if (strstr($string, '#039')) { } else {
-        $string = preg_replace('/#(\w+)/', ' <a href="/hashtag?hashtag=$1">#$1</a>', $string);
-        $string = str_replace("</a>  <a href", "</a>&nbsp;<a href", $string);
+    $result = '';
+    $words = explode(" ", $string);
+    $ascii = array("video/mpeg", "video/mpg", "video/ogg", "video/mp4",
+        "video/quicktime", "video/webm", "video/x-matroska",
+        "video/x-ms-wmw");
+
+    foreach ($words as $word) {
+        // check for any special ascii characters that might come back in a link title
+        // before building the hashtag link.
+        if (strstr($word, '#039') || strstr($word, '#8217') || strstr($word, '#032') || strstr($word, '#033')
+            || strstr($word, '#034') || strstr($word, '#035') || strstr($word, '#036') || strstr($word, '#037')
+            || strstr($word, '#038') || strstr($word, '#039') || strstr($word, '#040') || strstr($word, '#041')
+            || strstr($word, '#042') || strstr($word, '#043') || strstr($word, '#044') || strstr($word, '#045')
+            || strstr($word, '#046') || strstr($word, '#047') || strstr($word, '#048') || strstr($word, '#049')
+            || strstr($word, '#050') || strstr($word, '#051') || strstr($word, '#052') || strstr($word, '#053')
+            || strstr($word, '#054') || strstr($word, '#055') || strstr($word, '#056') || strstr($word, '#057')
+            || strstr($word, '#058') || strstr($word, '#059') || strstr($word, '#060') || strstr($word, '#061')
+            || strstr($word, '#062') || strstr($word, '#063')) { } else {
+            $word = preg_replace('/#(\w+)/', ' <a href="/hashtag?hashtag=$1" style="padding-left:5px;">#$1</a>&nbsp;', $word);
+            $word = str_replace("</a>  <a href", "</a>&nbsp;<a href", $word);
+            $result .= $word . ' ';
+        }
     }
-    return $string;
+
+    return $result;
 }
 
 // text function to all service providers for related service post
