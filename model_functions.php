@@ -709,7 +709,18 @@ function hashtag_links($string) {
             || strstr($word, '#050') || strstr($word, '#051') || strstr($word, '#052') || strstr($word, '#053')
             || strstr($word, '#054') || strstr($word, '#055') || strstr($word, '#056') || strstr($word, '#057')
             || strstr($word, '#058') || strstr($word, '#059') || strstr($word, '#060') || strstr($word, '#061')
-            || strstr($word, '#062') || strstr($word, '#063')) { } else {
+            || strstr($word, '#062') || strstr($word, '#063')
+
+
+            || strstr($word, '#34') || strstr($word, '#35') || strstr($word, '#36') || strstr($word, '#37')
+            || strstr($word, '#38') || strstr($word, '#39') || strstr($word, '#40') || strstr($word, '#41')
+            || strstr($word, '#42') || strstr($word, '#43') || strstr($word, '#44') || strstr($word, '#45')
+            || strstr($word, '#46') || strstr($word, '#47') || strstr($word, '#48') || strstr($word, '#49')
+            || strstr($word, '#50') || strstr($word, '#51') || strstr($word, '#52') || strstr($word, '#53')
+            || strstr($word, '#54') || strstr($word, '#55') || strstr($word, '#56') || strstr($word, '#57')
+            || strstr($word, '#58') || strstr($word, '#59') || strstr($word, '#60') || strstr($word, '#61')
+            || strstr($word, '#62') || strstr($word, '#63')
+            ) { } else {
             $word = preg_replace('/#(\w+)/', ' <a href="/hashtag?hashtag=$1" style="padding-right:2px;">#$1</a>', $word);
             $word = str_replace("</a>  <a href", "</a>&nbsp;<a href", $word);
             $result .= $word . ' ';
