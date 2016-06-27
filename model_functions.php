@@ -293,6 +293,17 @@ function is_existing_email($email, $ID) {
     }
 }
 
+function hasEmailChanged($email, $ID) {
+    $sql = "SELECT Email FROM Members WHERE Email = '$email' and ID = $ID ";
+    $result = mysql_query($sql) or die(mysql_error());
+    if (mysql_num_rows($result) > 0) {
+        return false;
+    }
+    else {
+        return true;
+    }
+}
+
 function check_demographics($ID) {
     $sql = "SELECT * FROM Profile WHERE Member_ID = $ID ";
     $result = mysql_query($sql) or die(logError(mysql_error(), "model_functions", "check_demographics() failed"));
@@ -707,6 +718,9 @@ function hashtag_links($string) {
 
     return $result;
 }
+
+
+
 
 // text function to all service providers for related service post
 function alert_followers($postID)

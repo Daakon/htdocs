@@ -209,12 +209,11 @@ if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
     $password = $_POST['Password'];
     $username = $_POST['Username'];
     $usernameStatus = $_POST['UsernameStatus'];
-    $updatePasswordBit = '';
+    $updateEmailValidated = '';
 
 //only if password has changed do we hash it
     if (check_password($ID, $password)==false) {
         $password = md5($password);
-        $updatePasswordBit = "IsEmailValidated = 0, ";
     }
 
     // check email
@@ -228,6 +227,12 @@ if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
         echo "<script>alert('This email already belongs to someone');location='/$username'</script>";
         exit();
     }
+
+    // check if email has changed
+    if (hasEmailChanged($email, $ID)) {
+        $updateEmailValidated = 'IsEmailValidated = 0 ,';
+    }
+
     $email = mysql_real_escape_string($email);
 
     if ($usernameStatus == 0) {
@@ -246,7 +251,7 @@ if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
     // update Member table first
     $sql = "Update Members
           Set
-          $updatePasswordBit
+          $updateEmailValidated
           $usernameUpdate
           FirstName = '$firstName',
           LastName = '$lastName',
