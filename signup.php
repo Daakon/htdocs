@@ -120,7 +120,7 @@ $subject = "Welcome to Playdoe";
 $receiverID = $ID;
 $rInitialMessage = 1;
 $rFirstMessage = 1;
-$supportID = 448;
+$supportID = 22;
 // create thread for receiver
 $sql = "INSERT INTO Messages  (ThreadOwner_ID, Sender_ID,   Receiver_ID,  Subject,    Message,         InitialMessage,      New,        FirstMessage,       MessageDate   ) VALUES
                               ($receiverID,    $supportID,  $receiverID, '$subject', '$message',     '$rInitialMessage',    '1',        $rFirstMessage,     CURRENT_TIMESTAMP ) ";

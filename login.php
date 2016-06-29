@@ -14,13 +14,6 @@ $result = mysql_query($sql) or die(logError(mysql_error(), $url, "Check existing
 if (mysql_num_rows($result) > 0) {
     $rows = mysql_fetch_assoc($result);
 
-    if ($rows['IsSuspended'] == 1) {
-        echo "<script>alert('Your account has been suspended. Contact support for more information.');location = '/index.php'</script>";
-        exit;
-    }
-
-    if ($rows[''])
-
     session_start();
 
     $_SESSION['ID'] = $rows['ID'];

@@ -210,6 +210,7 @@ if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
     $username = $_POST['Username'];
     $usernameStatus = $_POST['UsernameStatus'];
     $updateEmailValidated = '';
+    $acctStatus = $_POST['AcctStatus'];
 
 //only if password has changed do we hash it
     if (check_password($ID, $password)==false) {
@@ -259,7 +260,8 @@ if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
           Email = '$email',
           EmailActive = '$emailStatus ',
           SmsActive = '$smsStatus ',
-          Password = '$password'
+          Password = '$password',
+          IsActive = $acctStatus
           WHERE ID = $ID ";
          mysql_query($sql) or die(mysql_error());
     // update Profile table
@@ -279,7 +281,11 @@ if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
                 RSS = '$rss' */
 
     mysql_query($sql) or die(mysql_error());
-    echo "<script>alert('Update Successful');location='/$username'</script>";
+    $redirect = "$username";
+    if ($acctStatus == 0) {
+        $redirect = 'logout';
+    }
+    echo "<script>alert('Update Successful');location='/$redirect'</script>";
 }
 ?>
 
@@ -893,7 +899,6 @@ $bgPhoto = $row['ProfilePhoto'];
                 }
                 ?>
 
-
                 <div class="form-group">
                     <label for="password">Username</label>
                     <input type="text" class="form-control" id="Username" name="Username" value="<?php echo $username ?>" <?php echo $readonly ?> />
@@ -902,10 +907,28 @@ $bgPhoto = $row['ProfilePhoto'];
                 </div>
 
 
+                <label for="AcctStatus">Deactivate Account</label>
+                <select id="AcctStatus" name="AcctStatus" name="AcctStatus" class="form-control">
+                    <option selected value="1">No</option>
+                    <option value="0">Yes</option>
+                </select>
+
+                <br/>
+
                 <input type = "submit" value = "Update" name = "updateProfile" id = "updateProfile" class="btn btn-default" />
             </form>
 
                 <br/>
+
+                <script>
+                    $('#AcctStatus').change(function() {
+                        if (this.value == 0) {
+                            alert('If you deactivate your account it will not be seen by anyone. You will not receive any notifications. ' +
+                                'You can always just log back in to reactivate your account.');
+                        }
+                    });
+                </script>
+
                 <?php /*if (strlen($rss) > 0) {
                     echo "<h3>Your RSS Feed</h3>";
                     require 'rss.php';
