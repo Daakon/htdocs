@@ -111,9 +111,9 @@ $message = "<p>Hey $firstName, You can now make money from your social media eff
         <br/>
         You cannot partially redeem your balance, our system is currently all of nothing.
         <br/>
-        Make sure you keep this message and reply anytime you have a question about how things work.
-        <br/>
-        You can do one better and follow us so you have easy access to our profile and you can see all of the posts we make about how to do certain things and how features work.</p>";
+        Follow us on Twitter and DM us if you have any questions. <br/>
+            <a href=\"https://twitter.com/officialplaydoe\" class=\"twitter-follow-button\" data-show-count=\"false\">Follow @officialplaydoe</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>.</p>";
 
 $message = mysql_escape_string($message);
 $subject = "Welcome to Playdoe";

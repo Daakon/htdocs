@@ -117,12 +117,12 @@ if (!empty($_SESSION['ID'])) {
 
                     <tr>
                         <td style="padding-left:0px;">
-                            <p>
+                            <h4>
                                 Playdoe is a social application that offers fun ways to make money.
-                                <br/>
-                                <a href="/support">Ways to make money</a>
-                            </p>
-                            </p>
+                            </h4>
+                            <lead>
+                                Checkout our <a href="http://officialplaydoe.tumblr.com/" target="_blank">blog</a> to learn more.
+                            </lead>
                         </td>
                     </tr>
 
@@ -138,11 +138,12 @@ if (!empty($_SESSION['ID'])) {
                             <img src="/images/Like-Redeem-Large.png" height="100px" width="100px" style="margin-bottom:10px;" />
                         </td>
                         <td style="padding-left:10px;">
-                            <p style="font-size:20px;">
+                            <h4>
                                 Playdoe is a social application that offers fun ways to make money.
-                                <br/>
-                                <a href="/support">Ways to make money</a>
-                            </p>
+                            </h4>
+                            <lead>
+                            Checkout our <a href="http://officialplaydoe.tumblr.com/" target="_blank">blog</a> to learn more.
+                            </lead>
                         </td>
                     </tr>
 
@@ -217,14 +218,8 @@ if (!empty($_SESSION['ID'])) {
         </div>
 
         <div class="col-lg-5 col-lg-offset-1 col-md-5 col-md-offset-1 col-sm-12 col-xs-12">
-            <h5>Follow us for the latest news & hashtag competitions</h5>
-            <a href="http://facebook.com/officialplaydoe" target="_blank"><img src="/images/facebook-logo-red.png" height="50" width="50"></a>
-            <a href="http://twitter.com/officialplaydoe" target="_blank"><img src="/images/twitter-logo-red.png" height="=50" width="50"></a>
-            <a href="http://officialplaydoe.tumblr.com/" target="_blank"><img src="/images/tumblr-logo-red.png" height="40" width="40"/> </a>
-            <a href="http://instagram.com/officialplaydoe" target="_blank"><img src="/images/instagram-logo-red.png" height="50" width="50"/></a>
-            <a href="https://www.pinterest.com/officialplaydoe/" target="_blank"><img src="/images/pintrest-logo-red.png" height="50" width="50" /> </a>
-            <a href="https://www.linkedin.com/company/playdoe" target="_blank"><img src="/images/linkedin-logo-red.png" height="40" width="40" /></a>
-<!--            <a href="https://plus.google.com/b/109922168318774544833/109922168318774544833/about" target="_blank"><img src="/images/google-youtube-logo.png" height="40" width="50" style="padding-left:8px;" /></a>-->
+
+
             <br/>
 
             <div style="margin-top:60px;">
