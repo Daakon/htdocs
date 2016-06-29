@@ -123,6 +123,9 @@ if (!empty($_SESSION['ID'])) {
                             <lead>
                                 Checkout our <a href="http://officialplaydoe.tumblr.com/" target="_blank">blog</a> to learn more.
                             </lead>
+                            <br/><br/>
+                            <a href="https://twitter.com/officialplaydoe" class="twitter-follow-button" data-show-count="false">Follow @officialplaydoe</a>
+                            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
                         </td>
                     </tr>
 
@@ -144,6 +147,9 @@ if (!empty($_SESSION['ID'])) {
                             <lead>
                             Checkout our <a href="http://officialplaydoe.tumblr.com/" target="_blank">blog</a> to learn more.
                             </lead>
+                            <br/><br/>
+                            <a href="https://twitter.com/officialplaydoe" class="twitter-follow-button" data-show-count="false">Follow @officialplaydoe</a>
+                            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
                         </td>
                     </tr>
 
