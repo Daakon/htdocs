@@ -926,10 +926,14 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
                 echo "<span style='color:#888888'><span style='color:#888888'><img src='images/Playdoe-Logo.png' height='50' width='50' /> Total Money: </span>". getRedeemPoints($ID, get_username($ID));
                 if (getRedeemPoints($ID, get_username($ID)) > 9) { echo "<br/><a href='/view_messages/redeem'>Redeem My Money</a>"; };
                 ?>
-
+                <hr class="hr-line"/>
             <?php } ?>
-
-
+            <br/>
+            Make <b>$50-$100</b> On Playdoe Now!
+            <br/>
+            Follow our Twitter page to find out how.
+            <a href="https://twitter.com/officialplaydoe" class="twitter-follow-button" data-show-count="false">Follow @officialplaydoe</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
         </div>
 
         <br/>
