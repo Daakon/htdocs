@@ -100,8 +100,9 @@ $ID = $_SESSION['ID'];
 
                         $sql2 = "SELECT FirstName,LastName,Username, ProfilePhoto
                                  FROM Members, Profile
-                                 WHERE Profile.Member_ID = $otherID
-                                 AND Members.ID = $otherID ";
+                                 WHERE (Profile.Member_ID = $otherID)
+                                 AND (Members.ID = $otherID )
+                                 And (Members.IsActive = 1) ";
 
                         $result2 = mysql_query($sql2) or die(mysql_error());
                         $rows2 = mysql_fetch_assoc($result2);
@@ -110,6 +111,11 @@ $ID = $_SESSION['ID'];
 
                         $name = $rows2['FirstName'] . ' ' . $rows2['LastName'];
                         $username = $rows2['Username'];
+                        $isActive = $rows2['IsActive'];
+
+                        if ($isActive == 0) {
+                            $profilePic = "<img src = '/media/default_photo.png' class='profilePhoto-Feed' alt='' />";
+                        }
 
                         // check if 2 people have new messages first
 
@@ -150,6 +156,7 @@ $ID = $_SESSION['ID'];
 
 
                 echo "
+
                 <div class='profileImageWrapper-Feed'>
                 <a href = '/view_messages/$username'>
                 $profilePic

@@ -2,7 +2,8 @@
 Select count(PostApprovals.ID) as LikeCount
 From PostApprovals, Members
 Where (PostApprovals.Owner_ID = X) and (PostApprovals.IsRedeemed = 0)
-And PostApprovals.Member_ID = Members.ID
+And (PostApprovals.Member_ID = Members.ID)
+And (PostApprovals.Member_ID != $ID)
 And Members.IsEmailValidated = 1
 
 --Update Post Approvals
@@ -16,8 +17,9 @@ Where IsRedeemed = 0 And Owner_ID = X
 --Comments
 Select Count(PostComments.ID) As CommentCount
 FROM PostComments, Members
-WHERE PostComments.Owner_ID = 'X' And PostComments.IsRedeemed = 0
-And PostComments.Member_ID = Members.ID
+WHERE (PostComments.Owner_ID = 'X' And PostComments.IsRedeemed = 0)
+And (PostComments.Member_ID = Members.ID)
+And (PostComments.Member_ID != $ID)
 And Members.IsEmailValidated = 1
 
 --update follower count

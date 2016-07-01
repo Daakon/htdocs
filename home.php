@@ -253,7 +253,7 @@ if (isset($_POST['submit'])) {
         else {
 
             $sql = "INSERT INTO     Posts (Post,       Category,    Member_ID,  IsSponsored,     PostDate) Values
-                                      ('$post',   '$category',   '$ID',    '$IsSponsored',    CURDATE())";
+                                      ('$post',   '$category',   '$ID',    '$IsSponsored',    NOW())";
             mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting post without media"));
         }
         alert_followers($lastPostID);
@@ -426,7 +426,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                     }
                     $comment = $comment . '<br/><br/>' . $img . '<br/>';
                     $sql = "INSERT INTO PostComments (Post_ID,     Member_ID,  Owner_ID,   Comment, CommentDate  ) Values
-                                                      ($postID,      $ID,      $ownerId, '$comment', CURDATE())";
+                                                      ($postID,      $ID,      $ownerId, '$comment', NOW())";
                     mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting post comment"));
 
                 }
@@ -436,7 +436,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 //----------------------
             else {
                 $sql = "INSERT INTO PostComments (Post_ID,  Member_ID,  Owner_ID,   Comment,  CommentDate ) Values
-                                                 ('$postID', '$ID',     '$ownerId', '$comment', CURDATE())";
+                                                 ('$postID', '$ID',     '$ownerId', '$comment', NOW())";
                 mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting comment without media"));
             }
             $scrollx = $_REQUEST['scrollx'];
@@ -828,7 +828,7 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
                         <br/><br/>
                         <?php
                         echo "<span style='color:#888888'><img src='images/Playdoe-Logo.png' height='50' width='50' /> Total Money: </span> ". getRedeemPoints($ID, get_username($ID));
-                        if (getRedeemPoints($ID, get_username($ID)) > 9) { echo "<br/><a href='/view_messages/redeem'>Redeem My Money</a>"; };
+                        if (getRedeemPoints($ID, get_username($ID)) > 9) { echo "<br/><a href='/view_messages/playdoe'>Redeem My Money</a>"; };
                         ?>
                     </div>
 
@@ -931,7 +931,7 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
             <br/>
             Make <b>$50-$100</b> On Playdoe Now!
             <br/>
-            <a href="/post/playdoe">Checkout our page to learn how.</a>
+            <a href="/post/playdoe">Click here to learn how.</a>
         </div>
 
         <br/>

@@ -10,14 +10,14 @@ $ID = $_SESSION['ID'];
 // handle roll call post
 
 $post = mysql_real_escape_string($_POST['post']);
-$category = $_POST['category'];
+$hashtag = $_POST['category'];
 
 if (isset($_POST['submit'])) {
 
     if ($_SESSION['Post'] == $_POST['post']) {
         echo "<script>alert('Your post appears to be empty');</script>";
     }
-    else if ($category == "") {
+    else if ($hashtag == "") {
         echo "<script>alert('Your post needs a category');</script>";
     }
 
@@ -229,7 +229,7 @@ if (isset($_POST['submit'])) {
                     $post = $post . '<br/><br/>' . $img . '<br/>';
 
                     $sql = "INSERT INTO Posts (Post,    Poster,	      Category,  Member_ID,   PostDate) Values
-                                              ('$post', '$posterName', '$category', '$ID',       CURDATE())";
+                                              ('$post', '$posterName', '$hashtag', '$ID',       NOW())";
                     mysql_query($sql) or die(mysql_error());
                     $newPostID = mysql_insert_id();
 
@@ -243,14 +243,14 @@ if (isset($_POST['submit'])) {
             else {
 
                 $sql = "INSERT INTO Posts (Post,       Category,    Member_ID,   PostDate) Values
-                                          ('$post',   '$category',   '$ID',      CURDATE())";
+                                          ('$post',   '$hashtag',   '$ID',      NOW())";
                 mysql_query($sql) or die(mysql_error());
 
             }
         }
 
     }
-    echo '<script>location="/post-interest?interest='.$category.'";</script>';
+    echo '<script>location="/hashtag?hashtag='.$hashtag.'";</script>';
 }
 
 ?>
@@ -269,7 +269,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
     $ownerId = $_POST['memberID'];
     $comment = $_POST['postComment'];
     $comment = mysql_real_escape_string($comment);
-
+    $hashtag = $_POST['hashtag'];
 
 
     if (strlen($comment) > 0) {
@@ -433,22 +433,13 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                     $comment = $comment . '<br/><br/>' . $img . '<br/>';
 
                     $sql = "INSERT INTO PostComments (Post_ID,     Member_ID,   Comment, CommentDate  ) Values
-                                                      ('$postID', '$ID',      '$comment', CURDATE())";
+                                                      ('$postID', '$ID',      '$comment', NOW())";
 
                     mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting post comment"));
 
-// create post
-
-                    // get poster data
-                    $sqlPoster = "SELECT ID, FirstName, LastName, Gender FROM Members WHERE ID = '$ID' ";
-                    $resultPoster = mysql_query($sqlPoster) or die(logError(mysql_error(), $url, "Getting comment poster data"));
-                    $rowsPoster = mysql_fetch_assoc($resultPoster);
-                    $name = $rowsPoster['FirstName'] . ' ' . $rowsPoster['LastName'];
-                    $posterId = $rowsPoster['ID'];
-                    $gender = $rowsPoster['Gender'];
-                    $nameLink = $name;
 
 
+/*
 // get photo owner data
                     $sql = "SELECT Member_ID FROM Posts WHERE ID = $postID";
                     $result = mysql_query($sql) or die(mysql_error());
@@ -482,7 +473,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                     $post = mysql_real_escape_string($post);
 
                     $sqlInsertPost = "INSERT INTO Posts (Post,     Member_ID,    PostDate  ) Values
-                                                        ('$post', '$ID',        CURDATE() ) ";
+                                                        ('$post', '$ID',        NOW() ) ";
                     mysql_query($sqlInsertPost) or die(logError(mysql_error(), $url, "Inserting comment with media"));
                     $newPostID = mysql_insert_id();
 
@@ -490,7 +481,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
                     $sql = "UPDATE Media SET Post_ID = '$newPostID' WHERE MediaName = '$mediaName' ";
                     mysql_query($sql) or die(mysql_error());
-
+*/
                 }
             }
 //----------------------
@@ -499,7 +490,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
             else {
                 $sql = "INSERT INTO PostComments (Post_ID,  Member_ID,    Comment,  CommentDate ) Values
-                                                 ('$postID', '$ID',      '$comment', CURDATE())";
+                                                 ('$postID', '$ID',      '$comment', NOW())";
 
                 mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting comment without media"));
             }
@@ -563,15 +554,15 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
         }
     }
-    echo "<script>location='/post-interest?interest=".urlencode($category)."&scrollx=$scrollx&scrolly=$scrolly'</script>";
+    echo "<script>location='/hashtag?hashtag=$hashtag&scrollx=$scrollx&scrolly=$scrolly';</script>";
 }
 
 if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
     $commentID = $_POST['commentID'];
-    $category = $_POST['category'];
+    $hashtag = $_POST['category'];
     $sql = "Update PostComments SET IsDeleted = '1' WHERE ID = $commentID";
     mysql_query($sql) or die (mysql_error());
-    echo '<script>location="/post-interest?interest='.$category.'";</script>';
+    echo '<script>location="/post-interest?interest='.$hashtag.'";</script>';
 }
 
 ?>
@@ -938,6 +929,7 @@ if (mysql_num_rows($result) > 0) {
                 <input type="hidden" name="postID" id="postID" Value="<?php echo $postID ?>"/>
                 <input type="hidden" name="ID" id="ID" value="<?php echo $ID ?>"/>
                 <input type="hidden" name="ownerId" id="ownerId" value="<?php echo $MemberID ?>"/>
+                <input type="hidden" name="hashtag" id="hashtag" value ="<?php echo $hashtag ?>" />
                 <input type="hidden" name="scrollx" id="scrollx" value="0"/>
                 <input type="hidden" name="scrolly" id="scrolly" value="0"/>
             </form>
@@ -1001,7 +993,7 @@ if (mysql_num_rows($result) > 0) {
                         echo '<div class="comment-delete">';
                         echo '<form action="" method="post" onsubmit="return confirm(\'Do you really want to delete this comment?\')">';
                         echo '<input type="hidden" name="commentID" id="commentID" value="' .  $commentID . '" />';
-                        echo '<input type="hidden" name="category" id="category" value="' .  $category . '" />';
+                        echo '<input type="hidden" name="category" id="category" value="' .  $hashtag . '" />';
                         echo '<input type ="submit" name="DeleteComment" id="DeleteComment" value="Delete" class="deleteButton" />';
                         echo '</form>';
                         echo '</div>';
@@ -1080,7 +1072,7 @@ if (mysql_num_rows($result) > 0) {
                     <div class="comment-delete">
                         <form action="" method="post" onsubmit="return confirm(\'Do you really want to delete this comment?\')">
                             <input type="hidden" name="commentID" id="commentID" value=" <?php echo $commentID ?>" />
-                            <input type="hidden" name="category" id="category" value="<?php echo $category ?>" />
+                            <input type="hidden" name="category" id="category" value="<?php echo $hashtag ?>" />
                             <input type ="submit" name="DeleteComment" id="DeleteComment" value="Delete" class="deleteButton" />
                             </form>
                         </div>

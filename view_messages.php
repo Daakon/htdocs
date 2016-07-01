@@ -752,23 +752,10 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
             ?>
 
             <?php
-            if ($urlUsername == 'redeem') { ?>
+            if ($urlUsername == 'playdoe') { ?>
                 <div style="margin-top:-30px;padding-bottom:30px;">
                 <h3>Redeeming Money</h3>
                 You must eclipse a minimum of $10 to redeem you money. You will need to tell us if you want to receive your money via PayPal or Venmo.
-
-
-                    <h4><div style="color:blue;"  onclick="document.getElementById('points').style.display = 'block';">View Payment System</div></h4>
-
-                    <br/>
-
-                    <div id="points" style="display:none;padding-right:10px;">
-                        <li class="list-group-item list-group-item-danger display-block">Likes = ¢1 each</li>
-                        <li class="list-group-item list-group-item-danger display-block">Comments = ¢1 each</li>
-                        <li class="list-group-item list-group-item-danger display-block">Referrals = $1 each</li>
-                        <li class="list-group-item list-group-item-danger display-block">100 Likes = $100</li>
-                    </div>
-                </div>
             <?php } ?>
 
             <div class="hidden-lg">
