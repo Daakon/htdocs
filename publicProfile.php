@@ -2,21 +2,22 @@
 // render profile public view
 $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 preg_match("/[^\/]+$/",$url ,$match);
+$username = $match[0];
+
+if ($username == '') {
+    $username = 'playdoe';
+}
+
+$memberID = get_id_from_username($username);
+
 $ID = $_SESSION['ID'];
 
-if ($_SESSION['UsernameUpdated'] == 1) {
-    $username = $_SESSION['Username'];
-}
-else {
-    $username = $match[0];
-    $memberID = get_id_from_username($username);
-
-    if (checkBlock($ID, $memberID)) {
-        echo "<script>alert('This profile could not be found');location='/home' </script>";
-        exit;
+    if (isset($ID) && !empty($ID)) {
+        if (checkBlock($ID, $memberID)) {
+            echo "<script>alert('This profile could not be found');location='/home' </script>";
+            exit;
     }
-}
-
+    }
 
 
 $sql = "SELECT

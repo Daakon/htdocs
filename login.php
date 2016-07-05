@@ -2,8 +2,8 @@
 
 require 'connect.php';
 
-$email = $_POST['login_email'];
-$pass = $_POST['login_password'];
+$email = trim($_POST['login_email']);
+$pass = trim($_POST['login_password']);
 
 
 $sql = "SELECT * FROM Members WHERE Email = '$email' And Password = '".md5($pass)."' ";

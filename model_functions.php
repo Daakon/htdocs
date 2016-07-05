@@ -87,12 +87,14 @@ function get_username($user_id)
 
     $result = mysql_query($sql) or die(logError(mysql_error(), "model_functions", "get_username() failed"));
     $rows = mysql_fetch_assoc($result);
-    return $rows['Username'];
+    $username = $rows['Username'];
+    $username = strtolower($username);
+    return $username;
 
 }
 
 function check_referral_ID($referralID) {
-    $sql = "SELECT Username FROM Members WHERE Username = '$referralID' ";
+    $sql = "SELECT ReferralID FROM Members WHERE Username = '$referralID' ";
     $result = mysql_query($sql) or die(mysql_error());
     if (mysql_num_rows($result) > 0) {
        return true;
@@ -101,6 +103,14 @@ function check_referral_ID($referralID) {
         return false;
     }
 
+}
+
+function get_referralID($ID) {
+    $sql = "SELECT ReferralID FROM Members WHERE ID = '$ID' ";
+    $result = mysql_query($sql) or die(mysql_error());
+    $rows = mysql_fetch_assoc($result);
+    $referralID = $rows['ReferralID'];
+    return $referralID;
 }
 
 function get_users_name_by_id($user_id)
@@ -253,6 +263,7 @@ function get_username_from_url() {
     $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
     preg_match("/[^\/]+$/", $url, $match);
     $username = $match[0];
+    $username = strtolower($username);
     return $username;
 }
 

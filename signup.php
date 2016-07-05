@@ -4,20 +4,22 @@ require 'imports.php';
 
 $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 
-$email = $_POST['email'];
-$referredBy = $_POST['referredBy'];
+$email = trim($_POST['email']);
+$referredBy = trim($_POST['referredBy']);
 $emailSplit = explode("@", $email);
-$username = $emailSplit[0];
+$username = trim($emailSplit[0]);
+
+$referredBy = strtolower($referredBy);
 
 if (check_referral_ID($referredBy) == false) {
         echo "<script>alert('Referral ID not found. Please check back with the person who referred you.'); location ='/learn_more'</script>";
         exit;
     }
 
-// captilize first letter only
+// capitalize first letter only
 $fName = ucfirst(strtolower($username));
 $lName = ' ';
-
+$username = strtolower($username);
 
 // check if email exists
 $sql = "SELECT * FROM Members WHERE Email = '$email'";
@@ -72,7 +74,6 @@ $result = mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting defa
 
 // insert Referral ID if exists
 if (strlen($referredBy) > 0) {
-
         $sql = "INSERT INTO Referrals (Signup_ID, Referral_ID, ReferralDate) Values ($ID, '$referredBy', NOW()) ";
         $result = mysql_query($sql) or die(mysql_error());
     }

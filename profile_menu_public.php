@@ -31,7 +31,7 @@ $text = 'login';
 if (!isset($_SESSION['ID']) && empty($_SESSION['ID'])) { ?>
     <div class="profileMenu">
     <a href="<?php echo $howItWorks ?>"><b>New To Playdoe?...Click here to find out more</b></a>
-    Or  <a href="/index"><b>Login</b></a>
+    Or  <a href="/learn_more"><b>Login</b></a>
     </div>
 
 <?php
