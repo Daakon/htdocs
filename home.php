@@ -826,8 +826,8 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
         </script>
 
         <div align="center">
-            <h5>Search
-                &nbsp;&nbsp;<input type="text" class="search" id="searchID" value="<?php $final_name ?>"
+            <h5>
+               <input type="text" class="search" id="searchID" value="<?php $final_name ?>"
                                    placeholder="Search for people"/>
                 <br/>
                 <div id="result"></div>
