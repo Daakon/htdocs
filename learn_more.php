@@ -167,7 +167,7 @@ if (!empty($_SESSION['ID'])) {
     <div class="row" style="background:#e3e3e3;padding-left:10px;">
         <a id="signup"></a>
         <div style="padding-left:20px;">
-            <h1 class="bold">Sign Up</h1>
+            <h1 class="bold" style="margin-top:-10px;">Sign Up</h1>
             <span class="lead" style="font-weight: 500;">It's Free!</span>
             <br/><br/>
         </div>
@@ -199,27 +199,28 @@ if (!empty($_SESSION['ID'])) {
                 <small>By clicking sign up, you agree to our <a href="/terms">terms</a></small>
                 <br/><br/>
 
-                <div class="form-group row">
+                <div class="form-group row" >
                     <div class="col-md-6">
                         <input class="btn btn-default " type="submit" name="signup" id="signup"
-                               style="background:#E30022;color:white;"     value="Sign Up"/>
+                               style="background:#E30022;color:white;float:left;margin-right:10px;" value="Sign Up"/>
+
+                        <div class="visible-xs" style="float:left;">
+                            <a href="/login-mobile"><div class="btn btn-default">Login</div></a>
+                        </div>
+
+                        <div class="hidden-xs" style="float:left;">
+                            <a href="../"><div class="btn btn-default">Login</div></a>
+                        </div>
 
                     </div>
                 </div>
 
+
             </form>
-            <hr/>
-            <h4>
-                <div class="visible-xs">
-                    <a href="/login-mobile"><div class="btn btn-default">Login</div></a>
-                </div>
-
-                <div class="hidden-xs">
-                    <a href="../"><div class="btn btn-default">Login</div></a>
-                </div>
 
 
-            </h4>
+
+
 
         </div>
 

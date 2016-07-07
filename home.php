@@ -929,7 +929,7 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
                 <hr class="hr-line"/>
             <?php } ?>
             <br/>
-            Make <b>$50-$100</b> On Playdoe Now!
+            Make <b>$50</b> On Playdoe Now!
             <br/>
             <a href="/post/playdoe">Click here to learn how.</a>
 
