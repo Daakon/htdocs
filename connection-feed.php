@@ -38,6 +38,7 @@ And (Members.IsSuspended = 0)
 And (Members.ID = Posts.Member_ID)
 And (Members.ID = Profile.Member_ID)
 And (Posts.IsDeleted = 0)
+And ((Posts.Member_ID = $ID) Or (Posts.Member_ID in (Select Followed_ID FROM Follows WHERE Follower_ID = $ID)))
 And (Members.ID Not in ( '" . implode($blockIDs, "', '") . "' ))
 $lastPostCondition
 Group By PostID

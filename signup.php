@@ -78,7 +78,12 @@ if (strlen($referredBy) > 0) {
         $result = mysql_query($sql) or die(mysql_error());
     }
 
+// assign default follows
+$sql = "INSERT INTO Follows (Followed_ID, Follower_ID, New, FollowDate) Values (22, $ID, 1, CURDATE())";
+mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting new follower"));
 
+$sql = "INSERT INTO Follows (Followed_ID, Follower_ID, New, FollowDate) Values (528, $ID, 1, CURDATE())";
+mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting new follower"));
 
 // Send out sign up email
 $toId = $rows['ID'];
