@@ -907,7 +907,6 @@ if (mysql_num_rows($result) > 0) {
                 <input type="text" class="form-control" name="postComment" id="postComment"
                        placeholder="Write a comment" title='' />
 
-                <h6>Attach A Photo/Video To Your Comment</h6>
                 <input type="file" name="flPostMedia" id="flPostMedia" style="max-width:180px;"/>
 
                 <br/>

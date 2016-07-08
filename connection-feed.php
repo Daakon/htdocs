@@ -267,7 +267,6 @@ if (mysql_num_rows($rollCallResult) > 0) {
                                    placeholder="Write a comment" title='' <?php echo $disabled ?> />
 
                             <?php if ($iPhone || $iPad || $Android) { ?>
-                                <h6>Add Photos/Video</h6>
                                 <input type="file" name="flPostMedia" id="flPostMedia" class="flPostMedia"/>
                             <?php } ?>
 
