@@ -200,7 +200,7 @@ if (mysql_num_rows($rollCallResult) > 0) {
                     $disabled = "";
                 }
 
-                if (isEmailValidated($ID)) {
+                if (isEmailValidated($ID) && hasOnePost($ID)) {
                     $disabled = '';
                 } else {
                     $disabled = 'disabled';

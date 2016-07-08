@@ -30,12 +30,12 @@ else {
 $text = 'login';
 if (!isset($_SESSION['ID']) && empty($_SESSION['ID'])) { ?>
     <div class="profileMenu">
-    <a href="<?php echo $howItWorks ?>"><b>New To Playdoe?...Click here to find out more</b></a>
-    Or  <a href="/learn_more"><b>Login</b></a>
+        <a href="<?php echo $howItWorks ?>"><b>New To Playdoe?...Click here to find out more</b></a>
+        Or  <a href="/learn_more"><b>Login</b></a>
     </div>
 
-<?php
-if ($_SESSION['IsProfilePage'] == true) {
+    <?php
+    if ($_SESSION['IsProfilePage'] == true) {
 
         require 'publicProfile.php';
 
@@ -54,10 +54,10 @@ if ($_SESSION['ID'] != $profileID) { ?>
 
     <?php
     $showProfile = "";
-        if (strstr($url, "home")) {
-            $username = get_username($ID);
-            $showProfile = "style='display:none;'";
-        }
+    if (strstr($url, "home")) {
+        $username = get_username($ID);
+        $showProfile = "style='display:none;'";
+    }
     ?>
 
     <style>
@@ -75,25 +75,25 @@ if ($_SESSION['ID'] != $profileID) { ?>
         <ul class="dropdown-menu">
             <li><a href="/home"><img src="/images/home.png" height="20" width="20" /> Home</b></a></li>
             <li <?php echo $showProfile ?>><a href="/<?php echo $username ?>"><img src="/images/profile.png" height="20" width="20" /> Profile</a></li>
-           <li><a href="/member_media/<?php echo $username ?>"><img src="/images/media.png" height="20" width="20" /> Media</a></li>
+            <li><a href="/member_media/<?php echo $username ?>"><img src="/images/media.png" height="20" width="20" /> Media</a></li>
             <li><a href="/post/<?php echo $username ?>"><img src="/images/post.png" height="20" width="20" /> View Posts</a></li>
             <li><a href="/messages/<?php echo get_username($ID) ?>"><img src = "/images/messages.png" height="20" width="20" /> Message</a></li>
             <li><a href="/member_follows/<?php echo $username ?>"><img src = "/images/follows.png" height="20" width="20" /> Followers</a></li>
             <li><a href="/<?php echo get_username($ID)?>"><span style="color:black;font-weight: 900;"><img src="<?php echo get_users_photo_by_id($ID) ?>" height="20" width="20"/> My Profile</span></a></li>
             <li><a href="/settings/<?php echo get_username($ID) ?>"><img src="/images/settings.png" height="20" width="20" />Settings</a></li>
-            <li><a href ="/support" class="visible-xs" ><img src = "/images/support.png" height="20" width="20" /> Support</a></li>
+            <li><a href ="/view_messages/playdoe" class="visible-xs" ><img src = "/images/support.png" height="20" width="20" /> Support</a></li>
             <li><a href ="/logout" ><img src = "/images/logout.png" height="20" width="20" /> Log Out</a></li>
-<?php
-    $username = get_username_from_url();
-    $profileID = get_id_from_username($username);
+            <?php
+            $username = get_username_from_url();
+            $profileID = get_id_from_username($username);
 
-    $sql = "SELECT IsAdmin FROM Members WHERE ID = $ID ";
-    $result = mysql_query($sql) or die(mysql_error());
-    $rows = mysql_fetch_assoc($result);
-    if ($rows['IsAdmin'] == 1) { ?>
-    <li><a href="/marketing_manager/<?php echo $username ?>"><img src = "/images/marketing-menu-glyph" height="20" width="20"/> Marketing Manager</a></li>
-<?php }
-?>
+            $sql = "SELECT IsAdmin FROM Members WHERE ID = $ID ";
+            $result = mysql_query($sql) or die(mysql_error());
+            $rows = mysql_fetch_assoc($result);
+            if ($rows['IsAdmin'] == 1) { ?>
+                <li><a href="/marketing_manager/<?php echo $username ?>"><img src = "/images/marketing-menu-glyph" height="20" width="20"/> Marketing Manager</a></li>
+            <?php }
+            ?>
         </ul>
     </div>
 

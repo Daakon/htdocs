@@ -1,8 +1,4 @@
 
-<!------------------------------------------------------
-ALWAYS COMPRESS THIS FILE BEFORE PUSHING TO PRODUCTION
-IT WILL INCREASE THE RENDERING TIME OF HTML ELEMENTS
-------------------------------------------------------->
 <?php
 require 'imports.php';
 $ffmpeg = '/usr/local/bin/ffmpeg';
@@ -827,8 +823,8 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
 
         <div align="center">
             <h5>
-               <input type="text" class="search" id="searchID" value="<?php $final_name ?>"
-                                   placeholder="Search for people"/>
+                <input type="text" class="search" id="searchID" value="<?php $final_name ?>"
+                       placeholder="Search for people"/>
                 <br/>
                 <div id="result"></div>
                 <div id="previewNames"></div>
@@ -871,12 +867,15 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
 
                     <div style="margin-top:-10px">
                         <a href="/messages/<?php echo $username ?>"><img src = "/images/messages.png" height="20" width="20" /> <?php require 'getNewMessageCount.php' ?></a>
-                        <a style="padding-left:20px;" href="/member_follows/<?php echo get_username($ID) ?>"><img src = "/images/follows.png" height="20" width="20" /><?php require 'getNewFollowCount.php' ?></a>
-                        <br/><br/>
-                        <?php
-                        echo "<span style='color:#888888'><img src='images/Playdoe-Logo.png' height='50' width='50' /> Total Money: </span> ". getRedeemPoints($ID, get_username($ID));
+                        <a style="margin-left:20px;" href="/member_follows/<?php echo get_username($ID) ?>"><img src = "/images/follows.png" height="20" width="20" /><?php require 'getNewFollowCount.php' ?></a>
+
+                        <a href="/post/playdoe"><img src="/images/50-dollar-icon.png" style="height:30px;width:30px;margin-left:20px;" /></a>
+
+                        <img src="/images/dollar-sign.png" style="width:30px;height:30px;margin-left:20px;" /> <?php
+                        echo "<span style='color:#888888'> </span> ". getRedeemPoints($ID, get_username($ID));
                         if (getRedeemPoints($ID, get_username($ID)) > 9) { echo "<br/><a href='/view_messages/playdoe'>Redeem My Money</a>"; };
                         ?>
+
                     </div>
 
                 </div>
@@ -966,25 +965,22 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
 
             <?php if (!$iPhone && !$iPad && !$Android) { ?>
                 <?php require 'profile_menu.php'; ?>
-                <a href="/messages/<?php echo $username ?>"><img src = "/images/messages.png" height=20" width="20" /> <?php require 'getNewMessageCount.php' ?></a>
-                <a style="padding-left:20px;" href="/member_follows/<?php echo get_username($ID) ?>"><img src = "/images/follows.png" height="20" width="20" /><?php require 'getNewFollowCount.php' ?></a>
-                <br/><br/>
-                <?php
-                echo "<span style='color:#888888'><span style='color:#888888'><img src='images/Playdoe-Logo.png' height='50' width='50' /> Total Money: </span>". getRedeemPoints($ID, get_username($ID));
+                <a href="/messages/<?php echo $username ?>"><img src = "/images/messages.png" height="20" width="20" /> <?php require 'getNewMessageCount.php' ?></a>
+                <a style="margin-left:20px;" href="/member_follows/<?php echo get_username($ID) ?>"><img src = "/images/follows.png" height="20" width="20" /><?php require 'getNewFollowCount.php' ?></a>
+
+                <a href="/post/playdoe"><img src="/images/50-dollar-icon.png" style="height:30px;width:30px;margin-left:20px;" /></a>
+
+                <img src="/images/dollar-sign.png" style="width:30px;height:30px;margin-left:20px;" /> <?php
+                echo "<span style='color:#888888'> </span> ". getRedeemPoints($ID, get_username($ID));
                 if (getRedeemPoints($ID, get_username($ID)) > 9) { echo "<br/><a href='/view_messages/playdoe'>Redeem My Money</a>"; };
                 ?>
+
                 <hr class="hr-line"/>
             <?php } ?>
-            <br/>
-            Make <b>$50</b> On Playdoe Now!
-            <br/>
-            <a href="/post/playdoe">Click here to learn how.</a>
 
-            <hr class="hr-line">
-            Make more <img src="/images/dollar-sign.png" height="30" width="30" /> by referring friends.
             <!-- SMARTADDON BEGIN --> <script type="text/javascript"> (function() { var s=document.createElement('script');s.type='text/javascript';s.async = true; s.src='http://s1.smartaddon.com/share_addon.js'; var j =document.getElementsByTagName('script')[0];j.parentNode.insertBefore(s,j); })(); </script> <a href="http://www.smartaddon.com/?share" title="Share Button" onclick="return sa_tellafriend('http://playdoe.com')"><img alt="Share" src="http://s1.smartaddon.com/s12.png" border="0" /></a> <!-- SMARTADDON END -->
             <br/>
-            <small>Be sure to include your Referral ID: <b><?php echo get_referralID($ID) ?></b></small>
+            <small>To get paid be sure to include your Referral ID: <b><?php echo get_referralID($ID) ?></b></small>
         </div>
 
         <br/>

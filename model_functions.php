@@ -77,7 +77,7 @@ function checkNameLength($name) {
     else {
         $name = $name;
     }
-        return $name;
+    return $name;
 }
 
 function get_username($user_id)
@@ -97,7 +97,7 @@ function check_referral_ID($referralID) {
     $sql = "SELECT ReferralID FROM Members WHERE Username = '$referralID' ";
     $result = mysql_query($sql) or die(mysql_error());
     if (mysql_num_rows($result) > 0) {
-       return true;
+        return true;
     }
     else {
         return false;
@@ -442,7 +442,7 @@ function getChatProfilePic($groupID, $ID) {
         if (checkBlock($ID, $rows['ThreadOwner_ID']) == false) {
             array_push($profile_ids, $rows['ThreadOwner_ID']);
         }
-        }
+    }
 
 
 //Boil the ids down to unique values bc we dont want it send double emails or notifications
@@ -453,10 +453,10 @@ function getChatProfilePic($groupID, $ID) {
     $counter = 0;
     foreach ($profile_ids as $item) {
         if ($counter <= 4) {
-        if (!empty($item) && $item != $ID) {
-            // only send email if account & email active
-            $profilePic .= "<image src= '/media/".get_users_photo_by_id_raw($item)."' style='float:left;' $width $height  alt='' />";
-            $counter++;
+            if (!empty($item) && $item != $ID) {
+                // only send email if account & email active
+                $profilePic .= "<image src= '/media/".get_users_photo_by_id_raw($item)."' style='float:left;' $width $height  alt='' />";
+                $counter++;
             }
         }
     }
@@ -479,27 +479,27 @@ function text_notification($receiverID, $senderID, $groupID)
         $receiverName = get_users_name($receiverID);
         $API_KEY = '7344d6254838e6d2c917c4cb78305a3235ba951d';
 
-            // Create a Clockwork object using your API key
-            $clockwork = new Clockwork($API_KEY);
-            $domain = null;
-            $username = get_username($senderID);
-            // check if group message
-            if (strlen($groupID) > 0) {
-                $username = $groupID;
-            }
-            if (strstr($url, "dev")) {
-                $domain = "dev.playdoe.com/view_messages/$username";
-            } else {
-                $domain = "http://playdoe.com/view_messages/$username";
-            }
-                $domain = shortenUrl($domain);
+        // Create a Clockwork object using your API key
+        $clockwork = new Clockwork($API_KEY);
+        $domain = null;
+        $username = get_username($senderID);
+        // check if group message
+        if (strlen($groupID) > 0) {
+            $username = $groupID;
+        }
+        if (strstr($url, "dev")) {
+            $domain = "dev.playdoe.com/view_messages/$username";
+        } else {
+            $domain = "http://playdoe.com/view_messages/$username";
+        }
+        $domain = shortenUrl($domain);
 
-            $text = "You have a new message from $senderName on Playdoe: $domain";
+        $text = "You have a new message from $senderName on Playdoe: $domain";
 
-            // Setup and send a message
-            $message = array('to' => $number, 'message' => $text);
-            $result = $clockwork->send($message);
-            // Check if the send was successful
+        // Setup and send a message
+        $message = array('to' => $number, 'message' => $text);
+        $result = $clockwork->send($message);
+        // Check if the send was successful
         if (strlen($groupID) > 0) {} else {
             if ($result['success']) {
                 //echo 'Message sent - ID: ' . $result['id'];
@@ -573,7 +573,7 @@ function checkBlock($ID, $memberID) {
             return true;
         }
         else { return false; }
-     }
+    }
     else {
         return false;
     }
@@ -641,6 +641,7 @@ function getRedeemPoints($ID, $username) {
     return $totalMoney;
 }
 
+// check if user has 10 unredeemed post for the day
 function hasTenPost($ID) {
     $sql = "Select count(ID) as PostCount FROM Posts Where (Member_ID = $ID)
     And (IsRedeemed = 0) And (DATE(PostDate) = DATE(NOW()))  And (IsDeleted = 0)";
@@ -649,6 +650,21 @@ function hasTenPost($ID) {
     $postCount = $rows['PostCount'];
 
     if ($postCount > 9) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+function hasOnePost($ID) {
+    $sql = "Select count(ID) as PostCount FROM Posts Where (Member_ID = $ID)
+     And (IsDeleted = 0)";
+    $result = mysql_query($sql) or die(mysql_error());
+    $rows = mysql_fetch_assoc($result);
+    $postCount = $rows['PostCount'];
+
+    if ($postCount > 0) {
         return true;
     }
     else {
@@ -743,7 +759,7 @@ function hashtag_links($string) {
             || strstr($word, '#x54') || strstr($word, '#x55') || strstr($word, '#x56') || strstr($word, '#x57')
             || strstr($word, '#x58') || strstr($word, '#x59') || strstr($word, '#x60') || strstr($word, '#x61')
             || strstr($word, '#x62') || strstr($word, '#x63')
-            ) { } else {
+        ) { } else {
             $word = preg_replace('/#(\w+)/', ' <a href="/hashtag?hashtag=$1" style="padding-right:2px;">#$1</a>', $word);
             $word = str_replace("</a>  <a href", "</a>&nbsp;<a href", $word);
             $result .= $word . ' ';
