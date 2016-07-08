@@ -819,19 +819,13 @@ if (mysql_num_rows($result) > 0) {
                 ?>
             </div>
 
-            <hr class="hr-line"/>
-
-             <?php echo $state; ?>
-
 
                  <?php if ($ID != $memberID) {?>
-                    <a style="padding-left:20px;" href="/view_messages/<?php echo $username ?>"><img src="/images/messages.png" height="20" width="20" /> Message </a>
+                    <a style="padding-left:20px;float:left;" href="/view_messages/<?php echo $username ?>"><img src="/images/messages.png" height="20" width="20" /></a>
                 <?php } ?>
 
 
-                <br/><br/>
-
-                <div style="padding-left:20px">
+                <div style="padding-left:20px;float:left">
                      <?php
                     $postPath = getPostPath();
                     $shareLinkID = "shareLink$postID"; ?>

@@ -526,7 +526,7 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
 
         <div class="col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8 roll-call ">
 
-            <h2>View Messages</h2>
+            <h3>View Messages</h3>
 
             <hr/>
 
@@ -754,16 +754,40 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
             <?php
             if ($urlUsername == 'playdoe') { ?>
                 <div style="margin-top:-30px;padding-bottom:30px;">
-                <h3>Redeeming Money</h3>
-                You must eclipse a minimum of $10 to redeem you money. You will need to tell us if you want to receive your money via PayPal or Venmo.
+
+                <div onclick="document.getElementById('faq').style.display = 'block';" style="font-size:20px;color:red;padding-bottom:10px;"> FAQ</div>
+                    <table id="faq" style="display:none;border:1px solid blue">
+                        <th class="lead faq-header" >I can't post anything</th>
+
+                        <tr>
+                        <td style="padding:5px;">
+                            New members are required to validate their emails before posting.
+                        </td>
+                        </tr>
+
+
+                        <th class="lead faq-header">I can't like or comment on anything</th>
+                        </tr>
+                        <td style="padding:5px;">
+                            One post by each member needs to be shared in order to like and comment on other members post.
+                        </td>
+                        <tr>
+
+                        <th class="lead faq-header">How Do I redeem my money?</th>
+                            <tr>
+                        <td style="padding:5px;">
+                            You must eclipse a minimum of $10 to redeem you money. You will need to tell us if you want to receive your money via PayPal or Venmo.
+                        </td>
+                        </tr>
+
+                    </table>
+
             <?php } ?>
 
+                    <hr class="hr-line" />
             <div class="hidden-lg">
 
                 <form id="messageForm" action="" method="post" enctype="multipart/form-data" onsubmit="return showUploading()">
-                    Add Any Combination of:<br/>
-                    <img src="/images/image-icon.png" height="30px" width="30px" alt="Photos/Video/Documents"/>
-                    <strong>Photos/Videos</strong>
 
                     <input type="file" width="10px;" name="flPostMedia[]" id="flPostMedia" multiple />
             </div>

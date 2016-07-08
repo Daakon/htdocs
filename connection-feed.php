@@ -159,13 +159,10 @@ if (mysql_num_rows($rollCallResult) > 0) {
             </div>
 
 
-            <hr class="hr-line" />
-
-
             <?php if (isset($ID)) { ?>
 
                 <?php if ($ID != $memberID) {?>
-                    <a href="/view_messages/<?php echo $username ?>" style="padding-left:10px;"><span class="engageText"><img src = "/images/messages.png" height="20" width="20" /> Message </span> </a>
+                    <a href="/view_messages/<?php echo $username ?>" style="padding-left:10px;float:left;"><span class="engageText"><img src = "/images/messages.png" height="20" width="20" /> </span> </a>
                 <?php } ?>
 
             <?php } ?>
@@ -177,7 +174,7 @@ if (mysql_num_rows($rollCallResult) > 0) {
                         $optionsID = "options$postID";
                     ?>
 
-                            <a href="javascript:showOptions('<?php echo $optionsID ?>');" style="font-size:20px;color:black;padding-left:10px;">...</a>
+                            <a href="javascript:showOptions('<?php echo $optionsID ?>');" style="font-size:20px;color:black;padding-left:30px;">...</a>
                             <div style="display:none;" id="<?php echo $optionsID ?>">
                             <form action="" method="post" onsubmit="return confirm('Do you really want to block this member?') && saveScrollPositions(this) ">
                                 <input type="hidden" id="blockedID" name="blockedID" class="blockedID" value="<?php echo $memberID ?>" />
@@ -206,7 +203,6 @@ if (mysql_num_rows($rollCallResult) > 0) {
                     $disabled = 'disabled';
                 }
 
-                echo "<hr class='hr-line'/>";
 
 
                 //check if member has approved this post

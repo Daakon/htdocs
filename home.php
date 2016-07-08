@@ -873,7 +873,7 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
 
                         <img src="/images/dollar-sign.png" style="width:30px;height:30px;margin-left:20px;" /> <?php
                         echo "<span style='color:#888888'> </span> ". getRedeemPoints($ID, get_username($ID));
-                        if (getRedeemPoints($ID, get_username($ID)) > 9) { echo "<br/><a href='/view_messages/playdoe'>Redeem My Money</a>"; };
+                        if (getRedeemPoints($ID, get_username($ID)) > 9) { echo "<br/><a href='/view_messages/playdoe'><img src='/images/redeem.png' height='30' width='30' /></a>"; };
                         ?>
 
                     </div>
@@ -892,8 +892,6 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
                         if (hasTenPost($ID) == false) {
                             ?>
                             <form method="post" enctype="multipart/form-data" action="" onsubmit="return showUploading()" >
-                                <img src="/images/image-icon.png" height="30px" width="30px" alt="Photos/Video"/>
-                                <strong>Upload Photos/Videos</strong><span style="color:red;padding-left:10px;">* Required</span>
                                 <input type="file" width="10px;" name="flPostMedia[]" id="flPostMedia" />
                                 <div id="image-holder"> </div>
 
@@ -972,15 +970,30 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
 
                 <img src="/images/dollar-sign.png" style="width:30px;height:30px;margin-left:20px;" /> <?php
                 echo "<span style='color:#888888'> </span> ". getRedeemPoints($ID, get_username($ID));
-                if (getRedeemPoints($ID, get_username($ID)) > 9) { echo "<br/><a href='/view_messages/playdoe'>Redeem My Money</a>"; };
+                if (getRedeemPoints($ID, get_username($ID)) > 9) { echo "<br/><a href='/view_messages/playdoe'><img src='/images/redeem.png' height='30' width='30' /></a>"; };
                 ?>
 
                 <hr class="hr-line"/>
             <?php } ?>
 
             <!-- SMARTADDON BEGIN --> <script type="text/javascript"> (function() { var s=document.createElement('script');s.type='text/javascript';s.async = true; s.src='http://s1.smartaddon.com/share_addon.js'; var j =document.getElementsByTagName('script')[0];j.parentNode.insertBefore(s,j); })(); </script> <a href="http://www.smartaddon.com/?share" title="Share Button" onclick="return sa_tellafriend('http://playdoe.com')"><img alt="Share" src="http://s1.smartaddon.com/s12.png" border="0" /></a> <!-- SMARTADDON END -->
-            <br/>
-            <small>To get paid be sure to include your Referral ID: <b><?php echo get_referralID($ID) ?></b></small>
+
+            <script>
+                function show(msg) {
+                    var tooltip = document.getElementById(msg);
+                    if (tooltip.style.display == 'none') {
+                        tooltip.style.display = 'block';
+                    } else {
+                        tooltip.style.display = 'none';
+                    }
+                }
+            </script>
+
+            <span style="padding-left:10px;" onclick="show('msg');">
+                <span class="glyphicon glyphicon-cog" data-toggle="tooltip" data-original-title="Setting">
+            </span>
+
+            <div onclick="document.getElementById('msg').style.display = 'block';" id="msg" style="display:none;" class="profile-on-hover">To get paid be sure to provide your Referral ID: <b><?php echo get_referralID($ID) ?></b></div>
         </div>
 
         <br/>
