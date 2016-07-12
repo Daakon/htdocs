@@ -20,7 +20,7 @@ if($_POST)
 {
     $q=$_POST['search'];
     $sql =mysql_query("select ID,FirstName,LastName,Username from Members where concat(FirstName,'',LastName) like '%$q%'
-    and ID Not in ( '" . implode($blockIDs, "', '") . "' ) order by id LIMIT 5");
+    and ID Not in ( '" . implode($blockIDs, "', '") . "' ) And (IsActive = 1) And (IsSuspended = 0) order by id LIMIT 5");
 
     while($row=mysql_fetch_array($sql)) {
         $name = $row['FirstName'] . ' ' . $row['LastName'];

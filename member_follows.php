@@ -26,14 +26,23 @@ $profileID = get_id_from_username($username);
     <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6 col-sm-12 col-xs-12 roll-call-feed member-media" style="padding-left:10px;">
         <?php require 'profile_menu.php'; ?>
 
+        <?php
+        $sqlF = "Select count(ID) as FollowedCount FROM Follows WHERE Followed_ID = $ID";
+        $resultF = mysql_query($sqlF);
+        $rowsF = mysql_fetch_assoc($resultF);
+        $followedCount = $rowsF['FollowedCount'];
+        ?>
+
         <h3><?php if ($username != get_username($ID)) {
-                echo trim(get_user_firstName($profileID)).'\'s Followers';
+                echo trim(get_user_firstName($profileID)).'\'s Followers ('. $followedCount.')' ;
             }
             else {
-               echo "Your Followers";
+               echo "Your Followers ($followedCount)";
             }
             ?>
         </h3>
+
+
         - <a href="/member_following/<?php echo $username ?>">Following</a>
         <hr/>
         <?php

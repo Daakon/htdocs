@@ -27,14 +27,24 @@ $profileID = get_id_from_username($username);
 
             <?php require 'profile_menu.php'; ?>
 
+            <?php
+            $sqlF = "Select count(ID) as FollowingCount FROM Follows WHERE Follower_ID = $ID";
+            $resultF = mysql_query($sqlF);
+            $rowsF = mysql_fetch_assoc($resultF);
+            $followingCount = $rowsF['FollowingCount'];
+            ?>
+
             <h3><?php if ($username != get_username($ID)) {
-                    echo 'Followed By '.trim(get_user_firstName($profileID));
+                    echo 'Followed By '.trim(get_user_firstName($profileID)).' ('.$followingCount.')' ;
                 }
                 else {
-                    echo "Followed by You";
+                    echo "Followed by You ($followingCount)";
                 }
                 ?>
             </h3>
+
+
+
             - <a href="/member_follows/<?php echo $username ?>">Followers</a>
             <hr/>
             <?php
@@ -70,7 +80,7 @@ $profileID = get_id_from_username($username);
                         $name = $rows2['FirstName'] . ' ' . $rows2['LastName'];
                         $username = $rows2['Username'];
                         $profilePhoto = $rows2['ProfilePhoto'];
-                        $interest = $rows2['Interest'];
+                        $followingCount = $rows2['FollowingCount'];
 
                         $profileUrl = "/$username";
                         ?>

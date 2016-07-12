@@ -99,13 +99,13 @@ $message = "<p>Hey $firstName, You can now make money from your social media eff
         <br/>
         3. Get paid every time you get a new follower.
         <br/>
-        4. Get paid every time you refer your friends to join Playdoe and your referral makes at least 5 unique posts.
+        4. Get paid every time you refer your friends to join Playdoe and your referral makes at least 5 posts.
         <br/>
         You have a referral ID assigned to you. Go to your profile and you will see it. Give that to your friends so you can get get paid for referring them.
         <br/>
         5. Compete in our weekly hashtag game and win $50 to $100 every time you get the most likes.
         <br/>
-        Last but not least, if you are really popular, get 20 referrals to share 5 posts and earn $20.
+        You must share at least one post to be able to like and comment on others' posts.
         <br/>
         You will earn $1 for yourself once you reach 5 post.
         <br/>

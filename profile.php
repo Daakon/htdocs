@@ -7,6 +7,8 @@ else {
     $_SESSION['IsProfilePage'] = false;
 }
 
+
+
 require 'imports.php';
 get_head_files();
 get_header();
@@ -525,7 +527,15 @@ $bgPhoto = $row['ProfilePhoto'];
 
             // if profile is not the current member session ID
             // serve the public profile
-            if ($rows['Username'] != $username) {
+            $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+            if (strstr($url, "http://playdoe.com/playdoe/")) {
+                $url = "http://playdoe.com/playdoe";
+            }
+            preg_match("/[^\/]+$/",$url ,$match);
+            $username = $match[0];
+
+
+            if ($ID != get_id_from_username($username)) {
 
             require 'publicProfile.php';
             }
