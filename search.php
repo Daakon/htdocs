@@ -1,5 +1,5 @@
 
-<table id="tblGroupChat" style="margin-bottom:10px;">
+<table id="tblGroupChat" style="margin-bottom:0px;margin-top:-25px;background-color: white;">
 
     <?php
 
@@ -37,7 +37,7 @@ if($_POST)
         <br/>
         <tr>
             <td id="tbName"
-                style="border-top:1px solid #e3e3e3;border-bottom:1px solid #e3e3e3;padding-top:5px;padding-bottom:5px;<?php echo $display ?>">
+                style="border-top:1px solid #e3e3e3;border-bottom:1px solid #e3e3e3;padding:5px;<?php echo $display ?>">
                 <a href="/<?php echo $username ?>">
                     <img src="<?php echo get_users_photo_by_id($receiverID) ?>"
                      style="width:50px; height:50px; float:left; margin-right:6px;display:inline-table"/><?php echo $name; ?>

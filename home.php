@@ -753,7 +753,7 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
 
 <!--empty onunload will clear browser cache for clean refresh -->
 <body onunload="">
-<div class="container" style="margin-top:-20px;">
+<div class="container" style="margin-top:-55px;">
     <?php
     ?>
     <div class="row row-padding">
@@ -824,7 +824,7 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
         <div align="center">
             <h5>
                 <input type="text" class="search" id="searchID" value="<?php $final_name ?>"
-                       placeholder="Search for people"/>
+                       placeholder="Search for people" style="margin-bottom:-10px;"/>
                 <br/>
                 <div id="result"></div>
                 <div id="previewNames"></div>
