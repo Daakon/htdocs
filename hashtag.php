@@ -845,6 +845,12 @@ if (mysql_num_rows($result) > 0) {
 
             <?php
 
+ if (isEmailValidated($ID) && hasOnePost($ID)) {
+                    $disabled = '';
+                } else {
+                    $disabled = 'disabled';
+                }
+
             //check if member has approved this post
             //----------------------------------------------------------------
             //require 'getSessionType.php';
@@ -867,7 +873,7 @@ if (mysql_num_rows($result) > 0) {
 
                 echo '<input type ="hidden" class = "postID" id = "postID" value = "' . $postID . '" />';
                 echo '<input type ="hidden" class = "ID" id = "ID" value = "' . $ID . '" />';
-                echo '<input type ="button" class = "btnDisapprove" />';
+                echo '<input type ="button" class = "btnDisapprove" ' .$disabled.' />';
 
                 if ($approvals > 0) {
 
@@ -880,7 +886,7 @@ if (mysql_num_rows($result) > 0) {
 
                 echo '<input type ="hidden" class = "postID" id = "postID" value = "' . $postID . '" />';
                 echo '<input type ="hidden" class = "ID" id = "ID" value = "' . $ID . '" />';
-                echo '<input type ="button" class = "btnApprove" />';
+                echo '<input type ="button" class = "btnApprove" ' . $disabled.' />';
 
                 if ($approvals > 0) {
 
@@ -905,7 +911,7 @@ if (mysql_num_rows($result) > 0) {
                   onsubmit="showCommentUploading('comment<?php echo $postID?>', this);">
 
                 <input type="text" class="form-control" name="postComment" id="postComment"
-                       placeholder="Write a comment" title='' />
+                       placeholder="Write a comment" title='' <?php echo $disabled ?> />
 
                 <input type="file" name="flPostMedia" id="flPostMedia" style="max-width:180px;"/>
 
@@ -918,7 +924,7 @@ if (mysql_num_rows($result) > 0) {
                     </div>
                 </div>
                 <input type="submit" name="btnComment" id="btnComment" Value="Comment"
-                       style="border:1px solid black"/>
+                       style="border:1px solid black" <?php echo $disabled ?> />
                 <input type="hidden" name="postID" id="postID" Value="<?php echo $postID ?>"/>
                 <input type="hidden" name="ID" id="ID" value="<?php echo $ID ?>"/>
                 <input type="hidden" name="ownerId" id="ownerId" value="<?php echo $MemberID ?>"/>

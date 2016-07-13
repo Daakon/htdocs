@@ -98,7 +98,7 @@ if (!empty($_SESSION['ID'])) {
     <!-- End Modal -->
 
     <div class="row" style="margin-top:-20px;">
-        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12" >
+        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12" >
 
             <div class="visible-xs" style="padding-left:10px;padding-top:10px;">
                 <a href="/login-mobile"><button class="btn btn-default">Login</button></a> &nbsp;&nbsp;
@@ -117,9 +117,9 @@ if (!empty($_SESSION['ID'])) {
 
                     <tr>
                         <td style="padding-left:0px;">
-                            <h4>
-                                Playdoe is a social network that pays you for sharing photos and videos of things you care about.
-                            </h4>
+                            <h5>
+                                Playdoe is a social network that pays you to share photos and videos about your life.
+                            </h5>
                             <lead>
                                 Checkout our <a href="http://officialplaydoe.tumblr.com/" target="_blank">blog</a> to learn more.
                             </lead>
@@ -142,7 +142,7 @@ if (!empty($_SESSION['ID'])) {
                         </td>
                         <td style="padding-left:10px;">
                             <h4>
-                                Playdoe is a social network that pays you for sharing photos and videos of things you care about.
+                                Playdoe is a social network that pays you to share photos and videos about your life.
                             </h4>
                             <lead>
                             Checkout our <a href="http://officialplaydoe.tumblr.com/" target="_blank">blog</a> to learn more.
@@ -167,7 +167,7 @@ if (!empty($_SESSION['ID'])) {
     <div class="row" style="background:#e3e3e3;padding-left:10px;">
         <a id="signup"></a>
         <div style="padding-left:20px;">
-            <h1 class="bold" style="margin-top:-10px;">Sign Up</h1>
+            <h2 class="bold" style="margin-top:-10px;">Sign Up</h2>
             <span class="lead" style="font-weight: 500;">It's Free!</span>
             <br/><br/>
         </div>

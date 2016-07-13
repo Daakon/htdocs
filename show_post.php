@@ -420,7 +420,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
         else if (isset($_SESSION['ID']) && isset($_COOKIE['Page'])) {
             ?>
             <li><button onclick="myFunction()" style="margin-left:10px;">Go Back</button></li>
-        <?php
+            <?php
         }
         else { ?>
             <li><a href="javascript:history.back()" style="margin-left:10px;">Go Back</a></li>
@@ -428,30 +428,30 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
         ?>
 
 
-    <?php
-    $postID = $_GET['postID'];
+        <?php
+        $postID = $_GET['postID'];
 
-    if (isset($_SESSION['ID']) && !empty($_SESSION['ID'])) {
-        $blockCondition = " And (Members.ID Not in ( '" . implode($blockIDs, "', '") . "' )) ";
-        $ID = $_SESSION['ID'];
-        $sql1 = "SELECT BlockedID, BlockerID FROM Blocks WHERE (BlockerID = $ID Or BlockedID = $ID)";
-        $result1 = mysql_query($sql1) or die(logError(mysql_error(), $url, ""));
+        if (isset($_SESSION['ID']) && !empty($_SESSION['ID'])) {
+            $blockCondition = " And (Members.ID Not in ( '" . implode($blockIDs, "', '") . "' )) ";
+            $ID = $_SESSION['ID'];
+            $sql1 = "SELECT BlockedID, BlockerID FROM Blocks WHERE (BlockerID = $ID Or BlockedID = $ID)";
+            $result1 = mysql_query($sql1) or die(logError(mysql_error(), $url, ""));
 
-        $blockIDs = array();
+            $blockIDs = array();
 
-        //Get blocked IDS
-        while ($rows1 = mysql_fetch_assoc($result1)) {
-            if ($rows1['BlockedID'] != $ID) {
-                array_push($blockIDs, $rows1['BlockedID']);
-                if ($rows1['BlockerID'] != $ID) {
-                    array_push($blockIDs, $rows1['BlockerID']);
+            //Get blocked IDS
+            while ($rows1 = mysql_fetch_assoc($result1)) {
+                if ($rows1['BlockedID'] != $ID) {
+                    array_push($blockIDs, $rows1['BlockedID']);
+                    if ($rows1['BlockerID'] != $ID) {
+                        array_push($blockIDs, $rows1['BlockerID']);
+                    }
                 }
             }
         }
-    }
-    else { $blockCondition = ''; }
+        else { $blockCondition = ''; }
 
-    $sql = "SELECT DISTINCT
+        $sql = "SELECT DISTINCT
     Members.ID As MemberID,
     Members.FirstName As FirstName,
     Members.LastName As LastName,
@@ -475,202 +475,208 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
     Order By Posts.ID DESC ";
 
 
-    $result = mysql_query($sql) or die(logError(mysql_error(), $url, "Getting single post data"));
+        $result = mysql_query($sql) or die(logError(mysql_error(), $url, "Getting single post data"));
 
-    if (mysql_num_rows($result) == 0) {
-        echo "<h1>This post no longer exists</h1>";
-        echo '<image src = "'.$imagesPath.'/sad-emoticon.png" height="150" width="150"/>';
-    }
+        if (mysql_num_rows($result) == 0) {
+            echo "<h1>This post no longer exists</h1>";
+            echo '<image src = "'.$imagesPath.'/sad-emoticon.png" height="150" width="150"/>';
+        }
 
-    if (mysql_num_rows($result) > 0) {
-    while ($rows = mysql_fetch_assoc($result)) {
-    $memberID = $rows['MemberID'];
-    $firstName = $rows['FirstName'];
-    $lastName = $rows['LastName'];
-    $name = $rows['FirstName'] . ' ' . $rows['LastName'];
-    $name = checkNameLength($name);
-    $username = $rows['Username'];
-    $profilePhoto = $rows['ProfilePhoto'];
-    $category = $rows['Category'];
-    $post = $rows['Post'];
-    $postID = $rows['PostID'];
-    $postDate = $rows['PostDate'];
-    $isSponsored = $rows['IsSponsored'];
-    ?>
+        if (mysql_num_rows($result) > 0) {
+        while ($rows = mysql_fetch_assoc($result)) {
+        $memberID = $rows['MemberID'];
+        $firstName = $rows['FirstName'];
+        $lastName = $rows['LastName'];
+        $name = $rows['FirstName'] . ' ' . $rows['LastName'];
+        $name = checkNameLength($name);
+        $username = $rows['Username'];
+        $profilePhoto = $rows['ProfilePhoto'];
+        $category = $rows['Category'];
+        $post = $rows['Post'];
+        $postID = $rows['PostID'];
+        $postDate = $rows['PostDate'];
+        $isSponsored = $rows['IsSponsored'];
+        ?>
 
-    <div class="row row-padding">
-        <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 roll-call"
-              align="left">
+        <div class="row row-padding">
+            <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 roll-call"
+                 align="left">
 
-            <div class="profileImageWrapper-Feed">
-                <a href="<?php echo $profileUrl ?>">
-                    <img src="<?php echo $mediaPath. $profilePhoto ?>" class="profilePhoto-Feed enlarge-onhover " alt=""
-                         title="<?php echo $name ?>" />
-                </a>
-            </div>
+                <div class="profileImageWrapper-Feed">
+                    <a href="<?php echo $profileUrl ?>">
+                        <img src="<?php echo $mediaPath. $profilePhoto ?>" class="profilePhoto-Feed enlarge-onhover " alt=""
+                             title="<?php echo $name ?>" />
+                    </a>
+                </div>
 
-            <div class="profileNameWrapper-Feed">
-                <a href="<?php echo $profileUrl ?>">
-                    <div class="profileName-Feed"><?php echo $name ?></div>
-                </a>
-                <div class="date"><?php echo date('l F j, Y',strtotime($postDate)); ?></div>
-            </div>
+                <div class="profileNameWrapper-Feed">
+                    <a href="<?php echo $profileUrl ?>">
+                        <div class="profileName-Feed"><?php echo $name ?></div>
+                    </a>
+                    <div class="date"><?php echo date('l F j, Y',strtotime($postDate)); ?></div>
+                </div>
 
                 <div class="post" style="clear:both;">
-                <?php
-                // remove excessive white space inside anchor tags
-                $post = preg_replace('~>\s+<~', '><', $post);
-                // trim white space
-                $post = trim($post);
-                // remove excessive line breaks
-                $post = cleanBrTags($post);
+                    <?php
+                    // remove excessive white space inside anchor tags
+                    $post = preg_replace('~>\s+<~', '><', $post);
+                    // trim white space
+                    $post = trim($post);
+                    // remove excessive line breaks
+                    $post = cleanBrTags($post);
 
-                echo nl2br($post);
+                    echo nl2br($post);
 
-                ?>
-            </div>
+                    ?>
+                </div>
 
-        <hr class="hr-line" />
+                <hr class="hr-line" />
 
 
 
                 <?php if (isset($ID)) { ?>
 
                     <?php if ($ID != $memberID) {?>
-                             <a style="padding-left:20px;" href="/view_messages/<?php echo $username ?>"><span class="engageText"><img src = "/images/messages.png" height="20" width="20" /> Message </span> </a>
-                            <?php } ?>
+                        <a style="padding-left:20px;" href="/view_messages/<?php echo $username ?>"><span class="engageText"><img src = "/images/messages.png" height="20" width="20" /> Message </span> </a>
+                    <?php } ?>
                 <?php } ?>
 
 
-            <?php
-            $postPath = getPostPath();
-            $shareLinkID = "shareLink$postID"; ?>
-            <a href="javascript:showLink('<?php echo $shareLinkID ?>');">
-                <img style="margin-left:20px;" src="/images/share.gif" height="50px" width="50px" />
-            </a>
+                <?php
+                $postPath = getPostPath();
+                $shareLinkID = "shareLink$postID"; ?>
+                <a href="javascript:showLink('<?php echo $shareLinkID ?>');">
+                    <img style="margin-left:20px;" src="/images/share.gif" height="50px" width="50px" />
+                </a>
 
-            <?php $shareLink = 'show_post?postID='.$postID.'&email=1';
-            $shareLink = $postPath.$shareLink;
-            $shortLink = shortenUrl($shareLink);
-            ?>
-            <input id="<?php echo $shareLinkID ?>" style="display:none;margin-left:20px;" value ="<?php echo $shortLink ?>" />
+                <?php $shareLink = 'show_post?postID='.$postID.'&email=1';
+                $shareLink = $postPath.$shareLink;
+                $shortLink = shortenUrl($shareLink);
+                ?>
+                <input id="<?php echo $shareLinkID ?>" style="display:none;margin-left:20px;" value ="<?php echo $shortLink ?>" />
 
-            <hr class="hr-line" />
+                <hr class="hr-line" />
 
-
-
-            <?php
-
-            //check if member has approved this post
-            //----------------------------------------------------------------
-            //require 'getSessionType.php';
-            echo "<div class='content-space'' >";
-            $sql2 = "SELECT ID FROM PostApprovals WHERE Post_ID = '$postID' AND Member_ID = '$ID'";
-            $result2 = mysql_query($sql2) or die(logError(mysql_error(), $url, "Getting post approvals"));
-            $rows2 = mysql_fetch_assoc($result2);
-
-
-            // get approvals for each post
-            $approvals = mysql_num_rows(mysql_query("SELECT * FROM PostApprovals WHERE Post_ID = $postID "));
-
-            // show disapprove if members has approved the post
-            echo '<table class="margin-bottom-20">';
-            echo '<tr>';
-            echo '<td>';
-            echo "<div id = 'approvals$postID'>";
-
-            // re-instantiate session and cookie variables to detect if user is logged in
-            require 'getSession.php';
-            if (empty($ID) && !isset($ID)) {
-                $readonly = 'readonly';
-            }
-            else {
-                $readonly = '';
-            }
-
-            if (mysql_num_rows($result2) > 0) {
-
-                echo '<form>';
-
-                echo '<input type ="hidden" class = "postID" id = "postID" value = "' . $postID . '" />';
-                echo '<input type ="hidden" class = "ID" id = "ID" value = "' . $ID . '" />';
-                echo '<input type ="button" class = "btnDisapprove"'. $readonly.' />';
-
-                if ($approvals > 0) {
-
-
-                    echo '&nbsp;' . $approvals;
-                }
-                echo '</form>';
-            } else {
-                echo '<form>';
-
-                echo '<input type ="hidden" class = "postID" id = "postID" value = "' . $postID . '" />';
-                echo '<input type ="hidden" class = "ID" id = "ID" value = "' . $ID . '" />';
-                echo '<input type ="button" class = "btnApprove"'. $readonly.' />';
-
-                if ($approvals > 0) {
-
-
-                    echo '&nbsp;' . $approvals;
-                }
-                echo '</form>';
-            }
-            echo '</div>'; // end of approval div
-            echo '</td></tr></table>';
-
-            //-------------------------------------------------------------
-            // End of approvals
-            //-----------------------------------------------------------
-            echo "</div>";
-            ?>
-
-
-            <?php
-            //Detect device
-            $iPod    = stripos($_SERVER['HTTP_USER_AGENT'],"iPod");
-            $iPhone  = stripos($_SERVER['HTTP_USER_AGENT'],"iPhone");
-            $iPad    = stripos($_SERVER['HTTP_USER_AGENT'],"iPad");
-            $Android = stripos($_SERVER['HTTP_USER_AGENT'],"Android");
-            $webOS   = stripos($_SERVER['HTTP_USER_AGENT'],"webOS");
-            ?>
-
-            <div class="content-space">
-
-                <form method="post" action="" enctype="multipart/form-data"
-                      onsubmit="showCommentUploading('comment<?php echo $postID?>', this);">
-
-                    <input type="text" class="form-control" name="postComment" id="postComment"
-                           placeholder="Write a comment" title='' <?php echo $readonly ?> />
-
-                    <?php if ($iPhone || $iPad || $Android) { ?>
-                    <h6>Add Photo/Video</h6>
-                    <input type="file" name="flPostMedia" id="flPostMedia" class="flPostMedia"/>
-                    <?php } ?>
-
-                    <br/>
-                    <div id="comment<?php echo $postID ?>" style="display:none;">
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-striped progress-bar-danger active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" >
-                                <b>File uploading...please wait</b>
-                            </div>
-                        </div>
-                    </div>
-
-                    <input type="submit" name="btnComment" id="btnComment" Value="Comment" <?php echo $readonly ?> />
-                    <input type="hidden" name="postID" id="postID" Value="<?php echo $postID ?>"/>
-                    <input type="hidden" name="ID" id="ID" value="<?php echo $ID ?>"/>
-                    <input type="hidden" name="ownerId" id="ownerId" value="<?php echo $MemberID ?>"/>
-                    <input type="hidden" name="scrollx" id="scrollx" value="0"/>
-                    <input type="hidden" name="scrolly" id="scrolly" value="0"/>
-
-                </form>
-
-                <br/>
 
 
                 <?php
-                $sql3 = "SELECT DISTINCT
+
+                if (isEmailValidated($ID) && hasOnePost($ID)) {
+                    $disabled = '';
+                } else {
+                    $disabled = 'disabled';
+                }
+
+                //check if member has approved this post
+                //----------------------------------------------------------------
+                //require 'getSessionType.php';
+                echo "<div class='content-space'' >";
+                $sql2 = "SELECT ID FROM PostApprovals WHERE Post_ID = '$postID' AND Member_ID = '$ID'";
+                $result2 = mysql_query($sql2) or die(logError(mysql_error(), $url, "Getting post approvals"));
+                $rows2 = mysql_fetch_assoc($result2);
+
+
+                // get approvals for each post
+                $approvals = mysql_num_rows(mysql_query("SELECT * FROM PostApprovals WHERE Post_ID = $postID "));
+
+                // show disapprove if members has approved the post
+                echo '<table class="margin-bottom-20">';
+                echo '<tr>';
+                echo '<td>';
+                echo "<div id = 'approvals$postID'>";
+
+                // re-instantiate session and cookie variables to detect if user is logged in
+                require 'getSession.php';
+                if (empty($ID) && !isset($ID)) {
+                    $readonly = 'readonly';
+                }
+                else {
+                    $readonly = '';
+                }
+
+                if (mysql_num_rows($result2) > 0) {
+
+                    echo '<form>';
+
+                    echo '<input type ="hidden" class = "postID" id = "postID" value = "' . $postID . '" />';
+                    echo '<input type ="hidden" class = "ID" id = "ID" value = "' . $ID . '" />';
+                    echo '<input type ="button" class = "btnDisapprove"'. $disabled.' />';
+
+                    if ($approvals > 0) {
+
+
+                        echo '&nbsp;' . $approvals;
+                    }
+                    echo '</form>';
+                } else {
+                    echo '<form>';
+
+                    echo '<input type ="hidden" class = "postID" id = "postID" value = "' . $postID . '" />';
+                    echo '<input type ="hidden" class = "ID" id = "ID" value = "' . $ID . '" />';
+                    echo '<input type ="button" class = "btnApprove"'. $disabled.' />';
+
+                    if ($approvals > 0) {
+
+
+                        echo '&nbsp;' . $approvals;
+                    }
+                    echo '</form>';
+                }
+                echo '</div>'; // end of approval div
+                echo '</td></tr></table>';
+
+                //-------------------------------------------------------------
+                // End of approvals
+                //-----------------------------------------------------------
+                echo "</div>";
+                ?>
+
+
+                <?php
+                //Detect device
+                $iPod    = stripos($_SERVER['HTTP_USER_AGENT'],"iPod");
+                $iPhone  = stripos($_SERVER['HTTP_USER_AGENT'],"iPhone");
+                $iPad    = stripos($_SERVER['HTTP_USER_AGENT'],"iPad");
+                $Android = stripos($_SERVER['HTTP_USER_AGENT'],"Android");
+                $webOS   = stripos($_SERVER['HTTP_USER_AGENT'],"webOS");
+                ?>
+
+                <div class="content-space">
+
+                    <form method="post" action="" enctype="multipart/form-data"
+                          onsubmit="showCommentUploading('comment<?php echo $postID?>', this);">
+
+                        <input type="text" class="form-control" name="postComment" id="postComment"
+                               placeholder="Write a comment" title='' <?php echo $disabled ?> />
+
+                        <?php if ($iPhone || $iPad || $Android) { ?>
+                            <h6>Add Photo/Video</h6>
+                            <input type="file" name="flPostMedia" id="flPostMedia" class="flPostMedia"/>
+                        <?php } ?>
+
+                        <br/>
+                        <div id="comment<?php echo $postID ?>" style="display:none;">
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-striped progress-bar-danger active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" >
+                                    <b>File uploading...please wait</b>
+                                </div>
+                            </div>
+                        </div>
+
+                        <input type="submit" name="btnComment" id="btnComment" Value="Comment" <?php echo $disabled ?> />
+                        <input type="hidden" name="postID" id="postID" Value="<?php echo $postID ?>"/>
+                        <input type="hidden" name="ID" id="ID" value="<?php echo $ID ?>"/>
+                        <input type="hidden" name="ownerId" id="ownerId" value="<?php echo $MemberID ?>"/>
+                        <input type="hidden" name="scrollx" id="scrollx" value="0"/>
+                        <input type="hidden" name="scrolly" id="scrolly" value="0"/>
+
+                    </form>
+
+                    <br/>
+
+
+                    <?php
+                    $sql3 = "SELECT DISTINCT
                         PostComments.Comment As PostComment,
                         PostComments.ID As PostCommentID,
                         PostComments.CommentDate as CommentDate,
@@ -688,21 +694,21 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                         And PostComments.IsDeleted = 0
                         Group By PostComments.ID
                         Order By PostComments.ID DESC LIMIT 3 ";
-                $result3 = mysql_query($sql3) or die(logError(mysql_error(), $url, "Getting first 3 comments"));
-                echo '<br/>';
-                if (mysql_num_rows($result3) > 0) {
-                    echo '<div class="comment-style">';
-                    while ($rows3 = mysql_fetch_assoc($result3)) {
-                        $comment = $rows3['PostComment'];
-                        $profilePhoto = $rows3['ProfilePhoto'];
-                        $commentID = $rows3['PostCommentID'];
-                        $commentOwnerID = $rows3['CommenterID'];
-                        $commenterUsername = $rows3['Username'];
-                        $commenterProfileUrl = "/$commenterUsername";
-                        $commentDate = $rows3['CommentDate'];
+                    $result3 = mysql_query($sql3) or die(logError(mysql_error(), $url, "Getting first 3 comments"));
+                    echo '<br/>';
+                    if (mysql_num_rows($result3) > 0) {
+                        echo '<div class="comment-style">';
+                        while ($rows3 = mysql_fetch_assoc($result3)) {
+                            $comment = $rows3['PostComment'];
+                            $profilePhoto = $rows3['ProfilePhoto'];
+                            $commentID = $rows3['PostCommentID'];
+                            $commentOwnerID = $rows3['CommenterID'];
+                            $commenterUsername = $rows3['Username'];
+                            $commenterProfileUrl = "/$commenterUsername";
+                            $commentDate = $rows3['CommentDate'];
 
-                        echo '<div class="comment-row">';
-                        echo '<div class="profileImageWrapper-Feed">
+                            echo '<div class="comment-row">';
+                            echo '<div class="profileImageWrapper-Feed">
                         <a href='.$commenterProfileUrl.'>
                         <img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" class ="enlarge-onhover img-responsive" />
                         </a>
@@ -719,28 +725,28 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                         </div>
 
                     <div class="comment-content" style="clear:both"></div>';
-                        echo '</div>';
-
-                        if ($commentOwnerID == $ID || $ID == $memberID) {
-                            //<!--DELETE BUTTON ------------------>
-                            echo '<div class="comment-delete">';
-                            echo '<form action="" method="post" onsubmit="return confirm(\'Do you really want to delete this comment?\')">';
-                            echo '<input type="hidden" name="commentID" id="commentID" value="' .  $commentID . '" />';
-                            echo '<input type="hidden" name="postID" id="postID" value="' .  $postID . '" />';
-                            echo '<input type ="submit" name="DeleteComment" id="DeleteComment" value="Delete" class="deleteButton" />';
-                            echo '</form>';
                             echo '</div>';
-                            //<!------------------------------------->
+
+                            if ($commentOwnerID == $ID || $ID == $memberID) {
+                                //<!--DELETE BUTTON ------------------>
+                                echo '<div class="comment-delete">';
+                                echo '<form action="" method="post" onsubmit="return confirm(\'Do you really want to delete this comment?\')">';
+                                echo '<input type="hidden" name="commentID" id="commentID" value="' .  $commentID . '" />';
+                                echo '<input type="hidden" name="postID" id="postID" value="' .  $postID . '" />';
+                                echo '<input type ="submit" name="DeleteComment" id="DeleteComment" value="Delete" class="deleteButton" />';
+                                echo '</form>';
+                                echo '</div>';
+                                //<!------------------------------------->
+                            }
                         }
+                        echo '</div>';
                     }
-                    echo '</div>';
-                }
-                ?>
+                    ?>
 
 
-                <!--Show more comments -->
-                <?php
-                $sql4 = "SELECT DISTINCT
+                    <!--Show more comments -->
+                    <?php
+                    $sql4 = "SELECT DISTINCT
                         PostComments.Comment As PostComment,
                         PostComments.ID As PostCommentID,
                         PostComments.CommentDate as CommentDate,
@@ -758,87 +764,87 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                         And Members.ID = Profile.Member_ID
                         Group By PostComments.ID
                         Order By PostComments.ID DESC LIMIT 3, 100 ";
-                $result4 = mysql_query($sql4) or die(logError(mysql_error(), $url, "Getting 3 to 100 comments"));
+                    $result4 = mysql_query($sql4) or die(logError(mysql_error(), $url, "Getting 3 to 100 comments"));
 
-                $moreComments = "moreComments$postID";
+                    $moreComments = "moreComments$postID";
 
-                if (mysql_num_rows($result4) > 0) {
+                    if (mysql_num_rows($result4) > 0) {
+                        ?>
+
+                        <a href="javascript:showComments('<?php echo $moreComments ?>');">Show More</a>
+
+                        <div id="<?php echo $moreComments ?>" style="display:none;">
+
+                            <div class="comment-style">
+
+                                <?php
+                                while ($rows4 = mysql_fetch_assoc($result4)) {
+                                    $comment = $rows4['PostComment'];
+                                    $profilePhoto = $rows4['ProfilePhoto'];
+                                    $commentID = $rows4['PostCommentID'];
+                                    $commentOwnerID = $rows4['CommenterID'];
+                                    $commenterUsername = $rows4['Username'];
+                                    $commenterProfileUrl = "/$commenterUsername";
+                                    $commentDate = $rows4['CommentDate'];
+
+                                    ?>
+                                    <div class="comment-row">
+                                        <div class="profileImageWrapper-Feed">
+                                            <a href='<?php echo $commenterProfileUrl ?>'>
+                                                <img src = "<?php echo $mediaPath . $profilePhoto ?>" height = "50" width = "50" class ="enlarge-onhover img-responsive" />
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <div class="commentNameWrapper-Feed">
+                                        <a href='<?php echo $commenterProfileUrl ?>'>
+                                            <div class="profileName-Feed">
+                                                <?php echo $rows4['FirstName'] . ' ' . $rows4['LastName'] ?>
+                                            </div>
+                                        </a><br/>
+                                        <?php echo nl2br($comment) ?>
+                                        <div class="date"><?php echo date('l F j, Y',strtotime($commentDate)) ?></div>
+                                    </div>
+                                    <div class="comment-content" style="clear:both"></div>
+
+                                    <!--DELETE BUTTON ------------------>
+                                    <?php if ($commentOwnerID == $ID || $memberID == $ID) { ?>
+                                        <div class="comment-delete">
+                                            <form action="" method="post" onsubmit="return confirm(\'Do you really want to delete this comment?\')">
+                                                <input type="hidden" name="commentID" id="commentID" value="' .  $commentID . '" />
+                                                <input type ="submit" name="DeleteComment" id="DeleteComment" value="Delete" class="deleteButton" />
+                                            </form>
+                                        </div>
+                                    <?php } ?>
+                                    <?php
+
+                                }
+                                ?>
+                            </div>
+                        </div>
+                        <?php
+                    }
                     ?>
 
-                    <a href="javascript:showComments('<?php echo $moreComments ?>');">Show More</a>
-
-                    <div id="<?php echo $moreComments ?>" style="display:none;">
-
-                        <div class="comment-style">
-
-                            <?php
-                            while ($rows4 = mysql_fetch_assoc($result4)) {
-                                $comment = $rows4['PostComment'];
-                                $profilePhoto = $rows4['ProfilePhoto'];
-                                $commentID = $rows4['PostCommentID'];
-                                $commentOwnerID = $rows4['CommenterID'];
-                                $commenterUsername = $rows4['Username'];
-                                $commenterProfileUrl = "/$commenterUsername";
-                                $commentDate = $rows4['CommentDate'];
-
-                                ?>
-                                <div class="comment-row">
-                                    <div class="profileImageWrapper-Feed">
-                                        <a href='<?php echo $commenterProfileUrl ?>'>
-                                            <img src = "<?php echo $mediaPath . $profilePhoto ?>" height = "50" width = "50" class ="enlarge-onhover img-responsive" />
-                                        </a>
-                                    </div>
-                                </div>
-
-                                <div class="commentNameWrapper-Feed">
-                                    <a href='<?php echo $commenterProfileUrl ?>'>
-                                        <div class="profileName-Feed">
-                                            <?php echo $rows4['FirstName'] . ' ' . $rows4['LastName'] ?>
-                                        </div>
-                                    </a><br/>
-                                    <?php echo nl2br($comment) ?>
-                                    <div class="date"><?php echo date('l F j, Y',strtotime($commentDate)) ?></div>
-                                </div>
-                                <div class="comment-content" style="clear:both"></div>
-
-                                <!--DELETE BUTTON ------------------>
-                                <?php if ($commentOwnerID == $ID || $memberID == $ID) { ?>
-                                    <div class="comment-delete">
-                                        <form action="" method="post" onsubmit="return confirm(\'Do you really want to delete this comment?\')">
-                                            <input type="hidden" name="commentID" id="commentID" value="' .  $commentID . '" />
-                                            <input type ="submit" name="DeleteComment" id="DeleteComment" value="Delete" class="deleteButton" />
-                                        </form>
-                                    </div>
-                                <?php } ?>
-                                <?php
-
-                            }
-                            ?>
-                        </div>
-                    </div>
-                    <?php
-                }
-                ?>
 
 
+                    <!---------------------------------------------------
+                                      End of comments div
+                                      ----------------------------------------------------->
 
-                <!---------------------------------------------------
-                                  End of comments div
-                                  ----------------------------------------------------->
-
+                </div>
             </div>
+
+
+            <?php
+            }
+            }
+            ?>
+
+
         </div>
 
-
-        <?php
-        }
-        }
-        ?>
-
-
-    </div>
-
-    <br/><br/>
+        <br/><br/>
 
 </body>
 </html>
