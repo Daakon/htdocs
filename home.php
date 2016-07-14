@@ -42,10 +42,10 @@ if (isset($_POST['submit'])) {
                 foreach ($_FILES['flPostMedia']['tmp_name'] as $k => $v) {
                     $mediaName = $_FILES['flPostMedia']['name'][$k];
 
-                    if (strlen($mediaName) == 0) {
+                    /*if (strlen($mediaName) == 0) {
                         echo "<script>alert('A photo or video is required'); location='/home'</script>";
                         exit;
-                    }
+                    }*/
                     // remove ALL WHITESPACE from image name
                     $mediaName = preg_replace('/\s+/', '', $mediaName);
                     // remove ALL SPECIAL CHARACTERS, Images paths are extremely sensitive
@@ -885,28 +885,30 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
                 <?php if (isEmailValidated($ID)) { ?>
 
                     <?php
-                    if (hasHourPast($ID) == false) {
+                    /*if (hasHourPast($ID) == false) {
                         echo "<h5 align='center'>Great job! Post again in one hour. <img src='/images/hourglass.gif' height='50' width='50' /></h5>";
                     }
-                    else {
-                        if (hasTenPost($ID) == false) {
+                    else {*/
+                        //if (hasTenPost($ID) == false) {
                             ?>
                             <form method="post" enctype="multipart/form-data" action="" onsubmit="return showUploading()" >
                                 <input type="file" width="10px;" name="flPostMedia[]" id="flPostMedia" />
                                 <div id="image-holder"> </div>
 
                                 <br/>
+
+
                         <textarea name="post" id="post" class="form-control textArea"
-                                  placeholder="Add a caption to your photos & videos" ></textarea>
+                                  placeholder="Share something and get paid for it" spellcheck="true"></textarea>
                                 <br/>
 
                                 <input type="submit" class="post-button" name="submit" id="submit" value="Post"/>
                             </form>
                             <?php
                         } // hasTenPost
-                        else { echo "<h5 align='center'>You have reached your daily post limit, great job!"; }
-                    } // hasHourPast
-                } // isEmailValidated
+                       // else { echo "<h5 align='center'>You have reached your daily post limit, great job!"; }
+                   // } // hasHourPast
+               // } // isEmailValidated
                 else {
                     echo "You must verify your email before posting <br/>
                             <form method='post' action='' >

@@ -118,7 +118,7 @@ if (!empty($_SESSION['ID'])) {
                     <tr>
                         <td style="padding-left:0px;">
                             <h5>
-                                Playdoe is a social network that pays you to share photos and videos about your life.
+                                Playdoe is a social network that pays you to share whatever you like.
                             </h5>
                             <lead>
                                 Checkout our <a href="http://officialplaydoe.tumblr.com/" target="_blank">blog</a> to learn more.
@@ -142,7 +142,7 @@ if (!empty($_SESSION['ID'])) {
                         </td>
                         <td style="padding-left:10px;">
                             <h4>
-                                Playdoe is a social network that pays you to share photos and videos about your life.
+                                Playdoe is a social network that pays you to share whatever you like.
                             </h4>
                             <lead>
                             Checkout our <a href="http://officialplaydoe.tumblr.com/" target="_blank">blog</a> to learn more.
