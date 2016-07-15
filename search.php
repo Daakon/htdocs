@@ -1,5 +1,5 @@
 
-<table id="tblGroupChat" style="margin-bottom:0px;margin-top:-25px;background-color: white;">
+<table id="tblGroupChat" style="margin-bottom:0px;background-color: white;">
 
     <?php
 

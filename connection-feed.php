@@ -52,14 +52,36 @@ $rollCallResult = mysql_query($sqlRollCall) or die(logError(mysql_error(), $url,
 if (mysql_num_rows($rollCallResult) == 0) {
     ?>
     <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6 roll-call-feed"
-         align="left">
-        <?php //echo $greetText ?>
+         align="left" style="padding-left:10px;">
 
-        <img src="/images/Playdoe-Logo.png" height="100" width="100" />
-        <br/>
-        <lead style="padding-left:10px;">
-            It Pays To Be Social
-        </lead>
+        <h4>Suggested profiles to follow</h4>
+        <?php
+
+        $playdoeID = 22;
+        $sqlPlaydoeFollow = "SELECT * FROM Follows WHERE Follower_ID = $ID And Followed_ID = $playdoeID ";
+        $resultPlaydoeFollow = mysql_query($sqlPlaydoeFollow) or die (logError(mysql_error(), $url, "Getting Follows"));
+        $playdoeName = get_users_name(22);
+        $playdoeUsername = get_username(22);
+            if (mysql_num_rows($resultPlaydoeFollow) == 0) {
+                $followPlaydoePhoto = get_users_photo_by_id(22);
+                echo "<a href='/$playdoeUsername'><img src='$followPlaydoePhoto' height='50' width='50' /> $playdoeName</a>";
+
+            }
+
+        echo "<hr class='hr-line'>";
+
+        $newsID = 528;
+        $sqlNewsFollow = "SELECT * FROM Follows WHERE Follower_ID = $ID And Followed_ID = $newsID ";
+        $resultNewsFollow = mysql_query($sqlNewsFollow) or die (logError(mysql_error(), $url, "Getting Follows"));
+        $newsName = get_users_name(528);
+        $newsUsername = get_username(528);
+        if (mysql_num_rows($resultNewsFollow) == 0) {
+            $followNewsPhoto = get_users_photo_by_id(528);
+            echo "<a href='/$newsUsername'><img src='$followNewsPhoto' height='50' width='50' /> $newsName</a>";
+
+        }
+
+        ?>
 
     </div>
 <?php }

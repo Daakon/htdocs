@@ -63,7 +63,7 @@ if (!empty($_SESSION['ID'])) {
         }
     </style>
 
-    <body class="index">
+    <body class="index" style="background:#e3e3e3">
 
     <div align="left" >
 
@@ -97,7 +97,7 @@ if (!empty($_SESSION['ID'])) {
     </div>
     <!-- End Modal -->
 
-    <div class="row" style="margin-top:-20px;">
+    <div class="row" style="margin-top:-20px;background:white;">
         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12" >
 
             <div class="visible-xs" style="padding-left:10px;padding-top:10px;">
@@ -118,7 +118,7 @@ if (!empty($_SESSION['ID'])) {
                     <tr>
                         <td style="padding-left:0px;">
                             <h5>
-                                Playdoe is a social network that pays you to share whatever you like.
+                                Playdoe is a social network that pays you for every <b>like</b>, <b>comment</b>, <b>follower</b> and <b>referral</b>.
                             </h5>
                             <lead>
                                 Checkout our <a href="http://officialplaydoe.tumblr.com/" target="_blank">blog</a> to learn more.
@@ -142,10 +142,10 @@ if (!empty($_SESSION['ID'])) {
                         </td>
                         <td style="padding-left:10px;">
                             <h4>
-                                Playdoe is a social network that pays you to share whatever you like.
+                                Playdoe is a social network that pays you for every <b>like</b>, <b>comment</b>, <b>follower</b> and <b>referral</b>.
                             </h4>
                             <lead>
-                            Checkout our <a href="http://officialplaydoe.tumblr.com/" target="_blank">blog</a> to learn more.
+                                Checkout our <a href="http://officialplaydoe.tumblr.com/" target="_blank">blog</a> to learn more.
                             </lead>
                             <br/><br/>
                             <a href="https://twitter.com/officialplaydoe" class="twitter-follow-button" data-show-count="false">Follow @officialplaydoe</a>
