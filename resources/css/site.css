@@ -655,26 +655,22 @@ script {
 
 }
 
-a {
-    word-wrap:break-word
-}
-
 a:hover {
     text-decoration: none !important;
 }
 
 .btnApprove {
     background: url("/images/Unlike.png") no-repeat;
-    width: 50px;
-    height: 50px;
+    width: 30px;
+    height: 30px;
     border: none;
     margin-left:10px;
 }
 
 .btnDisapprove {
     background: url("/images/Like-Redeem.png") no-repeat;
-    width: 50px;
-    height: 50px;
+    width: 30px;
+    height: 30px;
     border: none;
     margin-left:10px;
 }
@@ -690,7 +686,8 @@ a:hover {
 }
 
 a {
-    color:blue;
+    color:black;
+    font-weight: 600;
     display:inline-block;
     /* These are technically the same, but use both */
     overflow-wrap: break-word;

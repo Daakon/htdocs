@@ -8,6 +8,7 @@ $ID = $_SESSION['ID'];
 $hashtag = $_SESSION['Hashtag'];
 preg_match("/[^\/]+$/",$url ,$match);
 $username = $match[0];
+
 ?>
 
 <?php
@@ -432,7 +433,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
     Profile.ProfilePhoto As ProfilePhoto
     FROM Members,Posts,Profile
     WHERE
-    ((Posts.Member_ID = $ID And (Posts.Reposter_ID = NULL or Posts.Reposter_ID = 0)) Or (Posts.Reposter_ID = $ID))
+    ((Posts.Member_ID = $profileID And (Posts.Reposter_ID = NULL or Posts.Reposter_ID = 0)) Or (Posts.Reposter_ID = $profileID))
     And (Members.IsActive = 1)
     And (Members.IsSuspended = 0)
     And (Members.ID = Posts.Member_ID)
@@ -465,23 +466,25 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                 <?php
                 $repostText = '';
                 $img = '';
-                $isRepost = false;
 
                 // check if post is a repost
                 if (!empty($reposterID) && isset($reposterID) && $reposterID != 0) {
-                    $reposterUsername = get_username($reposterID);
-                    $postID = $origPostID;
 
-                    $isRepost = true;
+                    $postID = $origPostID;
 
                     if ($reposterID == $ID) {
                         $img = "<img src='/images/repost_icon.png' style='float:left;' height='20' width='20'/>";
+                        $reposterName = get_users_name($ID);
                         $repostText = "$img You reposted <br/><br/>";
+                        $reposterUsername = get_username($ID);
+                        echo "<div style='margin-left:10px;color:#8899a6;float:left;'><a style='color:#8899a6' href='/$reposterUsername'>$repostText</a></div>";
                     }
                     else {
                         $img = "<img src='/images/repost_icon.png' style='float:left;' height='20' width='20'/>";
                         $reposterName = get_users_name($reposterID);
+                        $reposterUsername = get_username($reposterID);
                         $repostText = $img . $reposterName ." reposted <br/><br/>";
+
 
                         echo "<div style='margin-left:10px;color:#8899a6;float:left;'><a style='color:#8899a6' href='/$reposterUsername'>$repostText</a></div>";
                     }}
@@ -592,6 +595,22 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                 ?>
                 <input id="<?php echo $shareLinkID ?>" style="display:none;margin-left:20px;" value ="<?php echo $shortLink ?>" />
 
+            <?php if ($ID != $memberID) { ?>
+
+                <?php if ($reposterID == $ID) { } else { ?>
+
+                    <form style="float:left;margin-top:0px;" action="" method="post" onsubmit="return confirm('Are you sure you want to repost this?') && saveScrollPositionOnLinkClick(this)">
+                        <input type="image" id="btnRepost" name="btnRepost" value="Repost" src="/images/repost_icon.png" style="margin-left:20px;margin-top:3px;" />
+                        <input type="hidden" id="memberID" name="memberID" value="<?php echo $memberID ?>" />
+                        <input type="hidden" id="ownerID" name="ownerID" value="<?php echo $memberID ?>" />
+                        <input type="hidden" id="postID" name="postID" value="<?php echo $postID ?>" />
+                        <input type="hidden" id="postDate" name="postDate" value="<?php echo $postDate ?>" />
+                        <input type="hidden" id="reposterID" name="reposterID" value="<?php echo $ID ?>" />
+                        <input type="hidden" name="scrollx" id="scrollx" value="0"/>
+                        <input type="hidden" name="scrolly" id="scrolly" value="0"/>
+                    </form>
+
+                <?php }} ?>
 
             <?php if ($_SESSION['ID'] == get_id_from_username($username) || $reposterID = $ID) { ?>
 
@@ -601,7 +620,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                         <input type="hidden" name="postID" id="postID" value="<?php echo $postID ?>"/>
                         <input type="hidden" name="repostID" id="repostID" value="<?php echo $repostID ?>" />
                         <input type="hidden" name="isRepost" id="isRepost" value="<?php echo $isRepost ?>" />
-                        <input type="image" name="Delete" id="Delete" value="Delete" src="/images/delete.png" style="height:30px;width:30px;" />
+                        <input type="image" name="Delete" id="Delete" value="Delete" src="/images/delete.png" style="height:20px;width:20px;" />
                     </form>
                 </div>
                 <!------------------------------------->
@@ -692,7 +711,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                             echo '<div class="comment-delete" >';
                             echo '<form action="" method="post" onsubmit="return confirm(\'Do you really want to delete this comment?\')">';
                             echo '<input type="hidden" name="commentID" id="commentID" value="' .  $commentID . '" />';
-                            echo '<input type ="image" name="DeleteComment" id="DeleteComment" value="Delete" src="/images/delete.png" style="height:30px;width:30px;margin-left:10px;" />';
+                            echo '<input type ="image" name="DeleteComment" id="DeleteComment" value="Delete" src="/images/delete.png" style="height:20px;width:20px;margin-left:10px;" />';
                             echo '</form>';
                             echo '</div>';
                             //<!------------------------------------->

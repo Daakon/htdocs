@@ -792,24 +792,30 @@ if (mysql_num_rows($result) > 0) {
         <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6 roll-call-feed" align="left" <?php echo $display ?>>
 
         <?php
-         $repostText = '';
+            $repostText = '';
             $img = '';
 
             // check if post is a repost
             if (!empty($reposterID) && isset($reposterID) && $reposterID != 0) {
-                $reposterUsername = get_username($reposterID);
+
+                $postID = $origPostID;
 
                 if ($reposterID == $ID) {
                     $img = "<img src='/images/repost_icon.png' style='float:left;' height='20' width='20'/>";
+                    $reposterName = get_users_name($ID);
                     $repostText = "$img You reposted <br/><br/>";
+                    $reposterUsername = get_username($ID);
+                    echo "<div style='margin-left:10px;color:#8899a6;float:left;'><a style='color:#8899a6' href='/$reposterUsername'>$repostText</a></div>";
                 }
                 else {
                     $img = "<img src='/images/repost_icon.png' style='float:left;' height='20' width='20'/>";
                     $reposterName = get_users_name($reposterID);
+                    $reposterUsername = get_username($reposterID);
                     $repostText = $img . $reposterName ." reposted <br/><br/>";
 
+
                     echo "<div style='margin-left:10px;color:#8899a6;float:left;'><a style='color:#8899a6' href='/$reposterUsername'>$repostText</a></div>";
-        }}
+                }}
 
         $profileUrl = "/$username";
         ?>
@@ -921,7 +927,7 @@ if (mysql_num_rows($result) > 0) {
 
                     $postPath = getPostPath();
                     $shareLinkID = "shareLink$postID"; ?>
-                   <a style="margin-top:-5px;padding-left:10px;" href="javascript:showLink('<?php echo $shareLinkID ?>');">
+                   <a style="margin-top:5px;margin-left:10px;" href="javascript:showLink('<?php echo $shareLinkID ?>');">
                        <img src="/images/share.gif" height="30" width="30" />
                    </a>
 
@@ -933,12 +939,12 @@ if (mysql_num_rows($result) > 0) {
 
 
                  <?php if ($ID != $memberID) {?>
-                    <a style="padding-left:20px;float:left;" href="/view_messages/<?php echo $username ?>"><img src="/images/messages.png" height="20" width="20" /></a>
+                    <a style="margin-left:20px;margin-top:10px;float:left;" href="/view_messages/<?php echo $username ?>"><img src="/images/messages.png" height="20" width="20" /></a>
                 <?php
 
                 if ($reposterID == $ID) { } else { ?>
 
-                    <form style="float:left;padding-right:10px;margin-top:-2px" action="" method="post" onsubmit="return confirm('Are you sure you want to repost this?') && saveScrollPositionOnLinkClick(this)">
+                    <form style="float:left;padding-right:10px;margin-top:10px" action="" method="post" onsubmit="return confirm('Are you sure you want to repost this?') && saveScrollPositionOnLinkClick(this)">
                         <input type="image" id="btnRepost" name="btnRepost" value="Repost" src="/images/repost_icon.png" style="margin-left:20px;" />
                         <input type="hidden" id="memberID" name="memberID" value="<?php echo $memberID ?>" />
                         <input type="hidden" id="ownerID" name="ownerID" value="<?php echo $memberID ?>" />
@@ -952,8 +958,6 @@ if (mysql_num_rows($result) > 0) {
 
                 <?php } } ?>
 
-
-            <hr class="hr-line" />
 
             <?php
 

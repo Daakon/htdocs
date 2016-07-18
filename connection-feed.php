@@ -132,16 +132,20 @@ if (mysql_num_rows($rollCallResult) > 0) {
 
             // check if post is a repost
             if (!empty($reposterID) && isset($reposterID) && $reposterID != 0) {
-                $reposterUsername = get_username($reposterID);
+
                 $postID = $origPostID;
 
                 if ($reposterID == $ID) {
                     $img = "<img src='/images/repost_icon.png' style='float:left;' height='20' width='20'/>";
+                    $reposterName = get_users_name($ID);
                     $repostText = "$img You reposted <br/><br/>";
+                    $reposterUsername = get_username($ID);
+                    echo "<div style='margin-left:10px;color:#8899a6;float:left;'><a style='color:#8899a6' href='/$reposterUsername'>$repostText</a></div>";
                 }
                 else {
                     $img = "<img src='/images/repost_icon.png' style='float:left;' height='20' width='20'/>";
                     $reposterName = get_users_name($reposterID);
+                    $reposterUsername = get_username($reposterID);
                     $repostText = $img . $reposterName ." reposted <br/><br/>";
 
 
@@ -214,7 +218,7 @@ if (mysql_num_rows($rollCallResult) > 0) {
             // get approvals for each post
             $approvals = mysql_num_rows(mysql_query("SELECT * FROM PostApprovals WHERE Post_ID = $postID "));
             // show disapprove if members has approved the post
-            echo '<div class="post-approvals" style="float:left;">';
+            echo '<div class="post-approvals" style="float:left;margin-top:10px;">';
                 echo "<div id = 'approvals$postID'>";
                     if (mysql_num_rows($result2) > 0) {
                     echo '<form>';
@@ -247,8 +251,21 @@ if (mysql_num_rows($rollCallResult) > 0) {
              if (isset($ID)) { ?>
 
                 <?php if ($ID != $memberID) {?>
-                    <a href="/view_messages/<?php echo $username ?>" style="padding-left:10px;float:left;margin-top:2px;"><span class="engageText"><img src = "/images/messages.png" height="20" width="20" /> </span> </a>
-                <?php } ?>
+                    <a href="/view_messages/<?php echo $username ?>" style="margin-left:20px;float:left;margin-top:15px;"><span class="engageText"><img src = "/images/messages.png" height="20" width="20" /> </span> </a>
+
+                     <?php
+                     $postPath = getPostPath();
+                     $shareLinkID = "shareLink$postID"; ?>
+                     <a style="float:left;margin-top:10px;" href="javascript:showLink('<?php echo $shareLinkID ?>');">
+                         <img style="margin-left:20px;" src="/images/share.gif" height="30px" width="30px" />
+                     </a>
+
+                     <?php $shareLink = 'show_post?postID='.$postID.'&email=1';
+                     $shareLink = $postPath.$shareLink;
+                     $shortLink = shortenUrl($shareLink);
+                     ?>
+                     <input id="<?php echo $shareLinkID ?>" style="display:none;margin-left:20px;" value ="<?php echo $shortLink ?>" />
+                 <?php } ?>
 
             <?php } ?>
 
@@ -258,7 +275,7 @@ if (mysql_num_rows($rollCallResult) > 0) {
 
                     <?php if ($reposterID == $ID) { } else { ?>
 
-                    <form style="float:left" action="" method="post" onsubmit="return confirm('Are you sure you want to repost this?') && saveScrollPositionOnLinkClick(this)">
+                    <form style="float:left;margin-top:10px;" action="" method="post" onsubmit="return confirm('Are you sure you want to repost this?') && saveScrollPositionOnLinkClick(this)">
                         <input type="image" id="btnRepost" name="btnRepost" value="Repost" src="/images/repost_icon.png" style="margin-left:20px;margin-top:3px;" />
                         <input type="hidden" id="memberID" name="memberID" value="<?php echo $memberID ?>" />
                         <input type="hidden" id="ownerID" name="ownerID" value="<?php echo $memberID ?>" />
@@ -274,7 +291,7 @@ if (mysql_num_rows($rollCallResult) > 0) {
 
                     <?php $optionsID = "options$postID"; ?>
 
-                            <a href="javascript:showOptions('<?php echo $optionsID ?>');" style="font-size:20px;padding-left:10px;color:#8899a6;float:left;">...</a>
+                            <a href="javascript:showOptions('<?php echo $optionsID ?>');" style="font-size:20px;margin-left:20px;margin-top:5px;color:#8899a6;float:left;">...</a>
                             <div style="display:none;" id="<?php echo $optionsID ?>">
                             <form action="" method="post" onsubmit="return confirm('Do you really want to block this member?') && saveScrollPositions(this) ">
                                 <input type="hidden" id="blockedID" name="blockedID" class="blockedID" value="<?php echo $memberID ?>" />
@@ -409,7 +426,7 @@ if (mysql_num_rows($rollCallResult) > 0) {
                                 echo '<div class="comment-delete">';
                                 echo '<form action="" method="post" onsubmit="return confirm(\'Do you really want to delete this comment?\') && saveScrollPositions(this) ">';
                                 echo '<input type="hidden" name="commentID" id="commentID" value="' .  $commentID . '" />';
-                                echo '<input type ="image" name="DeleteComment" id="DeleteComment" value="Delete" src="/images/delete.png" style="height:30px;width:30px" />';
+                                echo '<input type ="image" name="DeleteComment" id="DeleteComment" value="Delete" src="/images/delete.png" style="height:20px;width:20px" />';
                                 echo '<input type="hidden" name="scrollx" id="scrollx" value="0"/>';
                                 echo '<input type="hidden" name="scrolly" id="scrolly" value="0"/>';
                                 echo '</form>';

@@ -534,17 +534,22 @@ echo "<script>location='/home';</script>";
 
                 // check if post is a repost
                 if (!empty($reposterID) && isset($reposterID) && $reposterID != 0) {
-                    $reposterUsername = get_username($reposterID);
+
                     $postID = $origPostID;
 
                     if ($reposterID == $ID) {
                         $img = "<img src='/images/repost_icon.png' style='float:left;' height='20' width='20'/>";
+                        $reposterName = get_users_name($ID);
                         $repostText = "$img You reposted <br/><br/>";
+                        $reposterUsername = get_username($ID);
+                        echo "<div style='margin-left:10px;color:#8899a6;float:left;'><a style='color:#8899a6' href='/$reposterUsername'>$repostText</a></div>";
                     }
                     else {
                         $img = "<img src='/images/repost_icon.png' style='float:left;' height='20' width='20'/>";
                         $reposterName = get_users_name($reposterID);
+                        $reposterUsername = get_username($reposterID);
                         $repostText = $img . $reposterName ." reposted <br/><br/>";
+
 
                         echo "<div style='margin-left:10px;color:#8899a6;float:left;'><a style='color:#8899a6' href='/$reposterUsername'>$repostText</a></div>";
                     }}
@@ -644,7 +649,7 @@ echo "<script>location='/home';</script>";
                // End of approvals
                //-----------------------------------------------------------
                echo "</div>";
-               
+
 
                  if (isset($ID)) { ?>
 
