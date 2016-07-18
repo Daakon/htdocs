@@ -266,19 +266,35 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 //BELOW IS END OF POST COMMENT HANDLING CODE ==========================================================================//
         }
     }
-    echo "<script>location='/manage_post/$username#comment$postID'</script>";
+    echo "<script>location='/post/$username#comment$postID'</script>";
 }
 ?>
 
 <?php
 // ----------------------------
-//delete post
+//delete post or repost
 // ----------------------------
 if (isset($_POST['Delete']) && $_POST['Delete'] == "Delete") {
     $postID = $_POST['postID'];
-    $sql = "Update Posts SET IsDeleted = '1' WHERE ID = $postID And Member_ID = $ID ";
+    $repostID = $_POST['repostID'];
+    $isRepost = $_POST['isRepost'];
+    $deleteCondition = '';
+
+    if ($isRepost == false) {
+        // delete original post and all reposts
+        $deleteCondition = "Where ID = $postID Or OrigPost_ID = $postID ";
+    }
+    else {
+        // only delete repost
+        $deleteCondition = "Where ID = $repostID ";
+    }
+
+    $username = get_username($ID);
+    $sql = "Update Posts SET IsDeleted = 1 $deleteCondition ";
     mysql_query($sql) or die (logError(mysql_error(), $url, "Deleting Post"));
+    echo "<script>alert('Post deleted!'); location='/post/$username'</script>";
 }
+
 // delete comment
 if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
     $commentID = $_POST['commentID'];
@@ -366,7 +382,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 <div class="container">
 
 
-    <div class="row row-padding">
+    <div class="row row-padding" style="margin-top:-50px;">
 
         <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6 roll-call"
              align="left" style="min-height: 10px;">
@@ -410,12 +426,14 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
     Posts.Post As Post,
     Posts.Category As Category,
     Posts.PostDate As PostDate,
+    Posts.Reposter_ID as ReposterID,
+    Posts.OrigPost_ID as OrigPostID,
     Posts.IsSponsored As IsSponsored,
     Profile.ProfilePhoto As ProfilePhoto
     FROM Members,Posts,Profile
     WHERE
-    Posts.Member_ID = $profileID
-    And(Members.IsActive = 1)
+    ((Posts.Member_ID = $ID And (Posts.Reposter_ID = NULL or Posts.Reposter_ID = 0)) Or (Posts.Reposter_ID = $ID))
+    And (Members.IsActive = 1)
     And (Members.IsSuspended = 0)
     And (Members.ID = Posts.Member_ID)
     And (Members.ID = Profile.Member_ID)
@@ -435,13 +453,43 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
         $post = $rows['Post'];
         $postID = $rows['PostID'];
         $postDate = $rows['PostDate'];
+            $repostID = $rows['PostID'];
+            $reposterID = $rows['ReposterID'];
+            $origPostID = $rows['OrigPostID'];
         $isSponsored = $rows['IsSponsored'];
             $postCount = $rows['PostCount'];
         ?>
 
             <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6 col-sm-12 col-xs-12 roll-call-feed" >
 
-            <div class="profileImageWrapper-Feed">
+                <?php
+                $repostText = '';
+                $img = '';
+                $isRepost = false;
+
+                // check if post is a repost
+                if (!empty($reposterID) && isset($reposterID) && $reposterID != 0) {
+                    $reposterUsername = get_username($reposterID);
+                    $postID = $origPostID;
+
+                    $isRepost = true;
+
+                    if ($reposterID == $ID) {
+                        $img = "<img src='/images/repost_icon.png' style='float:left;' height='20' width='20'/>";
+                        $repostText = "$img You reposted <br/><br/>";
+                    }
+                    else {
+                        $img = "<img src='/images/repost_icon.png' style='float:left;' height='20' width='20'/>";
+                        $reposterName = get_users_name($reposterID);
+                        $repostText = $img . $reposterName ." reposted <br/><br/>";
+
+                        echo "<div style='margin-left:10px;color:#8899a6;float:left;'><a style='color:#8899a6' href='/$reposterUsername'>$repostText</a></div>";
+                    }}
+
+                $profileUrl = "/$username";
+                ?>
+
+            <div style="clear:both" class="profileImageWrapper-Feed">
                 <a href="<?php echo $profileUrl ?>">
                     <img src="<?php echo $mediaPath. $profilePhoto ?>" class="profilePhoto-Feed " alt=""
                          title="<?php echo $name ?>" />
@@ -487,12 +535,47 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                 ?>
             </div>
 
-            <hr/>
+<?php
+                //check if member has approved this post
+                //----------------------------------------------------------------
+                //require 'getSessionType.php';
+                $sql2 = "SELECT ID FROM PostApprovals WHERE Post_ID = '$postID' AND Member_ID = '$ID'";
+                $result2 = mysql_query($sql2) or die(logError(mysql_error(), $url, "Getting member approval"));
+                $rows2 = mysql_fetch_assoc($result2);
+                // get approvals for each post
+                $approvals = mysql_num_rows(mysql_query("SELECT * FROM PostApprovals WHERE Post_ID = $postID "));
+                // show disapprove if members has approved the post
+                echo '<table style="float:left;">';
+                    echo '<tr>';
+                        echo '<td>';
+                            echo "<div id = 'approvals$postID'>";
+                                if (mysql_num_rows($result2) > 0) {
+                                echo '<form>';
+                                    echo '<input type ="hidden" class = "postID" id = "postID" value = "' . $postID . '" />';
+                                    echo '<input type ="hidden" class = "ID" id = "ID" value = "' . $ID . '" />';
+                                    echo '<input type ="button" class = "btnDisapprove" />';
+                                    if ($approvals > 0) {
+                                    echo '&nbsp;<span>' . $approvals . '</font>';
+                }
+                echo '</form>';
+                                } else {
+                                echo '<form>';
+                                    echo '<input type ="hidden" class = "postID" id = "postID" value = "' . $postID . '" />';
+                                    echo '<input type ="hidden" class = "ID" id = "ID" value = "' . $ID . '" />';
+                                    echo '<input type ="button" class = "btnApprove" />';
+                                    if ($approvals > 0) {
+                                    echo '&nbsp;<span>' . $approvals . '</font>';
+                }
+                echo '</form>';
+                                }
+                                echo '</div>'; // end of approval div
+                            echo '</td></tr></table>';
+                //-------------------------------------------------------------
+                // End of approvals
+                //-----------------------------------------------------------
 
-            <span class="engageText"><?php echo $category ?></span>
-
-            <?php if ($memberID != $ID) { ?>
-                <a href="/view_messages.php/<?php echo $username ?>" style="padding-left:10px;"><span class="engageText"><img src="/images/messages.png" height="20" width="20" /> Message </span></a>
+            if ($memberID != $ID) { ?>
+                <a href="/view_messages.php/<?php echo $username ?>" style="padding-left:10px;"><span class="engageText"><img src="/images/messages.png" height="20" width="20" /></span></a>
             <?php } ?>
 
 
@@ -500,69 +583,31 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                 $postPath = getPostPath();
                 $shareLinkID = "shareLink$postID"; ?>
                 <a href="javascript:showLink('<?php echo $shareLinkID ?>');">
-                    <img style="margin-left:20px;" src="/images/share.gif" height="50px" width="50px" />
+                    <img style="margin-left:20px;" src="/images/share.gif" height="30px" width="30px" />
                 </a>
 
                 <?php $shareLink = 'show_post?postID='.$postID.'&email=1';
                 $shareLink = $postPath.$shareLink;
                 $shortLink = shortenUrl($shareLink);
                 ?>
-                <input  id="<?php echo $shareLinkID ?>" style="display:none;margin-left:20px;" value ="<?php echo $shortLink ?>" />
+                <input id="<?php echo $shareLinkID ?>" style="display:none;margin-left:20px;" value ="<?php echo $shortLink ?>" />
 
 
-            <?php if ($_SESSION['ID'] == get_id_from_username($username)) { ?>
+            <?php if ($_SESSION['ID'] == get_id_from_username($username) || $reposterID = $ID) { ?>
 
-                <div class="content-space" style="padding-top:20px;margin-left:10px;">
+                <div class="content-space" style="margin-left:10px;float:left">
                     <!--DELETE BUTTON ------------------>
-                    <form action="" method="post" onsubmit="return confirm('Do you really want to delete this post?')">
+                    <form style="float:left;" action="" method="post" onsubmit="return confirm('Do you really want to delete this post?')">
                         <input type="hidden" name="postID" id="postID" value="<?php echo $postID ?>"/>
-                        <input type="submit" name="Delete" id="Delete" value="Delete" class="deleteButton"/>
+                        <input type="hidden" name="repostID" id="repostID" value="<?php echo $repostID ?>" />
+                        <input type="hidden" name="isRepost" id="isRepost" value="<?php echo $isRepost ?>" />
+                        <input type="image" name="Delete" id="Delete" value="Delete" src="/images/delete.png" style="height:30px;width:30px;" />
                     </form>
                 </div>
                 <!------------------------------------->
                 <?php
             }
-            echo "<hr/>";
-            //check if member has approved this post
-            //----------------------------------------------------------------
-            //require 'getSessionType.php';
-            $sql2 = "SELECT ID FROM PostApprovals WHERE Post_ID = '$postID' AND Member_ID = '$ID'";
-            $result2 = mysql_query($sql2) or die(logError(mysql_error(), $url, "Getting member approval"));
-            $rows2 = mysql_fetch_assoc($result2);
-            // get approvals for each post
-            $approvals = mysql_num_rows(mysql_query("SELECT * FROM PostApprovals WHERE Post_ID = $postID "));
-            // show disapprove if members has approved the post
-            echo '<table>';
-            echo '<tr>';
-            echo '<td>';
-            echo "<div id = 'approvals$postID'>";
-            if (mysql_num_rows($result2) > 0) {
-                echo '<form>';
-                echo '<input type ="hidden" class = "postID" id = "postID" value = "' . $postID . '" />';
-                echo '<input type ="hidden" class = "ID" id = "ID" value = "' . $ID . '" />';
-                echo '<input type ="button" class = "btnDisapprove" />';
-                if ($approvals > 0) {
-                    echo '&nbsp;<span>' . $approvals . '</font>';
-                }
-                echo '</form>';
-            } else {
-                echo '<form>';
-                echo '<input type ="hidden" class = "postID" id = "postID" value = "' . $postID . '" />';
-                echo '<input type ="hidden" class = "ID" id = "ID" value = "' . $ID . '" />';
-                echo '<input type ="button" class = "btnApprove" />';
-                if ($approvals > 0) {
-                    echo '&nbsp;<span>' . $approvals . '</font>';
-                }
-                echo '</form>';
-            }
-            echo '</div>'; // end of approval div
-            echo '</td></tr></table>';
-            //-------------------------------------------------------------
-            // End of approvals
-            //-----------------------------------------------------------
-            ?>
 
-                <?php
                 //Detect device
                 $iPod    = stripos($_SERVER['HTTP_USER_AGENT'],"iPod");
                 $iPhone  = stripos($_SERVER['HTTP_USER_AGENT'],"iPhone");
@@ -578,7 +623,6 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                            placeholder="Write a comment" title='' />
 
             <?php if ($iPhone || $iPad || $Android) { ?>
-                    <h6>Attach A Photo/Video To Your Comment</h6>
                     <input type="file" name="flPostMedia" id="flPostMedia" style="max-width:180px;"/>
                     <br/>
                 <?php } ?>
@@ -632,7 +676,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                         <img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" class ="img-responsive" />
                         </a>
                         </div>
-                         <div class="commentNameWrapper-Feed" style="padding-left:10px">
+                         <div class="commentNameWrapper-Feed" style="margin-top:-6px;">
                           <a href='.$commenterProfileUrl.'>
                             <div class="profileName-Feed"><?php echo $name ?> ' .
                             $rows3['FirstName'] . ' ' . $rows3['LastName'] .
@@ -648,7 +692,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                             echo '<div class="comment-delete" >';
                             echo '<form action="" method="post" onsubmit="return confirm(\'Do you really want to delete this comment?\')">';
                             echo '<input type="hidden" name="commentID" id="commentID" value="' .  $commentID . '" />';
-                            echo '<input type ="submit" name="DeleteComment" id="DeleteComment" value="Delete" class="deleteButton" />';
+                            echo '<input type ="image" name="DeleteComment" id="DeleteComment" value="Delete" src="/images/delete.png" style="height:30px;width:30px;margin-left:10px;" />';
                             echo '</form>';
                             echo '</div>';
                             //<!------------------------------------->
@@ -719,11 +763,11 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
                                 <!--DELETE BUTTON ------------------>
                                 <?php if ($commentOwnerID == $ID || $memberID == $ID) { ?>
-                                    <div class="comment-delete">
-                                        <form action="" method="post" onsubmit="return confirm(\'Do you really want to delete this comment?\')">
-                                            <input type="hidden" name="commentID" id="commentID" value="<?php echo $commentID ?>" />
-                                            <input type ="submit" name="DeleteComment" id="DeleteComment" value="Delete" class="deleteButton" />
-                                        </form>
+                                    <div class="comment-delete" >
+                                      <form action="" method="post" onsubmit="return confirm(\'Do you really want to delete this comment?\')">
+                                          <input type="hidden" name="commentID" id="commentID" value="' .  $commentID . '" />
+                                          <input type ="image" name="DeleteComment" id="DeleteComment" value="Delete" src="/images/delete.png" style="height:30px;width:30px;margin-left:10px;" />
+                                      </form>
                                     </div>
                                 <?php } ?>
                                 <?php

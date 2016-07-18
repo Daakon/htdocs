@@ -565,6 +565,25 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
     echo '<script>location="/post-interest?interest='.$hashtag.'";</script>';
 }
 
+// handle Repost
+if (isset($_POST['btnRepost']) && ($_POST['btnRepost'] == "Repost")) {
+
+    $postID = $_POST['postID'];
+    $post = getPost($postID);
+    $post = mysql_escape_string($post);
+    $postDate = $_POST['postDate'];
+    $memberID = $_POST['memberID'];
+    $ownerID = $_POST['ownerID'];
+    $reposterID = $_POST['reposterID'];
+    $scrollx = $_REQUEST['scrollx'];
+    $scrolly = $_REQUEST['scrolly'];
+
+    $sql = "INSERT INTO Posts (Member_ID,     Post, Reposter_ID, OrigPost_ID, PostDate) Values
+                              ('$memberID', '$post', $ID,        $postID,     '$postDate')";
+    mysql_query($sql) or die(mysql_error());
+
+     echo "<script>location='/hashtag?hashtag=$hashtag&scrollx=$scrollx&scrolly=$scrolly';</script>";
+}
 ?>
 
 
@@ -723,6 +742,8 @@ $sql = " SELECT DISTINCT
 Posts.ID As PostID,
 Posts.Post As Post,
 Posts.PostDate As PostDate,
+Posts.Reposter_ID as ReposterID,
+Posts.OrigPost_ID as OrigPostID,
 Posts.Member_ID As MemberID,
 Members.FirstName As FirstName,
 Members.LastName As LastName,
@@ -763,15 +784,38 @@ if (mysql_num_rows($result) > 0) {
         $postID = $rows['PostID'];
         $postOwner = $memberID;
         $postDate = $rows['PostDate'];
+        $reposterID = $rows['ReposterID'];
+        $origPostID = $rows['OrigPostID'];
         ?>
 
         <?php if (checkBlock($ID, $memberID)) { $display = "style= 'display:none;'"; } else { $display = "style='display:block;'"; } ?>
         <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6 roll-call-feed" align="left" <?php echo $display ?>>
 
         <?php
+         $repostText = '';
+            $img = '';
+
+            // check if post is a repost
+            if (!empty($reposterID) && isset($reposterID) && $reposterID != 0) {
+                $reposterUsername = get_username($reposterID);
+
+                if ($reposterID == $ID) {
+                    $img = "<img src='/images/repost_icon.png' style='float:left;' height='20' width='20'/>";
+                    $repostText = "$img You reposted <br/><br/>";
+                }
+                else {
+                    $img = "<img src='/images/repost_icon.png' style='float:left;' height='20' width='20'/>";
+                    $reposterName = get_users_name($reposterID);
+                    $repostText = $img . $reposterName ." reposted <br/><br/>";
+
+                    echo "<div style='margin-left:10px;color:#8899a6;float:left;'><a style='color:#8899a6' href='/$reposterUsername'>$repostText</a></div>";
+        }}
+
         $profileUrl = "/$username";
         ?>
-              <div class="profileImageWrapper-Feed">
+
+
+        <div style="clear:both" class="profileImageWrapper-Feed">
         <a href="<?php echo $profileUrl ?>">
             <img src="<?php echo $mediaPath. $profilePhoto ?>" class="profilePhoto-Feed" alt=""
                  title="<?php echo $name ?>" />
@@ -788,7 +832,7 @@ if (mysql_num_rows($result) > 0) {
     </div>
 
 
-    <div class="post" style="clear:both;">
+    <div class="post" style="clear:both;margin-bottom:5px;">
                <?php
                 // remove excessive white space inside anchor tags
                 $post = preg_replace('~>\s+<~', '><', $post);
@@ -820,38 +864,9 @@ if (mysql_num_rows($result) > 0) {
             </div>
 
 
-                 <?php if ($ID != $memberID) {?>
-                    <a style="padding-left:20px;float:left;" href="/view_messages/<?php echo $username ?>"><img src="/images/messages.png" height="20" width="20" /></a>
-                <?php } ?>
+<?php
 
-
-                <div style="padding-left:20px;float:left">
-                     <?php
-                    $postPath = getPostPath();
-                    $shareLinkID = "shareLink$postID"; ?>
-                   <a href="javascript:showLink('<?php echo $shareLinkID ?>');">
-                       <img src="/images/share.gif" height="50" width="50" />
-
-                   </a>
-
-                <?php $shareLink = 'show_post?postID='.$postID.'&email=1';
-                      $shareLink = $postPath.$shareLink;
-                      $shortLink = shortenUrl($shareLink);
-                ?>
-                <input id="<?php echo $shareLinkID ?>" style="display:none;" value ="<?php echo $shortLink ?>" />
-            </div>
-
-            <hr class="hr-line" />
-
-            <?php
-
- if (isEmailValidated($ID) && hasOnePost($ID)) {
-                    $disabled = '';
-                } else {
-                    $disabled = 'disabled';
-                }
-
-            //check if member has approved this post
+                     //check if member has approved this post
             //----------------------------------------------------------------
             //require 'getSessionType.php';
 
@@ -864,7 +879,7 @@ if (mysql_num_rows($result) > 0) {
             $approvals = mysql_num_rows(mysql_query("SELECT * FROM PostApprovals WHERE Post_ID = '$postID'"));
 
             // show disapprove if members has approved the post
-            echo '<div class="post-approvals">';
+            echo '<div class="post-approvals" style="float:left;">';
             echo "<div id = 'approvals$postID'>";
 
             if (mysql_num_rows($result2) > 0) {
@@ -901,6 +916,53 @@ if (mysql_num_rows($result) > 0) {
             //-------------------------------------------------------------
             // End of approvals
             //-----------------------------------------------------------
+
+
+
+                    $postPath = getPostPath();
+                    $shareLinkID = "shareLink$postID"; ?>
+                   <a style="margin-top:-5px;padding-left:10px;" href="javascript:showLink('<?php echo $shareLinkID ?>');">
+                       <img src="/images/share.gif" height="30" width="30" />
+                   </a>
+
+                <?php $shareLink = 'show_post?postID='.$postID.'&email=1';
+                      $shareLink = $postPath.$shareLink;
+                      $shortLink = shortenUrl($shareLink);
+                ?>
+                <input id="<?php echo $shareLinkID ?>" style="display:none;" value ="<?php echo $shortLink ?>" />
+
+
+                 <?php if ($ID != $memberID) {?>
+                    <a style="padding-left:20px;float:left;" href="/view_messages/<?php echo $username ?>"><img src="/images/messages.png" height="20" width="20" /></a>
+                <?php
+
+                if ($reposterID == $ID) { } else { ?>
+
+                    <form style="float:left;padding-right:10px;margin-top:-2px" action="" method="post" onsubmit="return confirm('Are you sure you want to repost this?') && saveScrollPositionOnLinkClick(this)">
+                        <input type="image" id="btnRepost" name="btnRepost" value="Repost" src="/images/repost_icon.png" style="margin-left:20px;" />
+                        <input type="hidden" id="memberID" name="memberID" value="<?php echo $memberID ?>" />
+                        <input type="hidden" id="ownerID" name="ownerID" value="<?php echo $memberID ?>" />
+                        <input type="hidden" id="postID" name="postID" value="<?php echo $postID ?>" />
+                        <input type="hidden" id="postDate" name="postDate" value="<?php echo $postDate ?>" />
+                        <input type="hidden" id="reposterID" name="reposterID" value="<?php echo $ID ?>" />
+                         <input type="hidden" name="hashtag" id="hashtag" value ="<?php echo $hashtag ?>" />
+                        <input type="hidden" name="scrollx" id="scrollx" value="0"/>
+                        <input type="hidden" name="scrolly" id="scrolly" value="0"/>
+                    </form>
+
+                <?php } } ?>
+
+
+            <hr class="hr-line" />
+
+            <?php
+
+ if (isEmailValidated($ID) && hasOnePost($ID)) {
+                    $disabled = '';
+                } else {
+                    $disabled = 'disabled';
+                }
+
 
             ?>
 
@@ -970,7 +1032,7 @@ if (mysql_num_rows($result) > 0) {
                     echo '<div class="comment-row"'. $display.'>';
                         echo '<div class="profileImageWrapper-Feed">
                         <a href='.$commenterProfileUrl.'>
-                        <img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" class ="enlarge-onhover img-responsive" />
+                        <img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" class ="img-responsive" />
                         </a>
                         </div>
 
@@ -1050,7 +1112,7 @@ if (mysql_num_rows($result) > 0) {
             <div class="comment-row" <?php echo $display ?>>
                 <div class="profileImageWrapper-Feed">
                     <a href='<?php echo $commenterProfileUrl ?>'>
-                        <img src = "<?php echo $mediaPath . $profilePhoto ?>" height = "50" width = "50" class ="enlarge-onhover img-responsive" />
+                        <img src = "<?php echo $mediaPath . $profilePhoto ?>" height = "50" width = "50" class ="img-responsive" />
                         </a>
                     </div>
                 </div>

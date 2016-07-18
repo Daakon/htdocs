@@ -311,7 +311,29 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
     mysql_query($sql) or die (mysql_error());
     echo "<script>location='/show_post?postID=$postID&scrollx=$scrollx&scrolly=$scrolly'</script>";
 }
+
+
+// handle Repost
+if (isset($_POST['btnRepost']) && ($_POST['btnRepost'] == "Repost")) {
+
+$postID = $_POST['postID'];
+$post = getPost($postID);
+$post = mysql_escape_string($post);
+$postDate = $_POST['postDate'];
+$memberID = $_POST['memberID'];
+$ownerID = $_POST['ownerID'];
+$reposterID = $_POST['reposterID'];
+$scrollx = $_REQUEST['scrollx'];
+$scrolly = $_REQUEST['scrolly'];
+
+$sql = "INSERT INTO Posts (Member_ID,     Post, Reposter_ID, OrigPost_ID, PostDate) Values
+                              ('$memberID', '$post', $ID,        $postID,     '$postDate')";
+mysql_query($sql) or die(mysql_error());
+
+echo "<script>location='/home';</script>";
+}
 ?>
+
 
 
 <script src="/resources/js/site.js"></script>
@@ -460,6 +482,8 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
     Posts.Post As Post,
     Posts.PostDate As PostDate,
     Posts.Category As Category,
+        Posts.Reposter_ID as ReposterID,
+        Posts.OrigPost_ID as OrigPostID,
     Posts.IsSponsored As IsSponsored,
     Profile.ProfilePhoto As ProfilePhoto
     FROM Members,Posts,Profile
@@ -495,6 +519,8 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
         $post = $rows['Post'];
         $postID = $rows['PostID'];
         $postDate = $rows['PostDate'];
+        $reposterID = $rows['ReposterID'];
+        $origPostID = $rows['OrigPostID'];
         $isSponsored = $rows['IsSponsored'];
         ?>
 
@@ -502,7 +528,31 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
             <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 roll-call"
                  align="left">
 
-                <div class="profileImageWrapper-Feed">
+                <?php
+                $repostText = '';
+                $img = '';
+
+                // check if post is a repost
+                if (!empty($reposterID) && isset($reposterID) && $reposterID != 0) {
+                    $reposterUsername = get_username($reposterID);
+                    $postID = $origPostID;
+
+                    if ($reposterID == $ID) {
+                        $img = "<img src='/images/repost_icon.png' style='float:left;' height='20' width='20'/>";
+                        $repostText = "$img You reposted <br/><br/>";
+                    }
+                    else {
+                        $img = "<img src='/images/repost_icon.png' style='float:left;' height='20' width='20'/>";
+                        $reposterName = get_users_name($reposterID);
+                        $repostText = $img . $reposterName ." reposted <br/><br/>";
+
+                        echo "<div style='margin-left:10px;color:#8899a6;float:left;'><a style='color:#8899a6' href='/$reposterUsername'>$repostText</a></div>";
+                    }}
+
+                $profileUrl = "/$username";
+                ?>
+
+                <div style="clear:both" class="profileImageWrapper-Feed">
                     <a href="<?php echo $profileUrl ?>">
                         <img src="<?php echo $mediaPath. $profilePhoto ?>" class="profilePhoto-Feed enlarge-onhover " alt=""
                              title="<?php echo $name ?>" />
@@ -530,11 +580,73 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                     ?>
                 </div>
 
-                <hr class="hr-line" />
+               <?php
+
+               //check if member has approved this post
+               //----------------------------------------------------------------
+               //require 'getSessionType.php';
+               echo "<div class='content-space'' >";
+               $sql2 = "SELECT ID FROM PostApprovals WHERE Post_ID = '$postID' AND Member_ID = '$ID'";
+               $result2 = mysql_query($sql2) or die(logError(mysql_error(), $url, "Getting post approvals"));
+               $rows2 = mysql_fetch_assoc($result2);
 
 
+               // get approvals for each post
+               $approvals = mysql_num_rows(mysql_query("SELECT * FROM PostApprovals WHERE Post_ID = $postID "));
 
-                <?php if (isset($ID)) { ?>
+               // show disapprove if members has approved the post
+               echo '<table class="margin-bottom-20">';
+               echo '<tr>';
+               echo '<td>';
+               echo "<div id = 'approvals$postID'>";
+
+               // re-instantiate session and cookie variables to detect if user is logged in
+               require 'getSession.php';
+               if (empty($ID) && !isset($ID)) {
+                   $readonly = 'readonly';
+               }
+               else {
+                   $readonly = '';
+               }
+
+               if (mysql_num_rows($result2) > 0) {
+
+                   echo '<form>';
+
+                   echo '<input type ="hidden" class = "postID" id = "postID" value = "' . $postID . '" />';
+                   echo '<input type ="hidden" class = "ID" id = "ID" value = "' . $ID . '" />';
+                   echo '<input type ="button" class = "btnDisapprove"'. $disabled.' />';
+
+                   if ($approvals > 0) {
+
+
+                       echo '&nbsp;' . $approvals;
+                   }
+                   echo '</form>';
+               } else {
+                   echo '<form>';
+
+                   echo '<input type ="hidden" class = "postID" id = "postID" value = "' . $postID . '" />';
+                   echo '<input type ="hidden" class = "ID" id = "ID" value = "' . $ID . '" />';
+                   echo '<input type ="button" class = "btnApprove"'. $disabled.' />';
+
+                   if ($approvals > 0) {
+
+
+                       echo '&nbsp;' . $approvals;
+                   }
+                   echo '</form>';
+               }
+               echo '</div>'; // end of approval div
+               echo '</td></tr></table>';
+
+               //-------------------------------------------------------------
+               // End of approvals
+               //-----------------------------------------------------------
+               echo "</div>";
+               
+
+                 if (isset($ID)) { ?>
 
                     <?php if ($ID != $memberID) {?>
                         <a style="padding-left:20px;" href="/view_messages/<?php echo $username ?>"><span class="engageText"><img src = "/images/messages.png" height="20" width="20" /> Message </span> </a>
@@ -545,7 +657,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                 <?php
                 $postPath = getPostPath();
                 $shareLinkID = "shareLink$postID"; ?>
-                <a href="javascript:showLink('<?php echo $shareLinkID ?>');">
+                <a style="margin-top:-5px;" href="javascript:showLink('<?php echo $shareLinkID ?>');">
                     <img style="margin-left:20px;" src="/images/share.gif" height="50px" width="50px" />
                 </a>
 
@@ -555,9 +667,28 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                 ?>
                 <input id="<?php echo $shareLinkID ?>" style="display:none;margin-left:20px;" value ="<?php echo $shortLink ?>" />
 
+                <?php if ($ID != $memberID) {?>
+                <a style="padding-left:20px;float:left;" href="/view_messages/<?php echo $username ?>"><img src="/images/messages.png" height="20" width="20" /></a>
+
+                <?php
+
+                if ($reposterID == $ID) { } else { ?>
+
+                    <form style="float:left;padding-right:10px;margin-top:-2px" action="" method="post" onsubmit="return confirm('Are you sure you want to repost this?') && saveScrollPositionOnLinkClick(this)">
+                        <input type="image" id="btnRepost" name="btnRepost" value="Repost" src="/images/repost_icon.png" style="margin-left:20px;" />
+                        <input type="hidden" id="memberID" name="memberID" value="<?php echo $memberID ?>" />
+                        <input type="hidden" id="ownerID" name="ownerID" value="<?php echo $memberID ?>" />
+                        <input type="hidden" id="postID" name="postID" value="<?php echo $postID ?>" />
+                        <input type="hidden" id="postDate" name="postDate" value="<?php echo $postDate ?>" />
+                        <input type="hidden" id="reposterID" name="reposterID" value="<?php echo $ID ?>" />
+                        <input type="hidden" name="hashtag" id="hashtag" value ="<?php echo $hashtag ?>" />
+                        <input type="hidden" name="scrollx" id="scrollx" value="0"/>
+                        <input type="hidden" name="scrolly" id="scrolly" value="0"/>
+                    </form>
+
+                <?php } }?>
+
                 <hr class="hr-line" />
-
-
 
                 <?php
 
@@ -567,72 +698,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                     $disabled = 'disabled';
                 }
 
-                //check if member has approved this post
-                //----------------------------------------------------------------
-                //require 'getSessionType.php';
-                echo "<div class='content-space'' >";
-                $sql2 = "SELECT ID FROM PostApprovals WHERE Post_ID = '$postID' AND Member_ID = '$ID'";
-                $result2 = mysql_query($sql2) or die(logError(mysql_error(), $url, "Getting post approvals"));
-                $rows2 = mysql_fetch_assoc($result2);
 
-
-                // get approvals for each post
-                $approvals = mysql_num_rows(mysql_query("SELECT * FROM PostApprovals WHERE Post_ID = $postID "));
-
-                // show disapprove if members has approved the post
-                echo '<table class="margin-bottom-20">';
-                echo '<tr>';
-                echo '<td>';
-                echo "<div id = 'approvals$postID'>";
-
-                // re-instantiate session and cookie variables to detect if user is logged in
-                require 'getSession.php';
-                if (empty($ID) && !isset($ID)) {
-                    $readonly = 'readonly';
-                }
-                else {
-                    $readonly = '';
-                }
-
-                if (mysql_num_rows($result2) > 0) {
-
-                    echo '<form>';
-
-                    echo '<input type ="hidden" class = "postID" id = "postID" value = "' . $postID . '" />';
-                    echo '<input type ="hidden" class = "ID" id = "ID" value = "' . $ID . '" />';
-                    echo '<input type ="button" class = "btnDisapprove"'. $disabled.' />';
-
-                    if ($approvals > 0) {
-
-
-                        echo '&nbsp;' . $approvals;
-                    }
-                    echo '</form>';
-                } else {
-                    echo '<form>';
-
-                    echo '<input type ="hidden" class = "postID" id = "postID" value = "' . $postID . '" />';
-                    echo '<input type ="hidden" class = "ID" id = "ID" value = "' . $ID . '" />';
-                    echo '<input type ="button" class = "btnApprove"'. $disabled.' />';
-
-                    if ($approvals > 0) {
-
-
-                        echo '&nbsp;' . $approvals;
-                    }
-                    echo '</form>';
-                }
-                echo '</div>'; // end of approval div
-                echo '</td></tr></table>';
-
-                //-------------------------------------------------------------
-                // End of approvals
-                //-----------------------------------------------------------
-                echo "</div>";
-                ?>
-
-
-                <?php
                 //Detect device
                 $iPod    = stripos($_SERVER['HTTP_USER_AGENT'],"iPod");
                 $iPhone  = stripos($_SERVER['HTTP_USER_AGENT'],"iPhone");

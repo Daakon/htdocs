@@ -480,6 +480,36 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
     }
     echo "<script>location='/home?&scrollx=$scrollx&scrolly=$scrolly'</script>";
 }
+
+
+// handle Repost
+if (isset($_POST['btnRepost']) && ($_POST['btnRepost'] == "Repost")) {
+
+    $postID = $_POST['postID'];
+    $post = getPost($postID);
+    $post = mysql_escape_string($post);
+    $postDate = $_POST['postDate'];
+    $memberID = $_POST['memberID'];
+    $ownerID = $_POST['ownerID'];
+    $reposterID = $_POST['reposterID'];
+    $scrollx = $_REQUEST['scrollx'];
+    $scrolly = $_REQUEST['scrolly'];
+
+    $sql = "INSERT INTO Posts (Member_ID,     Post, Reposter_ID, OrigPost_ID, PostDate) Values
+                              ('$memberID', '$post', $ID,        $postID,     '$postDate')";
+    mysql_query($sql) or die(mysql_error());
+
+    if (checkActive($memberID)) {
+        if (checkEmailActive($memberID)) {
+            build_and_send_email($ID, $memberID, 15, $postID);
+        }
+    }
+
+    echo "<script>alert('Reposted!'); location='/home?&scrollx=$scrollx&scrolly=$scrolly'</script>";
+}
+
+
+
 if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
     $commentID = $_POST['commentID'];
 

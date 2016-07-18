@@ -309,6 +309,24 @@ function build_and_send_email($senderId, $toId, $notification, $postID, $pass, $
         $subject = "<a href=".$postID."?x=$toId'>Click here to validate your email</a>";
     }
 
+    if ($notification == 15) {
+        $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+        $link;
+        if (strstr($url, "local")) {
+            $link = "show_post?postID=$postID&email=1";
+        }
+        else if (strstr($url, "dev")) {
+            $link = "http://dev.playdoe.com/show_post?postID=$postID&email=1";
+        }
+        else {
+            $link = "http://www.playdoe.com/show_post?postID=$postID&email=1";
+        }
+
+        $reposterName = get_users_name($senderId);
+
+        $subject = "$reposterName reshared your <a href='$link'>post</a>";
+    }
+
     // if we have a notification, then send the email.
     if (strlen($notification) > 0) {
         if (strstr($url, "local")) {

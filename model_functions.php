@@ -672,6 +672,14 @@ function hasOnePost($ID) {
     }
 }
 
+function getPost($postID) {
+    $sql = "Select Post FROM Posts WHERE ID = $postID ";
+    $result = mysql_query($sql) or die(mysql_error());
+    $rows = mysql_fetch_assoc($result);
+    $post = $rows['Post'];
+    return $post;
+}
+
 function isEmailValidated($ID) {
     $sql = "Select IsEmailValidated From Members Where ID = $ID ";
     $result = mysql_query($sql) or die(mysql_error());
@@ -718,6 +726,9 @@ function hasHourPast($ID) {
         return false;
     }
 }
+
+
+
 
 /// Find hash tags
 function hashtag_links($string) {

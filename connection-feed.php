@@ -1,3 +1,5 @@
+
+
 <?php
 $ID = $_SESSION['ID'];
 $sql1 = "SELECT BlockedID, BlockerID FROM Blocks WHERE (BlockerID = $ID Or BlockedID = $ID)";
@@ -23,12 +25,12 @@ $sqlRollCall = " SELECT DISTINCT
 Posts.Post As Post,
 Posts.PostDate As PostDate,
 Posts.Member_ID As MemberID,
+Posts.ID As PostID,
+Posts.Reposter_ID as ReposterID,
+Posts.OrigPost_ID as OrigPostID,
 Members.FirstName As FirstName,
 Members.LastName As LastName,
 Members.Username As Username,
-Posts.ID As PostID,
-Posts.Category As Category,
-Posts.IsSponsored As IsSponsored,
 Profile.ProfilePhoto As ProfilePhoto,
 (Select count(PostID) From PostApprovals Where Post_ID = PostID) As Likes
 FROM Members,Posts,Profile
@@ -117,18 +119,39 @@ if (mysql_num_rows($rollCallResult) > 0) {
         $postOwner = $memberID;
         $lastPostID = $rows['LastPostID'];
 
-
+        $reposterID = $rows['ReposterID'];
+        $origPostID = $rows['OrigPostID'];
         ?>
 
 
         <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6 col-sm-12 col-xs-12 roll-call-feed" >
 
             <?php
+            $repostText = '';
+            $img = '';
+
+            // check if post is a repost
+            if (!empty($reposterID) && isset($reposterID) && $reposterID != 0) {
+                $reposterUsername = get_username($reposterID);
+                $postID = $origPostID;
+
+                if ($reposterID == $ID) {
+                    $img = "<img src='/images/repost_icon.png' style='float:left;' height='20' width='20'/>";
+                    $repostText = "$img You reposted <br/><br/>";
+                }
+                else {
+                    $img = "<img src='/images/repost_icon.png' style='float:left;' height='20' width='20'/>";
+                    $reposterName = get_users_name($reposterID);
+                    $repostText = $img . $reposterName ." reposted <br/><br/>";
+
+
+                    echo "<div style='margin-left:10px;color:#8899a6;float:left;'><a style='color:#8899a6' href='/$reposterUsername'>$repostText</a></div>";
+                }}
 
             $profileUrl = "/$username";
             ?>
 
-            <div class="profileImageWrapper-Feed">
+            <div style="clear:both" class="profileImageWrapper-Feed">
                 <a href="<?php echo $profileUrl ?>">
                     <img src="<?php echo $mediaPath. $profilePhoto ?>" class="profilePhoto-Feed" alt=""
                          title="<?php echo $name ?>" />
@@ -148,6 +171,7 @@ if (mysql_num_rows($rollCallResult) > 0) {
 
             <div class="post" <?php echo $postStyle ?> style="clear:both;">
                 <?php
+
                 // remove excessive white space inside anchor tags
                 $post = preg_replace('~>\s+<~', '><', $post);
                 // trim white space
@@ -180,23 +204,77 @@ if (mysql_num_rows($rollCallResult) > 0) {
 
             </div>
 
+            <?php
+            //check if member has approved this post
+            //----------------------------------------------------------------
+            //require 'getSessionType.php';
+            $sql2 = "SELECT ID FROM PostApprovals WHERE Post_ID = '$postID' AND Member_ID = '$ID'";
+            $result2 = mysql_query($sql2) or die(logError(mysql_error(), $url, "Getting member approval"));
+            $rows2 = mysql_fetch_assoc($result2);
+            // get approvals for each post
+            $approvals = mysql_num_rows(mysql_query("SELECT * FROM PostApprovals WHERE Post_ID = $postID "));
+            // show disapprove if members has approved the post
+            echo '<div class="post-approvals" style="float:left;">';
+                echo "<div id = 'approvals$postID'>";
+                    if (mysql_num_rows($result2) > 0) {
+                    echo '<form>';
+                        echo '<input type ="hidden" name="postID" class = "postID" id = "postID" value = "' . $postID . '" />';
+                        echo '<input type ="hidden" class = "ID" id = "ID" value = "' . $ID . '" />';
+                        echo '<input type ="hidden" class = "memberID" id = "memberID" value = "' . $memberID . '" />';
+                        echo '<input type ="button" class = "btnDisapprove"'. $disabled.' />';
+                        if ($approvals > 0) {
+                        echo '&nbsp;<span>' . $approvals . '</span>';
+                        }
+                        echo '</form>';
+                    } else {
+                    echo '<form>';
+                        echo '<input type ="hidden" name="postID" class = "postID" id = "postID" value = "' . $postID . '" />';
+                        echo '<input type ="hidden" class = "ID" id = "ID" value = "' . $ID . '" />';
+                        echo '<input type ="hidden" name="memberID" class = "memberID" id = "memberID" value = "' . $memberID . '" />';
+                        echo '<input type ="button" class = "btnApprove"'. $disabled.' />';
+                        if ($approvals > 0) {
+                        echo '&nbsp;<span>' . $approvals . '</span>';
+                        }
+                        echo '</form>';
+                    }
+                    echo '</div>'; // end of approval div
+                echo '</div>';
+            //-------------------------------------------------------------
+            // End of approvals
+            //-----------------------------------------------------------
 
-            <?php if (isset($ID)) { ?>
+
+             if (isset($ID)) { ?>
 
                 <?php if ($ID != $memberID) {?>
-                    <a href="/view_messages/<?php echo $username ?>" style="padding-left:10px;float:left;"><span class="engageText"><img src = "/images/messages.png" height="20" width="20" /> </span> </a>
+                    <a href="/view_messages/<?php echo $username ?>" style="padding-left:10px;float:left;margin-top:2px;"><span class="engageText"><img src = "/images/messages.png" height="20" width="20" /> </span> </a>
                 <?php } ?>
 
             <?php } ?>
 
             <div >
 
-                <?php if ($ID != $memberID) {
+                <?php if ($ID != $memberID) { ?>
 
-                        $optionsID = "options$postID";
-                    ?>
+                    <?php if ($reposterID == $ID) { } else { ?>
 
-                            <a href="javascript:showOptions('<?php echo $optionsID ?>');" style="font-size:20px;color:black;padding-left:30px;">...</a>
+                    <form style="float:left" action="" method="post" onsubmit="return confirm('Are you sure you want to repost this?') && saveScrollPositionOnLinkClick(this)">
+                        <input type="image" id="btnRepost" name="btnRepost" value="Repost" src="/images/repost_icon.png" style="margin-left:20px;margin-top:3px;" />
+                        <input type="hidden" id="memberID" name="memberID" value="<?php echo $memberID ?>" />
+                        <input type="hidden" id="ownerID" name="ownerID" value="<?php echo $memberID ?>" />
+                        <input type="hidden" id="postID" name="postID" value="<?php echo $postID ?>" />
+                        <input type="hidden" id="postDate" name="postDate" value="<?php echo $postDate ?>" />
+                        <input type="hidden" id="reposterID" name="reposterID" value="<?php echo $ID ?>" />
+                        <input type="hidden" name="scrollx" id="scrollx" value="0"/>
+                        <input type="hidden" name="scrolly" id="scrolly" value="0"/>
+                    </form>
+
+                <?php } ?>
+
+
+                    <?php $optionsID = "options$postID"; ?>
+
+                            <a href="javascript:showOptions('<?php echo $optionsID ?>');" style="font-size:20px;padding-left:10px;color:#8899a6;float:left;">...</a>
                             <div style="display:none;" id="<?php echo $optionsID ?>">
                             <form action="" method="post" onsubmit="return confirm('Do you really want to block this member?') && saveScrollPositions(this) ">
                                 <input type="hidden" id="blockedID" name="blockedID" class="blockedID" value="<?php echo $memberID ?>" />
@@ -206,9 +284,14 @@ if (mysql_num_rows($rollCallResult) > 0) {
                                 <input type="submit" id="block" name="block" class="btnBlock" style="margin-left:10px;" value="Block This User" />
                             </form>
                         </div>
-</p>
+
+
+
 
                 <?php } ?>
+
+
+
 
                 <?php
 
@@ -226,49 +309,6 @@ if (mysql_num_rows($rollCallResult) > 0) {
                 }
 
 
-
-                //check if member has approved this post
-                //----------------------------------------------------------------
-                //require 'getSessionType.php';
-                $sql2 = "SELECT ID FROM PostApprovals WHERE Post_ID = '$postID' AND Member_ID = '$ID'";
-                $result2 = mysql_query($sql2) or die(logError(mysql_error(), $url, "Getting member approval"));
-                $rows2 = mysql_fetch_assoc($result2);
-                // get approvals for each post
-                $approvals = mysql_num_rows(mysql_query("SELECT * FROM PostApprovals WHERE Post_ID = $postID "));
-                // show disapprove if members has approved the post
-                echo '<div class="post-approvals">';
-                echo "<div id = 'approvals$postID'>";
-                if (mysql_num_rows($result2) > 0) {
-                    echo '<form>';
-                    echo '<input type ="hidden" name="postID" class = "postID" id = "postID" value = "' . $postID . '" />';
-                    echo '<input type ="hidden" class = "ID" id = "ID" value = "' . $ID . '" />';
-                    echo '<input type ="hidden" class = "memberID" id = "memberID" value = "' . $memberID . '" />';
-                    echo '<input type ="button" class = "btnDisapprove"'. $disabled.' />';
-                    if ($approvals > 0) {
-                        echo '&nbsp;<span>' . $approvals . '</span>';
-                    }
-                    echo '</form>';
-                } else {
-                    echo '<form>';
-                    echo '<input type ="hidden" name="postID" class = "postID" id = "postID" value = "' . $postID . '" />';
-                    echo '<input type ="hidden" class = "ID" id = "ID" value = "' . $ID . '" />';
-                    echo '<input type ="hidden" name="memberID" class = "memberID" id = "memberID" value = "' . $memberID . '" />';
-                    echo '<input type ="button" class = "btnApprove"'. $disabled.' />';
-                    if ($approvals > 0) {
-                        echo '&nbsp;<span>' . $approvals . '</span>';
-                    }
-                    echo '</form>';
-                }
-                echo '</div>'; // end of approval div
-                echo '</div>';
-                //-------------------------------------------------------------
-                // End of approvals
-                //-----------------------------------------------------------
-                echo "</p>";
-                ?>
-
-
-                <?php
                 //Detect device
                 $iPod    = stripos($_SERVER['HTTP_USER_AGENT'],"iPod");
                 $iPhone  = stripos($_SERVER['HTTP_USER_AGENT'],"iPhone");
@@ -369,7 +409,7 @@ if (mysql_num_rows($rollCallResult) > 0) {
                                 echo '<div class="comment-delete">';
                                 echo '<form action="" method="post" onsubmit="return confirm(\'Do you really want to delete this comment?\') && saveScrollPositions(this) ">';
                                 echo '<input type="hidden" name="commentID" id="commentID" value="' .  $commentID . '" />';
-                                echo '<input type ="submit" name="DeleteComment" id="DeleteComment" value="Delete" class="deleteButton" />';
+                                echo '<input type ="image" name="DeleteComment" id="DeleteComment" value="Delete" src="/images/delete.png" style="height:30px;width:30px" />';
                                 echo '<input type="hidden" name="scrollx" id="scrollx" value="0"/>';
                                 echo '<input type="hidden" name="scrolly" id="scrolly" value="0"/>';
                                 echo '</form>';
