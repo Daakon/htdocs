@@ -6,7 +6,7 @@ get_header();
 
 ?>
 
-<div class="container">
+<div class="container" style="margin-top:-10px;">
 
     <div class="col-xs-12">
 
@@ -15,22 +15,22 @@ get_header();
         <br/><br/>
 
         <form method="post" action="login.php" >
-    <label class="sr-only" for="login_email">Email</label>
-    <input type="text" name="login_email" id="login_email" placeholder="Email" class="form-control"/>
-    <br/>
-    <label class="sr-only" for="login_password">Password</label>
-    <input type="password" name="login_password" id="login_password" placeholder="Password"
-           class="form-control"/>
-    <br/>
-    <input type="submit" name="login" id="login" value="Log in" class="btn btn-default" style="background: #E30022;color:white;"/>
+            <label class="sr-only" for="login_email">Email</label>
+            <input type="text" name="login_email" id="login_email" placeholder="Email" class="form-control"/>
+            <br/>
+            <label class="sr-only" for="login_password">Password</label>
+            <input type="password" name="login_password" id="login_password" placeholder="Password"
+                   class="form-control"/>
+            <br/>
+            <input type="submit" name="login" id="login" value="Log in" class="btn btn-default" style="background: #E30022;color:white;"/>
             <br/><br/>
             <a href="forgot-password" style="color:black;margin-top:10px;">Forgot Your Password?</a>
-    <br/>
-</form>
+            <br/>
+        </form>
 
         <h4><a href="/learn_more#signup">Sign Up</a></h4>
-</div>
-
-        </div>
+    </div>
 
 </div>
+
+</div></div>

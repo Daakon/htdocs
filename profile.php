@@ -501,7 +501,7 @@ $bgPhoto = $row['ProfilePhoto'];
     ">
 
 
-<div class="container" >
+<div class="container" style="margin-top:-75px;">
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script src = "jquery-1.8.3.min.js"></script>

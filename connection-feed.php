@@ -1,5 +1,3 @@
-
-
 <?php
 $ID = $_SESSION['ID'];
 $sql1 = "SELECT BlockedID, BlockerID FROM Blocks WHERE (BlockerID = $ID Or BlockedID = $ID)";
@@ -64,11 +62,11 @@ if (mysql_num_rows($rollCallResult) == 0) {
         $resultPlaydoeFollow = mysql_query($sqlPlaydoeFollow) or die (logError(mysql_error(), $url, "Getting Follows"));
         $playdoeName = get_users_name(22);
         $playdoeUsername = get_username(22);
-            if (mysql_num_rows($resultPlaydoeFollow) == 0) {
-                $followPlaydoePhoto = get_users_photo_by_id(22);
-                echo "<a href='/$playdoeUsername'><img src='$followPlaydoePhoto' height='50' width='50' /> $playdoeName</a>";
+        if (mysql_num_rows($resultPlaydoeFollow) == 0) {
+            $followPlaydoePhoto = get_users_photo_by_id(22);
+            echo "<a href='/$playdoeUsername'><img src='$followPlaydoePhoto' height='50' width='50' /> $playdoeName</a>";
 
-            }
+        }
 
         echo "<hr class='hr-line'>";
 
@@ -129,6 +127,7 @@ if (mysql_num_rows($rollCallResult) > 0) {
             <?php
             $repostText = '';
             $img = '';
+            $prestinePostID = $rows['PostID'];
 
             // check if post is a repost
             if (!empty($reposterID) && isset($reposterID) && $reposterID != 0) {
@@ -219,53 +218,40 @@ if (mysql_num_rows($rollCallResult) > 0) {
             $approvals = mysql_num_rows(mysql_query("SELECT * FROM PostApprovals WHERE Post_ID = $postID "));
             // show disapprove if members has approved the post
             echo '<div class="post-approvals" style="float:left;margin-top:10px;">';
-                echo "<div id = 'approvals$postID'>";
-                    if (mysql_num_rows($result2) > 0) {
-                    echo '<form>';
-                        echo '<input type ="hidden" name="postID" class = "postID" id = "postID" value = "' . $postID . '" />';
-                        echo '<input type ="hidden" class = "ID" id = "ID" value = "' . $ID . '" />';
-                        echo '<input type ="hidden" class = "memberID" id = "memberID" value = "' . $memberID . '" />';
-                        echo '<input type ="button" class = "btnDisapprove"'. $disabled.' />';
-                        if ($approvals > 0) {
-                        echo '&nbsp;<span>' . $approvals . '</span>';
-                        }
-                        echo '</form>';
-                    } else {
-                    echo '<form>';
-                        echo '<input type ="hidden" name="postID" class = "postID" id = "postID" value = "' . $postID . '" />';
-                        echo '<input type ="hidden" class = "ID" id = "ID" value = "' . $ID . '" />';
-                        echo '<input type ="hidden" name="memberID" class = "memberID" id = "memberID" value = "' . $memberID . '" />';
-                        echo '<input type ="button" class = "btnApprove"'. $disabled.' />';
-                        if ($approvals > 0) {
-                        echo '&nbsp;<span>' . $approvals . '</span>';
-                        }
-                        echo '</form>';
-                    }
-                    echo '</div>'; // end of approval div
-                echo '</div>';
+            echo "<div id = 'approvals$postID'>";
+            if (mysql_num_rows($result2) > 0) {
+                echo '<form>';
+                echo '<input type ="hidden" name="postID" class = "postID" id = "postID" value = "' . $postID . '" />';
+                echo '<input type ="hidden" class = "ID" id = "ID" value = "' . $ID . '" />';
+                echo '<input type ="hidden" class = "memberID" id = "memberID" value = "' . $memberID . '" />';
+                echo '<input type ="button" class = "btnDisapprove"'. $disabled.' />';
+                if ($approvals > 0) {
+                    echo '&nbsp;<span>' . $approvals . '</span>';
+                }
+                echo '</form>';
+            } else {
+                echo '<form>';
+                echo '<input type ="hidden" name="postID" class = "postID" id = "postID" value = "' . $postID . '" />';
+                echo '<input type ="hidden" class = "ID" id = "ID" value = "' . $ID . '" />';
+                echo '<input type ="hidden" name="memberID" class = "memberID" id = "memberID" value = "' . $memberID . '" />';
+                echo '<input type ="button" class = "btnApprove"'. $disabled.' />';
+                if ($approvals > 0) {
+                    echo '&nbsp;<span>' . $approvals . '</span>';
+                }
+                echo '</form>';
+            }
+            echo '</div>'; // end of approval div
+            echo '</div>';
             //-------------------------------------------------------------
             // End of approvals
             //-----------------------------------------------------------
 
 
-             if (isset($ID)) { ?>
+            if (isset($ID)) { ?>
 
                 <?php if ($ID != $memberID) {?>
                     <a href="/view_messages/<?php echo $username ?>" style="margin-left:20px;float:left;margin-top:15px;"><span class="engageText"><img src = "/images/messages.png" height="20" width="20" /> </span> </a>
-
-                     <?php
-                     $postPath = getPostPath();
-                     $shareLinkID = "shareLink$postID"; ?>
-                     <a style="float:left;margin-top:10px;" href="javascript:showLink('<?php echo $shareLinkID ?>');">
-                         <img style="margin-left:20px;" src="/images/share.gif" height="30px" width="30px" />
-                     </a>
-
-                     <?php $shareLink = 'show_post?postID='.$postID.'&email=1';
-                     $shareLink = $postPath.$shareLink;
-                     $shortLink = shortenUrl($shareLink);
-                     ?>
-                     <input id="<?php echo $shareLinkID ?>" style="display:none;margin-left:20px;" value ="<?php echo $shortLink ?>" />
-                 <?php } ?>
+                <?php } ?>
 
             <?php } ?>
 
@@ -275,33 +261,36 @@ if (mysql_num_rows($rollCallResult) > 0) {
 
                     <?php if ($reposterID == $ID) { } else { ?>
 
-                    <form style="float:left;margin-top:10px;" action="" method="post" onsubmit="return confirm('Are you sure you want to repost this?') && saveScrollPositionOnLinkClick(this)">
-                        <input type="image" id="btnRepost" name="btnRepost" value="Repost" src="/images/repost_icon.png" style="margin-left:20px;margin-top:3px;" />
-                        <input type="hidden" id="memberID" name="memberID" value="<?php echo $memberID ?>" />
-                        <input type="hidden" id="ownerID" name="ownerID" value="<?php echo $memberID ?>" />
-                        <input type="hidden" id="postID" name="postID" value="<?php echo $postID ?>" />
-                        <input type="hidden" id="postDate" name="postDate" value="<?php echo $postDate ?>" />
-                        <input type="hidden" id="reposterID" name="reposterID" value="<?php echo $ID ?>" />
-                        <input type="hidden" name="scrollx" id="scrollx" value="0"/>
-                        <input type="hidden" name="scrolly" id="scrolly" value="0"/>
-                    </form>
+                        <form style="float:left;margin-top:13px;" action="" method="post" onsubmit="return confirm('Are you sure you want to repost this?') && saveScrollPositions(this)">
+                            <input type="image" id="btnRepost" name="btnRepost" value="Repost" src="/images/repost_icon.png" style="margin-left:20px;margin-top:3px;" />
+                            <input type="hidden" id="memberID" name="memberID" value="<?php echo $memberID ?>" />
+                            <input type="hidden" id="ownerID" name="ownerID" value="<?php echo $memberID ?>" />
+                            <input type="hidden" id="postID" name="postID" value="<?php echo $postID ?>" />
+                            <input type="hidden" id="postDate" name="postDate" value="<?php echo $postDate ?>" />
+                            <input type="hidden" id="reposterID" name="reposterID" value="<?php echo $ID ?>" />
+                            <input type="hidden" name="scrollx" id="scrollx" value="0"/>
+                            <input type="hidden" name="scrolly" id="scrolly" value="0"/>
+                        </form>
 
-                <?php } ?>
+                    <?php } ?>
 
 
-                    <?php $optionsID = "options$postID"; ?>
+                    <?php $optionsID = "options$prestinePostID"; ?>
 
-                            <a href="javascript:showOptions('<?php echo $optionsID ?>');" style="font-size:20px;margin-left:20px;margin-top:5px;color:#8899a6;float:left;">...</a>
-                            <div style="display:none;" id="<?php echo $optionsID ?>">
-                            <form action="" method="post" onsubmit="return confirm('Do you really want to block this member?') && saveScrollPositions(this) ">
-                                <input type="hidden" id="blockedID" name="blockedID" class="blockedID" value="<?php echo $memberID ?>" />
-                                <input type="hidden" id="ID" name="ID" class="ID" value="<?php echo $ID ?>" />
-                                <input type="hidden" name="scrollx" id="scrollx" value="0"/>
-                                <input type="hidden" name="scrolly" id="scrolly" value="0"/>
-                                <input type="submit" id="block" name="block" class="btnBlock" style="margin-left:10px;" value="Block This User" />
-                            </form>
-                        </div>
+                    <a href="javascript:showOptions('<?php echo $optionsID ?>');" style="font-size:20px;margin-left:20px;margin-top:5px;color:#8899a6;float:left;">...</a>
 
+
+                    <?php
+                    $postPath = getPostPath();
+                    $shareLinkID = "shareLink$prestinePostID"; ?>
+                    <a style="float:left;margin-top:10px;" href="javascript:showLink('<?php echo $shareLinkID ?>');">
+                        <img style="margin-left:20px;" src="/images/share.png" height="30px" width="30px" />
+                    </a>
+
+                    <?php $shareLink = 'show_post?postID='.$postID.'&email=1';
+                    $shareLink = $postPath.$shareLink;
+                    $shortLink = shortenUrl($shareLink);
+                    ?>
 
 
 
@@ -312,12 +301,6 @@ if (mysql_num_rows($rollCallResult) > 0) {
 
                 <?php
 
-                if (!isset($ID)) {
-                    $disabled = "disabled";
-                }
-                else {
-                    $disabled = "";
-                }
 
                 if (isEmailValidated($ID) && hasOnePost($ID)) {
                     $disabled = '';
@@ -335,18 +318,40 @@ if (mysql_num_rows($rollCallResult) > 0) {
 
                 ?>
 
+                <hr class="hr-line"/>
+                <div class="content-space" style="clear:both;margin-top:-20px;">
 
-                <div class="content-space">
+                    <!--Show block button here show it displays clearly between engagement icons and comment box -->
+                    <div style="display:none;" id="<?php echo $optionsID ?>">
+                        <form action="" method="post" onsubmit="return confirm('Do you really want to block this member?') && saveScrollPositions(this) ">
+                            <input type="hidden" id="blockedID" name="blockedID" class="blockedID" value="<?php echo $memberID ?>" />
+                            <input type="hidden" id="ID" name="ID" class="ID" value="<?php echo $ID ?>" />
+                            <input type="hidden" name="scrollx" id="scrollx" value="0"/>
+                            <input type="hidden" name="scrolly" id="scrolly" value="0"/>
+                            <input type="submit" id="block" name="block" class="btn btn-primary" style="margin-left:10px;background:red;" value="Block This User" />
+                        </form>
+                    </div>
 
+                    <!--Show share link here show it displays clearly between engagement icons and comment box -->
+                    <input id="<?php echo $shareLinkID ?>" style="display:none;margin-left:20px;" value ="<?php echo $shortLink ?>" />
+
+
+                    <!--Comment box -->
                     <?php if (isset($ID)) { ?>
-                        <form method="post" action="" enctype="multipart/form-data"
+                        <form style="margin-top:20px;float:left" method="post" action="" enctype="multipart/form-data"
                               onsubmit="showCommentUploading('comment<?php echo $postID?>', this);">
 
-                            <input type="text" class="form-control" name="postComment" id="postComment"
-                                   placeholder="Write a comment" title='' <?php echo $disabled ?> />
+
 
                             <?php if ($iPhone || $iPad || $Android) { ?>
-                                <input type="file" name="flPostMedia" id="flPostMedia" class="flPostMedia"/>
+                                <div class="fileUpload btn btn-primary" style="background:transparent;border:none;float:left;margin-top:-10px;">
+                                    <img src="/images/camera.png" style ="width:40px;height:30px;float:left;margin-left:-10px" />
+                                    <input type="file" name="flPostMedia" id="flPostMedia" class="flPostMedia"/>
+                                </div>
+
+                                <textarea style="float:left;margin-top:-5px;border:none;"  type="text" name="postComment" id="postComment"
+                                          placeholder="Write a comment" title='' <?php echo $disabled ?> ></textarea>
+                                <input style="float:left;margin-left:5px;" type="submit" name="btnComment" id="btnComment" class="btn btn-primary" Value="Comment" <?php echo $disabled ?> />
                             <?php } ?>
 
                             <br/>
@@ -357,7 +362,9 @@ if (mysql_num_rows($rollCallResult) > 0) {
                                     </div>
                                 </div>
                             </div>
-                            <input type="submit" name="btnComment" id="btnComment" class="btnComment" Value="Comment" <?php echo $disabled ?> />
+
+
+
                             <input type="hidden" name="postID" id="postID" class="postID" Value="<?php echo $postID ?>"/>
                             <input type="hidden" name="ID" id="ID" class="ID" value="<?php echo $ID ?>"/>
                             <input type="hidden" name="ownerID" class="ownerID" id="ownerID" value="<?php echo $memberID ?>"/>
@@ -390,7 +397,7 @@ if (mysql_num_rows($rollCallResult) > 0) {
                     $result3 = mysql_query($sql3) or die(logError(mysql_error(), $url, "Gettig first 3 Connection Feed comments"));
                     echo '<br/>';
                     if (mysql_num_rows($result3) > 0) {
-                        echo '<div class="comment-style">';
+                        echo '<div class="comment-style" style="clear:both;margin-top:10px;">';
                         while ($rows3 = mysql_fetch_assoc($result3)) {
                             $comment = $rows3['PostComment'];
                             $profilePhoto = $rows3['ProfilePhoto'];

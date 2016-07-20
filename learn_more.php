@@ -65,7 +65,7 @@ if (!empty($_SESSION['ID'])) {
 
     <body class="index" style="background:#e3e3e3">
 
-    <div align="left" >
+    <div align="left" style="margin-top:-25px;">
 
 
         <!-- Modal -->
@@ -97,7 +97,7 @@ if (!empty($_SESSION['ID'])) {
     </div>
     <!-- End Modal -->
 
-    <div class="row" style="margin-top:-20px;background:white;">
+    <div class="row" style="background:white;">
         <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12" >
 
             <div class="visible-xs" style="padding-left:10px;padding-top:10px;">
@@ -118,11 +118,12 @@ if (!empty($_SESSION['ID'])) {
                     <tr>
                         <td style="padding-left:0px;">
                             <h5>
-                                Playdoe is a social network that pays you for every <b>like</b>, <b>comment</b>, <b>follower</b> and <b>referral</b>.
+                                Playdoe is a social network that pays you for every <b style="color:gray">like</b>, <b style="color:gray">comment</b>,
+                                <b style="color:gray">follower</b> and <b style="color:gray">referral</b>.
                             </h5>
-                            <lead>
+                            <span style="color:gray;font-size:12px;font-weight:600">
                                 Checkout our <a href="http://officialplaydoe.tumblr.com/" target="_blank">blog</a> to learn more.
-                            </lead>
+                            </span>
                             <br/><br/>
                             <a href="https://twitter.com/officialplaydoe" class="twitter-follow-button" data-show-count="false">Follow @officialplaydoe</a>
                             <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
@@ -142,11 +143,12 @@ if (!empty($_SESSION['ID'])) {
                         </td>
                         <td style="padding-left:10px;">
                             <h4>
-                                Playdoe is a social network that pays you for every <b>like</b>, <b>comment</b>, <b>follower</b> and <b>referral</b>.
+                                Playdoe is a social network that pays you for every <b style="color:gray">like</b>, <b style="color:gray">comment</b>,
+                                <b style="color:gray">follower</b> and <b style="color:gray">referral</b>.
                             </h4>
-                            <lead>
+                            <span style="color:gray;font-size:14px;font-weight:600">
                                 Checkout our <a href="http://officialplaydoe.tumblr.com/" target="_blank">blog</a> to learn more.
-                            </lead>
+                            </span>
                             <br/><br/>
                             <a href="https://twitter.com/officialplaydoe" class="twitter-follow-button" data-show-count="false">Follow @officialplaydoe</a>
                             <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>

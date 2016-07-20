@@ -15,12 +15,12 @@ if (strstr($url, "local")) {
     $login = "../";
 }
 elseif (strstr($url, "dev")) {
-    $howItWorks = "http://dev.rapportbook.com/learn_more";
-    $login = "http://dev.rapportbook.com/";
+    $howItWorks = "http://dev.playdoe.com/learn_more";
+    $login = "http://dev.playdoe.com/";
 }
 else {
-    $howItWorks = "http://rapportbook.com/learn_more";
-    $login = "http://rapportbook.com/";
+    $howItWorks = "http://playdoe.com/learn_more";
+    $login = "http://playdoe.com/";
 }
 ?>
 

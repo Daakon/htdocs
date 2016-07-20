@@ -1,4 +1,3 @@
-
 <?php
 require 'imports.php';
 $ffmpeg = '/usr/local/bin/ffmpeg';
@@ -783,7 +782,7 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
 
 <!--empty onunload will clear browser cache for clean refresh -->
 <body onunload="">
-<div class="container" style="margin-top:-55px;">
+<div class="container" style="margin-top:-60px;">
     <?php
     ?>
     <div class="row row-padding">
@@ -853,7 +852,7 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
 
         <div align="center">
             <h5>
-                <input type="text" class="search" id="searchID" value="<?php $final_name ?>"
+                <input  type="text" class="search form-control" id="searchID" value="<?php $final_name ?>"
                        placeholder="Search for people" style="margin-bottom:-10px;"/>
                 <br/>
                 <div id="result"></div>
@@ -910,7 +909,7 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
 
                 </div>
 
-                <hr class="hr-line" />
+
 
                 <?php if (isEmailValidated($ID)) { ?>
 
@@ -921,15 +920,20 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
                     else {*/
                         //if (hasTenPost($ID) == false) {
                             ?>
-                            <form method="post" enctype="multipart/form-data" action="" onsubmit="return showUploading()" >
-                                <input type="file" width="10px;" name="flPostMedia[]" id="flPostMedia" />
+                            <form style="float:left" method="post" enctype="multipart/form-data" action="" onsubmit="return showUploading()" >
+
+                               <div class="fileUpload btn btn-primary" style="background:white;border:none;margin-top:20px;float:left;">
+                                    <img src="/images/camera.png" style ="width:30px;height:30px;float:left;margin-left:-10px" />
+                                <input type="file" name="flPostMedia[]" id="flPostMedia" class="flPostMedia" style="float:left;" />
+
+                                <textarea name="post" id="post" class="form-control textArea" style="float:left;"
+                                  placeholder="Share something and get paid for it" spellcheck="true"></textarea>
+
+                                </div>
                                 <div id="image-holder"> </div>
 
-                                <br/>
 
 
-                        <textarea name="post" id="post" class="form-control textArea"
-                                  placeholder="Share something and get paid for it" spellcheck="true"></textarea>
                                 <br/>
 
                                 <input type="submit" class="post-button" name="submit" id="submit" value="Post"/>
@@ -958,7 +962,7 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
                     </div>
                 </div>
 
-                <hr class="hr-line">
+              <br/><br/>
 
             <?php } ?>
 
@@ -1001,14 +1005,18 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
                 <a href="/post/playdoe"><img src="/images/50-dollar-icon.png" style="height:30px;width:30px;margin-left:20px;" /></a>
 
                 <img src="/images/dollar-sign.png" style="width:30px;height:30px;margin-left:20px;" /> <?php
-                echo "<span style='color:#888888'> </span> ". getRedeemPoints($ID, get_username($ID));
+                echo "<span style='color:#888888;margin-right:10px;'> ". getRedeemPoints($ID, get_username($ID))."</span> ";
                 if (getRedeemPoints($ID, get_username($ID)) > 9) { echo "<br/><a href='/view_messages/playdoe'><img src='/images/redeem.png' height='30' width='30' /></a>"; };
                 ?>
 
-                <hr class="hr-line"/>
+
             <?php } ?>
 
-            <!-- SMARTADDON BEGIN --> <script type="text/javascript"> (function() { var s=document.createElement('script');s.type='text/javascript';s.async = true; s.src='http://s1.smartaddon.com/share_addon.js'; var j =document.getElementsByTagName('script')[0];j.parentNode.insertBefore(s,j); })(); </script> <a href="http://www.smartaddon.com/?share" title="Share Button" onclick="return sa_tellafriend('http://playdoe.com')"><img alt="Share" src="http://s1.smartaddon.com/s12.png" border="0" /></a> <!-- SMARTADDON END -->
+
+
+            <!-- SMARTADDON BEGIN --> <script type="text/javascript"> (function() { var s=document.createElement('script');s.type='text/javascript';s.async = true; s.src='http://s1.smartaddon.com/share_addon.js'; var j =document.getElementsByTagName('script')[0];j.parentNode.insertBefore(s,j); })(); </script>
+
+<a href="http://www.smartaddon.com/?share" title="Share Button" onclick="return sa_tellafriend('http://playdoe.com')" style="margin-top:20px"><img alt="Share" src="http://s1.smartaddon.com/s12.png" border="0" /></a> <!-- SMARTADDON END -->
 
             <script>
                 function show(msg) {

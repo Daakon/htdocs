@@ -706,7 +706,7 @@ function myFunction() {
 
         <ul class="list-inline">
 
-            <li> <a style="padding-top:10px;" href="javascript:history.go(-1)">Go Back</a></li>
+            <li> <a style="padding-top:10px;" href="javascript:history.go(-1)"><img src="/images/back.png" height="20" width="20"/> </a></li>
         </ul>
 </div>
 
@@ -794,6 +794,7 @@ if (mysql_num_rows($result) > 0) {
         <?php
             $repostText = '';
             $img = '';
+            $prestinePostID = $rows['PostID'];
 
             // check if post is a repost
             if (!empty($reposterID) && isset($reposterID) && $reposterID != 0) {
@@ -885,7 +886,7 @@ if (mysql_num_rows($result) > 0) {
             $approvals = mysql_num_rows(mysql_query("SELECT * FROM PostApprovals WHERE Post_ID = '$postID'"));
 
             // show disapprove if members has approved the post
-            echo '<div class="post-approvals" style="float:left;">';
+            echo '<div class="post-approvals" style="float:left;margin-top:10px;">';
             echo "<div id = 'approvals$postID'>";
 
             if (mysql_num_rows($result2) > 0) {
@@ -923,28 +924,13 @@ if (mysql_num_rows($result) > 0) {
             // End of approvals
             //-----------------------------------------------------------
 
-
-
-                    $postPath = getPostPath();
-                    $shareLinkID = "shareLink$postID"; ?>
-                   <a style="margin-top:5px;margin-left:10px;" href="javascript:showLink('<?php echo $shareLinkID ?>');">
-                       <img src="/images/share.gif" height="30" width="30" />
-                   </a>
-
-                <?php $shareLink = 'show_post?postID='.$postID.'&email=1';
-                      $shareLink = $postPath.$shareLink;
-                      $shortLink = shortenUrl($shareLink);
-                ?>
-                <input id="<?php echo $shareLinkID ?>" style="display:none;" value ="<?php echo $shortLink ?>" />
-
-
-                 <?php if ($ID != $memberID) {?>
-                    <a style="margin-left:20px;margin-top:10px;float:left;" href="/view_messages/<?php echo $username ?>"><img src="/images/messages.png" height="20" width="20" /></a>
+                 if ($ID != $memberID) { ?>
+                    <a style="margin-left:20px;margin-top:20px;float:left;" href="/view_messages/<?php echo $username ?>"><img src="/images/messages.png" height="20" width="20" /></a>
                 <?php
 
                 if ($reposterID == $ID) { } else { ?>
 
-                    <form style="float:left;padding-right:10px;margin-top:10px" action="" method="post" onsubmit="return confirm('Are you sure you want to repost this?') && saveScrollPositionOnLinkClick(this)">
+                    <form style="float:left;margin-top:18px" action="" method="post" onsubmit="return confirm('Are you sure you want to repost this?') && saveScrollPositionOnLinkClick(this)">
                         <input type="image" id="btnRepost" name="btnRepost" value="Repost" src="/images/repost_icon.png" style="margin-left:20px;" />
                         <input type="hidden" id="memberID" name="memberID" value="<?php echo $memberID ?>" />
                         <input type="hidden" id="ownerID" name="ownerID" value="<?php echo $memberID ?>" />
@@ -956,7 +942,24 @@ if (mysql_num_rows($result) > 0) {
                         <input type="hidden" name="scrolly" id="scrolly" value="0"/>
                     </form>
 
-                <?php } } ?>
+                <?php }
+
+                      $optionsID = "options$prestinePostID"; ?>
+
+                    <a href="javascript:showOptions('<?php echo $optionsID ?>');" style="font-size:20px;margin-left:10px;margin-top:10px;color:#8899a6;float:left;">...</a>
+                <?php } ?>
+
+                <?php
+                    $postPath = getPostPath();
+                    $shareLinkID = "shareLink$postID"; ?>
+                   <a style="margin-top:11px;margin-left:10px;" href="javascript:showLink('<?php echo $shareLinkID ?>');">
+                       <img src="/images/share.png" height="30" width="30" />
+                   </a>
+
+                <?php $shareLink = 'show_post?postID='.$postID.'&email=1';
+                      $shareLink = $postPath.$shareLink;
+                      $shortLink = shortenUrl($shareLink);
+                ?>
 
 
             <?php
@@ -970,18 +973,36 @@ if (mysql_num_rows($result) > 0) {
 
             ?>
 
+        <hr class="hr-line"/>
+        <div class="content-space" style="clear:both;margin-top:-20px;" >
+
+        <!--Show block button here show it displays clearly between engagement icons and comment box -->
+        <div style="display:none;margin-top:10px;" id="<?php echo $optionsID ?>">
+            <form action="" method="post" onsubmit="return confirm('Do you really want to block this member?') && saveScrollPositions(this) ">
+                <input type="hidden" id="blockedID" name="blockedID" class="blockedID" value="<?php echo $memberID ?>" />
+                <input type="hidden" id="ID" name="ID" class="ID" value="<?php echo $ID ?>" />
+                <input type="hidden" name="scrollx" id="scrollx" value="0"/>
+                <input type="hidden" name="scrolly" id="scrolly" value="0"/>
+                <input type="submit" id="block" name="block" class="btn btn-primary" style="margin-left:10px;background:red;" value="Block This User" />
+            </form>
+        </div>
+
+        <input id="<?php echo $shareLinkID ?>" style="display:none;" value ="<?php echo $shortLink ?>" />
 
 
-        <div class="content-space">
-            <form method="post" action="" enctype="multipart/form-data"
+            <form style="margin-top:20px;" method="post" action="" enctype="multipart/form-data"
                   onsubmit="showCommentUploading('comment<?php echo $postID?>', this);">
 
-                <input type="text" class="form-control" name="postComment" id="postComment"
-                       placeholder="Write a comment" title='' <?php echo $disabled ?> />
+<?php if ($iPhone || $iPad || $Android) { ?>
+                   <div class="fileUpload btn btn-primary" style="background:transparent;border:none;float:left;margin-top:-10px;">
+                                    <img src="/images/camera.png" style ="width:40px;height:30px;float:left;margin-left:-10px" />
+                                    <input type="file" name="flPostMedia" id="flPostMedia" class="flPostMedia"/>
+                                </div>
 
-                <input type="file" name="flPostMedia" id="flPostMedia" style="max-width:180px;"/>
+                                <textarea style="float:left;margin-top:-5px;border:none;"  type="text" name="postComment" id="postComment"
+                                          placeholder="Write a comment" title='' <?php echo $disabled ?> ></textarea>
+                                <input style="float:left;margin-left:5px;" type="submit" name="btnComment" id="btnComment" class="btn btn-primary" Value="Comment" <?php echo $disabled ?> />
 
-                <br/>
                 <div id="comment<?php echo $postID ?>" style="display:none;">
                     <div class="progress">
                         <div class="progress-bar progress-bar-striped progress-bar-danger active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" >
@@ -989,8 +1010,8 @@ if (mysql_num_rows($result) > 0) {
                         </div>
                     </div>
                 </div>
-                <input type="submit" name="btnComment" id="btnComment" Value="Comment"
-                       style="border:1px solid black" <?php echo $disabled ?> />
+
+
                 <input type="hidden" name="postID" id="postID" Value="<?php echo $postID ?>"/>
                 <input type="hidden" name="ID" id="ID" value="<?php echo $ID ?>"/>
                 <input type="hidden" name="ownerId" id="ownerId" value="<?php echo $MemberID ?>"/>
@@ -999,7 +1020,7 @@ if (mysql_num_rows($result) > 0) {
                 <input type="hidden" name="scrolly" id="scrolly" value="0"/>
             </form>
 
-            <br/>
+           <?php } ?>
 
 
             <?php
@@ -1021,9 +1042,10 @@ if (mysql_num_rows($result) > 0) {
                         Group By PostComments.ID
                         Order By PostComments.ID DESC LIMIT 3 ";
             $result3 = mysql_query($sql3) or die(logError(mysql_error(), $url, "Getting first 3 comments"));
+
             echo '<br/>';
             if (mysql_num_rows($result3) > 0) {
-                echo '<div class="comment-style"'.$display.'>';
+                echo '<div style="clear:both;margin-top:10px;" class="comment-style"'.$display.'>';
                 while ($rows3 = mysql_fetch_assoc($result3)) {
                     $comment = $rows3['PostComment'];
                     $profilePhoto = $rows3['ProfilePhoto'];
