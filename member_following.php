@@ -28,7 +28,12 @@ $profileID = get_id_from_username($username);
             <?php require 'profile_menu.php'; ?>
 
             <?php
-            $sqlF = "Select count(ID) as FollowingCount FROM Follows WHERE Follower_ID = $ID";
+            $sqlF = "SELECT COUNT( Follows.ID ) AS FollowingCount
+FROM Follows, Members
+WHERE Follows.Follower_ID =1
+AND Follows.Followed_ID = Members.ID
+AND Members.IsActive =1
+AND Members.IsEmailValidated =1";
             $resultF = mysql_query($sqlF);
             $rowsF = mysql_fetch_assoc($resultF);
             $followingCount = $rowsF['FollowingCount'];

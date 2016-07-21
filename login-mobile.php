@@ -6,6 +6,8 @@ get_header();
 
 ?>
 
+<body style="background:white;">
+
 <div class="container" style="margin-top:-10px;">
 
     <div class="col-xs-12">
@@ -16,10 +18,10 @@ get_header();
 
         <form method="post" action="login.php" >
             <label class="sr-only" for="login_email">Email</label>
-            <input type="text" name="login_email" id="login_email" placeholder="Email" class="form-control"/>
+            <input type="text" name="login_email" id="login_email" placeholder="Email" class="form-control" style="border:1px solid #8899a6;" />
             <br/>
             <label class="sr-only" for="login_password">Password</label>
-            <input type="password" name="login_password" id="login_password" placeholder="Password"
+            <input type="password" name="login_password" id="login_password" placeholder="Password" style="border:1px solid #8899a6;"
                    class="form-control"/>
             <br/>
             <input type="submit" name="login" id="login" value="Log in" class="btn btn-default" style="background: #E30022;color:white;"/>
@@ -33,4 +35,5 @@ get_header();
 
 </div>
 
-</div></div>
+</div>
+</body>

@@ -852,9 +852,12 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
 
         <div align="center">
             <h5>
-                <input  type="text" class="search form-control" id="searchID" value="<?php $final_name ?>"
+<div class="inner-addon left-addon">
+<i class="glyphicon glyphicon-user"></i>
+                <input type="text" class="search form-control" id="searchID" value="<?php $final_name ?>"
                        placeholder="Search for people" style="margin-bottom:-10px;"/>
-                <br/>
+</div>
+
                 <div id="result"></div>
                 <div id="previewNames"></div>
             </h5>
@@ -891,7 +894,7 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
             if ($iPhone || $iPad || $Android) {
                 ?>
 
-                <div style="padding-left:10px;padding-bottom:0px;">
+                <div style="padding-bottom:0px;">
                     <?php require 'profile_menu.php'; ?>
 
                     <div style="margin-top:-10px">
@@ -922,21 +925,21 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
                             ?>
                             <form style="float:left" method="post" enctype="multipart/form-data" action="" onsubmit="return showUploading()" >
 
-                               <div class="fileUpload btn btn-primary" style="background:white;border:none;margin-top:20px;float:left;">
-                                    <img src="/images/camera.png" style ="width:30px;height:30px;float:left;margin-left:-10px" />
+                               <span class="fileUpload btn btn-primary" style="background:white;border:none;margin-top:20px;float:left;margin-left:-10px;">
+                                    <img src="/images/camera.png" style ="width:30px;height:30px;float:left" />
                                 <input type="file" name="flPostMedia[]" id="flPostMedia" class="flPostMedia" style="float:left;" />
+</span>
+                                <input name="post" id="post"  style="float:left;margin-top:25px;width:300px;border:none;"
+                                  placeholder="Share something and get paid for it" spellcheck="true"/>
+<br/>
 
-                                <textarea name="post" id="post" class="form-control textArea" style="float:left;"
-                                  placeholder="Share something and get paid for it" spellcheck="true"></textarea>
-
-                                </div>
-                                <div id="image-holder"> </div>
+                                <div style="clear:both" id="image-holder"> </div>
 
 
 
                                 <br/>
 
-                                <input type="submit" class="post-button" name="submit" id="submit" value="Post"/>
+                                <input style="float:left" type="submit" class="post-button" name="submit" id="submit" value="Post"/>
                             </form>
                             <?php
                         } // hasTenPost

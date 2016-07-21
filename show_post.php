@@ -445,7 +445,7 @@ echo "<script>location='/home';</script>";
             <?php
         }
         else { ?>
-            <li><a href="javascript:history.back()" style="margin-left:10px;">Go Back</a></li>
+            <li><a href="javascript:history.back()" style="margin-left:10px;"><img scr="/images/back.png" height="20" width="20" /> </a></li>
         <?php }
         ?>
 

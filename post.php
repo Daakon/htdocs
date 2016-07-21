@@ -388,13 +388,17 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
         <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6 roll-call"
              align="left" style="min-height: 10px;">
             <?php require 'profile_menu.php'; ?>
-            <img src="<?php echo get_users_photo_by_id(get_id_from_username($username)) ?>" class="profilePhoto-Feed " alt=""
-                 title="<?php echo $name ?>" />&nbsp;&nbsp;
-            <?php if (get_id_from_username($username) == $ID) {
-                echo "<span style='color:#888888'>Your posts</span>";
-            } else {
-                echo get_users_name_by_id(get_id_from_username($username))."'s Post";  }
-            ?>
+
+            <?php if (get_id_from_username($username) == $ID) { ?>
+                <img src="<?php echo get_users_photo_by_id(get_id_from_username($username)) ?>" class="profilePhoto-Feed" alt=""
+                     title="<?php echo $name ?>" />
+                <span style="color:#888888;padding-left:5px;">Your posts</span>
+                <?php
+            } else { ?>
+                <div style="margin-top:-40px"><img src="<?php echo get_users_photo_by_id(get_id_from_username($username)) ?>"  class="profilePhoto-Feed " alt=""
+                                                   title="$name ?" />
+                    <span style="color:#8888;padding-left:5px;"><?php echo get_users_name_by_id(get_id_from_username($username))?>'s Post</span></div>
+            <?php }   ?>
         </div>
 
         <?php
@@ -580,60 +584,60 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
 
 
-                        <?php if ($ID != $memberID) { ?>
+                    <?php if ($ID != $memberID) { ?>
 
-                            <?php if ($reposterID == $ID) { } else { ?>
+                        <?php if ($reposterID == $ID) { } else { ?>
 
-                                <form style="float:left;margin-top:13px;" action="" method="post" onsubmit="return confirm('Are you sure you want to repost this?') && saveScrollPositions(this)">
-                                    <input type="image" id="btnRepost" name="btnRepost" value="Repost" src="/images/repost_icon.png" style="margin-left:20px;margin-top:3px;" />
-                                    <input type="hidden" id="memberID" name="memberID" value="<?php echo $memberID ?>" />
-                                    <input type="hidden" id="ownerID" name="ownerID" value="<?php echo $memberID ?>" />
-                                    <input type="hidden" id="postID" name="postID" value="<?php echo $postID ?>" />
-                                    <input type="hidden" id="postDate" name="postDate" value="<?php echo $postDate ?>" />
-                                    <input type="hidden" id="reposterID" name="reposterID" value="<?php echo $ID ?>" />
-                                    <input type="hidden" name="scrollx" id="scrollx" value="0"/>
-                                    <input type="hidden" name="scrolly" id="scrolly" value="0"/>
-                                </form>
-
-                            <?php } ?>
-
-
-                            <?php $optionsID = "options$prestinePostID"; ?>
-
-                            <a href="javascript:showOptions('<?php echo $optionsID ?>');" style="font-size:20px;margin-left:20px;margin-top:5px;color:#8899a6;float:left;">...</a>
-
-
-                            <?php
-                            $postPath = getPostPath();
-                            $shareLinkID = "shareLink$prestinePostID"; ?>
-                            <a style="float:left;margin-top:10px;" href="javascript:showLink('<?php echo $shareLinkID ?>');">
-                                <img style="margin-left:20px;" src="/images/share.png" height="30px" width="30px" />
-                            </a>
-
-                            <?php $shareLink = 'show_post?postID='.$postID.'&email=1';
-                            $shareLink = $postPath.$shareLink;
-                            $shortLink = shortenUrl($shareLink);
-                            ?>
-
-
-
-                        <?php } ?>
-
-
-
-                            <!--DELETE BUTTON ------------------>
-                            <?php if ($ID == get_id_from_username($username)) { ?>
-                            <form style="float:left;margin-top:20px;margin-left:10px;" action="" method="post" onsubmit="return confirm('Do you really want to delete this post?')">
-                                <input type="hidden" name="postID" id="postID" value="<?php echo $postID ?>"/>
-                                <input type="hidden" name="repostID" id="repostID" value="<?php echo $repostID ?>" />
-                                <input type="hidden" name="isRepost" id="isRepost" value="<?php echo $isRepost ?>" />
-                                <input type="image" name="Delete" id="Delete" value="Delete" src="/images/delete.png" style="height:20px;width:20px;" />
+                            <form style="float:left;margin-top:13px;" action="" method="post" onsubmit="return confirm('Are you sure you want to repost this?') && saveScrollPositions(this)">
+                                <input type="image" id="btnRepost" name="btnRepost" value="Repost" src="/images/repost_icon.png" style="margin-left:20px;margin-top:3px;" />
+                                <input type="hidden" id="memberID" name="memberID" value="<?php echo $memberID ?>" />
+                                <input type="hidden" id="ownerID" name="ownerID" value="<?php echo $memberID ?>" />
+                                <input type="hidden" id="postID" name="postID" value="<?php echo $postID ?>" />
+                                <input type="hidden" id="postDate" name="postDate" value="<?php echo $postDate ?>" />
+                                <input type="hidden" id="reposterID" name="reposterID" value="<?php echo $ID ?>" />
+                                <input type="hidden" name="scrollx" id="scrollx" value="0"/>
+                                <input type="hidden" name="scrolly" id="scrolly" value="0"/>
                             </form>
+
                         <?php } ?>
 
 
-                        <!------------------------------------->
+                        <?php $optionsID = "options$prestinePostID"; ?>
+
+                        <a href="javascript:showOptions('<?php echo $optionsID ?>');" style="font-size:20px;margin-left:20px;margin-top:5px;color:#8899a6;float:left;">...</a>
+
+
                         <?php
+                        $postPath = getPostPath();
+                        $shareLinkID = "shareLink$prestinePostID"; ?>
+                        <a style="float:left;margin-top:10px;" href="javascript:showLink('<?php echo $shareLinkID ?>');">
+                            <img style="margin-left:20px;" src="/images/share.png" height="30px" width="30px" />
+                        </a>
+
+                        <?php $shareLink = 'show_post?postID='.$postID.'&email=1';
+                        $shareLink = $postPath.$shareLink;
+                        $shortLink = shortenUrl($shareLink);
+                        ?>
+
+
+
+                    <?php } ?>
+
+
+
+                    <!--DELETE BUTTON ------------------>
+                    <?php if ($ID == get_id_from_username($username)) { ?>
+                        <form style="float:left;margin-top:20px;margin-left:10px;" action="" method="post" onsubmit="return confirm('Do you really want to delete this post?')">
+                            <input type="hidden" name="postID" id="postID" value="<?php echo $postID ?>"/>
+                            <input type="hidden" name="repostID" id="repostID" value="<?php echo $repostID ?>" />
+                            <input type="hidden" name="isRepost" id="isRepost" value="<?php echo $isRepost ?>" />
+                            <input type="image" name="Delete" id="Delete" value="Delete" src="/images/delete.png" style="height:20px;width:20px;" />
+                        </form>
+                    <?php } ?>
+
+
+                    <!------------------------------------->
+                    <?php
 
 
                     //Detect device
@@ -645,19 +649,19 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                     ?>
 
 
-                        <hr class="hr-line"/>
-                        <div style="clear:both;margin-top:-20px;margin-bottom:10px;">
+                    <hr class="hr-line"/>
+                    <div style="clear:both;margin-top:-20px;margin-bottom:10px;">
 
 
-                            <!--Show block button here show it displays clearly between engagement icons and comment box -->
-                            <div style="display:none;" id="<?php echo $optionsID ?>">
-                                <form action="" method="post" onsubmit="return confirm('Do you really want to block this member?') && saveScrollPositions(this) ">
-                                    <input type="hidden" id="blockedID" name="blockedID" class="blockedID" value="<?php echo $memberID ?>" />
-                                    <input type="hidden" id="ID" name="ID" class="ID" value="<?php echo $ID ?>" />
-                                    <input type="hidden" name="scrollx" id="scrollx" value="0"/>
-                                    <input type="hidden" name="scrolly" id="scrolly" value="0"/>
-                                    <input type="submit" id="block" name="block" class="btn btn-primary" style="margin-left:10px;background:red;" value="Block This User" />
-                                </form>
+                        <!--Show block button here show it displays clearly between engagement icons and comment box -->
+                        <div style="display:none;" id="<?php echo $optionsID ?>">
+                            <form action="" method="post" onsubmit="return confirm('Do you really want to block this member?') && saveScrollPositions(this) ">
+                                <input type="hidden" id="blockedID" name="blockedID" class="blockedID" value="<?php echo $memberID ?>" />
+                                <input type="hidden" id="ID" name="ID" class="ID" value="<?php echo $ID ?>" />
+                                <input type="hidden" name="scrollx" id="scrollx" value="0"/>
+                                <input type="hidden" name="scrolly" id="scrolly" value="0"/>
+                                <input type="submit" id="block" name="block" class="btn btn-primary" style="margin-left:10px;background:red;" value="Block This User" />
+                            </form>
                         </div>
 
                         <input id="<?php echo $shareLinkID ?>" style="display:none;margin-left:10px;" value ="<?php echo $shortLink ?>" />
