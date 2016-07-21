@@ -7,7 +7,7 @@ get_header();
 
 
 
-<body>
+<body style="background:white;">
 
 <div class="container" >
 
@@ -52,7 +52,7 @@ get_header();
                 <img src="/images/Playdoe-Logo.png" height="50" width="50" />
                 <span class="lead bold">Reset Password</span>
                 <br/><br/>
-                <input type="text" class="form-control" id="email" name="email" placeholder="Email"/>
+                <input type="text" class="form-control" id="email" name="email" placeholder="Email" style="border: 1px solid #8899a6;"/>
             </div>
 
             <input type="submit" id="submit" name="submit" value="Reset Password" class="btn btn-default"/>

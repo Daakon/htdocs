@@ -19,7 +19,7 @@ $profileID = get_id_from_username($username);
 ?>
 
 
-<div class="container">
+<div class="container" style="margin-top:-50px;">
 
     <div class="row row-padding" >
 

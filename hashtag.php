@@ -586,6 +586,21 @@ if (isset($_POST['btnRepost']) && ($_POST['btnRepost'] == "Repost")) {
 }
 ?>
 
+<?php
+// block member
+if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
+    $blockedID = $_POST['blockedID'];
+    $ID = $_POST['ID'];
+
+    $scrollx = $_REQUEST['scrollx'];
+    $scrolly = $_REQUEST['scrolly'];
+
+    $sql = "INSERT INTO Blocks (BlockerID,   BlockedID) Values
+                              ('$ID',  '$blockedID')";
+    mysql_query($sql) or die(mysql_error());
+    echo "<script>location='/hashtag?hashtag=$hashtag&scrollx=$scrollx&scrolly=$scrolly';</script>";
+}
+?>
 
 <script type="text/javascript">
     function saveScrollPositions(theForm) {

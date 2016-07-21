@@ -330,11 +330,25 @@ $sql = "INSERT INTO Posts (Member_ID,     Post, Reposter_ID, OrigPost_ID, PostDa
                               ('$memberID', '$post', $ID,        $postID,     '$postDate')";
 mysql_query($sql) or die(mysql_error());
 
-echo "<script>location='/home';</script>";
+    echo "<script>location='/show_post?postID=$postID&scrollx=$scrollx&scrolly=$scrolly'</script>";
 }
 ?>
 
+<?php
+// block member
+if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
+    $blockedID = $_POST['blockedID'];
+    $ID = $_POST['ID'];
 
+    $scrollx = $_REQUEST['scrollx'];
+    $scrolly = $_REQUEST['scrolly'];
+
+    $sql = "INSERT INTO Blocks (BlockerID,   BlockedID) Values
+                              ('$ID',  '$blockedID')";
+    mysql_query($sql) or die(mysql_error());
+    echo "<script>location='/home';</script>";
+}
+?>
 
 <script src="/resources/js/site.js"></script>
 
