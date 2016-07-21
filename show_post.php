@@ -445,7 +445,7 @@ echo "<script>location='/home';</script>";
             <?php
         }
         else { ?>
-            <li><a href="javascript:history.back()" style="margin-left:10px;"><img scr="/images/back.png" height="20" width="20" /> </a></li>
+            <li><a href="javascript:history.back()" style="margin-left:10px;">Go Back</a></li>
         <?php }
         ?>
 
@@ -531,6 +531,7 @@ echo "<script>location='/home';</script>";
                 <?php
                 $repostText = '';
                 $img = '';
+                $prestinePostID = $rows['PostID'];
 
                 // check if post is a repost
                 if (!empty($reposterID) && isset($reposterID) && $reposterID != 0) {
@@ -586,6 +587,12 @@ echo "<script>location='/home';</script>";
                 </div>
 
                <?php
+               if (empty($ID) && !isset($ID)) {
+                   $disabled = 'readonly';
+               }
+               else {
+                   $disabled = '';
+               }
 
                //check if member has approved this post
                //----------------------------------------------------------------
@@ -600,19 +607,14 @@ echo "<script>location='/home';</script>";
                $approvals = mysql_num_rows(mysql_query("SELECT * FROM PostApprovals WHERE Post_ID = $postID "));
 
                // show disapprove if members has approved the post
-               echo '<table class="margin-bottom-20">';
+               echo '<table style="float:left;margin-top:5px;">';
                echo '<tr>';
                echo '<td>';
                echo "<div id = 'approvals$postID'>";
 
                // re-instantiate session and cookie variables to detect if user is logged in
                require 'getSession.php';
-               if (empty($ID) && !isset($ID)) {
-                   $readonly = 'readonly';
-               }
-               else {
-                   $readonly = '';
-               }
+
 
                if (mysql_num_rows($result2) > 0) {
 
@@ -651,78 +653,78 @@ echo "<script>location='/home';</script>";
                echo "</div>";
 
 
-                 if (isset($ID)) { ?>
+               if ($ID != $memberID) { ?>
+                   <a style="padding-left:20px;float:left;margin-top:10px;" href="/view_messages/<?php echo $username ?>"><img src="/images/messages.png" height="20" width="20" /></a>
 
-                    <?php if ($ID != $memberID) {?>
-                        <a style="padding-left:20px;" href="/view_messages/<?php echo $username ?>"><span class="engageText"><img src = "/images/messages.png" height="20" width="20" /> Message </span> </a>
-                    <?php } ?>
-                <?php } ?>
+                   <?php
 
+                   if ($reposterID == $ID) { } else { ?>
+
+                       <form style="float:left;margin-top:10px" action="" method="post" onsubmit="return confirm('Are you sure you want to repost this?') && saveScrollPositionOnLinkClick(this)">
+                           <input type="image" id="btnRepost" name="btnRepost" value="Repost" src="/images/repost_icon.png" style="margin-left:20px;" />
+                           <input type="hidden" id="memberID" name="memberID" value="<?php echo $memberID ?>" />
+                           <input type="hidden" id="ownerID" name="ownerID" value="<?php echo $memberID ?>" />
+                           <input type="hidden" id="postID" name="postID" value="<?php echo $postID ?>" />
+                           <input type="hidden" id="postDate" name="postDate" value="<?php echo $postDate ?>" />
+                           <input type="hidden" id="reposterID" name="reposterID" value="<?php echo $ID ?>" />
+                           <input type="hidden" name="hashtag" id="hashtag" value ="<?php echo $hashtag ?>" />
+                           <input type="hidden" name="scrollx" id="scrollx" value="0"/>
+                           <input type="hidden" name="scrolly" id="scrolly" value="0"/>
+                       </form>
+
+                   <?php } }
+
+               $optionsID = "options$prestinePostID";
+
+               ?>
+
+                <a href="javascript:showOptions('<?php echo $optionsID ?>');" style="font-size:20px;margin-left:10px;color:#8899a6;float:left;">...</a>
 
                 <?php
+
                 $postPath = getPostPath();
                 $shareLinkID = "shareLink$postID"; ?>
-                <a style="margin-top:-5px;" href="javascript:showLink('<?php echo $shareLinkID ?>');">
-                    <img style="margin-left:20px;" src="/images/share.gif" height="50px" width="50px" />
+                <a style="margin-top:3px;margin-left:10px;" href="javascript:showLink('<?php echo $shareLinkID ?>');">
+                    <img src="/images/share.png" height="30" width="30" />
                 </a>
 
                 <?php $shareLink = 'show_post?postID='.$postID.'&email=1';
                 $shareLink = $postPath.$shareLink;
                 $shortLink = shortenUrl($shareLink);
+
                 ?>
-                <input id="<?php echo $shareLinkID ?>" style="display:none;margin-left:20px;" value ="<?php echo $shortLink ?>" />
-
-                <?php if ($ID != $memberID) {?>
-                <a style="padding-left:20px;float:left;" href="/view_messages/<?php echo $username ?>"><img src="/images/messages.png" height="20" width="20" /></a>
-
-                <?php
-
-                if ($reposterID == $ID) { } else { ?>
-
-                    <form style="float:left;padding-right:10px;margin-top:-2px" action="" method="post" onsubmit="return confirm('Are you sure you want to repost this?') && saveScrollPositionOnLinkClick(this)">
-                        <input type="image" id="btnRepost" name="btnRepost" value="Repost" src="/images/repost_icon.png" style="margin-left:20px;" />
-                        <input type="hidden" id="memberID" name="memberID" value="<?php echo $memberID ?>" />
-                        <input type="hidden" id="ownerID" name="ownerID" value="<?php echo $memberID ?>" />
-                        <input type="hidden" id="postID" name="postID" value="<?php echo $postID ?>" />
-                        <input type="hidden" id="postDate" name="postDate" value="<?php echo $postDate ?>" />
-                        <input type="hidden" id="reposterID" name="reposterID" value="<?php echo $ID ?>" />
-                        <input type="hidden" name="hashtag" id="hashtag" value ="<?php echo $hashtag ?>" />
-                        <input type="hidden" name="scrollx" id="scrollx" value="0"/>
-                        <input type="hidden" name="scrolly" id="scrolly" value="0"/>
-                    </form>
-
-                <?php } }?>
 
                 <hr class="hr-line" />
 
-                <?php
+                <div class="content-space" style="clear:both;margin-top:-20px;">
 
-                if (isEmailValidated($ID) && hasOnePost($ID)) {
-                    $disabled = '';
-                } else {
-                    $disabled = 'disabled';
-                }
+                    <!--Show block button here show it displays clearly between engagement icons and comment box -->
+                    <div style="display:none;margin-top:10px;" id="<?php echo $optionsID ?>">
+                        <form action="" method="post" onsubmit="return confirm('Do you really want to block this member?') && saveScrollPositions(this) ">
+                            <input type="hidden" id="blockedID" name="blockedID" class="blockedID" value="<?php echo $memberID ?>" />
+                            <input type="hidden" id="ID" name="ID" class="ID" value="<?php echo $ID ?>" />
+                            <input type="hidden" name="scrollx" id="scrollx" value="0"/>
+                            <input type="hidden" name="scrolly" id="scrolly" value="0"/>
+                            <input type="submit" id="block" name="block" class="btn btn-primary" style="margin-left:10px;background:red;" value="Block This User" />
+                        </form>
+                    </div>
+
+                    <input id="<?php echo $shareLinkID ?>" style="display:none;" value ="<?php echo $shortLink ?>" />
 
 
-                //Detect device
-                $iPod    = stripos($_SERVER['HTTP_USER_AGENT'],"iPod");
-                $iPhone  = stripos($_SERVER['HTTP_USER_AGENT'],"iPhone");
-                $iPad    = stripos($_SERVER['HTTP_USER_AGENT'],"iPad");
-                $Android = stripos($_SERVER['HTTP_USER_AGENT'],"Android");
-                $webOS   = stripos($_SERVER['HTTP_USER_AGENT'],"webOS");
-                ?>
-
-                <div class="content-space">
-
-                    <form method="post" action="" enctype="multipart/form-data"
+                    <form style="float:left;margin-top:20px;" method="post" action="" enctype="multipart/form-data"
                           onsubmit="showCommentUploading('comment<?php echo $postID?>', this);">
 
-                        <input type="text" class="form-control" name="postComment" id="postComment"
-                               placeholder="Write a comment" title='' <?php echo $disabled ?> />
 
                         <?php if ($iPhone || $iPad || $Android) { ?>
-                            <h6>Add Photo/Video</h6>
-                            <input type="file" name="flPostMedia" id="flPostMedia" class="flPostMedia"/>
+                            <div class="fileUpload btn btn-primary" style="background:transparent;border:none;float:left;margin-top:-10px;">
+                                <img src="/images/camera.png" style ="width:40px;height:30px;float:left;margin-left:-10px" />
+                                <input type="file" name="flPostMedia" id="flPostMedia" class="flPostMedia"/>
+                            </div>
+
+                            <textarea style="float:left;margin-top:-5px;border:none;"  type="text" name="postComment" id="postComment"
+                                      placeholder="Write a comment" title='' <?php echo $disabled ?> ></textarea>
+                            <input style="float:left;margin-left:5px;" type="submit" name="btnComment" id="btnComment" class="btn btn-primary" Value="Comment" <?php echo $disabled ?> />
                         <?php } ?>
 
                         <br/>
@@ -734,7 +736,7 @@ echo "<script>location='/home';</script>";
                             </div>
                         </div>
 
-                        <input type="submit" name="btnComment" id="btnComment" Value="Comment" <?php echo $disabled ?> />
+
                         <input type="hidden" name="postID" id="postID" Value="<?php echo $postID ?>"/>
                         <input type="hidden" name="ID" id="ID" value="<?php echo $ID ?>"/>
                         <input type="hidden" name="ownerId" id="ownerId" value="<?php echo $MemberID ?>"/>
@@ -768,7 +770,7 @@ echo "<script>location='/home';</script>";
                     $result3 = mysql_query($sql3) or die(logError(mysql_error(), $url, "Getting first 3 comments"));
                     echo '<br/>';
                     if (mysql_num_rows($result3) > 0) {
-                        echo '<div class="comment-style">';
+                        echo '<div class="comment-style" style="clear:both">';
                         while ($rows3 = mysql_fetch_assoc($result3)) {
                             $comment = $rows3['PostComment'];
                             $profilePhoto = $rows3['ProfilePhoto'];

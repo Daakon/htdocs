@@ -208,6 +208,12 @@ if (mysql_num_rows($rollCallResult) > 0) {
             </div>
 
             <?php
+            if (isEmailValidated($ID) && hasOnePost($ID)) {
+                $disabled = '';
+            } else {
+                $disabled = 'disabled';
+            }
+
             //check if member has approved this post
             //----------------------------------------------------------------
             //require 'getSessionType.php';
@@ -297,16 +303,7 @@ if (mysql_num_rows($rollCallResult) > 0) {
                 <?php } ?>
 
 
-
-
                 <?php
-
-
-                if (isEmailValidated($ID) && hasOnePost($ID)) {
-                    $disabled = '';
-                } else {
-                    $disabled = 'disabled';
-                }
 
 
                 //Detect device

@@ -873,6 +873,13 @@ if (mysql_num_rows($result) > 0) {
 
 <?php
 
+
+               if (isEmailValidated($ID) && hasOnePost($ID)) {
+                    $disabled = '';
+                } else {
+                    $disabled = 'disabled';
+                }
+
                      //check if member has approved this post
             //----------------------------------------------------------------
             //require 'getSessionType.php';
@@ -962,16 +969,7 @@ if (mysql_num_rows($result) > 0) {
                 ?>
 
 
-            <?php
 
- if (isEmailValidated($ID) && hasOnePost($ID)) {
-                    $disabled = '';
-                } else {
-                    $disabled = 'disabled';
-                }
-
-
-            ?>
 
         <hr class="hr-line"/>
         <div class="content-space" style="clear:both;margin-top:-20px;" >

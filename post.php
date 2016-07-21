@@ -482,7 +482,15 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                             $reposterName = get_users_name($ID);
                             $repostText = "$img You reposted <br/><br/>";
                             $reposterUsername = get_username($ID);
-                            $isRepost = true;
+                            echo "<div style='margin-left:10px;color:#8899a6;float:left;'><a style='color:#8899a6' href='/$reposterUsername'>$repostText</a></div>";
+                        }
+                        else {
+                            $img = "<img src='/images/repost_icon.png' style='float:left;' height='20' width='20'/>";
+                            $reposterName = get_users_name($reposterID);
+                            $reposterUsername = get_username($reposterID);
+                            $repostText = $img . $reposterName ." reposted <br/><br/>";
+
+
                             echo "<div style='margin-left:10px;color:#8899a6;float:left;'><a style='color:#8899a6' href='/$reposterUsername'>$repostText</a></div>";
                         }}
 
@@ -536,6 +544,11 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                     </div>
 
                     <?php
+                    if (isEmailValidated($ID) && hasOnePost($ID)) {
+                        $disabled = '';
+                    } else {
+                        $disabled = 'disabled';
+                    }
                     //check if member has approved this post
                     //----------------------------------------------------------------
                     //require 'getSessionType.php';
