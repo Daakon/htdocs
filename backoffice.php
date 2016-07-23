@@ -18,7 +18,6 @@ if (isset($_POST['redeem']) && $_POST['redeem'] == 'Redeem') {
     $referralID = $_POST['referralID'];
 
     $sql = "Update PostApprovals
-    Update PostApprovals
     Join Members
     ON PostApprovals.Member_ID = Members.ID
     Set IsRedeemed = 1
@@ -46,7 +45,7 @@ if (isset($_POST['redeem']) && $_POST['redeem'] == 'Redeem') {
        WHERE Referrals.Referral_ID = '$referralID' and Members.IsEmailValidated = 1 ";
        mysql_query($sql4);
 
-    echo "<script>alert('Redemption process successful'); location = '/backoffice?username=$username' ";
+    echo "<script>alert('Redemption process successful');location = '/backoffice?username=$username' </script>";
 }
 ?>
 
@@ -164,13 +163,14 @@ if (isset($_POST['redeem']) && $_POST['redeem'] == 'Redeem') {
 
             <br/><br/>
 
-            <form action="" method="post" onsubmit="return confirm('Are you sure you want to redeem this member')">
+            <form style="float:left" action="" method="post" onsubmit="return confirm('Are you sure you want to redeem this member')">
                 <input type="hidden" name="memberID" id="memberID" value="<?php echo $memberID ?>" />
                 <input type="hidden" name="username" id="username" value="<?php echo $username ?>" />
                 <input type="hidden" name="referralID" id="referralID" value="<?php echo $referralID ?>" />
                 <input type="submit" name="redeem" id="redeem" value="Redeem" class="btn btn-primary" />
             </form>
 
+            <a style="float:left;padding-left:10px;" href="/view_messages/<?php echo $username ?>">Back To Messages</a>
         <?php
 
         }
