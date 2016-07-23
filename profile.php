@@ -24,21 +24,21 @@ $_SESSION['Username'] = $urlUsername;
 <?php
 // handle upload profile pic
 if (isset($_POST['photo']) && ($_POST['photo'] == "Upload Photo")) {
-    if (isset($_FILES['flPostPhoto']) && strlen($_FILES['flPostPhoto']['name']) > 1) {
-        if ($_FILES['flPostPhoto']['size'] > 5000000000) {
+    if (isset($_FILES['flPostMedia']) && strlen($_FILES['flPostMedia']['name']) > 1) {
+        if ($_FILES['flPostMedia']['size'] > 5000000000) {
             echo '<script>alert("File is too large");</script>';
             exit;
         }
 
 
         // add unique id to image name to make it unique and add it to the file server
-        $mediaName = $_FILES["flPostPhoto"]["name"];
+        $mediaName = $_FILES["flPostMedia"]["name"];
         // remove ALL WHITESPACE from image name
         $mediaName = preg_replace('/\s+/', '', $mediaName);
         // remove ALL SPECIAL CHARACTERS, Images paths are extremely sensitive
         $mediaName = str_replace('/[^A-Za-z0-9\-]/', '', $mediaName);
         $mediaName = uniqid() . $mediaName;
-        $mediaFile = $_FILES['flPostPhoto']['tmp_name'];
+        $mediaFile = $_FILES['flPostMedia']['tmp_name'];
 
         $checkImage = getimagesize($mediaFile);
         $width = $checkImage[0];
@@ -49,7 +49,7 @@ if (isset($_POST['photo']) && ($_POST['photo'] == "Upload Photo")) {
             exit;
         }
 
-        $type = $_FILES["flPostPhoto"]["type"];
+        $type = $_FILES["flPostMedia"]["type"];
         require 'media_post_file_path.php';
         if ($type == "image/jpeg") {
             $src = imagecreatefromjpeg($mediaFile);
@@ -196,8 +196,9 @@ if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
     $state = $_POST['State'];
     $zip = $_POST['Zip'];
     $showZip = $_POST['ShowZip'];
-    $phone = $_POST['Phone'];
+
     $showPhone = $_POST['ShowPhone'];*/
+    $phone = $_POST['Phone'];
     $email = $_POST['Email'];
     $about = $_POST['About'];
     $about = mysql_real_escape_string($about);
@@ -268,7 +269,7 @@ if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
          mysql_query($sql) or die(mysql_error());
     // update Profile table
     $sql = "Update Profile
-            Set About = '$about'
+            Set About = '$about', Phone = '$phone'
              WHERE Member_ID = $ID ";
 
     /*Address = '$address',
@@ -335,7 +336,7 @@ if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
 
 
         // check phone if provided
-        /*var phone = document.getElementById('Phone').value;
+        var phone = document.getElementById('Phone').value;
         // remove special characters
         var rawPhone = phone.replace(/[^\d]/g,'');
         if (rawPhone.length > 0) {
@@ -347,7 +348,7 @@ if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
                 alert('Invalid phone format');
                 return false;
             }
-        }*/
+        }
 
         // check password
         /*var password = document.getElementById('Password').value;
@@ -675,11 +676,12 @@ $bgPhoto = $row['ProfilePhoto'];
             if ($iPhone || $iPad || $Android) { ?>
 
                 <form method="post" enctype="multipart/form-data" action="" >
-                    <img src="/images/image-icon.png" class="img-icon" alt="Photos/Video"/>
-                    <strong>Upload A Profile Photo</strong>
-                    <input type="file" width="10px;" name="flPostPhoto" id="flPostPhoto"/>
-                    <input type="hidden" name="MAX_FILE_SIZE" value="500000000"
-                    <br/>
+
+                    <span class="fileUpload btn btn-primary" style="background:white;border:none;margin-top:20px;float:left;margin-left:-10px;">
+                            <img src="/images/camera.png" style ="width:30px;height:30px;float:left" />
+                            <input type="file" accept="image/*" class="flPostMedia" name="flPostMedia" id="flPostMedia" style="float:left;"/>
+                    </span>
+
                     <div id="PhotoProgress" style="display:none;">
                         <div class="progress">
                             <div class="progress-bar progress-bar-striped progress-bar-danger active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" class="progress-bar">
@@ -690,6 +692,52 @@ $bgPhoto = $row['ProfilePhoto'];
                     <br/>
                     <input type="submit" class="post-button" name="photo" id="photo" value="Upload Photo" onclick="showPhotoUploading()" />
                 </form>
+
+                    <div style="clear:both" id="image-holder"> </div>
+
+
+                        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+                        <script>
+                            $(function () {
+                                $("#flPostMedia").change(function () {
+                                    if (typeof (FileReader) != "undefined") {
+                                        var dvPreview = $("#image-holder");
+                                        dvPreview.html("");
+                                        var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp|.mov|.mpeg|.mpg|.ogg|.mp4|.webm|.x-matroska|.x-ms-wmw)$/;
+                                        $($(this)[0].files).each(function () {
+                                            var file = $(this);
+                                            if (regex.test(file[0].name.toLowerCase())) {
+                                                var reader = new FileReader();
+                                                reader.onload = function (e) {
+                                                    var img = $("<img />");
+                                                    img.attr("style", "height:100px;width: 100px");
+                                                    img.attr("src", e.target.result);
+                                                    dvPreview.append(img);
+
+                                                    var video = $("<video />");
+                                                    video.attr("style", "height:100px;width: 100px");
+                                                    video.attr("src", e.target.result);
+                                                    dvPreview.append(video);
+                                                }
+                                                reader.readAsDataURL(file[0]);
+                                            } else {
+                                                alert(file[0].name + " is not a valid image file.");
+                                                dvPreview.html("");
+                                                return false;
+                                            }
+                                        });
+                                    } else {
+                                        alert("This browser does not support HTML5 FileReader.");
+                                    }
+                                });
+                            });
+
+                        </script>
+
+
+                    <br/>
+
+
 <?php } ?>
 
 
@@ -794,10 +842,10 @@ $bgPhoto = $row['ProfilePhoto'];
                     </select>
                 </div>-->
 
-                <!--<div class="form-group">
+                <div class="form-group">
                     <label for="Phone">Phone</label>
-                    <input type="text" class="form-control" id="Phone" name="Phone" value="<?php /*echo $phone */?>" />
-                </div>-->
+                    <input type="text" class="form-control" id="Phone" name="Phone" value="<?php echo $phone ?>" />
+                </div>
 
                 <?php
                 /*$otherShowPhoneValue = "";

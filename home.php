@@ -218,7 +218,7 @@ if (isset($_POST['submit'])) {
                                 <source src = "' . $videoPath . $webmFileName . '" type = "video/webm" />
                                 </video>';
                         }
-                        $newImage .= $img;
+                        $newImage .= $img.'<br/>';
                     }
                     // predict next post ID so when can reference each image to the new post
                     $sql = "SELECT ID FROM Posts Order by ID DESC LIMIT 1";
@@ -927,19 +927,25 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
 
                                <span class="fileUpload btn btn-primary" style="background:white;border:none;margin-top:20px;float:left;margin-left:-10px;">
                                     <img src="/images/camera.png" style ="width:30px;height:30px;float:left" />
-                                <input type="file" name="flPostMedia[]" id="flPostMedia" class="flPostMedia" style="float:left;" />
+                                <input type="file" name="flPostMedia[]" id="flPostMedia" class="flPostMedia" style="float:left;" multiple />
 </span>
-                                <input name="post" id="post"  style="float:left;margin-top:25px;width:300px;border:none;"
-                                  placeholder="Share something and get paid for it" spellcheck="true"/>
-<br/>
+                                <textarea name="post" id="post"  style="float:left;margin-top:25px;width:300px;border:none;"
+                                  placeholder="Share something and get paid for it" spellcheck="true"></textarea>
+
 
                                 <div style="clear:both" id="image-holder"> </div>
 
-
-
                                 <br/>
 
-                                <input style="float:left" type="submit" class="post-button" name="submit" id="submit" value="Post"/>
+<div id="progress" style="display:none;padding-top:5px;float:left">
+                    <div style="float:left" class="progress">
+                        <div style="float:left" class="progress-bar progress-bar-striped progress-bar-danger active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" class="progress-bar">
+                            <b>File uploading...please wait</b>
+                        </div>
+                    </div>
+                </div>
+
+                                <input style="clear:both;float:left;margin-left:0px;" type="submit" class="post-button" name="submit" id="submit" value="Post"/>
                             </form>
                             <?php
                         } // hasTenPost
@@ -957,48 +963,50 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
                 ?>
 
 
-                <div id="progress" style="display:none;padding-top:5px;">
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-striped progress-bar-danger active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" class="progress-bar">
-                            <b>File uploading...please wait</b>
-                        </div>
-                    </div>
-                </div>
+
 
               <br/><br/>
 
             <?php } ?>
 
+<!--Preview uploaded photos and videos -->
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
             <script>
-                // preview image upload
-                $("#flPostMedia").on('change', function () {
+                $(function () {
+    $("#flPostMedia").change(function () {
+        if (typeof (FileReader) != "undefined") {
+            var dvPreview = $("#image-holder");
+            dvPreview.html("");
+            var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp|.mov|.mpeg|.mpg|.ogg|.mp4|.webm|.x-matroska|.x-ms-wmw)$/;
+            $($(this)[0].files).each(function () {
+                var file = $(this);
+                if (regex.test(file[0].name.toLowerCase())) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        var img = $("<img />");
+                        img.attr("style", "height:100px;width: 100px");
+                        img.attr("src", e.target.result);
+                        dvPreview.append(img);
 
-                    if (typeof (FileReader) != "undefined") {
-
-                        var image_holder = $("#image-holder");
-                        image_holder.empty();
-
-                        var reader = new FileReader();
-                        reader.onload = function (e) {
-                            $("<img />", {
-                                "src": e.target.result,
-                                "class": "thumb-image"
-                            }).appendTo(image_holder);
-
-                            $("<video />", {
-                                "src": e.target.result,
-                                "class": "thumb-image"
-                            }).appendTo(image_holder);
-                        }
-                        image_holder.show();
-                        reader.readAsDataURL($(this)[0].files[0]);
-                    } else {
-                        alert("This browser does not support image preview.");
+                        var video = $("<video />");
+                        video.attr("style", "height:100px;width: 100px");
+                        video.attr("src", e.target.result);
+                        dvPreview.append(video);
                     }
-                });
+                    reader.readAsDataURL(file[0]);
+                } else {
+                    alert(file[0].name + " is not a valid image file.");
+                    dvPreview.html("");
+                    return false;
+                }
+            });
+        } else {
+            alert("This browser does not support HTML5 FileReader.");
+        }
+    });
+});
 
             </script>
-
 
             <?php if (!$iPhone && !$iPad && !$Android) { ?>
                 <?php require 'profile_menu.php'; ?>

@@ -30,7 +30,7 @@ $profileID = get_id_from_username($username);
             <?php
             $sqlF = "SELECT COUNT( Follows.ID ) AS FollowingCount
 FROM Follows, Members
-WHERE Follows.Follower_ID =1
+WHERE Follows.Follower_ID = $profileID
 AND Follows.Followed_ID = Members.ID
 AND Members.IsActive =1
 AND Members.IsEmailValidated =1";
@@ -39,14 +39,14 @@ AND Members.IsEmailValidated =1";
             $followingCount = $rowsF['FollowingCount'];
             ?>
 
-            <h3><?php if ($username != get_username($ID)) {
+            <h4><?php if ($username != get_username($ID)) {
                     echo 'Followed By '.trim(get_user_firstName($profileID)).' ('.$followingCount.')' ;
                 }
                 else {
                     echo "Followed by You ($followingCount)";
                 }
                 ?>
-            </h3>
+            </h4>
 
 
 

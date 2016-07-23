@@ -37,7 +37,7 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
 }
 ?>
 
-<div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 col-sm-12 col-xs-12 roll-call">
+<div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 col-sm-12 col-xs-12 roll-call" style = "margin-top:-50px">
 
     <?php require 'profile_menu.php'; ?>
 
@@ -52,51 +52,50 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
 
         <table>
 
-    <?php
-    $ID = $_SESSION['ID'];
-    $sql1 = "SELECT BlockedID, BlockerID FROM Blocks WHERE (BlockerID = $ID Or BlockedID = $ID)";
-    $result1 = mysql_query($sql1) or die(logError(mysql_error(), $url, ""));
+            <?php
+            $ID = $_SESSION['ID'];
+            $sql1 = "SELECT BlockedID, BlockerID FROM Blocks WHERE (BlockerID = $ID Or BlockedID = $ID)";
+            $result1 = mysql_query($sql1) or die(logError(mysql_error(), $url, ""));
 
-    $blockIDs = array();
+            $blockIDs = array();
 
-    //Get blocked IDs
-    while ($rows1 = mysql_fetch_assoc($result1)) {
-        if ($rows1['BlockedID'] != $ID) {
-            array_push($blockIDs, $rows1['BlockedID']);
-            if ($rows1['BlockerID'] != $ID) {
-                array_push($blockIDs, $rows1['BlockerID']);
+            //Get blocked IDs
+            while ($rows1 = mysql_fetch_assoc($result1)) {
+                if ($rows1['BlockedID'] != $ID) {
+                    array_push($blockIDs, $rows1['BlockedID']);
+                    if ($rows1['BlockerID'] != $ID) {
+                        array_push($blockIDs, $rows1['BlockerID']);
+                    }
+                }
             }
-        }
-    }
 
-        $sql = "SELECT ID, FirstName, LastName From Members Where ID IN ( '" . implode($blockIDs, "', '") . "' ) ";
-        $result = mysql_query($sql) or die(mysql_error());
+            $sql = "SELECT ID, FirstName, LastName From Members Where ID IN ( '" . implode($blockIDs, "', '") . "' ) ";
+            $result = mysql_query($sql) or die(mysql_error());
 
-        while ($rows = mysql_fetch_assoc($result)) {
-            $memberID = $rows['ID'];
-            $firstName = $rows['FirstName'];
-            $lastName = $rows['LastName'];
+            while ($rows = mysql_fetch_assoc($result)) {
+                $memberID = $rows['ID'];
+                $firstName = $rows['FirstName'];
+                $lastName = $rows['LastName'];
 
-            echo "<tr>
-                    <td>";
-            echo "$firstName $lastName"; ?>
+                echo "<tr>
+                        <td>";
+                echo "$firstName $lastName"; ?>
+                        </td>
+
+                    <td style="padding-left:20px;">
+                <form action="" method="post" onsubmit="return confirm('Do you really want to unblock this member?') ">
+                    <input type="hidden" id="blockedID" name="blockedID" class="blockedID" value="<?php echo $memberID ?>" />
+                    <input type="hidden" id="ID" name="ID" class="ID" value="<?php echo $ID ?>" />
+                    <input type="submit" id="unblock" name="unblock" class="btnBlock" value="Unblock This User" />
+                </form>
                     </td>
-
-                <td style="padding-left:20px;">
-            <form action="" method="post" onsubmit="return confirm('Do you really want to unblock this member?') ">
-                <input type="hidden" id="blockedID" name="blockedID" class="blockedID" value="<?php echo $memberID ?>" />
-                <input type="hidden" id="ID" name="ID" class="ID" value="<?php echo $ID ?>" />
-                <input type="submit" id="unblock" name="unblock" class="btnBlock" value="Unblock This User" />
-            </form>
-                </td>
-            </tr>
-        <?php
-        }
-    ?>
+                </tr>
+            <?php
+            }
+            ?>
 
         </table>
-        </div>
+    </div>
 
 
 </div>
-

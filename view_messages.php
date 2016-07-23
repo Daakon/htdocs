@@ -522,11 +522,11 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
 <body onload='location.href="#pageStart"'>
 
 <div class="container">
-    <div class="row row-padding">
+    <div class="row row-padding" style="margin-top:-50px">
 
         <div class="col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8 roll-call ">
 
-            <h3>View Messages</h3>
+            <h4>View Messages</h4>
 
             <hr/>
 
@@ -753,85 +753,130 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
 
             <?php
             if ($urlUsername == 'playdoe') { ?>
-                <div style="margin-top:-30px;padding-bottom:30px;">
+            <div style="margin-top:-30px;padding-bottom:30px;">
 
                 <div onclick="document.getElementById('faq').style.display = 'block';" style="font-size:20px;color:red;padding-bottom:10px;"> FAQ</div>
-                    <table id="faq" style="display:none;border:1px solid blue">
-                        <th class="lead faq-header" >I can't post anything</th>
+                <table id="faq" style="display:none;border:1px solid blue">
+                    <th class="lead faq-header" >I can't post anything</th>
 
-                        <tr>
+                    <tr>
                         <td style="padding:5px;">
                             New members are required to validate their emails before posting.
                         </td>
-                        </tr>
+                    </tr>
 
 
-                        <th class="lead faq-header">I can't like or comment on anything</th>
-                        </tr>
-                        <td style="padding:5px;">
-                            One post by each member needs to be shared in order to like and comment on other members post.
-                        </td>
-                        <tr>
+                    <th class="lead faq-header">I can't like or comment on anything</th>
+                    </tr>
+                    <td style="padding:5px;">
+                        One post by each member needs to be shared in order to like and comment on other members post.
+                    </td>
+                    <tr>
 
                         <th class="lead faq-header">How Do I redeem my money?</th>
-                            <tr>
+                    <tr>
                         <td style="padding:5px;">
                             You must eclipse a minimum of $10 to redeem you money. You will need to tell us if you want to receive your money via PayPal or Venmo.
                         </td>
-                        </tr>
+                    </tr>
 
-                    </table>
+                </table>
 
-            <?php } ?>
+                <?php } ?>
 
-                    <hr class="hr-line" />
-            <div class="hidden-lg">
+                <hr class="hr-line" />
 
-                <form id="messageForm" action="" method="post" enctype="multipart/form-data" onsubmit="return showUploading()">
 
-                    <input type="file" width="10px;" name="flPostMedia[]" id="flPostMedia" multiple />
-            </div>
+                    <form id="messageForm" action="" method="post" enctype="multipart/form-data" onsubmit="return showUploading()">
 
-                    <textarea name="message" id="message" class="form-control" placeholder="Type your message here"></textarea>
-                    <input type="hidden" id="subject" name="subject" value="<?php echo $subject ?>" />
-                    <?php if (isset($recipientID) && !empty($recipientID)) { ?>
-                        <input type="hidden" id="receiverID" name="receiverID[]" value="<?php echo $recipientID ?>" />
-                    <?php } ?>
-                    <input type="hidden" id="isGroupChat" name="isGroupChat" value="<?php echo $isGroupChat ?>" />
-                    <input type="hidden" id="groupChatExist" name="groupChatExist" value="<?php echo $groupChatExist ?>" />
-                    <input type="hidden" id="groupID" name="groupID" value="<?php echo $urlUsername ?>" />
-                    <input type="hidden" id="groupName" name="groupName" value="<?php echo $groupName ?>" />
-                    <input type="submit" class="btn btn-default" id="send" name="send" value="Send" <?php echo $readonly ?> />
-                    <img src="/images/video-chat.png" height="50" width="50" style="border-left:1px solid black;"/>
-                    <input type="submit" class="" id="videoSend" name="videoSend" value = "Start Video Chat" />
+                            <span class="fileUpload btn btn-primary" style="background:white;border:none;margin-top:20px;float:left;margin-left:-10px;">
+                                    <img src="/images/camera.png" style ="width:30px;height:30px;float:left" />
+                                <input type="file" name="flPostMedia[]" id="flPostMedia" class="flPostMedia" style="float:left;" multiple />
+</span>
+                                <textarea name="post" id="post"  style="float:left;margin-top:25px;width:300px;border:none;"
+                                          placeholder="Share something and get paid for it" spellcheck="true"></textarea>
+
+
+                        <div style="clear:both" id="image-holder"> </div>
+
+
+                <input type="hidden" id="subject" name="subject" value="<?php echo $subject ?>" />
+                <?php if (isset($recipientID) && !empty($recipientID)) { ?>
+                    <input type="hidden" id="receiverID" name="receiverID[]" value="<?php echo $recipientID ?>" />
+                <?php } ?>
+                <input type="hidden" id="isGroupChat" name="isGroupChat" value="<?php echo $isGroupChat ?>" />
+                <input type="hidden" id="groupChatExist" name="groupChatExist" value="<?php echo $groupChatExist ?>" />
+                <input type="hidden" id="groupID" name="groupID" value="<?php echo $urlUsername ?>" />
+                <input type="hidden" id="groupName" name="groupName" value="<?php echo $groupName ?>" />
+
+                        <div id="progress" style="display:none;">
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-striped progress-bar-danger active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" class="progress-bar">
+                                    <b>File uploading...please wait</b>
+                                </div>
+                            </div>
+                        </div>
+
+                <input type="submit" class="btn btn-default" id="send" name="send" value="Send" <?php echo $readonly ?> />
+                <img src="/images/video-chat.png" height="50" width="50" style="border-left:1px solid black;"/>
+                <input type="submit" class="" id="videoSend" name="videoSend" value = "Start Video Chat" />
                 </form>
 
                 <br/><br/>
 
 
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+                <script>
+                    $(function () {
+                        $("#flPostMedia").change(function () {
+                            if (typeof (FileReader) != "undefined") {
+                                var dvPreview = $("#image-holder");
+                                dvPreview.html("");
+                                var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp|.mov|.mpeg|.mpg|.ogg|.mp4|.webm|.x-matroska|.x-ms-wmw)$/;
+                                $($(this)[0].files).each(function () {
+                                    var file = $(this);
+                                    if (regex.test(file[0].name.toLowerCase())) {
+                                        var reader = new FileReader();
+                                        reader.onload = function (e) {
+                                            var img = $("<img />");
+                                            img.attr("style", "height:100px;width: 100px");
+                                            img.attr("src", e.target.result);
+                                            dvPreview.append(img);
 
-            <div id="progress" style="display:none;">
-                <div class="progress">
-                    <div class="progress-bar progress-bar-striped progress-bar-danger active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" class="progress-bar">
-                        <b>File uploading...please wait</b>
-                    </div>
-                </div>
+                                            var video = $("<video />");
+                                            video.attr("style", "height:100px;width: 100px");
+                                            video.attr("src", e.target.result);
+                                            dvPreview.append(video);
+                                        }
+                                        reader.readAsDataURL(file[0]);
+                                    } else {
+                                        alert(file[0].name + " is not a valid image file.");
+                                        dvPreview.html("");
+                                        return false;
+                                    }
+                                });
+                            } else {
+                                alert("This browser does not support HTML5 FileReader.");
+                            }
+                        });
+                    });
+
+                </script>
+
+
+                <br/>
+
+                <?php if ($rowCount == true) { ?>
+                    <form action="" method="post" onsubmit = "return confirm('Do you really want to delete this message thread')" >
+                        <input type="hidden" id="receiverID" name="receiverID" value="<?php echo $recipientID ?>" />
+                        <input type="hidden" id="isGroupChat" name="isGroupChat" value="<?php echo $isGroupChat ?>" />
+                        <input type="hidden" id="groupID" name="groupID" value="<?php echo $urlUsername ?>" />
+                        <input type="submit" class="btn btn-default" style="background:red;color:white;" id="delete" name="delete" value="Delete Messages" />
+
+                    </form>
+                <?php } ?>
+                <!-------------------------------------------------------------------->
             </div>
-
-            <br/>
-
-            <?php if ($rowCount == true) { ?>
-                <form action="" method="post" onsubmit = "return confirm('Do you really want to delete this message thread')" >
-                    <input type="hidden" id="receiverID" name="receiverID" value="<?php echo $recipientID ?>" />
-                    <input type="hidden" id="isGroupChat" name="isGroupChat" value="<?php echo $isGroupChat ?>" />
-                    <input type="hidden" id="groupID" name="groupID" value="<?php echo $urlUsername ?>" />
-                    <input type="submit" class="btn btn-default" style="background:red;color:white;" id="delete" name="delete" value="Delete Messages" />
-
-                </form>
-            <?php } ?>
-            <!-------------------------------------------------------------------->
         </div>
-    </div>
-    <a id='pageStart' href='#'></a>
-
+        <a id='pageStart' href='#'></a>
 

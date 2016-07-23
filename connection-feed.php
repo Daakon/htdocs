@@ -38,7 +38,7 @@ And (Members.IsSuspended = 0)
 And (Members.ID = Posts.Member_ID)
 And (Members.ID = Profile.Member_ID)
 And (Posts.IsDeleted = 0)
-And ((Posts.Member_ID = $ID) Or (Posts.Member_ID in (Select Followed_ID FROM Follows WHERE Follower_ID = $ID)))
+And ((Posts.Member_ID = $ID) Or (Posts.Reposter_ID = $ID) Or (Posts.Member_ID in (Select Followed_ID FROM Follows WHERE Follower_ID = $ID)))
 And (Members.ID Not in ( '" . implode($blockIDs, "', '") . "' ))
 $lastPostCondition
 Group By PostID
@@ -208,12 +208,6 @@ if (mysql_num_rows($rollCallResult) > 0) {
             </div>
 
             <?php
-            if (isEmailValidated($ID) && hasOnePost($ID)) {
-                $disabled = '';
-            } else {
-                $disabled = 'disabled';
-            }
-
             //check if member has approved this post
             //----------------------------------------------------------------
             //require 'getSessionType.php';
@@ -303,7 +297,16 @@ if (mysql_num_rows($rollCallResult) > 0) {
                 <?php } ?>
 
 
+
+
                 <?php
+
+
+                if (isEmailValidated($ID) && hasOnePost($ID)) {
+                    $disabled = '';
+                } else {
+                    $disabled = 'disabled';
+                }
 
 
                 //Detect device

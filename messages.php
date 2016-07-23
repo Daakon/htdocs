@@ -15,11 +15,11 @@ $ID = $_SESSION['ID'];
 <div class="container">
     <div class="row row-padding">
 
-        <div class="col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8 roll-call ">
+        <div class="col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8 roll-call" style="margin-top:-50px">
 
             <?php require 'profile_menu.php'; ?>
 
-            <h2>Messages</h2>
+            <h4>Messages</h4>
             <hr/>
             <a href="/view_messages?groupchat=groupchat">Start Chat</a>
             <hr/>
@@ -155,7 +155,7 @@ $ID = $_SESSION['ID'];
 
 
 
-                echo "
+                    echo "
 
                 <div class='profileImageWrapper-Feed'>
                 <a href = '/view_messages/$username'>
@@ -186,6 +186,6 @@ $ID = $_SESSION['ID'];
             ?>
 
             <!-------------------------------------------------------------------->
-            </div>
         </div>
     </div>
+</div>

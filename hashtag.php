@@ -586,21 +586,6 @@ if (isset($_POST['btnRepost']) && ($_POST['btnRepost'] == "Repost")) {
 }
 ?>
 
-<?php
-// block member
-if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
-    $blockedID = $_POST['blockedID'];
-    $ID = $_POST['ID'];
-
-    $scrollx = $_REQUEST['scrollx'];
-    $scrolly = $_REQUEST['scrolly'];
-
-    $sql = "INSERT INTO Blocks (BlockerID,   BlockedID) Values
-                              ('$ID',  '$blockedID')";
-    mysql_query($sql) or die(mysql_error());
-    echo "<script>location='/hashtag?hashtag=$hashtag&scrollx=$scrollx&scrolly=$scrolly';</script>";
-}
-?>
 
 <script type="text/javascript">
     function saveScrollPositions(theForm) {
@@ -716,22 +701,22 @@ function myFunction() {
 }
 </script>
 
-    <div class="row row-padding">
-<div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6 " align="left">
+    <div class="row row-padding" >
+<div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6 " align="left" style="background:white;">
 
-        <ul class="list-inline">
+        <ul class="list-inline" style="background:white;">
 
-            <li> <a style="padding-top:10px;" href="javascript:history.go(-1)"><img src="/images/back.png" height="20" width="20"/> </a></li>
+            <li style="background:white;"> <a style="padding-top:10px;" href="javascript:history.go(-1)"><img src="/images/back.png" height="20" width="20"/> </a></li>
         </ul>
-</div>
 
-<div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6 ">
 <?php $hashtag = $_GET['hashtag'];
 
 ?>
 
 <h4><?php echo "#".$hashtag ?></h4>
+
 </div>
+
 
 <?php
 
@@ -888,13 +873,6 @@ if (mysql_num_rows($result) > 0) {
 
 <?php
 
-
-               if (isEmailValidated($ID) && hasOnePost($ID)) {
-                    $disabled = '';
-                } else {
-                    $disabled = 'disabled';
-                }
-
                      //check if member has approved this post
             //----------------------------------------------------------------
             //require 'getSessionType.php';
@@ -984,7 +962,16 @@ if (mysql_num_rows($result) > 0) {
                 ?>
 
 
+            <?php
 
+ if (isEmailValidated($ID) && hasOnePost($ID)) {
+                    $disabled = '';
+                } else {
+                    $disabled = 'disabled';
+                }
+
+
+            ?>
 
         <hr class="hr-line"/>
         <div class="content-space" style="clear:both;margin-top:-20px;" >

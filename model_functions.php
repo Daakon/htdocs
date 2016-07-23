@@ -47,7 +47,7 @@ function get_users_name($user_id)
     $name = null;
     $lastName = $rows['LastName'];
     if (strlen($lastName) > 0) {
-        $name = $rows['FirstName'] . ' ' . $rows['LastName'];
+        $name = $rows['FirstName']. ' ' .$rows['LastName'];
         $name = trim($name);
     }
     else {

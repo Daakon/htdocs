@@ -12,7 +12,7 @@ function get_head_files()
 
 
         <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
-        <meta name="description" content="Earn money by sharing photos and video of things you love.">
+        <meta name="description" content="<b>Playdoe</b> is a social network that pays you for every like, comment, follower and referral.">
         <meta name="keywords" content="<?php echo $keywords ?>">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
@@ -144,6 +144,7 @@ function get_header()
         </a>
         </div>
         <?php $ID = $_SESSION['ID']; ?>
+
 
 
         <!--desktop layout -->
