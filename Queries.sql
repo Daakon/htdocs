@@ -22,7 +22,7 @@ And (PostComments.Member_ID = Members.ID)
 And (PostComments.Member_ID != $ID)
 And Members.IsEmailValidated = 1
 
---update follower count
+--update comment count
 Update PostComments
 Join Members
 ON PostComments.Member_ID = Members.ID

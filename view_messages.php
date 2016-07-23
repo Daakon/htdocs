@@ -72,6 +72,9 @@ if (isset($_POST['send']) && $_POST['send'] == "Send") {
     $groupName = $_POST['groupName'];
     $groupID = $_POST['groupID'];
     // get total receiver count
+
+    if (strlen($message) == 0) { echo "<script>alert('Your message appears to be empty'); location = '/view_messages/$urlUsername</script>"; }
+
     $receiverCount = count($_POST['receiverID']);
     foreach ($_POST['receiverID'] as $key => $receiverID) {
         $receiverUsername = $_POST['username'];
@@ -504,8 +507,8 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
 <script>
     // show uploading
     function showUploading() {
-        if (document.getElementById('post').value == '') {
-            alert('Your post appears to be empty');
+        if (document.getElementById('message').value == '') {
+            alert('Your message appears to be empty');
             return false;
         }
         if (document.getElementById('category').value == '') {
@@ -727,6 +730,14 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
             <ul class="list-inline">
 
                 <?php require 'profile_menu.php'; ?>
+
+                <?php
+
+                if (isAdmin($ID)) {
+                    echo "<a href='/backoffice?username=$urlUsername'>Calculate Redemptions</a>";
+                }
+                ?>
+
             </ul>
 
 
@@ -793,7 +804,7 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
                                     <img src="/images/camera.png" style ="width:30px;height:30px;float:left" />
                                 <input type="file" name="flPostMedia[]" id="flPostMedia" class="flPostMedia" style="float:left;" multiple />
 </span>
-                                <textarea name="post" id="post"  style="float:left;margin-top:25px;width:300px;border:none;"
+                                <textarea name="message" id="message"  style="float:left;margin-top:25px;width:300px;border:none;"
                                           placeholder="Share something and get paid for it" spellcheck="true"></textarea>
 
 

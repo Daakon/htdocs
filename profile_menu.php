@@ -39,7 +39,7 @@ if ($profileID == $ID) {
         $result = mysql_query($sql) or die(mysql_error());
         $rows = mysql_fetch_assoc($result);
         if ($rows['IsAdmin'] == 1) { ?>
-            <li><a href="/marketing_manager/<?php echo $username ?>"><img src = "/images/marketing-menu-glyph" height="20" width="20"/> Marketing Manager</a></li>
+            <li><a href="/backoffice?<?php echo $username ?>"><img src = "/images/marketing-menu-glyph" height="20" width="20"/> Back Office</a></li>
         <?php }
 
         echo "</ul>";
