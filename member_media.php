@@ -85,7 +85,7 @@ if (isset($_POST['MakeProfileVideo']) && $_POST['MakeProfileVideo'] == "Make Pro
 </script>
 
 
-<div class="container">
+<div class="container" style="margin-top:-50px;">
 
     <div class="row row-padding" >
 
@@ -93,7 +93,7 @@ if (isset($_POST['MakeProfileVideo']) && $_POST['MakeProfileVideo'] == "Make Pro
 
             <?php require 'profile_menu.php'; ?>
 
-            <h2>Media</h2>
+            <h4>Media</h4>
 
             <?php
             $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];

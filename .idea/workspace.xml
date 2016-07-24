@@ -5,7 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="51867226-c8dd-43fb-9a46-7c8a9e9ab742" name="Default" comment="Added media page.&#10;&#10;">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/backoffice.php" afterPath="$PROJECT_DIR$/backoffice.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/member_media.php" afterPath="$PROJECT_DIR$/member_media.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/profile_menu.php" afterPath="$PROJECT_DIR$/profile_menu.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/profile_menu_public.php" afterPath="$PROJECT_DIR$/profile_menu_public.php" />
     </list>
     <ignored path="htdocs.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -32,7 +34,51 @@
     <favorites_list name="htdocs" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="profile_menu.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/profile_menu.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-3.2307692">
+              <caret line="27" column="8" selection-start-line="27" selection-start-column="8" selection-end-line="27" selection-end-column="129" />
+              <folding>
+                <marker date="1469368321000" expanded="true" signature="1990:2029" placeholder="SELECT IsAdm... Members" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="profile_menu_public.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/profile_menu_public.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-3.6153846">
+              <caret line="78" column="133" selection-start-line="78" selection-start-column="133" selection-end-line="78" selection-end-column="133" />
+              <folding>
+                <marker date="1469368447000" expanded="true" signature="137:199" placeholder="SELECT First... Members" />
+                <marker date="1469368447000" expanded="true" signature="3277:3316" placeholder="SELECT IsAdm... Members" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="member_media.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/member_media.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.5760649">
+              <caret line="94" column="0" selection-start-line="94" selection-start-column="0" selection-end-line="94" selection-end-column="0" />
+              <folding>
+                <element signature="e#2752#2777#0#HTML" expanded="true" />
+                <marker date="1469368595000" expanded="true" signature="381:459" placeholder="SELECT * FRO... Members" />
+                <marker date="1469368595000" expanded="true" signature="1005:1076" placeholder="Update Profi... " />
+                <marker date="1469368595000" expanded="true" signature="1484:1549" placeholder="Update Profi... " />
+                <marker date="1469368595000" expanded="true" signature="2184:2244" placeholder="Update Profi... " />
+                <marker date="1469368595000" expanded="true" signature="3254:3372" placeholder="SELECT * FRO... Media" />
+                <marker date="1469368595000" expanded="true" signature="7638:7768" placeholder="SELECT * FRO... Media" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="Git.Settings">
     <option name="PUSH_AUTO_UPDATE" value="true" />
@@ -65,7 +111,6 @@
         <option value="$PROJECT_DIR$/ways-to-get-paid.php" />
         <option value="$PROJECT_DIR$/logout.php" />
         <option value="$PROJECT_DIR$/findURL.php" />
-        <option value="$PROJECT_DIR$/member_media.php" />
         <option value="$PROJECT_DIR$/login.php" />
         <option value="$PROJECT_DIR$/publicProfile.php" />
         <option value="$PROJECT_DIR$/getRecipients.php" />
@@ -93,9 +138,10 @@
         <option value="$PROJECT_DIR$/home.php" />
         <option value="$PROJECT_DIR$/view_messages.php" />
         <option value="$PROJECT_DIR$/Queries.sql" />
-        <option value="$PROJECT_DIR$/profile_menu_public.php" />
-        <option value="$PROJECT_DIR$/profile_menu.php" />
         <option value="$PROJECT_DIR$/backoffice.php" />
+        <option value="$PROJECT_DIR$/profile_menu.php" />
+        <option value="$PROJECT_DIR$/profile_menu_public.php" />
+        <option value="$PROJECT_DIR$/member_media.php" />
       </list>
     </option>
   </component>
@@ -369,7 +415,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1" y="23" width="1249" height="642" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21006945" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32861635" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -667,6 +713,11 @@
           <line>21</line>
           <option name="timeStamp" value="281" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/profile_menu_public.php</url>
+          <line>89</line>
+          <option name="timeStamp" value="282" />
+        </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/resources/js/site.js</url>
           <line>16</line>
@@ -676,7 +727,7 @@
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="282" />
+      <option name="time" value="283" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -782,14 +833,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/member_media.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.51724136">
-          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1427,28 +1470,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="2.0308285">
           <caret line="62" column="0" selection-start-line="62" selection-start-column="0" selection-end-line="67" selection-end-column="66" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/profile_menu_public.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-12.730769">
-          <caret line="92" column="41" selection-start-line="92" selection-start-column="41" selection-end-line="92" selection-end-column="41" />
-          <folding>
-            <marker date="1469316392000" expanded="true" signature="137:199" placeholder="SELECT First... Members" />
-            <marker date="1469316392000" expanded="true" signature="3143:3182" placeholder="SELECT IsAdm... Members" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/profile_menu.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6186613">
-          <caret line="41" column="36" selection-start-line="41" selection-start-column="36" selection-end-line="41" selection-end-column="36" />
-          <folding>
-            <marker date="1469316397000" expanded="true" signature="1860:1899" placeholder="SELECT IsAdm... Members" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1457,8 +1478,6 @@
         <state vertical-scroll-proportion="0.82758623">
           <caret line="172" column="51" selection-start-line="172" selection-start-column="51" selection-end-line="172" selection-end-column="51" />
           <folding>
-            <element signature="n#style#0;n#form#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#0;n#div#0;n#div#0;n#body#0;n#!!top" expanded="true" />
             <marker date="1469318152000" expanded="true" signature="385:405" placeholder="Update Post " />
             <marker date="1469318152000" expanded="true" signature="405:530" placeholder="Update PostA... " />
             <marker date="1469318152000" expanded="true" signature="405:531" placeholder="Update PostA... " />
@@ -1473,6 +1492,43 @@
             <marker date="1469318152000" expanded="true" signature="3055:3385" placeholder="Select count... PostApprovals" />
             <marker date="1469318152000" expanded="true" signature="3795:4120" placeholder="Select Count... PostComments" />
             <marker date="1469318152000" expanded="true" signature="4555:4812" placeholder="SELECT COUNT... Follows" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/profile_menu.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.2307692">
+          <caret line="27" column="8" selection-start-line="27" selection-start-column="8" selection-end-line="27" selection-end-column="129" />
+          <folding>
+            <marker date="1469368321000" expanded="true" signature="1990:2029" placeholder="SELECT IsAdm... Members" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/profile_menu_public.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.6153846">
+          <caret line="78" column="133" selection-start-line="78" selection-start-column="133" selection-end-line="78" selection-end-column="133" />
+          <folding>
+            <marker date="1469368447000" expanded="true" signature="137:199" placeholder="SELECT First... Members" />
+            <marker date="1469368447000" expanded="true" signature="3277:3316" placeholder="SELECT IsAdm... Members" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/member_media.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5760649">
+          <caret line="94" column="0" selection-start-line="94" selection-start-column="0" selection-end-line="94" selection-end-column="0" />
+          <folding>
+            <element signature="e#2752#2777#0#HTML" expanded="true" />
+            <marker date="1469368595000" expanded="true" signature="381:459" placeholder="SELECT * FRO... Members" />
+            <marker date="1469368595000" expanded="true" signature="1005:1076" placeholder="Update Profi... " />
+            <marker date="1469368595000" expanded="true" signature="1484:1549" placeholder="Update Profi... " />
+            <marker date="1469368595000" expanded="true" signature="2184:2244" placeholder="Update Profi... " />
+            <marker date="1469368595000" expanded="true" signature="3254:3372" placeholder="SELECT * FRO... Media" />
+            <marker date="1469368595000" expanded="true" signature="7638:7768" placeholder="SELECT * FRO... Media" />
           </folding>
         </state>
       </provider>

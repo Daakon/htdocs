@@ -25,6 +25,7 @@ if ($profileID == $ID) {
         <li><a href="/home"><img src="/images/home.png" height="20" width="20" /> Home</a></li>
         <li><a href="/<?php echo get_username($ID)?>"><span style="color:black;font-weight: 900;"><img src="<?php echo get_users_photo_by_id($ID) ?>" height="20" width="20"/> My Profile</span></a></li>
         <li><a href="/post/<?php echo $username ?>"><img src="/images/post.png" height="20" width="20" /> Manage Posts</a></li>
+        <li><a href="/member_media/<?php echo $username ?>"><img src="/images/media.png" height="20" width="20" /> Media</a></li>
         <li><a href="/messages/<?php echo $username ?>"><img src = "/images/messages.png" height="20" width="20" /> Messages <?php require 'getNewMessageCount.php' ?></a></li>
         <li><a href="/member_follows/<?php echo get_username($profileID) ?>"><img src = "/images/follows.png" height="20" width="20" /> Followers <?php require 'getNewFollowCount.php' ?></a></li>
         <li><a href="/settings/<?php echo get_username($ID) ?>"><img src="/images/settings.png" height="20" width="20" />Settings</a></li>
