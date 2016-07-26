@@ -715,7 +715,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                         $sql3 = "SELECT DISTINCT
                         PostComments.Comment As PostComment,
                         PostComments.ID As PostCommentID,
-                        PostComments.Comment As CommentDate,
+                        PostComments.CommentDate As CommentDate,
                         Members.ID As CommenterID,
                         Members.FirstName as FirstName,
                         Members.LastName As LastName,
@@ -733,7 +733,9 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                         $result3 = mysql_query($sql3) or die(logError(mysql_error(), $url, "Getting first 3 post comments"));
                         echo '<br/>';
                         if (mysql_num_rows($result3) > 0) {
+                            echo '<div class="comment-style commentStyleAlign" >';
                             while ($rows3 = mysql_fetch_assoc($result3)) {
+
                                 $comment = $rows3['PostComment'];
                                 $profilePhoto = $rows3['ProfilePhoto'];
                                 $commentID = $rows3['PostCommentID'];
@@ -770,6 +772,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                                     //<!------------------------------------->
                                 }
                             }
+
                             echo '</div>';
                         }
                         ?>
@@ -779,7 +782,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                         $sql4 = "SELECT DISTINCT
                         PostComments.Comment As PostComment,
                         PostComments.ID As PostCommentID,
-                        PostComments.Comment As CommentDate,
+                        PostComments.CommentDate As CommentDate,
                         Members.ID As CommenterID,
                         Members.FirstName as FirstName,
                         Members.LastName As LastName,
@@ -799,7 +802,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                         if (mysql_num_rows($result4) > 0) {
                             ?>
 
-                            <a href="javascript:showComments('<?php echo $moreComments ?>');">Show More</a>
+                            <a style="padding-left:10px;" href="javascript:showComments('<?php echo $moreComments ?>');">Show More</a>
 
                             <div id="<?php echo $moreComments ?>" style="display:none;">
 
@@ -851,7 +854,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                             <?php
                         }
                         ?>
-
+                </div>
                     </div>
                     <!---------------------------------------------------
                                       End of comments div

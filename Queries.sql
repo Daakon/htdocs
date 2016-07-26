@@ -56,7 +56,7 @@ SELECT Posts.Member_ID
 FROM Posts
 WHERE Posts.IsDeleted =0
 GROUP BY Posts.ID
-HAVING COUNT( Posts.ID ) >=5
+HAVING COUNT( Posts.Member_ID ) >=5
 )
 AND Members.IsEmailValidated =1
 

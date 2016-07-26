@@ -814,8 +814,14 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
         <script type="text/javascript" src="jquery-1.8.0.min.js"></script>
         <script type="text/javascript">
             $(function(){
+
                 $(".search").keyup(function()
                 {
+                     // clear results if empty
+                     if (!this.value.trim()) {
+                        $('#result').html('');
+                        return;
+                    }
                     var searchid = $(this).val();
                     var dataString = 'search='+ searchid;
                     if(searchid!='')

@@ -408,7 +408,6 @@ if (mysql_num_rows($rollCallResult) > 0) {
                             $commentDate = $rows3['CommentDate'];
 
                             //if (checkBlock($ID, $commentOwnerID)) { $display2 = "style= 'display:none;'"; } else { $display2 = "style='display:block;'"; }
-
                             echo '<div class="comment-row" >';
                             echo '<div class="profileImageWrapper-Feed">
                     <a href='.$commenterProfileUrl.'>

@@ -538,6 +538,11 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
                 $(function(){
                     $(".search").keyup(function()
                     {
+                        // clear empty result
+                        if (!this.value.trim()) {
+                            $('#result').html('');
+                            return;
+                        }
                         var searchid = $(this).val();
                         var dataString = 'search='+ searchid;
                         if(searchid!='')
@@ -595,9 +600,9 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
 
             <?php if ($isGroupChat && $groupChatExist == false) { ?>
                 <h5>Chat
-                    &nbsp;&nbsp;<input type="text" class="search" id="searchID" value="<?php $final_name ?>"
+                    &nbsp;&nbsp;<input type="text" class="search form-control" id="searchID" value="<?php $final_name ?>"
                                        placeholder="Search for people"/>
-                    <br/>
+
                     <div id="result"></div>
                     <div id="previewNames"></div>
                 </h5>
@@ -671,9 +676,6 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
 
             ?>
 
-            <br/>
-            <h4><?php echo $subject ?></h4>
-            <br/>
 
             <?php
             if (!empty($urlUsername)) {
@@ -805,7 +807,7 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
                                 <input type="file" name="flPostMedia[]" id="flPostMedia" class="flPostMedia" style="float:left;" multiple />
 </span>
                                 <textarea name="message" id="message"  style="float:left;margin-top:25px;width:300px;border:none;"
-                                          placeholder="Share something and get paid for it" spellcheck="true"></textarea>
+                                          placeholder="Type your message" spellcheck="true"></textarea>
 
 
                         <div style="clear:both" id="image-holder"> </div>
@@ -828,9 +830,8 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
                             </div>
                         </div>
 
-                <input type="submit" class="btn btn-default" id="send" name="send" value="Send" <?php echo $readonly ?> />
-                <img src="/images/video-chat.png" height="50" width="50" style="border-left:1px solid black;"/>
-                <input type="submit" class="" id="videoSend" name="videoSend" value = "Start Video Chat" />
+                <input style="float:left;margin-top:10px;" type="submit" class="btn btn-primary" id="send" name="send" value="Send" <?php echo $readonly ?> />
+                <input type="image" class="" id="videoSend" name="videoSend" src="/images/video-chat.png" style="margin-top:10px;height:50px;width:50px;float:left;padding-bottom:10px;" value = "Start Video Chat" />
                 </form>
 
                 <br/><br/>
