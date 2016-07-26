@@ -217,7 +217,7 @@ if (mysql_num_rows($rollCallResult) > 0) {
             // get approvals for each post
             $approvals = mysql_num_rows(mysql_query("SELECT * FROM PostApprovals WHERE Post_ID = $postID "));
             // show disapprove if members has approved the post
-            echo '<div class="post-approvals" style="float:left;margin-top:10px;">';
+            echo '<div class="post-approvals postApprovalsAlign">';
             echo "<div id = 'approvals$postID'>";
             if (mysql_num_rows($result2) > 0) {
                 echo '<form>';
@@ -250,7 +250,7 @@ if (mysql_num_rows($rollCallResult) > 0) {
             if (isset($ID)) { ?>
 
                 <?php if ($ID != $memberID) {?>
-                    <a href="/view_messages/<?php echo $username ?>" style="margin-left:20px;float:left;margin-top:15px;"><span class="engageText"><img src = "/images/messages.png" height="20" width="20" /> </span> </a>
+                    <a href="/view_messages/<?php echo $username ?>" class="messageEnvelope"><img src = "/images/messages.png" height="20" width="20" /></a>
                 <?php } ?>
 
             <?php } ?>
@@ -259,10 +259,13 @@ if (mysql_num_rows($rollCallResult) > 0) {
 
                 <?php if ($ID != $memberID) { ?>
 
-                    <?php if ($reposterID == $ID) { } else { ?>
+                    <?php if ($reposterID == $ID) { } else {
+                        if (hasReposted($ID, $postID)) { $repostDisabled = "disabled"; } else { $repostDisabled = ''; }
 
-                        <form style="float:left;margin-top:13px;" action="" method="post" onsubmit="return confirm('Are you sure you want to repost this?') && saveScrollPositions(this)">
-                            <input type="image" id="btnRepost" name="btnRepost" value="Repost" src="/images/repost_icon.png" style="margin-left:20px;margin-top:3px;" />
+                        ?>
+
+                        <form class="repostAlign" action="" method="post" onsubmit="return confirm('Are you sure you want to repost this?') && saveScrollPositions(this)">
+                            <input type="image" id="btnRepost" name="btnRepost" value="Repost" src="/images/repost_icon.png" style="margin-left:20px;margin-top:3px;" <?php echo $repostDisabled ?> />
                             <input type="hidden" id="memberID" name="memberID" value="<?php echo $memberID ?>" />
                             <input type="hidden" id="ownerID" name="ownerID" value="<?php echo $memberID ?>" />
                             <input type="hidden" id="postID" name="postID" value="<?php echo $postID ?>" />
@@ -277,14 +280,14 @@ if (mysql_num_rows($rollCallResult) > 0) {
 
                     <?php $optionsID = "options$prestinePostID"; ?>
 
-                    <a href="javascript:showOptions('<?php echo $optionsID ?>');" style="font-size:20px;margin-left:20px;margin-top:5px;color:#8899a6;float:left;">...</a>
+                    <a href="javascript:showOptions('<?php echo $optionsID ?>');" class="blockLink">...</a>
 
 
                     <?php
                     $postPath = getPostPath();
                     $shareLinkID = "shareLink$prestinePostID"; ?>
-                    <a style="float:left;margin-top:10px;" href="javascript:showLink('<?php echo $shareLinkID ?>');">
-                        <img style="margin-left:20px;" src="/images/share.png" height="30px" width="30px" />
+                    <a class="shareLink" href="javascript:showLink('<?php echo $shareLinkID ?>');">
+                        <img style="margin-left:20px;" src="/images/share.png" height="25px" width="25px" />
                     </a>
 
                     <?php $shareLink = 'show_post?postID='.$postID.'&email=1';
@@ -293,10 +296,7 @@ if (mysql_num_rows($rollCallResult) > 0) {
                     ?>
 
 
-
                 <?php } ?>
-
-
 
 
                 <?php
@@ -319,7 +319,7 @@ if (mysql_num_rows($rollCallResult) > 0) {
                 ?>
 
                 <hr class="hr-line"/>
-                <div class="content-space" style="clear:both;margin-top:-20px;">
+                <div class="content-space content-space-align">
 
                     <!--Show block button here show it displays clearly between engagement icons and comment box -->
                     <div style="display:none;" id="<?php echo $optionsID ?>">
@@ -338,20 +338,20 @@ if (mysql_num_rows($rollCallResult) > 0) {
 
                     <!--Comment box -->
                     <?php if (isset($ID)) { ?>
-                        <form style="margin-top:20px;float:left" method="post" action="" enctype="multipart/form-data"
+                        <form class="commentBoxAlign" method="post" action="" enctype="multipart/form-data"
                               onsubmit="showCommentUploading('comment<?php echo $postID?>', this);">
 
 
 
                             <?php if ($iPhone || $iPad || $Android) { ?>
-                                <div class="fileUpload btn btn-primary" style="background:transparent;border:none;float:left;margin-top:-10px;">
-                                    <img src="/images/camera.png" style ="width:40px;height:30px;float:left;margin-left:-10px" />
+                                <div class="fileUpload btn btn-primary cameraDiv">
+                                    <img src="/images/camera.png" class="cameraImage" />
                                     <input type="file" name="flPostMedia" id="flPostMedia" class="flPostMedia"/>
                                 </div>
 
-                                <textarea style="float:left;margin-top:-5px;border:none;"  type="text" name="postComment" id="postComment"
+                                <textarea class="textAreaAlign"  type="text" name="postComment" id="postComment"
                                           placeholder="Write a comment" title='' <?php echo $disabled ?> ></textarea>
-                                <input style="float:left;margin-left:5px;" type="submit" name="btnComment" id="btnComment" class="btn btn-primary" Value="Comment" <?php echo $disabled ?> />
+                                <input type="submit" name="btnComment" id="btnComment" class="btn btn-primary commentButtonAlign" Value="Comment" <?php echo $disabled ?> />
                             <?php } ?>
 
                             <br/>
@@ -397,7 +397,7 @@ if (mysql_num_rows($rollCallResult) > 0) {
                     $result3 = mysql_query($sql3) or die(logError(mysql_error(), $url, "Gettig first 3 Connection Feed comments"));
                     echo '<br/>';
                     if (mysql_num_rows($result3) > 0) {
-                        echo '<div class="comment-style" style="clear:both;margin-top:10px;">';
+                        echo '<div class="comment-style commentStyleAlign" >';
                         while ($rows3 = mysql_fetch_assoc($result3)) {
                             $comment = $rows3['PostComment'];
                             $profilePhoto = $rows3['ProfilePhoto'];

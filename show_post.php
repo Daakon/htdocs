@@ -442,7 +442,7 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
 
 <body>
 
-<div class="container" style="margin-top: -50px;">
+<div class="container containerFlush">
 
 
     <div class="row row-padding">
@@ -532,15 +532,15 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
                 $email = $_GET['email'];
                 if ($email == 1) {
                     ?>
-                    <li><a href="/home" style="margin-left:10px;"><img src="/images/back.png" height="20" width="20" /></a></li>
+                    <li><a href="/home" class="backButton"><img src="/images/back.png" height="20" width="20" /></a></li>
                 <?php }
                 else if (isset($_SESSION['ID']) && isset($_COOKIE['Page'])) {
                     ?>
-                    <li><button onclick="myFunction()" style="margin-left:10px;"><img src="/images/back.png" height="20" width="20" /></button></li>
+                    <li><button onclick="myFunction()" class="backButton"><img src="/images/back.png" height="20" width="20" /></button></li>
                     <?php
                 }
                 else { ?>
-                    <li><a href="javascript:history.back()" style="margin-left:10px;"><img src="/images/back.png" height="20" width="20" /></a></li>
+                    <li><a href="javascript:history.back()" class="backButton"><img src="/images/back.png" height="20" width="20" /></a></li>
                 <?php }
                 ?>
 
@@ -623,7 +623,7 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
                 $approvals = mysql_num_rows(mysql_query("SELECT * FROM PostApprovals WHERE Post_ID = $postID "));
 
                 // show disapprove if members has approved the post
-                echo '<table style="float:left;margin-top:5px;">';
+                echo '<table class="postApprovalsAlign">';
                 echo '<tr>';
                 echo '<td>';
                 echo "<div id = 'approvals$postID'>";
@@ -670,14 +670,16 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
 
 
                 if ($ID != $memberID) { ?>
-                    <a style="padding-left:20px;float:left;margin-top:10px;" href="/view_messages/<?php echo $username ?>"><img src="/images/messages.png" height="20" width="20" /></a>
+                    <a class="messageEnvelope" href="/view_messages/<?php echo $username ?>"><img src="/images/messages.png" height="20" width="20" /></a>
 
                     <?php
 
-                    if ($reposterID == $ID) { } else { ?>
+                    if ($reposterID == $ID) { } else {
+                        if (hasReposted($ID, $postID)) { $repostDisabled = "disabled"; } else { $repostDisabled = ''; }
+                        ?>
 
-                        <form style="float:left;margin-top:10px" action="" method="post" onsubmit="return confirm('Are you sure you want to repost this?') && saveScrollPositionOnLinkClick(this)">
-                            <input type="image" id="btnRepost" name="btnRepost" value="Repost" src="/images/repost_icon.png" style="margin-left:20px;" />
+                        <form class="repostAlign" style="margin-top:13px;" action="" method="post" onsubmit="return confirm('Are you sure you want to repost this?') && saveScrollPositionOnLinkClick(this)">
+                            <input type="image" id="btnRepost" name="btnRepost" value="Repost" src="/images/repost_icon.png" style="margin-left:20px;" <?php echo $repostDisabled ?> />
                             <input type="hidden" id="memberID" name="memberID" value="<?php echo $memberID ?>" />
                             <input type="hidden" id="ownerID" name="ownerID" value="<?php echo $memberID ?>" />
                             <input type="hidden" id="postID" name="postID" value="<?php echo $postID ?>" />
@@ -694,14 +696,14 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
 
                 ?>
 
-                <a href="javascript:showOptions('<?php echo $optionsID ?>');" style="font-size:20px;margin-left:10px;color:#8899a6;float:left;">...</a>
+                <a href="javascript:showOptions('<?php echo $optionsID ?>');" class="blockLink">...</a>
 
                 <?php
 
                 $postPath = getPostPath();
                 $shareLinkID = "shareLink$postID"; ?>
-                <a style="margin-top:3px;margin-left:10px;" href="javascript:showLink('<?php echo $shareLinkID ?>');">
-                    <img src="/images/share.png" height="30" width="30" />
+                <a class="shareLink" href="javascript:showLink('<?php echo $shareLinkID ?>');">
+                    <img src="/images/share.png" class="shareImageAlign" height="25" width="25" />
                 </a>
 
                 <?php $shareLink = 'show_post?postID='.$postID.'&email=1';
@@ -712,10 +714,10 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
 
                 <hr class="hr-line" />
 
-                <div class="content-space" style="clear:both;margin-top:-20px;">
+                <div class="content-space content-space-align">
 
                     <!--Show block button here show it displays clearly between engagement icons and comment box -->
-                    <div style="display:none;margin-top:10px;" id="<?php echo $optionsID ?>">
+                    <div style="display:none;" id="<?php echo $optionsID ?>">
                         <form action="" method="post" onsubmit="return confirm('Do you really want to block this member?') && saveScrollPositions(this) ">
                             <input type="hidden" id="blockedID" name="blockedID" class="blockedID" value="<?php echo $memberID ?>" />
                             <input type="hidden" id="ID" name="ID" class="ID" value="<?php echo $ID ?>" />
@@ -728,19 +730,20 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
                     <input id="<?php echo $shareLinkID ?>" style="display:none;" value ="<?php echo $shortLink ?>" />
 
 
-                    <form style="float:left;margin-top:20px;" method="post" action="" enctype="multipart/form-data"
+                    <!--Comment box -->
+                    <form class="commentBoxAlign" method="post" action="" enctype="multipart/form-data"
                           onsubmit="showCommentUploading('comment<?php echo $postID?>', this);">
 
 
                         <?php if ($iPhone || $iPad || $Android) { ?>
-                            <div class="fileUpload btn btn-primary" style="background:transparent;border:none;float:left;margin-top:-10px;">
-                                <img src="/images/camera.png" style ="width:40px;height:30px;float:left;margin-left:-10px" />
+                            <div class="fileUpload btn btn-primary cameraDiv">
+                                <img src="/images/camera.png" class="cameraImage" />
                                 <input type="file" name="flPostMedia" id="flPostMedia" class="flPostMedia"/>
                             </div>
 
-                            <textarea style="float:left;margin-top:-5px;border:none;"  type="text" name="postComment" id="postComment"
+                            <textarea class="textAreaAlign"  type="text" name="postComment" id="postComment"
                                       placeholder="Write a comment" title='' <?php echo $disabled ?> ></textarea>
-                            <input style="float:left;margin-left:5px;" type="submit" name="btnComment" id="btnComment" class="btn btn-primary" Value="Comment" <?php echo $disabled ?> />
+                            <input style="float:left;margin-left:5px;" type="submit" name="btnComment" id="btnComment" class="btn btn-primary commentButtonAlign" Value="Comment" <?php echo $disabled ?> />
                         <?php } ?>
 
                         <br/>
@@ -786,7 +789,7 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
                     $result3 = mysql_query($sql3) or die(logError(mysql_error(), $url, "Getting first 3 comments"));
                     echo '<br/>';
                     if (mysql_num_rows($result3) > 0) {
-                        echo '<div class="comment-style" style="clear:both">';
+                        echo '<div class="comment-style commentStyleAlign">';
                         while ($rows3 = mysql_fetch_assoc($result3)) {
                             $comment = $rows3['PostComment'];
                             $profilePhoto = $rows3['ProfilePhoto'];

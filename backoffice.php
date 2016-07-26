@@ -81,19 +81,21 @@ if (isset($_POST['redeem']) && $_POST['redeem'] == 'Redeem') {
 
             // get referral money
             $sql3 = "SELECT COUNT( Referrals.ID ) AS ReferralCount
-            FROM Referrals, Members
-            WHERE Referrals.Referral_ID =  '$referralID'
-            AND Referrals.IsRedeemed =0
-            AND Referrals.Signup_ID = Members.ID
-            AND Referrals.Signup_ID
-            IN (
-            SELECT Posts.Member_ID
-            FROM Posts
-            WHERE Posts.IsDeleted =0
-            GROUP BY Posts.ID
-            HAVING COUNT( Posts.ID ) >=5
-            )
-            AND Members.IsEmailValidated =1 ";
+                FROM Referrals
+                JOIN Members ON Referrals.Signup_ID = Members.ID
+                WHERE Referrals.Referral_ID =  '$referralID'
+                AND Referrals.IsRedeemed =0
+                AND Referrals.Signup_ID IN
+
+                ( SELECT Posts.Member_ID
+                FROM Posts
+                WHERE Posts.IsDeleted =0
+                GROUP BY Posts.Member_ID
+                HAVING COUNT( Posts.Member_ID ) >=5
+                ORDER BY Posts.ID DESC )
+
+                AND Members.IsEmailValidated =1";
+
             $result3 = mysql_query($sql3) or die(mysql_error());
             $rows3 = mysql_fetch_assoc($result3);
             $referralCount = $rows3['ReferralCount'];
@@ -114,7 +116,7 @@ if (isset($_POST['redeem']) && $_POST['redeem'] == 'Redeem') {
             $result = mysql_query($sql) or die(mysql_error());
             $rows = mysql_fetch_assoc($result);
             $likeCount = $rows['LikeCount'];
-            $likeMoney = $likeCount * 0.04;
+            $likeMoney = $likeCount * 0.01;
 
             echo "Like Count: $likeCount <br/>";
             echo "Like Money: ". money_format('$%i', $likeMoney);
@@ -131,7 +133,7 @@ if (isset($_POST['redeem']) && $_POST['redeem'] == 'Redeem') {
             $result = mysql_query($sql) or die(mysql_error());
             $rows = mysql_fetch_assoc($result);
             $commentCount = $rows['CommentCount'];
-            $commentMoney = $commentCount * 0.04;
+            $commentMoney = $commentCount * 0.01;
 
             echo "Comment Count: $commentCount <br/>";
             echo "Comment Money: ". money_format('$%i', $commentMoney);
@@ -148,7 +150,7 @@ if (isset($_POST['redeem']) && $_POST['redeem'] == 'Redeem') {
             $result1 = mysql_query($sql1) or die(mysql_error());
             $rows1 = mysql_fetch_assoc($result1);
             $followerCount = $rows1['FollowerCount'];
-            $followerMoney = $followerCount * 0.05;
+            $followerMoney = $followerCount * 0.01;
 
             echo "Follower Count: $followerCount <br/>";
             echo "Follower Money: ". money_format('$%i', $followerMoney);
@@ -170,7 +172,8 @@ if (isset($_POST['redeem']) && $_POST['redeem'] == 'Redeem') {
                 <input type="submit" name="redeem" id="redeem" value="Redeem" class="btn btn-primary" />
             </form>
 
-            <a style="float:left;padding-left:10px;" href="/view_messages/<?php echo $username ?>">Back To Messages</a>
+            <a style="float:left;padding-left:10px;" href="/view_messages/<?php echo $username ?>"><img src="/images/back.png" style="height: 20px;width:20px;" />
+            </a>
         <?php
 
         }

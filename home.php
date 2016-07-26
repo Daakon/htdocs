@@ -904,7 +904,7 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
                         <a href="/post/playdoe"><img src="/images/50-dollar-icon.png" style="height:30px;width:30px;margin-left:20px;" /></a>
 
                         <img src="/images/dollar-sign.png" style="width:30px;height:30px;margin-left:20px;" /> <?php
-                        echo "<span style='color:#888888'> </span> ". getRedeemPoints($ID, get_username($ID));
+                        echo "<span style='color:#888888'> </span> ". getRedeemPoints($ID, get_referralID($ID));
                         if (getRedeemPoints($ID, get_username($ID)) > 9) { echo "<br/><a href='/view_messages/playdoe'><img src='/images/redeem.png' height='30' width='30' /></a>"; };
                         ?>
 

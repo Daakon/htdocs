@@ -579,23 +579,24 @@ function checkBlock($ID, $memberID) {
     }
 }
 
-function getRedeemPoints($ID, $username) {
+function getRedeemPoints($ID, $referralID) {
 
     // get referral money
     $sql3 = "SELECT COUNT( Referrals.ID ) AS ReferralCount
-            FROM Referrals, Members
-            WHERE Referrals.Referral_ID =  '$username'
-            AND Referrals.IsRedeemed =0
-            AND Referrals.Signup_ID = Members.ID
-            AND Referrals.Signup_ID
-            IN (
-            SELECT Posts.Member_ID
-            FROM Posts
-            WHERE Posts.IsDeleted =0
-            GROUP BY Posts.ID
-            HAVING COUNT( Posts.ID ) >=5
-            )
-            AND Members.IsEmailValidated =1 ";
+                FROM Referrals
+                JOIN Members ON Referrals.Signup_ID = Members.ID
+                WHERE Referrals.Referral_ID =  '$referralID'
+                AND Referrals.IsRedeemed =0
+                AND Referrals.Signup_ID IN
+
+                ( SELECT Posts.Member_ID
+                FROM Posts
+                WHERE Posts.IsDeleted =0
+                GROUP BY Posts.Member_ID
+                HAVING COUNT( Posts.Member_ID ) >=5
+                ORDER BY Posts.ID DESC )
+
+                AND Members.IsEmailValidated =1 ";
     $result3 = mysql_query($sql3) or die(mysql_error());
     $rows3 = mysql_fetch_assoc($result3);
     $referralCount = $rows3['ReferralCount'];
@@ -610,7 +611,7 @@ function getRedeemPoints($ID, $username) {
     $result = mysql_query($sql) or die(mysql_error());
     $rows = mysql_fetch_assoc($result);
     $likeCount = $rows['LikeCount'];
-    $likeMoney = $likeCount * 0.04;
+    $likeMoney = $likeCount * 0.01;
 
     $sql2 = "Select Count(PostComments.ID) As CommentCount
     FROM PostComments, Members
@@ -621,7 +622,7 @@ function getRedeemPoints($ID, $username) {
     $result = mysql_query($sql) or die(mysql_error());
     $rows = mysql_fetch_assoc($result);
     $commentCount = $rows['CommentCount'];
-    $commentMoney = $commentCount * 0.04;
+    $commentMoney = $commentCount * 0.01;
 
     $sql1 = "SELECT COUNT(Follows.ID) AS FollowerCount
     FROM Follows, Members
@@ -680,6 +681,18 @@ function getPost($postID) {
     return $post;
 }
 
+function hasReposted($ID, $postID) {
+    $sql = "SELECT ID FROM Posts WHERE OrigPost_ID = $postID And Reposter_ID = $ID ";
+    $result = mysql_query($sql) or die(mysql_error());
+
+    if (mysql_num_rows($result) > 0) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
 function isEmailValidated($ID) {
     $sql = "Select IsEmailValidated From Members Where ID = $ID ";
     $result = mysql_query($sql) or die(mysql_error());
@@ -726,7 +739,6 @@ function hasHourPast($ID) {
         return false;
     }
 }
-
 
 
 
@@ -779,8 +791,6 @@ function hashtag_links($string) {
 
     return $result;
 }
-
-
 
 
 // text function to all service providers for related service post

@@ -1,3 +1,5 @@
+
+
 <?php
 
 require 'imports.php';
@@ -300,8 +302,7 @@ $profileMediaSrc = trim("/media/" . $profilePhoto);
 <?php get_head_files() ?>
 
 
-
-<script type="text/javascript">
+    <script type="text/javascript" xmlns="http://www.w3.org/1999/html">
         function confirmPhotoDelete(theForm) {
             if (!confirm('Are you sure you want to delete this photo')) {
                 return false;
@@ -418,7 +419,24 @@ $profileMediaSrc = trim("/media/" . $profilePhoto);
     }
 </script>
 
-<?php include('media_sizes.html'); ?>
+<style>
+    .btnApprove {
+        background: url("/images/Unlike.png") no-repeat;
+        width: 30px;
+        height: 30px;
+        border: none;
+        margin-left:10px;
+    }
+
+    .btnDisapprove {
+        background: url("/images/Like-Redeem.png") no-repeat;
+        width: 30px;
+        height: 30px;
+        border: none;
+        margin-left:10px;
+    }
+</style>
+
 
 <body class="media-bg">
 
@@ -510,7 +528,7 @@ $profileMediaSrc = trim("/media/" . $profilePhoto);
                 }
                 ?>
 
-                <a href="javascript:history.go(- <?php echo $back ?>)">Back</a>
+                <a href="javascript:history.go(- <?php echo $back ?>)"><img src="/images/back.png" style="height:20px;width:20px;" /></a>
                 <br/><br/><br/>
 
                 <?php
@@ -531,8 +549,8 @@ $profileMediaSrc = trim("/media/" . $profilePhoto);
                 $rows3 = mysql_fetch_assoc($result3);
                 $approvals = mysql_num_rows($result3);
 
-                echo '<table><tr>';
-                echo "<div id = 'approvals$postID' style='display:inline'>";
+                echo '<table style="margin-top:-10px;margin-bottom:10px;margin-left:-10px;"><tr>';
+                echo "<div id = 'approvals$postID' style='display:inline;'>";
 
                 if (mysql_num_rows($result2) > 0) {
                     echo '<td>';
@@ -579,27 +597,22 @@ $profileMediaSrc = trim("/media/" . $profilePhoto);
                 echo '</tr></table>';
 ?>
 
-            <div class="content-space">
+
             <?php if (isset($ID)) { ?>
-                <form method="post" action="" enctype="multipart/form-data"
+
+                <form style="float:left;" method="post" action="" enctype="multipart/form-data"
                       onsubmit="saveScrollPositions(this);">
 
-                    <input type="text" class="form-control" name="mediaComment" id="mediaComment"
-                           placeholder="Write a comment" title='' class="border"/>
 
-                    <h6>Attach A Photo/Video To Your Comment</h6>
+                    <div class="fileUpload btn btn-primary" style="background:transparent;border:none;float:left;margin-top:-10px;margin-left:-5px;">
+                        <img src="/images/camera.png" style ="width:40px;height:30px;float:left;margin-left:-10px" />
                     <input type="file" name="flPostMedia" id="flPostMedia" class="flPostMedia"/>
+                </div>
 
-                    <br/>
-                    <div id="comment<?php echo $postID ?>" style="display:none;">
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-striped progress-bar-danger active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" >
-                                <b>File uploading...please wait</b>
-                            </div>
-                        </div>
-                    </div>
-                    <input type="submit" name="btnComment" id="btnComment" Value="Comment"
-                           style="border:1px solid black"/>
+                    <textarea style="float-left;border:none;" name="mediaComment" id="mediaComment"
+                           placeholder="Write a comment" ></textarea>
+                    <input style="float:right;" type="submit" name="btnComment" id="btnComment" class="btn btn-primary" Value="Comment" />
+
                     <input type="hidden" name="mediaID" id="mediaID" Value="<?php echo $mediaID ?>"/>
                     <input type="hidden" name="ID" id="ID" value="<?php echo $ID ?>"/>
                     <input type="hidden" name="ownerID" id="ownerID" value="<?php echo $memberID ?>"/>
@@ -608,6 +621,14 @@ $profileMediaSrc = trim("/media/" . $profilePhoto);
                 </form>
 
                 <br/>
+
+                <div id="comment<?php echo $postID ?>" style="display:none;float:left;">
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped progress-bar-danger active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" >
+                                <b>File uploading...please wait</b>
+                            </div>
+                        </div>
+
             <?php } ?>
 
             <?php
@@ -664,7 +685,7 @@ $profileMediaSrc = trim("/media/" . $profilePhoto);
                         echo '<div class="comment-delete">';
                         echo '<form action="" method="post" onsubmit="return confirm(\'Do you really want to delete this comment?\')">';
                         echo '<input type="hidden" name="commentID" id="commentID" value="' .  $commentID . '" />';
-                        echo '<input type ="submit" name="DeleteComment" id="DeleteComment" value="Delete" class="deleteButton" />';
+                        echo '<input type ="submit" name="DeleteComment" id="DeleteComment" value="Delete" class="btn" style="color:red;" />';
                         echo '</form>';
                         echo '</div>';
                         //<!------------------------------------->
@@ -738,7 +759,7 @@ $profileMediaSrc = trim("/media/" . $profilePhoto);
                         <div class="comment-delete">
                             <form action="" method="post" onsubmit="return confirm(\'Do you really want to delete this comment?\')">
                                 <input type="hidden" name="commentID" id="commentID" value="' .  $commentID . '" />
-                                <input type ="submit" name="DeleteComment" id="DeleteComment" value="Delete" class="deleteButton" />
+                                <input type ="submit" name="DeleteComment" id="DeleteComment" value="Delete" class="deleteButton btn" />
                             </form>
                         </div>
                     <?php } ?>
@@ -770,7 +791,7 @@ $profileMediaSrc = trim("/media/" . $profilePhoto);
             <br/><br/>
             <form method="get" action="" onsubmit="return confirm('Are you sure you want to delete this media')">
                 <?php
-                echo '<input type = "submit" name = "btnDelete" id = "btnDelete" value = "Delete Image" class="deleteButton" /><br/><br/>';
+                echo '<input type = "submit" name = "btnDelete" id = "btnDelete" value = "Delete Image" class="deleteButton btn" /><br/><br/>';
                 echo '<input type ="hidden" name = "mediaID" id = "mediaID" value = "' . $mediaID . '" />';
                 echo '<input type = "hidden" name = "ID" id = "ID" value="' . $ID . '"/>';
                 echo '</form>';

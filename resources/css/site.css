@@ -461,6 +461,12 @@ li {
     font-weight:bold;
 }
 
+.deleteButtonAlign {
+    float:left;
+    margin-top:20px;
+    margin-left:10px;
+}
+
 .user-icon{
 
 }
@@ -532,6 +538,12 @@ li {
     min-width: 90%;
 }
 
+.textAreaAlign {
+    float:left;
+    margin-top:-5px;
+    border:none;
+}
+
 .mobileLink {
     color:black;
     font-weight: bold;
@@ -556,8 +568,8 @@ li {
     padding-left: 10px;
 }
 
-.flush-container {
-    margin-top:-60px;
+.containerFlush {
+    margin-top:-50px;
 }
 
 .searchBox {
@@ -782,10 +794,81 @@ a {
     pointer-events: none;
 }
 
-/* align icon */
+/* Enagement Row */
 .left-addon .glyphicon  { left:  0px;}
 .right-addon .glyphicon { right: 0px;}
 
 /* add padding  */
 .left-addon input  { padding-left:  30px; }
 .right-addon input { padding-right: 30px; }
+
+.postApprovalsAlign {
+    float:left;
+    margin-top:10px;
+}
+
+.messageEnvelope {
+    margin-left:20px;
+    float:left;
+    margin-top:15px;
+}
+
+.repostAlign {
+    float:left;
+    margin-top:11px;
+}
+
+.shareLink {
+    float:left;
+    margin-top:11px;
+}
+
+.shareImageAlign {
+    margin-left:20px;
+}
+
+.blockLink {
+    font-size:20px;
+    margin-left:20px;
+    margin-top:5px;
+    color:#8899a6;
+    float:left;
+}
+
+.content-space-align {
+    clear:both;
+    margin-top:-20px;
+}
+
+.commentBoxAlign {
+    margin-top:20px;
+    float:left;
+}
+
+.commentStyleAlign {
+    clear:both;
+    margin-top:10px;
+}
+
+.cameraDiv {
+    background:transparent;
+    border:none;
+    float:left;
+    margin-top:-10px;
+}
+
+.cameraImage {
+    width:40px;
+    height:30px;
+    float:left;
+    margin-left:-10px;
+}
+
+.commentButtonAlign {
+    float:left;
+    margin-left:5px;
+}
+
+.backButton {
+    margin-left:10px;
+}

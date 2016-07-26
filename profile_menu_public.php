@@ -77,7 +77,7 @@ if ($_SESSION['ID'] != $profileID) { ?>
             <li <?php echo $showProfile ?>><a href="/<?php echo $username ?>"><img src="/images/profile.png" height="20" width="20" /> Profile</a></li>
             <li><a href="/post/<?php echo $username ?>"><img src="/images/post.png" height="20" width="20" /> View Posts</a></li>
             <li><a href="/member_media/<?php echo $username ?>"><img src="/images/media.png" height="20" width="20" /> Media</a></li>
-            <li><a href="/messages/<?php echo get_username($ID) ?>"><img src = "/images/messages.png" height="20" width="20" /> Message</a></li>
+            <li><a href="/messages/<?php echo get_username($ID) ?>"><img src = "/images/messages.png" height="20" width="20" /> Messages</a></li>
             <li><a href="/member_follows/<?php echo $username ?>"><img src = "/images/follows.png" height="20" width="20" /> Followers</a></li>
             <li><a href="/<?php echo get_username($ID)?>"><span style="color:black;font-weight: 900;"><img src="<?php echo get_users_photo_by_id($ID) ?>" height="20" width="20"/> My Profile</span></a></li>
             <li><a href="/settings/<?php echo get_username($ID) ?>"><img src="/images/settings.png" height="20" width="20" />Settings</a></li>
@@ -91,7 +91,7 @@ if ($_SESSION['ID'] != $profileID) { ?>
             $result = mysql_query($sql) or die(mysql_error());
             $rows = mysql_fetch_assoc($result);
             if ($rows['IsAdmin'] == 1) { ?>
-                <li><a href="/backoffice?<?php echo $username ?>"><img src = "/images/marketing-menu-glyph" height="20" width="20"/> Back Office</a></li>
+                <li><a href="/backoffice?username=playdoe"><img src = "/images/marketing-menu-glyph" height="20" width="20"/> Back Office</a></li>
             <?php }
             ?>
         </ul>
