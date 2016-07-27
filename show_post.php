@@ -534,11 +534,7 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
                     ?>
                     <li><a href="/home" class="backButton"><img src="/images/back.png" height="20" width="20" /></a></li>
                 <?php }
-                else if (isset($_SESSION['ID']) && isset($_COOKIE['Page'])) {
-                    ?>
-                    <li><button onclick="myFunction()" class="backButton"><img src="/images/back.png" height="20" width="20" /></button></li>
-                    <?php
-                }
+
                 else { ?>
                     <li><a href="javascript:history.back()" class="backButton"><img src="/images/back.png" height="20" width="20" /></a></li>
                 <?php }

@@ -641,7 +641,7 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
                     $subjectSql = "SELECT Subject FROM (SELECT * FROM Messages
                     WHERE ThreadOwner_ID = $ID
                     AND (GroupID = '$urlUsername')
-                    Order By ID DESC LIMIT 10) as ROWS Order By ID ASC ";
+                    Order By ID DESC LIMIT 100) as ROWS Order By ID ASC ";
                     $subjectResult = mysql_query($sql);
                     $subjectCount = mysql_num_rows($subjectResult);
                 } else {
@@ -649,7 +649,7 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
                     WHERE ThreadOwner_ID = $ID
                     AND (Sender_ID = $recipientID Or Receiver_ID = $recipientID)
                     AND (IsDeleted = 0) And (GroupID = '')
-                    Order By ID DESC LIMIT 10) as ROWS Order By ID ASC ";
+                    Order By ID DESC LIMIT 100) as ROWS Order By ID ASC ";
                     $subjectResult = mysql_query($subjectSql);
                 }
 
@@ -658,7 +658,7 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
                     $sql = "SELECT * FROM (SELECT * FROM Messages
                     WHERE ThreadOwner_ID = $ID
                     AND (GroupID = '$urlUsername')
-                    Order By ID DESC LIMIT 10) as ROWS Order By ID ASC ";
+                    Order By ID DESC LIMIT 100) as ROWS Order By ID ASC ";
                     $result = mysql_query($sql);
                     $count = mysql_num_rows($result);
                 } else {
@@ -666,7 +666,7 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
                     WHERE ThreadOwner_ID = $ID
                     AND (Sender_ID = $recipientID Or Receiver_ID = $recipientID)
                     AND (IsDeleted = 0) And (GroupID = '')
-                    Order By ID DESC LIMIT 10) as ROWS Order By ID ASC ";
+                    Order By ID DESC LIMIT 100) as ROWS Order By ID ASC ";
                     $result = mysql_query($sql);
                 }
 

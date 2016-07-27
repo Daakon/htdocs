@@ -117,6 +117,8 @@ $message = "<p>Hey $firstName, You can now make money from your social media eff
         <br/>
         You cannot partially redeem your balance, our system is currently all of nothing.
         <br/>
+        *Note: To like any content or post content you must have a least one active post at all times.
+        <br/>
         Save this message and contact us anytime if you have any questions.</p>";
 
 $message = mysql_escape_string($message);
