@@ -750,6 +750,57 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
     });
 </script>
 
+
+<script>
+    // follow
+    $(document).ready(function() {
+        $("body").delegate(".btnFollow", "click", function() {
+            var parentDiv = $(this).closest("div[id^=followDiv]");
+            data={
+                memberID: $(this).closest('tr').find('.followedID').val(),
+                ID: $(this).closest('tr').find('.followerID').val()
+                //add other properties similarly
+            }
+
+            $.ajax({
+                type: "post",
+                url: "follow.php",
+                data: data,
+                success: function(data)
+                {
+                    parentDiv.html(data);
+                }
+
+            })
+        });
+    });
+</script>
+
+<script>
+    // unfollow
+    $(document).ready(function() {
+        $("body").delegate(".btnUnfollow", "click", function() {
+            var parentDiv = $(this).closest("div[id^=followDiv]");
+            data={
+                memberID: $(this).closest('tr').find('.followedID').val(),
+                ID: $(this).closest('tr').find('.followerID').val()
+                //add other properties similarly
+            }
+
+            $.ajax({
+                type: "post",
+                url: "unfollow.php",
+                data: data,
+                success: function(data)
+                {
+                    parentDiv.html(data);
+                }
+
+            })
+        });
+    });
+</script>
+
 <meta http-equiv="cache-control" content="max-age=0" />
 <meta http-equiv="cache-control" content="no-cache" />
 <meta http-equiv="expires" content="0" />
@@ -1054,6 +1105,116 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
         </div>
 
         <br/>
+
+<!--Suggest people to follow -->
+ <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6 roll-call"
+             align="left" >
+
+
+<?php
+$fSql = "SELECT DISTINCT Members.ID as fMemberID, Members.FirstName as fFirstName, Members.LastName as fLastName,
+Members.Username as fUsername, Profile.ProfilePhoto as fProfilePhoto
+FROM Members, Profile
+WHERE Members.ID = Profile.Member_ID
+AND Members.ID != $ID
+AND Members.ID
+IN (
+
+SELECT Posts.Member_ID
+FROM Posts
+WHERE Posts.IsDeleted =0
+GROUP BY Posts.ID
+HAVING COUNT( Posts.ID ) >=1
+)
+AND Members.ID NOT
+IN (
+
+SELECT Followed_ID
+FROM Follows
+WHERE Follower_ID = $ID
+GROUP BY Followed_ID
+) Limit 4
+";
+
+$fResult = mysql_query($fSql) or die(mysql_error());
+$fRows = mysql_fetch_assoc($fResult);
+
+if (mysql_num_rows($fResult) > 0) {
+
+echo "<h4 style='color:#8899a6'>Cool people to follow</h4><hr class='hr-line' />";
+
+}
+
+while ($fRows = mysql_fetch_assoc($fResult)) {
+
+$fProfilePhoto = $fRows['fProfilePhoto'];
+$fName = $fRows['fFirstName'].' '.$fRows['fLastName'];
+$fUsername = $fRows['fUsername'];
+$fProfileUrl = "/$fUsername";
+$fMemberID = $fRows['fMemberID'];
+?>
+
+<div style="clear:both;float:left;" class="profileImageWrapper-Feed">
+ <a href="<?php echo $fProfileUrl ?>">
+                    <img src="<?php echo $mediaPath. $fProfilePhoto ?>" class="profilePhoto-Feed" alt=""
+                         title="<?php echo $fName ?>" />
+                </a>
+</div>
+
+<div class="profileNameWrapper-Feed" style="float:left;">
+ <a href="<?php echo $fProfileUrl ?>">
+                    <div style="float:left;" class="profileName-Feed"><?php echo $fName ?></div>
+                </a>
+
+<div id="followDiv1" style="float:right;margin-top:-5px;">
+                 <table >
+            <tr>
+                <td >
+                    <?php
+
+                    $sqlFollow = "SELECT Follower_ID FROM Follows WHERE Follower_ID = $ID And Followed_ID = $fMemberID ";
+                    $resultFollow = mysql_query($sqlFollow) or die (mysql_error());
+
+                    if (isEmailValidated($ID)) {
+                        if (mysql_num_rows($resultFollow) == 0) {
+                            echo '<form>';
+                            echo '<input type = "hidden" class = "followerID" value = "' . $ID . '" />';
+                            echo '<input type = "hidden" class = "followedID" value = "' . $fMemberID . '">';
+                            echo '<input type = "button" class = "btnFollow" value = "Follow" />';
+                            echo '</form>';
+                        } else {
+                            echo '<form>';
+                            echo '<input type = "hidden" class = "followerID" value = "' . $ID . '" />';
+                            echo '<input type = "hidden" class = "followedID" value = "' . $fMemberID . '">';
+                            echo '<input type = "button" class = "btnUnfollow" value = "Unfollow" />';
+                            echo '</form>';
+                        }
+                    }
+                    ?>
+                </td>
+            </tr>
+        </table>
+        </div>
+
+</div>
+
+<hr class="hr-line"/>
+<?php
+
+
+
+
+}
+
+?>
+
+             </div>
+
+
+
+
+
+
 
 
 
