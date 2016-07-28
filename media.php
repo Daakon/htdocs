@@ -329,12 +329,12 @@ $profileMediaSrc = trim("/media/" . $profilePhoto);
         $("body").delegate(".btnApprove", "click", function () {
             var parentDiv = $(this).closest("div[id^=approvals]");
             var data = {
-                postID: $(this).closest('tr').find('.postID').val(),
-                ID: $(this).closest('tr').find('.ID').val(),
-                mediaID: $(this).closest('tr').find('.mediaID').val(),
-                mediaName: $(this).closest('tr').find('.mediaName').val(),
-                mediaType: $(this).closest('tr').find('.mediaType').val(),
-                mediaDate: $(this).closest('tr').find('.mediaDate').val()
+                postID: $(this).closest('div').find('.postID').val(),
+                ID: $(this).closest('div').find('.ID').val(),
+                mediaID: $(this).closest('div').find('.mediaID').val(),
+                mediaName: $(this).closest('div').find('.mediaName').val(),
+                mediaType: $(this).closest('div').find('.mediaType').val(),
+                mediaDate: $(this).closest('div').find('.mediaDate').val()
                 //add other properties similarly
             }
 
@@ -357,12 +357,12 @@ $profileMediaSrc = trim("/media/" . $profilePhoto);
         $("body").delegate(".btnDisapprove", "click", function () {
             var currentDiv = $(this).closest("div[id^=approvals]");
             var data = {
-                postID: $(this).closest('tr').find('.postID').val(),
-                ID: $(this).closest('tr').find('.ID').val(),
-                mediaID: $(this).closest('tr').find('.mediaID').val(),
-                mediaName: $(this).closest('tr').find('.mediaName').val(),
-                mediaType: $(this).closest('tr').find('.mediaType').val(),
-                mediaDate: $(this).closest('tr').find('.mediaDate').val()
+                postID: $(this).closest('div').find('.postID').val(),
+                ID: $(this).closest('div').find('.ID').val(),
+                mediaID: $(this).closest('div').find('.mediaID').val(),
+                mediaName: $(this).closest('div').find('.mediaName').val(),
+                mediaType: $(this).closest('div').find('.mediaType').val(),
+                mediaDate: $(this).closest('div').find('.mediaDate').val()
 
                 //add other properties similarly
             }
@@ -502,34 +502,22 @@ $profileMediaSrc = trim("/media/" . $profilePhoto);
 
         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 ">
 
-            <img src="/media/<?php echo $profilePhoto ?>" height="100px" width="80px"/>
+            <div style="clear:both" class="profileImageWrapper-Feed">
 
-            <?php echo $name; ?><br/>
-            <?php echo date("F j, Y", strtotime($mediaDate)) ?>
+                    <img src="media/<?php echo $profilePhoto ?>" class="profilePhoto-Feed" alt=""
+                         title="<?php echo $name ?>" />
 
-            <hr/>
-            <?php
-            $history = $_GET['h'];
-            if ($history=='0') { ?>
+            </div>
 
-                <a href="/home">Home</a>
-                <br/><br/><br/>
+            <div class="profileNameWrapper-Feed">
 
-            <?php } else {
+                    <div class="profileName-Feed"><?php echo $name ?></div>
 
-                $isPhotoAlbumOpen = $_GET['photoOpen'];
-                if ($isPhotoAlbumOpen == 'true') {
-                    $_SESSION['PhotoAlbumOpen'] = true;
-                }
+                <div class="date"><?php echo date('l F j, Y',strtotime($mediaDate)); ?>
+                    <?php if ($isSponsored) { echo "<br/>Sponsored"; } ?>
+                </div>
+            </div>
 
-                $isVideoAlbumOpen = $_GET['videoOpen'];
-                if ($isVideoAlbumOpen == 'true') {
-                    $_SESSION['VideoAlbumOpen'] = true;
-                }
-                ?>
-
-                <a href="javascript:history.go(- <?php echo $back ?>)"><img src="/images/back.png" style="height:20px;width:20px;" /></a>
-                <br/><br/><br/>
 
                 <?php
             }
@@ -549,12 +537,12 @@ $profileMediaSrc = trim("/media/" . $profilePhoto);
                 $rows3 = mysql_fetch_assoc($result3);
                 $approvals = mysql_num_rows($result3);
 
-                echo '<table style="margin-top:-10px;margin-bottom:10px;margin-left:-10px;"><tr>';
-                echo "<div id = 'approvals$postID' style='display:inline;'>";
+
+                echo "<div id = 'approvals$postID' style='clear:both;float:left;margin-top:30px;'>";
 
                 if (mysql_num_rows($result2) > 0) {
-                    echo '<td>';
-                    echo '<form>';
+
+                    echo '<form style="float:left;">';
                     echo '<input type ="hidden" class = "ID" value="' . $ID . '"/>';
                     echo '<input type ="hidden" class = "mediaID" value = "' . $mediaID . '" />';
                     echo '<input type ="hidden" class = "mediaName" value ="' . $mediaName . '" />';
@@ -563,19 +551,18 @@ $profileMediaSrc = trim("/media/" . $profilePhoto);
                     echo '<input type ="button" class = "btnDisapprove" />';
 
                     echo '</form>';
-                    echo '</td>';
+
 
                     if ($approvals > 0) {
-                        //echo '<tr><td>';
-                        echo '<td>';
+
                         echo $approvals;
-                        echo '</td>';
+
                     }
 
                 } else {
 
                     echo '<td>';
-                    echo '<form>';
+                    echo '<form style="float:left;">';
                     echo '<span style="display: inline;">';
                     echo '<input type ="hidden" class = "ID" value="' . $ID . '"/>';
                     echo '<input type ="hidden" class = "mediaID" value = "' . $mediaID . '" />';
@@ -583,24 +570,51 @@ $profileMediaSrc = trim("/media/" . $profilePhoto);
                     echo '<input type ="hidden" class = "mediaType" id = "type" value = "' . $mediaType . '" />';
                     echo '<input type ="hidden" class = "mediaDate" id = "mediaDate" value = "' . $mediaDate . '" />';
                     echo '<input type ="button" class = "btnApprove" />';
-                    echo '</td>';
+
 
                     if ($approvals > 0) {
 
-                        echo '<td>';
+
                         echo $approvals;
-                        echo '</td>';
+
                     }
                     echo '</form>';
                 }
                 echo "</div>"; // end of approval div
-                echo '</tr></table>';
 ?>
 
+                <div style='float:left;margin-top:30px;padding-left:20px;'>
 
-            <?php if (isset($ID)) { ?>
+                <?php
+     $history = $_GET['h'];
+            if ($history=='0') { ?>
 
-                <form style="float:left;" method="post" action="" enctype="multipart/form-data"
+                <a href="/home"><img src="/images/back.png" style="height:20px;width:20px;" /></a>
+                <br/><br/><br/>
+
+            <?php } else {
+
+                $isPhotoAlbumOpen = $_GET['photoOpen'];
+                if ($isPhotoAlbumOpen == 'true') {
+                    $_SESSION['PhotoAlbumOpen'] = true;
+                }
+
+                $isVideoAlbumOpen = $_GET['videoOpen'];
+                if ($isVideoAlbumOpen == 'true') {
+                    $_SESSION['VideoAlbumOpen'] = true;
+                }
+                ?>
+
+                <a style="float:left;" href="javascript:history.go(- <?php echo $back ?>)"><img src="/images/back.png" style="height:20px;width:20px;" /></a>
+            </div>
+
+<?php
+
+             if (isset($ID)) { ?>
+
+            <hr class="hr-line" />
+
+                <form style="clear:both;float:left;" method="post" action="" enctype="multipart/form-data"
                       onsubmit="saveScrollPositions(this);">
 
 
