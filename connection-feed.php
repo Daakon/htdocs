@@ -344,26 +344,22 @@ if (mysql_num_rows($rollCallResult) > 0) {
 
 
                             <?php if ($iPhone || $iPad || $Android) { ?>
-                                <div class="fileUpload btn btn-primary cameraDiv">
-                                    <img src="/images/camera.png" class="cameraImage" />
-                                    <input type="file" name="flPostMedia" id="flPostMedia" class="flPostMedia"/>
+
+                                <div style="position:relative;float:left;">
+                                    <a class='btn btn-default' href='javascript:;'>
+                                        <img src="/images/camera.png" height="25" width="25" />
+                                        <input type="file" style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;' name="flPostMedia" id="flPostMedia" onchange='$("#upload-file-info").html($(this).val());'>
+                                    </a>
+                                    &nbsp;
+                                    <span class='label label-info' id="upload-file-info"></span>
                                 </div>
 
-                                <textarea class="textAreaAlign"  type="text" name="postComment" id="postComment"
+
+
+                                <textarea class="textAreaAlign" style="margin-top:10px;" name="postComment" id="postComment"
                                           placeholder="Write a comment" title='' <?php echo $disabled ?> ></textarea>
                                 <input type="submit" name="btnComment" id="btnComment" class="btn btn-primary commentButtonAlign" Value="Comment" <?php echo $disabled ?> />
                             <?php } ?>
-
-                            <br/>
-                            <div id="comment<?php echo $postID ?>" style="display:none;">
-                                <div class="progress">
-                                    <div class="progress-bar progress-bar-striped progress-bar-danger active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" >
-                                        <b>File uploading...please wait</b>
-                                    </div>
-                                </div>
-                            </div>
-
-
 
                             <input type="hidden" name="postID" id="postID" class="postID" Value="<?php echo $postID ?>"/>
                             <input type="hidden" name="ID" id="ID" class="ID" value="<?php echo $ID ?>"/>
@@ -372,7 +368,19 @@ if (mysql_num_rows($rollCallResult) > 0) {
                             <input type="hidden" name="scrolly" id="scrolly" value="0"/>
                         </form>
 
+                        <br/>
+                        <div id="comment<?php echo $postID ?>" style="display:none;">
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-striped progress-bar-danger active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" >
+                                    <b>File uploading...please wait</b>
+                                </div>
+                            </div>
+                        </div>
+
                     <?php } ?>
+
+
+
 
                     <?php
                     $sql3 = "SELECT DISTINCT
