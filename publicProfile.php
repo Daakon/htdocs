@@ -123,6 +123,13 @@ $age = $rows['Age'];
 
     <br/><br/>
 
+    <!--Profile video --------------------------------------------------------------------------------->
+    <?php if ($profileVideo != "default_video.png") { ?>
+        <video src = "<?php echo $videoPath . $profileVideo ?>" poster="/poster/<?php echo $posterName ?>"  preload="none" muted autoplay="autoplay" controls ></video>
+        <br/>
+    <?php } ?>
+
+    <br/>
 
     <h3>
         <?php echo "<div class=\"public-profile-label profileFont\">$firstName $lastName </div>" ?>

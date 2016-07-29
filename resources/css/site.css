@@ -819,9 +819,20 @@ a {
     margin-top:11px;
 }
 
+.repostAlign-hashtag {
+    float:left;
+    margin-top:14px;
+}
+
 .shareLink {
     float:left;
     margin-top:11px;
+}
+
+.shareLink-hashtag {
+    float:left;
+    margin-top:11px;
+    margin-left:20px;
 }
 
 .shareImageAlign {
@@ -831,6 +842,14 @@ a {
 .blockLink {
     font-size:20px;
     margin-left:20px;
+    margin-top:5px;
+    color:#8899a6;
+    float:left;
+}
+
+.blockLink-hashtag {
+    font-size:20px;
+    margin-left:15px;
     margin-top:5px;
     color:#8899a6;
     float:left;

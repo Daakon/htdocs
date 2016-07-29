@@ -675,12 +675,18 @@ $bgPhoto = $row['ProfilePhoto'];
             // only show form on mobile devices
             if ($iPhone || $iPad || $Android) { ?>
 
-                <form method="post" enctype="multipart/form-data" action="" >
+                <form method="post" enctype="multipart/form-data" action="" onsubmit="showPhotoUploading()">
 
                     <span class="fileUpload btn btn-primary" style="background:white;border:none;margin-top:20px;float:left;margin-left:-10px;">
                             <img src="/images/camera.png" style ="width:30px;height:30px;float:left" />
-                            <input type="file" accept="image/*" class="flPostMedia" name="flPostMedia" id="flPostMedia" style="float:left;"/>
+                            <input type="file" accept="image/*" class="flPostMedia" name="flPostMedia" id="flPostMedia" style="float:left; "  onchange='$("#upload-file-info").html($(this).val());' />
                     </span>
+
+                    <br/>
+
+                    <input style="float:left;" type="submit" class="post-button" name="photo" id="photo" value="Upload Photo" />
+
+                    <br/>
 
                     <div id="PhotoProgress" style="display:none;">
                         <div class="progress">
@@ -689,8 +695,6 @@ $bgPhoto = $row['ProfilePhoto'];
                             </div>
                         </div>
                     </div>
-                    <br/>
-                    <input type="submit" class="post-button" name="photo" id="photo" value="Upload Photo" onclick="showPhotoUploading()" />
                 </form>
 
                     <div style="clear:both" id="image-holder"> </div>
@@ -737,8 +741,37 @@ $bgPhoto = $row['ProfilePhoto'];
 
                     <br/>
 
+                <div align ="center">
 
-<?php } ?>
+                    <video src = " <?php echo $videoPath . $profileVideo ?>" poster="/poster/<?php echo $posterName ?>"  preload="auto" controls />
+
+                </div>
+
+
+                <form method="post" enctype="multipart/form-data" action="" onsubmit="showVideoUploading()">
+
+                    <span class="fileUpload btn btn-primary" style="background:white;border:none;margin-top:20px;float:left;margin-left:-10px;">
+                            <img src="/images/camera.png" style ="width:30px;height:30px;float:left" />
+                            <input type="file" accept="video/*" class="flPostMedia" name="flPostVideo" id="flPostVideo" style="float:left;" onchange='$("#upload-file-info").html($(this).val());' />
+                    </span>
+
+                    <br/>
+
+                    <input style="float:left;" type="submit" class="post-button" name="video" id="video" value="Upload Video"  />
+
+                    <br/>
+
+                    <div id="PhotoProgress" style="display:none;">
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped progress-bar-danger active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" class="progress-bar">
+                                <span class="sr-only">Loading</span>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+
+            <?php } ?>
 
 
             <hr class="hr-line"/>

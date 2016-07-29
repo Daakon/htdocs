@@ -932,7 +932,7 @@ if (mysql_num_rows($result) > 0) {
                 if (hasReposted($ID, $postID)) { $repostDisabled = "disabled"; } else { $repostDisabled = ''; }
                 ?>
 
-                    <form class="repostAlign" action="" method="post" onsubmit="return confirm('Are you sure you want to repost this?') && saveScrollPositionOnLinkClick(this)">
+                    <form class="repostAlign-hashtag" action="" method="post" onsubmit="return confirm('Are you sure you want to repost this?') && saveScrollPositionOnLinkClick(this)">
                         <input type="image" id="btnRepost" name="btnRepost" value="Repost" src="/images/repost_icon.png" style="margin-left:20px;" <?php echo $repostDisabled ?> />
                         <input type="hidden" id="memberID" name="memberID" value="<?php echo $memberID ?>" />
                         <input type="hidden" id="ownerID" name="ownerID" value="<?php echo $memberID ?>" />
@@ -948,13 +948,13 @@ if (mysql_num_rows($result) > 0) {
 
                       $optionsID = "options$prestinePostID"; ?>
 
-                    <a href="javascript:showOptions('<?php echo $optionsID ?>');" class="blockLink">...</a>
+                    <a href="javascript:showOptions('<?php echo $optionsID ?>');" class="blockLink-hashtag">...</a>
                 <?php } ?>
 
                 <?php
                     $postPath = getPostPath();
                     $shareLinkID = "shareLink$postID"; ?>
-                   <a class="shareLink" href="javascript:showLink('<?php echo $shareLinkID ?>');">
+                   <a class="shareLink-hashtag" href="javascript:showLink('<?php echo $shareLinkID ?>');">
                        <img src="/images/share.png" height="25" width="25" />
                    </a>
 

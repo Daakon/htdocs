@@ -330,7 +330,6 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                         exit;*/
                     }
                     // read exif data
-
                     $exif = @exif_read_data($mediaFile);
                     if (empty($exif) || !isset($exif)) {
                         echo "<script>alert('Your photo could not be uploaded');location='/home'</script>";
@@ -925,11 +924,7 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
         <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6 roll-call"
              align="left" >
 
-            <div style="margin-bottom:10px;margin-top:-20px;padding-bottom:10px;" align="center">
 
-
-                <!--***********************************-->
-            </div>
 
             <?php
             // set local currency
@@ -1107,7 +1102,6 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
 
         <br/>
 
-<!--Suggest people to follow -->
  <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6 roll-call"
              align="left" >
 
