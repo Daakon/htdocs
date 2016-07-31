@@ -345,15 +345,14 @@ if (mysql_num_rows($rollCallResult) > 0) {
 
                             <?php if ($iPhone || $iPad || $Android) { ?>
 
+
                                 <div style="position:relative;float:left;">
                                     <a class='btn btn-default' href='javascript:;'>
                                         <img src="/images/camera.png" height="25" width="25" />
-                                        <input type="file" style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;' name="flPostMedia" id="flPostMedia" onchange='$("#upload-file-info").html($(this).val());'>
+                                        <input type="file" style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;' name="flCommentMedia[]" id="flCommentMedia" multiple onchange='$("#upload-file-info").html($(this).val());' />
                                     </a>
                                     &nbsp;
-                                    <span class='label label-info' id="upload-file-info"></span>
                                 </div>
-
 
 
                                 <textarea class="textAreaAlign" style="margin-top:10px;" name="postComment" id="postComment"
@@ -369,7 +368,7 @@ if (mysql_num_rows($rollCallResult) > 0) {
                         </form>
 
                         <br/>
-                        <div id="comment<?php echo $postID ?>" style="display:none;">
+                        <div id="comment<?php echo $postID ?>" style="display:none;float:left;">
                             <div class="progress">
                                 <div class="progress-bar progress-bar-striped progress-bar-danger active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" >
                                     <b>File uploading...please wait</b>

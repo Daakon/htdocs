@@ -1,57 +1,7 @@
-
-<?php
-$fSql = "SELECT DISTINCT Members.FirstName as fFirstName, Members.LastName as fLastName,
-Members.Username as fUsername, Profile.ProfilePhoto as fProfilePhoto
-FROM Members, Profile
-WHERE Members.ID = Profile.Member_ID
-AND Members.ID != $ID
-AND Members.ID
-IN (
-
-SELECT Posts.Member_ID
-FROM Posts
-WHERE Posts.IsDeleted =0
-GROUP BY Posts.ID
-HAVING COUNT( Posts.ID ) >=1
-)
-AND Members.ID NOT
-IN (
-
-SELECT Followed_ID
-FROM Follows
-WHERE Follower_ID = $ID
-GROUP BY Followed_ID
-) Limit 2
-";
-
-$fResult = mysql_query($fSql) or die(mysql_error());
-$fRows = mysql_fetch_assoc($fResult);
-
-echo "<div class=\"col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6 roll-call-feed\"
-         align=\"left\" style=\"padding-left:10px;\">";
-echo "<h4>People to follow</h4>";
-
-
-while ($fRows = mysql_fetch_assoc($fResult)) {
-
-$fProfilePhoto = $fRows['fProfilePhoto'];
-$fName = $fRows['fFirstName'].' '.$fRows['fLastName'];
-$fUsername = $fRows['fUsername'];
-$fProfileUrl = "/$fUsername";
-?>
-<div style="clear:both" class="profileImageWrapper-Feed">
-                <a href="<?php echo $fProfileUrl ?>">
-                    <img src="<?php echo $mediaPath. $fProfilePhoto ?>" class="profilePhoto-Feed" alt=""
-                         title="<?php echo $fName ?>" />
-                </a>
-            </div>
-
-            <div class="profileNameWrapper-Feed">
-                <a href="<?php echo $fProfileUrl ?>">
-                    <div class="profileName-Feed"><?php echo $fName ?></div>
-                </a>
-<?php
-
-}
-echo "</div>";
-?>
+<div style="position:relative;float:left;">
+ <a class='btn btn-default' href='javascript:;'>
+                                        <img src="/images/camera.png" height="25" width="25" />
+                                        <input type="file" style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;' name="flPostMedia[]" id="flPostMedia" multiple onchange='$("#upload-file-info").html($(this).val());' />
+                                    </a>
+                                    &nbsp;
+                                    </div>

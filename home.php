@@ -271,13 +271,29 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
         $comment = makeLinks($comment);
         $comment = hashtag_links($comment);
 
-        if ($_SESSION['PostComment'] == $_POST['postComment']) {
-            echo "<script>alert('Your comment appears to be empty');</script>";
-        } else {
+
+
 // if photo is provided
-            if (isset($_FILES['flPostMedia']) && strlen($_FILES['flPostMedia']['name']) > 1) {
+            if (strlen($_FILES['flCommentMedia']['name'] > 0)) {
+ foreach ($_FILES['flCommentMedia']['tmp_name'] as $k => $v) {
+
+ $mediaName = $_FILES["flCommentMedia"]["name"][$k];
+                // remove ALL WHITESPACE from image name
+                $mediaName = preg_replace('/\s+/', '', $mediaName);
+                // remove ALL special characters
+                $mediaName = str_replace('/[^A-Za-z0-9\-]/', '', $mediaName);
+                // remove ampersand
+                $mediaName = str_replace('&', '', $mediaName);
+                $fileName = pathinfo($mediaName, PATHINFO_FILENAME);
+                // add unique id to image name to make it unique and add it to the file server
+                $mediaName = trim(uniqid() . $mediaName);
+                $mediaFile = $_FILES['flCommentMedia']['tmp_name'][$k];
+                $type = trim($_FILES["flCommentMedia"]["type"][$k]);
+                $tempName = $_FILES['flCommentMedia']['tmp_name'][$k];
+                    $size = $_FILES['flCommentMedia']['size'][$k];
+                    $mediaFile = $tempName;
 // check file size
-                if ($_FILES['flPostMedia']['size'] > 25000000000) {
+                if ($size > 25000000000) {
                     echo '<script>alert("File is too large. The maximum file size is 50MB.");</script>';
                     header('Location:home.php');
                     exit;
@@ -290,18 +306,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                 $photoFileTypes = array("image/jpg", "image/jpeg", "image/png", "image/tiff",
                     "image/gif", "image/raw");
                 $audioFileTypes = array("audio/wav", "audio/mp3");
-                $mediaName = $_FILES["flPostMedia"]["name"];
-                // remove ALL WHITESPACE from image name
-                $mediaName = preg_replace('/\s+/', '', $mediaName);
-                // remove ALL special characters
-                $mediaName = str_replace('/[^A-Za-z0-9\-]/', '', $mediaName);
-                // remove ampersand
-                $mediaName = str_replace('&', '', $mediaName);
-                $fileName = pathinfo($mediaName, PATHINFO_FILENAME);
-                // add unique id to image name to make it unique and add it to the file server
-                $mediaName = trim(uniqid() . $mediaName);
-                $mediaFile = $_FILES['flPostMedia']['tmp_name'];
-                $type = trim($_FILES["flPostMedia"]["type"]);
+
                 require 'media_post_file_path.php';
                 // create file type instance
                 if (in_array($type, $audioFileTypes) || in_array($type, $videoFileTypes)) {
@@ -393,6 +398,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                     }
                     if (in_array($type, $photoFileTypes)) {
                         $img = '<img src = "' . $mediaPath . $mediaName .'"  />';
+                         $newImage .= $img.'<br/>';
                     } // check if file type is a video
                     elseif (in_array($type, $videoFileTypes)) {
                         // where ffmpeg is located
@@ -413,19 +419,24 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                                 <source src = "' . $videoPath . $oggFileName . '" type = "video/ogg" />
                                 <source src = "' . $videoPath . $webmFileName . '" type = "video/webm" />
                                 </video>';
+                                $newImage .= $img.'<br/>';
                     } else {
                         // if invalid file type
                         /*echo '<script>alert("Invalid File Type!");</script>';
                         header('Location:home.php');
                         exit; */
                     }
-                    $comment = $comment . '<br/><br/>' . $img . '<br/>';
+                    }
+                    }
+                    $comment = $comment . '<br/><br/>' . $newImage . '<br/>';
                     $sql = "INSERT INTO PostComments (Post_ID,     Member_ID,  Owner_ID,   Comment, CommentDate  ) Values
                                                       ($postID,      $ID,      $ownerId, '$comment', NOW())";
                     mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting post comment"));
 
-                }
+
             }
+                }
+
 //----------------------
 // if not comment photo
 //----------------------
@@ -475,11 +486,9 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 //------------------
 //=========================================================================================================================//
 //BELOW IS END OF POST COMMENT HANDLING CODE ==========================================================================//
-        }
-    }
+
     echo "<script>location='/home?&scrollx=$scrollx&scrolly=$scrolly'</script>";
 }
-
 
 // handle Repost
 if (isset($_POST['btnRepost']) && ($_POST['btnRepost'] == "Repost")) {
