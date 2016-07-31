@@ -85,7 +85,7 @@ if (isset($_POST['MakeProfileVideo']) && $_POST['MakeProfileVideo'] == "Make Pro
 </script>
 
 
-<div class="container" style="margin-top:-50px;">
+<div class="container containerFlush">
 
     <div class="row row-padding" >
 

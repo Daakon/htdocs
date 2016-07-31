@@ -119,7 +119,7 @@ if (!empty($_SESSION['ID'])) {
                         <td style="padding-left:0px;">
                             <h5>
                                 Playdoe is a social network that pays you for every <b style="color:gray">like</b>, <b style="color:gray">comment</b>,
-                                <b style="color:gray">follower</b> and <b style="color:gray">referral</b>.
+                                <b style="color:gray">follower</b> and <b style="color:gray">referral</b>. Once you reach $10, you can cash out, take a gift card or keep going.
                             </h5>
                             <span style="color:gray;font-size:12px;font-weight:600">
                                 Checkout our <a href="http://officialplaydoe.tumblr.com/" target="_blank">blog</a> to learn more.
@@ -144,7 +144,7 @@ if (!empty($_SESSION['ID'])) {
                         <td style="padding-left:10px;">
                             <h4>
                                 Playdoe is a social network that pays you for every <b style="color:gray">like</b>, <b style="color:gray">comment</b>,
-                                <b style="color:gray">follower</b> and <b style="color:gray">referral</b>.
+                                <b style="color:gray">follower</b> and <b style="color:gray">referral</b>. Once you reach $10, you can cash out, take a gift card or keep going.
                             </h4>
                             <span style="color:gray;font-size:14px;font-weight:600">
                                 Checkout our <a href="http://officialplaydoe.tumblr.com/" target="_blank">blog</a> to learn more.
@@ -169,7 +169,7 @@ if (!empty($_SESSION['ID'])) {
     <div class="row" style="background:#e3e3e3;padding-left:10px;">
         <a id="signup"></a>
         <div style="padding-left:20px;">
-            <h2 class="bold" style="margin-top:-10px;">Sign Up</h2>
+            <h2 class="bold">Sign Up</h2>
             <span class="lead" style="font-weight: 500;">It's Free!</span>
             <br/><br/>
         </div>

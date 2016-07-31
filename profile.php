@@ -17,6 +17,11 @@ $ID = $_SESSION['ID'];
 $urlUsername = get_username_from_url();
 $_SESSION['Username'] = $urlUsername;
 
+
+if ($urlUsername == '') {
+    $urlUsername = 'playdoe';
+}
+
 ?>
 
 
@@ -24,21 +29,21 @@ $_SESSION['Username'] = $urlUsername;
 <?php
 // handle upload profile pic
 if (isset($_POST['photo']) && ($_POST['photo'] == "Upload Photo")) {
-    if (isset($_FILES['flPostMedia']) && strlen($_FILES['flPostMedia']['name']) > 1) {
-        if ($_FILES['flPostMedia']['size'] > 5000000000) {
+    if (isset($_FILES['flPostPhoto']) && strlen($_FILES['flPostPhoto']['name']) > 1) {
+        if ($_FILES['flPostPhoto']['size'] > 5000000000) {
             echo '<script>alert("File is too large");</script>';
             exit;
         }
 
 
         // add unique id to image name to make it unique and add it to the file server
-        $mediaName = $_FILES["flPostMedia"]["name"];
+        $mediaName = $_FILES["flPostPhoto"]["name"];
         // remove ALL WHITESPACE from image name
         $mediaName = preg_replace('/\s+/', '', $mediaName);
         // remove ALL SPECIAL CHARACTERS, Images paths are extremely sensitive
         $mediaName = str_replace('/[^A-Za-z0-9\-]/', '', $mediaName);
         $mediaName = uniqid() . $mediaName;
-        $mediaFile = $_FILES['flPostMedia']['tmp_name'];
+        $mediaFile = $_FILES['flPostPhoto']['tmp_name'];
 
         $checkImage = getimagesize($mediaFile);
         $width = $checkImage[0];
@@ -49,7 +54,7 @@ if (isset($_POST['photo']) && ($_POST['photo'] == "Upload Photo")) {
             exit;
         }
 
-        $type = $_FILES["flPostMedia"]["type"];
+        $type = $_FILES["flPostPhoto"]["type"];
         require 'media_post_file_path.php';
         if ($type == "image/jpeg") {
             $src = imagecreatefromjpeg($mediaFile);
@@ -473,6 +478,7 @@ else {
 }
 
 
+
 $token = $match[1];
 $username = $_SESSION['Username'];
 $profileID = get_id_from_username($username);
@@ -502,7 +508,7 @@ $bgPhoto = $row['ProfilePhoto'];
     ">
 
 
-<div class="container" style="margin-top:-75px;">
+<div class="container containerFlush-profile">
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script src = "jquery-1.8.3.min.js"></script>
@@ -526,15 +532,9 @@ $bgPhoto = $row['ProfilePhoto'];
             $result = mysql_query($sql) or die(logError(mysql_error(), $url, "Getting username from session ID"));
             $rows = mysql_fetch_assoc($result);
 
-            // if profile is not the current member session ID
-            // serve the public profile
-            $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-            if (strstr($url, "http://playdoe.com/playdoe/")) {
-                $url = "http://playdoe.com/playdoe";
+            if ($username == '') {
+                $username = 'playdoe';
             }
-            preg_match("/[^\/]+$/",$url ,$match);
-            $username = $match[0];
-
 
             if ($ID != get_id_from_username($username)) {
 
@@ -677,21 +677,23 @@ $bgPhoto = $row['ProfilePhoto'];
 
                 <form method="post" enctype="multipart/form-data" action="" onsubmit="showPhotoUploading()">
 
-                    <span class="fileUpload btn btn-primary" style="background:white;border:none;margin-top:20px;float:left;margin-left:-10px;">
-                            <img src="/images/camera.png" style ="width:30px;height:30px;float:left" />
-                            <input type="file" accept="image/*" class="flPostMedia" name="flPostMedia" id="flPostMedia" style="float:left; "  onchange='$("#upload-file-info").html($(this).val());' />
-                    </span>
-
-                    <br/>
+                    <div style="position:relative;float:left;">
+                        <a class='btn btn-default' href='javascript:;'>
+                            <img src="/images/camera.png" height="25" width="25" />
+                            <input type="file" accept="image/*" style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;' name="flPostPhoto" id="flPostPhoto" >
+                        </a>
+                        &nbsp;
+                        <div style="clear:both" id="image-holder"> </div>
+                    </div>
 
                     <input style="float:left;" type="submit" class="post-button" name="photo" id="photo" value="Upload Photo" />
 
                     <br/>
 
-                    <div id="PhotoProgress" style="display:none;">
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-striped progress-bar-danger active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" class="progress-bar">
-                                <span class="sr-only">Loading</span>
+                    <div id="PhotoProgress" style="display:none;float:left">
+                        <div style="float:left" class="progress">
+                            <div style="float:left" class="progress-bar progress-bar-striped progress-bar-danger active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" class="progress-bar">
+                                <span style="float: left" class="sr-only">Loading</span>
                             </div>
                         </div>
                     </div>
@@ -703,11 +705,11 @@ $bgPhoto = $row['ProfilePhoto'];
                         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
                         <script>
                             $(function () {
-                                $("#flPostMedia").change(function () {
+                                $("#flPostPhoto").change(function () {
                                     if (typeof (FileReader) != "undefined") {
                                         var dvPreview = $("#image-holder");
                                         dvPreview.html("");
-                                        var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp|.mov|.mpeg|.mpg|.ogg|.mp4|.webm|.x-matroska|.x-ms-wmw)$/;
+                                        var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png)$/;
                                         $($(this)[0].files).each(function () {
                                             var file = $(this);
                                             if (regex.test(file[0].name.toLowerCase())) {
@@ -717,11 +719,6 @@ $bgPhoto = $row['ProfilePhoto'];
                                                     img.attr("style", "height:100px;width: 100px");
                                                     img.attr("src", e.target.result);
                                                     dvPreview.append(img);
-
-                                                    var video = $("<video />");
-                                                    video.attr("style", "height:100px;width: 100px");
-                                                    video.attr("src", e.target.result);
-                                                    dvPreview.append(video);
                                                 }
                                                 reader.readAsDataURL(file[0]);
                                             } else {
@@ -750,12 +747,48 @@ $bgPhoto = $row['ProfilePhoto'];
 
                 <form method="post" enctype="multipart/form-data" action="" onsubmit="showVideoUploading()">
 
-                    <span class="fileUpload btn btn-primary" style="background:white;border:none;margin-top:20px;float:left;margin-left:-10px;">
-                            <img src="/images/camera.png" style ="width:30px;height:30px;float:left" />
-                            <input type="file" accept="video/*" class="flPostMedia" name="flPostVideo" id="flPostVideo" style="float:left;" onchange='$("#upload-file-info").html($(this).val());' />
-                    </span>
+                    <div style="position:relative;float:left;">
+                        <a class='btn btn-default' href='javascript:;'>
+                            <img src="/images/camera.png" height="25" width="25" />
+                            <input type="file" accept="video/*" style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;' name="flPostVideo" id="flPostVideo" onchange='$("#upload-video-info").html($(this).val());'>
+                        </a>
+                        &nbsp;
+                        <div style="clear:both" id="video-holder"> </div>
+                    </div>
 
-                    <br/>
+                    <script>
+                        $(function () {
+                            $("#flPostVideo").change(function () {
+                                if (typeof (FileReader) != "undefined") {
+                                    var dvPreview = $("#video-holder");
+                                    dvPreview.html("");
+                                    var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.bmp|.mov|.mpeg|.mpg|.ogg|.mp4|.webm|.x-matroska|.x-ms-wmw)$/;
+                                    $($(this)[0].files).each(function () {
+                                        var file = $(this);
+                                        if (regex.test(file[0].name.toLowerCase())) {
+                                            var reader = new FileReader();
+                                            reader.onload = function (e) {
+                                                var img = $("<video />");
+                                                img.attr("style", "height:100px;width: 100px");
+                                                img.attr("src", e.target.result);
+                                                dvPreview.append(img);
+
+                                            }
+                                            reader.readAsDataURL(file[0]);
+                                        } else {
+                                            alert(file[0].name + " is not a valid image file.");
+                                            dvPreview.html("");
+                                            return false;
+                                        }
+                                    });
+                                } else {
+                                    alert("This browser does not support HTML5 FileReader.");
+                                }
+                            });
+                        });
+
+                    </script>
+
 
                     <input style="float:left;" type="submit" class="post-button" name="video" id="video" value="Upload Video"  />
 

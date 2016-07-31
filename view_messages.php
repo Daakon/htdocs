@@ -524,8 +524,8 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
 
 <body onload='location.href="#pageStart"'>
 
-<div class="container">
-    <div class="row row-padding" style="margin-top:-50px">
+<div class="container containerFlush">
+    <div class="row row-padding">
 
         <div class="col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8 roll-call ">
 

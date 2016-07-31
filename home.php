@@ -833,7 +833,7 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
 
 <!--empty onunload will clear browser cache for clean refresh -->
 <body onunload="">
-<div class="container" style="margin-top:-60px;">
+<div class="container containerFlush-home">
     <?php
     ?>
     <div class="row row-padding">
@@ -1006,7 +1006,7 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
                    // } // hasHourPast
                // } // isEmailValidated
                 else {
-                    echo "You must verify your email before posting <br/>
+                    echo "You must verify your email before you can post, like, comment or follow anyone. <br/>
                             <form method='post' action='' >
                                 <input type='hidden' id='id' name='id' value='$ID' />
                                 <input type='submit' id='validate' name='validate' value='Send Email Verification' />
