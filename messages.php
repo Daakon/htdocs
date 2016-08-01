@@ -12,10 +12,10 @@ $ID = $_SESSION['ID'];
 ?>
 
 
-<div class="container">
+<div class="container containerFlush">
     <div class="row row-padding">
 
-        <div class="col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8 roll-call" style="margin-top:-50px">
+        <div class="col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8 roll-call">
 
             <?php require 'profile_menu.php'; ?>
 

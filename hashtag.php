@@ -282,10 +282,26 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
         } else {
 
 // if photo is provided
-            if (isset($_FILES['flPostMedia']) && strlen($_FILES['flPostMedia']['name']) > 1) {
+            if (isset($_FILES['flCommentMedia']) && strlen($_FILES['flCommentMedia']['name'] > 0)) {
+             foreach ($_FILES['flCommentMedia']['tmp_name'] as $k => $v) {
+$mediaName = $_FILES["flCommentMedia"]["name"][$k];
+                // remove ALL WHITESPACE from image name
+                $mediaName = preg_replace('/\s+/', '', $mediaName);
+                // remove ALL special characters
+                $mediaName = str_replace('/[^A-Za-z0-9\-]/', '', $mediaName);
+                // remove ampersand
+                $mediaName = str_replace('&', '', $mediaName);
+                $fileName = pathinfo($mediaName, PATHINFO_FILENAME);
+                // add unique id to image name to make it unique and add it to the file server
+                $mediaName = trim(uniqid() . $mediaName);
+                $mediaFile = $_FILES['flCommentMedia']['tmp_name'][$k];
+                $type = trim($_FILES["flCommentMedia"]["type"][$k]);
+                $tempName = $_FILES['flCommentMedia']['tmp_name'][$k];
+                    $size = $_FILES['flCommentMedia']['size'][$k];
+                    $mediaFile = $tempName;
 
 // check file size
-                if ($_FILES['flPostMedia']['size'] > 50000000) {
+                if ($size > 50000000) {
                     echo '<script>alert("File is too large. The maximum file size is 50MB.");</script>';
                     header('Location:home.php');
                     exit;
@@ -299,17 +315,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                 $photoFileTypes = array("image/jpg", "image/jpeg", "image/png", "image/tiff",
                     "image/gif", "image/raw");
 
-                // add unique id to image name to make it unique and add it to the file server
-                $mediaName = $_FILES["flPostMedia"]["name"];
-                // remove ALL SPECIAL CHARACTERS, Images paths are extremely sensitive
-                $mediaName = str_replace('/[^A-Za-z0-9\-]/', '', $mediaName);
-                 // remove ALL WHITESPACE from image name
-                $mediaName = preg_replace('/\s+/', '', $mediaName);
-                // remove ampersand
-                $mediaName = str_replace('&', '', $mediaName);
-                $mediaName = trim(uniqid() . $mediaName);
-                $mediaFile = $_FILES['flPostMedia']['tmp_name'];
-                $type = trim($_FILES["flPostMedia"]["type"]);
+
 
                 require 'media_post_file_path.php';
 
@@ -403,6 +409,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 
                         $img = '<img src = "' . $mediaPath . $mediaName .'" class="img-responsive"/>';
                         $img = '<a href = "/media.php?id=' . $ID . '&mid=' . $mediaID . '&mediaName=' . $media . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '">' . $img . '</a>';
+                        $newImage .= $img.'<br/>';
                     } // check if file type is a video
                     elseif (in_array($type, $videoFileTypes)) {
                          // where ffmpeg is located
@@ -423,14 +430,16 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                                 <source src = "' . $videoPath . $oggFileName . '" type = "video/ogg" />
                                 <source src = "' . $videoPath . $webmFileName . '" type = "video/webm" />
                                 </video>';
+                                $newImage .= $img.'<br/>';
                     } else {
                         // if invalid file type
                         echo '<script>alert("Invalid File Type!");</script>';
                         header('Location:home.php');
                         exit;
                     }
-
-                    $comment = $comment . '<br/><br/>' . $img . '<br/>';
+}
+}
+                    $comment = $comment . '<br/><br/>' . $newImage . '<br/>';
 
                     $sql = "INSERT INTO PostComments (Post_ID,     Member_ID,   Comment, CommentDate  ) Values
                                                       ('$postID', '$ID',      '$comment', NOW())";
@@ -438,51 +447,6 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                     mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting post comment"));
 
 
-
-/*
-// get photo owner data
-                    $sql = "SELECT Member_ID FROM Posts WHERE ID = $postID";
-                    $result = mysql_query($sql) or die(mysql_error());
-                    $rows = mysql_fetch_assoc($result);
-                    $ownerId = $rows['Member_ID'];
-                    $sqlOwner = "SELECT ID, FirstName, LastName FROM Members WHERE ID = '$ownerId' ";
-                    $resultOwner = mysql_query($sqlOwner) or die(mysql_error());
-                    $rowsOwner = mysql_fetch_assoc($resultOwner);
-                    $name2 = $rowsOwner['FirstName'] . ' ' . $rowsOwner['LastName'];
-                    $name2 = $name2."'s";
-                    $ownerId = $rowsOwner['ID'];
-                    $name2Link = $name2;
-
-                    $orgPost = "<a href='/show_post.php?postID=$postID'>status</a>";
-                    $orgPostSql = "SELECT Category FROM Posts WHERE ID = $postID ";
-                    $orgPostResult = mysql_query($orgPostSql) or die(logError(mysql_error(), $url, "Getting original post commented on"));
-                    $orgPostRow = mysql_fetch_assoc($orgPostResult);
-                    $orgInterest = $orgPostRow['Category'];
-
-                    // determine noun if profile owner commented on their own post and write bulletin
-
-                    if ($ownerId == $ID) {
-                       $noun = "a status they posted";
-                    }
-                    else {
-
-                        $noun = $name2 . ' post.';
-                    }
-
-                    $post = "$nameLink posted a new $mediaString comment on previous $orgPost <br/><br/>$img<br/>";
-                    $post = mysql_real_escape_string($post);
-
-                    $sqlInsertPost = "INSERT INTO Posts (Post,     Member_ID,    PostDate  ) Values
-                                                        ('$post', '$ID',        NOW() ) ";
-                    mysql_query($sqlInsertPost) or die(logError(mysql_error(), $url, "Inserting comment with media"));
-                    $newPostID = mysql_insert_id();
-
-// update new photo with bulletin id for commenting later
-
-                    $sql = "UPDATE Media SET Post_ID = '$newPostID' WHERE MediaName = '$mediaName' ";
-                    mysql_query($sql) or die(mysql_error());
-*/
-                }
             }
 //----------------------
 // if not comment photo
@@ -995,34 +959,42 @@ if (mysql_num_rows($result) > 0) {
             <form style="margin-top:20px;" method="post" action="" enctype="multipart/form-data"
                   onsubmit="showCommentUploading('comment<?php echo $postID?>', this);">
 
-<?php if ($iPhone || $iPad || $Android) { ?>
-                   <div class="fileUpload btn btn-primary cameraDiv">
-                                    <img src="/images/camera.png" class="cameraImage" />
-                                    <input type="file" name="flPostMedia" id="flPostMedia" class="flPostMedia"/>
+     <?php if ($iPhone || $iPad || $Android) { ?>
+
+
+                                <div style="position:relative;float:left;">
+                                    <a class='btn btn-default' href='javascript:;'>
+                                        <img src="/images/camera.png" height="25" width="25" />
+                                        <input type="file" style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;' name="flCommentMedia[]" id="flCommentMedia" multiple onchange='$("#upload-file-info").html($(this).val());' />
+                                    </a>
                                 </div>
 
-                                <textarea class="textAreaAlign"  type="text" name="postComment" id="postComment"
+
+                                <textarea class="textAreaAlign" style="margin-top:10px;" name="postComment" id="postComment"
                                           placeholder="Write a comment" title='' <?php echo $disabled ?> ></textarea>
+
                                 <input type="submit" name="btnComment" id="btnComment" class="btn btn-primary commentButtonAlign" Value="Comment" <?php echo $disabled ?> />
 
-                <div id="comment<?php echo $postID ?>" style="display:none;">
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-striped progress-bar-danger active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" >
-                            <b>File uploading...please wait</b>
+                            <?php } ?>
+
+                            <input type="hidden" name="postID" id="postID" class="postID" Value="<?php echo $postID ?>"/>
+                            <input type="hidden" name="ID" id="ID" class="ID" value="<?php echo $ID ?>"/>
+                            <input type="hidden" name="ownerID" class="ownerID" id="ownerID" value="<?php echo $memberID ?>"/>
+                            <input type="hidden" name="scrollx" id="scrollx" value="0"/>
+                            <input type="hidden" name="scrolly" id="scrolly" value="0"/>
+                        </form>
+
+                        <br/>
+                         <span style="clear:both;float:left;;" class='label label-info' id="upload-file-info"></span>
+                         <br/>
+
+                        <div id="comment<?php echo $postID ?>" style="display:none;float:left;">
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-striped progress-bar-danger active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" >
+                                    <b>File uploading...please wait</b>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-
-
-                <input type="hidden" name="postID" id="postID" Value="<?php echo $postID ?>"/>
-                <input type="hidden" name="ID" id="ID" value="<?php echo $ID ?>"/>
-                <input type="hidden" name="ownerId" id="ownerId" value="<?php echo $MemberID ?>"/>
-                <input type="hidden" name="hashtag" id="hashtag" value ="<?php echo $hashtag ?>" />
-                <input type="hidden" name="scrollx" id="scrollx" value="0"/>
-                <input type="hidden" name="scrolly" id="scrolly" value="0"/>
-            </form>
-
-           <?php } ?>
 
 
             <?php

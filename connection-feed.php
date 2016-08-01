@@ -351,7 +351,7 @@ if (mysql_num_rows($rollCallResult) > 0) {
                                         <img src="/images/camera.png" height="25" width="25" />
                                         <input type="file" style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;' name="flCommentMedia[]" id="flCommentMedia" multiple onchange='$("#upload-file-info").html($(this).val());' />
                                     </a>
-                                    &nbsp;
+
                                 </div>
 
 
@@ -367,6 +367,8 @@ if (mysql_num_rows($rollCallResult) > 0) {
                             <input type="hidden" name="scrolly" id="scrolly" value="0"/>
                         </form>
 
+                        <br/>
+                        <span class='label label-info' id="upload-file-info"></span>
                         <br/>
                         <div id="comment<?php echo $postID ?>" style="display:none;float:left;">
                             <div class="progress">

@@ -24,164 +24,172 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
         $comment = makeLinks($comment);
 
 // if photo is provided
-        if (isset($_FILES['flPostMedia']) && strlen($_FILES['flPostMedia']['name']) > 1) {
+        if (isset($_FILES['flPostMedia']) && strlen($_FILES['flPostMedia']['name'] > 1)) {
+            foreach ($_FILES['flCommentMedia']['tmp_name'] as $k => $v) {
+
+                // remove ALL WHITESPACE from image name
+                $mediaName = preg_replace('/\s+/', '', $mediaName);
+                // remove ALL special characters
+                $mediaName = str_replace('/[^A-Za-z0-9\-]/', '', $mediaName);
+                // remove ampersand
+                $mediaName = str_replace('&', '', $mediaName);
+                $fileName = pathinfo($mediaName, PATHINFO_FILENAME);
+                // add unique id to image name to make it unique and add it to the file server
+                $mediaName = trim(uniqid() . $mediaName);
+                $mediaFile = $_FILES['flCommentMedia']['tmp_name'][$k];
+                $type = trim($_FILES["flCommentMedia"]["type"][$k]);
+                $tempName = $_FILES['flCommentMedia']['tmp_name'][$k];
+                $size = $_FILES['flCommentMedia']['size'][$k];
+                $mediaFile = $tempName;
 
 // check file size
-            if ($_FILES['flPostMedia']['size'] > 50000000) {
-                echo '<script>alert("File is too large. The maximum file size is 50MB.");location = "home.php?"</script>';
-                exit;
-            }
-
-// check if file type is a photo
-            $videoFileTypes = array("video/mpeg", "video/mpg", "video/ogg", "video/mp4",
-                "video/quicktime", "video/webm", "video/x-matroska",
-                "video/x-ms-wmw");
-// video file types
-            $photoFileTypes = array("image/jpg", "image/jpeg", "image/png", "image/tiff",
-                "image/gif", "image/raw");
-
-            // add unique id to image name to make it unique and add it to the file server
-            $mediaName = $_FILES["flPostMedia"]["name"];
-            // remove ALL SPECIAL CHARACTERS, Images paths are extremely sensitive
-            $mediaName = str_replace('/[^A-Za-z0-9\-]/', '', $mediaName);
-            // remove ALL WHITESPACE from image name
-            $mediaName = preg_replace('/\s+/', '', $mediaName);
-            // remove ampersand
-            $mediaName = str_replace('&', '', $mediaName);
-            $mediaName = trim(uniqid() . $mediaName);
-            $mediaFile = $_FILES['flPostMedia']['tmp_name'];
-            $type = trim($_FILES["flPostMedia"]["type"]);
-
-            require 'media_post_file_path.php';
-
-            if (in_array($type, $videoFileTypes)) {
-                // do nothing here
-                $mediaString = 'video';
-
-            } else {
-                $mediaString = 'photo';
-                if ($type == "image/jpg" || $type == "image/jpeg") {
-                    $src = imagecreatefromjpeg($mediaFile);
-                } else if ($type == "image/png") {
-                    $src = imagecreatefrompng($mediaFile);
-                } else if ($type == "image/gif") {
-                    $src = imagecreatefromgif($mediaFile);
-                } else {
-                    echo "<script>alert('Invalid File Type'); ";
+                if ($_FILES['flPostMedia']['size'] > 50000000) {
+                    echo '<script>alert("File is too large. The maximum file size is 50MB.");location = "home.php?"</script>';
                     exit;
                 }
-            }
 
-            // read exif data
-            $exif = exif_read_data($_FILES['flPostMedia']['tmp_name']);
+// check if file type is a photo
+                $videoFileTypes = array("video/mpeg", "video/mpg", "video/ogg", "video/mp4",
+                    "video/quicktime", "video/webm", "video/x-matroska",
+                    "video/x-ms-wmw");
+// video file types
+                $photoFileTypes = array("image/jpg", "image/jpeg", "image/png", "image/tiff",
+                    "image/gif", "image/raw");
 
-            if (!empty($exif['Orientation'])) {
-                $ort = $exif['Orientation'];
 
-                switch ($ort) {
-                    case 8:
-                        if (strstr($url, 'localhost:8888')) {
-                            // local php imagerotate doesn't work
 
-                        } else {
-                            $src = imagerotate($src, 90, 0);
-                        }
-                        break;
-                    case 3:
-                        if (strstr($url, 'localhost:8888')) {
-                            // local php imagerotate doesn't work
+                require 'media_post_file_path.php';
 
-                        } else {
-                            $src = imagerotate($src, 180, 0);
-                        }
-                        break;
-                    case 6:
-                        if (strstr($url, 'localhost:8888')) {
-                            // local php imagerotate doesn't work
-                        } else {
-                            $src = imagerotate($src, -90, 0);
-                        }
-                        break;
-                }
-            }
-
-// save photo/video
-            require 'media_post_file_path.php';
-            if (in_array($type, $videoFileTypes)) {
-                $cmd = "ffmpeg -i $mediaFile -vf 'transpose=1' $mediaFile";
-                exec($cmd);
-                move_uploaded_file($mediaFile, $postMediaFilePath);
-            } else {
-                if ($type == "image/jpg" || $type == "image/jpeg") {
-                    imagejpeg($src, $postMediaFilePath, 100);
-
-                } else if ($type == "image/png") {
-                    imagepng($src, $postMediaFilePath, 0, NULL);
+                if (in_array($type, $videoFileTypes)) {
+                    // do nothing here
+                    $mediaString = 'video';
 
                 } else {
-                    imagegif($src, $postMediaFilePath, 100);
-
+                    $mediaString = 'photo';
+                    if ($type == "image/jpg" || $type == "image/jpeg") {
+                        $src = imagecreatefromjpeg($mediaFile);
+                    } else if ($type == "image/png") {
+                        $src = imagecreatefrompng($mediaFile);
+                    } else if ($type == "image/gif") {
+                        $src = imagecreatefromgif($mediaFile);
+                    } else {
+                        echo "<script>alert('Invalid File Type'); ";
+                        exit;
+                    }
                 }
-            }
+
+                // read exif data
+                $exif = exif_read_data($_FILES['flPostMedia']['tmp_name']);
+
+                if (!empty($exif['Orientation'])) {
+                    $ort = $exif['Orientation'];
+
+                    switch ($ort) {
+                        case 8:
+                            if (strstr($url, 'localhost:8888')) {
+                                // local php imagerotate doesn't work
+
+                            } else {
+                                $src = imagerotate($src, 90, 0);
+                            }
+                            break;
+                        case 3:
+                            if (strstr($url, 'localhost:8888')) {
+                                // local php imagerotate doesn't work
+
+                            } else {
+                                $src = imagerotate($src, 180, 0);
+                            }
+                            break;
+                        case 6:
+                            if (strstr($url, 'localhost:8888')) {
+                                // local php imagerotate doesn't work
+                            } else {
+                                $src = imagerotate($src, -90, 0);
+                            }
+                            break;
+                    }
+                }
+
+// save photo/video
+                require 'media_post_file_path.php';
+                if (in_array($type, $videoFileTypes)) {
+                    $cmd = "ffmpeg -i $mediaFile -vf 'transpose=1' $mediaFile";
+                    exec($cmd);
+                    move_uploaded_file($mediaFile, $postMediaFilePath);
+                } else {
+                    if ($type == "image/jpg" || $type == "image/jpeg") {
+                        imagejpeg($src, $postMediaFilePath, 100);
+
+                    } else if ($type == "image/png") {
+                        imagepng($src, $postMediaFilePath, 0, NULL);
+
+                    } else {
+                        imagegif($src, $postMediaFilePath, 100);
+
+                    }
+                }
 
 // if photo didn't get uploaded, notify the user
-            if (!file_exists($postMediaFilePath)) {
-                echo "<script>alert('File could not be uploaded, try uploading a different file type.');</script>";
-            }
+                if (!file_exists($postMediaFilePath)) {
+                    echo "<script>alert('File could not be uploaded, try uploading a different file type.');</script>";
+                }
 
-            imagedestroy($src);
-            //imagedestroy($tmp);
+                imagedestroy($src);
+                //imagedestroy($tmp);
 
-            // determine which table to put photo pointer in
-            // store media pointer
-            $sql = "INSERT INTO Media (Member_ID,  MediaName,  MediaType,  MediaDate    ) Values
+                // determine which table to put photo pointer in
+                // store media pointer
+                $sql = "INSERT INTO Media (Member_ID,  MediaName,  MediaType,  MediaDate    ) Values
                                       ('$ID',    '$mediaName', '$type',   CURRENT_DATE())";
-            mysql_query($sql) or die(logError(mysql_error(), $url, "Storing media name from comment in media table"));
+                mysql_query($sql) or die(logError(mysql_error(), $url, "Storing media name from comment in media table"));
 
-            // get media ID
-            $sqlGetMedia = "SELECT * FROM Media WHERE MediaName = '$mediaName'";
-            $mediaResult = mysql_query($sqlGetMedia) or die(logError(mysql_error(), $url, "Getting media ID for link buildng"));
-            $mediaRow = mysql_fetch_assoc($mediaResult);
-            $mediaID = $mediaRow['ID'];
-            $media = $mediaRow['MediaName'];
-            $mediaType = $mediaRow['MediaType'];
-            $mediaDate = $mediaRow['MediaDate'];
+                // get media ID
+                $sqlGetMedia = "SELECT * FROM Media WHERE MediaName = '$mediaName'";
+                $mediaResult = mysql_query($sqlGetMedia) or die(logError(mysql_error(), $url, "Getting media ID for link buildng"));
+                $mediaRow = mysql_fetch_assoc($mediaResult);
+                $mediaID = $mediaRow['ID'];
+                $media = $mediaRow['MediaName'];
+                $mediaType = $mediaRow['MediaType'];
+                $mediaDate = $mediaRow['MediaDate'];
 
 
 // check if file type is a photo
-            if (in_array($type, $photoFileTypes)) {
+                if (in_array($type, $photoFileTypes)) {
 
-                $img = '<img src = "' . $postMediaFilePath . '" />';
-                $img = '<a href = "/media.php?id=' . $ID . '&mid=' . $mediaID . '&media=' . $media . '&type=' . $mediaType . '&mediaDate=' . $mediaDate . '">' . $img . '</a>';
-            } // check if file type is a video
-            elseif (in_array($type, $videoFileTypes)) {
-                // where ffmpeg is located
-                $ffmpeg = '/usr/local/bin/ffmpeg';
-                // poster file name
-                $posterName = "poster".uniqid().".jpg";
-                //where to save the image
-                $poster = "$posterPath$posterName";
-                //time to take screenshot at
-                $interval = 3;
-                //screenshot size
-                //$size = '440x280'; -s $size
-                //ffmpeg command
-                $cmd = "$ffmpeg -i \"$postMediaFilePath\" -r 1 -ss 3 -t 1  -f image2 $poster 2>&1";
-                exec($cmd);
+                    $img = '<img src = "' . $postMediaFilePath . '" />';
+                    $img = '<a href = "/media.php?id=' . $ID . '&mid=' . $mediaID . '&media=' . $media . '&type=' . $mediaType . '&mediaDate=' . $mediaDate . '">' . $img . '</a>';
+                    $newImage .= $img.'<br/>';
+                } // check if file type is a video
+                elseif (in_array($type, $videoFileTypes)) {
+                    // where ffmpeg is located
+                    $ffmpeg = '/usr/local/bin/ffmpeg';
+                    // poster file name
+                    $posterName = "poster" . uniqid() . ".jpg";
+                    //where to save the image
+                    $poster = "$posterPath$posterName";
+                    //time to take screenshot at
+                    $interval = 3;
+                    //screenshot size
+                    //$size = '440x280'; -s $size
+                    //ffmpeg command
+                    $cmd = "$ffmpeg -i \"$postMediaFilePath\" -r 1 -ss 3 -t 1  -f image2 $poster 2>&1";
+                    exec($cmd);
 
-                $img = '<video poster="/poster/'.$posterName.'" preload="none" autoplay="autoplay" muted controls>
+                    $img = '<video poster="/poster/' . $posterName . '" preload="none" autoplay="autoplay" muted controls>
                                 <source src = "' . $videoPath . $mediaName . '" type="video/mp4" />
                                 <source src = "' . $videoPath . $oggFileName . '" type = "video/ogg" />
                                 <source src = "' . $videoPath . $webmFileName . '" type = "video/webm" />
                                 </video>';
-            } else {
-                // if invalid file type
-                echo '<script>alert("Invalid File Type!");</script>';
-                echo "<script>location= 'home.php'</script>";
-                exit;
+                    $newImage .= $img.'<br/>';
+                } else {
+                    // if invalid file type
+                    echo '<script>alert("Invalid File Type!");</script>';
+                    echo "<script>location= 'home.php'</script>";
+                    exit;
+                }
             }
-
-            $comment = $comment . '<br/><br/>' . $img . '<br/>';
+            $comment = $comment . '<br/><br/>' . $newImage . '<br/>';
 
             $sql = "INSERT INTO PostComments (Post_ID,     Member_ID,   Comment  CommentDate ) Values
                                              ('$postID',   $ID',      '$comment', CURDATE() )";
@@ -726,24 +734,34 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
                     <input id="<?php echo $shareLinkID ?>" style="display:none;" value ="<?php echo $shortLink ?>" />
 
 
-                    <!--Comment box -->
-                    <form class="commentBoxAlign" method="post" action="" enctype="multipart/form-data"
-                          onsubmit="showCommentUploading('comment<?php echo $postID?>', this);">
+                    <?php if ($iPhone || $iPad || $Android) { ?>
 
 
-                        <?php if ($iPhone || $iPad || $Android) { ?>
-                            <div class="fileUpload btn btn-primary cameraDiv">
-                                <img src="/images/camera.png" class="cameraImage" />
-                                <input type="file" name="flPostMedia" id="flPostMedia" class="flPostMedia"/>
-                            </div>
+                                <div style="position:relative;float:left;">
+                                    <a class='btn btn-default' href='javascript:;'>
+                                        <img src="/images/camera.png" height="25" width="25" />
+                                        <input type="file" style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;' name="flCommentMedia[]" id="flCommentMedia" multiple onchange='$("#upload-file-info").html($(this).val());' />
+                                    </a>
 
-                            <textarea class="textAreaAlign"  type="text" name="postComment" id="postComment"
-                                      placeholder="Write a comment" title='' <?php echo $disabled ?> ></textarea>
-                            <input style="float:left;margin-left:5px;" type="submit" name="btnComment" id="btnComment" class="btn btn-primary commentButtonAlign" Value="Comment" <?php echo $disabled ?> />
-                        <?php } ?>
+                                </div>
+
+
+                                <textarea class="textAreaAlign" style="margin-top:10px;" name="postComment" id="postComment"
+                                          placeholder="Write a comment" title='' <?php echo $disabled ?> ></textarea>
+                                <input type="submit" name="btnComment" id="btnComment" class="btn btn-primary commentButtonAlign" Value="Comment" <?php echo $disabled ?> />
+
+
+                            <input type="hidden" name="postID" id="postID" class="postID" Value="<?php echo $postID ?>"/>
+                            <input type="hidden" name="ID" id="ID" class="ID" value="<?php echo $ID ?>"/>
+                            <input type="hidden" name="ownerID" class="ownerID" id="ownerID" value="<?php echo $memberID ?>"/>
+                            <input type="hidden" name="scrollx" id="scrollx" value="0"/>
+                            <input type="hidden" name="scrolly" id="scrolly" value="0"/>
+                        </form>
 
                         <br/>
-                        <div id="comment<?php echo $postID ?>" style="display:none;">
+                        <span class='label label-info' id="upload-file-info"></span>
+                        <br/>
+                        <div id="comment<?php echo $postID ?>" style="display:none;float:left;">
                             <div class="progress">
                                 <div class="progress-bar progress-bar-striped progress-bar-danger active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" >
                                     <b>File uploading...please wait</b>
@@ -751,14 +769,7 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
                             </div>
                         </div>
 
-
-                        <input type="hidden" name="postID" id="postID" Value="<?php echo $postID ?>"/>
-                        <input type="hidden" name="ID" id="ID" value="<?php echo $ID ?>"/>
-                        <input type="hidden" name="ownerId" id="ownerId" value="<?php echo $MemberID ?>"/>
-                        <input type="hidden" name="scrollx" id="scrollx" value="0"/>
-                        <input type="hidden" name="scrolly" id="scrolly" value="0"/>
-
-                    </form>
+                    <?php } ?>
 
                     <br/>
 

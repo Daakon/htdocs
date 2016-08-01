@@ -74,8 +74,8 @@ if ($_SESSION['ID'] != $profileID) { ?>
         </button>
         <ul class="dropdown-menu">
             <li><a href="/home"><img src="/images/home.png" height="20" width="20" /> Home</b></a></li>
-            <li <?php echo $showProfile ?>><a href="/<?php echo $username ?>"><img src="/images/profile.png" height="20" width="20" /> Profile</a></li>
-            <li><a href="/post/<?php echo $username ?>"><img src="/images/post.png" height="20" width="20" /> View Posts</a></li>
+            <li><a href="/<?php echo $username ?>"><img src="/images/profile.png" height="20" width="20" /> Profile</a></li>
+            <li><a href="/post.php/<?php echo $username ?>"><img src="/images/post.png" height="20" width="20" /> View Posts</a></li>
             <li><a href="/member_media/<?php echo $username ?>"><img src="/images/media.png" height="20" width="20" /> Media</a></li>
             <li><a href="/messages/<?php echo get_username($ID) ?>"><img src = "/images/messages.png" height="20" width="20" /> Messages</a></li>
             <li><a href="/member_follows/<?php echo $username ?>"><img src = "/images/follows.png" height="20" width="20" /> Followers</a></li>

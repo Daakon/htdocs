@@ -8,7 +8,7 @@ get_header();
 
 <body style="background:white;">
 
-<div class="container" style="margin-top:-10px;">
+<div class="container containerFlush">
 
     <div class="col-xs-12">
 
