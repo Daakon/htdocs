@@ -602,7 +602,7 @@ function getRedeemPoints($ID, $referralID) {
     $result3 = mysql_query($sql3) or die(mysql_error());
     $rows3 = mysql_fetch_assoc($result3);
     $referralCount = $rows3['ReferralCount'];
-    $referralMoney = $referralCount * 3;
+    $referralMoney = $referralCount * 1;
 
     $sql = "Select count(PostApprovals.ID) as LikeCount
     From PostApprovals, Members
