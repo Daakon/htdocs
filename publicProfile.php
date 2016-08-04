@@ -1,4 +1,5 @@
 <?php
+
 // render profile public view
 $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 preg_match("/[^\/]+$/",$url ,$match);

@@ -532,10 +532,11 @@ li {
     color: red;
 }
 
-.textArea {
-    width:450px;
-    max-width: 90%;
-    min-width: 90%;
+
+textarea {
+    max-width: 70%;
+    min-width: 70%;
+    border:1px solid black;
 }
 
 .textAreaAlign {
@@ -895,6 +896,8 @@ a {
 
 .commentButtonAlign {
     float:right;
+    margin-left:60px;
+    margin-top:-40px;
 }
 
 .commentButtonAlign-post {

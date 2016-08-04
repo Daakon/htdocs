@@ -15,6 +15,7 @@ get_header();
 
 $ID = $_SESSION['ID'];
 $urlUsername = get_username_from_url();
+
 $_SESSION['Username'] = $urlUsername;
 
 
@@ -478,14 +479,16 @@ else {
 }
 
 
-
 $token = $match[1];
+
 $username = $_SESSION['Username'];
-$profileID = get_id_from_username($username);
-$sql = "SELECT ProfilePhoto FROM Profile WHERE Member_ID = $profileID";
-$result = mysql_query($sql) or (logError(mysql_error(), $url, 'Getting Profile Photo'));
-$row = mysql_fetch_assoc($result);
-$bgPhoto = $row['ProfilePhoto'];
+if ($username == '') { $username = $urlUsername; }
+$memberID = get_id_from_username($username);
+$sql1 = "SELECT ProfilePhoto FROM Profile WHERE Member_ID = $memberID";
+$result1 = mysql_query($sql1) or (logError(mysql_error(), $url, 'Getting Profile Photo'));
+$row1 = mysql_fetch_assoc($result1);
+$bgPhoto = $row1['ProfilePhoto'];
+
 ?>
 
 <body style="
@@ -520,6 +523,7 @@ $bgPhoto = $row['ProfilePhoto'];
         <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6 col-sm-12 col-xs-12 roll-call">
 
             <?php
+
                 require 'profile_menu.php';
             ?>
 

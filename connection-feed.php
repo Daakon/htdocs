@@ -337,40 +337,37 @@ if (mysql_num_rows($rollCallResult) > 0) {
 
 
                     <!--Comment box -->
-                    <?php if (isset($ID)) { ?>
-                        <form class="commentBoxAlign" method="post" action="" enctype="multipart/form-data"
-                              onsubmit="showCommentUploading('comment<?php echo $postID?>', this);">
+
+                    <form class="commentBoxAlign" method="post" action="" enctype="multipart/form-data"
+                          onsubmit="showCommentUploading('comment<?php echo $postID?>', this);">
 
 
 
-                            <?php if ($iPhone || $iPad || $Android) { ?>
+                        <input type="file" style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;' name="flCommentMedia[]" id="flCommentMedia" multiple onchange='$("#upload-photo-info").html($(this).val());' />
+
+                        <textarea style="margin-top:10px;float:left;border:none;width:450px;" name="postComment" id="postComment"
+                                  placeholder="Write a comment" title='' ></textarea>
+                        <br/><br/>
+
+                        <label style="float:left;clear:both" for="flCommentMedia">
+                            <img src="/images/camera.png" style="height:25px;width:25px;float:left;margin-right:10px;" />
+                        </label>
+                        <input type="submit" name="btnComment" id="btnComment" class="btn btn-primary" style="float:left;" Value="Comment"  />
 
 
-                                <div style="position:relative;float:left;">
-                                    <a class='btn btn-default' href='javascript:;'>
-                                        <img src="/images/camera.png" height="25" width="25" />
-                                        <input type="file" style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;' name="flCommentMedia[]" id="flCommentMedia" multiple onchange='$("#upload-file-info").html($(this).val());' />
-                                    </a>
+                        <input type="hidden" name="postID" id="postID" class="postID" Value="<?php echo $postID ?>"/>
+                        <input type="hidden" name="ID" id="ID" class="ID" value="<?php echo $ID ?>"/>
+                        <input type="hidden" name="memberID" id="memberID" class="memberID" value="<?php echo $memberID ?>"/>
+                        <input type="hidden" name="scrollx" id="scrollx" value="0"/>
+                        <input type="hidden" name="scrolly" id="scrolly" value="0"/>
 
-                                </div>
+                        <br/><br/>
 
+                        <span style="float:left;clear:both;margin-top:10px;" class='label label-info' id="upload-photo-info"></span>
 
-                                <textarea class="textAreaAlign" style="margin-top:10px;" name="postComment" id="postComment"
-                                          placeholder="Write a comment" title='' <?php echo $disabled ?> ></textarea>
-                                <input type="submit" name="btnComment" id="btnComment" class="btn btn-primary commentButtonAlign" Value="Comment" <?php echo $disabled ?> />
-                            <?php } ?>
+                        <br/><br/>
 
-                            <input type="hidden" name="postID" id="postID" class="postID" Value="<?php echo $postID ?>"/>
-                            <input type="hidden" name="ID" id="ID" class="ID" value="<?php echo $ID ?>"/>
-                            <input type="hidden" name="ownerID" class="ownerID" id="ownerID" value="<?php echo $memberID ?>"/>
-                            <input type="hidden" name="scrollx" id="scrollx" value="0"/>
-                            <input type="hidden" name="scrolly" id="scrolly" value="0"/>
-                        </form>
-
-                        <br/>
-                        <span class='label label-info' id="upload-file-info"></span>
-                        <br/>
-                        <div id="comment<?php echo $postID ?>" style="display:none;float:left;">
+                        <div id="comment<?php echo $postID ?>" style="display:none;float:left;clear:both;">
                             <div class="progress">
                                 <div class="progress-bar progress-bar-striped progress-bar-danger active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" >
                                     <b>File uploading...please wait</b>
@@ -378,7 +375,7 @@ if (mysql_num_rows($rollCallResult) > 0) {
                             </div>
                         </div>
 
-                    <?php } ?>
+                    </form>
 
 
 
@@ -429,9 +426,11 @@ if (mysql_num_rows($rollCallResult) > 0) {
                         <div class="profileName-Feed"><?php echo $name ?> ' .
                                 $rows3['FirstName'] . ' ' . $rows3['LastName'] .
                                 '</div>
-                     </a><br/>
-                     ' . nl2br($comment) . '
+                     </a>
                      <div class="date">'. date('l F j, Y',strtotime($commentDate)) .'</div>
+
+                     ' . nl2br($comment) . '
+
                     </div>
 
                     <div class="comment-content" style="clear:both"></div>';
@@ -485,7 +484,7 @@ if (mysql_num_rows($rollCallResult) > 0) {
 
                         <div id="<?php echo $moreComments ?>" style="display:none;">
 
-                            <div class="comment-style">
+                            <div class="comment-style commentStyleAlign">
 
                                 <?php
                                 while ($rows4 = mysql_fetch_assoc($result4)) {
@@ -503,7 +502,7 @@ if (mysql_num_rows($rollCallResult) > 0) {
                                     <div class="comment-row" >
                                         <div class="profileImageWrapper-Feed">
                                             <a href='<?php echo $commenterProfileUrl ?>'>
-                                                <img src = "<?php echo $mediaPath . $profilePhoto ?>" class="profilePhoto-Feed enlarge-onhover " />
+                                                <img src = "<?php echo $mediaPath . $profilePhoto ?>" class="profilePhoto-Feed" />
                                             </a>
                                         </div>
                                     </div>
@@ -513,9 +512,11 @@ if (mysql_num_rows($rollCallResult) > 0) {
                                             <div class="profileName-Feed">
                                                 <?php echo $rows4['FirstName'] . ' ' . $rows4['LastName'] ?>
                                             </div>
-                                        </a><br/>
-                                        <?php echo nl2br($comment) ?>
+                                        </a>
                                         <div class="date"><?php echo date('l F j, Y',strtotime($commentDate)) ?></div>
+
+                                        <?php echo nl2br($comment) ?>
+
                                     </div>
                                     <div class="comment-content" style="clear:both"></div>
 

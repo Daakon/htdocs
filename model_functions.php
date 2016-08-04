@@ -251,12 +251,14 @@ function getMemberCity($ID) {
 }
 
 function get_id_from_username($username) {
-    // returns member state
+
+    $username = strtolower($username);
+    $username = trim($username);
     $sql = "SELECT ID FROM Members WHERE Username = '$username' ";
-    $result = mysql_query($sql) or die(logError(mysql_error(), "model_functions", "get_id_from_username() failed"));
+    $result = mysql_query($sql) or die(mysql_error());
     $row = mysql_fetch_assoc($result);
-    $id = $row['ID'];
-    return $id;
+
+    return $row['ID'];
 }
 
 function get_username_from_url() {

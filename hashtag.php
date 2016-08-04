@@ -10,95 +10,94 @@ $ID = $_SESSION['ID'];
 // handle roll call post
 
 $post = mysql_real_escape_string($_POST['post']);
-$hashtag = $_POST['category'];
+$hashtag = $_POST['hashtag'];
 
-if (isset($_POST['submit'])) {
-
-    if ($_SESSION['Post'] == $_POST['post']) {
-        echo "<script>alert('Your post appears to be empty');</script>";
-    }
-    else if ($hashtag == "") {
-        echo "<script>alert('Your post needs a category');</script>";
-    }
-
-    else {
-        if (strlen($post) > 0) {
+?>
 
 
-            $post = makeLinks($post);
+<?php
 
-            // if photo is provided
-            if (strlen($_FILES['flPostMedia']['name']) > 0) {
+//-------------------------------------------------
+// handle post comments
+//-------------------------------------------------
+if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
+    $postID = $_POST['postID'];
+    $ownerID = $_POST['memberID'];
+    $comment = $_POST['postComment'];
+    $hashtag = $_POST['hashtag'];
 
+    $comment = mysql_real_escape_string($comment);
+    if (strlen($comment) > 0) {
+// find urls
+        $comment = makeLinks($comment);
+        if ($_SESSION['PostComment'] == $_POST['postComment']) {
+            echo "<script>alert('Your comment appears to be empty');</script>";
+        } else {
+// if photo is provided
+            if (file_exists($_FILES['flCommentMedia']['name'] > 0)) {
 
-                // check file size
-                if ($_FILES['flPostMedia']['size'] > 600000000) {
-
-                    exit();
-                }
-
-                // create media type arrays
-                $videoFileTypes = array("video/mpeg", "video/mpg", "video/ogg", "video/mp4",
-                    "video/quicktime", "video/webm", "video/x-matroska",
-                    "video/x-ms-wmw");
-                // video file types
-                $photoFileTypes = array("image/jpg", "image/jpeg", "image/png", "image/tiff",
-                    "image/gif", "image/raw");
-
-                // add unique id to image name to make it unique and add it to the file server
-                $mediaName = $_FILES["flPostMedia"]["name"];
-                $mediaName = trim(uniqid() . $mediaName);
-                $mediaFile = $_FILES['flPostMedia']['tmp_name'];
-                $type = $_FILES['flPostMedia']['type'];
-
-                require 'media_post_file_path.php';
-
-                if (in_array($type, $videoFileTypes)) {
-
-                    // convert to mp4
+                foreach ($_FILES['flCommentMedia']['tmp_name'] as $k => $v) {
+                    $mediaName = $_FILES["flCommentMedia"]["name"][$k];
+                    // remove ALL WHITESPACE from image name
+                    $mediaName = preg_replace('/\s+/', '', $mediaName);
+                    // remove ALL special characters
+                    $mediaName = str_replace('/[^A-Za-z0-9\-]/', '', $mediaName);
+                    // remove ampersand
+                    $mediaName = str_replace('&', '', $mediaName);
                     $fileName = pathinfo($mediaName, PATHINFO_FILENAME);
-                    $newFileName = $fileName.".mp4";
-
-                    exec("ffmpeg -i $fileName -vcodec libx264 -pix_fmt yuv420p -profile:v baseline -preset slow -crf 22 -movflags +faststart $newFileName");
-                    $mediaName = $newFileName;
-
-
-
-
-                } else {
-                    if ($type == "image/jpg" || $type == "image/jpeg") {
-                        $src = imagecreatefromjpeg($mediaFile);
-                    } else if ($type == "image/png") {
-                        $src = imagecreatefrompng($mediaFile);
-                    } else if ($type == "image/gif") {
-                        $src = imagecreatefromgif($mediaFile);
-                    } else {
-                        echo "<script>alert('Invalid File Type');</script>";
+                    // add unique id to image name to make it unique and add it to the file server
+                    $mediaName = trim(uniqid() . $mediaName);
+                    $mediaFile = $_FILES['flCommentMedia']['tmp_name'][$k];
+                    $type = trim($_FILES["flCommentMedia"]["type"][$k]);
+                    $tempName = $_FILES['flCommentMedia']['tmp_name'][$k];
+                    $size = $_FILES['flCommentMedia']['size'][$k];
+                    $mediaFile = $tempName;
+// check file size
+                    if ($size > 25000000000) {
+                        echo '<script>alert("File is too large. The maximum file size is 50MB.");</script>';
                         header('Location:home.php');
                         exit;
                     }
-                }
+// check if file type is a photo
+                    $videoFileTypes = array("video/mpeg", "video/mpg", "video/ogg", "video/mp4",
+                        "video/quicktime", "video/webm", "video/x-matroska",
+                        "video/x-ms-wmw");
+// video file types
+                    $photoFileTypes = array("image/jpg", "image/jpeg", "image/png", "image/tiff",
+                        "image/gif", "image/raw");
+                    $audioFileTypes = array("audio/wav", "audio/mp3");
 
-
-                require 'media_post_file_path.php';
-
-// save photo/video
-                if (in_array($type, $videoFileTypes)) {
-                    $cmd = "ffmpeg -i $mediaFile -vf 'transpose=1' $mediaFile";
-                    exec($cmd);
-                    move_uploaded_file($mediaFile, $postMediaFilePath);
-
-                } else {
-
-                    if (in_array($type, $photoFileTypes)) {
-
+                    require 'media_post_file_path.php';
+                    // create file type instance
+                    if (in_array($type, $audioFileTypes) || in_array($type, $videoFileTypes)) {
+                        $audioName = $fileName;
+                    }
+                    if (in_array($type, $videoFileTypes)) {
+                        // convert to mp4
+                        $mediaString = 'video';
+                        $newFileName = $fileName.".mp4";
+                        $audioName = $fileName;
+                        $ffmpeg = '/usr/local/bin/ffmpeg';
+                        exec("$ffmpeg -i $newFileName -vcodec libx264 -pix_fmt yuv420p -profile:v baseline -preset slow -crf 22 -movflags +faststart $newFileName");
+                        $mediaName = $newFileName;
+                    } else {
+                        $mediaString = 'photo';
+                        if ($type == "image/jpg" || $type == "image/jpeg") {
+                            $src = imagecreatefromjpeg($mediaFile);
+                        } else if ($type == "image/png") {
+                            $src = imagecreatefrompng($mediaFile);
+                        } else if ($type == "image/gif") {
+                            // must save gifs as jpeg
+                            $src = imagecreatefromjpeg($mediaFile);
+                        } else {
+                            /*echo "<script>alert('Invalid File Type');</script>";
+                            header('Location:home.php');
+                            exit;*/
+                        }
                         // read exif data
                         $exif = @exif_read_data($mediaFile);
-
                         if (!empty($exif['Orientation'])) {
-
                             $ort = $exif['Orientation'];
-
                             switch ($ort) {
                                 case 8:
                                     $src = imagerotate($src, 90, 0);
@@ -111,350 +110,102 @@ if (isset($_POST['submit'])) {
                                     break;
                             }
                         }
-
                     }
-
-
-                    if ($type == "image/jpg" || $type == "image/jpeg") {
-                        imagejpeg($src, $postMediaFilePath, 100);
-                    } else if ($type == "image/png") {
-
-                        imagepng($src, $postMediaFilePath, 0, NULL);
-
-
-                    } else if ($type == "image/gif") {
-                        imagegif($src, $postMediaFilePath, 100);
-
-                    } else {
-                        echo "<script>alert('Invalid File Type');</script>";
-                        header('Location:home.php');
-                        exit;
-                    }
-                }
-
-
-                // if photo didn't get uploaded, notify the user
-                if (!file_exists($postMediaFilePath)) {
-                    echo "<script>alert('File could not be uploaded, try uploading a different file type.');location='home.php'</script>";
-                }
-                else {
-
-                    // store media pointer
-                    $sql = "INSERT INTO Media (Member_ID,  MediaName,  MediaType,  MediaDate    ) Values
-                                          ('$ID',    '$mediaName', '$type',   CURRENT_DATE())";
-                    mysql_query($sql) or die(mysql_error());
-
-                    // get media ID
-                    $sqlGetMedia = "SELECT * FROM Media WHERE MediaName = '$mediaName'";
-                    $mediaResult = mysql_query($sqlGetMedia) or die(mysql_error());
-                    $mediaRow = mysql_fetch_assoc($mediaResult);
-                    $mediaID = $mediaRow['ID'];
-                    $media = $mediaRow['MediaName'];
-                    $mediaType = $mediaRow['MediaType'];
-                    $mediaDate = $mediaRow['MediaDate'];
-
-
-                    // build post links based on media type
-                    if (in_array($type, $photoFileTypes)) {
-
-                        $img = '<img src = "' . $mediaPath . $mediaName . '" class="img-responsive"/>';
-                        $img = '<a href = "media.php?id=' . $ID . '&mid=' . $mediaID . '&mediaName=' . $media . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '">' . $img . '</a>';
-                    } // check if file type is a video
-                    elseif (in_array($type, $videoFileTypes)) {
-
-                        // where ffmpeg is located
-                        $ffmpeg = '/usr/bin/ffmpeg';
-
-                        // poster file name
-                        $posterName = "poster".uniqid().".jpg";
-
-                        //where to save the image
-                        $poster = "$posterPath$posterName";
-
-
-                        //time to take screenshot at
-                        $interval = 5;
-
-                        //screenshot size
-                        //$size = '440x280'; -s $size
-
-                        //ffmpeg command
-                        $cmd = "$ffmpeg -i \"$postMediaFilePath\" -r 1  -f image2 $poster 2>&1";
-
-                        exec($cmd);
-
-                        $poster = imagecreatefromjpeg($poster);
-                        $exif = @exif_read_data($poster);
-
-                        if ( isset($exif['Orientation']) && !empty($exif['Orientation']) ) {
-
-                            // Decide orientation
-                            if ( $exif['Orientation'] == 3 ) {
-                                $rotation = 180;
-                            } else if ( $exif['Orientation'] == 6 ) {
-                                $rotation = 90;
-                            } else if ( $exif['Orientation'] == 8 ) {
-                                $rotation = -90;
-                            } else {
-                                $rotation = 0;
-                            }
-
-                            // Rotate the image
-                            if ( $rotation ) {
-                                $img = imagerotate($poster, $rotation, 0);
-                                imagejpeg($img, $posterPath.$posterName, 100);
-                            }
-                        }
-                        else {
-                            // if we cannot determine the exif data
-                            // then we will rotate the image if it is wider than it is tall
-                            // this is the best fallback so far.
-                            $size = getimagesize("$posterPath$posterName");
-                            $width = $size[0];
-                            $height = $size[1];
-                            if ($width > $height) {
-                                $img = imagerotate($poster, -90, 0);
-                                imagejpeg($img, $posterPath.$posterName, 100);
-                            }
-                        }
-                        $img = '<video src = "' . $videoPath . $mediaName . '" poster="/poster/'.$posterName.'" preload="none" controls />';
-
-                    } else {
-                        // if invalid file type
-                        echo '<script>alert("Invalid File Type!");</script>';
-                        header('Location:home.php');
-                        exit;
-                    }
-
-                    $post = $post . '<br/><br/>' . $img . '<br/>';
-
-                    $sql = "INSERT INTO Posts (Post,    Poster,	      Category,  Member_ID,   PostDate) Values
-                                              ('$post', '$posterName', '$hashtag', '$ID',       NOW())";
-                    mysql_query($sql) or die(mysql_error());
-                    $newPostID = mysql_insert_id();
-
-                    // update Media table with new post id
-                    if (isset($_SESSION['ID'])) {
-                        $sqlUpdateMedia = "UPDATE Media SET Post_ID = '$newPostID', Poster='$posterName' WHERE MediaName = '$mediaName' ";
-                        mysql_query($sqlUpdateMedia) or die(mysql_error());
-                    }
-                }
-            } // if no media
-            else {
-
-                $sql = "INSERT INTO Posts (Post,       Category,    Member_ID,   PostDate) Values
-                                          ('$post',   '$hashtag',   '$ID',      NOW())";
-                mysql_query($sql) or die(mysql_error());
-
-            }
-        }
-
-    }
-    echo '<script>location="/hashtag?hashtag='.$hashtag.'";</script>';
-}
-
-?>
-
-
-<?php
-
-//-------------------------------------------------
-// handle post comments
-//-------------------------------------------------
-
-
-if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
-
-    $postID = $_POST['postID'];
-    $ownerId = $_POST['memberID'];
-    $comment = $_POST['postComment'];
-    $comment = mysql_real_escape_string($comment);
-    $hashtag = $_POST['hashtag'];
-
-
-    if (strlen($comment) > 0) {
-// find urls
-
-        $comment = makeLinks($comment);
-
-        if ($_SESSION['PostComment'] == $_POST['postComment']) {
-            echo "<script>alert('Your comment appears to be empty');</script>";
-        } else {
-
-// if photo is provided
-            if (isset($_FILES['flCommentMedia']) && strlen($_FILES['flCommentMedia']['name'] > 0)) {
-             foreach ($_FILES['flCommentMedia']['tmp_name'] as $k => $v) {
-$mediaName = $_FILES["flCommentMedia"]["name"][$k];
-                // remove ALL WHITESPACE from image name
-                $mediaName = preg_replace('/\s+/', '', $mediaName);
-                // remove ALL special characters
-                $mediaName = str_replace('/[^A-Za-z0-9\-]/', '', $mediaName);
-                // remove ampersand
-                $mediaName = str_replace('&', '', $mediaName);
-                $fileName = pathinfo($mediaName, PATHINFO_FILENAME);
-                // add unique id to image name to make it unique and add it to the file server
-                $mediaName = trim(uniqid() . $mediaName);
-                $mediaFile = $_FILES['flCommentMedia']['tmp_name'][$k];
-                $type = trim($_FILES["flCommentMedia"]["type"][$k]);
-                $tempName = $_FILES['flCommentMedia']['tmp_name'][$k];
-                    $size = $_FILES['flCommentMedia']['size'][$k];
-                    $mediaFile = $tempName;
-
-// check file size
-                if ($size > 50000000) {
-                    echo '<script>alert("File is too large. The maximum file size is 50MB.");</script>';
-                    header('Location:home.php');
-                    exit;
-                }
-
-// check if file type is a photo
-                $videoFileTypes = array("video/mpeg", "video/mpg", "video/ogg", "video/mp4",
-                    "video/quicktime", "video/webm", "video/x-matroska",
-                    "video/x-ms-wmw");
-// video file types
-                $photoFileTypes = array("image/jpg", "image/jpeg", "image/png", "image/tiff",
-                    "image/gif", "image/raw");
-
-
-
-                require 'media_post_file_path.php';
-
-                // create file type instance
-                if (in_array($type, $videoFileTypes)) {
-                    // convert to mp4
-                    $mediaString = 'video';
-                    $fileName = pathinfo($mediaName, PATHINFO_FILENAME);
-                    $newFileName = $fileName.".mp4";
-                    exec("ffmpeg -i $newFileName -vcodec libx264 -pix_fmt yuv420p -profile:v baseline -preset slow -crf 22 -movflags +faststart $newFileName");
-                    $mediaName = $newFileName;
-                } else {
-
-                    $mediaString = 'photo';
-                    if ($type == "image/jpg" || $type == "image/jpeg") {
-                        $src = imagecreatefromjpeg($mediaFile);
-                    } else if ($type == "image/png") {
-                        $src = imagecreatefrompng($mediaFile);
-                    } else if ($type == "image/gif") {
-                        $src = imagecreatefromgif($mediaFile);
-                    } else {
-                        echo "<script>alert('Invalid File Type');</script>";
-                        header('Location:home.php');
-                        exit;
-                    }
-
-                    // read exif data
-                    $exif = @exif_read_data($mediaFile);
-
-                    if (!empty($exif['Orientation'])) {
-
-                        $ort = $exif['Orientation'];
-
-                        switch ($ort) {
-                            case 8:
-                                $src = imagerotate($src, 90, 0);
-                                break;
-                            case 3:
-                                $src = imagerotate($src, 180, 0);
-                                break;
-                            case 6:
-                                $src = imagerotate($src, -90, 0);
-                                break;
-                        }
-                    }
-
-                }
-
-
 // save photo/video
-                require 'media_post_file_path.php';
-                if (in_array($type, $videoFileTypes)) {
-                    move_uploaded_file($mediaFile, $postMediaFilePath);
-                } else {
-                    if ($type == "image/jpg" || $type == "image/jpeg") {
-                        imagejpeg($src, $postMediaFilePath, 100);
-
-                    } else if ($type == "image/png") {
-                        imagepng($src, $postMediaFilePath, 0, NULL);
+                    require 'media_post_file_path.php';
+                    if (in_array($type, $videoFileTypes) || in_array($type, $audioFileTypes)) {
+                        move_uploaded_file($mediaFile, $postMediaFilePath);
+                    } else {
+                        // handle transparency
+                        imagesavealpha($src, true);
+                        if ($type == "image/jpg" || $type == "image/jpeg") {
+                            imagejpeg($src, $postMediaFilePath, 50);
+                        } else if ($type == "image/png") {
+                            imagepng($src, $postMediaFilePath, 0, NULL);
+                        } else {
+                            imagegif($src, $postMediaFilePath, 50);
+                        }
+                    }
+// if photo didn't get uploaded, notify the user
+                    if (!file_exists($postMediaFilePath)) {
+                        //echo "<script>alert('File could not be uploaded, try uploading a different file type.');</script>";
 
                     } else {
-                        imagegif($src, $postMediaFilePath, 100);
-
-                    }
-                }
-
-// if photo didn't get uploaded, notify the user
-                if (!file_exists($postMediaFilePath)) {
-                    echo "<script>alert('File could not be uploaded, try uploading a different file type.');</script>";
-                    header('Location:home.php');
-                } else {
-
-                    // determine which table to put photo pointer in
-                    // store media pointer
-                    $sql = "INSERT INTO Media (Member_ID,  MediaName,  MediaType,  MediaDate    ) Values
-                                      ('$ID',    '$mediaName', '$type',   CURRENT_DATE())";
-                    mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting media name into media table"));
-
-                    // get media ID
-                    $sqlGetMedia = "SELECT * FROM Media WHERE MediaName = '$mediaName'";
-                    $mediaResult = mysql_query($sqlGetMedia) or die(logError(mysql_error(), $url, "Getting media ID for link building"));
-                    $mediaRow = mysql_fetch_assoc($mediaResult);
-                    $mediaID = $mediaRow['ID'];
-                    $media = $mediaRow['MediaName'];
-                    $mediaType = $mediaRow['MediaType'];
-                    $mediaDate = $mediaRow['MediaDate'];
-
-
-// check if file type is a photo
-                    if (in_array($type, $photoFileTypes)) {
-
-                        $img = '<img src = "' . $mediaPath . $mediaName .'" class="img-responsive"/>';
-                        $img = '<a href = "/media.php?id=' . $ID . '&mid=' . $mediaID . '&mediaName=' . $media . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '">' . $img . '</a>';
-                        $newImage .= $img.'<br/>';
-                    } // check if file type is a video
-                    elseif (in_array($type, $videoFileTypes)) {
-                         // where ffmpeg is located
-                        $ffmpeg = '/usr/local/bin/ffmpeg';
-                        // poster file name
-                        $posterName = "poster".uniqid().".jpg";
-                        //where to save the image
-                        $poster = "$posterPath$posterName";
-                        //time to take screenshot at
-                        $interval = 3;
-                        //screenshot size
-                        //$size = '440x280'; -s $size
-                        //ffmpeg command
-                        $cmd = "$ffmpeg -i \"$postMediaFilePath\" -r 1 -ss 3 -t 1  -f image2 $poster 2>&1";
-                        exec($cmd);
-                        $img = '<video poster="/poster/'.$posterName.'" preload="none" autoplay="autoplay" muted controls>
+                        // determine which table to put photo pointer in
+                        // store media pointer
+                        $sql = "INSERT INTO Media (Member_ID,  MediaName,  MediaType,  MediaDate,     AudioName    ) Values
+                                              ('$ID',    '$mediaName', '$type',   CURRENT_DATE(), '$audioName')";
+                        mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting media into media table"));
+                        // get media ID
+                        $sqlGetMedia = "SELECT * FROM Media WHERE MediaName = '$mediaName'";
+                        $mediaResult = mysql_query($sqlGetMedia) or die(mysql_error());
+                        $mediaRow = mysql_fetch_assoc($mediaResult);
+                        $mediaID = $mediaRow['ID'];
+                        $media = $mediaRow['MediaName'];
+                        $mediaType = $mediaRow['MediaType'];
+                        $mediaDate = $mediaRow['MediaDate'];
+                        // build post links based on media type
+                        if (in_array($type, $audioFileTypes)) {
+                            $img = '<b>' . $audioName . '</b><br/><audio controls>
+                            <source src="' . $mediaPath . $mediaName . '" type="' . $mediaType . '">
+                            Your browser does not support the audio element.
+                            </audio>';
+                            $img = '<a href = "/media.php?id=' . $ID . '&mediaName=' . $mediaName . '&mid=' . $mediaID . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '" ><br/>' . $img . '</a><br/><br/>';
+                        }
+                        if (in_array($type, $photoFileTypes)) {
+                            $img = '<img src = "' . $mediaPath . $mediaName . '" />';
+                            $img = '<a href = "/media.php?id=' . $ID . '&mid=' . $mediaID . '&mediaName=' . $media . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '">' . $img . '</a>';
+                        } // check if file type is a video
+                        elseif (in_array($type, $videoFileTypes)) {
+                            // where ffmpeg is located
+                            $ffmpeg = '/usr/local/bin/ffmpeg';
+                            // poster file name
+                            $posterName = "poster" . uniqid() . ".jpg";
+                            //where to save the image
+                            $poster = "$posterPath$posterName";
+                            //time to take screenshot at
+                            $interval = 3;
+                            //screenshot size
+                            //$size = '440x280'; -s $size
+                            //ffmpeg command
+                            $cmd = "$ffmpeg -i \"$postMediaFilePath\" -r 1 -ss 3 -t 1  -f image2 $poster 2>&1";
+                            exec($cmd);
+                            $img = '<video poster="/poster/' . $posterName . '" preload="none" autoplay="autoplay" muted controls>
                                 <source src = "' . $videoPath . $mediaName . '" type="video/mp4" />
                                 <source src = "' . $videoPath . $oggFileName . '" type = "video/ogg" />
                                 <source src = "' . $videoPath . $webmFileName . '" type = "video/webm" />
                                 </video>';
-                                $newImage .= $img.'<br/>';
-                    } else {
-                        // if invalid file type
-                        echo '<script>alert("Invalid File Type!");</script>';
-                        header('Location:home.php');
-                        exit;
+                            $newImage .= $img.'<br/>';
+                        } else {
+                            // if invalid file type
+                            /*echo '<script>alert("Invalid File Type!");</script>';
+                            header('Location:home.php');
+                            exit; */
+                        }
                     }
-}
-}
-                    $comment = $comment . '<br/><br/>' . $newImage . '<br/>';
+                    $comment = $comment . '<br/><br/>' . $img . '<br/>';
+                    $sql = "INSERT INTO PostComments (Post_ID,   Owner_ID,  Member_ID,   Comment, CommentDate  ) Values
+                                                      ('$postID', '$ownerID', '$ID',      '$comment', NOW())";
+                    mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting comment"));
+// create post
+                    // get poster data
+                    $sqlPoster = "SELECT ID, FirstName, LastName, Gender FROM Members WHERE ID = '$ID' ";
+                    $resultPoster = mysql_query($sqlPoster) or die(logError(mysql_error(), $url, "Getting comment poster data"));
+                    $rowsPoster = mysql_fetch_assoc($resultPoster);
+                    $name = $rowsPoster['FirstName'] . ' ' . $rowsPoster['LastName'];
+                    $posterId = $rowsPoster['ID'];
+                    $gender = $rowsPoster['Gender'];
+                    $nameLink = $name;
 
-                    $sql = "INSERT INTO PostComments (Post_ID,     Member_ID,   Comment, CommentDate  ) Values
-                                                      ('$postID', '$ID',      '$comment', NOW())";
-
-                    mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting post comment"));
-
-
+                }
             }
 //----------------------
 // if not comment photo
 //----------------------
 
             else {
-                $sql = "INSERT INTO PostComments (Post_ID,  Member_ID,    Comment,  CommentDate ) Values
-                                                 ('$postID', '$ID',      '$comment', NOW())";
+                $sql = "INSERT INTO PostComments (Post_ID,    Owner_ID,    Member_ID,    Comment,  CommentDate ) Values
+                                                 ('$postID',  '$ownerID',   '$ID',      '$comment', NOW())";
 
                 mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting comment without media"));
             }
@@ -521,6 +272,7 @@ $mediaName = $_FILES["flCommentMedia"]["name"][$k];
     echo "<script>location='/hashtag?hashtag=$hashtag&scrollx=$scrollx&scrolly=$scrolly';</script>";
 }
 
+// Delete comment
 if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
     $commentID = $_POST['commentID'];
     $hashtag = $_POST['category'];
@@ -668,10 +420,9 @@ function myFunction() {
     <div class="row row-padding" >
 <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6 " align="left" style="background:white;">
 
-        <ul class="list-inline" style="background:white;">
 
-            <li style="background:white;"> <a style="padding-top:10px;" href="javascript:history.go(-1)"><img src="/images/back.png" height="20" width="20"/> </a></li>
-        </ul>
+           <?php require 'profile_menu.php'; ?>
+
 
 <?php $hashtag = $_GET['hashtag'];
 
@@ -888,44 +639,55 @@ if (mysql_num_rows($result) > 0) {
             // End of approvals
             //-----------------------------------------------------------
 
-                 if ($ID != $memberID) { ?>
-                    <a class="messageEnvelope" href="/view_messages/<?php echo $username ?>"><img src="/images/messages.png" height="20" width="20" /></a>
-                <?php
+            if (isset($ID)) { ?>
 
-                if ($reposterID == $ID) { } else {
-                if (hasReposted($ID, $postID)) { $repostDisabled = "disabled"; } else { $repostDisabled = ''; }
-                ?>
+                <?php if ($ID != $memberID) {?>
+                    <a href="/view_messages/<?php echo $username ?>" class="messageEnvelope"><img src = "/images/messages.png" height="20" width="20" /> </a>
+                <?php } ?>
 
-                    <form class="repostAlign-hashtag" action="" method="post" onsubmit="return confirm('Are you sure you want to repost this?') && saveScrollPositionOnLinkClick(this)">
-                        <input type="image" id="btnRepost" name="btnRepost" value="Repost" src="/images/repost_icon.png" style="margin-left:20px;" <?php echo $repostDisabled ?> />
+            <?php } ?>
+
+
+
+            <?php if ($ID != $memberID) { ?>
+
+                <?php if ($reposterID == $ID) { } else {
+                    if (hasReposted($ID, $postID)) { $repostDisabled = "disabled"; } else { $repostDisabled = ''; }
+                    ?>
+
+                    <form class="repostAlign" action="" method="post" onsubmit="return confirm('Are you sure you want to repost this?') && saveScrollPositions(this)" >
+                        <input type="image" id="btnRepost" name="btnRepost" value="Repost" src="/images/repost_icon.png" style="margin-left:20px;margin-top:3px;" <?php echo $repostDisabled ?> />
                         <input type="hidden" id="memberID" name="memberID" value="<?php echo $memberID ?>" />
-                        <input type="hidden" id="ownerID" name="ownerID" value="<?php echo $memberID ?>" />
                         <input type="hidden" id="postID" name="postID" value="<?php echo $postID ?>" />
                         <input type="hidden" id="postDate" name="postDate" value="<?php echo $postDate ?>" />
                         <input type="hidden" id="reposterID" name="reposterID" value="<?php echo $ID ?>" />
-                         <input type="hidden" name="hashtag" id="hashtag" value ="<?php echo $hashtag ?>" />
                         <input type="hidden" name="scrollx" id="scrollx" value="0"/>
                         <input type="hidden" name="scrolly" id="scrolly" value="0"/>
                     </form>
 
-                <?php }
-
-                      $optionsID = "options$prestinePostID"; ?>
-
-                    <a href="javascript:showOptions('<?php echo $optionsID ?>');" class="blockLink-hashtag">...</a>
                 <?php } ?>
 
+
+                <?php $optionsID = "options$prestinePostID"; ?>
+
+                <a href="javascript:showOptions('<?php echo $optionsID ?>');" class="blockLink">...</a>
+
+
                 <?php
-                    $postPath = getPostPath();
-                    $shareLinkID = "shareLink$postID"; ?>
-                   <a class="shareLink-hashtag" href="javascript:showLink('<?php echo $shareLinkID ?>');">
-                       <img src="/images/share.png" height="25" width="25" />
-                   </a>
+                $postPath = getPostPath();
+                $shareLinkID = "shareLink$prestinePostID"; ?>
+                <a class="shareLink" href="javascript:showLink('<?php echo $shareLinkID ?>');">
+                    <img style="margin-left:20px;" src="/images/share.png" height="25px" width="25px" />
+                </a>
 
                 <?php $shareLink = 'show_post?postID='.$postID.'&email=1';
-                      $shareLink = $postPath.$shareLink;
-                      $shortLink = shortenUrl($shareLink);
+                $shareLink = $postPath.$shareLink;
+                $shortLink = shortenUrl($shareLink);
                 ?>
+
+
+
+            <?php } ?>
 
 
             <?php
@@ -940,7 +702,7 @@ if (mysql_num_rows($result) > 0) {
             ?>
 
         <hr class="hr-line"/>
-        <div class="content-space" style="clear:both;margin-top:-20px;" >
+<div style="clear:both;margin-top:-20px;margin-bottom:10px;margin-left:10px;">
 
         <!--Show block button here show it displays clearly between engagement icons and comment box -->
         <div style="display:none;" id="<?php echo $optionsID ?>">
@@ -959,42 +721,39 @@ if (mysql_num_rows($result) > 0) {
             <form style="margin-top:20px;" method="post" action="" enctype="multipart/form-data"
                   onsubmit="showCommentUploading('comment<?php echo $postID?>', this);">
 
-     <?php if ($iPhone || $iPad || $Android) { ?>
+    <input type="file" style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;' name="flCommentMedia[]" id="flCommentMedia" multiple onchange='$("#upload-photo-info").html($(this).val());' />
+
+                        <textarea style="margin-top:10px;float:left;border:none;width:450px;" name="postComment" id="postComment"
+                                  placeholder="Write a comment" title='' ></textarea>
+                    <br/><br/>
+
+                    <label style="float:left;clear:both" for="flCommentMedia">
+                        <img src="/images/camera.png" style="height:25px;width:25px;float:left;margin-right:10px;" />
+                    </label>
+                    <input type="submit" name="btnComment" id="btnComment" class="btn btn-primary" style="float:left;" Value="Comment"  />
 
 
-                                <div style="position:relative;float:left;">
-                                    <a class='btn btn-default' href='javascript:;'>
-                                        <img src="/images/camera.png" height="25" width="25" />
-                                        <input type="file" style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;' name="flCommentMedia[]" id="flCommentMedia" multiple onchange='$("#upload-file-info").html($(this).val());' />
-                                    </a>
-                                </div>
+                    <input type="hidden" name="postID" id="postID" class="postID" Value="<?php echo $postID ?>"/>
+                    <input type="hidden" name="ID" id="ID" class="ID" value="<?php echo $ID ?>"/>
+                    <input type="hidden" name="memberID" id="memberID" class="memberID" value="<?php echo $memberID ?>"/>
+                    <input type="hidden" name="hashtag" id="hashtag" class="hashtag" value="<?php echo $hashtag ?>"/>
+                    <input type="hidden" name="scrollx" id="scrollx" value="0"/>
+                    <input type="hidden" name="scrolly" id="scrolly" value="0"/>
 
 
-                                <textarea class="textAreaAlign" style="margin-top:10px;" name="postComment" id="postComment"
-                                          placeholder="Write a comment" title='' <?php echo $disabled ?> ></textarea>
-
-                                <input type="submit" name="btnComment" id="btnComment" class="btn btn-primary commentButtonAlign" Value="Comment" <?php echo $disabled ?> />
-
-                            <?php } ?>
-
-                            <input type="hidden" name="postID" id="postID" class="postID" Value="<?php echo $postID ?>"/>
-                            <input type="hidden" name="ID" id="ID" class="ID" value="<?php echo $ID ?>"/>
-                            <input type="hidden" name="ownerID" class="ownerID" id="ownerID" value="<?php echo $memberID ?>"/>
-                            <input type="hidden" name="scrollx" id="scrollx" value="0"/>
-                            <input type="hidden" name="scrolly" id="scrolly" value="0"/>
-                        </form>
-
-                        <br/>
-                         <span style="clear:both;float:left;;" class='label label-info' id="upload-file-info"></span>
-                         <br/>
-
-                        <div id="comment<?php echo $postID ?>" style="display:none;float:left;">
-                            <div class="progress">
-                                <div class="progress-bar progress-bar-striped progress-bar-danger active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" >
-                                    <b>File uploading...please wait</b>
-                                </div>
+                    <span style="float:left;clear:both;margin-top:10px;" class='label label-info' id="upload-photo-info"></span>
+                    <br/><br/>
+                    <div id="comment<?php echo $postID ?>" style="display:none;float:left;clear:both;">
+                    <br/>
+                        <div style="float:left;clear:both;" class="progress">
+                            <div class="progress-bar progress-bar-striped progress-bar-danger active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" >
+                                <b>File uploading...please wait</b>
                             </div>
                         </div>
+                    </div>
+ </form>
+
+
 
 
             <?php
@@ -1017,7 +776,7 @@ if (mysql_num_rows($result) > 0) {
                         Order By PostComments.ID DESC LIMIT 3 ";
             $result3 = mysql_query($sql3) or die(logError(mysql_error(), $url, "Getting first 3 comments"));
 
-            echo '<br/>';
+
             if (mysql_num_rows($result3) > 0) {
                 echo '<div class="comment-style commentStyleAlign"'.$display.'>';
                 while ($rows3 = mysql_fetch_assoc($result3)) {
@@ -1032,18 +791,19 @@ if (mysql_num_rows($result) > 0) {
                     echo '<div class="comment-row"'. $display.'>';
                         echo '<div class="profileImageWrapper-Feed">
                         <a href='.$commenterProfileUrl.'>
-                        <img src = "' . $mediaPath . $profilePhoto . '" height = "50" width = "50" class ="img-responsive" />
+                        <img src = "' . $mediaPath . $profilePhoto . '" class ="profilePhoto-Feed" />
                         </a>
                         </div>
 
                          <div class="commentNameWrapper-Feed" style="padding-left:10px">
                           <a href='.$commenterProfileUrl.'>
                             <div class="profileName-Feed"><?php echo $name ?> ' .
-                                $rows3['FirstName'] . ' ' . $rows3['LastName'] .
-                                '</div>
-                         </a><br/>
-                         ' . nl2br($comment) . '
+                                $rows3['FirstName'] . ' ' . $rows3['LastName'] . '
+                                </div>
+                         </a>
                          <div class="date">'. date('l F j, Y',strtotime($commentDate)) .'</div>
+                         ' . nl2br($comment) . '
+
                         </div>
 
                     <div class="comment-content" style="clear:both"></div>';
@@ -1051,11 +811,11 @@ if (mysql_num_rows($result) > 0) {
 
                     if ($commentOwnerID == $ID) {
                         //<!--DELETE BUTTON ------------------>
-                        echo '<div class="comment-delete">';
+                        echo '<div class="comment-delete" style="margin-top:-10px;">';
                         echo '<form action="" method="post" onsubmit="return confirm(\'Do you really want to delete this comment?\')">';
                         echo '<input type="hidden" name="commentID" id="commentID" value="' .  $commentID . '" />';
                         echo '<input type="hidden" name="category" id="category" value="' .  $hashtag . '" />';
-                        echo '<input type ="submit" name="DeleteComment" id="DeleteComment" value="Delete" class="deleteButton" />';
+                        echo '<input type ="image" name="DeleteComment" id="DeleteComment" value="Delete" src="/images/delete.png" style="height:20px;width:20px;margin-left:10px;" />';
                         echo '</form>';
                         echo '</div>';
                         //<!------------------------------------->
@@ -1112,7 +872,7 @@ if (mysql_num_rows($result) > 0) {
             <div class="comment-row" <?php echo $display ?>>
                 <div class="profileImageWrapper-Feed">
                     <a href='<?php echo $commenterProfileUrl ?>'>
-                        <img src = "<?php echo $mediaPath . $profilePhoto ?>" height = "50" width = "50" class ="img-responsive" />
+                        <img src = "<?php echo $mediaPath . $profilePhoto ?>" class ="profilePhoto-Feed" />
                         </a>
                     </div>
                 </div>
@@ -1122,9 +882,11 @@ if (mysql_num_rows($result) > 0) {
                             <div class="profileName-Feed">
                                 <?php echo $rows4['FirstName'] . ' ' . $rows4['LastName'] ?>
                                 </div>
-                        </a><br/>
+                        </a>
+                         <div class="date"><?php echo date('l F j, Y',strtotime($commentDate)) ?></div>
+                        <br/>
                         <?php echo nl2br($comment) ?>
-                        <div class="date"><?php echo date('l F j, Y',strtotime($commentDate)) ?></div>
+
                     </div>
                     <div class="comment-content" style="clear:both"></div>
 

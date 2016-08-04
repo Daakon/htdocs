@@ -258,38 +258,40 @@ if (isset($_POST['submit'])) {
 }
 ?>
 <?php
+
 //-------------------------------------------------
 // handle post comments
 //-------------------------------------------------
 if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
     $postID = $_POST['postID'];
-    $ownerId = $_POST['ownerID'];
+    $ownerID = $_POST['memberID'];
     $comment = $_POST['postComment'];
     $comment = mysql_real_escape_string($comment);
     if (strlen($comment) > 0) {
 // find urls
         $comment = makeLinks($comment);
-        $comment = hashtag_links($comment);
-
-
-
+        if ($_SESSION['PostComment'] == $_POST['postComment']) {
+            echo "<script>alert('Your comment appears to be empty'); location='/home';</script>";
+            exit;
+        }
 // if photo is provided
-            if (strlen($_FILES['flCommentMedia']['name'] > 0)) {
- foreach ($_FILES['flCommentMedia']['tmp_name'] as $k => $v) {
+            if ($_FILES['flCommentMedia']['name'] != "") {
 
- $mediaName = $_FILES["flCommentMedia"]["name"][$k];
-                // remove ALL WHITESPACE from image name
-                $mediaName = preg_replace('/\s+/', '', $mediaName);
-                // remove ALL special characters
-                $mediaName = str_replace('/[^A-Za-z0-9\-]/', '', $mediaName);
-                // remove ampersand
-                $mediaName = str_replace('&', '', $mediaName);
-                $fileName = pathinfo($mediaName, PATHINFO_FILENAME);
-                // add unique id to image name to make it unique and add it to the file server
-                $mediaName = trim(uniqid() . $mediaName);
-                $mediaFile = $_FILES['flCommentMedia']['tmp_name'][$k];
-                $type = trim($_FILES["flCommentMedia"]["type"][$k]);
-                $tempName = $_FILES['flCommentMedia']['tmp_name'][$k];
+                foreach ($_FILES['flCommentMedia']['tmp_name'] as $k => $v) {
+                    $mediaName = $_FILES["flCommentMedia"]["name"][$k];
+
+                    // remove ALL WHITESPACE from image name
+                    $mediaName = preg_replace('/\s+/', '', $mediaName);
+                    // remove ALL special characters
+                    $mediaName = str_replace('/[^A-Za-z0-9\-]/', '', $mediaName);
+                    // remove ampersand
+                    $mediaName = str_replace('&', '', $mediaName);
+                    $fileName = pathinfo($mediaName, PATHINFO_FILENAME);
+                    // add unique id to image name to make it unique and add it to the file server
+                    $mediaName = trim(uniqid() . $mediaName);
+                    $mediaFile = $_FILES['flCommentMedia']['tmp_name'][$k];
+                    $type = trim($_FILES["flCommentMedia"]["type"][$k]);
+                    $tempName = $_FILES['flCommentMedia']['tmp_name'][$k];
                     $size = $_FILES['flCommentMedia']['size'][$k];
                     $mediaFile = $tempName;
 // check file size
@@ -336,10 +338,6 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                     }
                     // read exif data
                     $exif = @exif_read_data($mediaFile);
-                    if (empty($exif) || !isset($exif)) {
-                        echo "<script>alert('Your photo could not be uploaded');location='/home'</script>";
-                        exit;
-                    }
                     if (!empty($exif['Orientation'])) {
                         $ort = $exif['Orientation'];
                         switch ($ort) {
@@ -372,14 +370,14 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                 }
 // if photo didn't get uploaded, notify the user
                 if (!file_exists($postMediaFilePath)) {
-                    echo "<script>alert('File could not be uploaded, try uploading a different file type.');</script>";
-                    header('Location:home.php');
+                    //echo "<script>alert('File could not be uploaded, try uploading a different file type.');</script>";
+
                 } else {
                     // determine which table to put photo pointer in
                     // store media pointer
                     $sql = "INSERT INTO Media (Member_ID,  MediaName,  MediaType,  MediaDate,     AudioName    ) Values
                                               ('$ID',    '$mediaName', '$type',   CURRENT_DATE(), '$audioName')";
-                    mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting media name from post into Media table"));
+                    mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting media into media table"));
                     // get media ID
                     $sqlGetMedia = "SELECT * FROM Media WHERE MediaName = '$mediaName'";
                     $mediaResult = mysql_query($sqlGetMedia) or die(mysql_error());
@@ -390,21 +388,21 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                     $mediaDate = $mediaRow['MediaDate'];
                     // build post links based on media type
                     if (in_array($type, $audioFileTypes)) {
-                        $img = '<b>'.$audioName.'</b><br/><audio controls>
-                            <source src="'.$mediaPath . $mediaName.'" type="'.$mediaType.'">
+                        $img = '<b>' . $audioName . '</b><br/><audio controls>
+                            <source src="' . $mediaPath . $mediaName . '" type="' . $mediaType . '">
                             Your browser does not support the audio element.
                             </audio>';
-                        $img = '<a href = "/media.php?id=' . $ID . '&mediaName=' . $mediaName . '&mid=' . $mediaID . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '" ><br/>'.$img.'</a><br/><br/>';
+                        $img = '<a href = "/media.php?id=' . $ID . '&mediaName=' . $mediaName . '&mid=' . $mediaID . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '" ><br/>' . $img . '</a><br/><br/>';
                     }
                     if (in_array($type, $photoFileTypes)) {
-                        $img = '<img src = "' . $mediaPath . $mediaName .'"  />';
-                         $newImage .= $img.'<br/>';
+                        $img = '<img src = "' . $mediaPath . $mediaName . '" />';
+                        $img = '<a href = "/media.php?id=' . $ID . '&mid=' . $mediaID . '&mediaName=' . $media . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '">' . $img . '</a>';
                     } // check if file type is a video
                     elseif (in_array($type, $videoFileTypes)) {
                         // where ffmpeg is located
                         $ffmpeg = '/usr/local/bin/ffmpeg';
                         // poster file name
-                        $posterName = "poster".uniqid().".jpg";
+                        $posterName = "poster" . uniqid() . ".jpg";
                         //where to save the image
                         $poster = "$posterPath$posterName";
                         //time to take screenshot at
@@ -414,36 +412,42 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                         //ffmpeg command
                         $cmd = "$ffmpeg -i \"$postMediaFilePath\" -r 1 -ss 3 -t 1  -f image2 $poster 2>&1";
                         exec($cmd);
-                        $img = '<video poster="/poster/'.$posterName.'" preload="none" autoplay="autoplay" muted controls>
+                        $img = '<video poster="/poster/' . $posterName . '" preload="none" autoplay="autoplay" muted controls>
                                 <source src = "' . $videoPath . $mediaName . '" type="video/mp4" />
                                 <source src = "' . $videoPath . $oggFileName . '" type = "video/ogg" />
                                 <source src = "' . $videoPath . $webmFileName . '" type = "video/webm" />
                                 </video>';
-                                $newImage .= $img.'<br/>';
+                        $newImage .= $img.'<br/>';
                     } else {
                         // if invalid file type
                         /*echo '<script>alert("Invalid File Type!");</script>';
                         header('Location:home.php');
                         exit; */
                     }
-                    }
-                    }
-                    $comment = $comment . '<br/><br/>' . $newImage . '<br/>';
-                    $sql = "INSERT INTO PostComments (Post_ID,     Member_ID,  Owner_ID,   Comment, CommentDate  ) Values
-                                                      ($postID,      $ID,      $ownerId, '$comment', NOW())";
-                    mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting post comment"));
-
-
-            }
                 }
+                    $comment = $comment . '<br/><br/>' . $img . '<br/>';
+                    $sql = "INSERT INTO PostComments (Post_ID,   Owner_ID,  Member_ID,   Comment, CommentDate  ) Values
+                                                      ('$postID', '$ownerID', '$ID',      '$comment', NOW())";
+                    mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting comment"));
+// create post
+                    // get poster data
+                    $sqlPoster = "SELECT ID, FirstName, LastName, Gender FROM Members WHERE ID = '$ID' ";
+                    $resultPoster = mysql_query($sqlPoster) or die(logError(mysql_error(), $url, "Getting comment poster data"));
+                    $rowsPoster = mysql_fetch_assoc($resultPoster);
+                    $name = $rowsPoster['FirstName'] . ' ' . $rowsPoster['LastName'];
+                    $posterId = $rowsPoster['ID'];
+                    $gender = $rowsPoster['Gender'];
+                    $nameLink = $name;
 
+                }
+            }
 //----------------------
 // if not comment photo
 //----------------------
             else {
-                $sql = "INSERT INTO PostComments (Post_ID,  Member_ID,  Owner_ID,   Comment,  CommentDate ) Values
-                                                 ('$postID', '$ID',     '$ownerId', '$comment', NOW())";
-                mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting comment without media"));
+                $sql = "INSERT INTO PostComments (Post_ID,  Owner_ID,   Member_ID,    Comment, CommentDate ) Values
+                                                ('$postID', '$ownerID', '$ID',      '$comment', CURDATE())";
+                mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting post comment without media"));
             }
             $scrollx = $_REQUEST['scrollx'];
             $scrolly = $_REQUEST['scrolly'];
@@ -451,8 +455,8 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 //The first thing is to identify all of the id's connected with this post
             $user_id = $_SESSION['ID'];
 //Get the ids of all the members connected with a post comment
-            $sql = "SELECT Member_ID FROM PostComments WHERE Post_ID = $postID And Member_ID != $ID ";
-            $result = mysql_query($sql) or die(logError(mysql_error(), $url, "Getting all IDs of members who commented on a post"));
+            $sql = "SELECT Member_ID FROM PostComments WHERE Post_ID = $postID And Member_ID != $ID";
+            $result = mysql_query($sql) or die(logError(mysql_error(), $url, "Getting all ID of members who commented on post"));
             $comment_ids = array();
 //Iterate over the results
             while ($rows = mysql_fetch_assoc($result)) {
@@ -462,7 +466,7 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
             $comment_ids = array_unique($comment_ids);
 //Send consumer notifications
             foreach ($comment_ids as $item) {
-                if (strlen($item) > 0 && $item != $ID) {
+                if (strlen($item) > 0) {
                     // only send email if account & email active
                     if (checkActive($item)) {
                         if (checkEmailActive($item)) {
@@ -472,8 +476,8 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                 }
             }
 //Notify the post creator
-            $sql = "SELECT Member_ID FROM Posts WHERE ID = $postID And Member_ID != $ID ";
-            $result = mysql_query($sql) or die(logError(mysql_error(), $url, "Getting post owner ID to notify of post comment"));
+            $sql = "SELECT Member_ID FROM Posts WHERE ID = '$postID' And Member_ID != $ID;";
+            $result = mysql_query($sql) or die(logError(mysql_error(), $url, "Getting post owner ID"));
             $rows = mysql_fetch_assoc($result);
             if (mysql_num_rows($result) > 0) {
                 $creatorID = $rows['Member_ID'];
@@ -487,9 +491,12 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
 //=========================================================================================================================//
 //BELOW IS END OF POST COMMENT HANDLING CODE ==========================================================================//
 
-    echo "<script>location='/home?&scrollx=$scrollx&scrolly=$scrolly'</script>";
+    }
+    echo "<script>location='/home?scrollx=$scrollx&scrolly=$scrolly'</script>";
 }
+?>
 
+<?php
 // handle Repost
 if (isset($_POST['btnRepost']) && ($_POST['btnRepost'] == "Repost")) {
 
@@ -498,7 +505,7 @@ if (isset($_POST['btnRepost']) && ($_POST['btnRepost'] == "Repost")) {
     $post = mysql_escape_string($post);
     $postDate = $_POST['postDate'];
     $memberID = $_POST['memberID'];
-    $ownerID = $_POST['ownerID'];
+    $ownerID = $_POST['memberID'];
     $reposterID = $_POST['reposterID'];
     $scrollx = $_REQUEST['scrollx'];
     $scrolly = $_REQUEST['scrolly'];
@@ -987,11 +994,9 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
                             ?>
                             <form style="float:left" method="post" enctype="multipart/form-data" action="" onsubmit="return showUploading()" >
 
-                               <span class="fileUpload btn btn-primary" style="background:white;border:none;margin-top:20px;float:left;margin-left:-10px;">
-                                    <img src="/images/camera.png" style ="width:30px;height:30px;float:left" />
-                                <input type="file" name="flPostMedia[]" id="flPostMedia" class="flPostMedia" style="float:left;" multiple />
-</span>
-                                <textarea name="post" id="post"  style="float:left;margin-top:25px;width:300px;border:none;"
+
+
+                                <textarea name="post" id="post"  style="float:left;margin-top:25px;width:400px;border:none;"
                                   placeholder="Share something and get paid for it" spellcheck="true"></textarea>
 
 
@@ -1007,7 +1012,13 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
                     </div>
                 </div>
 
-                                <input style="clear:both;float:left;margin-left:0px;" type="submit" class="post-button" name="submit" id="submit" value="Post"/>
+ <label style="float:left;clear:both" for="flPostMedia">
+                        <img src="/images/camera.png" style="height:25px;width:25px;float:left;margin-right:10px;" />
+                    </label>
+                                <input type="file" name="flPostMedia[]" id="flPostMedia" class="flPostMedia" style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;' multiple />
+
+
+                                <input style="float:left;margin-left:0px;" type="submit" class="post-button" name="submit" id="submit" value="Post"/>
                             </form>
                             <?php
                         } // hasTenPost

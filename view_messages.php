@@ -802,10 +802,7 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
 
                     <form id="messageForm" action="" method="post" enctype="multipart/form-data" onsubmit="return showUploading()">
 
-                            <span class="fileUpload btn btn-primary" style="background:white;border:none;margin-top:20px;float:left;margin-left:-10px;">
-                                    <img src="/images/camera.png" style ="width:30px;height:30px;float:left" />
-                                <input type="file" name="flPostMedia[]" id="flPostMedia" class="flPostMedia" style="float:left;" multiple />
-</span>
+
                                 <textarea name="message" id="message"  style="float:left;margin-top:25px;width:300px;border:none;"
                                           placeholder="Type your message" spellcheck="true"></textarea>
 
@@ -830,8 +827,13 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
                             </div>
                         </div>
 
-                <input style="float:left;margin-top:10px;" type="submit" class="btn btn-primary" id="send" name="send" value="Send" <?php echo $readonly ?> />
-                <input type="image" class="" id="videoSend" name="videoSend" src="/images/video-chat.png" style="margin-top:10px;height:50px;width:50px;float:left;padding-bottom:10px;" value = "Start Video Chat" />
+                        <label style="float:left;" for="flPostMedia">
+                            <img src="/images/camera.png" style="height:25px;width:25px;float:left;margin-right:10px;" />
+                        </label>
+                        <input type="file" name="flPostMedia[]" id="flPostMedia" class="flPostMedia" style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;' multiple />
+
+                        <input style="float:left;" type="submit" class="btn btn-primary" id="send" name="send" value="Send" <?php echo $readonly ?> />
+                <input type="image" class="" id="videoSend" name="videoSend" src="/images/video-chat.png" style="margin-top:-10px;height:50px;width:50px;float:left;padding-bottom:10px;padding-left:5px;" value = "Start Video Chat" />
                 </form>
 
                 <br/><br/>
