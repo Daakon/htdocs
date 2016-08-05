@@ -98,47 +98,43 @@ get_head_files();
 
 <?php require 'checkLogin.php'; ?>
 
-    <body class="index" style="background: url(images/girls-selfie.jpeg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;">
+    <body>
 
     <div class="container-fluid" >
 
         <div class="row" >
 
 
-            <div class="col-lg-12 col-md-12 ">
+            <div class="col-lg-12 col-md-12 " >
 
 
                 <div align="center" class="index-menu" >
 
                     <ul class="list-inline" style="margin-top:-40px;">
 
-                        <a href="/learn_more" style="color:#E30022;">
-                            It Pays To Be Social: Learn How &nbsp;&nbsp;&nbsp;
+                        <a href="/learn_more" style="color:#E30022;border-radius:5px;padding:5px;font-weight: bold;">
+                            About Us&nbsp;&nbsp;&nbsp;
                         </a>
 
 
 
-                        <a class="hidden-xs" href="/learn_more#signup" style="color:white;">
+                        <a class="hidden-xs" href="/learn_more#signup" style="color:#E30022;font-weight: bold;">
                             Sign Up &nbsp;&nbsp;&nbsp;
                         </a>
 
 
 
-                        <a class="visible-xs" href="/login-mobile" style="color:white;">
+                        <a class="visible-xs" href="/login-mobile" style="color:#E30022;font-weight: bold;">
                             Sign Up or Login &nbsp;&nbsp;&nbsp;
                         </a>
 
 
 
-                        <a href="/support" style="color:white;">
+                        <a href="/support" style="color:#E30022;">
                             Support &nbsp;&nbsp;&nbsp;
                         </a>
 
-
+<img src="/images/gift-cards.png" style="width: 500px" />
 
 
 

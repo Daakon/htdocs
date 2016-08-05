@@ -98,7 +98,7 @@ if (!empty($_SESSION['ID'])) {
     <!-- End Modal -->
 
     <div class="row" style="background:white;">
-        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12" >
+        <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12" >
 
             <div class="visible-xs" style="padding-left:10px;padding-top:10px;">
                 <a href="/login-mobile"><button class="btn btn-default">Login</button></a> &nbsp;&nbsp;
@@ -118,8 +118,7 @@ if (!empty($_SESSION['ID'])) {
                     <tr>
                         <td style="padding-left:0px;">
                             <h5>
-                                Playdoe is a social network that pays you for every <b style="color:gray">like</b>, <b style="color:gray">comment</b>,
-                                <b style="color:gray">follower</b> and <b style="color:gray">referral</b>. Once you reach $10, you can cash out, take a gift card or keep going.
+                                Playdoe is a social network that lets you earn cash and gift cards.
                             </h5>
                             <span style="color:gray;font-size:12px;font-weight:600">
                                 Checkout our <a href="http://officialplaydoe.tumblr.com/" target="_blank">blog</a> to learn more.
@@ -134,7 +133,7 @@ if (!empty($_SESSION['ID'])) {
             </div>
 
             <!--Desktop -->
-            <div class="hidden-xs">
+            <div class="hidden-xs" >
 
                 <table style="margin-left:10px;margin-top:20px;">
                     <tr>
@@ -143,8 +142,7 @@ if (!empty($_SESSION['ID'])) {
                         </td>
                         <td style="padding-left:10px;">
                             <h4>
-                                Playdoe is a social network that pays you for every <b style="color:gray">like</b>, <b style="color:gray">comment</b>,
-                                <b style="color:gray">follower</b> and <b style="color:gray">referral</b>. Once you reach $10, you can cash out, take a gift card or keep going.
+                                Playdoe is a social network that lets you earn cash and gift cards.
                             </h4>
                             <span style="color:gray;font-size:14px;font-weight:600">
                                 Checkout our <a href="http://officialplaydoe.tumblr.com/" target="_blank">blog</a> to learn more.

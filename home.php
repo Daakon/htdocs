@@ -959,8 +959,8 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
                 //browser reported as a webOS device -- do something here
             }*/
 
-            // only show form on mobile devices
-            if ($iPhone || $iPad || $Android) {
+
+
                 ?>
 
                 <div style="padding-bottom:0px;">
@@ -970,11 +970,11 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
                         <a href="/messages/<?php echo $username ?>"><img src = "/images/messages.png" height="20" width="20" /> <?php require 'getNewMessageCount.php' ?></a>
                         <a style="margin-left:20px;" href="/member_follows/<?php echo get_username($ID) ?>"><img src = "/images/follows.png" height="20" width="20" /><?php require 'getNewFollowCount.php' ?></a>
 
-                        <a href="/post/playdoe"><img src="/images/50-dollar-icon.png" style="height:30px;width:30px;margin-left:20px;" /></a>
+                        <a href="/post/playdoe"><img src="/images/dollar-sign.png" style="height:30px;width:30px;margin-left:20px;" /></a>
 
-                        <img src="/images/dollar-sign.png" style="width:30px;height:30px;margin-left:20px;" /> <?php
-                        echo "<span style='color:#888888'> </span> ". getRedeemPoints($ID, get_referralID($ID));
-                        if (getRedeemPoints($ID, get_username($ID)) > 9) { echo "<br/><a href='/view_messages/playdoe'><img src='/images/redeem.png' height='30' width='30' /></a>"; };
+                        <!--<img src="/images/dollar-sign.png" style="width:30px;height:30px;margin-left:20px;" /> --><?php
+/*                        echo "<span style='color:#888888'> </span> ". getRedeemPoints($ID, get_referralID($ID));
+                        if (getRedeemPoints($ID, get_username($ID)) > 9) { echo "<br/><a href='/view_messages/playdoe'><img src='/images/redeem.png' height='30' width='30' /></a>"; };*/
                         ?>
 
                     </div>
@@ -996,7 +996,7 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
 
 
 
-                                <textarea name="post" id="post"  style="float:left;margin-top:25px;width:400px;border:none;"
+                                <textarea name="post" id="post"  style="float:left;margin-top:25px;width:440px;border:none;" onkeyup="this.style.height='24px'; this.style.height = this.scrollHeight + 12 + 'px';"
                                   placeholder="Share something and get paid for it" spellcheck="true"></textarea>
 
 
@@ -1040,7 +1040,6 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
 
               <br/><br/>
 
-            <?php } ?>
 
 <!--Preview uploaded photos and videos -->
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
@@ -1081,20 +1080,6 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
 
             </script>
 
-            <?php if (!$iPhone && !$iPad && !$Android) { ?>
-                <?php require 'profile_menu.php'; ?>
-                <a href="/messages/<?php echo $username ?>"><img src = "/images/messages.png" height="20" width="20" /> <?php require 'getNewMessageCount.php' ?></a>
-                <a style="margin-left:20px;" href="/member_follows/<?php echo get_username($ID) ?>"><img src = "/images/follows.png" height="20" width="20" /><?php require 'getNewFollowCount.php' ?></a>
-
-                <a href="/post/playdoe"><img src="/images/50-dollar-icon.png" style="height:30px;width:30px;margin-left:20px;" /></a>
-
-                <img src="/images/dollar-sign.png" style="width:30px;height:30px;margin-left:20px;" /> <?php
-                echo "<span style='color:#888888;margin-right:10px;'> ". getRedeemPoints($ID, get_username($ID))."</span> ";
-                if (getRedeemPoints($ID, get_username($ID)) > 9) { echo "<br/><a href='/view_messages/playdoe'><img src='/images/redeem.png' height='30' width='30' /></a>"; };
-                ?>
-
-
-            <?php } ?>
 
 
 

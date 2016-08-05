@@ -677,7 +677,7 @@ $bgPhoto = $row1['ProfilePhoto'];
             }*/
 
             // only show form on mobile devices
-            if ($iPhone || $iPad || $Android) { ?>
+      ?>
 
                 <form method="post" enctype="multipart/form-data" action="" onsubmit="showPhotoUploading()">
 
@@ -808,7 +808,7 @@ $bgPhoto = $row1['ProfilePhoto'];
                 </form>
 
 
-            <?php } ?>
+
 
 
             <hr class="hr-line"/>
