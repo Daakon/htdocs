@@ -785,6 +785,8 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
                         <td style="padding:5px;">
                             Simply post stuff as you do on any other social network. But when you do, add the hashtag of the current date, i.e January 1, 2016 would be #1116.
                             The post with the most likes daily wins a $10 gift card. Then direct message Team Playde and let us know what gift card you would like.
+                            <br/>
+                            <lead>Please note there must be at least 10 posts per day for a gift card to be issued.</lead>
                         </td>
                     </tr>
 

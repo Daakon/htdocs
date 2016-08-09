@@ -978,7 +978,7 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
 
 
 
-                                <textarea name="post" id="post"  style="float:left;margin-top:25px;width:440px;border:none;" onkeyup="this.style.height='24px'; this.style.height = this.scrollHeight + 12 + 'px';"
+                                <textarea name="post" id="post"  style="float:left;margin-top:25px;width:300px;border:none;" onkeyup="this.style.height='24px'; this.style.height = this.scrollHeight + 12 + 'px';"
                                   placeholder="Share something and get paid for it" spellcheck="true"></textarea>
 
 
