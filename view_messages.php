@@ -733,12 +733,6 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
 
                 <?php require 'profile_menu.php'; ?>
 
-                <?php
-
-                if (isAdmin($ID)) {
-                    echo "<a href='/backoffice?username=$urlUsername'>Calculate Redemptions</a>";
-                }
-                ?>
 
             </ul>
 
@@ -766,7 +760,7 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
 
             <?php
             if ($urlUsername == 'playdoe') { ?>
-            <div style="margin-top:-30px;padding-bottom:30px;">
+            <div style="padding-bottom:30px;">
 
                 <div onclick="document.getElementById('faq').style.display = 'block';" style="font-size:20px;color:red;padding-bottom:10px;"> FAQ</div>
                 <table id="faq" style="display:none;border:1px solid blue">
@@ -803,7 +797,7 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
                     <form id="messageForm" action="" method="post" enctype="multipart/form-data" onsubmit="return showUploading()">
 
 
-                                <textarea name="message" id="message"  style="float:left;margin-top:25px;width:300px;border:none;"
+                                <textarea name="message" id="message"  style="float:left;margin-top:25px;width:450px;border:none;" onkeyup="this.style.height='24px'; this.style.height = this.scrollHeight + 12 + 'px';"
                                           placeholder="Type your message" spellcheck="true"></textarea>
 
 

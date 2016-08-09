@@ -742,6 +742,7 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
 
 
 <script>
+// load more posts after 10
     $(window).scroll(function () {
         if ($(document).height() <= $(window).scrollTop() + $(window).height()) {
             //alert("End Of The Page");

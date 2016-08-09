@@ -118,7 +118,7 @@ if (!empty($_SESSION['ID'])) {
                     <tr>
                         <td style="padding-left:0px;">
                             <h5>
-                                Playdoe is a social network that lets you earn cash and gift cards.
+                                Playdoe is a social network that lets you earn cash, gift cards and find deals.
                             </h5>
                             <span style="color:gray;font-size:12px;font-weight:600">
                                 Checkout our <a href="http://officialplaydoe.tumblr.com/" target="_blank">blog</a> to learn more.
@@ -142,7 +142,7 @@ if (!empty($_SESSION['ID'])) {
                         </td>
                         <td style="padding-left:10px;">
                             <h4>
-                                Playdoe is a social network that lets you earn cash and gift cards.
+                                Playdoe is a social network that lets you earn cash, gift cards and find deals.
                             </h4>
                             <span style="color:gray;font-size:14px;font-weight:600">
                                 Checkout our <a href="http://officialplaydoe.tumblr.com/" target="_blank">blog</a> to learn more.

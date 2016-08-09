@@ -97,35 +97,14 @@ build_and_send_email(0,$ID, 3, null,$pass);
 
 $firstName = get_user_firstName($ID);
 // DM new member with instructions
-$message = "<p>Hey $firstName, You can now make money from your social media efforts.
+$message = "<p>Hey $firstName, You can now get rewarded for your social media efforts.
         <br/>
-        1. Get paid every time someone likes your post.
+        Compete in our weekly hashtag game and win $50 to $100 or more via PayPal or the gift card of your choice.
         <br/>
-        2. Get paid every time someone comments on your post.
+        You will also see gift card giveaways from other sponsors in your feed.
         <br/>
-        3. Get paid every time you get a new follower.
-        <br/>
-        4. Get paid every time you refer your friends to join Playdoe and your referral makes at least 5 posts.
-        <br/>
-        You have a referral ID assigned to you. Go to your profile and you will see it. Give that to your friends so you can get get paid for referring them.
-        <br/>
-        5. Compete in our weekly hashtag game and win $50 to $100 every time you get the most likes.
-        <br/>
-        You must share at least one post to be able to like and comment on others' posts.
-        <br/>
-        You will earn $1 for yourself once you reach 5 post.
-        <br/>
-        You will see a running total of your money on your home screen.
-        <br/>
-        You must reach a $10 threshold before redeeming you money. At which point you would direct message the <a href='/view_messages/playdoe'>Team Playdoe</a>, who handles all member redemptions.
-         <br/>
-        If you do not have a bank account, you can elect to receive a gift card for the value of your cash balance. Please request the gift card of your preference at the time of your redemption request. If an electronic gift card is available we will provide it. Some restrictions apply depending on the particular company, such as Walmart only offers gift cards in increments of $5, so your cash balance will be rounded up or down to the nearest dollar.
-        <br/>
-        You cannot partially redeem your balance, our system is currently all of nothing.
-        <br/>
-        *Note: To like and comment on a post or follow someone, you must verify your email and have at least one active post at all times.
-        <br/>
-        Save this message and contact us anytime if you have any questions.</p>";
+        Go to our profile now to see what the current hashtag is.
+        </p>";
 
 $message = mysql_escape_string($message);
 $subject = "Welcome to Playdoe";
