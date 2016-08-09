@@ -780,10 +780,11 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
                     </td>
                     <tr>
 
-                        <th class="lead faq-header">How Do I redeem my money?</th>
+                        <th class="lead faq-header">How do I make money?</th>
                     <tr>
                         <td style="padding:5px;">
-                            You must eclipse a minimum of $10 to redeem you money. You will need to tell us if you want to receive your money via PayPal or Venmo.
+                            Simply post stuff as you do on any other social network. But when you do, add the hashtag of the current date, i.e January 1, 2016 would be #1116.
+                            The post with the most likes daily wins a $10 gift card. Then direct message Team Playde and let us know what gift card you would like.
                         </td>
                     </tr>
 
