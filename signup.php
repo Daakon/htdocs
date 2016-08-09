@@ -83,10 +83,6 @@ if (strlen($referredBy) > 0) {
 $sql = "INSERT INTO Follows (Followed_ID, Follower_ID, New, FollowDate) Values (22, $ID, 1, CURDATE())";
 mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting new follower"));
 
-// Playdoe News
-$sql = "INSERT INTO Follows (Followed_ID, Follower_ID, New, FollowDate) Values (528, $ID, 1, CURDATE())";
-mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting new follower"));
-
 // Playdoe Marketing
 $sql = "INSERT INTO Follows (Followed_ID, Follower_ID, New, FollowDate) Values (720, $ID, 1, CURDATE())";
 mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting new follower"));
@@ -99,11 +95,9 @@ $firstName = get_user_firstName($ID);
 // DM new member with instructions
 $message = "<p>Hey $firstName, You can now get rewarded for your social media efforts.
         <br/>
-        Compete in our weekly hashtag game and win $50 to $100 or more via PayPal or the gift card of your choice.
-        <br/>
-        You will also see gift card giveaways from other sponsors in your feed.
-        <br/>
-        Go to our profile now to see what the current hashtag is.
+        Simply post stuff as you do on any other social network. But when you do, add the hashtag of the current date, i.e January 1, 2016 would be #1116.
+        The post with the most likes daily wins a $10 gift card. Simply direct message Team Playde and let us know what gift card you would like.
+        We will send you an e-gift card to your Playdoe inbox. It's that easy! If you have any questions, just reply to this message anytime or checkout the FAQ below.
         </p>";
 
 $message = mysql_escape_string($message);
