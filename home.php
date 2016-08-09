@@ -393,10 +393,12 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                             Your browser does not support the audio element.
                             </audio>';
                         $img = '<a href = "/media.php?id=' . $ID . '&mediaName=' . $mediaName . '&mid=' . $mediaID . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '" ><br/>' . $img . '</a><br/><br/>';
+                        $newImage .= $img.'<br/>';
                     }
-                    if (in_array($type, $photoFileTypes)) {
+                    elseif (in_array($type, $photoFileTypes)) {
                         $img = '<img src = "' . $mediaPath . $mediaName . '" />';
                         $img = '<a href = "/media.php?id=' . $ID . '&mid=' . $mediaID . '&mediaName=' . $media . '&mediaType=' . $mediaType . '&mediaDate=' . $mediaDate . '">' . $img . '</a>';
+                         $newImage .= $img.'<br/>';
                     } // check if file type is a video
                     elseif (in_array($type, $videoFileTypes)) {
                         // where ffmpeg is located
@@ -418,37 +420,18 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                                 <source src = "' . $videoPath . $webmFileName . '" type = "video/webm" />
                                 </video>';
                         $newImage .= $img.'<br/>';
-                    } else {
-                        // if invalid file type
-                        /*echo '<script>alert("Invalid File Type!");</script>';
-                        header('Location:home.php');
-                        exit; */
                     }
                 }
-                    $comment = $comment . '<br/><br/>' . $img . '<br/>';
+
+                }
+                    $comment = $comment . '<br/>'. $newImage;
                     $sql = "INSERT INTO PostComments (Post_ID,   Owner_ID,  Member_ID,   Comment, CommentDate  ) Values
                                                       ('$postID', '$ownerID', '$ID',      '$comment', NOW())";
                     mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting comment"));
-// create post
-                    // get poster data
-                    $sqlPoster = "SELECT ID, FirstName, LastName, Gender FROM Members WHERE ID = '$ID' ";
-                    $resultPoster = mysql_query($sqlPoster) or die(logError(mysql_error(), $url, "Getting comment poster data"));
-                    $rowsPoster = mysql_fetch_assoc($resultPoster);
-                    $name = $rowsPoster['FirstName'] . ' ' . $rowsPoster['LastName'];
-                    $posterId = $rowsPoster['ID'];
-                    $gender = $rowsPoster['Gender'];
-                    $nameLink = $name;
 
-                }
             }
-//----------------------
-// if not comment photo
-//----------------------
-            else {
-                $sql = "INSERT INTO PostComments (Post_ID,  Owner_ID,   Member_ID,    Comment, CommentDate ) Values
-                                                ('$postID', '$ownerID', '$ID',      '$comment', CURDATE())";
-                mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting post comment without media"));
-            }
+
+
             $scrollx = $_REQUEST['scrollx'];
             $scrolly = $_REQUEST['scrolly'];
 //A comment was just made, we need to send out some notifications.
@@ -970,8 +953,6 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
                     <div style="margin-top:-10px">
                         <a href="/messages/<?php echo $username ?>"><img src = "/images/messages.png" height="20" width="20" /> <?php require 'getNewMessageCount.php' ?></a>
                         <a style="margin-left:20px;" href="/member_follows/<?php echo get_username($ID) ?>"><img src = "/images/follows.png" height="20" width="20" /><?php require 'getNewFollowCount.php' ?></a>
-
-                        <a href="/post/playdoe"><img src="/images/dollar-sign.png" style="height:30px;width:30px;margin-left:20px;" /></a>
 
                         <!--<img src="/images/dollar-sign.png" style="width:30px;height:30px;margin-left:20px;" /> --><?php
 /*                        echo "<span style='color:#888888'> </span> ". getRedeemPoints($ID, get_referralID($ID));

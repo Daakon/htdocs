@@ -183,21 +183,12 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
                             exit; */
                         }
                     }
-                    $comment = $comment . '<br/><br/>' . $img . '<br/>';
-                    $sql = "INSERT INTO PostComments (Post_ID,   Owner_ID,  Member_ID,   Comment, CommentDate  ) Values
-                                                      ('$postID', '$ownerID', '$ID',      '$comment', NOW())";
-                    mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting comment"));
-// create post
-                    // get poster data
-                    $sqlPoster = "SELECT ID, FirstName, LastName, Gender FROM Members WHERE ID = '$ID' ";
-                    $resultPoster = mysql_query($sqlPoster) or die(logError(mysql_error(), $url, "Getting comment poster data"));
-                    $rowsPoster = mysql_fetch_assoc($resultPoster);
-                    $name = $rowsPoster['FirstName'] . ' ' . $rowsPoster['LastName'];
-                    $posterId = $rowsPoster['ID'];
-                    $gender = $rowsPoster['Gender'];
-                    $nameLink = $name;
-
                 }
+                 $comment = $comment . '<br/>' . $newImage;
+                 $sql = "INSERT INTO PostComments (Post_ID,   Owner_ID,  Member_ID,   Comment, CommentDate  ) Values
+                                                      ('$postID', '$ownerID', '$ID',      '$comment', NOW())";
+                 mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting comment"));
+
             }
 //----------------------
 // if not comment photo
