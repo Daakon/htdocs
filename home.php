@@ -917,6 +917,8 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
 
                 <div id="result"></div>
                 <div id="previewNames"></div>
+
+
             </h5>
         </div>
 
@@ -948,7 +950,10 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
                 ?>
 
                 <div style="padding-bottom:0px;">
+                <div id="followerResult"></div>
                     <?php require 'profile_menu.php'; ?>
+
+
 
                     <div style="margin-top:-10px">
                         <a href="/messages/<?php echo $username ?>"><img src = "/images/messages.png" height="20" width="20" /> <?php require 'getNewMessageCount.php' ?></a>
@@ -963,7 +968,34 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
 
                 </div>
 
+                <script>
+                function showDialog() {
+                  $("#post").on('keyup', function(){
 
+                  // clear results if empty
+                     if (!this.value.trim()) {
+                        $('#followerResult').html('');
+                        return;
+                    }
+
+                        if($('#post').val().indexOf('@') > -1){
+                        var searchid = $(this).val();
+                        var dataString = 'search='+ searchid;
+                           $.ajax({
+                            type: "POST",
+                            url: "getMentions.php",
+                            data: dataString,
+                            cache: false,
+                            success: function(html)
+                            {
+                                $("#followerResult").html(html).show();
+                            }
+                        });
+
+                        }
+                    });
+                    }
+                </script>
 
                 <?php if (isEmailValidated($ID)) { ?>
 
@@ -978,8 +1010,12 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
 
 
 
-                                <textarea name="post" id="post"  style="float:left;margin-top:25px;width:300px;border:none;" onkeyup="this.style.height='24px'; this.style.height = this.scrollHeight + 12 + 'px';"
+                                <textarea name="post" id="post" class="postClass"
+                                onkeydown='showDialog()'
+                                style="float:left;margin-top:25px;width:300px;border:none;"
+                                onkeyup="this.style.height='24px'; this.style.height = this.scrollHeight + 12 + 'px';"
                                   placeholder="Share something and get paid for it" spellcheck="true"></textarea>
+
 
 
                                 <div style="clear:both" id="image-holder"> </div>
@@ -993,6 +1029,8 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
                         </div>
                     </div>
                 </div>
+
+
 
  <label style="float:left;clear:both" for="flPostMedia">
                         <img src="/images/camera.png" style="height:25px;width:25px;float:left;margin-right:10px;" />
@@ -1085,9 +1123,17 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
             </span>
 
             <div onclick="document.getElementById('msg').style.display = 'block';" id="msg" style="display:none;" class="profile-on-hover">To get paid be sure to provide your Referral ID: <b><?php echo get_referralID($ID) ?></b></div>
+
+
+
+
+
         </div>
 
         <br/>
+
+
+
 
  <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6 roll-call"
              align="left" >

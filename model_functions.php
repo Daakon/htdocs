@@ -742,7 +742,14 @@ function hasHourPast($ID) {
     }
 }
 
-
+function getMentions($post) {
+    $marked = array();
+    foreach (explode(' ', $post) as $word) {
+        if ($word[0] == '@') {
+            $marked[] = $word;
+        }
+    }
+}
 
 /// Find hash tags
 function hashtag_links($string) {
