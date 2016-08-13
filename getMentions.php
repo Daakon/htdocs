@@ -1,12 +1,18 @@
 <script>
     function storeRecipients(username) {
-        $('#post').val($('#post').val()+username);
-    }
+        // build new username
+        username = ' @'+username;
+        // get current post
+        var post = $('#post').val();
+        // delete the last mention typed by the user
+        text = post.replace(/\w+$/, '');
+        // add the username to the current post
+        text = text.substring(0, text.lastIndexOf(' ')) + username;
 
-    function removeRecipient(id) {
-        $("span[id="+id+"]").remove();
-        $("input[value="+id+"]").val('');
-        $("input[value="+id+"]").remove();
+
+// return post with prior text plus newly added username
+        $('#post').val(text);
+
     }
 </script>
 
@@ -28,7 +34,8 @@
 
     if($_POST)
     {
-        $q=$_POST['searchMembers'];
+        $q=$_POST['search'];
+        $q = str_replace('@', '', $q);
         $sql =mysql_query("select ID,FirstName,LastName,Username from Members where concat(FirstName,'',LastName) like '%$q%'
     and ID Not in ( '" . implode($blockIDs, "', '") . "' ) And (IsActive = 1) And (IsSuspended = 0) order by id LIMIT 5");
 

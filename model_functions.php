@@ -742,13 +742,20 @@ function hasHourPast($ID) {
     }
 }
 
-function getMentions($post) {
-    $marked = array();
-    foreach (explode(' ', $post) as $word) {
-        if ($word[0] == '@') {
-            $marked[] = $word;
+function mentionLink($string) {
+    // split all words
+    $words = explode(" ", $string);
+    foreach ($words as $word) {
+        // if a mention
+        if (strstr($word, '@')) {
+            // get username
+            $newWord = explode("@", $word);
+            $username = $newWord[1];
+            $mentionLink = '<a href="/'.$username.'">'.$word.'</a> ';
+            $string = str_replace($word, $mentionLink, $string);
         }
     }
+    return $string;
 }
 
 /// Find hash tags

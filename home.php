@@ -33,9 +33,13 @@ if (isset($_POST['submit'])) {
         if (strlen($post) > 0) {
             $post = makeLinks($post);
             $post = hashtag_links($post);
-
+            $post = mentionLink($post);
             $post = "<p>$post</p>";
 
+foreach ($_POST['receiverID'] as $key => $receiverID) {
+$mention = $_POST['mention'];
+
+}
             // Loop through each image uploaded.
             if (strlen($_FILES['flPostMedia']['name'] > 0)) {
                 foreach ($_FILES['flPostMedia']['tmp_name'] as $k => $v) {
@@ -950,7 +954,7 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
                 ?>
 
                 <div style="padding-bottom:0px;">
-                <div id="followerResult"></div>
+                <div id="mentionResult"></div>
                     <?php require 'profile_menu.php'; ?>
 
 
@@ -968,18 +972,26 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
 
                 </div>
 
-                <script>
-                function showDialog() {
-                  $("#post").on('keyup', function(){
+
+<script>
+              function showMentions(e) {
+                  $("#post").on('keydown', function(){
+
+var code = (e.keyCode ? e.keyCode : e.which);
 
                   // clear results if empty
                      if (!this.value.trim()) {
-                        $('#followerResult').html('');
+                        $('#mentionResult').html('');
                         return;
                     }
 
-                        if($('#post').val().indexOf('@') > -1){
-                        var searchid = $(this).val();
+                        if(code == '50' || code == '16'){
+                         // match on last @mention
+ var lastMention = $(this).val().split(' ');
+            var lastType = lastMention[lastMention.length - 1];
+
+                        var searchid = lastType;
+
                         var dataString = 'search='+ searchid;
                            $.ajax({
                             type: "POST",
@@ -988,7 +1000,8 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
                             cache: false,
                             success: function(html)
                             {
-                                $("#followerResult").html(html).show();
+
+ $("#mentionResult").html(html).show();
                             }
                         });
 
@@ -1006,13 +1019,13 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
                     else {*/
                         //if (hasTenPost($ID) == false) {
                             ?>
-                            <form style="float:left" method="post" enctype="multipart/form-data" action="" onsubmit="return showUploading()" >
+                            <form id="formPost" style="float:left" method="post" enctype="multipart/form-data" action="" onsubmit="return showUploading()" >
 
 
 
                                 <textarea name="post" id="post" class="postClass"
-                                onkeydown='showDialog()'
-                                style="float:left;margin-top:25px;width:300px;border:none;"
+                                onkeydown='showMentions(event, this)'
+                                style="float:left;margin-top:25px;width:300px;border:none;font-size:17px"
                                 onkeyup="this.style.height='24px'; this.style.height = this.scrollHeight + 12 + 'px';"
                                   placeholder="Share something and get paid for it" spellcheck="true"></textarea>
 
