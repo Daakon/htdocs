@@ -31,15 +31,21 @@ if (isset($_POST['submit'])) {
         echo "<script>alert('Your post needs a hash tag');</script>";
     }*/ else {
         if (strlen($post) > 0) {
+
+        // predict next post ID so when can reference each image to the new post
+                    $sql = "SELECT ID FROM Posts Order by ID DESC LIMIT 1";
+                    $result = mysql_query($sql);
+                    $row = mysql_fetch_assoc($result);
+                    $lastPostID = $row['ID'];
+                    $newPostID = $lastPostID +1;
+                    $_SESSION['NewPostID'] = $newPostID;
+
             $post = makeLinks($post);
             $post = hashtag_links($post);
-            $post = mentionLink($post);
+            $post = mentionLink($post, $ID, $newPostID);
             $post = "<p>$post</p>";
 
-foreach ($_POST['receiverID'] as $key => $receiverID) {
-$mention = $_POST['mention'];
 
-}
             // Loop through each image uploaded.
             if (strlen($_FILES['flPostMedia']['name'] > 0)) {
                 foreach ($_FILES['flPostMedia']['tmp_name'] as $k => $v) {
@@ -224,15 +230,9 @@ $mention = $_POST['mention'];
                         }
                         $newImage .= $img.'<br/>';
                     }
-                    // predict next post ID so when can reference each image to the new post
-                    $sql = "SELECT ID FROM Posts Order by ID DESC LIMIT 1";
-                    $result = mysql_query($sql);
-                    $row = mysql_fetch_assoc($result);
-                    $lastPostID = $row['ID'];
-                    $lastPostID = $lastPostID +1;
-                    $newPostID = $_SESSION['NewPostID'];
+
                     // update Media table with new post id
-                    $sqlUpdateMedia = "UPDATE Media SET PostID = $lastPostID, Poster='$posterName' WHERE ID = '$mediaID' ";
+                    $sqlUpdateMedia = "UPDATE Media SET PostID = $newPostID, Poster='$posterName' WHERE ID = '$mediaID' ";
                     mysql_query($sqlUpdateMedia) or die(logError(mysql_error(), $url, "Fetching next post ID to reference images to"));
                 } // end of loop -----------------------------------
             }
@@ -255,7 +255,9 @@ $mention = $_POST['mention'];
                                       ('$post',   '$category',   '$ID',    '$IsSponsored',    NOW())";
             mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting post without media"));
         }
-        alert_followers($lastPostID);
+        alert_followers($newPostID);
+
+
     }
 
     echo "<script>location='/home'</script>";

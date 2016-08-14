@@ -742,7 +742,7 @@ function hasHourPast($ID) {
     }
 }
 
-function mentionLink($string) {
+function mentionLink($string, $ID, $newPostID) {
     // split all words
     $words = explode(" ", $string);
     foreach ($words as $word) {
@@ -751,9 +751,15 @@ function mentionLink($string) {
             // get username
             $newWord = explode("@", $word);
             $username = $newWord[1];
+            $toID = get_id_from_username($username);
             $mentionLink = '<a style="padding-right:3px;" href="/'.$username.'">'.$word.'</a>';
             $string = str_replace($word, $mentionLink, $string);
+            if (checkEmailActive($toID)) {
+                build_and_send_email($ID, $toID, 16, $newPostID);
+            }
+
         }
+
     }
     return $string;
 }
@@ -807,7 +813,6 @@ function hashtag_links($string) {
 
     return $result;
 }
-
 
 // text function to all service providers for related service post
 function alert_followers($postID)
