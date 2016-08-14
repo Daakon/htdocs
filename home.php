@@ -985,7 +985,7 @@ var code = (e.keyCode ? e.keyCode : e.which);
                         return;
                     }
 
-                        if(code == '50' || code == '16'){
+                        if(code == '50'){
                          // match on last @mention
  var lastMention = $(this).val().split(' ');
             var lastType = lastMention[lastMention.length - 1];
@@ -1019,21 +1019,27 @@ var code = (e.keyCode ? e.keyCode : e.which);
                     else {*/
                         //if (hasTenPost($ID) == false) {
                             ?>
-                            <form id="formPost" style="float:left" method="post" enctype="multipart/form-data" action="" onsubmit="return showUploading()" >
+                            <form id="formPost" style="float:left;width:100%" method="post" enctype="multipart/form-data" action="" onsubmit="return showUploading()" >
 
 
 
-                                <textarea name="post" id="post" class="postClass"
+                                <textarea name="post" id="post" class="form-control"
                                 onkeydown='showMentions(event, this)'
-                                style="float:left;margin-top:25px;width:300px;border:none;font-size:17px"
+                                style="float:left;border:none;font-size:17px"
                                 onkeyup="this.style.height='24px'; this.style.height = this.scrollHeight + 12 + 'px';"
                                   placeholder="Share something and get paid for it" spellcheck="true"></textarea>
 
+ <label style="float:left;clear:both" for="flPostMedia">
+                        <img src="/images/camera.png" style="height:25px;width:25px;float:left;margin-right:10px;" />
+                    </label>
+                                <input type="file" name="flPostMedia[]" id="flPostMedia" class="flPostMedia" style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;' multiple />
 
+
+                                <input style="float:left;margin-left:0px;" type="submit" class="post-button" name="submit" id="submit" value="Post"/>
+                            </form>
 
                                 <div style="clear:both" id="image-holder"> </div>
 
-                                <br/>
 
 <div id="progress" style="display:none;padding-top:5px;float:left">
                     <div style="float:left" class="progress">
@@ -1045,14 +1051,6 @@ var code = (e.keyCode ? e.keyCode : e.which);
 
 
 
- <label style="float:left;clear:both" for="flPostMedia">
-                        <img src="/images/camera.png" style="height:25px;width:25px;float:left;margin-right:10px;" />
-                    </label>
-                                <input type="file" name="flPostMedia[]" id="flPostMedia" class="flPostMedia" style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;' multiple />
-
-
-                                <input style="float:left;margin-left:0px;" type="submit" class="post-button" name="submit" id="submit" value="Post"/>
-                            </form>
                             <?php
                         } // hasTenPost
                        // else { echo "<h5 align='center'>You have reached your daily post limit, great job!"; }
@@ -1067,11 +1065,6 @@ var code = (e.keyCode ? e.keyCode : e.which);
                         ";
                 }
                 ?>
-
-
-
-
-              <br/><br/>
 
 
 <!--Preview uploaded photos and videos -->
@@ -1114,32 +1107,7 @@ var code = (e.keyCode ? e.keyCode : e.which);
             </script>
 
 
-
-
-            <!-- SMARTADDON BEGIN --> <script type="text/javascript"> (function() { var s=document.createElement('script');s.type='text/javascript';s.async = true; s.src='http://s1.smartaddon.com/share_addon.js'; var j =document.getElementsByTagName('script')[0];j.parentNode.insertBefore(s,j); })(); </script>
-
-<a href="http://www.smartaddon.com/?share" title="Share Button" onclick="return sa_tellafriend('http://playdoe.com')" style="margin-top:20px"><img alt="Share" src="http://s1.smartaddon.com/s12.png" border="0" /></a> <!-- SMARTADDON END -->
-
-            <script>
-                function show(msg) {
-                    var tooltip = document.getElementById(msg);
-                    if (tooltip.style.display == 'none') {
-                        tooltip.style.display = 'block';
-                    } else {
-                        tooltip.style.display = 'none';
-                    }
-                }
-            </script>
-
-            <span style="padding-left:10px;" onclick="show('msg');">
-                <span class="glyphicon glyphicon-cog" data-toggle="tooltip" data-original-title="Setting">
-            </span>
-
             <div onclick="document.getElementById('msg').style.display = 'block';" id="msg" style="display:none;" class="profile-on-hover">To get paid be sure to provide your Referral ID: <b><?php echo get_referralID($ID) ?></b></div>
-
-
-
-
 
         </div>
 
@@ -1150,6 +1118,10 @@ var code = (e.keyCode ? e.keyCode : e.which);
 
  <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6 roll-call"
              align="left" >
+
+       <!-- SMARTADDON BEGIN --> <script type="text/javascript"> (function() { var s=document.createElement('script');s.type='text/javascript';s.async = true; s.src='http://s1.smartaddon.com/share_addon.js'; var j =document.getElementsByTagName('script')[0];j.parentNode.insertBefore(s,j); })(); </script>
+
+<a href="http://www.smartaddon.com/?share" title="Share Button" onclick="return sa_tellafriend('http://playdoe.com')" style="margin-top:20px"><img alt="Share" src="http://s1.smartaddon.com/s12.png" border="0" /></a> <!-- SMARTADDON END -->
 
 
 <?php

@@ -751,7 +751,7 @@ function mentionLink($string) {
             // get username
             $newWord = explode("@", $word);
             $username = $newWord[1];
-            $mentionLink = '<a href="/'.$username.'">'.$word.'</a> ';
+            $mentionLink = '<a style="padding-right:3px;" href="/'.$username.'">'.$word.'</a>';
             $string = str_replace($word, $mentionLink, $string);
         }
     }
