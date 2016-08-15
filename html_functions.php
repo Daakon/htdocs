@@ -12,7 +12,7 @@ function get_head_files()
 
 
         <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
-        <meta name="description" content="<b>Playdoe</b> is a social network that gives people gift cards every day.">
+        <meta name="description" content="Playdoe is a social network that gives people gift cards every day.">
         <meta name="keywords" content="<?php echo $keywords ?>">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta http-equiv="content-type" content="text/html; charset=utf-8"/>

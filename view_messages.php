@@ -797,10 +797,10 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
                 <hr class="hr-line" />
 
 
-                    <form id="messageForm" action="" method="post" enctype="multipart/form-data" onsubmit="return showUploading()">
+                    <form style="width:100%" id="messageForm" action="" method="post" enctype="multipart/form-data" onsubmit="return showUploading()">
 
 
-                                <textarea name="message" id="message"  style="float:left;margin-top:25px;width:450px;border:none;" onkeyup="this.style.height='24px'; this.style.height = this.scrollHeight + 12 + 'px';"
+                                <textarea name="message" id="message"  style="float:left;font-size:17px;border:none;" onkeyup="this.style.height='24px'; this.style.height = this.scrollHeight + 12 + 'px';"
                                           placeholder="Type your message" spellcheck="true"></textarea>
 
 
