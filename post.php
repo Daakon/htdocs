@@ -675,13 +675,13 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                 <input id="<?php echo $shareLinkID ?>" style="display:none;margin-left:10px;" value ="<?php echo $shortLink ?>" />
 
 
-                <form class="commentBoxAlign" method="post" action="" enctype="multipart/form-data"
+                <form style="width:100%" class="commentBoxAlign" method="post" action="" enctype="multipart/form-data"
                       onsubmit="showCommentUploading('comment<?php echo $postID?>', this);">
 
 
                     <input type="file" style='z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;' name="flCommentMedia[]" id="flCommentMedia" multiple onchange='$("#upload-photo-info").html($(this).val());' />
 
-                        <textarea style="margin-top:10px;float:left;border:none;width:300px;" name="postComment" id="postComment" onkeyup="this.style.height='24px'; this.style.height = this.scrollHeight + 12 + 'px';"
+                        <textarea style="margin-top:10px;float:left;border:none;font-size:17px;" name="postComment" id="postComment" onkeyup="this.style.height='24px'; this.style.height = this.scrollHeight + 12 + 'px';"
                                   placeholder="Write a comment" title='' ></textarea>
                     <br/><br/>
 
