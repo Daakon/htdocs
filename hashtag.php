@@ -726,7 +726,7 @@ if (mysql_num_rows($result) > 0) {
                                 var dataString = 'search='+ searchid + '&commentID='+commentMention;
                                 $.ajax({
                                     type: "POST",
-                                    url: "getCommentMentions.php",
+                                    url: "/getCommentMentions.php",
                                     data: dataString,
                                     cache: false,
                                     success: function(html)

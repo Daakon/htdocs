@@ -569,7 +569,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                 echo '<input type ="hidden" class = "ID" id = "ID" value = "' . $ID . '" />';
                 echo '<input type ="button" class = "btnDisapprove" />';
                 if ($approvals > 0) {
-                    echo '&nbsp;<span>' . $approvals . '</font>';
+                    echo '&nbsp;<span>' . $approvals . '</span>';
                 }
                 echo '</form>';
             } else {
@@ -578,7 +578,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                 echo '<input type ="hidden" class = "ID" id = "ID" value = "' . $ID . '" />';
                 echo '<input type ="button" class = "btnApprove" />';
                 if ($approvals > 0) {
-                    echo '&nbsp;<span>' . $approvals . '</font>';
+                    echo '&nbsp;<span>' . $approvals . '</span>';
                 }
                 echo '</form>';
             }
@@ -689,7 +689,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
                             var dataString = 'search='+ searchid + '&commentID='+commentMention;
                             $.ajax({
                                 type: "POST",
-                                url: "getCommentMentions.php",
+                                url: "/getCommentMentions.php",
                                 data: dataString,
                                 cache: false,
                                 success: function(html)
@@ -706,10 +706,12 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
 
 
-            <?php $commentMentionResult = "commentMentionResult$prestinePostID"; ?>
-            <div id="<?php echo $commentMentionResult ?>"></div>
+
 
             <div style="clear:both;margin-top:-20px;margin-bottom:10px;margin-left:10px;">
+
+                <?php $commentMentionResult = "commentMentionResult$prestinePostID"; ?>
+                <div id="<?php echo $commentMentionResult ?>"></div>
 
 
                 <!--Show block button here show it displays clearly between engagement icons and comment box -->

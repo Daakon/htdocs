@@ -678,7 +678,7 @@ if (isset($_POST['block']) && $_POST['block'] == "Block This User") {
                                 var dataString = 'search='+ searchid + '&commentID='+commentMention;
                                 $.ajax({
                                     type: "POST",
-                                    url: "getCommentMentions.php",
+                                    url: "/getCommentMentions.php",
                                     data: dataString,
                                     cache: false,
                                     success: function(html)

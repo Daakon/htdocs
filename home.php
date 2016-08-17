@@ -999,7 +999,7 @@ var code = (e.keyCode ? e.keyCode : e.which);
                         var dataString = 'search='+ searchid;
                            $.ajax({
                             type: "POST",
-                            url: "getMentions.php",
+                            url: "/getMentions.php",
                             data: dataString,
                             cache: false,
                             success: function(html)
