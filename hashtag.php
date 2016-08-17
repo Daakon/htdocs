@@ -30,6 +30,8 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
     if (strlen($comment) > 0) {
 // find urls
         $comment = makeLinks($comment);
+        $comment = mentionLink($comment, $ID, $postID, 17);
+
         if ($_SESSION['PostComment'] == $_POST['postComment']) {
             echo "<script>alert('Your comment appears to be empty');</script>";
         } else {
@@ -695,14 +697,22 @@ if (mysql_num_rows($result) > 0) {
         <hr class="hr-line"/>
 
          <script>
-                    function showCommentMentions(e) {
-                        $("#comment").on('keydown', function(){
+                    function showCommentMentions(e, id) {
+
+
+                        var commentMentionResult = "#commentMentionResult"+id;
+                        var commentMention = "#commentMention"+id;
+
+                        //alert(commentMention);
+
+                        $(commentMention).on('keydown', function(){
 
                             var code = (e.keyCode ? e.keyCode : e.which);
 
                             // clear results if empty
                             if (!this.value.trim()) {
-                                $('#commentMentionResult').html('');
+
+                                $(commentMentionResult).html('');
                                 return;
                             }
 
@@ -713,7 +723,7 @@ if (mysql_num_rows($result) > 0) {
 
                                 var searchid = lastType;
 
-                                var dataString = 'search='+ searchid;
+                                var dataString = 'search='+ searchid + '&commentID='+commentMention;
                                 $.ajax({
                                     type: "POST",
                                     url: "getCommentMentions.php",
@@ -722,7 +732,7 @@ if (mysql_num_rows($result) > 0) {
                                     success: function(html)
                                     {
 
-                                        $("#commentMentionResult").html(html).show();
+                                        $(commentMentionResult).html(html).show();
                                     }
                                 });
 
@@ -732,7 +742,9 @@ if (mysql_num_rows($result) > 0) {
                 </script>
 
 
-                <div id="commentMentionResult"></div>
+               <?php $commentMentionResult = "commentMentionResult$prestinePostID"; ?>
+                <div id="<?php echo $commentMentionResult ?>"></div>
+
 <div style="clear:both;margin-top:-20px;margin-bottom:10px;margin-left:10px;">
 
         <!--Show block button here show it displays clearly between engagement icons and comment box -->
@@ -754,7 +766,8 @@ if (mysql_num_rows($result) > 0) {
 
     <input type="file" style='z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;' name="flCommentMedia[]" id="flCommentMedia" multiple onchange='$("#upload-photo-info").html($(this).val());' />
 
-                        <textarea id="comment" onkeydown='showCommentMentions(event, this)' style="margin-top:10px;float:left;border:none;font-size:17px;" name="postComment" id="postComment" onkeyup="this.style.height='24px'; this.style.height = this.scrollHeight + 12 + 'px';"
+                <?php $commentID = "$prestinePostID"; ?>
+                        <textarea id="commentMention<?php echo $commentID ?>" onkeydown='showCommentMentions(event, <?php echo $commentID ?>)' style="margin-top:10px;float:left;border:none;font-size:17px;" name="postComment" id="postComment" onkeyup="this.style.height='24px'; this.style.height = this.scrollHeight + 12 + 'px';"
                                   placeholder="Write a comment" title='' ></textarea>
                     <br/><br/>
 

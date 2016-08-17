@@ -320,16 +320,23 @@ if (mysql_num_rows($rollCallResult) > 0) {
 
                 <hr class="hr-line"/>
 
-
                 <script>
-                    function showCommentMentions(e) {
-                        $("#comment").on('keydown', function(){
+                    function showCommentMentions(e, id) {
+
+
+                        var commentMentionResult = "#commentMentionResult"+id;
+                        var commentMention = "#commentMention"+id;
+
+                        //alert(commentMention);
+
+                        $(commentMention).on('keydown', function(){
 
                             var code = (e.keyCode ? e.keyCode : e.which);
 
                             // clear results if empty
                             if (!this.value.trim()) {
-                                $('#commentMentionResult').html('');
+
+                                $(commentMentionResult).html('');
                                 return;
                             }
 
@@ -340,7 +347,7 @@ if (mysql_num_rows($rollCallResult) > 0) {
 
                                 var searchid = lastType;
 
-                                var dataString = 'search='+ searchid;
+                                var dataString = 'search='+ searchid + '&commentID='+commentMention;
                                 $.ajax({
                                     type: "POST",
                                     url: "getCommentMentions.php",
@@ -349,7 +356,7 @@ if (mysql_num_rows($rollCallResult) > 0) {
                                     success: function(html)
                                     {
 
-                                        $("#commentMentionResult").html(html).show();
+                                        $(commentMentionResult).html(html).show();
                                     }
                                 });
 
@@ -358,8 +365,8 @@ if (mysql_num_rows($rollCallResult) > 0) {
                     }
                 </script>
 
-
-                <div id="commentMentionResult"></div>
+                <?php $commentMentionResult = "commentMentionResult$prestinePostID"; ?>
+                <div id="<?php echo $commentMentionResult ?>"></div>
 
                 <div class="content-space content-space-align">
 
@@ -387,8 +394,12 @@ if (mysql_num_rows($rollCallResult) > 0) {
 
                         <input type="file" style='float:left;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;' name="flCommentMedia[]" id="flCommentMedia" multiple onchange='$("#upload-photo-info").html($(this).val());' />
 
-                        <textarea id="comment" onkeydown='showCommentMentions(event, this)' style="margin-top:10px;float:left;border:none;font-size:17px;" name="postComment" id="postComment" onkeyup="this.style.height='24px'; this.style.height = this.scrollHeight + 12 + 'px';"
+                        <?php $commentID = "$prestinePostID"; ?>
+                        <textarea id="commentMention<?php echo $commentID ?>" onkeydown='showCommentMentions(event, <?php echo $commentID ?>)' style="margin-top:10px;float:left;border:none;font-size:17px;" name="postComment" id="postComment" onkeyup="this.style.height='24px'; this.style.height = this.scrollHeight + 12 + 'px';"
                                   placeholder="Write a comment" title='' ></textarea>
+
+
+
                         <br/><br/>
 
                         <label style="float:left;clear:both" for="flCommentMedia">

@@ -1,9 +1,10 @@
 <script>
-    function storeCommentMentions(username) {
+    function storeCommentMentions(username, commentID) {
         // build new username
         username = ' @'+username;
         // get current post
-        var comment = $('#comment').val();
+        var comment = $(commentID).val();
+
         // delete the last mention typed by the user
         text = comment.replace(/\w+$/, '');
         // add the username to the current post
@@ -11,7 +12,7 @@
 
 
 // return post with prior text plus newly added username
-        $('#comment').val(text);
+        $(commentID).val(text);
 
     }
 </script>
@@ -35,6 +36,7 @@
     if($_POST)
     {
         $q=$_POST['search'];
+        $commentID = $_POST['commentID'];
         $q = str_replace('@', '', $q);
         $sql =mysql_query("select ID,FirstName,LastName,Username from Members where concat(FirstName,'',LastName) like '%$q%'
     and ID Not in ( '" . implode($blockIDs, "', '") . "' ) And (IsActive = 1) And (IsSuspended = 0) order by id LIMIT 5");
@@ -61,7 +63,7 @@
                     &nbsp;
                     <br/>
                     <button id="<?php echo $receiverID ?>" name="<?php echo $username ?>" class="<?php echo $username ?>"
-                            value="<?php echo $username ?>" onclick="storeCommentMentions(this.name);">Add
+                            value="<?php echo $commentID ?>" onclick="storeCommentMentions(this.name, this.value);">Add
                     </button>
                 </td>
             </tr>
