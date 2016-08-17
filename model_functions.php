@@ -742,7 +742,7 @@ function hasHourPast($ID) {
     }
 }
 
-function mentionLink($string, $ID, $newPostID) {
+function mentionLink($string, $ID, $newPostID, $emailType) {
     // split all words
     $words = explode(" ", $string);
     foreach ($words as $word) {
@@ -755,7 +755,7 @@ function mentionLink($string, $ID, $newPostID) {
             $mentionLink = '<a style="padding-right:3px;" href="/'.$username.'">'.$word.'</a>';
             $string = str_replace($word, $mentionLink, $string);
             if (checkEmailActive($toID)) {
-                build_and_send_email($ID, $toID, 16, $newPostID);
+                build_and_send_email($ID, $toID, $emailType, $newPostID);
             }
 
         }

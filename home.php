@@ -42,7 +42,7 @@ if (isset($_POST['submit'])) {
 
             $post = makeLinks($post);
             $post = hashtag_links($post);
-            $post = mentionLink($post, $ID, $newPostID);
+            $post = mentionLink($post, $ID, $newPostID, 16);
             $post = "<p>$post</p>";
 
 
@@ -276,6 +276,8 @@ if (isset($_POST['btnComment']) && ($_POST['btnComment'] == "Comment")) {
     if (strlen($comment) > 0) {
 // find urls
         $comment = makeLinks($comment);
+        $comment = mentionLink($comment, $ID, $postID, 17);
+
         if ($_SESSION['PostComment'] == $_POST['postComment']) {
             echo "<script>alert('Your comment appears to be empty'); location='/home';</script>";
             exit;
@@ -1029,7 +1031,7 @@ var code = (e.keyCode ? e.keyCode : e.which);
                                 onkeydown='showMentions(event, this)'
                                 style="float:left;border:none;font-size:17px"
                                 onkeyup="this.style.height='24px'; this.style.height = this.scrollHeight + 12 + 'px';"
-                                  placeholder="Share something and get paid for it" spellcheck="true"></textarea>
+                                  placeholder="Share something about your day" spellcheck="true"></textarea>
 
  <label style="float:left;clear:both" for="flPostMedia">
                         <img src="/images/camera.png" style="height:25px;width:25px;float:left;margin-right:10px;" />

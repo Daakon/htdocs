@@ -658,6 +658,47 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
 
             <hr class="hr-line"/>
+
+            <script>
+                function showCommentMentions(e) {
+                    $("#comment").on('keydown', function(){
+
+                        var code = (e.keyCode ? e.keyCode : e.which);
+
+                        // clear results if empty
+                        if (!this.value.trim()) {
+                            $('#commentMentionResult').html('');
+                            return;
+                        }
+
+                        if(code == '50'){
+                            // match on last @mention
+                            var lastMention = $(this).val().split(' ');
+                            var lastType = lastMention[lastMention.length - 1];
+
+                            var searchid = lastType;
+
+                            var dataString = 'search='+ searchid;
+                            $.ajax({
+                                type: "POST",
+                                url: "getCommentMentions.php",
+                                data: dataString,
+                                cache: false,
+                                success: function(html)
+                                {
+
+                                    $("#commentMentionResult").html(html).show();
+                                }
+                            });
+
+                        }
+                    });
+                }
+            </script>
+
+
+            <div id="commentMentionResult"></div>
+
             <div style="clear:both;margin-top:-20px;margin-bottom:10px;margin-left:10px;">
 
 
@@ -681,7 +722,7 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 
                     <input type="file" style='z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;' name="flCommentMedia[]" id="flCommentMedia" multiple onchange='$("#upload-photo-info").html($(this).val());' />
 
-                        <textarea style="margin-top:10px;float:left;border:none;font-size:17px;" name="postComment" id="postComment" onkeyup="this.style.height='24px'; this.style.height = this.scrollHeight + 12 + 'px';"
+                        <textarea id="comment" onkeydown='showCommentMentions(event, this)' style="margin-top:10px;float:left;border:none;font-size:17px;" name="postComment" id="postComment" onkeyup="this.style.height='24px'; this.style.height = this.scrollHeight + 12 + 'px';"
                                   placeholder="Write a comment" title='' ></textarea>
                     <br/><br/>
 

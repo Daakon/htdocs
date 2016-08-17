@@ -345,6 +345,24 @@ function build_and_send_email($senderId, $toId, $notification, $postID, $pass, $
         $subject = "$posterName mentioned you in a <a href='$link'>post</a>";
     }
 
+    if ($notification == 17) {
+        $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+        $link;
+        if (strstr($url, "local")) {
+            $link = "show_post?postID=$postID&email=1";
+        }
+        else if (strstr($url, "dev")) {
+            $link = "http://dev.playdoe.com/show_post?postID=$postID&email=1";
+        }
+        else {
+            $link = "http://www.playdoe.com/show_post?postID=$postID&email=1";
+        }
+
+        $posterName = get_users_name($senderId);
+
+        $subject = "$posterName mentioned you in a <a href='$link'>comment</a>";
+    }
+
     // if we have a notification, then send the email.
     if (strlen($notification) > 0) {
         if (strstr($url, "local")) {

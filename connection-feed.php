@@ -319,6 +319,48 @@ if (mysql_num_rows($rollCallResult) > 0) {
                 ?>
 
                 <hr class="hr-line"/>
+
+
+                <script>
+                    function showCommentMentions(e) {
+                        $("#comment").on('keydown', function(){
+
+                            var code = (e.keyCode ? e.keyCode : e.which);
+
+                            // clear results if empty
+                            if (!this.value.trim()) {
+                                $('#commentMentionResult').html('');
+                                return;
+                            }
+
+                            if(code == '50'){
+                                // match on last @mention
+                                var lastMention = $(this).val().split(' ');
+                                var lastType = lastMention[lastMention.length - 1];
+
+                                var searchid = lastType;
+
+                                var dataString = 'search='+ searchid;
+                                $.ajax({
+                                    type: "POST",
+                                    url: "getCommentMentions.php",
+                                    data: dataString,
+                                    cache: false,
+                                    success: function(html)
+                                    {
+
+                                        $("#commentMentionResult").html(html).show();
+                                    }
+                                });
+
+                            }
+                        });
+                    }
+                </script>
+
+
+                <div id="commentMentionResult"></div>
+
                 <div class="content-space content-space-align">
 
                     <!--Show block button here show it displays clearly between engagement icons and comment box -->
@@ -338,14 +380,14 @@ if (mysql_num_rows($rollCallResult) > 0) {
 
                     <!--Comment box -->
 
-                    <form style="width:100%;" class="commentBoxAlign" method="post" action="" enctype="multipart/form-data"
+                    <form style="width:100%;"  class="commentBoxAlign" method="post" action="" enctype="multipart/form-data"
                           onsubmit="showCommentUploading('comment<?php echo $postID?>', this);">
 
 
 
                         <input type="file" style='float:left;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;' name="flCommentMedia[]" id="flCommentMedia" multiple onchange='$("#upload-photo-info").html($(this).val());' />
 
-                        <textarea style="margin-top:10px;float:left;border:none;font-size:17px;" name="postComment" id="postComment" onkeyup="this.style.height='24px'; this.style.height = this.scrollHeight + 12 + 'px';"
+                        <textarea id="comment" onkeydown='showCommentMentions(event, this)' style="margin-top:10px;float:left;border:none;font-size:17px;" name="postComment" id="postComment" onkeyup="this.style.height='24px'; this.style.height = this.scrollHeight + 12 + 'px';"
                                   placeholder="Write a comment" title='' ></textarea>
                         <br/><br/>
 
