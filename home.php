@@ -1123,6 +1123,21 @@ var code = (e.keyCode ? e.keyCode : e.which);
  <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6 roll-call"
              align="left" >
 
+<link rel="stylesheet" href="/resources/css/jquery.bxslider.css">
+
+<script src="resources/js/jquery.bxslider.min.js"></script>
+
+<script>
+$(document).ready(function(){
+  $('#foobar').bxSlider();
+});
+</script>
+
+<h4>Most requested giftcards</h4>
+<div id="foobar">
+  <div><img src="/giftcards/walmart-giftcard.png" height="80%" width="100%" /></div>
+  <div><img src="/giftcards/target-giftcard.png" height="80%" width="100%" /></div>
+</div>
        <!-- SMARTADDON BEGIN --> <script type="text/javascript"> (function() { var s=document.createElement('script');s.type='text/javascript';s.async = true; s.src='http://s1.smartaddon.com/share_addon.js'; var j =document.getElementsByTagName('script')[0];j.parentNode.insertBefore(s,j); })(); </script>
 
 <a href="http://www.smartaddon.com/?share" title="Share Button" onclick="return sa_tellafriend('http://playdoe.com')" style="margin-top:20px"><img alt="Share" src="http://s1.smartaddon.com/s12.png" border="0" /></a> <!-- SMARTADDON END -->
