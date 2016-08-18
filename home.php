@@ -967,10 +967,10 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
                         <a href="/messages/<?php echo $username ?>"><img src = "/images/messages.png" height="20" width="20" /> <?php require 'getNewMessageCount.php' ?></a>
                         <a style="margin-left:20px;" href="/member_follows/<?php echo get_username($ID) ?>"><img src = "/images/follows.png" height="20" width="20" /><?php require 'getNewFollowCount.php' ?></a>
 
-                        <!--<img src="/images/dollar-sign.png" style="width:30px;height:30px;margin-left:20px;" /> --><?php
-/*                        echo "<span style='color:#888888'> </span> ". getRedeemPoints($ID, get_referralID($ID));
-                        if (getRedeemPoints($ID, get_username($ID)) > 9) { echo "<br/><a href='/view_messages/playdoe'><img src='/images/redeem.png' height='30' width='30' /></a>"; };*/
-                        ?>
+                       <?php
+                echo "<span style='color:#888888;margin-left:20px;'><span style='color:#888888'><img src='/images/referral-icon.png' height='30' width='30' /> </span>";
+                if (getReferrals($ID, get_username($ID)) > 0) { echo "<span style='background:red;padding:5px;'><a style='color:white;' href='/view_messages/redeem'>".getReferrals($ID, get_username($ID))."</a></span>"; };
+                ?>
 
                     </div>
 
@@ -1142,6 +1142,7 @@ $(document).ready(function(){
 
 <a href="http://www.smartaddon.com/?share" title="Share Button" onclick="return sa_tellafriend('http://playdoe.com')" style="margin-top:20px"><img alt="Share" src="http://s1.smartaddon.com/s12.png" border="0" /></a> <!-- SMARTADDON END -->
 
+<span style="color:#9197a3;">Your referral ID:</span> </b><?php echo get_referralID($ID); ?>
 
 <?php
 $fSql = "SELECT DISTINCT Members.ID as fMemberID, Members.FirstName as fFirstName, Members.LastName as fLastName,

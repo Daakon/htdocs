@@ -581,7 +581,7 @@ function checkBlock($ID, $memberID) {
     }
 }
 
-function getRedeemPoints($ID, $referralID) {
+function getReferrals($ID, $referralID) {
 
     // get referral money
     $sql3 = "SELECT COUNT( Referrals.ID ) AS ReferralCount
@@ -602,9 +602,10 @@ function getRedeemPoints($ID, $referralID) {
     $result3 = mysql_query($sql3) or die(mysql_error());
     $rows3 = mysql_fetch_assoc($result3);
     $referralCount = $rows3['ReferralCount'];
-    $referralMoney = $referralCount * 1;
 
-    $sql = "Select count(PostApprovals.ID) as LikeCount
+    //$referralMoney = $referralCount * 1;
+
+    /*$sql = "Select count(PostApprovals.ID) as LikeCount
     From PostApprovals, Members
     Where (PostApprovals.Owner_ID = $ID) and (PostApprovals.IsRedeemed = 0)
     And (PostApprovals.Member_ID = Members.ID)
@@ -638,10 +639,10 @@ function getRedeemPoints($ID, $referralID) {
     $followerMoney = $followerCount * 0.05;
 
     $addedMoney = $referralMoney + $likeMoney + $commentMoney + $followerMoney;
-    $totalMoney =  money_format('$%i', $addedMoney);
+    $totalMoney =  money_format('$%i', $addedMoney);*/
 
     // tally redemption points
-    return $totalMoney;
+    return $referralCount;
 }
 
 // check if user has 10 unredeemed post for the day

@@ -96,8 +96,18 @@ $firstName = get_user_firstName($ID);
 $message = "<p>Hey $firstName, You can now get rewarded for your social media efforts.
         <br/>
         Simply post stuff as you do on any other social network. But when you do, add the hashtag of the current date, i.e January 1, 2016 would be #1116.
-        Everyday the post with the most likes wins a $10 gift card. If at least 50 members post something then you get $20. Simply direct message Team Playde and let us know what gift card you would like.
-        We will send you an e-gift card to your Playdoe inbox. It's that easy! If you have any questions, just reply to this message anytime or checkout the FAQ below.
+        To collect, simply direct message Team Playde and let us know what gift card you would like.
+        <br/>
+        Everyday the post with the most likes wins a $10 gift card.
+        <br/>
+        You can also earn a $5 gift card for everyone you refer that shares at least 5 posts.
+        Just be sure to give your referral your referral id which is listed in your profile page.
+        They will use that to sign up so you get credit for the referral.
+        You will see your referral count on your home screen go up once a referral has made their 5th post.
+        Once you have an eligible referral, you will be able to click the referral icon and direct message you $5 gift card request.
+        <br/>
+
+        In all cases, we will send you an e-gift card to your Playdoe inbox. It's that easy! If you have any questions, just reply to this message anytime or checkout the FAQ below.
         </p>";
 
 $message = mysql_escape_string($message);

@@ -184,9 +184,9 @@ if (!empty($_SESSION['ID'])) {
                         <input class="form-control input-lg" type="email" name="email" id="email"
                                placeholder="Email"/>
 
-                        <!--<label class="sr-only" for="referredBy">Referred By</label>
+                        <label class="sr-only" for="referredBy">Referred By</label>
                         <input class="form-control input-lg" type="text" name="referredBy" id="referredBy"
-                               placeholder="Referral ID" /> <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">What's Referral ID ?</button>-->
+                               placeholder="Referral ID" /> <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">What's Referral ID ?</button>
                     </div>
                     <div class="col-md-6">
                         <div class="error-text"></div>
