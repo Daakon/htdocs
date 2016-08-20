@@ -758,7 +758,7 @@ $bgPhoto = $row1['ProfilePhoto'];
 
                 </div>
 
-
+<br/>
                 <form method="post" enctype="multipart/form-data" action="" onsubmit="showVideoUploading()">
 
                     <label style="float:left;clear:both" for="flPostVideo">
