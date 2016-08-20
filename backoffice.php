@@ -59,7 +59,7 @@ if (isset($_POST['redeem']) && $_POST['redeem'] == 'Redeem') {
         ?>
         <span style="color:#8899a6;font-weight:bold">Current Sign Ups</span> : <?php echo $rows['Total']; ?>
 
-        <br/><br/>
+        <hr class="hr-line" />
 
         <?php
         $username = $_GET['username'];
@@ -86,11 +86,9 @@ if (isset($_POST['redeem']) && $_POST['redeem'] == 'Redeem') {
             $referralMoney = $referralCount * 1;
             echo "Referral Count: $referralCount <br/>";
             echo "Referral Money: ". money_format('$%i', $referralMoney);
+
             echo "<hr class='hr-line' />";
 
-
-            $referralMoney =  money_format('$%i', $referralMoney);
-            echo "Referral Money: $referralMoney ";
             ?>
 
             <br/><br/>

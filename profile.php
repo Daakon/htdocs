@@ -366,13 +366,13 @@ if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
         }
 
         // check password
-        /*var password = document.getElementById('Password').value;
+        var password = document.getElementById('Password').value;
         if (password == '') {
             alert('Password needed');
             return false;
-        }*/
+        }
 
-        // check password
+        // check about
         /*var about = document.getElementById('About').value;
         if (about == '') {
             alert('Please provide something about yourself in your about section');
@@ -690,17 +690,18 @@ $bgPhoto = $row1['ProfilePhoto'];
 
                 <form method="post" enctype="multipart/form-data" action="" onsubmit="showPhotoUploading()">
 
-                    <div style="position:relative;float:left;">
-                        <a class='btn btn-default' href='javascript:;'>
-                            <img src="/images/camera.png" height="25" width="25" />
-                            <input type="file" accept="image/*" style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;' name="flPostPhoto" id="flPostPhoto" >
-                        </a>
-                        &nbsp;
-                        <div style="clear:both" id="image-holder"> </div>
-                    </div>
+
+
+                    <label style="float:left;clear:both" for="flPostPhoto">
+                        <img src="/images/camera.png" style="height:25px;width:25px;float:left;margin-right:10px;" />
+                    </label>
+
+                            <input type="file" accept="image/*" style='float:left;width:5px;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;' name="flPostPhoto" id="flPostPhoto" >
 
                     <input style="float:left;" type="submit" class="post-button" name="photo" id="photo" value="Upload Photo" />
 
+                    <br/>
+                    <div style="clear:both" id="image-holder"> </div>
                     <br/>
 
                     <div id="PhotoProgress" style="display:none;float:left">
@@ -760,14 +761,26 @@ $bgPhoto = $row1['ProfilePhoto'];
 
                 <form method="post" enctype="multipart/form-data" action="" onsubmit="showVideoUploading()">
 
-                    <div style="position:relative;float:left;">
-                        <a class='btn btn-default' href='javascript:;'>
-                            <img src="/images/camera.png" height="25" width="25" />
-                            <input type="file" accept="video/*" style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;' name="flPostVideo" id="flPostVideo" onchange='$("#upload-video-info").html($(this).val());'>
-                        </a>
-                        &nbsp;
-                        <div style="clear:both" id="video-holder"> </div>
+                    <label style="float:left;clear:both" for="flPostVideo">
+                        <img src="/images/camera.png" style="height:25px;width:25px;float:left;margin-right:10px;" />
+                    </label>
+
+                    <input type="file" accept="video/*" style='float:left;width:5px;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;' name="flPostVideo" id="flPostVideo" onchange='$("#upload-video-info").html($(this).val());'>
+
+                    <input style="float:left;" type="submit" class="post-button" name="video" id="video" value="Upload Video"  />
+
+                    <br/>
+                    <div style="clear:both" id="image-holder"> </div>
+                    <br/>
+
+                    <div id="PhotoProgress" style="display:none;">
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped progress-bar-danger active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" class="progress-bar">
+                                <span class="sr-only">Loading</span>
+                            </div>
+                        </div>
                     </div>
+                </form>
 
                     <script>
                         $(function () {
@@ -803,18 +816,7 @@ $bgPhoto = $row1['ProfilePhoto'];
                     </script>
 
 
-                    <input style="float:left;" type="submit" class="post-button" name="video" id="video" value="Upload Video"  />
 
-                    <br/>
-
-                    <div id="PhotoProgress" style="display:none;">
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-striped progress-bar-danger active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" class="progress-bar">
-                                <span class="sr-only">Loading</span>
-                            </div>
-                        </div>
-                    </div>
-                </form>
 
 
 
