@@ -730,12 +730,14 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
 
 
             <ul class="list-inline">
-
                 <?php require 'profile_menu.php'; ?>
-
-
             </ul>
 
+            <?php
+                if (isAdmin($ID)) {
+                echo "<a href='/backoffice?username=$urlUsername'>Calculate Redemptions</a>";
+               }
+               ?>
 
             <?php
             if (strstr($urlUsername, "?")) {

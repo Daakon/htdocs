@@ -94,6 +94,14 @@ get_head_files();
     a {
         color:black;
     }
+
+    body {
+        background: url(images/giftcards.png) no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
 </style>
 
 <?php require 'checkLogin.php'; ?>
@@ -107,25 +115,22 @@ get_head_files();
 
         <div class="col-lg-12 col-md-12 " >
 
-<!--Desktop view -->
-                <div class="hidden-xs" style="margin-left:20%">
-                    <a href="/learn_more" style="display:inline-block;font-weight: bold;padding-left:10px;padding-right:10px;">
-                        <img src="/images/about.png" height="80" width="80" />
-                    </a>
+            <!--Desktop view -->
+            <div class="hidden-xs" style="margin-left:20%">
+                <a href="/learn_more" style="display:inline-block;font-weight: bold;padding-left:10px;padding-right:10px;">
+                    <img src="/images/about.png" height="80" width="80" />
+                </a>
 
 
-                    <a class="hidden-xs" href="/learn_more#signup" style="display:inline-block;padding-right:10px;">
-                        <img src="/images/signup.png" height="80" width="80" />
-                    </a>
+                <a class="hidden-xs" href="/learn_more#signup" style="display:inline-block;padding-right:10px;">
+                    <img src="/images/signup.png" height="80" width="80" />
+                </a>
 
 
-                    <a href="http://twitter.com/officialplaydoe" style="display:inline-block;">
-                        <img src="/images/support.png" height="90" width="90" />
-                    </a>
+                <a href="http://twitter.com/officialplaydoe" style="display:inline-block;">
+                    <img src="/images/support.png" height="90" width="90" />
+                </a>
 
-                <div style="clear:both;display:inline-block;">
-                    <img src="/images/phone-gift.png" style="width: 500px" />
-                </div>
             </div>
 
             <!--Mobile View -->
@@ -142,10 +147,6 @@ get_head_files();
                 <a href="http://twitter.com/officialplaydoe" style="float:left;margin-right:2%">
                     <img src="/images/support.png" height="75" width="75" />
                 </a>
-
-                <div style="margin-left:-10%">
-                    <img src="/images/phone-gift.png" style="width: 500px" />
-                </div>
 
 
             </div>

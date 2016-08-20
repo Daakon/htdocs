@@ -20,7 +20,7 @@ $_SESSION['Username'] = $urlUsername;
 
 
 if ($urlUsername == '') {
-    $urlUsername = 'playdoe';
+    $urlUsername = 'teamplaydoe';
 }
 
 ?>
@@ -247,6 +247,13 @@ if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
 
     if ($usernameStatus == 0) {
         if ($_SESSION['Username'] != trim($username)) {
+
+            if (preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $username))
+            {
+                // one or more of the 'special characters' found in $username
+                echo "<script>alert('Usernames cannot contain special characters');location='/$urlUsername'</script>";
+                exit;
+            }
             // remove white spaces
             $username = preg_replace('/\s+/', '', $username);
             $usernameUpdate = " Username = '$username', IsUsernameUpdated = 1, ";
@@ -258,6 +265,8 @@ if (isset($_POST['updateProfile']) && $_POST['updateProfile'] == "Update") {
     else {
         $usernameUpdate = '';
     }
+
+
     // update Member table first
     $sql = "Update Members
           Set

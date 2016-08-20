@@ -283,6 +283,7 @@ if (isset($_POST['btnRepost']) && ($_POST['btnRepost'] == "Repost")) {
     $postDate = $_POST['postDate'];
     $memberID = $_POST['memberID'];
     $ownerID = $_POST['ownerID'];
+    $hashtag = $_POST['hashtag'];
     $reposterID = $_POST['reposterID'];
     $scrollx = $_REQUEST['scrollx'];
     $scrolly = $_REQUEST['scrolly'];
@@ -654,6 +655,7 @@ if (mysql_num_rows($result) > 0) {
                         <input type="hidden" id="postID" name="postID" value="<?php echo $postID ?>" />
                         <input type="hidden" id="postDate" name="postDate" value="<?php echo $postDate ?>" />
                         <input type="hidden" id="reposterID" name="reposterID" value="<?php echo $ID ?>" />
+                        <input type="hidden" name="hashtag" id="hashtag" class="hashtag" value="<?php echo $hashtag ?>"/>
                         <input type="hidden" name="scrollx" id="scrollx" value="0"/>
                         <input type="hidden" name="scrolly" id="scrolly" value="0"/>
                     </form>

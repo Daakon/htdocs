@@ -1,27 +1,27 @@
 <?php if ($_SESSION['ID'] == $ID) {
 
-$username = get_username_from_url();
-$profileID = get_id_from_username($username);
+    $username = get_username_from_url();
+    $profileID = get_id_from_username($username);
 
 
-if ($profileID == $ID) {
+    if ($profileID == $ID) {
 
-?>
+        ?>
 
-<style>
-    .dropdown {
-        background: transparent;
-        padding-left:0px;
-    }
-</style>
+        <style>
+            .dropdown {
+                background: transparent;
+                padding-left:0px;
+            }
+        </style>
 
 
-<div class="dropdown">
-    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-        <img src="<?php echo get_users_photo_by_id($ID) ?>" height="30" width="30"/> Profile Menu
-        <span class="caret"></span>
-    </button>
-    <ul class="dropdown-menu">
+        <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+            <img src="<?php echo get_users_photo_by_id($ID) ?>" height="30" width="30"/> Profile Menu
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
         <li><a href="/home"><img src="/images/home.png" height="20" width="20" /> Home</a></li>
         <li><a href="/<?php echo get_username($ID)?>"><span style="color:black;font-weight: 900;"><img src="<?php echo get_users_photo_by_id($ID) ?>" height="20" width="20"/> My Profile</span></a></li>
         <li><a href="/post/<?php echo $username ?>"><img src="/images/post.png" height="20" width="20" /> Manage Posts</a></li>
@@ -45,14 +45,14 @@ if ($profileID == $ID) {
 
         echo "</ul>";
         echo "</div>";
-        }
-        else  {
-            require 'profile_menu_public.php';
+    }
+    else  {
+        require 'profile_menu_public.php';
 
-        }
-        ?>
+    }
+    ?>
 
 
-        <?php
-        }
-        ?>
+    <?php
+}
+?>

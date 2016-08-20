@@ -1066,7 +1066,13 @@ var code = (e.keyCode ? e.keyCode : e.which);
                                 <input type='hidden' id='id' name='id' value='$ID' />
                                 <input type='submit' id='validate' name='validate' value='Send Email Verification' />
                             </form>
-                        ";
+
+<hr/>
+<h4 align='center'>
+One or more of these gift cards is waiting on you right now!
+</h4>
+<img src='/images/giftcards.png' height=100% width=100% />
+";
                 }
                 ?>
 

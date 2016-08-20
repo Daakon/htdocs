@@ -76,10 +76,10 @@ function build_and_send_email($senderId, $toId, $notification, $postID, $pass, $
         $name = get_users_name_by_id($toId);
         $nameArray = explode(' ', $name);
         $name = $nameArray[0];
-        $subject = "Congratulations $name, you now have a new profile on Playdoe.
-                    Start sharing great content and watch how quickly you start making money!<br/>";
-        $subject .= "Your temporary password is <b>$pass</b><br/>. Be sure to change it right away.";
-        $subject .= '<a href = "'.$link.$toId.'">Validate your email</a>';
+        $subject = "<p>Congratulations $name, you now have a new profile on Playdoe.
+                    One or more of these gift cards are waiting on you right now!<br/><img src='".$imgLink."giftcards.png' height='100%' width='100%' />";
+        $subject .= "Your temporary password is <b>$pass</b><br/> Be sure to change it right away.<br/>";
+        $subject .= '<a href = "'.$link.$toId.'">Validate your email</a></p>';
     }
 
     if ($notification == 4) {
