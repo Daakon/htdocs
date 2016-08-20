@@ -117,6 +117,7 @@ if (!empty($_SESSION['ID'])) {
 
                     <tr>
                         <td style="padding-left:0px;">
+                            <img src="/images/giftcards-horizontal.jpg" height="60%" width="100%" style="margin-bottom:10px;" />
                             <h5>
                                 Playdoe is a gamification app that gives people free gift cards everyday.
                             </h5>
@@ -138,7 +139,7 @@ if (!empty($_SESSION['ID'])) {
                 <table style="margin-left:10px;margin-top:20px;">
                     <tr>
                         <td>
-                            <img src="/images/Like-Redeem-Large.png" height="100px" width="100px" style="margin-bottom:10px;" />
+                            <img src="/images/giftcards-horizontal.jpg" height="100%" width="100%" style="margin-bottom:10px;" />
                         </td>
                         <td style="padding-left:10px;">
                             <h4>
