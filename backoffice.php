@@ -83,7 +83,7 @@ if (isset($_POST['redeem']) && $_POST['redeem'] == 'Redeem') {
             $result3 = mysql_query($sql3) or die(mysql_error());
             $rows3 = mysql_fetch_assoc($result3);
             $referralCount = $rows3['ReferralCount'];
-            $referralMoney = $referralCount * 1;
+            $referralMoney = $referralCount * 5;
             echo "Referral Count: $referralCount <br/>";
             echo "Referral Money: ". money_format('$%i', $referralMoney);
 

@@ -56,7 +56,7 @@ if (mysql_num_rows($rollCallResult) == 0) {
 
         <h4>Suggested profiles to follow</h4>
         <?php
-
+// DISPLAY ADS HERE
         $playdoeID = 22;
         $sqlPlaydoeFollow = "SELECT * FROM Follows WHERE Follower_ID = $ID And Followed_ID = $playdoeID ";
         $resultPlaydoeFollow = mysql_query($sqlPlaydoeFollow) or die (logError(mysql_error(), $url, "Getting Follows"));

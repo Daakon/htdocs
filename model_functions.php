@@ -603,43 +603,6 @@ function getReferrals($ID, $referralID) {
     $rows3 = mysql_fetch_assoc($result3);
     $referralCount = $rows3['ReferralCount'];
 
-    //$referralMoney = $referralCount * 1;
-
-    /*$sql = "Select count(PostApprovals.ID) as LikeCount
-    From PostApprovals, Members
-    Where (PostApprovals.Owner_ID = $ID) and (PostApprovals.IsRedeemed = 0)
-    And (PostApprovals.Member_ID = Members.ID)
-    And (PostApprovals.Member_ID != $ID)
-    And (Members.IsEmailValidated = 1) ";
-    $result = mysql_query($sql) or die(mysql_error());
-    $rows = mysql_fetch_assoc($result);
-    $likeCount = $rows['LikeCount'];
-    $likeMoney = $likeCount * 0.01;
-
-    $sql2 = "Select Count(PostComments.ID) As CommentCount
-    FROM PostComments, Members
-    WHERE (PostComments.Owner_ID = $ID And PostComments.IsRedeemed = 0)
-    And (PostComments.Member_ID = Members.ID)
-    And (PostComments.Member_ID != $ID)
-    And (Members.IsEmailValidated = 1) ";
-    $result = mysql_query($sql) or die(mysql_error());
-    $rows = mysql_fetch_assoc($result);
-    $commentCount = $rows['CommentCount'];
-    $commentMoney = $commentCount * 0.01;
-
-    $sql1 = "SELECT COUNT(Follows.ID) AS FollowerCount
-    FROM Follows, Members
-    WHERE (Follows.Followed_ID = $ID)
-    AND (IsRedeemed =0)
-    And (Follows.Follower_ID = Members.ID)
-    And (Members.IsEmailValidated = 1) ";
-    $result1 = mysql_query($sql1) or die(mysql_error());
-    $rows1 = mysql_fetch_assoc($result1);
-    $followerCount = $rows1['FollowerCount'];
-    $followerMoney = $followerCount * 0.05;
-
-    $addedMoney = $referralMoney + $likeMoney + $commentMoney + $followerMoney;
-    $totalMoney =  money_format('$%i', $addedMoney);*/
 
     // tally redemption points
     return $referralCount;

@@ -1,7 +1,11 @@
-<div style="position:relative;float:left;">
- <a class='btn btn-default' href='javascript:;'>
-                                        <img src="/images/camera.png" height="25" width="25" />
-                                        <input type="file" style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;' name="flPostMedia[]" id="flPostMedia" multiple onchange='$("#upload-file-info").html($(this).val());' />
-                                    </a>
-                                    &nbsp;
-                                    </div>
+<div class="row row-padding">
+    <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6 roll-call-feed" align="left">
+        <?php if ($ID == get_id_from_username($username)) { ?>
+            <div style="padding-left:15px;">You do not have anything posted.</div>
+        <?php } else {
+            $firstName = get_user_firstName(get_id_from_username($username));
+            ?>
+            <div style="padding-left:15px;"><?php echo $firstName ?> does not have anything posted.</div>
+        <?php } ?>
+    </div>
+</div>

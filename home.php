@@ -1251,14 +1251,6 @@ $fMemberID = $fRows['fMemberID'];
 
 
 
-
-
-
-
-
-
-
-
         <?php
         // pre-load Connection Feed
         // get genre selection
@@ -1313,20 +1305,17 @@ $fMemberID = $fRows['fMemberID'];
 
 
 
-    <!--Middle Column -->
+    <!--Right Column -->
 
 </div>
 
 
 <br/><br/>
 
-</div>
-
-<?php if ($noPosts == false) { ?>
 
     <div id="gettingMore" align="center" style="display:block;margin-top:-20px;" ><img src="/images/spinner.gif" height="50" width="50" /></div>
 
-<?php } ?>
+
 
 </body>
 
