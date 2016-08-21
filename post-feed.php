@@ -44,6 +44,24 @@ $sql = "SELECT DISTINCT
     Group By PostID
     Order By PostID DESC Limit $limit ";
 $result = mysql_query($sql) or die(logError(mysql_error(), $url, "Getting all member posts"));
+
+if (mysql_num_rows($result) == 0) { ?>
+    <div class="row row-padding">
+    <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6 roll-call-feed" align="left">
+        <?php if ($ID == get_id_from_username($username)) { ?>
+            <div style="padding-left:15px;">You do not have anything posted.</div>
+        <?php } else {
+            $firstName = get_user_firstName(get_id_from_username($username));
+            ?>
+            <div style="padding-left:15px;"><?php echo $firstName ?> does not have anything posted.</div>
+        <?php } ?>
+    </div>
+</div>
+
+<?php } ?>
+
+<?php
+
 if (mysql_num_rows($result) > 0) {
 $total = mysql_num_rows($result);
 $counter = 0;
