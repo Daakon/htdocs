@@ -432,15 +432,38 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
         </div>
 
         <?php
+
+        ?>
+
+        <?php
         $limit = "10";
         $lastPostCondition = '';
 
         $username = get_username_from_url();
         $username = explode("?", $username);
         $username = $username[0];
+        $profileID = get_id_from_username($username);
+
+        // Display AD if not posts by profile owner
+        $sql = "SELECT ID FROM Posts WHERE Member_ID = $profileID And IsDeleted = 0 Limit 1";
+        $result = mysql_query($sql) or die(mysql_error());
+        $count = mysql_num_rows($result);
+
+        if (mysql_num_rows($result) == 0) { ?>
+        <div class="col-lg-offset-3 col-lg-6 col-md-offset-3 col-md-6 col-sm-12 col-xs-12 roll-call-feed" >
+            <img src="/ads/payday-loan.jpg" height="50%" width="100%" />
+            <p>
+                Short term payday loans...$500... fulltime job, checking account required.
+                Must be on your job at least a year. 888-415-1593 Innovation Global LLC
+            </p>
+            </div>
+        <?php } else {
+
         require 'post-feed.php'; ?>
         <div id="gettingMore" align="center" style="float:left;margin-top:-20px;" ><img src="/images/spinner.gif" height="50" width="50" /></div>
-</div>
+<?php } ?>
+
+    </div>
 
 
 <div id="loadMorePosts">
@@ -453,10 +476,11 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 <br/><br/>
 
 
-
 </body>
 
 </html>
+
+
 
 <?php
 $scrollx = 0;
