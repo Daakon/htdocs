@@ -1025,13 +1025,13 @@ var code = (e.keyCode ? e.keyCode : e.which);
                             ?>
                             <form id="formPost" style="float:left;width:100%" method="post" enctype="multipart/form-data" action="" onsubmit="return showUploading()" >
 
-
+                            <hr/>
 
                                 <textarea name="post" id="post" class="form-control"
                                 onkeydown='showMentions(event, this)'
                                 style="float:left;border:none;font-size:17px"
                                 onkeyup="this.style.height='24px'; this.style.height = this.scrollHeight + 12 + 'px';"
-                                  placeholder="Share something about your day" spellcheck="true"></textarea>
+                                  placeholder="What's on your mind?" spellcheck="true"></textarea>
 
  <label style="float:left;clear:both" for="flPostMedia">
                         <img src="/images/camera.png" style="height:25px;width:25px;float:left;margin-right:10px;" />

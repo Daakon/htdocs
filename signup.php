@@ -98,7 +98,7 @@ $message = "
 <br/>
 <p>Hey $firstName, You can now get rewarded for your social media efforts.
         <br/>
-        Simply share content about your life and interests. But when you do, add the hashtag of the current date, i.e January 1, 2016 would be #1116.
+        Simply share whatever is on your mind. But when you do, add the hashtag of the current date, i.e January 1, 2016 would be #1116.
         To collect, simply direct message Team Playde and let us know what gift card you would like.
         <br/>
         Everyday the post with the most likes wins a <b>$10 gift card</b>.
