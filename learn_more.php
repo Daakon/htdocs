@@ -117,9 +117,9 @@ if (!empty($_SESSION['ID'])) {
 
                     <tr>
                         <td style="padding-left:0px;">
-                            <img src="/images/giftcards-horizontal.jpg" height="60%" width="100%" style="margin-bottom:10px;" />
+                            <img src="/images/giveaway.png" height="30%" width="100%" style="margin-bottom:10px;" />
                             <h5>
-                                Playdoe is a gamification app that gives people free gift cards everyday.
+                                Playdoe is a gamification app that gives people free stuff everyday.
                             </h5>
                             <span style="color:gray;font-size:12px;font-weight:600">
                                 Checkout our <a href="http://officialplaydoe.tumblr.com/" target="_blank">blog</a> to learn more.
@@ -139,11 +139,11 @@ if (!empty($_SESSION['ID'])) {
                 <table style="margin-left:10px;margin-top:20px;">
                     <tr>
                         <td>
-                            <img src="/images/giftcards-horizontal.jpg" height="100%" width="100%" style="margin-bottom:10px;" />
+                            <img src="/images/giveaway.png" height="30%" width="100%" style="margin-bottom:10px;" />
                         </td>
                         <td style="padding-left:10px;">
                             <h4>
-                                Playdoe is a gamification app that gives people free gift cards everyday.
+                                Playdoe is a gamification app that gives people free stuff everyday.
                             </h4>
                             <span style="color:gray;font-size:14px;font-weight:600">
                                 Checkout our <a href="http://officialplaydoe.tumblr.com/" target="_blank">blog</a> to learn more.

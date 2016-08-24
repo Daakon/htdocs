@@ -1023,9 +1023,10 @@ var code = (e.keyCode ? e.keyCode : e.which);
                     else {*/
                         //if (hasTenPost($ID) == false) {
                             ?>
+<hr />
                             <form id="formPost" style="float:left;width:100%" method="post" enctype="multipart/form-data" action="" onsubmit="return showUploading()" >
 
-                            <hr/>
+
 
                                 <textarea name="post" id="post" class="form-control"
                                 onkeydown='showMentions(event, this)'
@@ -1069,9 +1070,9 @@ var code = (e.keyCode ? e.keyCode : e.which);
 
 <hr/>
 <h4 align='center'>
-One or more of these gift cards is waiting on you right now!
+There are plenty of gifts and prizes waiting on you right now!
 </h4>
-<img src='/images/giftcards.png' height=100% width=100% />
+<img src='/images/giveaway.png' height=50% width=100% />
 ";
                 }
                 ?>
@@ -1251,6 +1252,14 @@ $fMemberID = $fRows['fMemberID'];
 
 
 
+
+
+
+
+
+
+
+
         <?php
         // pre-load Connection Feed
         // get genre selection
@@ -1311,6 +1320,8 @@ $fMemberID = $fRows['fMemberID'];
 
 
 <br/><br/>
+
+</div>
 
 
     <div id="gettingMore" align="center" style="display:block;margin-top:-20px;" ><img src="/images/spinner.gif" height="50" width="50" /></div>

@@ -96,20 +96,27 @@ $firstName = get_user_firstName($ID);
 $message = "
 <img src='/images/giftcards-horizontal.jpg' height='100%' width='100%' />
 <br/>
-<p>Hey $firstName, You can now get rewarded for your social media efforts.
-        <br/>
+<p>Hey $firstName, Playdoe is a gamification app that offers fun way to win free stuff.
+        <h4>Daily Hashtag</h4>
         Simply share whatever is on your mind. But when you do, add the hashtag of the current date, i.e January 1, 2016 would be #1116.
         To collect, simply direct message Team Playde and let us know what gift card you would like.
-        <br/>
-        Everyday the post with the most likes wins a <b>$10 gift card</b>.
-        <br/>
+        Everyday the post with the most likes wins a <b>$10 gift card</b> sent to their Playdoe inbox.
+
+        <h4>Member Competitions</h4>
+        This is where other members on Playdoe create competitions. These are typically for a business, organization or event.
+        They will all have their own set of rules and rewards for their various campaigns. We will repost campaigns to make sure
+        you don't miss any of them. Stay posted to your feed.
+
+        <h4>Referrals</h4>
         You can also earn a <b>$5 gift</b> card for everyone you refer that shares at least 5 posts.
         Just be sure to give our referral id which is listed in your profile page.
         Your friends will use your referral id to sign up so you get credit for the referral.
         You will see your referral count on your home screen go up once a referral has made their <b>5th post</b>b>.
         Once you have an eligible referral, you will be able to click the referral icon and direct message you $5 gift card request.
-<br/>
-        In all cases, we will send you an e-gift card to your Playdoe inbox. It's that easy! If you have any questions, just reply to this message anytime or checkout the FAQ below.
+        We will send you an e-gift card to your Playdoe inbox. It's that easy!
+
+        <br/>
+        If you have any questions, just reply to this message anytime or checkout the FAQ below.
         </p>";
 
 $message = mysql_escape_string($message);

@@ -96,7 +96,7 @@ get_head_files();
     }
 
     body {
-        background: url(images/giftcards.png) no-repeat center center fixed;
+        background: url(images/gamification.png) no-repeat center center fixed;
         -webkit-background-size: cover;
         -moz-background-size: cover;
         -o-background-size: cover;
