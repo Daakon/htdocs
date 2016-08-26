@@ -102,8 +102,8 @@ $message = "
         To collect, simply direct message Team Playde and let us know what gift card you would like.
         Everyday the post with the most likes wins a <b>$10 gift card</b> sent to their Playdoe inbox.
 
-        <h4>Member Competitions</h4>
-        This is where other members on Playdoe create competitions. These are typically for a business, organization or event.
+        <h4>Member Campaigns</h4>
+        This is where other members on Playdoe create competitions. These are typically for a businesses, organizations or events.
         They will all have their own set of rules and rewards for their various campaigns. We will repost campaigns to make sure
         you don't miss any of them. Stay posted to your feed.
 

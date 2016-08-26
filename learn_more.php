@@ -113,15 +113,17 @@ if (!empty($_SESSION['ID'])) {
             <!--Mobile -->
             <div class="visible-xs">
 
-                <table style="margin-left:10px;margin-top:20px;margin-bottom:10px;margin-right:10px;">
+                <table style="margin-top:20px;margin-bottom:10px;margin-right:10px;">
 
                     <tr>
-                        <td style="padding-left:0px;">
-                            <img src="/images/giveaway.png" height="30%" width="100%" style="margin-bottom:10px;" />
-                            <h5>
-                                Playdoe is a gamification app that gives people free stuff everyday.
-                            </h5>
-                            <span style="color:gray;font-size:12px;font-weight:600">
+                        <td style="width:100px;">
+                            <img src="/images/Playdoe-Logo.png" height="10%" width="100%" style="margin-bottom:10px;" />
+                        </td>
+                        <td>
+                            <h4>
+                                Playdoe is a gamification app that offers fun ways to win money and prizes.
+                            </h4>
+                            <span style="color:gray;font-size:14px;font-weight:600">
                                 Checkout our <a href="http://officialplaydoe.tumblr.com/" target="_blank">blog</a> to learn more.
                             </span>
                             <br/><br/>
@@ -138,12 +140,12 @@ if (!empty($_SESSION['ID'])) {
 
                 <table style="margin-left:10px;margin-top:20px;">
                     <tr>
-                        <td>
-                            <img src="/images/giveaway.png" height="30%" width="100%" style="margin-bottom:10px;" />
+                        <td style="width:200px;">
+                            <img src="/images/Playdoe-Logo.png" height="10%" width="100%" style="margin-bottom:10px;" />
                         </td>
                         <td style="padding-left:10px;">
                             <h4>
-                                Playdoe is a gamification app that gives people free stuff everyday.
+                                Playdoe is a gamification app that offers fun ways to win money and prizes.
                             </h4>
                             <span style="color:gray;font-size:14px;font-weight:600">
                                 Checkout our <a href="http://officialplaydoe.tumblr.com/" target="_blank">blog</a> to learn more.

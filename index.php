@@ -96,11 +96,11 @@ get_head_files();
     }
 
     body {
-        background: url(images/gamification.png) no-repeat center center fixed;
-        -webkit-background-size: cover;
-        -moz-background-size: cover;
-        -o-background-size: cover;
-        background-size: cover;
+        background: url(images/woman-on-phone.jpeg) no-repeat fixed;
+        -webkit-background-size: 110% 100%;
+        -moz-background-size: 110% 100%;
+        -o-background-size: 110% 100%;
+        background-size: 110% 100%;
     }
 </style>
 
