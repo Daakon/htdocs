@@ -267,7 +267,7 @@ if (isset($_POST['btnRepost']) && ($_POST['btnRepost'] == "Repost")) {
         }
     }
 
-    echo "<script>alert('Reposted!'); location='/post/$username'</script>";
+    echo "<script>alert('Reposted!'); location='/post/$username&scrollx=$scrollx&scrolly=$scrolly'</script>";
 }
 
 
