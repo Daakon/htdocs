@@ -121,7 +121,7 @@ if (!empty($_SESSION['ID'])) {
                         </td>
                         <td>
                             <h4>
-                                Playdoe is a gamification app that offers fun ways to win money and prizes.
+                                Playdoe is a gamification app that offers fun ways to earn money and win free stuff.
                             </h4>
                             <span style="color:gray;font-size:14px;font-weight:600">
                                 Checkout our <a href="http://officialplaydoe.tumblr.com/" target="_blank">blog</a> to learn more.
@@ -145,7 +145,7 @@ if (!empty($_SESSION['ID'])) {
                         </td>
                         <td style="padding-left:10px;">
                             <h4>
-                                Playdoe is a gamification app that offers fun ways to win money and prizes.
+                                Playdoe is a gamification app that offers fun ways to earn money and win free stuff.
                             </h4>
                             <span style="color:gray;font-size:14px;font-weight:600">
                                 Checkout our <a href="http://officialplaydoe.tumblr.com/" target="_blank">blog</a> to learn more.
