@@ -255,6 +255,9 @@ if (isset($_POST['btnRepost']) && ($_POST['btnRepost'] == "Repost")) {
     $reposterID = $_POST['reposterID'];
     $scrollx = $_REQUEST['scrollx'];
     $scrolly = $_REQUEST['scrolly'];
+    $_SESSION['ScrollX'] = $scrollx;
+    $_SESSION['ScrollY'] = $scrolly;
+
     $username = get_username($memberID);
 
     $sql = "INSERT INTO Posts (Member_ID,     Post, Reposter_ID, OrigPost_ID, PostDate) Values
@@ -267,7 +270,7 @@ if (isset($_POST['btnRepost']) && ($_POST['btnRepost'] == "Repost")) {
         }
     }
 
-    echo "<script>alert('Reposted!'); location='/post/$username&scrollx=$scrollx&scrolly=$scrolly'</script>";
+    echo "<script>alert('Reposted!'); location='/post/$username'</script>";
 }
 
 
@@ -485,11 +488,11 @@ if (isset($_POST['DeleteComment']) && $_POST['DeleteComment'] == "Delete") {
 <?php
 $scrollx = 0;
 $scrolly = 0;
-if(!empty($_REQUEST['scrollx'])) {
-    $scrollx = $_REQUEST['scrollx'];
+if(!empty($_SESSION['ScrollX'])) {
+    $scrollx = $_SESSION['ScrollY'];
 }
-if(!empty($_REQUEST['scrolly'])) {
-    $scrolly = $_REQUEST['scrolly'];
+if(!empty($_SESSION['ScrollY'])) {
+    $scrolly = $_SESSION['ScrollY'];
 }
 ?>
 

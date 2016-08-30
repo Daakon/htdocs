@@ -969,8 +969,7 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
 
                        <?php
                 echo "<span style='color:#888888;margin-left:20px;'><span style='color:#888888'><img src='/images/referral-icon.png' height='30' width='30' /> </span>";
-                if (getReferrals($ID, get_username($ID)) > 0 && getReferrals($ID, get_username($ID)) <= 4) { echo "<span style='background:black;color:white;padding:5px;'>".getReferrals($ID, get_username($ID))."</span>"; }
-                elseif (getReferrals($ID, get_username($ID)) >= 5) { echo "<span style='background:red;padding:5px;'><a style='color:white;' href='/view_messages/redeem'>".getReferrals($ID, get_username($ID))."</a></span>"; };
+                if (getReferrals($ID, get_username($ID)) > 0) { echo "<span style='background:red;padding:5px;'><a style='color:white;' href='/view_messages/redeem'>".getReferrals($ID, get_username($ID))."</a></span>"; };
                 ?>
 
                     </div>
@@ -1143,8 +1142,9 @@ $(document).ready(function(){
 
 <h4>Most requested giftcards</h4>
 <div id="foobar">
-  <div><img src="/giftcards/walmart-giftcard.png" height="80%" width="100%" /></div>
+  <li><img src="/giftcards/walmart-giftcard.png" height="80%" width="100%" /></li>
   <div><img src="/giftcards/target-giftcard.png" height="80%" width="100%" /></div>
+  <li><img src="/giftcards/amazon-giftcard.jpg" height="60%" width="100%" /></li>
 </div>
        <!-- SMARTADDON BEGIN --> <script type="text/javascript"> (function() { var s=document.createElement('script');s.type='text/javascript';s.async = true; s.src='http://s1.smartaddon.com/share_addon.js'; var j =document.getElementsByTagName('script')[0];j.parentNode.insertBefore(s,j); })(); </script>
 
