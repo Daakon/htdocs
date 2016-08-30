@@ -112,7 +112,7 @@ function makeLinks($str)
         $title = mysql_real_escape_string($title);
 
         $str = cleanBrTags($str);
-        $str = trim($title) . ' '. trim($str);
+        //$str = trim($title) . ' '. trim($str);
 
         return $str;
     }
