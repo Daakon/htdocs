@@ -594,6 +594,7 @@ function getReferrals($ID, $referralID) {
                 ( SELECT Posts.Member_ID
                 FROM Posts
                 WHERE Posts.IsDeleted =0
+                and (Posts.Post Like '%hashtag?hashtag?%')
                 GROUP BY Posts.Member_ID
                 HAVING COUNT( Posts.Member_ID ) >=5
                 ORDER BY Posts.ID DESC )

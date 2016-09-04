@@ -73,11 +73,22 @@ function build_and_send_email($senderId, $toId, $notification, $postID, $pass, $
         else {
             $link = "http://www.playdoe.com/validate_email?x=";
         }
+
+        if (strstr($url, "local")) {
+            $imgLink = "/images/";
+        }
+        else if (strstr($url, "dev")) {
+            $imgLink = "http://dev.playdoe.com/images/";
+        }
+        else {
+            $imgLink = "http://www.playdoe.com/images/";
+        }
+
         $name = get_users_name_by_id($toId);
         $nameArray = explode(' ', $name);
         $name = $nameArray[0];
         $subject = "<p>Congratulations $name, you now have a new profile on Playdoe.
-                    One or more of these gift cards are waiting on you right now!<br/><img src='".$imgLink."giftcards.png' height='100%' width='100%' />";
+                    Playdoe offers fun ways to earn money and win free stuff!<br/><img src='".$imgLink."giftbox.png' height='100%' width='100%' />";
         $subject .= "Your temporary password is <b>$pass</b><br/> Be sure to change it right away.<br/>";
         $subject .= '<a href = "'.$link.$toId.'">Validate your email</a></p>';
     }

@@ -12,9 +12,9 @@ $username = trim($emailSplit[0]);
 $referredBy = strtolower($referredBy);
 
 if (check_referral_ID($referredBy) == false) {
-        echo "<script>alert('Referral ID not found. Please check back with the person who referred you.'); location ='/learn_more'</script>";
-        exit;
-    }
+    echo "<script>alert('Referral ID not found. Please check back with the person who referred you.'); location ='/learn_more'</script>";
+    exit;
+}
 
 // capitalize first letter only
 $fName = ucfirst(strtolower($username));
@@ -27,8 +27,8 @@ $result = mysql_query($sql) or die(logError(mysql_error(), $url, "Checking if em
 
 if (mysql_num_rows($result) > 0) {
 
-        echo '<script>alert("You already have an profile, please login");location = "index.php"</script>';
-        exit;
+    echo '<script>alert("You already have an profile, please login");location = "index.php"</script>';
+    exit;
 }
 
 $unique = 1;
@@ -74,9 +74,9 @@ $result = mysql_query($sql) or die(logError(mysql_error(), $url, "Inserting defa
 
 // insert Referral ID if exists
 if (strlen($referredBy) > 0) {
-        $sql = "INSERT INTO Referrals (Signup_ID, Referral_ID, ReferralDate) Values ($ID, '$referredBy', NOW()) ";
-        $result = mysql_query($sql) or die(mysql_error());
-    }
+    $sql = "INSERT INTO Referrals (Signup_ID, Referral_ID, ReferralDate) Values ($ID, '$referredBy', NOW()) ";
+    $result = mysql_query($sql) or die(mysql_error());
+}
 
 // assign default follows
 // Team Playdoe
@@ -94,27 +94,26 @@ build_and_send_email(0,$ID, 3, null,$pass);
 $firstName = get_user_firstName($ID);
 // DM new member with instructions
 $message = "
-<img src='/images/giftbbox.png' height='100%' width='100%' />
+<img src='/images/giftcards-horizontal.jpg' height='100%' width='100%' />
 <br/>
 <p>Hey $firstName, Playdoe is a gamification app that offers fun way to win free stuff.
         <h4>Daily Hashtag</h4>
         Simply share whatever is on your mind. But when you do, add the hashtag of the current date, i.e January 1, 2016 would be #1116.
         To collect, simply direct message Team Playde and let us know what gift card you would like.
         Everyday the post with the most likes wins a <b>$10 gift card</b> sent to their Playdoe inbox.
-        This is just one of the many ways you can get rewarded on Playdoe.
+
+        <h4>Reward Campaigns</h4>
+        This is where other members on Playdoe offer you money and free stuff to help promote their products and services.
+        They will all have their own set of rules and rewards for their various campaigns. We will repost campaigns to make sure
+        you don't miss any of them. Stay posted to your feed.
 
         <h4>Referrals</h4>
-        You can also earn a <b>$5 gift</b> card for every 5 friends you refer that shares at least 5 posts.
+        You can also earn a <b>$5 gift</b> card for every friend you refer that shares at least 5 posts in the daily hashtag competition.
         Just be sure to give our referral id which is listed in your profile page.
         Your friends will use your referral id to sign up so you get credit for the referral.
         You will see your referral count on your home screen go up once a referral has made their <b>5th post</b>b>.
         Once you have an eligible referral, you will be able to click the referral icon and direct message you $5 gift card request.
         We will send you an e-gift card to your Playdoe inbox. It's that easy!
-
-        <h4>Rewards Campaigns</h4>
-        Need to get the word out about something? Create your own promotional giveaway. It's totally free!
-        Just come up with an idea and post it. Build a following and grow your presence.
-        We can help with campaign ideas, just contact <a href='/view_messages/marketing'>Playdoe Marketing</a>
 
         <br/>
         If you have any questions, just reply to this message anytime or checkout the FAQ below.
@@ -132,15 +131,15 @@ $sql = "INSERT INTO Messages  (ThreadOwner_ID, Sender_ID,   Receiver_ID,  Subjec
 mysql_query($sql) or die(mysql_error());
 ?>
 
-<!--track sign ups through Google-->
-<noscript>
-    <div style="display:inline;">
-        <img height="1" width="1" style="border-style:none;" alt=""
-             src="//www.googleadservices.com/pagead/conversion/951358222/?label=jDs3CNyP4GAQjqbSxQM&guid=ON&script=0"/>
-    </div>
-</noscript>
+    <!--track sign ups through Google-->
+    <noscript>
+        <div style="display:inline;">
+            <img height="1" width="1" style="border-style:none;" alt=""
+                 src="//www.googleadservices.com/pagead/conversion/951358222/?label=jDs3CNyP4GAQjqbSxQM&guid=ON&script=0"/>
+        </div>
+    </noscript>
 
-    <?php
-        echo '<script>alert("Your profile was successfully set up");location = "home.php"</script>';
+<?php
+echo '<script>alert("Your profile was successfully set up");location = "home.php"</script>';
 
-    ?>
+?>

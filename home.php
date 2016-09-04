@@ -969,7 +969,7 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
 
                        <?php
                 echo "<span style='color:#888888;margin-left:20px;'><span style='color:#888888'><img src='/images/referral-icon.png' height='30' width='30' /> </span>";
-                if (getReferrals($ID, get_username($ID)) > 0) { echo "<span style='background:red;padding:5px;'><a style='color:white;' href='/view_messages/redeem'>".getReferrals($ID, get_username($ID))."</a></span>"; };
+                if (getReferrals($ID, get_referralID($ID)) > 0) { echo "<span style='background:red;padding:5px;'><a style='color:white;' href='/view_messages/redeem'>".getReferrals($ID, get_referralID($ID))."</a></span>"; };
                 ?>
 
                     </div>
