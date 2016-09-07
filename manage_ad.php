@@ -14,27 +14,16 @@ if (isset($_POST['Update'])) {
     $adID = $_POST['AdID'];
     $adTitle = $_POST['AdTitle'];
     $adText = $_POST['AdText'];
-    $adPosition = $_POST['AdPosition'];
-    $adCategory = $_POST['AdCategory'];
-    $ageStart = $_POST['AgeStart'];
-    $ageEnd = $_POST['AgeEnd'];
+
+    $ageStart = $_POST['AgeStartDate'];
+    $ageEnd = $_POST['AgeEndDate'];
     $adState = $_POST['AdState'];
-    $interests = $_POST['Interests'];
-    $gender = $_POST['Gender'];
     $mediaExist = $_POST['MediaExist'];
 
     if (!strstr($adText, "mailto:")) {
         $adText = preg_replace('/([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6})/', '<a href="mailto:$1">$1</a>', $adText);
     }
 
-    $rollCall;
-    $rightCol;
-
-    if ($adPosition == '1') {
-        $rollCall = 1;
-    } else {
-        $rightCol = 1;
-    }
 
     // if photo is provided
     if (strlen($_FILES['flPostMedia']['name']) > 0) {
@@ -275,7 +264,7 @@ if (isset($_POST['Update'])) {
         }
 
         // update ad
-        $sqlUpdatePost = "Update Posts SET
+        $sqlUpdatePost = "Update Ads SET
               Post = '$ad',  AdTitle = '$adTitle',
               AdText = '$adText',
               Interests = '$interests',
@@ -317,62 +306,39 @@ if (isset($_POST['Update'])) {
 
 <div class="container">
 
-    <div class="col-xs-12 col-md-10 col-lg-10 col-md-offset-2 roll-call">
+    <div class="col-xs-12 col-md-12 col-lg-12 roll-call" >
 
-        <a href="/home.php">Back to Roll Call</a>
+        <a href="/home">Home</a>
         <br/><br/>
 
-        <div class="row" style="padding:10px;">
+        <div class="row" style="padding-left:20px;">
 
-            Need Help? Contact us: <a href="mailto:ads@rapportbook.com">ads@rapportbook.com</a>
+            Need Help? Contact us: <a href="mailto:ads@playdoe.com">ads@playdoe.com</a>
 
             <br/><br/>
-            <a href="/ad-manager.php">Back to Ad Manager</a>
+            <a href="/ad-manager">Back to Ad Manager</a>
 
             <?php
             $adID = $_GET['adID'];
-            $sql = "SELECT * FROM Posts WHERE ID = $adID ";
-            $result = mysql_query($sql) or die(mysql_error());
+            if (!empty($adID) && isset($adID)) {
+                $sql = "SELECT * FROM Ads WHERE ID = $adID ";
+                $result = mysql_query($sql) or die(mysql_error());
 
-            $rows = mysql_fetch_assoc($result);
-            $adID = $rows['ID'];
-            $adTitle = $rows['AdTitle'];
-            $adText = $rows['AdText'];
-            $mediaSrc = $rows['MediaSource'];
-            $talentFeed = $rows['TalentFeed'];
-            $rightColumn = $rows['RightColumn'];
-            $adCategory = $rows['AdCategory'];
-            $ageStart = $rows['AgeStart'];
-            $ageEnd = $rows['AgeEnd'];
-            $adState = $rows['AdState'];
-            $interests = $rows['Interests'];
-            $gender = $rows['Gender'];
-            $transID = $rows['TransID'];
-            $impressions = $rows['Impressions'];
-            $adEnd = $rows['AdEnd'];
+                $rows = mysql_fetch_assoc($result);
+                $adID = $rows['ID'];
+                $adTitle = $rows['AdTitle'];
+                $adText = $rows['Ad'];
+                $adStart = $rows['AdStartDate'];
+                $adEnd = $rows['AdEndDate'];
+            }
 
-            if ($ageStart == 0) {
-                $ageStart = 18;
-            }
-            if ($ageEnd == 0) {
-                $ageEnd = 18;
-            }
             ?>
 
         </div>
 
 
-        <div class="row" style="padding:10px;">
-<?php
+        <div class="row" style="padding-left:20px;">
 
-
-            $mediaExist = 0;
-            if (strlen($mediaSrc) > 0) {
-                $mediaExist = 1;
-                echo $mediaSrc;
-            }
-
-             ?>
 
             <form method="post" enctype="multipart/form-data" action = "" onsubmit="return checkAd()">
 
@@ -397,73 +363,6 @@ if (isset($_POST['Update'])) {
                     <textarea type ="text" class="form-control" id="AdText" name="AdText"><?php echo $adText ?></textarea>
                 </div>
 
-                <?php
-                $check0 = $check1 = "";
-                if ($talentFeed == 1) { $check0 = "CHECKED"; } else { $check1 = "CHECKED"; }
-                ?>
-
-                <div class="form-group">
-                    <label for="AdPosition">Ad Position</label>
-                    <br/>
-                    Talent Feed&nbsp;<input type="radio" name="AdPosition" id="AdPosition" value="1"<?php echo $check0 ?>>
-                   <!-- <br/>
-                    Right Column&nbsp;<input type="radio" name="AdPosition" id="AdPosition" value="0"--><?php /*echo $check1 */?>>
-                </div>
-
-                <br/>
-
-                <h3>Demographics</h3>
-
-                <br/>
-
-
-
-                <br/>
-
-                <label for="AdTitle">State (Optional)</label>
-                <select id="AdState" name="AdState"  class="form-control">
-                    <option value="<?php echo $adState ?>"><?php echo $adState ?></option>
-                    <?php getState() ?>
-                </select>
-
-                <br/>
-
-                <div class="form-group">
-                    <label for="Interests">Interests (Optional - <span style="font-style:italic;color:red;">Add up to 5 Interests</span>)</label>
-                    <br/>
-                    <input type ="text" class="form-control" id="Interests" name="Interests" value = "<?php echo $interests ?>"  />
-                </div>
-
-                <?php if ($gender == 1) { $genderText = 'Male'; }
-                else if ( $gender == 2) { $genderText = 'Female'; }
-                else { $genderText = 'Both';}
-                ?>
-
-                <div class="form-group">
-                    <label for="Gender">Gender (Optional)</label>
-                    <br/>
-                    <select class='form-control input-lg' name="Gender" id="Gender">
-                        <option value="<?php echo $gender ?>"><?php echo $genderText ?></option>
-                        <option value="0">Both</option>
-                        <option value="1">Male</option>
-                        <option value="2">Female</option>
-                    </select>
-                </div>
-
-                <label for="AdTitle">Ad Category (Optional)</label>
-                <select class="form-control input-lg" id="AdCategory" name="AdCategory">
-                    <option value=""><?php echo $adCategory ?></option>
-                    <?php echo category() ?>
-                </select>
-
-                <br/>
-
-                <label for="TransID">PayPal Transaction ID</label>
-                <br/>
-                <input type ="text" class="form-control" id="TransID" name="TransID" value="<?php echo $transID ?>" readonly />
-                <small>Please complete the PayPal process first, then provide the Transaction ID to submit your ad:</small>
-
-                <br/><br/>
 
                 <input type = "submit" name = "Update" value = "Update" class="btn btn-default" />
             </form>

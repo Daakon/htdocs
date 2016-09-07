@@ -1063,6 +1063,7 @@ var code = (e.keyCode ? e.keyCode : e.which);
                // } // isEmailValidated
                 else {
                     echo "You must verify your email before you can post, like, comment or follow anyone. <br/>
+                          <i>If you don't see a verification email, check your spam folder. </i>
                             <form method='post' action='' >
                                 <input type='hidden' id='id' name='id' value='$ID' />
                                 <input type='submit' id='validate' name='validate' value='Send Email Verification' />
@@ -1072,6 +1073,7 @@ var code = (e.keyCode ? e.keyCode : e.which);
 <h4 align='center'>
 There are plenty of gifts and prizes waiting on you right now!
 </h4>
+
 <img src='/images/giveaway.png' height=50% width=100% />
 ";
                 }

@@ -15,44 +15,30 @@ get_header();
 
 ?>
 
+<style>
+
+    body {
+        background: url(images/revenue-image.jpg) no-repeat fixed;
+        -webkit-background-size: 110% 100%;
+        -moz-background-size: 110% 100%;
+        -o-background-size: 110% 100%;
+        background-size: 110% 100%;
+    }
+</style>
+
     <body>
 
+    <div class="container-fluid" >
 
-<div class="container">
+        <div class="row" >
 
 
-    <div class="col-xs-12 col-md-12 col-lg-12 roll-call" >
-        <div class="row" style="padding:10px;">
+            <div class="col-lg-12 col-md-12 " >
 
-                <a href="/home.php">Back to Roll Call</a>
 
-                    <img src="<?php echo $imagesPath ?>ad-pic.jpg" style="border-bottom:1px solid black;" />
+               <h4>Create a Display Ad</h4>
 
-            <br/>
-</div>
-        <div class="row" style="padding:10px;">
-                    <span class="how-it-works-header"><h2>Advertise</h2></span>
+                <a href="/manage_ad"><h4 style="color:red;">Start Here</h4></a>
 
-                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                        <img src="<?php echo $imagesPath ?>Placing-ads.gif" height="auto" width="100%" style="max-width:200px;max-height:200px" class="img-responsive" />
-                        <h3>1. Place An Ad</h3>
-                    </div>
-
-            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                <img src="<?php echo $imagesPath ?>demographics.jpg" height="auto" width="100%" style="max-width:200px;max-height:400px" class="img-responsive" />
-                <h3>2. Choose demographics</h3>
             </div>
-
-            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                <img src="<?php echo $imagesPath ?>publish.jpg" height="auto" width="100%" style="max-width:200px;max-height:400px" class="img-responsive" />
-                <h3>3. Publish your AD.</h3>
-            </div>
-    </div>
-
-        <div class="row">
-            <a href="/ad-manager.php">
-            <div align = "center" style="background-color:red;border-radius:10px;width:100px;color:white;padding:10px;margin-left:50px;">Manage Ads</div>
-            </a>
-</div>
-
 <?php get_footer_files() ?>

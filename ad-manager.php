@@ -19,37 +19,9 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == "Submit AD") {
     // submit AD
     $adTitle = $_POST['AdTitle'];
     $adText = $_POST['AdText'];
-    $adPosition = $_POST['AdPosition'];
-    $ageStart = $_POST['AgeStart'];
-    $ageEnd = $_POST['AgeEnd'];
-    $state = $_POST['AdState'];
-    $interests = mysql_real_escape_string($_POST['Interests']);
-    $gender = $_POST['Gender'];
-    $adCategory = $_POST['AdCategory'];
-    $transID = $_POST['TransID'];
+    $ageStart = $_POST['AgeStartDae'];
+    $ageEnd = $_POST['AgeEndDate'];
 
-    if ($ageStart == 0) {
-        $ageStart = 18;
-    }
-
-    if ($ageEnd == 0) {
-        $ageEnd = 90;
-    }
-
-    if (!strstr($adText, "mailto:")) {
-        $adText = preg_replace('/([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6})/', '<a href="mailto:$1">$1</a>', $adText);
-    }
-
-
-    $rollCall;
-    $rightCol;
-
-    if ($adPosition == '1') {
-        $rollCall = 1;
-    }
-    else {
-        $rightCol = 1;
-    }
 
 
     // if photo is provided
@@ -331,24 +303,25 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == "Submit AD") {
 
     <div class="col-xs-12 col-md-10 col-lg-10 col-md-offset-2 roll-call">
 
-                <a href="/home.php">Back to Roll Call</a>
+                <a href="/home">Home</a>
 <br/><br/>
 
             <div class="row" style="padding:10px;">
 
-                Need Help? Contact us: <a href="mailto:ads@rapportbook.com">ads@rapportbook.com</a>
+                Need Help? Contact us: <a href="mailto:ads@playdoe.com">ads@playdoe.com</a>
 
             <h3 style="color:red;">Manage Existing Ads</h3>
 
                 <?php
-                $sql = "SELECT ID, AdTitle, AdEnd FROM Posts WHERE Member_ID = $ID AND Category = 'Sponsored' ";
+                $sql = "SELECT ID, AdTitle, AdStartDate, AdEndDate FROM Ads WHERE Member_ID = $ID ";
                 $result = mysql_query($sql) or die(mysql_error());
 
                 if (mysql_numrows($result) > 0) {
                     while ($rows = mysql_fetch_assoc($result)) {
                         $adID = $rows['ID'];
                         $adLink = $rows['AdTitle'];
-                        $adEnd = $rows['AdEnd'];
+                        $adStart = $rows['AdStartDate'];
+                        $adEnd = $rows['AdEndDate'];
 
                         if ($adEnd < date('Y-m-d H:i:s')) {
                             echo "<a href='manage_ad.php?adID=$adID' style='display:block'>$adLink <span style='color:red;'>(Ad Ended on ". date("l M d Y", strtotime($adEnd)).")</span></a>";
@@ -373,28 +346,14 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == "Submit AD") {
             if (empty($_POST['AdText'])) {
                 $_POST['AdText'] = $_GET['AdText'];
             }
-            if (empty($_POST['AdPosition'])) {
-                $_POST['AdPosition'] = $_GET['AdPosition'];
+
+            if (empty($_POST['AgeStartDate'])) {
+                $_POST['AgeStartDate'] = $_GET['AgeStartDate'];
             }
-            if (empty($_POST['AgeStart'])) {
-                $_POST['AgeStart'] = $_GET['AgeStart'];
-            }
-            if (empty($_POST['AgeEnd'])) {
-                $_POST['AgeEnd'] = $_GET['AgeEnd'];
-            }
-            if (empty($_POST['AdCategory'])) {
-                $_POST['AdCategory'] = $_GET['AdCategory'];
-            }
-            if (empty($_POST['AdState'])) {
-                $_POST['AdState'] = $_GET['AdState'];
-            }
-            if (empty($_POST['Interests'])) {
-                $_POST['Interests'] = $_GET['Interests'];
+            if (empty($_POST['AgeEndDate'])) {
+                $_POST['AgeEndDate'] = $_GET['AgeEndDate'];
             }
 
-            if (empty($_POST['Gender'])) {
-                $_POST['Gender'] = $_GET['Gender'];
-            }
         ?>
 
 
@@ -439,70 +398,6 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == "Submit AD") {
 
                     <br/>
 
-                    <h3>Demographics</h3>
-
-                    <br/>
-
-                    <div class="form-group">
-                        <label for="AdTitle">Age Group (Optional)</label>
-                        <br/>
-                        <select id="AgeStart" name="AgeStart">
-                            <option value="<?php echo $_POST['AgeStart'] ?>"><?php echo $_POST['AgeStart'] ?></option>
-                            <?php age() ?>
-                        </select>
-                        To
-                        <select id="AgeEnd" name="AgeEnd">
-                            <option value="<?php echo $_POST['AgeEnd'] ?>"><?php echo $_POST['AgeEnd'] ?></option>
-                            <?php age() ?>
-                        </select>
-                    </div>
-
-                    <br/>
-
-                    <label for="AdTitle">State (Optional)</label>
-                        <select id="AdState" name="AdState"  class="form-control">
-                            <option value="<?php echo $_POST['AdState'] ?>"><?php echo $_POST['AdState'] ?></option>
-                            <?php getState() ?>
-                        </select>
-
-                    <br/>
-
-                    <div class="form-group">
-                        <label for="Interests">Interests (Optional - <span style="font-style:italic;color:red;">Add up to 5 Interests</span>)</label>
-                        <br/>
-                        <input type ="text" class="form-control" id="Interests" name="Interests" value = "<?php echo $_POST['Interests'] ?>"  />
-                    </div>
-
-                    <?php if ($gender == 1) { $genderText = 'Male'; }
-                                else if ( $gender == 2) { $genderText = 'Female'; }
-                                else { $genderText = 'Both'; }
-                    ?>
-
-                    <div class="form-group">
-                        <label for="Gender">Gender (Optional)</label>
-                        <br/>
-                        <select class='form-control input-lg' name="Gender" id="Gender">
-                            <option value="<?php echo $gender ?>"><?php echo $genderText ?></option>
-                            <option value="0">Both</option>
-                            <option value="1">Male</option>
-                            <option value="2">Female</option>
-                        </select>
-                    </div>
-
-                    <label for="AdTitle">Ad Category (Optional)</label>
-                    <select class="form-control input-lg" id="AdCategory" name="AdCategory">
-                        <option value="<?php echo $_POST['AdCategory'] ?>"><?php echo $_POST['AdCategory'] ?></option>
-                        <?php echo category() ?>
-                    </select>
-
-                    <br/>
-
-                    <label for="TransID">PayPal Transaction ID</label>
-                    <br/>
-                    <input type ="text" class="form-control" id="TransID" name="TransID" />
-                    <small>Please complete the PayPal process first, then provide the Transaction ID to submit your ad:</small>
-
-                    <br/><br/>
 
                     <input type = "submit" value = "Submit AD" name = "Submit" id = "Submit" class="btn btn-default" />
                 </form>
