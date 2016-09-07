@@ -9,4 +9,6 @@
     $postWebmFilePath = trim("./media/$webmFileName");
 
     $docFilePath = trim("./doc/$mediaName");
+
+    $adFilePath = trim("./ads/$mediaName");
 ?>

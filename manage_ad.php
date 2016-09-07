@@ -304,7 +304,7 @@ if (isset($_POST['Update'])) {
 
     <body>
 
-<div class="container">
+<div class="containerFlush">
 
     <div class="col-xs-12 col-md-12 col-lg-12 roll-call" >
 
@@ -317,11 +317,12 @@ if (isset($_POST['Update'])) {
 
             <br/><br/>
             <a href="/ad-manager">Back to Ad Manager</a>
+            <hr class="hr-line" />
 
             <?php
             $adID = $_GET['adID'];
             if (!empty($adID) && isset($adID)) {
-                $sql = "SELECT * FROM Ads WHERE ID = $adID ";
+                $sql = "SELECT * FROM DisplayAds WHERE ID = $adID ";
                 $result = mysql_query($sql) or die(mysql_error());
 
                 $rows = mysql_fetch_assoc($result);
@@ -367,16 +368,19 @@ if (isset($_POST['Update'])) {
                 <input type = "submit" name = "Update" value = "Update" class="btn btn-default" />
             </form>
 
-            <a href ="ad_view.php?adID=<?php echo $adID ?>"><h2>View Ad</h2></a>
+
+            <?php if (!empty($adID) && isset($adID)) { ?>
+            <a href ="ad_view.php?adID=<?php echo $adID ?>"><h4>View Ad</h4></a>
 
             <?php
+
             if (date('Y-m-d H:i:s') < $adEnd) { ?>
             <h3>This ad expires on <?php echo date("l M d Y", strtotime($adEnd)); ?></h3>
             <?php } else { ?>
             <h3>This ad expired on <?php echo date("l M d Y", strtotime($adEnd)); ?></h3>
             <br/>
-                <a href="/ad-manager.php?AdTitle=<?php echo $adTitle ?>&AdText=<?php echo $adText ?>&AgeStart=<?php echo $ageStart ?>&AgeEnd=<?php echo $ageEnd ?>&AdState=<?php echo $adState ?>&AdCategory=<?php echo $adCategory ?>&Interests=<?php echo $interests ?>">Rerun Ad</a>
-            <?php } ?>
+                <a href="/ad-manager.php?AdTitle=<?php echo $adTitle ?>&AdText=<?php echo $adText ?>">Rerun Ad</a>
+            <?php }} ?>
 
         </div>
 

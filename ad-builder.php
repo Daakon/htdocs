@@ -19,7 +19,7 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == "Submit AD") {
     // submit AD
     $adTitle = $_POST['AdTitle'];
     $adText = $_POST['AdText'];
-    $ageStart = $_POST['AgeStartDae'];
+    $ageStart = $_POST['AgeStartDate'];
     $ageEnd = $_POST['AgeEndDate'];
 
 
@@ -82,7 +82,7 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == "Submit AD") {
         if (in_array($type, $videoFileTypes)) {
             $cmd = "ffmpeg -i $mediaFile -vf 'transpose=1' $mediaFile";
             exec($cmd);
-            move_uploaded_file($mediaFile, $postMediaFilePath);
+            move_uploaded_file($mediaFile, $adFilePath);
 
         } else {
 
@@ -113,13 +113,13 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == "Submit AD") {
             // handle transparency
             imagesavealpha($src, true);
             if ($type == "image/jpg" || $type == "image/jpeg") {
-                imagejpeg($src, $postMediaFilePath, 100);
+                imagejpeg($src, $adMediaFilePath, 100);
             } else if ($type == "image/png") {
-                imagepng($src, $postMediaFilePath, 0, NULL);
+                imagepng($src, $adMediaFilePath, 0, NULL);
 
 
             } else if ($type == "image/gif") {
-                imagegif($src, $postMediaFilePath, 100);
+                imagegif($src, $adMediaFilePath, 100);
 
             } else {
                 echo "<script>alert('Invalid File Type');</script>";
@@ -130,7 +130,7 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == "Submit AD") {
 
 
         // if photo didn't get uploaded, notify the user
-        if (!file_exists($postMediaFilePath)) {
+        if (!file_exists($adMediaFilePath)) {
             echo "<script>alert('File could not be uploaded, try uploading a different file type.');location='home.php'</script>";
         }
         else {
@@ -175,7 +175,7 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == "Submit AD") {
                 //$size = '440x280'; -s $size
 
                 //ffmpeg command
-                $cmd = "$ffmpeg -i \"$postMediaFilePath\" -r 1  -f image2 $poster 2>&1";
+                $cmd = "$ffmpeg -i \"$adMediaFilePath\" -r 1  -f image2 $poster 2>&1";
 
                 exec($cmd);
 
@@ -230,8 +230,8 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == "Submit AD") {
             $adTitle = makeLinks($adTitle);
 
             // insert ad
-        $sqlInsertPost = "INSERT INTO Posts (Post,      MediaSource,   Member_ID,    Category,      AdTitle,    AdText,    Interests,    Gender,       RollCall,     RightColumn,   AgeStart,    AgeEnd,    AdState,    AdCategory,    TransID,   PostDate,    AdEnd ) Values
-                                                ('$ad',  '$img',        '$ID',      'Sponsored', '$adTitle',  '$adText',  '$interests', '$gender',   '$rollCall',  '$rightCol', '$ageStart', '$ageEnd', '$state', '$adCategory', '$transID',   CURDATE(),  ADDDATE(CURDATE(), INTERVAL 30 DAY) ) ";
+        $sqlInsertPost = "INSERT INTO DisplayAd (Post,  Member_ID,   MediaSource,         AdTitle,    AdText,        PostDate,    AdEnd ) Values
+                                                ('$ad',  '$ID',       '$img',            '$adTitle',  '$adText',    CURDATE(),  ADDDATE(CURDATE(), INTERVAL 30 DAY) ) ";
             mysql_query($sqlInsertPost) or die(mysql_error());
             $newPostID = mysql_insert_id();
 
@@ -251,22 +251,15 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == "Submit AD") {
         $ad = mysql_real_escape_string("<span style='color:red;font-weight:bold;'><h3>" . $adTitle . "</h3>" . $adText);
 
         $ad = makeLinks($ad);
-        $adText = makeLinks($adText);
-        $adTitle = makeLinks($adTitle);
 
         // insert ad
-        $sqlInsertPost = "INSERT INTO Posts (Post,     Member_ID,   Category,   AdTitle,  AdText,   Interests,     Gender,    TalentFeed,     RightColumn,   AgeStart,    AgeEnd,    AdState,    AdCategory,    TransID,   PostDate,    AdEnd ) Values
-                                        ('$ad',    '$ID',      'Sponsored', '$adTitle',  '$adText', '$interests', '$gender', '$talentFeed',  '$rightCol', '$ageStart', '$ageEnd', '$state', '$adCategory', '$transID',   CURDATE(),  ADDDATE(CURDATE(), INTERVAL 30 DAY) ) ";
-        mysql_query($sqlInsertPost) or die(mysql_error());
+        $sqlInsertAd = "INSERT INTO Posts (Post,     Member_ID,     AdTitle,  AdText,        PostDate,    AdEnd ) Values
+                                            ('$ad',    '$ID',       '$adTitle',  '$adText',      CURDATE(),  ADDDATE(CURDATE(), INTERVAL 30 DAY) ) ";
+        mysql_query($sqlInsertAd) or die(mysql_error());
         $newPostID = mysql_insert_id();
         // redirect to manage-ad
         echo "<script>alert('Ad Submitted'); location='manage_ad.php?adID=$newPostID'</script>";
     }
-
-
-
-
-
 }
 ?>
 
@@ -298,25 +291,26 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == "Submit AD") {
 <body>
 
 
-<div class="container">
+<div class="containerFlush">
 
 
-    <div class="col-xs-12 col-md-10 col-lg-10 col-md-offset-2 roll-call">
+    <div class="col-xs-12 col-md-12 col-lg-12 roll-call">
 
                 <a href="/home">Home</a>
 <br/><br/>
 
-            <div class="row" style="padding:10px;">
+            <div class="row" style="padding:10px;padding-left:20px;">
 
                 Need Help? Contact us: <a href="mailto:ads@playdoe.com">ads@playdoe.com</a>
 
-            <h3 style="color:red;">Manage Existing Ads</h3>
+
 
                 <?php
-                $sql = "SELECT ID, AdTitle, AdStartDate, AdEndDate FROM Ads WHERE Member_ID = $ID ";
+                $sql = "SELECT ID, AdTitle, AdStartDate, AdEndDate FROM DisplayAds WHERE Member_ID = $ID ";
                 $result = mysql_query($sql) or die(mysql_error());
 
                 if (mysql_numrows($result) > 0) {
+                    echo "<h3 style='color:red;'>Manage Existing Ads</h3>";
                     while ($rows = mysql_fetch_assoc($result)) {
                         $adID = $rows['ID'];
                         $adLink = $rows['AdTitle'];
@@ -333,7 +327,7 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == "Submit AD") {
                     }
                 }
                 else {
-                    echo "You currently have not created any ads";
+                    echo "<br/>You currently have not created any ads";
                 }
                 ?>
 
@@ -347,17 +341,11 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == "Submit AD") {
                 $_POST['AdText'] = $_GET['AdText'];
             }
 
-            if (empty($_POST['AgeStartDate'])) {
-                $_POST['AgeStartDate'] = $_GET['AgeStartDate'];
-            }
-            if (empty($_POST['AgeEndDate'])) {
-                $_POST['AgeEndDate'] = $_GET['AgeEndDate'];
-            }
-
         ?>
 
+            <hr class="hr-line" style="margin:0px;padding:0px;" />
 
-            <div class="row" style="padding:10px;">
+            <div class="row" style="padding:10px;padding-left:20px;">
 
                 <h3 style="color:green;">Create An Ad </h3>
 
@@ -382,21 +370,6 @@ if (isset($_POST['Submit']) && $_POST['Submit'] == "Submit AD") {
                         <br/>
                         <textarea type ="text" class="form-control" id="AdText" name="AdText"><?php echo $_POST['AdText'] ?></textarea>
                     </div>
-
-                    <?php
-                    $check0 = $check1 = "";
-                    if ($talentFeed == 1) { $check0 = "CHECKED"; } else { $check1 = "CHECKED"; }
-                    ?>
-
-                    <div class="form-group">
-                        <label for="AdPosition">Ad Position</label>
-                        <br/>
-                        Roll Call&nbsp;<input type="radio" name="AdPosition" id="AdPosition" value="1"<?php echo $check0 ?>>
-                        <!--<br/>
-                        Right Column&nbsp;<input type="radio" name="AdPosition" id="AdPosition" value="0"<?php /*echo $check1 */?>>&nbsp;(Desktop Only)-->
-                    </div>
-
-                    <br/>
 
 
                     <input type = "submit" value = "Submit AD" name = "Submit" id = "Submit" class="btn btn-default" />

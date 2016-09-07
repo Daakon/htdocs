@@ -29,7 +29,7 @@ $adID = $_GET['adID'];
 
 
     <?php
-        $sql = "SELECT * FROM Posts WHERE ID = $adID ";
+        $sql = "SELECT * FROM DisplayAds WHERE ID = $adID ";
         $result = mysql_query($sql) or die(mysql_error());
         $row = mysql_fetch_assoc($result);
         echo $row['Post'];

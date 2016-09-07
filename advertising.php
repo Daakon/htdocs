@@ -38,7 +38,7 @@ get_header();
 
                <h4>Create a Display Ad</h4>
 
-                <a href="/manage_ad"><h4 style="color:red;">Start Here</h4></a>
+                <a href="/ad-builder"><h4 style="color:red;">Start Here</h4></a>
 
             </div>
 <?php get_footer_files() ?>
