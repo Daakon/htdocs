@@ -469,8 +469,7 @@ And (Posts.IsDeleted = 0)
 And (Members.ID Not in ( '" . implode($blockIDs, "', '") . "' ))
 and (Posts.Post Like '%$like%')
 Group By PostID
-
-Order By Likes DESC";
+Order by PostDate DESC, Likes DESC ";
 $result = mysql_query($sql) or die(logError(mysql_error(), $url, "Getting Connection Feed data"));
 
 // if no results

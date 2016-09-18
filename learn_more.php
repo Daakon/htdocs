@@ -121,7 +121,7 @@ if (!empty($_SESSION['ID'])) {
                         </td>
                         <td>
                             <h4>
-                                Playdoe is a gamification app that offers fun ways to earn money and win free stuff.
+                                Playdoe is a gamification app that offers fun ways to earn money, discounts & free stuff.
                             </h4>
                             <span style="color:gray;font-size:14px;font-weight:600">
                                 Checkout our <a href="http://officialplaydoe.tumblr.com/" target="_blank">blog</a> to learn more.
@@ -145,7 +145,7 @@ if (!empty($_SESSION['ID'])) {
                         </td>
                         <td style="padding-left:10px;">
                             <h4>
-                                Playdoe is a gamification app that offers fun ways to earn money and win free stuff.
+                                Playdoe is a gamification app that offers fun ways to earn money, discounts & free stuff.
                             </h4>
                             <span style="color:gray;font-size:14px;font-weight:600">
                                 Checkout our <a href="http://officialplaydoe.tumblr.com/" target="_blank">blog</a> to learn more.
@@ -187,9 +187,9 @@ if (!empty($_SESSION['ID'])) {
                         <input class="form-control input-lg" type="email" name="email" id="email"
                                placeholder="Email"/>
 
-                        <label class="sr-only" for="referredBy">Referred By</label>
+                       <!-- <label class="sr-only" for="referredBy">Referred By</label>
                         <input class="form-control input-lg" type="text" name="referredBy" id="referredBy"
-                               placeholder="Referral ID" /> <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">What's Referral ID ?</button>
+                               placeholder="Referral ID" /> <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">What's Referral ID ?</button>-->
                     </div>
                     <div class="col-md-6">
                         <div class="error-text"></div>

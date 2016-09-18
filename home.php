@@ -966,13 +966,7 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
                     <div style="margin-top:-10px">
                         <a href="/messages/<?php echo $username ?>"><img src = "/images/messages.png" height="20" width="20" /> <?php require 'getNewMessageCount.php' ?></a>
                         <a style="margin-left:20px;" href="/member_follows/<?php echo get_username($ID) ?>"><img src = "/images/follows.png" height="20" width="20" /><?php require 'getNewFollowCount.php' ?></a>
-
-                       <?php
-                echo "<span style='color:#888888;margin-left:20px;'><span style='color:#888888'><img src='/images/referral-icon.png' height='30' width='30' /> </span>";
-                if (getReferrals($ID, get_referralID($ID)) > 0) { echo "<span style='background:red;padding:5px;'><a style='color:white;' href='/view_messages/redeem'>".getReferrals($ID, get_referralID($ID))."</a></span>"; };
-                ?>
-
-                    </div>
+                     </div>
 
                 </div>
 
@@ -1074,7 +1068,7 @@ var code = (e.keyCode ? e.keyCode : e.which);
 There are plenty of gifts and prizes waiting on you right now!
 </h4>
 
-<img src='/images/giveaway.png' height=50% width=100% />
+<video src='images/winning-reward.mov' height='auto' width='auto' autoplay='autoplay' loop='loop' />
 ";
                 }
                 ?>
@@ -1142,11 +1136,9 @@ $(document).ready(function(){
 });
 </script>
 
-<h4>Most requested giftcards</h4>
+<h4>Recent Giveways</h4>
 <div id="foobar">
-  <li><img src="/giftcards/walmart-giftcard.png" height="80%" width="100%" /></li>
-  <div><img src="/giftcards/target-giftcard.png" height="80%" width="100%" /></div>
-  <li><img src="/giftcards/amazon-giftcard.jpg" height="60%" width="100%" /></li>
+  <li><img src="/giveaways/jordans.png" height="80%" width="100%" /></li>
 </div>
        <!-- SMARTADDON BEGIN --> <script type="text/javascript"> (function() { var s=document.createElement('script');s.type='text/javascript';s.async = true; s.src='http://s1.smartaddon.com/share_addon.js'; var j =document.getElementsByTagName('script')[0];j.parentNode.insertBefore(s,j); })(); </script>
 

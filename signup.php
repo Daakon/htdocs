@@ -96,24 +96,11 @@ $firstName = get_user_firstName($ID);
 $message = "
 <img src='/images/giftcards-horizontal.jpg' height='100%' width='100%' />
 <br/>
-<p>Hey $firstName, Playdoe is a gamification app that offers fun way to win free stuff.
-        <h4>Daily Hashtag</h4>
-        Simply share whatever is on your mind. But when you do, add the hashtag of the current date, i.e January 1, 2016 would be #1116.
-        To collect, simply direct message Team Playde and let us know what gift card you would like.
-        Everyday the post with the most likes wins a <b>$10 gift card</b> sent to their Playdoe inbox.
-
+<p>Hey $firstName, Playdoe is a gamification app that offers fun way to earn money, discounts and win free stuff.
         <h4>Reward Campaigns</h4>
-        This is where other members on Playdoe offer you money and free stuff to help promote their products and services.
+        Reward Campaigns are where members on Playdoe offer you money, discounts and free stuff to help promote their products and services.
         They will all have their own set of rules and rewards for their various campaigns. We will repost campaigns to make sure
         you don't miss any of them. Stay posted to your feed.
-
-        <h4>Referrals</h4>
-        You can also earn a <b>$5 gift</b> card for every friend you refer that shares at least 5 posts in the daily hashtag competition.
-        Just be sure to give our referral id which is listed in your profile page.
-        Your friends will use your referral id to sign up so you get credit for the referral.
-        You will see your referral count on your home screen go up once a referral has made their <b>5th post</b>b>.
-        Once you have an eligible referral, you will be able to click the referral icon and direct message you $5 gift card request.
-        We will send you an e-gift card to your Playdoe inbox. It's that easy!
 
         <br/>
         If you have any questions, just reply to this message anytime or checkout the FAQ below.
