@@ -827,7 +827,7 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
                         </div>
 
                         <label style="float:left;" for="flPostMedia">
-                            <img src="/images/camera.png" style="height:25px;width:25px;float:left;margin-right:10px;" />
+                            <img src="/images/combo.png" style="height:25px;width:50px;float:left;margin-right:10px;" />
                         </label>
                         <input type="file" name="flPostMedia[]" id="flPostMedia" class="flPostMedia" style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;' multiple />
 
@@ -863,8 +863,8 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
                                         }
                                         reader.readAsDataURL(file[0]);
                                     } else {
-                                        alert(file[0].name + " is not a valid image file.");
-                                        dvPreview.html("");
+                                        alert(file[0].name + " document uploaded.");
+                                        dvPreview.html("<img src='/images/document.png' height='100' width='100' />");
                                         return false;
                                     }
                                 });
