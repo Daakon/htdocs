@@ -520,18 +520,26 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
     }
 </script>
 
-
+<style>
+    .list-inline {
+        margin-bottom:-30px;
+    }
+</style>
 
 <body onload='location.href="#pageStart"'>
 
-<div class="container containerFlush">
+<div class="container containerFlush" style="position: relative;">
     <div class="row row-padding">
 
         <div class="col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8 roll-call ">
 
             <h4>View Messages</h4>
 
-            <hr/>
+            <ul class="list-inline">
+                <?php require 'profile_menu.php'; ?>
+            </ul>
+
+
 
             <script type="text/javascript" src="jquery-1.8.0.min.js"></script>
             <script type="text/javascript">
@@ -606,13 +614,9 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
                     <div id="result"></div>
                     <div id="previewNames"></div>
                 </h5>
-                <hr class="hr-class" />
+                <hr class="hr-line" />
 
-            <?php } elseif ($isGroupChat == false) { ?>
-
-                <h5><span class="viewMessage"><a href="/<?php echo $username ?>">Visit <?php echo $firstName ?>'s
-                            Profile</a></span></h5>
-            <?php } ?>
+            <?php }  ?>
 
             <?php
             if (strstr($urlUsername, "?")) {
@@ -632,6 +636,105 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
             ?>
 
 
+            <hr class="hr-line" />
+
+
+            <!--Message box -->
+            <form style="width:100%" id="messageForm" action="" method="post" enctype="multipart/form-data" onsubmit="return showUploading()">
+
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+                <div id="content">
+                                <textarea name="message" id="message"  style="float:left;font-size:17px;border:none;clear:both;"
+                                          onkeyup="this.style.height='24px'; this.style.height = this.scrollHeight + 12 + 'px';"
+                                          placeholder="Type your message" spellcheck="true"></textarea>
+                </div>
+
+                <div style="clear:both" id="image-holder"> </div>
+
+
+                <input type="hidden" id="subject" name="subject" value="<?php echo $subject ?>" />
+                <?php if (isset($recipientID) && !empty($recipientID)) { ?>
+                    <input type="hidden" id="receiverID" name="receiverID[]" value="<?php echo $recipientID ?>" />
+                <?php } ?>
+                <input type="hidden" id="isGroupChat" name="isGroupChat" value="<?php echo $isGroupChat ?>" />
+                <input type="hidden" id="groupChatExist" name="groupChatExist" value="<?php echo $groupChatExist ?>" />
+                <input type="hidden" id="groupID" name="groupID" value="<?php echo $urlUsername ?>" />
+                <input type="hidden" id="groupName" name="groupName" value="<?php echo $groupName ?>" />
+
+                <div id="progress" style="display:none;">
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped progress-bar-danger active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" class="progress-bar">
+                            <b>File uploading...please wait</b>
+                        </div>
+                    </div>
+                </div>
+
+                <label style="float:left;" for="flPostMedia">
+                    <img src="/images/combo.png" style="height:25px;width:50px;float:left;margin-right:10px;" />
+                </label>
+                <input type="file" name="flPostMedia[]" id="flPostMedia" class="flPostMedia" style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;' multiple />
+
+                <input style="float:left;" type="submit" class="btn btn-primary" id="send" name="send" value="Send" <?php echo $readonly ?> />
+                <input type="image" class="" id="videoSend" name="videoSend" src="/images/video-chat.png" style="margin-top:-10px;height:50px;width:50px;float:left;padding-bottom:10px;padding-left:5px;" value = "Start Video Chat" />
+            </form>
+
+            <br/><br/>
+
+
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+            <script>
+                $(function () {
+                    $("#flPostMedia").change(function () {
+                        if (typeof (FileReader) != "undefined") {
+                            var dvPreview = $("#image-holder");
+                            dvPreview.html("");
+                            var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp|.mov|.mpeg|.mpg|.ogg|.mp4|.webm|.x-matroska|.x-ms-wmw)$/;
+                            $($(this)[0].files).each(function () {
+                                var file = $(this);
+                                if (regex.test(file[0].name.toLowerCase())) {
+                                    var reader = new FileReader();
+                                    reader.onload = function (e) {
+                                        var img = $("<img />");
+                                        img.attr("style", "height:100px;width: 100px");
+                                        img.attr("src", e.target.result);
+                                        dvPreview.append(img);
+
+                                        var video = $("<video />");
+                                        video.attr("style", "height:100px;width: 100px");
+                                        video.attr("src", e.target.result);
+                                        dvPreview.append(video);
+                                    }
+                                    reader.readAsDataURL(file[0]);
+                                } else {
+                                    alert(file[0].name + " document uploaded.");
+                                    dvPreview.html("<img src='/images/document.png' height='100' width='100' />");
+                                    return false;
+                                }
+                            });
+                        } else {
+                            alert("This browser does not support HTML5 FileReader.");
+                        }
+                    });
+                });
+
+            </script>
+
+
+            <br/>
+
+            <?php if ($rowCount == true) { ?>
+                <form action="" method="post" onsubmit = "return confirm('Do you really want to delete this message thread')" >
+                    <input type="hidden" id="receiverID" name="receiverID" value="<?php echo $recipientID ?>" />
+                    <input type="hidden" id="isGroupChat" name="isGroupChat" value="<?php echo $isGroupChat ?>" />
+                    <input type="hidden" id="groupID" name="groupID" value="<?php echo $urlUsername ?>" />
+                    <input type="submit" class="btn btn-default" style="background:red;color:white;" id="delete" name="delete" value="Delete Messages" />
+
+                </form>
+            <?php } ?>
+
+
+            <hr class="hr-line" />
+
             <?php
             if (strstr($urlUsername, "?")) {
             } else {
@@ -641,7 +744,7 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
                     $subjectSql = "SELECT Subject FROM (SELECT * FROM Messages
                     WHERE ThreadOwner_ID = $ID
                     AND (GroupID = '$urlUsername')
-                    Order By ID DESC LIMIT 100) as ROWS Order By ID ASC ";
+                    Order By ID DESC LIMIT 100) as ROWS Order By ID DESC ";
                     $subjectResult = mysql_query($sql);
                     $subjectCount = mysql_num_rows($subjectResult);
                 } else {
@@ -649,7 +752,7 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
                     WHERE ThreadOwner_ID = $ID
                     AND (Sender_ID = $recipientID Or Receiver_ID = $recipientID)
                     AND (IsDeleted = 0) And (GroupID = '')
-                    Order By ID DESC LIMIT 100) as ROWS Order By ID ASC ";
+                    Order By ID DESC LIMIT 100) as ROWS Order By ID DESC ";
                     $subjectResult = mysql_query($subjectSql);
                 }
 
@@ -658,7 +761,7 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
                     $sql = "SELECT * FROM (SELECT * FROM Messages
                     WHERE ThreadOwner_ID = $ID
                     AND (GroupID = '$urlUsername')
-                    Order By ID DESC LIMIT 100) as ROWS Order By ID ASC ";
+                    Order By ID DESC LIMIT 100) as ROWS Order By ID DESC ";
                     $result = mysql_query($sql);
                     $count = mysql_num_rows($result);
                 } else {
@@ -666,7 +769,7 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
                     WHERE ThreadOwner_ID = $ID
                     AND (Sender_ID = $recipientID Or Receiver_ID = $recipientID)
                     AND (IsDeleted = 0) And (GroupID = '')
-                    Order By ID DESC LIMIT 100) as ROWS Order By ID ASC ";
+                    Order By ID DESC LIMIT 100) as ROWS Order By ID DESC ";
                     $result = mysql_query($sql);
                 }
 
@@ -729,9 +832,6 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
 
 
 
-            <ul class="list-inline">
-                <?php require 'profile_menu.php'; ?>
-            </ul>
 
             <?php
                 if (isAdmin($ID)) {
@@ -796,100 +896,11 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
 
                 <?php } ?>
 
-                <hr class="hr-line" />
+<!--                <a id='pageStart' href='#'></a>-->
 
 
-                    <form style="width:100%" id="messageForm" action="" method="post" enctype="multipart/form-data" onsubmit="return showUploading()">
-
-
-                                <textarea name="message" id="message"  style="float:left;font-size:17px;border:none;" onkeyup="this.style.height='24px'; this.style.height = this.scrollHeight + 12 + 'px';"
-                                          placeholder="Type your message" spellcheck="true"></textarea>
-
-
-                        <div style="clear:both" id="image-holder"> </div>
-
-
-                <input type="hidden" id="subject" name="subject" value="<?php echo $subject ?>" />
-                <?php if (isset($recipientID) && !empty($recipientID)) { ?>
-                    <input type="hidden" id="receiverID" name="receiverID[]" value="<?php echo $recipientID ?>" />
-                <?php } ?>
-                <input type="hidden" id="isGroupChat" name="isGroupChat" value="<?php echo $isGroupChat ?>" />
-                <input type="hidden" id="groupChatExist" name="groupChatExist" value="<?php echo $groupChatExist ?>" />
-                <input type="hidden" id="groupID" name="groupID" value="<?php echo $urlUsername ?>" />
-                <input type="hidden" id="groupName" name="groupName" value="<?php echo $groupName ?>" />
-
-                        <div id="progress" style="display:none;">
-                            <div class="progress">
-                                <div class="progress-bar progress-bar-striped progress-bar-danger active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" class="progress-bar">
-                                    <b>File uploading...please wait</b>
-                                </div>
-                            </div>
-                        </div>
-
-                        <label style="float:left;" for="flPostMedia">
-                            <img src="/images/combo.png" style="height:25px;width:50px;float:left;margin-right:10px;" />
-                        </label>
-                        <input type="file" name="flPostMedia[]" id="flPostMedia" class="flPostMedia" style='position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;' multiple />
-
-                        <input style="float:left;" type="submit" class="btn btn-primary" id="send" name="send" value="Send" <?php echo $readonly ?> />
-                <input type="image" class="" id="videoSend" name="videoSend" src="/images/video-chat.png" style="margin-top:-10px;height:50px;width:50px;float:left;padding-bottom:10px;padding-left:5px;" value = "Start Video Chat" />
-                </form>
-
-                <br/><br/>
-
-
-                <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-                <script>
-                    $(function () {
-                        $("#flPostMedia").change(function () {
-                            if (typeof (FileReader) != "undefined") {
-                                var dvPreview = $("#image-holder");
-                                dvPreview.html("");
-                                var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.gif|.png|.bmp|.mov|.mpeg|.mpg|.ogg|.mp4|.webm|.x-matroska|.x-ms-wmw)$/;
-                                $($(this)[0].files).each(function () {
-                                    var file = $(this);
-                                    if (regex.test(file[0].name.toLowerCase())) {
-                                        var reader = new FileReader();
-                                        reader.onload = function (e) {
-                                            var img = $("<img />");
-                                            img.attr("style", "height:100px;width: 100px");
-                                            img.attr("src", e.target.result);
-                                            dvPreview.append(img);
-
-                                            var video = $("<video />");
-                                            video.attr("style", "height:100px;width: 100px");
-                                            video.attr("src", e.target.result);
-                                            dvPreview.append(video);
-                                        }
-                                        reader.readAsDataURL(file[0]);
-                                    } else {
-                                        alert(file[0].name + " document uploaded.");
-                                        dvPreview.html("<img src='/images/document.png' height='100' width='100' />");
-                                        return false;
-                                    }
-                                });
-                            } else {
-                                alert("This browser does not support HTML5 FileReader.");
-                            }
-                        });
-                    });
-
-                </script>
-
-
-                <br/>
-
-                <?php if ($rowCount == true) { ?>
-                    <form action="" method="post" onsubmit = "return confirm('Do you really want to delete this message thread')" >
-                        <input type="hidden" id="receiverID" name="receiverID" value="<?php echo $recipientID ?>" />
-                        <input type="hidden" id="isGroupChat" name="isGroupChat" value="<?php echo $isGroupChat ?>" />
-                        <input type="hidden" id="groupID" name="groupID" value="<?php echo $urlUsername ?>" />
-                        <input type="submit" class="btn btn-default" style="background:red;color:white;" id="delete" name="delete" value="Delete Messages" />
-
-                    </form>
-                <?php } ?>
                 <!-------------------------------------------------------------------->
             </div>
         </div>
-        <a id='pageStart' href='#'></a>
+
 
