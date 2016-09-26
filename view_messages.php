@@ -517,6 +517,13 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
     }
 </script>
 
+<script>
+    function auto_grow(element) {
+        element.style.height = "5px";
+        element.style.height = (element.scrollHeight)+"px";
+    }
+</script>
+
 <style>
     .list-inline {
         margin-bottom:-30px;
@@ -632,14 +639,18 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
             }
             ?>
 
+            <?php
+            if ($groupChatExist) {
+                echo "In this chat:<span style='font-weight:bold;font-size:16px;'> $groupName </span>";
+                $sqlUpdate = "UPDATE Messages SET New = 0, FirstMessage = 0 WHERE ThreadOwner_ID = $ID And GroupID = '$urlUsername' ";
+                mysql_query($sqlUpdate) or die();
+            }
+            else if (isset($urlUsername) && !empty($urlUsername)) {
+                echo "You are chatting with<span style='font-weight:bold;font-size:16px;'> ". get_username_from_url() . "</span>";
+            }
+            ?>
 
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-=======
-=======
->>>>>>> origin/master
             <hr class="hr-line" />
-
 
             <!--Message box -->
             <form style="width:100%" id="messageForm" action="" method="post" enctype="multipart/form-data" onsubmit="return showUploading()">
@@ -647,7 +658,7 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
                 <div id="content">
                                 <textarea name="message" id="message"  style="float:left;font-size:17px;border:none;clear:both;"
-                                          onkeyup="this.style.height='24px'; this.style.height = this.scrollHeight + 12 + 'px';"
+                                          onkeyup="auto_grow(this)"
                                           placeholder="Type your message" spellcheck="true"></textarea>
                 </div>
 
@@ -663,8 +674,7 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
                 <input type="hidden" id="groupID" name="groupID" value="<?php echo $urlUsername ?>" />
                 <input type="hidden" id="groupName" name="groupName" value="<?php echo $groupName ?>" />
 
-<<<<<<< HEAD
-=======
+
                 <div id="progress" style="display:none;">
                     <div class="progress">
                         <div class="progress-bar progress-bar-striped progress-bar-danger active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" class="progress-bar">
@@ -672,7 +682,7 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
                         </div>
                     </div>
                 </div>
->>>>>>> origin/master
+
 
                 <label style="float:left;" for="flPostMedia">
                     <img src="/images/combo.png" style="height:25px;width:50px;float:left;margin-right:10px;" />
@@ -684,7 +694,7 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
             </form>
 
             <br/><br/>
-<<<<<<< HEAD
+
             <div id="progress" style="display:none;">
                 <div class="progress">
                     <div class="progress-bar progress-bar-striped progress-bar-danger active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" class="progress-bar">
@@ -692,9 +702,7 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
                     </div>
                 </div>
             </div>
-=======
 
->>>>>>> origin/master
 
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
             <script>
@@ -750,10 +758,7 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
 
             <hr class="hr-line" />
 
-<<<<<<< HEAD
->>>>>>> Stashed changes
-=======
->>>>>>> origin/master
+
             <?php
             if (strstr($urlUsername, "?")) {
             } else {
@@ -849,9 +854,6 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
             ?>
 
 
-<<<<<<< Updated upstream
-
-
 
             <?php
                 if (isAdmin($ID)) {
@@ -859,8 +861,6 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
                }
                ?>
 
-=======
->>>>>>> Stashed changes
             <?php
             if (strstr($urlUsername, "?")) {
             } else if ($groupChatExist == false) {
@@ -875,11 +875,7 @@ if (isset($_POST['delete']) && $_POST['delete'] == "Delete Messages") {
                 $sql3 = "UPDATE Messages SET New = 0, FirstMessage = 0 WHERE ThreadOwner_ID = $ID AND (Sender_ID = $ID) And (Receiver_ID = $recipientID) And (GroupID = '') ";
                 mysql_query($sql3) or die();
             }
-            if ($groupChatExist) {
-                echo "<span style='font-weight:bold;font-size:18px;'>In this chat:</span> $groupName <br/><br/>";
-                $sqlUpdate = "UPDATE Messages SET New = 0, FirstMessage = 0 WHERE ThreadOwner_ID = $ID And GroupID = '$urlUsername' ";
-                mysql_query($sqlUpdate) or die();
-            }
+
             ?>
 
             <?php

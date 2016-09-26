@@ -809,6 +809,15 @@ if (isset($_POST['validate']) && $_POST['validate'] == 'Send Email Verification'
     });
 </script>
 
+<script>
+function auto_grow(element) {
+    element.style.height = "5px";
+    element.style.height = (element.scrollHeight)+"px";
+    var rollCall = $("#roll-call-feed")
+    rollCall.style.height = (rollCall.scrollHeight)+"px";
+}
+</script>
+
 <meta http-equiv="cache-control" content="max-age=0" />
 <meta http-equiv="cache-control" content="no-cache" />
 <meta http-equiv="expires" content="0" />

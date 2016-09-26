@@ -395,7 +395,10 @@ if (mysql_num_rows($rollCallResult) > 0) {
                         <input type="file" style='float:left;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";opacity:0;background-color:transparent;color:transparent;' name="flCommentMedia[]" id="flCommentMedia" multiple onchange='$("#upload-photo-info").html($(this).val());' />
 
                         <?php $commentID = "$prestinePostID"; ?>
-                        <textarea id="commentMention<?php echo $commentID ?>" onkeydown='showCommentMentions(event, <?php echo $commentID ?>)' style="margin-top:10px;float:left;border:none;font-size:17px;" name="postComment" id="postComment" onkeyup="this.style.height='24px'; this.style.height = this.scrollHeight + 12 + 'px';"
+                        <textarea id="commentMention<?php echo $commentID ?>"
+                                  onkeydown='showCommentMentions(event, <?php echo $commentID ?>)'
+                                  style="margin-top:10px;float:left;border:none;font-size:17px;" name="postComment" id="postComment"
+                                  onkeyup="auto_grow(this)"
                                   placeholder="Write a comment" title='' ></textarea>
 
 
